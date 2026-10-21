@@ -1,5 +1,11 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Revisión numérica de interfaz AssetLab→Vita
+
+- Evaluada muestra originalSTTAsset/1 por hash:4huesos,48vértices,72triángulos,192poses en cuadrícula1/60s,sin coordenadas no finitas. Ambas duraciones y7claves caen en ticks enteros de60Hz.
+- Límites muestreados enmm documentados,sin inferir extremoscontinuos. Cinco anclas de conversión comprobadas;redondeo/empaquetado solo propuestas,no formato ni presupuesto Vita aprobado.
+- Criterios pendientes de base/avance,winding,tiempo,importador y validaciónruntime en docs/research/game-inputs-2026-10-21/asset-bridge-review.md. Sin recursos comerciales,GUI,VPK,red,consola ni cambios de fuentes de otros frentes.
+
 ## 21-10-2026 — Primer derivado Frontier enlazado al banco
 
 - Investigación descomprimió unJKR:349bytes,sin firma reconocida. Se cotejaron fuente238bytes,salida y recibo contra hashes y catálogo,sin repetir decodificación.
