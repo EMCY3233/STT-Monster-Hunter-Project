@@ -1,0 +1,30 @@
+name: STT Pose portable reader
+on:
+  push:
+    paths: ['pose-runtime/**', 'asset-lab/**', '.github/workflows/pose-runtime.yml']
+  pull_request:
+    paths: ['pose-runtime/**', 'asset-lab/**', '.github/workflows/pose-runtime.yml']
+permissions:
+  contents: read
+jobs:
+  cross-pc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python pose-runtime/tests/check_cross.py > pose-pc-evidence.json
+        env:
+          POSE_CFLAGS: '-fsanitize=undefined,bounds -fno-sanitize-recover=all'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-pose-pc-evidence
+          path: pose-pc-evidence.json
+          retention-days: 14
+  compile-vita:
+    runs-on: ubuntu-latest
+    container: vitasdk/vitasdk:2026.08-20260815@sha256:7f5eee50ff95b73c8c847dbfef6227aa0035886444b4d0254c21da8369ff1efc
+    steps:
+      - uses: actions/checkout@v4
+      - run: arm-vita-eabi-gcc -std=c99 -Wall -Wextra -Werror -Ipose-runtime -c pose-runtime/stt_pose.c -o /tmp/stt_pose.o

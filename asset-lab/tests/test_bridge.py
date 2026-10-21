@@ -66,4 +66,14 @@ class BridgeTests(unittest.TestCase):
         a=copy.deepcopy(self.asset); a['clips'][0]['duration']=600
         with self.assertRaises(model.AssetError): bridge.bake(a)
 
+    def test_c_profile_canonicalizes_order_and_restricts_names(self):
+        data=bridge.bake(self.asset)
+        canonical=bridge.runtime_dumps(data)
+        self.assertEqual(bridge.runtime_dumps(dict(reversed(list(data.items())))),canonical)
+        self.assertEqual(bridge.loads(canonical),data)
+        for name in ['caf\u00e9', 'quote"', 'slash\\']:
+            data['clips'][0]['name']=name
+            bridge.dumps(data)  # still valid general Pose/1
+            with self.assertRaises(model.AssetError): bridge.runtime_dumps(data)
+
 if __name__ == '__main__': unittest.main()

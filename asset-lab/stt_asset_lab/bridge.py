@@ -106,13 +106,30 @@ def frame(data, clip, tick):
     frames = data['clips'][clip]['frames']
     return frames[tick % len(frames)]
 
+def runtime_dumps(data):
+    """Canonical C-reader profile of Pose/1; does not change geometry or time.
+
+    C requires this field order and printable ASCII clip names without escapes.
+    General Pose/1 readers continue to accept other JSON ordering/Unicode names.
+    """
+    validate(data)
+    for clip in data['clips']:
+        model.require(all(32 <= ord(c) <= 126 and c not in '\\"' for c in clip['name']),
+                      'C profile requires unescaped printable ASCII clip names')
+    canonical = dict(format=data['format'], version=data['version'], hz=data['hz'], basis=data['basis'],
+                     parents=data['parents'], triangles=data['triangles'],
+                     clips=[dict(name=c['name'], frames=[dict(joints=f['joints'], vertices=f['vertices'])
+                             for f in c['frames']]) for c in data['clips']])
+    return dumps(canonical)
+
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('source')
     parser.add_argument('destination')
+    parser.add_argument('--runtime', action='store_true', help='canonical C-reader JSON profile')
     args = parser.parse_args()
-    raw = dumps(bake(model.load(args.source)))
+    raw = (runtime_dumps if args.runtime else dumps)(bake(model.load(args.source)))
     with Path(args.destination).open('xb') as stream:
         stream.write(raw)
     print(f'STT Pose/1: {len(raw)} bytes')
