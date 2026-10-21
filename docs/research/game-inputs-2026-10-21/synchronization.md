@@ -225,3 +225,9 @@ Prototipos entregó revisiónvisualPC dePR21:dosposesobservadas ydefectodecobert
 ## 22-10-2026 — Aceptación de jerarquía independiente encargada
 
 Nuevaorden de investigación:una muestraMOD230 ya catalogada conhuesos,selecciónmínimatamaño/desempatehash;solo tablas/esqueleto,rangos,padres/raíces,ciclos yfinituddematrices si fuenteaplicable. No escontinuacióndelcontadorgeométrico de990bytes,nolo resuelve. No asociarLMTpor nombre,skinning oadaptación. Resultado pendiente. BloqueosBLZ/LMTno se reabren sin nuevaevidencia;monitorPCcerrado yprototipoPCvisualcerrado conservan pendientesfísicos.
+
+## 22-10-2026 — Jerarquía MOD230 parcial cerrada
+
+PR7/16111d8,según propietario:una muestra catalogada con3huesos,2raíces,0ciclos y6matricesfinitas;10pruebas nuevas correctas. Acredita estructuraacotada,no rigfuncional,skinning,bindpose oasociaciónLMT. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/16111d8/docs/research/stt-re-20261021/mod230-skeleton.md).
+
+Centralrecibióinforme porlecturadeestado;elenvíoderegresodelpropietariofue rechazadopor revisiónautomática yno se reintenta. No bloqueatrabajolocal. Siguienteaceptaciónencargada:sobre mismamuestra,propiedadnuméricadelasdosfamiliasdematrices solo confuenteprimariaaplicable,toleranciaexplícita ymetadatosagregados. Si semántica noacreditada,cerrar bloqueo;sinmatricescomercialespublicadas,nuevoLMT/skin/render/banco/consola.

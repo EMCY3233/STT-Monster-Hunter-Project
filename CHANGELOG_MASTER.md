@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Jerarquía parcialMOD230
+
+-PR7/16111d8:3huesos,2raíces,0ciclos,6matricesfinitas;10pruebasnuevasdelpropietario. No rigfuncional.
+-Encargadapropiedadnuméricadematricescondicionadaafuenteaplicable,sinampliarmuestras.
+
 ## 22-10-2026 — Estado consolidado al cierre de etapas
 
 - Sustituidos estados históricos de monitor no integrado y base3DS no disponible; separadas pruebasPC/compilación/visual/físico. GitHub confirmaPR20fusionada yPR21abierta.
