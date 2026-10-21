@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — MH4Ubase ymonitor integrado
+
+-PR7/1bdf73e:cabeceras/hashesMH4Ubasecoherentes;BLZsolo.codeencargada,salidaacotada16.261.120bytes.
+-Monitorinforma6PRintegradasconautorizaciónhumanadirecta,mainf199bd0/CIcorrecta;sinreinstalación. No extiendepermisoamásfusiones.
+
 ## 21-10-2026 — Renderer00.11 ymatrizmonitor
 
 -RecibidoPR21:muestrapropiaintegrada,VPK00.11compilado,sinvisual/físico. EncargadaverificaciónPCviable.

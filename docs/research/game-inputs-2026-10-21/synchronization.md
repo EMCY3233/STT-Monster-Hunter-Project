@@ -199,3 +199,11 @@ InformeprototiposPR21:Pose/1 conectado alrenderer con muestrapropia,límite160Ki
 MonitorPR20/f30e8d4 entregamatriz/heads/orden13→14→16→18→19→20;26pruebas/CIdecódigocorrectas segúnpropietario. CI documentalpendiente,encargadocierre;frente listopararevisión,sinfusión ofeaturesadicionalesinnecesarias. Pendientesfísicosred/reloj no se sustituyenconPC.
 
 Investigaciónrecibe siguienteaceptación:una particiónNCCH ejecutable de nueva baseMH4Ulegible,ExHeader/ExeFS/flags/rangos conprocedencia;sinRomFSmasivo,nuevosemuruns odescompresiónautomática. Banco/otrasramas/originalesintactos.
+
+## MH4U base estructurada y monitor integrado por autorización directa
+
+PR7/1bdf73ecd6f3535b2d83c105b1847f3f9806ccca:partición0NCCHejecutable/no_crypto deMH4Ubase,ProgramID0004000000126100;ExHeader/tablaExeFS yhashes.code/banner/icon coinciden. .codecomprimido9.091.360bytes,pieBLZdeclara16.261.120igualpáginasdesegmentos;sin descompresiónenestaetapa. FlagsCPUsolicitanL2/804MHz,no frecuenciaobservada;noISAinferida de core_version. Propietario comunica7pruebasnuevas,sinrepetirsuite124.
+
+DosSHAcompletos4GiBleenbytesRomFS pero no lo parsean/extractan:recibooriginalseconserva yacceptanceaclaraelalcance,no se reescribehistoria. Siguienteaceptaciónencargada:solo.codeBLZ,salidaprivadaacotada16.261.120bytes,consumo/prefijo/hash/segmentos yBSSseparado. SinrepetirSHAimagencompletasinmotivo,sinbanco/emu.
+
+Monitorconfirmó autorizaciónhumanadirectaensuchat:«Sí,fusionarlas seisPR». Cadena13/14/16/18/19/20fusionada;merges130948a/79a6292/0041f73/5c9a79b/7becc6e/f199bd0. Según cierre:mainlocal/remoto sincronizado,árbollimpio,CI finalPC/Vita correcta. No esuna autorización general de fusionarPR3/7/prototipos. Sinreinstalación/FTP;pendientesfísicosred/reloj conservados. Estadoanterior«sin fusionar» deestas6PRqueda superado;registrohistóricoconservado.
