@@ -137,3 +137,11 @@ Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototip
 - Corregida cobertura de borde dependiente del winding; regresión exacta preservada.
 - CI39682179024 aprobada, código d5df0516. VPK candidato actualizado e inspeccionado, sin transferencias.
 - near-plane sigue rechazando triángulos completos; sin GPU, FPS ni hardware acreditados.
+
+## 2026-10-22 — Espada CC0 equipada en muestra propia
+
+- Montaje planar codo/mano con grip provisional180mm y yaw del cazador.
+- Variante corporal40v/60tri sin hoja previa; espada199v/394tri de PR22, con créditos incluidos.
+- Buffer de espada8KiB y pose estática precargada; fallback propio ante carga fallida.
+- STTP00001 versión00.12; pruebas C/PC, capturas y compilación pendientes CI al publicar.
+- Kenney sigue pendiente de adaptación; sin FTP, instalación ni consola.
