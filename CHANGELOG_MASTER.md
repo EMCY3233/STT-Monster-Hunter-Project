@@ -1,5 +1,13 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-RESEARCH-003 / herramientas y extracción exterior
+
+- Corregida la precisión de nombres: Capcom identifica Generations Ultimate como Monster Hunter XX en Japón; se conserva la plataforma por separado. La entrada local extraída es CIA 3DS, no una imagen Switch.
+- 7zr portátil 26.04: listado, prueba íntegra de descompresión/CRC y extracción de los dos conjuntos MH4U/MHXX correctos. SHA-256 de los dos CIA y TMD públicos registrados; contenidos de ambas bases marcados como cifrados.
+- CTRTool portátil 1.3.0, ZIP cotejado con digest de publicación: extraído contenido NCCH sin cifrar del parche y listado RomFS correcto (1.228 entradas .arc y 270 .gmd). La opción anunciada --listexefs fue rechazada; sin asumir validación completa de ExeFS o assets.
+- [Informe con herramientas, fuentes, hashes y límites](docs/research/game-inputs-2026-10-21/extraction-tools.md). Arc Explorer declara soporte específico de los juegos de interés; Kuriimu2 y mhtools quedan como candidatos no probados con los recursos locales.
+- Siete originales cotejados tras extracción: 7/7 SHA-256 conservados. Derivados, herramientas y logs permanecen fuera del repo, en analysis-local; sin claves, tickets, recursos comerciales publicados ni acceso PS Vita/FTP.
+
 ## 2026-10-21 — STT-RESEARCH-002 / consolidación de investigación y áreas
 
 - Inventariados siete archivos locales, 7.861.039.260 bytes, mediante lectura completa y SHA-256; dos pasadas con hashes idénticos. [Resultados y límites](docs/research/game-inputs-2026-10-21/README.md).
