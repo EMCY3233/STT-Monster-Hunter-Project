@@ -118,3 +118,10 @@ Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototip
 - Contrato y límites: docs/prototypes/asset-pose-bridge.md.
 - Sin parser VPK, GUI, compilación Vita nueva ni validación física de este puente.
 
+
+## 2026-10-21 — Lector C STT Pose/1
+
+- Lector portable acotado, índice de poses y transformación de escena.
+- Perfil JSON canónico C explícito, sin modificar STT Pose/1 general.
+- 30 pruebas Python PC aprobadas; 288 casos C/Python con ASan/UBSan y compilación de objeto Vita aprobados (CI 39677522635, código 0c9fd354).
+- Sin nuevo VPK, consola, FTP ni recursos comerciales.
