@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — MH4U BLZ cerrado
+
+-PR7/93455dc:salida16.261.120bytes yhashcotejados,segmentosrespaldados;sinreverificarimagencompleta4GiB.
+-ContrasteindependienteBLZencargado condicionadoalinaje/aplicabilidad,sinsemánticaojuegoejecutado.
+
 ## 21-10-2026 — MH4Ubase ymonitor integrado
 
 -PR7/1bdf73e:cabeceras/hashesMH4Ubasecoherentes;BLZsolo.codeencargada,salidaacotada16.261.120bytes.

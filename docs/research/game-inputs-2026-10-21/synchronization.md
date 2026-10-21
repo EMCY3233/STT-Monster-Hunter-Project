@@ -207,3 +207,11 @@ PR7/1bdf73ecd6f3535b2d83c105b1847f3f9806ccca:partición0NCCHejecutable/no_crypto
 DosSHAcompletos4GiBleenbytesRomFS pero no lo parsean/extractan:recibooriginalseconserva yacceptanceaclaraelalcance,no se reescribehistoria. Siguienteaceptaciónencargada:solo.codeBLZ,salidaprivadaacotada16.261.120bytes,consumo/prefijo/hash/segmentos yBSSseparado. SinrepetirSHAimagencompletasinmotivo,sinbanco/emu.
 
 Monitorconfirmó autorizaciónhumanadirectaensuchat:«Sí,fusionarlas seisPR». Cadena13/14/16/18/19/20fusionada;merges130948a/79a6292/0041f73/5c9a79b/7becc6e/f199bd0. Según cierre:mainlocal/remoto sincronizado,árbollimpio,CI finalPC/Vita correcta. No esuna autorización general de fusionarPR3/7/prototipos. Sinreinstalación/FTP;pendientesfísicosred/reloj conservados. Estadoanterior«sin fusionar» deestas6PRqueda superado;registrohistóricoconservado.
+
+## MH4U BLZ cerrado: alcance parcial de preservación
+
+PR7/93455dcab83d823d1b4218b039aa29e951e5e7a1:una.code9.091.360bytes,cotejadaantes/después;salida16.261.120bytes SHA-25663940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc,tamaño/hashsalidacotejadosaquí. Flujo/coberturaterminanexactamente,prefijo76conservado;segmentostext/ro/datarespaldados yBSS/stackseparados. Propietariocomunica7tests nuevos,decodercompartidosincambios.
+
+No se repitióSHAdeimagen4GiB:hashNCSDhistórico,noafirmarimagenenteraintactareverificada. Statigualnopruebaotrasregiones;whole_image_unchanged_reverified=false. SinRomFSparseado/extraído,arranque,banco oconsola. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/93455dcab83d823d1b4218b039aa29e951e5e7a1/docs/research/stt-re-20261021/mh4u-code-blz.md).
+
+Siguienteaceptación:comprobarlinaje/aplicabilidad deunasegundaimplementaciónBLZ ycontrastaruna salida siindependenciaacreditable;deotro modo cerrar bloqueoexplícito. No acreditarsemántica/ARMThumb/funcionesporhashcorrecto.
