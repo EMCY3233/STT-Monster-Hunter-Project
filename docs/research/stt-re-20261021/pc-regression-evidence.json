@@ -1,0 +1,1077 @@
+{
+  "tested_commit": "c4215e801bc14d5158321860a3afddeda790d561",
+  "python_version": "3.12.14",
+  "python_implementation": "CPython",
+  "python_executable_sha256": "b07b03b9ba866a341a3c13ee69710fbc8d43d4ce2523dee13f6df5c25378d15b",
+  "scope": "synthetic regression and tool syntax/CLI help only; no game or emulator launch, resource decoding, extraction or census",
+  "manifest_sha256": "737c81ef173792b49b1c44a2b0333b5166474c6637135a0374a4bc14f602e61a",
+  "manifest_files_checked": 78,
+  "manifest_matches": true,
+  "tests_run": 106,
+  "outcomes": {
+    "passed": 106
+  },
+  "modules": [
+    {
+      "module": "test_stt_re_arc",
+      "tests": 8,
+      "outcomes": {
+        "passed": 8
+      }
+    },
+    {
+      "module": "test_stt_re_elf_sections",
+      "tests": 7,
+      "outcomes": {
+        "passed": 7
+      }
+    },
+    {
+      "module": "test_stt_re_frontier_candidates",
+      "tests": 6,
+      "outcomes": {
+        "passed": 6
+      }
+    },
+    {
+      "module": "test_stt_re_frontier_layout",
+      "tests": 5,
+      "outcomes": {
+        "passed": 5
+      }
+    },
+    {
+      "module": "test_stt_re_frontier_pair",
+      "tests": 3,
+      "outcomes": {
+        "passed": 3
+      }
+    },
+    {
+      "module": "test_stt_re_frontier_signatures",
+      "tests": 4,
+      "outcomes": {
+        "passed": 4
+      }
+    },
+    {
+      "module": "test_stt_re_headers",
+      "tests": 10,
+      "outcomes": {
+        "passed": 10
+      }
+    },
+    {
+      "module": "test_stt_re_jkr_lz",
+      "tests": 13,
+      "outcomes": {
+        "passed": 13
+      }
+    },
+    {
+      "module": "test_stt_re_jkr_selection",
+      "tests": 5,
+      "outcomes": {
+        "passed": 5
+      }
+    },
+    {
+      "module": "test_stt_re_lmt_vectors",
+      "tests": 11,
+      "outcomes": {
+        "passed": 11
+      }
+    },
+    {
+      "module": "test_stt_re_mhfu_toc",
+      "tests": 6,
+      "outcomes": {
+        "passed": 6
+      }
+    },
+    {
+      "module": "test_stt_re_mod230_conventions",
+      "tests": 4,
+      "outcomes": {
+        "passed": 4
+      }
+    },
+    {
+      "module": "test_stt_re_mod230_mesh",
+      "tests": 8,
+      "outcomes": {
+        "passed": 8
+      }
+    },
+    {
+      "module": "test_stt_re_ppsspp_import_logs",
+      "tests": 4,
+      "outcomes": {
+        "passed": 4
+      }
+    },
+    {
+      "module": "test_stt_re_psp_import_reference",
+      "tests": 5,
+      "outcomes": {
+        "passed": 5
+      }
+    },
+    {
+      "module": "test_stt_re_tex3ds",
+      "tests": 7,
+      "outcomes": {
+        "passed": 7
+      }
+    }
+  ],
+  "test_cases": [
+    {
+      "test": "test_stt_re_arc.ArcProbeTests.test_corrupt_zlib",
+      "status": "passed",
+      "seconds": 0.00022839999292045832,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_arc.ArcProbeTests.test_declared_budget",
+      "status": "passed",
+      "seconds": 4.830001853406429e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_arc.ArcProbeTests.test_decompression_size_lie",
+      "status": "passed",
+      "seconds": 3.99000127799809e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_arc.ArcProbeTests.test_payload_over_table",
+      "status": "passed",
+      "seconds": 2.4299981305375695e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_arc.ArcProbeTests.test_trailing_compressed_data",
+      "status": "passed",
+      "seconds": 2.9300019377842546e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_arc.ArcProbeTests.test_truncated_table",
+      "status": "passed",
+      "seconds": 2.0799983758479357e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_arc.ArcProbeTests.test_unsupported_version",
+      "status": "passed",
+      "seconds": 1.8999999156221747e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_arc.ArcProbeTests.test_valid_payload_and_name_not_used_as_destination",
+      "status": "passed",
+      "seconds": 0.0010768999927677214,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_elf_sections.ElfTests.test_bad_name",
+      "status": "passed",
+      "seconds": 6.379999103955925e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_elf_sections.ElfTests.test_big_endian_rejected",
+      "status": "passed",
+      "seconds": 2.169999061152339e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_elf_sections.ElfTests.test_entry_mapping",
+      "status": "passed",
+      "seconds": 0.00016590001177974045,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_elf_sections.ElfTests.test_file_size_exceeds_memory",
+      "status": "passed",
+      "seconds": 2.0500010577961802e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_elf_sections.ElfTests.test_memory_only_entry_is_not_file_backed",
+      "status": "passed",
+      "seconds": 3.0399998649954796e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_elf_sections.ElfTests.test_section_outside",
+      "status": "passed",
+      "seconds": 2.020000829361379e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_elf_sections.ElfTests.test_table_outside",
+      "status": "passed",
+      "seconds": 1.3899989426136017e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_candidates.CandidateHeaders.test_ecd",
+      "status": "passed",
+      "seconds": 1.7300015315413475e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_candidates.CandidateHeaders.test_ecd_length_mismatch",
+      "status": "passed",
+      "seconds": 7.159999222494662e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_candidates.CandidateHeaders.test_jkr",
+      "status": "passed",
+      "seconds": 1.479999627918005e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_candidates.CandidateHeaders.test_jkr_bad_offset",
+      "status": "passed",
+      "seconds": 3.199998172931373e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_candidates.CandidateHeaders.test_jkr_budget",
+      "status": "passed",
+      "seconds": 3.090000245720148e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_candidates.CandidateHeaders.test_sce_does_not_claim_elf",
+      "status": "passed",
+      "seconds": 1.2900010915473104e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_layout.LayoutBounds.test_budget",
+      "status": "passed",
+      "seconds": 3.589998232200742e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_layout.LayoutBounds.test_embedded_nul",
+      "status": "passed",
+      "seconds": 3.2100011594593525e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_layout.LayoutBounds.test_external_anchors_only",
+      "status": "passed",
+      "seconds": 0.00010120001388713717,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_layout.LayoutBounds.test_missing_terminator",
+      "status": "passed",
+      "seconds": 3.220001235604286e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_layout.LayoutBounds.test_overlapping_anchors",
+      "status": "passed",
+      "seconds": 1.5300000086426735e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_pair.PairBounds.test_bad_anchor",
+      "status": "passed",
+      "seconds": 3.57000099029392e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_pair.PairBounds.test_pair_budget",
+      "status": "passed",
+      "seconds": 1.4999997802078724e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_pair.PairBounds.test_partial_template_is_not_grammar",
+      "status": "passed",
+      "seconds": 6.670001312159002e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_signatures.SignatureTests.test_ecd",
+      "status": "passed",
+      "seconds": 1.6400008462369442e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_signatures.SignatureTests.test_exf",
+      "status": "passed",
+      "seconds": 1.0499992640689015e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_signatures.SignatureTests.test_jkr",
+      "status": "passed",
+      "seconds": 9.599985787644982e-06,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_frontier_signatures.SignatureTests.test_reversed_marker_not_accepted",
+      "status": "passed",
+      "seconds": 1.3199984095990658e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_headers.ResourceHeaderTests.test_block_inside_table",
+      "status": "passed",
+      "seconds": 2.19999928958714e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_headers.ResourceHeaderTests.test_block_outside_file",
+      "status": "passed",
+      "seconds": 1.550000160932541e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_headers.ResourceHeaderTests.test_mod_declared_fields",
+      "status": "passed",
+      "seconds": 1.4499993994832039e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_headers.ResourceHeaderTests.test_mod_truncated",
+      "status": "passed",
+      "seconds": 1.09999964479357e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_headers.ResourceHeaderTests.test_mod_unsupported",
+      "status": "passed",
+      "seconds": 1.0799994925037026e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_headers.ResourceHeaderTests.test_track_pointer_outside_file",
+      "status": "passed",
+      "seconds": 1.309998333454132e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_headers.ResourceHeaderTests.test_truncated_table",
+      "status": "passed",
+      "seconds": 1.1199997970834374e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_headers.ResourceHeaderTests.test_unreasonable_counts",
+      "status": "passed",
+      "seconds": 1.2400007108226418e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_headers.ResourceHeaderTests.test_unsupported_lmt",
+      "status": "passed",
+      "seconds": 1.1399999493733048e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_headers.ResourceHeaderTests.test_valid_lmt_and_empty_slot",
+      "status": "passed",
+      "seconds": 1.4899997040629387e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_bad_backreference",
+      "status": "passed",
+      "seconds": 7.98000255599618e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_budget",
+      "status": "passed",
+      "seconds": 1.400001929141581e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_control_reload",
+      "status": "passed",
+      "seconds": 2.3200002033263445e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_literals",
+      "status": "passed",
+      "seconds": 1.4099990949034691e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_long_a",
+      "status": "passed",
+      "seconds": 1.610000617802143e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_long_b",
+      "status": "passed",
+      "seconds": 1.5099998563528061e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_medium",
+      "status": "passed",
+      "seconds": 1.2100004823878407e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_output_overshoot",
+      "status": "passed",
+      "seconds": 4.260000423528254e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_raw_block",
+      "status": "passed",
+      "seconds": 1.6400008462369442e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_short_overlap",
+      "status": "passed",
+      "seconds": 1.2500007869675756e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_trailing_recorded",
+      "status": "passed",
+      "seconds": 1.1800002539530396e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_truncated",
+      "status": "passed",
+      "seconds": 3.160000778734684e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_lz.JkrLz.test_wrong_codec",
+      "status": "passed",
+      "seconds": 3.0499999411404133e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_selection.Selection.test_bad_budget",
+      "status": "passed",
+      "seconds": 1.7300015315413475e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_selection.Selection.test_exclude_control",
+      "status": "passed",
+      "seconds": 1.71000137925148e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_selection.Selection.test_filters_codec",
+      "status": "passed",
+      "seconds": 1.2300006346777081e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_selection.Selection.test_no_candidate_does_not_expand",
+      "status": "passed",
+      "seconds": 3.099997411482036e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_jkr_selection.Selection.test_tie_by_path",
+      "status": "passed",
+      "seconds": 1.309998333454132e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_16bit_affine_bounds",
+      "status": "passed",
+      "seconds": 3.0399998649954796e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_8bit_affine_bounds",
+      "status": "passed",
+      "seconds": 1.750001683831215e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_additive_frame_indices",
+      "status": "passed",
+      "seconds": 1.6200006939470768e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_missing_extremes",
+      "status": "passed",
+      "seconds": 1.3300013961270452e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_nan_bounds",
+      "status": "passed",
+      "seconds": 1.4399993233382702e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_nonfinite_weight",
+      "status": "passed",
+      "seconds": 1.810002140700817e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_nonintegral_stride",
+      "status": "passed",
+      "seconds": 1.1299998732283711e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_reference_only",
+      "status": "passed",
+      "seconds": 1.9400002202019095e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_track_table_outside",
+      "status": "passed",
+      "seconds": 1.3500015484169126e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_unsupported_codec",
+      "status": "passed",
+      "seconds": 1.069999416358769e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_lmt_vectors.VectorTests.test_version_rejected",
+      "status": "passed",
+      "seconds": 1.1100026313215494e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mhfu_toc.TocBounds.test_backward_sector",
+      "status": "passed",
+      "seconds": 4.780001472681761e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mhfu_toc.TocBounds.test_entry_budget",
+      "status": "passed",
+      "seconds": 2.2099993657320738e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mhfu_toc.TocBounds.test_missing_end",
+      "status": "passed",
+      "seconds": 3.540000761859119e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mhfu_toc.TocBounds.test_sector_entries",
+      "status": "passed",
+      "seconds": 1.8999999156221747e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mhfu_toc.TocBounds.test_table_length_mismatch",
+      "status": "passed",
+      "seconds": 1.5700003132224083e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mhfu_toc.TocBounds.test_unaligned_source",
+      "status": "passed",
+      "seconds": 2.7499976567924023e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_conventions.IndexWindows.test_rejects_another_version",
+      "status": "passed",
+      "seconds": 3.259998629800975e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_conventions.IndexWindows.test_rejects_mesh_header_outside",
+      "status": "passed",
+      "seconds": 1.4999997802078724e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_conventions.IndexWindows.test_rejects_multiple_mesh_scope",
+      "status": "passed",
+      "seconds": 2.8600014047697186e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_conventions.IndexWindows.test_two_conventions_without_silent_padding",
+      "status": "passed",
+      "seconds": 2.9999995604157448e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_mesh.ModMeshBounds.test_bad_index",
+      "status": "passed",
+      "seconds": 5.699999746866524e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_mesh.ModMeshBounds.test_bad_signature",
+      "status": "passed",
+      "seconds": 3.309999010525644e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_mesh.ModMeshBounds.test_global_shortfall_reported",
+      "status": "passed",
+      "seconds": 3.659998765215278e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_mesh.ModMeshBounds.test_nan_position",
+      "status": "passed",
+      "seconds": 3.1400006264448166e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_mesh.ModMeshBounds.test_stride_span",
+      "status": "passed",
+      "seconds": 2.340000355616212e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_mesh.ModMeshBounds.test_table_outside",
+      "status": "passed",
+      "seconds": 3.3199990866705775e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_mesh.ModMeshBounds.test_table_overlap",
+      "status": "passed",
+      "seconds": 3.259998629800975e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_mod230_mesh.ModMeshBounds.test_valid_synthetic_ranges",
+      "status": "passed",
+      "seconds": 2.6299996534362435e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_ppsspp_import_logs.LogEvidence.test_exact_announcement",
+      "status": "passed",
+      "seconds": 4.360001184977591e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_ppsspp_import_logs.LogEvidence.test_same_address_other_section_is_not_evidence",
+      "status": "passed",
+      "seconds": 1.4199991710484028e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_ppsspp_import_logs.LogEvidence.test_unstructured_address_is_not_evidence",
+      "status": "passed",
+      "seconds": 1.09999964479357e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_ppsspp_import_logs.LogEvidence.test_wrong_size_is_not_evidence",
+      "status": "passed",
+      "seconds": 1.0899995686486363e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_psp_import_reference.ImportPointer.test_bss_is_not_file_data",
+      "status": "passed",
+      "seconds": 6.310001481324434e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_psp_import_reference.ImportPointer.test_dual_mapping",
+      "status": "passed",
+      "seconds": 2.789997961372137e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_psp_import_reference.ImportPointer.test_nid_array_crosses_backed_end",
+      "status": "passed",
+      "seconds": 2.370000584051013e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_psp_import_reference.ImportPointer.test_record_length_outside_scope",
+      "status": "passed",
+      "seconds": 3.8300000596791506e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_psp_import_reference.ImportPointer.test_section_disagrees_with_segment",
+      "status": "passed",
+      "seconds": 4.320000880397856e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_tex3ds.TexRanges.test_full_block_payload_without_pixels",
+      "status": "passed",
+      "seconds": 2.2899999748915434e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_tex3ds.TexRanges.test_no_guess_for_unknown_format",
+      "status": "passed",
+      "seconds": 3.369999467395246e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_tex3ds.TexRanges.test_offset_is_relative",
+      "status": "passed",
+      "seconds": 1.4499993994832039e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_tex3ds.TexRanges.test_payload_overrun",
+      "status": "passed",
+      "seconds": 1.3600016245618463e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_tex3ds.TexRanges.test_truncated_table",
+      "status": "passed",
+      "seconds": 1.170000177808106e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_tex3ds.TexRanges.test_unsupported_version",
+      "status": "passed",
+      "seconds": 2.9199989512562752e-05,
+      "detail": null
+    },
+    {
+      "test": "test_stt_re_tex3ds.TexRanges.test_zero_dimensions",
+      "status": "passed",
+      "seconds": 2.759997732937336e-05,
+      "detail": null
+    }
+  ],
+  "syntax": [
+    {
+      "path": "tools/stt_re/audit_accessible.py",
+      "sha256": "513c23a4e5ca8535b48472e8ef33c68394e19d4faaf19107bacdda01100bb08e",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/compare_frontier_jkr_pair.py",
+      "sha256": "ba1e2f08a068057c7f02ab288786731703df9bed3c6e2a89305e8f70a5894183",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/compare_mod230_index_conventions.py",
+      "sha256": "4de20b97b08fcf55386b347dec21378814e480a7913d2c0d6e496fd309e2c983",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/compare_ppsspp_import_logs.py",
+      "sha256": "7a37d619ea8577a4a1c90b2fbc50e16298cbb2caf6acb3544e09165c251c840f",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/decode_jkr_lz.py",
+      "sha256": "4c6cc0f6dc54f1a0834e821eee4b3209753a96ab331017de178b0ec199203519",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/decode_lmt_vectors.py",
+      "sha256": "017afabf0b046e8c9f75411174a08a1ef49c135dc24c5568dd6d8af26fd95e8f",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_elf_sections.py",
+      "sha256": "be8f2e7a1a9fb56041d697f923801574827699d894584fd95227f281619186b7",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_frontier_candidates.py",
+      "sha256": "c46b246eae3480330597a247e0d145c9ca8d3a65662d60786768e0866c7131c1",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_frontier_local.py",
+      "sha256": "d18e3fca5741b700faf58faabd21fcb36dde99c0c08c882d47467ffd014eee6e",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_frontier_text_layout.py",
+      "sha256": "ea00c14cdbbdec29bf031d941ab790d894aa67feacf06022da86d7634133b2b1",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_mod230_mesh.py",
+      "sha256": "241ed9f0b2210d0fabc6d843977b0aeeb2347d20ee34467841e490fbab334661",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_tex3ds_header.py",
+      "sha256": "ca9086be580d30e8fa0de54e17816241cbbf3f58c3e67831777d2aea9a3a329a",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inventory_games.py",
+      "sha256": "9d831777e9f78daa4f27d0a06db43f7cb11dd8e89d7674ae9b45d4a23ae09f91",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/label_catalog.py",
+      "sha256": "c49c7859b2f76c2568163fd9882728a3089eb168509d26eb486e72d4dee356ea",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/map_psp_import_reference.py",
+      "sha256": "aaec74ff0f5da5758cb6b10291ba30e6427e07134115ddbc4cf2f47d5a1d5d11",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/probe_arc.py",
+      "sha256": "530a8d02689dbb6b06e0c3d8639c9e35c5c9e64dceb85899202a9f02e0bb4bb3",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/probe_mhfu_data.py",
+      "sha256": "39bd007666278d928c1222189d577a9e97510bac3a4ee8c2ca8cbb88ebd9f1e7",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/probe_plain_executables.py",
+      "sha256": "c1b1aac76c3d48a0e7cec5a0ad1b104b28c21e60cbd28455166c25114efe77ed",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/probe_resource_headers.py",
+      "sha256": "f84f262a992b74653dd7eac272991317a79aec5573b36a14f61ee25de949cc9d",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/run_citra_probe.py",
+      "sha256": "faded40453b1ab03ee7cd0d6e5d0a16b20a486f9dc1ec5449c9ffdfed2e1d659",
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/run_ppsspp_probe.py",
+      "sha256": "345cf52117296d321e922a26e18fa107d28003e3064c0f857794eed65fb90f2e",
+      "status": "passed"
+    }
+  ],
+  "cli_help": [
+    {
+      "path": "tools/stt_re/audit_accessible.py",
+      "source_sha256": "513c23a4e5ca8535b48472e8ef33c68394e19d4faaf19107bacdda01100bb08e",
+      "exit_code": 0,
+      "seconds": 0.10568759997840971,
+      "stdout_bytes": 227,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/compare_frontier_jkr_pair.py",
+      "source_sha256": "ba1e2f08a068057c7f02ab288786731703df9bed3c6e2a89305e8f70a5894183",
+      "exit_code": 0,
+      "seconds": 0.08938910000142641,
+      "stdout_bytes": 436,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/compare_mod230_index_conventions.py",
+      "source_sha256": "4de20b97b08fcf55386b347dec21378814e480a7913d2c0d6e496fd309e2c983",
+      "exit_code": 0,
+      "seconds": 0.08808020001742989,
+      "stdout_bytes": 408,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/compare_ppsspp_import_logs.py",
+      "source_sha256": "7a37d619ea8577a4a1c90b2fbc50e16298cbb2caf6acb3544e09165c251c840f",
+      "exit_code": 0,
+      "seconds": 0.09019800001988187,
+      "stdout_bytes": 311,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/decode_jkr_lz.py",
+      "source_sha256": "4c6cc0f6dc54f1a0834e821eee4b3209753a96ab331017de178b0ec199203519",
+      "exit_code": 0,
+      "seconds": 0.09133789999759756,
+      "stdout_bytes": 1694,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/decode_lmt_vectors.py",
+      "source_sha256": "017afabf0b046e8c9f75411174a08a1ef49c135dc24c5568dd6d8af26fd95e8f",
+      "exit_code": 0,
+      "seconds": 0.10207309998804703,
+      "stdout_bytes": 436,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_elf_sections.py",
+      "source_sha256": "be8f2e7a1a9fb56041d697f923801574827699d894584fd95227f281619186b7",
+      "exit_code": 0,
+      "seconds": 0.09102459999849088,
+      "stdout_bytes": 320,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_frontier_candidates.py",
+      "source_sha256": "c46b246eae3480330597a247e0d145c9ca8d3a65662d60786768e0866c7131c1",
+      "exit_code": 0,
+      "seconds": 0.092319800023688,
+      "stdout_bytes": 335,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_frontier_local.py",
+      "source_sha256": "d18e3fca5741b700faf58faabd21fcb36dde99c0c08c882d47467ffd014eee6e",
+      "exit_code": 0,
+      "seconds": 0.08954089999315329,
+      "stdout_bytes": 243,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_frontier_text_layout.py",
+      "source_sha256": "ea00c14cdbbdec29bf031d941ab790d894aa67feacf06022da86d7634133b2b1",
+      "exit_code": 0,
+      "seconds": 0.09481290000258014,
+      "stdout_bytes": 326,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_mod230_mesh.py",
+      "source_sha256": "241ed9f0b2210d0fabc6d843977b0aeeb2347d20ee34467841e490fbab334661",
+      "exit_code": 0,
+      "seconds": 0.0907831999938935,
+      "stdout_bytes": 478,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inspect_tex3ds_header.py",
+      "source_sha256": "ca9086be580d30e8fa0de54e17816241cbbf3f58c3e67831777d2aea9a3a329a",
+      "exit_code": 0,
+      "seconds": 0.09069330000784248,
+      "stdout_bytes": 490,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/inventory_games.py",
+      "source_sha256": "9d831777e9f78daa4f27d0a06db43f7cb11dd8e89d7674ae9b45d4a23ae09f91",
+      "exit_code": 0,
+      "seconds": 0.08662119999644347,
+      "stdout_bytes": 315,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/label_catalog.py",
+      "source_sha256": "c49c7859b2f76c2568163fd9882728a3089eb168509d26eb486e72d4dee356ea",
+      "exit_code": 0,
+      "seconds": 0.0800368000054732,
+      "stdout_bytes": 328,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/map_psp_import_reference.py",
+      "source_sha256": "aaec74ff0f5da5758cb6b10291ba30e6427e07134115ddbc4cf2f47d5a1d5d11",
+      "exit_code": 0,
+      "seconds": 0.08449849998578429,
+      "stdout_bytes": 369,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/probe_arc.py",
+      "source_sha256": "530a8d02689dbb6b06e0c3d8639c9e35c5c9e64dceb85899202a9f02e0bb4bb3",
+      "exit_code": 0,
+      "seconds": 0.08493070001713932,
+      "stdout_bytes": 630,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/probe_mhfu_data.py",
+      "source_sha256": "39bd007666278d928c1222189d577a9e97510bac3a4ee8c2ca8cbb88ebd9f1e7",
+      "exit_code": 0,
+      "seconds": 0.0897209000249859,
+      "stdout_bytes": 639,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/probe_plain_executables.py",
+      "source_sha256": "c1b1aac76c3d48a0e7cec5a0ad1b104b28c21e60cbd28455166c25114efe77ed",
+      "exit_code": 0,
+      "seconds": 0.08988549999776296,
+      "stdout_bytes": 247,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/probe_resource_headers.py",
+      "source_sha256": "f84f262a992b74653dd7eac272991317a79aec5573b36a14f61ee25de949cc9d",
+      "exit_code": 0,
+      "seconds": 0.04609449999406934,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/run_citra_probe.py",
+      "source_sha256": "faded40453b1ab03ee7cd0d6e5d0a16b20a486f9dc1ec5449c9ffdfed2e1d659",
+      "exit_code": 0,
+      "seconds": 0.08815120000508614,
+      "stdout_bytes": 277,
+      "stderr_bytes": 0,
+      "status": "passed"
+    },
+    {
+      "path": "tools/stt_re/run_ppsspp_probe.py",
+      "source_sha256": "345cf52117296d321e922a26e18fa107d28003e3064c0f857794eed65fb90f2e",
+      "exit_code": 0,
+      "seconds": 0.08780359997763298,
+      "stdout_bytes": 446,
+      "stderr_bytes": 0,
+      "status": "passed"
+    }
+  ],
+  "bank_sqlite_sha256_before": "1ad910c69269f951f41d9ff086d66521eda6bc2d96227042f82234e64a095ce1",
+  "bank_sqlite_sha256_after": "1ad910c69269f951f41d9ff086d66521eda6bc2d96227042f82234e64a095ce1",
+  "bank_sqlite_unchanged": true,
+  "new_emulator_runs": 0,
+  "new_dumps": 0,
+  "new_game_resource_decodes": 0,
+  "visual_or_commercial_fidelity_verified": false,
+  "success": true,
+  "private_report_sha256": "c65108bd63750c7ded343743fd5de7d545b698ce44ef615223ad63d0430d5713",
+  "unittest_log_sha256": "414d48d3318a50c3915610e23e9645d7b85e8c7202b9021058e532a371e56bce",
+  "tested_manifest_copy_sha256": "737c81ef173792b49b1c44a2b0333b5166474c6637135a0374a4bc14f602e61a",
+  "published_manifest_normalized_content_verified": true,
+  "manifest_line_ending_note": "tested local CRLF serialization retained; logical contents match Git LF after normalization"
+}

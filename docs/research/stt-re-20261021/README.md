@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: contraste con logs PPSSPP
+## Estado más reciente: regresión PC completa
+
+[Matriz de campaña](pc-regression-matrix.md), snapshot c4215e8 / CPython 3.12.14: 106/106 pruebas sintéticas, 21/21 sintaxis y 21/21 ayudas CLI aprobadas. SQLite sin cambios, manifiesto cotejado. Sin nuevos arranques, extracciones, censos o decodificaciones comerciales; bloqueos de fidelidad/compatibilidad permanecen abiertos.
+
+
+## Etapa anterior: contraste con logs PPSSPP
 
 [Dos registros anteriores cotejados](mhfu-import-runtime-review.md) anuncian .lib.stub y .rodata.sceNid en direcciones/tamaños idénticos al mapa estático. Corroboración parcial del loader; lectura concreta del puntero e invocación funcional sin demostrar. Cero nuevos arranques/dumps; cuatro pruebas nuevas aprobadas. Sin FPS o validación visual.
 
