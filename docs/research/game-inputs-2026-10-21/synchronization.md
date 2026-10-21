@@ -55,3 +55,7 @@ Monitor confirmó main local=GitHub, árbol limpio, STT/1+STT/2 en receptor, age
 ## Entrega inicial de prototipos
 
 PR abiertas comprobadas: [contratos STT/3](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/8),[CombatLab](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/9),[AssetLab](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/10),[Vita3D](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/11). El chat responsable comunicó pruebas PC y compilación correctas; no se ejecutaron ni reprodujeron aquí. Ninguna está fusionada. El siguiente cruce de integración debe revisar dependencia entre contratos/núcleo y telemetría; no afirmar conexión UDP física que aún no existe.
+
+## Revisión offline STT/3
+
+[Interoperabilidad](protocol-interop-review.md):15casos sintéticos PC correctos. Validador candidato conserva casosSTT/1–2 y acepta ejemplosSTT/3 de386/432bytes; casoamplio715bytes. Validador vigente rechazaSTT/3 deliberadamente. Composición con analizador vigente resume2muestras, sin estadísticascombate. NoUDP,encoderC,VPK ni hardware probados en este recorrido; no se acredita instalación o integración enmain. El buzón del prototipo continúa local. Prototipos recibieron el informe; no hay encargo de cambiar el rechazo esperado del receptor antiguo.
