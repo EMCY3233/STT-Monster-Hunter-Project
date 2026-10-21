@@ -18,7 +18,7 @@ El receptor añade líneas a `telemetry.jsonl` sin truncar el archivo. Cada mues
 python -m unittest discover -s tests -v
 ```
 
-No hay dependencias de terceros. Si Windows abre Microsoft Store al invocar `python`, instalar/configurar Python o usar su ruta completa.
+El monitor PC no tiene dependencias de terceros. Si Windows abre Microsoft Store al invocar `python`, instalar/configurar Python o usar su ruta completa.
 
 ## Analizar una captura
 
@@ -33,7 +33,7 @@ Produce un resumen por IP, origen declarado y sesión: muestras, duplicados, lle
 - [Áreas 01–10](docs/areas/README.md)
 - [Arquitectura y protocolo STT/1](docs/monitor-protocol.md)
 - [Plan STT-MON-001 y resultados](docs/STT-MON-001.md)
-- [Diseño del agente Vita](vita-agent/README.md)
+- [Agente Vita experimental y compilación](vita-agent/README.md)
 - [Changelog maestro](CHANGELOG_MASTER.md)
 
-La conexión FTP y las características del hardware proceden de confirmación del usuario. Esta entrega no accede a la consola ni utiliza WinSCP. No incluye recursos de juegos, firmware, plugins ni instaladores VPK.
+La conexión FTP y las características del hardware proceden de confirmación del usuario. Esta entrega no accede a la consola ni utiliza WinSCP. No incluye recursos de juegos, firmware ni plugins. El workflow del agente prepara un VPK experimental para revisión; no lo instala ni transfiere.

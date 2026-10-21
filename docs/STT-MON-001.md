@@ -16,9 +16,10 @@ Reproducir con los comandos del README. Usar un archivo nuevo por ensayo si se d
 | UDP local, mensaje inválido seguido de válidos, duplicados y desorden | Automatizada; resultado en changelog |
 | Inactividad sin emisor | Automatizada; resultado en changelog |
 | Dos procesos CLI y 10 muestras | Resultado en changelog |
-| CI Windows/Linux, Python 3.11/3.13 | Configurado; ejecución remota pendiente |
+| CI Windows/Linux, Python 3.11/3.13 | Correcto en 610c076; ejecución enlazada en changelog |
 | Wi-Fi entre PC y Vita | Pendiente; requiere autorización adicional |
 | Desconexión/reconexión física y batería real | Pendiente |
-| Compilación/instalación/salida de agente Vita | Pendiente; VitaSDK no disponible |
+| Compilación de agente Vita | Workflow remoto en rama experimental; consultar su resultado |
+| Instalación/salida de agente Vita | Pendiente en hardware; requiere autorización adicional |
 
 El ensayo de inactividad automatizado cubre ausencia de datagramas; no prueba una desconexión Wi-Fi física. No se afirma rendimiento ni compatibilidad en consola.

@@ -1,0 +1,48 @@
+name: Vita agent build
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  protocol-c:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test C encoder and compatibility with Python receiver
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -Ivita-agent/src vita-agent/src/telemetry.c vita-agent/tests/test_telemetry.c -o /tmp/stt-encoder-test
+          /tmp/stt-encoder-test > /tmp/stt-c-packets.txt
+          python -c "from stt_monitor.protocol import decode; from pathlib import Path; packets=[decode(line) for line in Path('/tmp/stt-c-packets.txt').read_bytes().splitlines()]; assert len(packets)==2; assert packets[0]['battery_pct'] is None; assert packets[1]['seq']==59; assert all(p['source']=='vita' for p in packets)"
+  build:
+    runs-on: ubuntu-latest
+    container: vitasdk/vitasdk:2026.08-20260815@sha256:7f5eee50ff95b73c8c847dbfef6227aa0035886444b4d0254c21da8369ff1efc
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure and compile experimental agent
+        run: |
+          cmake -S vita-agent -B build/vita
+          cmake --build build/vita --parallel 2
+          sha256sum build/vita/stt_vita_monitor.vpk > build/vita/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-vita-monitor-experimental
+          path: |
+            build/vita/stt_vita_monitor.vpk
+            build/vita/SHA256SUMS
+          retention-days: 7
+  inspect-package:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: stt-vita-monitor-experimental
+          path: build/package
+      - name: Verify package structure and checksum without executing it
+        run: python tests/inspect_vpk.py build/package
