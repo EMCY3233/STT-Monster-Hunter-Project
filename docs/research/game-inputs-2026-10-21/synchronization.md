@@ -71,3 +71,7 @@ PR abiertas comprobadas: [contratos STT/3](https://github.com/EMCY3233/STT-Monst
 ## Coherencia de fuentes entre PR8–11
 
 [Comparación a commits fijados](prototype-overlap-review.md):17rutas compartidas,36observaciones deblobGit;16rutas idénticas ysoloCHANGELOGdistinto. PR11 conserva9rutasdecontratos dePR8 y7deCombatLabdePR9. Los4changelogs comparten prefijo yentradaspropias;requierenconsolidación futura. No se probó fusión combinada ni archivos exclusivos/runtime. Las4PR estaban abiertas,enborrador ysin fusionar. Coordinador informado;sin cambios en ramas.
+
+## Regiones compatibles con texto en el derivado JKR
+
+[SondeoCP932](frontier-jkr-text-regions.md) sobre los mismos349bytes:14tramosNULcompatiblesCP932conkana,160bytes,12sincontroles/2concontroles;14rechazanUTF8estricto. No se exportaron cadenas. Seis pruebas sintéticas correctas yhashfuente igual. No acredita formato,codificacióncanónica ni función. Investigación recibió el hallazgo para gramática/bordes de esta misma muestra;losotros43JKRsiguenpendientes,sin nuevaextracción.
