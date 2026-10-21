@@ -43,6 +43,9 @@ La espada usa en el suelo un círculo de radio 700 mm centrado 900 mm delante de
 
 LeakSanitizer no pudo inspeccionar `/proc` bajo el entorno instrumentado; se repitió con `ASAN_OPTIONS=detect_leaks=0`, con ASan y UBSan activos. Núcleo sin asignaciones dinámicas. CMake no estaba instalado localmente; se proporciona CI Windows/Linux separada de la compilación Vita y su resultado debe verificarse por SHA, sin atribuirle éxito anticipado.
 
-SHA-256 de ejecutables locales de esa compilación (no portables entre compiladores/rutas y no son VPK): demo `80a2a49e50931852aa19d7a9f369eee0f1568cfd5e599dff75d1842ed447531a`; test ASan/UBSan `10fdaa544b72f7e384f9c188097547b3463577f9eafaec8dd7f8b75c5a009daa`.
+SHA-256 de ejecutables locales de esa compilación (no portables entre compiladores/rutas y no son VPK): demo `80a2a49e50931852aa19d7a9f369eee0f1568cfd5e599dff75d1842ed447531a`; test ASan/UBSan `0c70e0202a8d01e4817392c2fe8ac97b1e1a2630acffaca4e7cde9cfaa1519dd`.
 
 No se ha probado recepción PC de telemetría desde Vita, instalación, interacción física ni rendimiento en PS Vita. Dependencias de integración: PR A (renderer, controles y VPK), PR contratos (telemetría/HUD y reserva acuática); B Asset Lab permanece desacoplado. Enlaces concretos se añadirán al publicar las PR. Pendiente: más objetivos, colisión 3D, golpes recibidos, propiedades de progresión y revisión de equilibrio con hardware.
+
+
+Revisión de portabilidad posterior: el primer build Vita GCC15 falló con `-Werror=type-limits` porque el enum de estados tiene representación sin signo; comparar con `< STT_IDLE` era siempre falso. Se sustituyó por comparación tras convertir a unsigned, conservando rechazo de estados negativos y superiores al máximo. Se añadieron caso -1 y compilación/prueba local `-fshort-enums` para reproducir enum sin signo; ambas variantes GCC13 pasan sin desactivar advertencias. CI añade esa variante. Build Vita debe repetirse sobre la corrección: este resultado PC no acredita aún el VPK. SHA-256 de `combat-lab/src/stt_combat.c` corregido: `dd50b4cf64ee0737c1f1cb9eebfc2d1ff9f47b5aedf1ec8b8ac0eb5fa726fbda`.

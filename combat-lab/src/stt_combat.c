@@ -38,7 +38,7 @@ void stt_combat_step(SttCombat *c,SttCombatInput in) {
  h=&c->hunter; c->tick++; c->impact_count=0;
  if(c->target.reaction_ticks) c->target.reaction_ticks--;
  /* Invalid state safely returns idle; opaque internal fields must not be imported. */
- if(h->state<STT_IDLE || h->state>STT_RECOVERY || (h->state!=STT_IDLE && (h->combo<1 || h->combo>3))) {
+ if((unsigned)h->state>(unsigned)STT_RECOVERY || (h->state!=STT_IDLE && (h->combo<1 || h->combo>3))) {
   h->state=STT_IDLE; h->phase_tick=0; c->buffered=0;
  }
  if(h->state==STT_IDLE) {

@@ -41,6 +41,8 @@ int main(void) {
  stt_combat_step(&c,(SttCombatInput){0,0,0,1}); ticks(&c,9);
  assert(c.target.hp==0 && c.target.reaction_ticks==12);
  ticks(&c,12); assert(c.target.reaction_ticks==0);
+ c.hunter.state=(SttHunterState)-1;
+ stt_combat_step(&c,input); assert(c.hunter.state==STT_IDLE);
  c.hunter.state=(SttHunterState)99; c.hunter.combo=255;
  stt_combat_step(&c,input); assert(c.hunter.state==STT_IDLE);
  /* Facing opposite target must miss. */
