@@ -119,3 +119,11 @@ Cinco pruebas sintéticas aprobadas por investigación,no reproducidas aquí. Re
 Se encargó al propietarioPR7 contrastar una sola pista vectorial LMT67 ya decodificada con una segunda referencia primaria/decoder independiente. Selección determinista,preferencia por menor pista cuantizada; presupuesto una pista. Aceptación requiere independencia real,aplicabilidad y comparación numérica/tiempo con tolerancias. Si falta base,documentar bloqueo,sin llamar al resultado validación cruzada.
 
 No repetir bibliotecas completas,exportar claves comerciales,asociar rig,rotaciones o vista previa. FPS permanece desconocido. El envío del encargo no acredita resultado; pendientes ejecución,evidencia y revisión. Sin ampliación deJKR/modelos ni cambios de banco/consola.
+
+## LMT: contraste documental cerrado con bloqueo
+
+[PR7/19d6e9d](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/19d6e9d/docs/research/stt-re-20261021/lmt-one-track-review.md): una pistaLMT67,slot8/pista2,codec5,payload8bytes/dosclaves. Segunda referencia MHW coincide documentalmente en fórmula yacumulación básica,pero usa otro layout yno acredita independencia/aplicabilidad suficientes paraMHXX LE32. No se ejecutaron dosdecoders;no hubo comparación numérica independiente. Errores/tolerancias permanecennull,no cero;FPS,rig,ejes/unidades desconocidos.
+
+Recibo de selección cotejado aquí por SHA-256 `3db66f07db494024c8b890efa5f40ec1d891c841c9356f157aedb099772deb58`. Sin repetir decodificación,pruebas o publicar claves comerciales. Bloqueo:segunda referencia independiente ycompatible o especificación que justifique equivalencia. Conservar pista como control,sin ampliar bibliotecas.
+
+Siguiente tarea encargada a investigación:una cargaTEX ya catalogada,solo cabecera/versión/dimensiones/mips/rangos con referencia aplicable. Sin exportar imagen ni adaptar. Resultado pendiente;no se declara textura validada. Banco yoriginales intactos.

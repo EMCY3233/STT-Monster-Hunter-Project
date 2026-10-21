@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Bloqueo LMT y siguiente recurso general
+
+- PR7/19d6e9d:acuerdo documental de codec,no validación cruzada;segunda referencia independiente/compatible pendiente. Recibo de selección cotejado;errores/toleranciasnull,FPS/rig/ejes/unidades desconocidos.
+- Encargada una cabeceraTEX ya catalogada,sin imagen/exportación/adaptación. Resultado pendiente,sin ampliar LMT/JKR/MOD ni cambiar banco.
+
 ## 21-10-2026 — Aceptación LMT acotada encargada
 
 - Solicitado contraste independiente de una sola pista vectorialLMT67 previamente decodificada. Resultado pendiente,no validación atribuida. FPS/rig/unidades/ejes sin confirmar; sin extracción masiva o adaptación.
