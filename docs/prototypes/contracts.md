@@ -41,7 +41,7 @@ independiente de matrices de render). Posiciones enteras en mm, límites ±100 k
 positivo eleva la cámara; distancia 1..1000000 mm. HP/daño enteros 0..1000000.
 Estados de cazador: idle, move, windup, active, recovery, stunned.
 Attack/target uint32; phase_tick 0..65535. Frame/update 0..10000000 us;
-dropped uint32 saturado. Los consumidores no infieren rendimiento global de Vita.
+dropped uint32 saturado: descartes de presupuesto del productor más sobrescrituras del buzón. Los consumidores no infieren rendimiento global de Vita.
 
 Un ataque/objetivo aparece como máximo una vez en cada lista; la deduplicación
 real durante el ataque es responsabilidad del Combat Lab, no del transporte.

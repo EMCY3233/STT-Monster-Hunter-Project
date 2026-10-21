@@ -32,7 +32,7 @@ int stt_play_encode(char *out,size_t cap,const SttPlaySample *s) {
 void stt_play_offer(SttPlayMailbox *m,const SttPlaySample *s) {
  if(!m||!s)return;
  if(m->ready&&m->dropped<UINT32_MAX)m->dropped++;
- m->latest=*s;m->latest.dropped=m->dropped;m->ready=1;
+ m->latest=*s;m->latest.dropped=UINT32_MAX-s->dropped<m->dropped?UINT32_MAX:s->dropped+m->dropped;m->ready=1;
 }
 int stt_play_take(SttPlayMailbox *m,SttPlaySample *s) {
  if(!m||!s||!m->ready)return 0;

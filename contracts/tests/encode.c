@@ -9,6 +9,7 @@ int main(void){
  s.state=3;s.tick=18;s.attack_id=1;s.hit_count=1;s.hits[0]=(SttPlayHit){1,1,25,75};
  assert(stt_play_encode(out,sizeof(out),&s)>0);puts(out);
  stt_play_offer(&m,&s);stt_play_offer(&m,&s);assert(stt_play_take(&m,&t)&&t.dropped==1);assert(!stt_play_take(&m,&t));
+ s.dropped=UINT32_MAX;stt_play_offer(&m,&s);assert(stt_play_take(&m,&t)&&t.dropped==UINT32_MAX);s.dropped=0;
  assert(stt_play_encode(out,5,&s)==-1&&out[0]==0);
  s.hit_count=3;assert(stt_play_encode(out,sizeof(out),&s)==-1);s.hit_count=1;
  s.session="bad\"";assert(stt_play_encode(out,sizeof(out),&s)==-1);s.session="synthetic";

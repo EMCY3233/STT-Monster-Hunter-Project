@@ -16,7 +16,7 @@ typedef struct {
 } SttPlaySample;
 /* Returns byte count or -1; never truncates a usable packet. No allocations/network. */
 int stt_play_encode(char *out, size_t capacity, const SttPlaySample *s);
-/* Latest-only mailbox: overwrite increments dropped; take clears it. No threads. */
+/* Latest-only mailbox: overwrite increments dropped; output adds producer dropped with saturation; take clears it. No threads. */
 typedef struct { SttPlaySample latest; int ready; uint32_t dropped; } SttPlayMailbox;
 void stt_play_offer(SttPlayMailbox *m, const SttPlaySample *s);
 int stt_play_take(SttPlayMailbox *m, SttPlaySample *s);
