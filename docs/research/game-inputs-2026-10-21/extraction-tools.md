@@ -50,3 +50,7 @@ Después de la extracción, se cotejaron de nuevo los siete archivos originales 
 2. Para MH3U/MH4U/MHXX base, documentar el bloqueo de contenido cifrado hasta disponer de entradas legítimamente legibles; no extrapolar la accesibilidad del parche a los juegos completos.
 3. Para MHFU, revisar el código y compatibilidad de mhtools antes de instalar Java o generar índices. No confundir índices de contenedor con modelos/animaciones identificados.
 4. Comunicar resultados a 02/04/07: sí hay dos CIA extraídos, la carga 7z ya está probada y el RomFS del parche es enumerable; no hay material Frontier ni adaptación de activos autorizada por estos resultados.
+
+## Continuación del estudio
+
+El [piloto ARC](arc-pilot.md) comprueba ahora tres archivos y exportaciones locales de muestra; sus límites sustituyen el pendiente inicial de inspeccionar una primera entrada. La [revisión de proyectos externos](existing-research.md) distingue extractores, decompilaciones y recompilaciones. No se considera resuelto el cifrado de las bases ni la identificación de animaciones.
