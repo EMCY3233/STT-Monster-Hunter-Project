@@ -3,6 +3,7 @@ import json
 import socket
 import threading
 import unittest
+from unittest.mock import patch
 from stt_monitor.protocol import decode, encode
 from stt_monitor.receiver import receive
 from stt_monitor.simulator import packet
@@ -90,6 +91,28 @@ class ReceiverTests(unittest.TestCase):
         self.assertIn('sesion=new-session muestra=0', lines[1])
         self.assertIn('intentos previos: env=0 err=0', lines[1])
         self.assertIn('ultimo error conservado=0x804101CD detalle=0x000000CD', lines[1])
+
+    def test_total_duration_bounds_continuous_valid_and_invalid_traffic(self):
+        class ClockSocket:
+            now = 0.0
+            def settimeout(self, seconds):
+                self.timeout = seconds
+            def recvfrom(self, size):
+                if self.timeout < 0.4:
+                    self.now += self.timeout
+                    raise socket.timeout()
+                self.now += 0.4
+                return self.raw, ('127.0.0.1', 1234)
+        for raw, expected in ((encode(packet('continuous', 0, 0)),
+                               {'accepted': 2, 'rejected': 0}),
+                              (b'{', {'accepted': 0, 'rejected': 2})):
+            with self.subTest(raw=raw):
+                sock = ClockSocket()
+                sock.raw = raw
+                with patch('stt_monitor.receiver.time.monotonic', side_effect=lambda: sock.now):
+                    result = receive(sock, io.StringIO(), idle_timeout=5, duration=1)
+                self.assertEqual(result, expected)
+                self.assertAlmostEqual(sock.now, 1)
 
     def test_inactivity(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
