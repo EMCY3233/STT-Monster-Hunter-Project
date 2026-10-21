@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-008 / límite temporal durante suspensión 0.5
+
+- Corrige el control que usaba solo reloj de proceso: [presupuesto conservador proceso+RTC](docs/suspend-deadlines.md), con parada ante lectura fallida/retroceso y protección ante saltos/desbordamientos.
+- Comprueba 180 s antes de transmitir al reanudar y usa el mismo presupuesto para los 30 s sin conexión observada. Muestra «Tiempo de limite» sin cambiar uptime_ms ni STT/2.
+- Añadidas pruebas C de reloj y política con pausa simulada, límites exactos y fallos de reloj. Compilación/CI y prueba física de suspensión pendientes al crear esta entrada. No se ha transferido 0.5.
+- No cambia el reloj ni ajustes de la consola; no se afirma tiempo de pared validado hasta la prueba física.
+
 ## 2026-10-21 — STT-MON-007 / recuperación automática acotada 0.4
 
 - Implementada [política de recuperación](docs/auto-recovery.md): consulta de estado con SceNetCtl, pausa sin consumir intentos durante desconexión y recreación del socket al volver la conexión o después de un fallo de envío.

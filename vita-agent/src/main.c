@@ -13,6 +13,7 @@
 #include "debugScreen.h"
 #include "telemetry.h"
 #include "recovery.h"
+#include "deadline_clock.h"
 
 /* Stable rows: repaint changed text only, without clearing the framebuffer. */
 static void screen_line(int row, const char *text) {
@@ -50,6 +51,9 @@ int main(void) {
     int result = 0, last_error = 0, last_net_errno = 0;
     int netctl_ready = 0;
     SttRecovery recovery;
+    SttDeadlineClock deadline_clock;
+    uint64_t budget_ms = 0;
+    int clock_error = 0;
     uint64_t start = 0, next = 0;
     char session[65] = "", payload[512], destination[16];
     void *memory = NULL;
@@ -100,6 +104,11 @@ int main(void) {
                     result = sceRtcGetCurrentTick(&tick);
                     if (result < 0) goto failure;
                     start = sceKernelGetProcessTimeWide();
+                    if (stt_clock_start(&deadline_clock, start, tick.tick, sceRtcGetTickResolution()) < 0) {
+                        result = -1; goto failure;
+                    }
+                    budget_ms = 0;
+                    clock_error = 0;
                     snprintf(session, sizeof session, "vita-%" PRIx64 "-%" PRIx64,
                              (uint64_t)tick.tick, start);
                     snprintf(destination, sizeof destination, "%u.%u.%u.%u", ip[0], ip[1], ip[2], ip[3]);
@@ -110,7 +119,7 @@ int main(void) {
                     result = sceNetInetPton(SCE_NET_AF_INET, destination, &address.sin_addr);
                     if (result != 1) { result = -1; goto failure; }
                     seq = sent = errors = 0;
-                    stt_recovery_start(&recovery, start / 1000);
+                    stt_recovery_start(&recovery, 0);
                     next = start;
                     active = 1;
                     status = "Enviando. Confirma recepcion en el PC.";
@@ -118,12 +127,25 @@ int main(void) {
             }
         }
         uint64_t now = sceKernelGetProcessTimeWide();
+        if (active) {
+            SceRtcTick current_tick = {0};
+            int rtc_result = sceRtcGetCurrentTick(&current_tick);
+            if (stt_clock_sample(&deadline_clock, now, current_tick.tick, rtc_result >= 0, &budget_ms) < 0) {
+                active = 0;
+                clock_error = rtc_result < 0 ? rtc_result : -1;
+                status = "Parado: reloj no fiable; pulsa Cruz.";
+            } else if (budget_ms >= 180000) {
+                /* Check before any socket operation, including first frame after resume. */
+                active = 0;
+                status = "Parado: limite total de 180 segundos.";
+            }
+        }
         if (active && now >= next) {
             next = now + UINT64_C(1000000);
             int network_state = SCE_NETCTL_STATE_DISCONNECTED;
             int state_result = sceNetCtlInetGetState(&network_state);
             if (state_result < 0) { last_error = state_result; last_net_errno = 0; }
-            SttRecoveryAction action = stt_recovery_step(&recovery, now / 1000,
+            SttRecoveryAction action = stt_recovery_step(&recovery, budget_ms,
                 state_result >= 0 && network_state == SCE_NETCTL_STATE_CONNECTED, seq);
             if (action == STT_DONE) { active = 0; status = "Terminado: 60 intentos. Revisa el PC."; }
             else if (action == STT_STOP_DEADLINE) { active = 0; status = "Parado: limite total de 180 segundos."; }
@@ -159,7 +181,7 @@ int main(void) {
             }
         }
         char line[128];
-        screen_line(0, "STT VITA MONITOR 0.4 - EXPERIMENTAL");
+        screen_line(0, "STT VITA MONITOR 0.5 - EXPERIMENTAL");
         screen_line(1, "");
         snprintf(line, sizeof line, "PC: %u.%u.%u.%u :32100", ip[0], ip[1], ip[2], ip[3]);
         screen_line(2, line);
@@ -178,7 +200,9 @@ int main(void) {
         screen_line(11, line);
         snprintf(line, sizeof line, "Sesion: %s", session);
         screen_line(12, line);
-        screen_line(13, "");
+        if (clock_error) snprintf(line, sizeof line, "Reloj: error 0x%08X", (unsigned int)clock_error);
+        else snprintf(line, sizeof line, "Tiempo de limite: %" PRIu64 " / 180 s", budget_ms / 1000);
+        screen_line(13, line);
         screen_line(14, "UDP: un envio no confirma entrega.");
         sceKernelDelayThread(50000);
     }
