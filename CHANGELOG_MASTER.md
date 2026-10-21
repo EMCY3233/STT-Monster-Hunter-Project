@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-004 / primer ensayo físico y pantalla 0.2
+
+- [Ensayo físico STT-MON-001](docs/STT-MON-001-hardware-result.md): 60 muestras, secuencias 0–59, cero rechazos, huecos, duplicados o llegadas fuera de orden; batería declarada 91 %. Salida con START confirmada por el usuario.
+- VPK 0.1 transferido con autorización a carpeta nueva y verificado por lectura de vuelta. Excepción temporal del firewall autorizada por separado y retirada al terminar; retirada comprobada.
+- Usuario informa texto pequeño y parpadeo. Corrección 0.2: fuente duplicada, filas estables que se redibujan solo si cambia el texto, sin borrar toda la pantalla cada 50 ms. Añadidos saltos de +/-10 para editar IP con menos pulsaciones.
+- Compilación de 0.2 y validación visual pendientes al publicar esta entrada. Pruebas de desconexión, suspensión y parada con Círculo siguen pendientes.
+
 ## 2026-10-21 — STT-MON-003 / agente Vita experimental
 
 - CI del commit 610c076 confirmado correcto: [Actions 39542198933](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39542198933).
