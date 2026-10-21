@@ -2,7 +2,7 @@
 
 ## Dependencias
 
-PR #13 añade la vista `--live`; PR #14 añade el resumen temporal. Esta mejora se basa en #14, sin fusionar ninguna de ellas. Compatible con el agente Vita 0.5 instalado: no cambia STT/1, STT/2, puertos ni JSONL. Amplía las opciones CLI del receptor y los campos del resumen del analizador.
+PR #13 añade la vista `--live`; PR #14 añade el resumen temporal. PR #16 añade duración máxima y ensayo conjunto. Los límites de recursos se basan en #16, sin fusionar ninguna de ellas. Compatible con el agente Vita 0.5 instalado: no cambia STT/1, STT/2, puertos ni JSONL. Amplía las opciones CLI del receptor y los campos del resumen del analizador.
 
 ## Matriz de comportamiento
 
@@ -27,6 +27,7 @@ Desde la raíz del repositorio, con Python 3.11 o posterior:
 python -m unittest discover -s tests -v
 python tests/smoke_cli.py
 python tests/smoke_diagnostics.py
+python tests/smoke_limits.py
 ```
 
 El último ensayo crea receptor y emisor en dos procesos independientes, solo en loopback puerto 32110, con archivo temporal. Todos sus paquetes son sintéticos, incluso `source=vita`, utilizado para probar el contrato. Espera cinco muestras aceptadas y dos datagramas inválidos rechazados; secuencias 0,2,2,1 y una nueva sesión con 0. Confirma cierre correcto, conservación JSONL y diagnóstico histórico con contadores reiniciados. Los saltos de reloj se inyectan después en copias en memoria para el analizador, sin cambiar el reloj del equipo ni registros de hardware. Añade dos líneas truncadas/inválidas al análisis; no se escriben al archivo de captura.
@@ -39,8 +40,14 @@ El receptor procesa un datagrama cada vez, de máximo 1024 bytes, y no acumula h
 
 `--duration N` acepta un plazo positivo de hasta 3600 s, medido con reloj monotónico del PC. Se usa el menor plazo entre duración total e inactividad para esperar en el socket, y se comprueba la duración antes de procesar una nueva muestra. Tráfico válido o inválido no amplía ese plazo total. Es una parada cooperativa del proceso, no una garantía de planificación en tiempo real; una escritura o salida bloqueada puede retrasar el retorno. La opción se omite por defecto para mantener compatibilidad.
 
-El archivo sigue siendo append-only, sin rotación ni cuota de bytes. Ni duración ni muestras limitan el tamaño de un archivo ya existente. El analizador guarda las secuencias únicas de cada sesión: su memoria crece con esa cardinalidad; no existe una cuota automática. Usar capturas acotadas y no equiparar esta revisión a una prueba de rendimiento sostenido o resistencia a tráfico hostil.
+El archivo sigue siendo append-only, sin rotación. La cuota por defecto `--max-bytes 10485760` (10 MiB) incluye el tamaño existente al abrir. Cada nuevo registro se mide en UTF-8 con LF; se escribe entero o se detiene antes de él. Al alcanzar la cuota, el resumen incluye `stop_reason=max_bytes`, `bytes_written` de esta ejecución y `not_recorded`: 1 si un datagrama válido recibido no cabía, 0 si se paró antes de leer o justo al llenar el límite. `accepted` cuenta solo registros guardados, `rejected` solo datagramas inválidos. No se trunca un archivo preexistente que ya supere la cuota ni se añade nada a él. Requiere uso exclusivo del archivo; no coordina escritores externos. El límite no es una cuota del sistema de archivos ni soluciona fallos de disco.
+
+El analizador guarda por defecto hasta 1000 sesiones y 100000 secuencias únicas globales. Son límites de cardinalidad, no bytes RAM medidos. Se pueden ajustar con `--max-sessions` y `--max-unique`, enteros positivos; las duplicadas no consumen otro identificador. Al primer registro válido que excedería un límite, no se incluye ese registro ni se sigue leyendo: devuelve `partial=true`, `stop_reason=max_sessions|max_unique`, `processed_packets` y `limits`. Exactamente alcanzar el límite al EOF no marca parcial. `partial=false` significa que terminó la entrada, no que todos sus registros fueran válidos.
+
+Conteos de muestras, duplicados, desorden, huecos internos y diagnósticos siguen siendo exactos **para el prefijo incluido**, nunca para el resto omitido ni para entregas UDP reales. `invalid_lines` cubre solo líneas examinadas hasta la parada. El mayor intervalo temporal corresponde a las recepciones incluidas, no es una estimación de la pausa máxima de toda la captura. El CLI termina correctamente con un JSON parcial; los consumidores deben comprobar `partial`.
+
+El lector CLI usa bloques de como máximo 4097 bytes para drenar líneas de más de 4096 bytes sin acumularlas, y cuenta una línea demasiado grande o con UTF-8 inválido una sola vez como inválida. No cambia los archivos. La API `summarize` también rechaza entradas superiores a ese tamaño; no puede controlar la memoria que el llamante haya reservado antes de entregarlas. Estos límites acotan estado retenido/entrada por línea, no garantizan un máximo de RAM del intérprete ni se han medido como tal. No es una prueba de rendimiento sostenido o resistencia a tráfico hostil.
 
 ## Estado
 
-20 pruebas locales y ensayo conjunto correctos al publicar; validación remota registrada en la PR. Las pruebas físicas pendientes de límite sin red durante suspensión y fallos/retrocesos RTC permanecen pendientes. Esta entrega no requiere FTP, instalación, firmware/plugins ni acceso a banco u originales.
+25 pruebas locales, ensayo conjunto, ensayo de cuota y ensayo STT/1 correctos al publicar; validación remota registrada en la PR. Las pruebas físicas pendientes de límite sin red durante suspensión y fallos/retrocesos RTC permanecen pendientes. Esta entrega no requiere FTP, instalación, firmware/plugins ni acceso a banco u originales.

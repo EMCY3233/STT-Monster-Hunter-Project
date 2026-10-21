@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-012 / cuotas de captura y análisis
+
+- Receptor: cuota total de archivo de 10 MiB por defecto (`--max-bytes`), incluido contenido previo. Escribe registros completos UTF-8/LF o para, sin truncar. Resumen visible con causa, bytes añadidos y datagrama válido no guardado si no cabía.
+- Analizador: máximos por defecto de 1000 sesiones y 100000 secuencias únicas globales; CLI con lectura por línea acotada a 4096 bytes. Al exceder estado, informe parcial explícito con causa y conteos exactos para el prefijo incluido. No afirma bytes RAM medidos ni estadísticas del resto omitido.
+- 25 pruebas locales y ensayos STT/1, diagnóstico conjunto y cuota con tráfico continuo sintético correctos. Archivo temporal con prefijo CRLF preservado, cuota real comprobada y parada sin añadir si ya supera el nuevo límite. CI remota pendiente al publicar.
+- CI de PR #16 ya completa: Monitor tests 39677198707 y Vita agent build 39677198790 correctas. Esta rama depende de #16, sin fusión. Sin consola, FTP, originales ni banco.
+
 ## 2026-10-21 — STT-MON-011 / validación conjunta y duración PC
 
 - Ensayo sintético reproducible de dos procesos para vista en directo y análisis: STT/2, reinicio con error histórico, duplicado/desorden, entrada inválida/truncada, salto/retroceso de reloj PC y cierre limpio. Incorporado a CI; no representa una prueba física.

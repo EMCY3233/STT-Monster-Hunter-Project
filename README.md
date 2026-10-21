@@ -12,7 +12,7 @@ python -m stt_monitor.receiver --max-packets 10 --idle-timeout 30
 python -m stt_monitor.simulator --count 10
 ```
 
-El receptor añade líneas a `telemetry.jsonl` sin truncar el archivo. Cada muestra está marcada `source=simulator`. Resumen esperado: 10 aceptadas, 0 rechazadas. El límite por inactividad permite finalizar si desaparece el emisor; Ctrl+C también detiene el receptor. El registro puede crecer: limitar la duración y archivar manualmente las sesiones.
+El receptor añade líneas a `telemetry.jsonl` sin truncar el archivo. Cada muestra está marcada `source=simulator`. Resumen esperado: 10 aceptadas, 0 rechazadas. El límite por inactividad permite finalizar si desaparece el emisor; Ctrl+C también detiene el receptor. El archivo tiene por defecto una cuota total de 10 MiB, incluido su contenido previo; `--max-bytes` permite cambiarla. Al alcanzarla se detiene sin truncar.
 
 ```powershell
 python -m unittest discover -s tests -v
@@ -30,7 +30,7 @@ python -m stt_monitor.receiver --live --max-packets 10 --idle-timeout 30
 
 El archivo JSONL conserva el mismo formato y sigue añadiendo registros. Los contadores describen intentos anteriores al mensaje actual; «último error conservado» puede pertenecer a una sesión previa. Una recepción no confirma el resultado del envío actual. STT/1 no aporta diagnóstico. La falta de mensajes no demuestra desconexión ni parada: STT/2 no transmite el estado de parada ni el presupuesto RTC. Esta vista no necesita actualizar el VPK.
 
-Para acotar también un flujo continuo, añadir `--duration 180`: el plazo total usa el reloj monotónico del PC y no se reinicia con cada muestra. Se aplica el primer límite alcanzado entre duración, inactividad y máximo de muestras. No cambia el plazo de la Vita ni limita bytes en disco. [Compatibilidad, límites y ensayo conjunto](docs/monitor-pc-compatibility.md).
+Para acotar también un flujo continuo, añadir `--duration 180`: el plazo total usa el reloj monotónico del PC y no se reinicia con cada muestra. Se aplica el primer límite alcanzado entre duración, inactividad y máximo de muestras. No cambia el plazo de la Vita. La cuota independiente `--max-bytes` limita los bytes añadidos al archivo. [Compatibilidad, límites y ensayo conjunto](docs/monitor-pc-compatibility.md).
 
 ## Analizar una captura
 
@@ -38,7 +38,7 @@ Para acotar también un flujo continuo, añadir `--duration 180`: el plazo total
 python -m stt_monitor.analyze telemetry.jsonl
 ```
 
-Produce un resumen por IP, origen declarado y sesión: muestras, duplicados, llegadas fuera de orden y números ausentes entre el mínimo y el máximo observados. Los huecos no demuestran pérdidas en la red: la captura puede ser parcial. No cuenta como perdidos los mensajes anteriores al primero o posteriores al último recibido. La etiqueta de origen no autentica un dispositivo. El analizador guarda en memoria las secuencias únicas; usar capturas acotadas.
+Produce un resumen por IP, origen declarado y sesión: muestras, duplicados, llegadas fuera de orden y números ausentes entre el mínimo y el máximo observados. Los huecos no demuestran pérdidas en la red: la captura puede ser parcial. No cuenta como perdidos los mensajes anteriores al primero o posteriores al último recibido. La etiqueta de origen no autentica un dispositivo. El analizador limita por defecto el estado a 1000 sesiones y 100000 secuencias únicas globales, ajustables con `--max-sessions` y `--max-unique`. Si el siguiente registro excedería un límite, se detiene antes de incluirlo y devuelve `partial=true` y `stop_reason`; las estadísticas describen solo el prefijo procesado. La lectura CLI está acotada a líneas de 4096 bytes; líneas mayores o UTF-8 inválido cuentan como inválidas.
 
 El resumen también incluye `reception_timing`: primeras/últimas horas válidas en orden de archivo, normalizadas a UTC, número de horas ausentes/inválidas, retrocesos del reloj del PC y mayor intervalo observado por sesión. `largest_gap` conserva secuencias y diferencia de `uptime_ms` de las dos muestras comparadas. Un timestamp sin zona, ausente o inválido interrumpe la comparación temporal de esa sesión, sin descartar su paquete. Un retroceso se cuenta y no se considera un intervalo positivo. Los mensajes duplicados o desordenados siguen siendo observaciones: una diferencia negativa de uptime no demuestra fallo del reloj del agente. Estos intervalos no identifican por sí solos suspensión, latencia ni causa de un corte. STT y JSONL no cambian; se añaden campos al informe del analizador.
 

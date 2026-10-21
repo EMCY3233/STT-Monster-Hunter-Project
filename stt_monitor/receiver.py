@@ -1,11 +1,14 @@
 """Receive telemetry only; never sends commands to a console."""
 import argparse
 import json
+import os
 import socket
 import sys
 import time
 from datetime import datetime, timezone
 from .protocol import MAX_BYTES, decode
+
+DEFAULT_MAX_CAPTURE_BYTES = 10 * 1024 * 1024
 
 
 def live_line(record):
@@ -24,9 +27,15 @@ def live_line(record):
     return text
 
 
-def receive(sock, output, *, idle_timeout=5.0, max_packets=0, live_output=None, duration=None):
+def receive(sock, output, *, idle_timeout=5.0, max_packets=0, live_output=None, duration=None,
+            max_bytes=DEFAULT_MAX_CAPTURE_BYTES, initial_bytes=0):
     """Stop at inactivity, packet count or total duration; append-only output."""
-    accepted = rejected = 0
+    if type(max_bytes) is not int or max_bytes < 1 or initial_bytes < 0:
+        raise ValueError('invalid capture byte limit or initial size')
+    accepted = rejected = written = 0
+    if initial_bytes >= max_bytes:
+        return {'accepted': 0, 'rejected': 0, 'stop_reason': 'max_bytes',
+                'bytes_written': 0, 'not_recorded': 0}
     started = time.monotonic()
     deadline = started + idle_timeout
     capture_deadline = None if duration is None else started + duration
@@ -55,12 +64,21 @@ def receive(sock, output, *, idle_timeout=5.0, max_packets=0, live_output=None, 
             continue
         record = {'received_at': datetime.now(timezone.utc).isoformat(),
                   'peer_ip': peer[0], 'packet': packet}
-        output.write(json.dumps(record, allow_nan=False) + '\n')
+        line = json.dumps(record, allow_nan=False) + '\n'
+        size = len(line.encode('utf-8'))
+        if initial_bytes + written + size > max_bytes:
+            return {'accepted': accepted, 'rejected': rejected, 'stop_reason': 'max_bytes',
+                    'bytes_written': written, 'not_recorded': 1}
+        output.write(line)
         output.flush()
+        written += size
         if live_output is not None:
             live_output.write(live_line(record) + '\n')
             live_output.flush()
         accepted += 1
+        if initial_bytes + written >= max_bytes:
+            return {'accepted': accepted, 'rejected': rejected, 'stop_reason': 'max_bytes',
+                    'bytes_written': written, 'not_recorded': 0}
         deadline = time.monotonic() + idle_timeout
     return {'accepted': accepted, 'rejected': rejected}
 
@@ -72,6 +90,8 @@ def main():
     parser.add_argument('--output', default='telemetry.jsonl')
     parser.add_argument('--idle-timeout', type=float, default=5)
     parser.add_argument('--max-packets', type=int, default=0)
+    parser.add_argument('--max-bytes', type=int, default=DEFAULT_MAX_CAPTURE_BYTES,
+                        help='maximum total output file bytes including existing data (default 10 MiB)')
     parser.add_argument('--duration', type=float, default=None,
                         help='maximum capture seconds (0 < duration <= 3600), independent of traffic')
     parser.add_argument('--live', action='store_true',
@@ -79,6 +99,8 @@ def main():
     args = parser.parse_args()
     if not 1 <= args.port <= 65535 or not 0 < args.idle_timeout <= 3600 or args.max_packets < 0:
         parser.error('invalid port, timeout or packet limit')
+    if args.max_bytes < 1:
+        parser.error('capture byte limit must be positive')
     if args.duration is not None and not 0 < args.duration <= 3600:
         parser.error('invalid capture duration')
     try:
@@ -88,9 +110,10 @@ def main():
             if args.live:
                 print('Vista de recepcion: contadores previos al envio actual; ultimo error puede ser historico. '
                       'Sin muestras no se puede confirmar parada ni desconexion.', flush=True)
-            with open(args.output, 'a', encoding='utf-8') as output:
+            with open(args.output, 'a', encoding='utf-8', newline='\n') as output:
                 print(json.dumps(receive(sock, output, idle_timeout=args.idle_timeout,
                                          max_packets=args.max_packets, duration=args.duration,
+                                         max_bytes=args.max_bytes, initial_bytes=os.fstat(output.fileno()).st_size,
                                          live_output=sys.stdout if args.live else None)))
     except KeyboardInterrupt:
         print('Stopped')

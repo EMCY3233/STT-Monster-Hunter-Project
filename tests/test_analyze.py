@@ -1,6 +1,7 @@
 import json
+import io
 import unittest
-from stt_monitor.analyze import summarize
+from stt_monitor.analyze import summarize, bounded_lines, MAX_LINE_BYTES
 from stt_monitor.simulator import packet
 
 
@@ -27,7 +28,10 @@ class AnalysisTests(unittest.TestCase):
         self.assertEqual(len(report['sessions']), 3)
 
     def test_empty_and_invalid(self):
-        self.assertEqual(summarize([]), {'sessions': [], 'invalid_lines': 0})
+        empty = summarize([])
+        self.assertEqual(empty['sessions'], [])
+        self.assertEqual(empty['invalid_lines'], 0)
+        self.assertFalse(empty['partial'])
         report = summarize(['bad', '{}', 'null', '[]', line(0)])
         self.assertEqual(report['invalid_lines'], 4)
         self.assertEqual(len(report['sessions']), 1)
@@ -72,3 +76,45 @@ class ReceptionTimingTests(unittest.TestCase):
         self.assertEqual(session['reception_timing']['largest_gap'], dict(
             seconds=4.0, from_seq=3, to_seq=1, process_uptime_delta_ms=-2000))
         self.assertEqual(session['out_of_order'], 1)
+
+
+class ResourceLimitTests(unittest.TestCase):
+    def test_exact_unique_limit_still_counts_duplicates_before_overflow(self):
+        rows = [line(n) for n in (0, 2, 2, 1, 3)]
+        result = summarize(rows, max_unique=3)
+        self.assertTrue(result['partial'])
+        self.assertEqual(result['stop_reason'], 'max_unique')
+        self.assertEqual(result['processed_packets'], 4)
+        session = result['sessions'][0]
+        self.assertEqual(session['unique_packets'], 3)
+        self.assertEqual(session['duplicates'], 1)
+        self.assertEqual(session['out_of_order'], 1)
+        self.assertEqual(session['missing_between_observed'], 0)
+        self.assertFalse(summarize(rows[:-1], max_unique=3)['partial'])
+
+    def test_many_sessions_stop_before_creating_over_budget_state(self):
+        visited = []
+        def rows():
+            for n in range(100):
+                visited.append(n)
+                yield line(0, session=f's{n}')
+        result = summarize(rows(), max_sessions=3)
+        self.assertEqual(result['stop_reason'], 'max_sessions')
+        self.assertEqual(len(result['sessions']), 3)
+        self.assertEqual(result['processed_packets'], 3)
+        self.assertEqual(visited, [0, 1, 2, 3])
+
+    def test_bounded_reader_counts_oversized_and_bad_utf8_lines_once(self):
+        raw = (b'x'*(MAX_LINE_BYTES*3) + b'\n' + b'\xff\n' +
+               line(0).encode() + b'\n' + b'{' )
+        result = summarize(bounded_lines(io.BytesIO(raw)))
+        self.assertEqual(result['invalid_lines'], 3)
+        self.assertEqual(result['processed_packets'], 1)
+        self.assertFalse(result['partial'])
+
+    def test_invalid_resource_settings(self):
+        for value in (0, -1, True, 1.5):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                summarize([], max_sessions=value)
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                summarize([], max_unique=value)
