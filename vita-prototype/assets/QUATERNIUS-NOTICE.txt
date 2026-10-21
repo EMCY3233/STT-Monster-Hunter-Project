@@ -1,0 +1,4 @@
+Sword model by Quaternius. Author declares CC0 at https://quaternius.itch.io/lowpoly-medieval-weapons
+Original pack SHA256: 546d6e168d71cc3ea0c5d388a7834658619ac2ace8be960050e5fb1dbd344a2a
+STT study derivative: centroid clustering, no materials/UV, normalized to 1.4 m. Not an original STT asset.
+License reference: https://creativecommons.org/publicdomain/zero/1.0/

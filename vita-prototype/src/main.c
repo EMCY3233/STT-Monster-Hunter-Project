@@ -13,6 +13,7 @@
 #include "snapshot.h"
 static volatile int resync_requested;
 static SttAsset original_asset;
+static SttWeapon equipped_sword;
 static int power_callback(int id,int count,int flags,void *user){
  (void)id;(void)count;(void)user;
  if((unsigned)flags&(SCE_POWER_CB_SYSTEM_SUSPEND|SCE_POWER_CB_SYSTEM_RESUMING|SCE_POWER_CB_SYSTEM_RESUME|SCE_POWER_CB_APP_RESUME|SCE_POWER_CB_APP_SUSPEND))resync_requested=1;
@@ -24,7 +25,8 @@ int main(void){
  uint64_t previous_time=0,accumulator=0,seq=0,next_sample=0,start=sceKernelGetProcessTimeWide();
  char session[65];snprintf(session,sizeof session,"vita-play-%" PRIx64,start);
  SttCombat combat;stt_combat_init(&combat);SttCamera camera={.45f,.40f};SttPlayMailbox mailbox={0};
- stt_asset_file(&original_asset,"app0:/assets/practice.pose.json");
+ stt_asset_file(&original_asset,"app0:/assets/hunter-body.pose.json");
+ stt_weapon_file(&equipped_sword,"app0:/assets/quaternius-sword.pose.json");
  /* Two CDRAM buffers, each 512*272*4 rounded to 256 KiB. Original asset packaged in app0. */
  for(int i=0;i<2;i++){
   memory[i]=sceKernelAllocMemBlock("stt-prototype-fb",SCE_KERNEL_MEMBLOCK_TYPE_USER_CDRAM_RW,0xC0000,NULL);
@@ -65,7 +67,7 @@ int main(void){
    }
   }
   update_us=(unsigned)(sceKernelGetProcessTimeWide()-update_start);
-  stt_render_with_asset(buffers[front],depth,&combat,camera,frame_us,dropped,need_release,&original_asset);
+  stt_render_equipped(buffers[front],depth,&combat,camera,frame_us,dropped,need_release,&original_asset,&equipped_sword);
   SceDisplayFrameBuf fb={sizeof fb,buffers[front],STT_PITCH,SCE_DISPLAY_PIXELFORMAT_A8B8G8R8,STT_WIDTH,STT_HEIGHT};
   result=sceDisplaySetFrameBuf(&fb,SCE_DISPLAY_SETBUF_NEXTFRAME);if(result<0)break;shown=1;
   result=sceDisplayWaitVblankStartCB();if(result<0)break;front^=1;
