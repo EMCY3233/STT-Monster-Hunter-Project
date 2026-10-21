@@ -1,6 +1,6 @@
 # Recuperación acotada — agente 0.4
 
-Implementación pendiente de validación física. Mantiene STT/2, IP privada elegida manualmente y un máximo de 60 intentos de envío por ensayo. No cambia perfiles ni enciende la radio Wi-Fi.
+Implementación con [un ensayo físico de continuidad superado](STT-MON-006-auto-result.md), tras un primer intento detenido. Mantiene STT/2, IP privada elegida manualmente y un máximo de 60 intentos de envío por ensayo. No cambia perfiles ni enciende la radio Wi-Fi. La suspensión no se aisló y los límites de tiempo de pared durante ella siguen pendientes.
 
 ## Comportamiento
 
@@ -28,4 +28,4 @@ La aplicación no puede observar estados mientras esté suspendida; el límite d
 
 Prueba C portable: arranque, corte y retorno sin nuevo inicio, fallo de socket con enlace conectado, restablecimiento del presupuesto tras envío correcto, cinco fallos de apertura/envío, límite exacto de 30 s incluso si conecta en ese instante, límite total y regresión del reloj. Se compila con advertencias como errores en CI; la compilación Vita comprueba además las APIs y enlace con SceNetCtl.
 
-Prueba física pendiente: observar una pausa y recepción posterior **en la misma sesión**, sin pulsar Cruz ni cerrar la aplicación. Registrar secuencias, tiempos, diagnósticos y contadores; distinguir suspensión al entrar en Ajustes de la pérdida de radio. Un build correcto o abrir un socket no bastan para dar por superada la prueba.
+En la repetición física se observaron una pausa y recepción posterior **en la misma sesión**, sin otro Cruz según confirmación del usuario: 60 mensajes completos. Debe distinguirse todavía la suspensión al entrar en Ajustes de la pérdida de radio. La diferencia entre tiempo recibido y uptime confirma que no puede presentarse el límite de reloj de proceso como un límite de tiempo de pared durante suspensión. Un build correcto o abrir un socket no bastan para validar otros escenarios.
