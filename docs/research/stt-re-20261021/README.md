@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: contraste documental de una pista LMT
+## Estado más reciente: una cabecera TEX 3DS
+
+[Una carga mínima de 84 bytes](tex-smallest.md): versión A6, 8×8, una imagen/mip, formato 0x0C ETC1A4 referenciado; 16 bytes de cabecera + 4 de tabla + 64 de bloques encajan exactamente. Siete pruebas nuevas aprobadas. No se decodificaron ni visualizaron píxeles; banco y originales intactos.
+
+
+## Etapa anterior: contraste documental de una pista LMT
 
 [Una pista cuantizada seleccionada](lmt-one-track-review.md): payload mínimo de 8 bytes, dos claves. Segunda implementación MHW coincide documentalmente en fórmula y acumulación bruta, pero no se establece independencia ni compatibilidad de contenedor LE32/LMT67. Validación cruzada bloqueada, errores/tolerancias null; FPS, ejes, unidades y rig desconocidos. Sin nuevos valores comerciales, decodificación masiva o supuestas pruebas de fidelidad.
 
