@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: un par JKR
+## Estado más reciente: una malla MOD230
+
+[Una muestra de 990 bytes](mod230-smallest.md), elegida por mínimo tamaño: tablas y spans de una malla en rango; 16 registros de posición/UV finitos, 28 índices en 0–15, stride 28 y formato referenciado. Discrepancia global de índices y campos min/max pendiente; geometría completa y skinning sin validar. Ocho pruebas nuevas aprobadas. Ninguna ampliación a JKR ni otros modelos.
+
+
+## Etapa anterior: un par JKR
 
 [Un único contraste adicional](frontier-jkr-pair.md), seleccionado determinísticamente con presupuesto de 4 KiB: 1.884/1.884 bytes, toda la carga consumida, original intacto. El patrón parcial de prefijos de A no aparece en B; criterio CP932 no aporta anclas en B. Gramáticas interiores pendientes, sin ampliar a los otros 42 JKR. Ocho pruebas nuevas aprobadas; setenta previas conservadas sin repetir censo/batería.
 
