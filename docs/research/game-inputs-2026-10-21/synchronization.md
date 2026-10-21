@@ -113,3 +113,9 @@ Aquí se cotejó SHA-256 del recibo `index-conventions.json`: `a970b3c73b866af60
 Artefacto existente1.910.384bytes, SHA-256 `64937c521286fc8423076e644089881c5fe051bed2565e5061dda8aec0b45e10`; prefijo canónico1.910.044bytes SHA-256 `74a0b779ea98f16dc8a9498487a8df6a712891e83a07ef4d533a948df1f4f4df`. Cola340bytes excluida,sin interpretar. Aquí cotejados ambos hashes yrecibo `9b370c8b054d81f8cc278f0c84bb135851e30da6267c354b51e762231ff63f3a`; no repetido parser.
 
 Cinco pruebas sintéticas aprobadas por investigación,no reproducidas aquí. Referencia primaria comunitariaPSPSDK6ef2b21dc440ef8d4125f000301faaa2a470975e; no especificación propietariaSony. No se publican NID/código ni se aplican relocaciones; no equivale a port,compatibilidadVita o semántica de juego. Área02 conserva direcciones estáticas yprocedencia; áreas04/07 no reciben funciones/recursos inferidos. Aceptación cerrada a una referencia, sin ampliación automática. Banco,originales yconsola sin cambios.
+
+## Próxima aceptación LMT: una pista, pendiente
+
+Se encargó al propietarioPR7 contrastar una sola pista vectorial LMT67 ya decodificada con una segunda referencia primaria/decoder independiente. Selección determinista,preferencia por menor pista cuantizada; presupuesto una pista. Aceptación requiere independencia real,aplicabilidad y comparación numérica/tiempo con tolerancias. Si falta base,documentar bloqueo,sin llamar al resultado validación cruzada.
+
+No repetir bibliotecas completas,exportar claves comerciales,asociar rig,rotaciones o vista previa. FPS permanece desconocido. El envío del encargo no acredita resultado; pendientes ejecución,evidencia y revisión. Sin ampliación deJKR/modelos ni cambios de banco/consola.

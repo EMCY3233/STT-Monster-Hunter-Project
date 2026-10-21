@@ -1,5 +1,9 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Aceptación LMT acotada encargada
+
+- Solicitado contraste independiente de una sola pista vectorialLMT67 previamente decodificada. Resultado pendiente,no validación atribuida. FPS/rig/unidades/ejes sin confirmar; sin extracción masiva o adaptación.
+
 ## 21-10-2026 — Estado consolidado alineado con evidencias
 
 - Sustituidas prioridades superadas de espera de copia e inicio de prototipos por cierres y PR ya documentados. Resumidos dosJKR,MOD230parcial,referenciaPSP e interfaces offline con límites propios.
