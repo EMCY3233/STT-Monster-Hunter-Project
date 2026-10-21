@@ -98,3 +98,9 @@ Zona de referencia: Europe/Madrid. Primera base de desarrollo autorizada en EMCY
 - STT/1 carece de autenticación/cifrado y el archivo de registro no tiene rotación automática; no exponer a Internet y limitar ensayos.
 
 Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototipo y su documentación. No se incorporan cambios de otros chats ni recursos de juegos.
+
+## 2026-10-21 — Prototipos iniciales: contratos STT/3
+
+- Añade contrato versionado de juego original, encoder C99 acotado y buzón de última muestra; validación Python compatible STT/1 y STT/2.
+- [Esquema, unidades, límites y pendientes](docs/prototypes/contracts.md). Reserva acuática null, sin implementar natación.
+- Pruebas PC locales: 19 aprobadas, incluido cruce C/Python. Sin recepción Vita, instalación ni comprobación física en este encargo.
