@@ -1,8 +1,17 @@
 # STT — Ingeniería inversa y recursos
 
+## Estado más reciente: Citra y DATA.BIN completo
+
+Ensayos reales de [Citra para 3DS](citra.md): bases MH3U/MH4U/MHXX bloqueadas por material criptográfico ausente; parche MHXX instalado con contenido de hash coincidente, ejecución aislada termina con crash. [MHFU DATA.BIN](mhfu-data.md): 6.657 entradas procesadas con comprobación de reversibilidad. [PPSSPP y Frontier](emulators.md): ELF PSP obtenido y contrastado; Frontier continúa siendo copia parcial. 46 pruebas sintéticas aprobadas. No demuestra reproducción visual ni validación semántica completa.
+
+
+## Antecedentes de las etapas anteriores
+
 Encargo STT-RE-20261021. Informe de ejecución del 21-10-2026, Europe/Madrid.
 
-**Avance más reciente:** [decodificación limitada de pistas MHXX](lmt-vectors.md): 1.772 claves vectoriales en 90 pistas; 89 presentan variación. Aún sin rotaciones, binding o reproducción visual; datos extraídos solo locales. El usuario autorizó el descifrado; las entradas cifradas siguen sujetas a requisitos técnicos. Suite ampliada a 36 pruebas.
+**Emuladores y descifrado comprobado:** [PPSSPP/MHFU y nuevos metadatos Frontier](emulators.md). Se obtuvo un EBOOT local descifrado: su prefijo de 1.910.044 bytes coincide exactamente con BOOT.BIN; 340 bytes adicionales quedan sin interpretar. Frontier ya tiene metadatos de parche Z 01.99, todavía sin copia completa ni revisión ZZ verificada. Corregidas firmas ECD/EXF del sondeo; 40 pruebas sintéticas aprobadas. Sin instalación/transferencia a consola.
+
+**Etapa LMT anterior:** [decodificación limitada de pistas MHXX](lmt-vectors.md): 1.772 claves vectoriales en 90 pistas; 89 presentan variación. Aún sin rotaciones, binding o reproducción visual; datos extraídos solo locales. El usuario autorizó el descifrado; las entradas cifradas siguen sujetas a requisitos técnicos. Suite ampliada a 36 pruebas.
 
 **Actualización posterior autorizada:** [continuación PSP y Frontier local](continuation.md). GU Switch queda excluido por el usuario. Hay ahora archivos Frontier Vita locales en una copia todavía incompleta; su SFO identifica la base G 1.00, sin revisión Z/ZZ demostrada. Las menciones de ausencia de Frontier y los conteos siguientes describen la primera fotografía, no el estado posterior. El nuevo lector amplía a 620 secciones ELF PSP; 25 pruebas aprobadas.
 
@@ -109,4 +118,4 @@ Las 18 pruebas también se repitieron correctamente desde las copias entregadas 
 
 Se leyeron los chats de Diseño 02, 03, 04, 05, 07 y el chat «Confirmación diseño integración» (área 10). [coordination.md](coordination.md) registra interfaces, mensajes enviados y estado de recepción. Las revisiones documentales de otros chats no son inspecciones independientes de los bytes. No se les encargaron modificaciones de consola ni implementación.
 
-Solo se publican informes, metadatos y código propio. Catálogo físico detallado, objetos comerciales, CIA/ISO y muestras permanecen locales. Ninguna descarga de juegos, claves o recursos; ningún descifrado/DRM, FTP, montaje o cambio de firmware, plugins o archivos de PS Vita.
+Solo se publican informes, metadatos y código propio. Catálogo físico detallado, objetos comerciales, CIA/ISO y muestras permanecen locales. No se descargaron juegos, claves ni recursos comerciales. El descifrado autorizado se realizó en el PC con las entradas existentes y queda detallado por etapa. Sin FTP, montajes ni cambios de firmware, plugins o archivos de PS Vita desde este encargo.

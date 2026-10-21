@@ -10,7 +10,7 @@ import struct
 def signature(head):
     known={b'\x00PSF':'SFO',b'SCE\x00':'SCE_wrapper',b'\x7fELF':'ELF',b'\x89PNG':'PNG',
            b'DDS ':'DDS',b'OggS':'Ogg',b'RIFF':'RIFF',b'FMOD':'FMOD_candidate',b'FSKL':'FSKL_candidate',
-           b'\x1aecd':'ECD_candidate',b'\x1aexf':'EXF_candidate',b'JKR\x1a':'JKR_candidate'}
+           b'ecd\x1a':'ECD_candidate',b'exf\x1a':'EXF_candidate',b'JKR\x1a':'JKR_candidate'}
     if head[:4] in known:
         return known[head[:4]]
     if head.startswith(b'\xff\xd8\xff'):
@@ -55,7 +55,7 @@ def inspect(root,out):
                 row['status']='excluded_in_progress'
                 records.append(row)
                 continue
-            if path.suffix.lower() in ('.rif','.rap') or 'license' in path.parts:
+            if path.suffix.lower() in ('.rif','.rap') or 'license' in path.parts or path.parent.name=='package':
                 row['status']='excluded_license'
                 records.append(row)
                 continue

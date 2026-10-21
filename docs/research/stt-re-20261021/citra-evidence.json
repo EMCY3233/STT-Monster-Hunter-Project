@@ -1,0 +1,199 @@
+{
+  "build": "Nightly 2104 HEAD-0ff3440",
+  "zip_sha256": "ea8569d5989ca51bf233a63cde03c998f6f1b1addd01906c96647e0a9915ebf5",
+  "provenance": "third-party preserved build linked via developer-maintained archive; archive integrity checked, no developer signature established",
+  "runs": [
+    {
+      "label": "mh3u",
+      "receipt_sha256": "d391919f49e4f78fbd1a949886b40e60956fb2fa07c62016da42383d372e9ca1",
+      "executable_sha256": "53087fb66a5e76bf6fe23bfe324c25c257c39b97fb1eefd8c69a8c917a104f27",
+      "input_sha256": "aa108914574a1a28b87e13964322441e2b619814a6d97401affce9f68ddcfd4f",
+      "input_unchanged": true,
+      "returncode": 1,
+      "terminated_after_timeout": false,
+      "elapsed_seconds": 1.9210000000020955,
+      "outputs": [
+        {
+          "path": "config\\sdl2-config.ini",
+          "bytes": 13278,
+          "sha256": "60f18a6492e53d9c88bc1a585d8f50ac1902f19e380a43e52e428884a064627a"
+        },
+        {
+          "path": "log\\citra_log.txt",
+          "bytes": 2054,
+          "sha256": "2ef793f88e9ed92c6bceb143839f76efcbe3b21baf2a4a08901eff7931c2f7fa"
+        }
+      ]
+    },
+    {
+      "label": "mh4u",
+      "receipt_sha256": "b7c99ae0b05e2cf45c2edbcfb0cdd1cd7ea506987c8903554153148f2de49f63",
+      "executable_sha256": "53087fb66a5e76bf6fe23bfe324c25c257c39b97fb1eefd8c69a8c917a104f27",
+      "input_sha256": "3b11095265bd96436306cbde7aa6256e7550164e83914d3ec9f8a139902e8069",
+      "input_unchanged": true,
+      "returncode": 1,
+      "terminated_after_timeout": false,
+      "elapsed_seconds": 2.687999999994645,
+      "outputs": [
+        {
+          "path": "config\\sdl2-config.ini",
+          "bytes": 13278,
+          "sha256": "60f18a6492e53d9c88bc1a585d8f50ac1902f19e380a43e52e428884a064627a"
+        },
+        {
+          "path": "log\\citra_log.txt",
+          "bytes": 2094,
+          "sha256": "30dcb0adc69295e33c5dbd6668d566ae7bd542948a6d63c2e7841beb6ce937bf"
+        }
+      ]
+    },
+    {
+      "label": "mhxx",
+      "receipt_sha256": "0873fec1d11f2e8f6a052cacd2c1a34d1417b79262eacf9338c718105d4aead5",
+      "executable_sha256": "53087fb66a5e76bf6fe23bfe324c25c257c39b97fb1eefd8c69a8c917a104f27",
+      "input_sha256": "195570856aa2cd623001d00aaa7c7e20d1e563fe8782979e054570ac83982245",
+      "input_unchanged": true,
+      "returncode": 1,
+      "terminated_after_timeout": false,
+      "elapsed_seconds": 2.2969999999913853,
+      "outputs": [
+        {
+          "path": "config\\sdl2-config.ini",
+          "bytes": 13278,
+          "sha256": "60f18a6492e53d9c88bc1a585d8f50ac1902f19e380a43e52e428884a064627a"
+        },
+        {
+          "path": "log\\citra_log.txt",
+          "bytes": 2076,
+          "sha256": "5cd274abdfd811c7ca5ab97fc7a0d8879b361f412b68f002d1020387125707fd"
+        }
+      ]
+    },
+    {
+      "label": "mhxx-patch",
+      "receipt_sha256": "1deec13a60c9826201e31d12f7216516ecea85613d180e27e3949f3f881336e3",
+      "executable_sha256": "53087fb66a5e76bf6fe23bfe324c25c257c39b97fb1eefd8c69a8c917a104f27",
+      "input_sha256": "8438c0c026203c20b9dd81fc3b6ec9c31c94abc80e5bb7f6618cd58f804ac4ac",
+      "input_unchanged": true,
+      "returncode": 1,
+      "terminated_after_timeout": false,
+      "elapsed_seconds": 0.13999999999941792,
+      "outputs": [
+        {
+          "path": "config\\sdl2-config.ini",
+          "bytes": 13278,
+          "sha256": "60f18a6492e53d9c88bc1a585d8f50ac1902f19e380a43e52e428884a064627a"
+        },
+        {
+          "path": "log\\citra_log.txt",
+          "bytes": 2626,
+          "sha256": "1ddbd6705cb76a086ea68a9f2b291816e7cf5da15f14e583295140c155e86ebf"
+        }
+      ]
+    },
+    {
+      "label": "mhxx-patch-short",
+      "receipt_sha256": "ed765415a5c4530ed20fd4b602e9f2df314e852fee3b5289f20af0ec178ece48",
+      "executable_sha256": "53087fb66a5e76bf6fe23bfe324c25c257c39b97fb1eefd8c69a8c917a104f27",
+      "input_sha256": "8438c0c026203c20b9dd81fc3b6ec9c31c94abc80e5bb7f6618cd58f804ac4ac",
+      "input_unchanged": true,
+      "returncode": 1,
+      "terminated_after_timeout": false,
+      "elapsed_seconds": 0.6410000000032596,
+      "outputs": [
+        {
+          "path": "config\\sdl2-config.ini",
+          "bytes": 13278,
+          "sha256": "60f18a6492e53d9c88bc1a585d8f50ac1902f19e380a43e52e428884a064627a"
+        },
+        {
+          "path": "log\\citra_log.txt",
+          "bytes": 49881,
+          "sha256": "8332059edb1d0ddecdc061c8688280af630413c5d615a2654181929e8c16e0c9"
+        },
+        {
+          "path": "sdmc\\Nintendo 3DS\\00000000000000000000000000000000\\00000000000000000000000000000000\\title\\0004000e\\00197100\\content\\00000000.app",
+          "bytes": 36868096,
+          "sha256": "1ed304a0d11d01ed66cdfeebefb140a072b1b20728f8c611c13ebab75a8be473"
+        },
+        {
+          "path": "sdmc\\Nintendo 3DS\\00000000000000000000000000000000\\00000000000000000000000000000000\\title\\0004000e\\00197100\\content\\00000000.tmd",
+          "bytes": 2868,
+          "sha256": "e2b613ada4cdd10979748403556046e740f814709da7b5da4037be64f0f06f40"
+        }
+      ]
+    },
+    {
+      "label": "mhxx-patch-boot",
+      "receipt_sha256": "4c38b97066531b474652c289b75954ef2afecf334846f1eacdbe477ed760e4d6",
+      "executable_sha256": "53087fb66a5e76bf6fe23bfe324c25c257c39b97fb1eefd8c69a8c917a104f27",
+      "input_sha256": "1ed304a0d11d01ed66cdfeebefb140a072b1b20728f8c611c13ebab75a8be473",
+      "input_unchanged": true,
+      "returncode": 3221225477,
+      "terminated_after_timeout": false,
+      "elapsed_seconds": 13.469000000011874,
+      "outputs": [
+        {
+          "path": "config\\sdl2-config.ini",
+          "bytes": 13278,
+          "sha256": "60f18a6492e53d9c88bc1a585d8f50ac1902f19e380a43e52e428884a064627a"
+        },
+        {
+          "path": "config\\telemetry_id",
+          "bytes": 8,
+          "sha256": "885b25cfb9fdf86d8d83843cb400dd813ae838dfdb31da37b7279f3be6c50b94"
+        },
+        {
+          "path": "log\\citra_log.txt",
+          "bytes": 1923338,
+          "sha256": "4d70d4226fbb99a26a42cc18f4188758b02c76bb8489bf044a2f7ef9f1a56c11"
+        },
+        {
+          "path": "sysdata\\mcu.dat",
+          "bytes": 24,
+          "sha256": "7a9931d0e2c8e245a08653d77a1b6d33699e50c87a5f0fc9bc57d47ab0b3c56f"
+        },
+        {
+          "path": "nand\\data\\00000000000000000000000000000000\\extdata\\00048000\\F000000B\\metadata",
+          "bytes": 16,
+          "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+        },
+        {
+          "path": "nand\\data\\00000000000000000000000000000000\\extdata\\00048000\\F000000B\\user\\gamecoin.dat",
+          "bytes": 20,
+          "sha256": "e5ad6a70466faa9bde8c818ae80f51a39f6ca0a68e2c766d37364010e4a6e19e"
+        },
+        {
+          "path": "nand\\data\\00000000000000000000000000000000\\sysdata\\00010017\\00000000\\config",
+          "bytes": 32768,
+          "sha256": "dc36a20653699fd8c998f0f18d769a9799ce1b6f3ff5dbdcd9454b360da94ead"
+        },
+        {
+          "path": "nand\\data\\00000000000000000000000000000000\\sysdata\\00010026\\00000000\\eventlog.dat",
+          "bytes": 200020,
+          "sha256": "f37c380dcc7348b04ca575ea3e8f078e23cc172b8be0df13c5abb9ed85d51f3c"
+        },
+        {
+          "path": "nand\\data\\00000000000000000000000000000000\\sysdata\\00010026\\00000000\\CEC\\MBoxList____",
+          "bytes": 396,
+          "sha256": "2aa9374fec6f45bd0eab9ae10fc1d0f38f1f3b779a089fccf160f435b378fc2f"
+        },
+        {
+          "path": "nand\\data\\00000000000000000000000000000000\\sysdata\\00010035\\00000000\\news.db",
+          "bytes": 11216,
+          "sha256": "ef87d94f1e43e12588760015a801dbeaa9f7277009bb8bda8f5129aa9c7d305f"
+        },
+        {
+          "path": "shaders\\opengl\\transferable\\0004000E00197100.bin",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "shaders\\opengl\\precompiled\\separable\\0004000E00197100.bin",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ]
+}
