@@ -114,3 +114,14 @@ record movement, camera, target HP, START exit and suspend/resume. Keep the moni
 bubble intact. A transfer receipt must contain source hash, destination and result.
 No transfer, installation or hardware test occurred here. Preserve package/evidence;
 remove only explicitly identified old project transfer files after verified update.
+
+## Resultado remoto verificado de esta entrega
+
+Código `e6416fb952ea050f3b785c852417e5bc58cd3f88`: [CI39560756730](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39560756730)
+correcto en controles/adapter PC, build Vita y revisión independiente del paquete.
+Job119091458348: SFO STTP00001 /STT Vita Prototype /00.10.
+VPK51.745 bytes, SHA-256 `e8b0a0bded89881c9a79a035028bec04fbed2bd99e85533abc662a0af993ffa5`.
+Descargado y reinspeccionado localmente con igual hash. Primer build fallido por enum
+quedó corregido y preservado como evidencia; no se usó un VPK de ese intento.
+Entrega, enlaces a las cuatro PR, controles e instalación local: [initial-delivery.md](initial-delivery.md).
+No hay transferencia FTP, instalación ni comprobación física desde Work.

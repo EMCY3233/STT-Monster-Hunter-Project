@@ -116,3 +116,10 @@ Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototip
 - Frame/ticks acotados, doble framebuffer, resync de suspensión y control de errores; transporte de telemetría desactivado, buzón STT/3 independiente de red y HUD local.
 - Pruebas PC locales de controles/cámara, adaptador C→STT/3→Python y renderer con ASan/UBSan aprobadas. Imagen sintética revisada; sin captura física.
 - CI Vita con imagen fijada, inspección de SHA/SELF/SFO e identidad STTP00001; resultados, paquete y hash reales pendientes de ejecución remota. Sin acceso FTP, instalación ni prueba física desde Work. Instrucciones en `docs/prototypes/vita.md`.
+
+## 2026-10-21 — Prototipos iniciales Vita: entrega integrada revisable
+
+- Publicadas cuatro PR independientes desde main410b1dd: contratos #8, Combat Lab #9, Asset Lab #10 y prototipo Vita/integración #11. Sin fusionar main ni modificar investigaciones #3/#7.
+- [Entrega y evidencias](docs/prototypes/initial-delivery.md): CI PC de B/C/contratos correcta y CI Vita39560756730 correcta, incluida inspección VPK/SFO independiente. Corrección de portabilidad de enum ARM y regresión `-fshort-enums`.
+- VPK STTP00001 de51.745 bytes: SHA-256 `e8b0a0bded89881c9a79a035028bec04fbed2bd99e85533abc662a0af993ffa5`; ZIP Asset Lab: `916638957260b3a7eea59581fcde8b83d539706faf294958d4a4360c8928fe99`. Ambos descargados/contrastados localmente.
+- Juego offline con movimiento/cámara/golpe/vida/reacción. Buzón STT/3 local; UDP y Aquatic pendientes. GUI B sin revisión visual; rendimiento/suspensión en consola sin confirmar. Sin acceso FTP desde Work, instalación ni prueba física en este encargo. Monitor STTM00001 intacto.
