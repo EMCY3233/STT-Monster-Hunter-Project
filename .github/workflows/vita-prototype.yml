@@ -1,0 +1,49 @@
+name: Vita playable prototype
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  controls-and-adapter-pc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Portable controls, camera, core adapter and renderer
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -Ivita-prototype/src vita-prototype/src/control.c vita-prototype/tests/test_control.c -lm -o /tmp/stt-controls
+          /tmp/stt-controls
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Ivita-prototype/src -Icombat-lab/include -Icontracts vita-prototype/src/control.c vita-prototype/src/render.c vita-prototype/src/snapshot.c combat-lab/src/stt_combat.c contracts/stt_play.c vita-prototype/tests/test_integration.c -lm -o /tmp/stt-integration
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-integration /tmp/stt-scene.ppm > /tmp/stt-adapter.jsonl
+          python -c "from pathlib import Path; from stt_monitor.protocol import decode; p=decode(Path('/tmp/stt-adapter.jsonl').read_bytes().strip()); assert p['play']['hits'][0]['damage']==10; assert p['source']=='simulator'"
+  build:
+    runs-on: ubuntu-latest
+    container: vitasdk/vitasdk:2026.08-20260815@sha256:7f5eee50ff95b73c8c847dbfef6227aa0035886444b4d0254c21da8369ff1efc
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build independent VPK
+        run: |
+          cmake -S vita-prototype -B build/prototype
+          cmake --build build/prototype --parallel 2
+          sha256sum build/prototype/stt_vita_prototype.vpk > build/prototype/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-vita-prototype-STTP00001
+          path: |
+            build/prototype/stt_vita_prototype.vpk
+            build/prototype/SHA256SUMS
+          retention-days: 14
+  inspect-package:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: stt-vita-prototype-STTP00001
+          path: build/package
+      - run: python vita-prototype/tests/inspect_package.py build/package

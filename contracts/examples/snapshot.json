@@ -1,0 +1,39 @@
+{
+  "version": 3,
+  "session": "synthetic",
+  "source": "simulator",
+  "seq": 0,
+  "uptime_ms": 0,
+  "battery_pct": null,
+  "play": {
+    "version": 1,
+    "tick": 0,
+    "origin": "original-prototype",
+    "hunter": {
+      "state": "idle",
+      "pos_mm": [
+        0,
+        0,
+        0
+      ],
+      "yaw_mdeg": 0,
+      "hp": 100
+    },
+    "camera": {
+      "yaw_mdeg": 0,
+      "pitch_mdeg": 0,
+      "distance_mm": 4000
+    },
+    "attack": {
+      "id": 0,
+      "phase_tick": 0
+    },
+    "hits": [],
+    "perf": {
+      "frame_us": 0,
+      "update_us": 0,
+      "dropped": 0
+    },
+    "aquatic": null
+  }
+}
