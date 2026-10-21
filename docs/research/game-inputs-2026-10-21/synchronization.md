@@ -151,3 +151,13 @@ Informes de los propietarios recibidos:prototipos PR15 STT Pose/1,exportación/r
 Órdenes siguientes enviadas:prototipos lectorCportableSTTPose/1 con pruebas cruzadas/entradasmalformadas ymemoria;monitor validación conjuntaPC dedirecto/pausas con sesiones,reordenación/reloj/entrada inválida;investigación cerrar comparaciónemuladores yprocedencia delnuevoMH4U.3ds,seguida de aceptaciónvisual acotada si existen medios fiables. El avance Citra es carga inicial porlogs,no jugabilidadvalidada.
 
 No nuevas conexionesFTP tras inspección cubierta;sin transferencia/instalación/consola,fusionesPR oalteración de banco/originales. Tres frentes con tareas diferenciadas; resultados nuevos pendientes de cierre,evidencia yrevisión.
+
+## Comparativa de emuladores y nueva base 3DS legible
+
+Entrega delpropietarioPR7,commit964770ad40a6c7dfc7df6bc4294858521ae7ff55:comparativaPPSSPP1.20.4/Azahar2126.2/Vita3K4211,fuentes/versiones/hashes;Azahar yVita3K no instalados en esta etapa. [Informe fijado](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/964770ad40a6c7dfc7df6bc4294858521ae7ff55/docs/research/stt-re-20261021/emulator-comparison.md).
+
+NuevaentradaMH4U EUR NCSD.3ds de4GiB,SHA-2563832beef353d134bcba6ef83dc987e7ae228c43dc32a6ba52519f5f103f52581,ProgramID0004000000126100,tresNCCH no_crypto. No implica equivalencia conCIA ni revisiónexactadeljuego. Citra2104 ejecutó15,641s enperfilaislado:loader/DSPHLE acreditados porlogs,paradacontrolada,originalintacto. Sin imagen/FPS/jugabilidadvalidados. Corrige solo la afirmacióngeneral deausenciadebase3DSlegible;CIApreviasmantienenbloqueocifrado. [Ensayo](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/964770ad40a6c7dfc7df6bc4294858521ae7ff55/docs/research/stt-re-20261021/citra-current-inputs.md). No incorporada automáticamentealbanco.
+
+ContrasteTEX delpropietario:segundalectura descarta alfa;no acredita fidelidadRGBA/RGB/orientación. Derivadoprivado,noaptitudparaadaptación. No confundir aceptaciónestructural anterior conimagenfiel.
+
+Bloqueovisual:superficieCUA disponible sinAPIsnativas;noobservaciónvisualrealizada,norepetirarranquesconmismoslogs. Encargada alternativa:.codeMHXX,flag/rangosBLZ ysegmentosantesdedescompresión;no forzar codec si flags noaplican. Fuente/derivadoslocales,metadatospublicables,sincambiosconsola/banco/originales.

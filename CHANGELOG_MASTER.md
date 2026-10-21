@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Emuladores comparados y baseMH4U legible
+
+- RecibidaPR7/964770ad:comparativaemuladores yensayo MH4U NCSDlegible,Citracarga/DSP,sinvisual/jugabilidad. LasCIAcifradas noquedanresueltas.
+- ContrasteTEX noacreditafidelidadalfa;controlvisualbloqueado. Siguienteaceptación:.codeMHXX,flags/rangos antesdeBLZ,sinforzarcodec.
+
 ## 21-10-2026 — Informes recibidos y tareas redistribuidas
 
 - Recibidos PR15/puentepropio,PR13–14/corrección ypausas,yFTPlectura monitor00.50;avance MH4U Citra aún sin cierrevisual. Evidencia atribuida a propietarios.
