@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — EntradaMHXX derivada delcargador
+
+-PR7/d419d6b:VA0x00100000→offset0/text yA32 esperado sustentados por rutaAzahar,no campoentryExHeader niobservaciónhardware.124pruebasdelpropietario.
+-Sin repetirBLZ,ejecutarupdate oatribuirfunciones;contrasteindependiente/semánticapendientes.
+
 ## 21-10-2026 — .codeMHXX descomprimido y trazable
 
 -PR7/3e9bbdb:salidaBLZ13.045.760bytes coincideconsegmentos;recibo/hashsalida cotejados aquí.116pruebasdelpropietario,sincontrasteindependiente osemántica acreditados.

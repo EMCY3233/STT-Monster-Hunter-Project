@@ -177,3 +177,9 @@ PR7/3e9bbdb032cf448194b09c07499fb5ee4ecde264:una entrada NCCHexistente,flagcompr
 Investigación declara10pruebasnuevas,116/116suitecorrecta;decodificador adaptado deAzahar GPL2+ conatribución/licencia. No hashdescomprimidoindependiente encontenedor ni contrasteindependienterealizado. Valida algoritmo/rangos,nosemántica,ejecución,baseMHXXcifrada oparchearrancable. Derivadosprivados fueraGit,sin incorporaciónalbanco. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/3e9bbdb032cf448194b09c07499fb5ee4ecde264/docs/research/stt-re-20261021/mhxx-code-blz.md).
 
 Siguienteaceptaciónencargada:unaVA↔offset↔segmentoARM respaldadaporExHeader/fuenteprimaria;distinguirtextstartdeentrypoint yARM/Thumbsolo sihaybase. Sin inferirfunciones odesensambladocomercialpublicado,ni repetirBLZ/emu.
+
+## MHXX: referencia estática de entrada cerrada
+
+PR7/d419d6b41e7c21ee9cb11025df50fb120f0a75f2:mapaúnico VA0x00100000→offset0→text,rango[0,4) respaldado porarchivo,noBSS/padding. Entryderivado delrutaloaderAzahar2126.2,no campo explícitoExHeader;CPSR.T=0/A32 esperado según implementación,alta confianza estructural. Sin opcode comercial publicado,funciónidentificada,ejecuciónhardware oparchearrancable demostrado.
+
+Propietario comunica8pruebasnuevas/124suitecorrecta,fuentesversionadas yhashesNCCH/code conservados. Reutilizócode.bin,sinnuevaBLZ/emu/binarios/banco. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/d419d6b41e7c21ee9cb11025df50fb120f0a75f2/docs/research/stt-re-20261021/mhxx-entry-reference.md). Contrasteindependiente ysemántica siguen pendientes;no atribuirIA/hitboxes.
