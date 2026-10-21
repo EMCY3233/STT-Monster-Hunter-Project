@@ -10,7 +10,7 @@ Estado documental del **21 de octubre de 2026**. Este índice reúne los resulta
 | Cargas ARC del parche MHXX 3DS | 21.696 entradas, 8.823 objetos únicos | [Cierre del banco inicial](resource-bank.md) |
 | Copia Frontier Vita | 8.261 archivos, 5.212.490.427 bytes; transferencia y registro terminados | [Censo completo](frontier-complete.md) |
 | Identidad Frontier | PCSG00350; base G 01.00 y parche Z 01.99 | [Metadatos y hashes](frontier-complete-summary.json) |
-| Derivado Frontier enlazado | Una salida JKR de 349 bytes, aún sin formato interior identificado | [Procedencia y consulta](bank-derivatives.md) |
+| Derivado Frontier enlazado | Una salida JKR de 349 bytes; 14 regiones compatibles con CP932 y kana, sin formato interior identificado | [Procedencia](bank-derivatives.md) y [sondeo textual](frontier-jkr-text-regions.md) |
 | Coherencia del catálogo | Sin errores de referencias/estados/tamaños en la auditoría; 161 grupos físicos de hashes repetidos conservados | [Auditoría y límites](bank-catalog-audit.md) |
 
 El derivado se enlaza en `derivatives.jsonl`, separado de SQLite y de sus objetos ARC. No incrementa los conteos de esas tablas ni duplica sus bytes. Los tamaños y hashes no autentican una edición comercial ni demuestran jugabilidad.
