@@ -69,7 +69,7 @@ int main(void) {
                     address.sin_family = SCE_NET_AF_INET;
                     address.sin_port = sceNetHtons(32100);
                     result = sceNetInetPton(SCE_NET_AF_INET, destination, &address.sin_addr);
-                    if (result != 1) goto failure;
+                    if (result != 1) { result = -1; goto failure; }
                     seq = sent = errors = consecutive = 0;
                     last_error = 0;
                     next = start;

@@ -15,7 +15,7 @@ Usa la conexión Wi-Fi existente, sin configurar perfiles. No garantiza reconexi
 
 ## Compilación sin consola
 
-CI usa vitasdk/vitasdk:2026.08-20260815 y prueba el codificador C en Linux contra el protocolo Python. El artefacto experimental contiene VPK y SHA-256; se retiene siete días, sin release ni transferencia a consola.
+CI usa vitasdk/vitasdk:2026.08-20260815 fijado también por digest y prueba el codificador C en Linux contra el protocolo Python. El artefacto experimental contiene VPK y SHA-256; se retiene siete días, sin release ni transferencia a consola. Otro trabajo descarga el artefacto y verifica hash, lista exacta de archivos y cabeceras SELF/SFO sin ejecutarlo.
 
 Con Docker disponible, desde la raíz del repositorio:
 
@@ -23,7 +23,7 @@ Con Docker disponible, desde la raíz del repositorio:
 docker run --rm -v "$PWD:/workspace" vitasdk/vitasdk:2026.08-20260815 sh -c 'cmake -S vita-agent -B build/vita && cmake --build build/vita'
 ```
 
-La imagen está fijada por etiqueta fechada, no por digest. El runner y las acciones también pueden cambiar; no se afirma reproducibilidad bit a bit. Identificador de desarrollo STTM00001: verificar que no colisiona con una aplicación instalada antes de una futura instalación.
+CI fija el digest sha256:7f5eee50ff95b73c8c847dbfef6227aa0035886444b4d0254c21da8369ff1efc, observado en el primer build correcto. Para usar exactamente la misma imagen localmente, añadir ese digest a la etiqueta del comando anterior. El runner y las acciones también pueden cambiar; no se afirma reproducibilidad bit a bit. Identificador de desarrollo STTM00001: verificar que no colisiona con una aplicación instalada antes de una futura instalación.
 
 ## Prueba física pendiente
 
