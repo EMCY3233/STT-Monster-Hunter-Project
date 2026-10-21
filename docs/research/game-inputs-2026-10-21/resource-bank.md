@@ -1,5 +1,9 @@
 # Banco local de archivos — 2026-10-21
 
+**Cierre verificado:** [copia y censo final de Frontier](frontier-complete.md):8261 archivos/5212490427bytes incorporados; banco actual9888archivos. BaseG1.00 y parcheZ01.99 confirmados, sin afirmar ZZ, descifrado o jugabilidad.
+
+Los conteos1627archivos que siguen describen el banco inicial; el estado actual y sus nuevos hashes están en el informe de cierre.
+
 Banco general, sin clasificación por armas ni búsqueda de relaciones con Espada Larga.
 
 ## Estado comprobado
