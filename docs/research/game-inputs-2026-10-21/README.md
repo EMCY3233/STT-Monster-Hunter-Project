@@ -1,5 +1,8 @@
 # STT — Inventario de entradas de juegos, 21-10-2026
 
+**Actualización posterior del 21-10-2026:** [herramientas y extracción local](extraction-tools.md). Los dos conjuntos 7z ya pasaron prueba íntegra y extracción; hay metadatos de sus CIA y listado RomFS del parche. Los párrafos iniciales que indican «sin prueba de carga» o «herramientas no disponibles» describen la primera etapa, superada donde lo precisa ese informe. MHXX es el nombre japonés relacionado con Generations Ultimate; se conserva por separado la plataforma 3DS observada en el CIA.
+
+
 Alcance: lectura local de `Juegos/`, sin modificar originales, ejecutar juegos, instalar herramientas, transferir a Vita o usar FTP. Solo se publican metadatos y código propio. Copia de trabajo independiente del monitor, rama `docs/game-input-inventory-20261021`.
 
 ## Resultado verificado
