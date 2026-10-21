@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: convenciones de índices MOD230
+## Estado más reciente: una referencia de imports PSP
+
+[Mapa estático de una referencia MHFU](mhfu-import-reference.md): primer registro .lib.stub compatible con PSPSDK, puntero NID a VA 0x0890EC78 / offset 0x0010D22C / sección .rodata.sceNid; sección y PT_LOAD coinciden. Alta confianza estructural, sin identificar funciones ni comportamiento. Cinco pruebas nuevas aprobadas; sin ejecutar ELF o repetir 620 secciones.
+
+
+## Etapa anterior: convenciones de índices MOD230
 
 [Contraste documental en la misma muestra](mod230-index-conventions.md): un lector primario MH4U/E6 lee dos bytes adicionales por malla; sus 29 índices encajan exactamente en EOF y mantienen seis ternas con índices distintos. Contador global 30 sin explicar; nombres min/max genéricos no confirmados para MHXX. Cuatro pruebas nuevas aprobadas. Aceptación delimitada, sin geometría completa validada ni expansión de muestras.
 
