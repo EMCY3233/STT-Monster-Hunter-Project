@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: .code base MH4U BLZ
+## Estado más reciente: contraste BLZ independiente pendiente
+
+[Revisión de linaje/licencias](mh4u-blz-independent-review.md), cierre22-10-2026: CTRTool, CUE y3dstool no aceptados aún como referencia suficientemente independiente. Sin segundo decoder ni coincidencia numérica inventada: tamaño/hash/consumo comparados=null. Cero arranques, descompresiones, instalaciones o lecturas de imagen. Invariantes MH4U previas intactas; independencia y semántica pendientes.
+
+
+## Etapa anterior: .code base MH4U BLZ
 
 [Una entrada descomprimida](mh4u-code-blz.md):16.261.120bytes, flujo y prefijo76bytes completos, hash salida registrado y segmentos respaldados; BSS separado. Recibo anterior fijado y rango.code reverificado antes/después, sin repetir hashes completos4GiB. Siete pruebas nuevas aprobadas; sin arranque, RomFS o instrucciones publicadas. Contraste independiente y semántica pendientes.
 

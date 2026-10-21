@@ -1,0 +1,130 @@
+{
+  "review_started": "2026-10-21",
+  "closed": "2026-10-22",
+  "timezone": "Europe/Madrid",
+  "scope": "documentary lineage/license/applicability review of one MH4U .code output",
+  "baseline_public_commit": "93455dcab83d823d1b4218b039aa29e951e5e7a1",
+  "baseline_output_bytes": 16261120,
+  "baseline_output_sha256": "63940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc",
+  "compressed_input_bytes": 9091360,
+  "compressed_input_sha256": "655e5b4f896d16ab1a745c3f516ef13c6cf482f3aa676b5c9927f3fa8ee57d83",
+  "independence_established": false,
+  "second_decoder_executed": false,
+  "size_equal": null,
+  "hash_equal": null,
+  "consumption_equal": null,
+  "new_decompressions": 0,
+  "new_commercial_binary_outputs": 0,
+  "new_image_reads": 0,
+  "whole_image_unchanged_reverified": false,
+  "whole_image_hash_repeated": false,
+  "new_installs": 0,
+  "new_synthetic_tests": 0,
+  "candidates": [
+    {
+      "name": "CTRTool1.3.0",
+      "commit": "e8f5f529c54ff9b22a2491a480ffa69206bf7b19",
+      "blob": "69868c3eb96229730bf35a9a11fe54048c30f979",
+      "license_for_lzss_files_not_established": true,
+      "independence": "not accepted: near-identical implementation structure; no complete attribution chain proven"
+    },
+    {
+      "name": "CUE/PeterLemon",
+      "commit": "067259ab76bc7f3b1dc4dcc94a6681a24366a0ed",
+      "blob": "de99266c476a7c46c48a3956336c95890e0722ea",
+      "license": "GPL-3.0-or-later",
+      "format_applicability": "documentary footer/limits compatible; not executed",
+      "independence": "plausible separate implementation strategy; historical relationship to contrasted lineage insufficiently established"
+    },
+    {
+      "name": "3dstool",
+      "commit": "3771ae967d64092370b646db86aa626401c279e8",
+      "blob": "d7fae77a900780ff17d9c3a3e9b9e452069580cd",
+      "license": "MIT",
+      "independence": "not established by different authorship/license or code alone"
+    }
+  ],
+  "primary_history": {
+    "ctrtool_neimod_import_commit": "87681b8bc5b6f57c4ac7368f494f310b84bfe4aa",
+    "citra_initial_ncch_commit": "3577dd027ddbaa2517eacad700ed0768a1f4b518",
+    "citra_initial_ncch_blob": "a01411e11dc16e2fc72f78d309e5bfb71c6528ae",
+    "cue_distribution_import_commit": "9fca43a5fca7f08f243818816ea0f14978bc7679"
+  },
+  "preserved_source_metadata": [
+    {
+      "file": "azahar-ncch_container.cpp",
+      "bytes": 29095,
+      "saved_sha256": "15dc06a391cb64e8fbd362c81ebc82f7e739c3b5afe9dd864f368aaaa645ab69",
+      "git_blob": "666d6037f1667ceea641cc46c7ee94cac5bee56c",
+      "exact_git_blob_verified": true,
+      "verified_content_sha256": "d3fd50dda11a5801990b83787d126e9417eb1fa3f6c6fb48ccf9b9ca3c781b9e",
+      "transport_extra_final_newline_bytes": 1
+    },
+    {
+      "file": "ctrtool-lzss.c",
+      "bytes": 2236,
+      "saved_sha256": "f5d2d7eca2fd8d67b891f977684697a90cfe02bf690e37b61d87bd3007eb26e0",
+      "git_blob": "69868c3eb96229730bf35a9a11fe54048c30f979",
+      "exact_git_blob_verified": true,
+      "verified_content_sha256": "a6784ff10ee3b876bd49fef09d82279ddb5225f06acebd62d8f72bb4f7d3a23b",
+      "transport_extra_final_newline_bytes": 1
+    },
+    {
+      "file": "cue-blz.c",
+      "bytes": 16391,
+      "saved_sha256": "a92f4699ceeb0ebdd107ab6d3de23bde24cc10ecdfa127c373af44f5f007a702",
+      "git_blob": "de99266c476a7c46c48a3956336c95890e0722ea",
+      "exact_git_blob_verified": true,
+      "verified_content_sha256": "1020709bcd234370cee9b0c891f4abaeb2c5196b136e605c8c797525b2eb0c63",
+      "transport_extra_final_newline_bytes": 1
+    },
+    {
+      "file": "cue-history.txt",
+      "bytes": 2202,
+      "saved_sha256": "bd3eab8d443da6d96e259eb3100bbdded53db9dbae8af49bd1f06190a4b6a5ab",
+      "git_blob": "e21f0182550fcf95be1ff16384b4bb03ac17b2e6",
+      "exact_git_blob_verified": true,
+      "verified_content_sha256": "4c49ae8a2bacc7637db3217084e06646c31cb93be603920737ae0e35cde13bf8",
+      "transport_extra_final_newline_bytes": 1
+    },
+    {
+      "file": "cue-GPL3.txt",
+      "bytes": 35150,
+      "saved_sha256": "e57f1c320b8cf8798a7d2ff83a6f9e06a33a03585f6e065fea97f1d86db84052",
+      "git_blob": null,
+      "exact_git_blob_verified": false,
+      "verified_content_sha256": null,
+      "transport_extra_final_newline_bytes": null
+    },
+    {
+      "file": "3dstool-backwardlz77.cpp",
+      "bytes": 8896,
+      "saved_sha256": "a1c0f87eb54bde1c1816af941e263de5c56a8480ed78cf653596ec388b99e95b",
+      "git_blob": "d7fae77a900780ff17d9c3a3e9b9e452069580cd",
+      "exact_git_blob_verified": true,
+      "verified_content_sha256": "21ce51a6d0474b6ae8022b811ca4f5f6ea5954d75cfc579a116563af7b3e73be",
+      "transport_extra_final_newline_bytes": 1
+    },
+    {
+      "file": "3dstool-MIT.txt",
+      "bytes": 1073,
+      "saved_sha256": "a269e56cadaaae358a84312d698e3d4b3e65f8fdfbec0d3f90964e96f4cd7f2f",
+      "git_blob": null,
+      "exact_git_blob_verified": false,
+      "verified_content_sha256": null,
+      "transport_extra_final_newline_bytes": null
+    },
+    {
+      "file": "citra-2014-ncch.cpp",
+      "bytes": 11610,
+      "saved_sha256": "01c38cafd78da232f7797c647e9938151738ad0c56adf172b7d41f4c79338ee6",
+      "git_blob": "a01411e11dc16e2fc72f78d309e5bfb71c6528ae",
+      "exact_git_blob_verified": true,
+      "verified_content_sha256": "94109529c3b834036be68d18686b5258967cd9fc41547f821b4a04da23828ec6",
+      "transport_extra_final_newline_bytes": 1
+    }
+  ],
+  "blocker": "No sufficiently evidenced independent compatible reference accepted; no numeric comparison performed",
+  "reopen_criterion": "Primary lineage evidence sufficient to select a reference, then same compressed input and separate output with size/hash/consumption checks",
+  "private_receipt_sha256": "40c1c89c0c8f05a4fd780b722833e83fe3872fdc95b3ab6a689f168b94740764"
+}

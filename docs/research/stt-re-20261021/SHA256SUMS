@@ -28,6 +28,8 @@ f91da0eb55d1670638878b449fe7beb437824e05864b807b4c77c103ec21891e  docs/research/
 79d68c2d23c304e7e41c6407a7ce8ccdfb64db0dc43c267e85c330b7e9384fb4  docs/research/stt-re-20261021/lmt-vectors-summary.json
 b12d62968f3c0c58ac4fd3f06aa5a08676e3d192b4b56143e3a255f6e6c886a7  docs/research/stt-re-20261021/lmt-vectors.md
 218503b92323f69c415ed0bd209adb20a96d68e12278252deae94ef6223e3595  docs/research/stt-re-20261021/local-evidence-receipt.json
+a739776e22cc6c9c0a49a74e29d2f47b696638a126ac322a841065b6ae79d909  docs/research/stt-re-20261021/mh4u-blz-independent-review-evidence.json
+933daa504f2cc669850fa901ca0a3ed174a8f9675a1575b6381b9e6d28348a97  docs/research/stt-re-20261021/mh4u-blz-independent-review.md
 92ea748dfc119c07b002a13d523a076f448e4f8f55b793de67782816730848e4  docs/research/stt-re-20261021/mh4u-code-blz-evidence.json
 641dc31d3841f84296ea191215b64029ab0e127b3514715810e7e0de99f6543a  docs/research/stt-re-20261021/mh4u-code-blz.md
 70a63aa1874e68cfb12b213b3e9055dc99c8fbb731c341a695fd2fca482a3c9d  docs/research/stt-re-20261021/mh4u-ncsd-executable-evidence.json
@@ -51,7 +53,7 @@ b00519fa40e3efc9a6c8a05b7a0dcba39069d39e0a6216f8be3b0f7dde64f8e6  docs/research/
 f00b97c68c22aba4db77b83461adb33b2c5c8ff98e1f415dee210cd2ab6fbb3a  docs/research/stt-re-20261021/plain-executables.json
 966dbcdbe24dd5773205a832f5495285da3532d93852a578628b702504d3857e  docs/research/stt-re-20261021/provenance.json
 b0ad05632223b50cafb32d53b0206253dd217433153dd2ab8ff212a2a4572f2f  docs/research/stt-re-20261021/psp-files.json
-61f6d6dd00f32c4bc4575b1f9fbef6cec4b83b09908ede35f23f1a5b88e9b08d  docs/research/stt-re-20261021/README.md
+b1a7b76f2f6d4e1bca51bd3d30bae91046fed31346c7de1bc3aadc0da1a33d7e  docs/research/stt-re-20261021/README.md
 0b98e274b925a2db76e6148e7652e9e4dafd82a86fb050a10c11dfe7227e09da  docs/research/stt-re-20261021/resource-headers.json
 bb443e912372d6a536aad036009e16dea90bebc8aa8e4e8442f6574a7ccae821  docs/research/stt-re-20261021/sources.md
 d3b4c600d17197c805d668412f19e4090d1c239bb524062b78d89fa140549111  docs/research/stt-re-20261021/tex-decoder-audit-evidence.json
