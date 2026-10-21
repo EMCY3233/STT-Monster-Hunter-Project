@@ -93,3 +93,7 @@ Verificación de preparación PR3: 60 pruebas automatizadas PC correctas y ensay
 Para el commit exacto `1b59dd01ac5cf745b36dba48ceda5984d642e4c9`, GitHub confirmó ambas ejecuciones completed/success: [Monitor tests39576768233](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39576768233) y [Vita agent build39576768171](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39576768171). Esto no acredita hardware ni se atribuye a commits documentales posteriores. No se descargó ni transfirió el artefacto.
 
 PR3 permanecía borrador/abierta, mergeable=true ysin fusionar. Se encargó a investigación una revisión estructural de un único MOD230 ya catalogado; Área07, límites/tablas y bloqueos antes de geometría. [Plan vigente](analysis-plan.md). No repetir descompresión JKR ni ampliar42restantes.
+
+## MOD230: evidencia parcial recibida
+
+[Seguimiento y límites](mod230-followup.md). PR7/10f3f10: una muestra990bytes,16posiciones/UV finitos y28índices accesibles. Discrepancia global30declarados/29disponibles y min/max0/0 pendientes. Aquí cotejados objeto/copia/3recibos yhashSQLite; sin nueva extracción,duplicación de objeto o pruebas del lector. Ocho pruebas comunicadas por investigación; geometría completa no validada.

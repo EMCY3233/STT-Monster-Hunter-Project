@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Recepción del análisis estructural MOD230
+
+- Una muestra990bytes,16registros de posición/UV finitos y28índices accesibles segúnPR7/10f3f10. Discrepancias global30/29índices y min/max pendientes; geometría completa no validada.
+- Cotejados aquí objeto/copia/tresrecibos ySQLite intacto; sin recatalogación o extracción adicional. Ocho pruebas del lector pertenecen a investigación. Informe mod230-followup.md conserva límites e interfaces02/04/07.
+
 ## 21-10-2026 — CI confirmada y plan estructural de modelo
 
 - Confirmadas pruebas y compilación remotas correctas de1b59dd0; enlaces/alcance en sincronización. Sin descarga o reinstalación de artefactos.
