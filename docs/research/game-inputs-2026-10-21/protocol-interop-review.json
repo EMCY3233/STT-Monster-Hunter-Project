@@ -1,0 +1,155 @@
+{
+  "scope": "Offline synthetic project-code composition only; no UDP, hardware, installation, gameplay or merged compatibility claim.",
+  "cases": [
+    {
+      "case": "baseline_v1_snapshot",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true,
+      "encoded_bytes": 97
+    },
+    {
+      "case": "candidate_v1_snapshot",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true,
+      "encoded_bytes": 97
+    },
+    {
+      "case": "baseline_v2_snapshot",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true,
+      "encoded_bytes": 171
+    },
+    {
+      "case": "candidate_v2_snapshot",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true,
+      "encoded_bytes": 171
+    },
+    {
+      "case": "baseline_v3_snapshot",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true,
+      "rejection": "unsupported version"
+    },
+    {
+      "case": "candidate_v3_snapshot",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true,
+      "encoded_bytes": 386
+    },
+    {
+      "case": "baseline_v3_hit",
+      "expected_accept": false,
+      "accepted": false,
+      "passed": true,
+      "rejection": "unsupported version"
+    },
+    {
+      "case": "candidate_v3_hit",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true,
+      "encoded_bytes": 432
+    },
+    {
+      "case": "candidate_maximum_field_lengths",
+      "expected_accept": true,
+      "accepted": true,
+      "passed": true,
+      "encoded_bytes": 715
+    },
+    {
+      "case": "baseline_duplicate_key",
+      "passed": true
+    },
+    {
+      "case": "baseline_oversize",
+      "passed": true
+    },
+    {
+      "case": "candidate_duplicate_key",
+      "passed": true
+    },
+    {
+      "case": "candidate_oversize",
+      "passed": true
+    },
+    {
+      "case": "baseline_analyzer_rejects_v3",
+      "passed": true
+    },
+    {
+      "case": "prospective_analyzer_counts_v3",
+      "passed": true
+    }
+  ],
+  "passed": 15,
+  "failed": 0,
+  "baseline_analyzer": {
+    "sessions": [],
+    "invalid_lines": 2
+  },
+  "prospective_analyzer": {
+    "sessions": [
+      {
+        "peer_ip": "127.0.0.1",
+        "source": "simulator",
+        "session": "synthetic",
+        "first_seq": 0,
+        "last_seq": 1,
+        "unique_packets": 2,
+        "missing_between_observed": 0,
+        "packets": 2,
+        "duplicates": 0,
+        "out_of_order": 0
+      }
+    ],
+    "invalid_lines": 0
+  },
+  "source_hashes": [
+    {
+      "path": "repository\\stt_monitor\\protocol.py",
+      "sha256": "f54f73e16b5830800c104eb19c4f437b914a7f50cccb852c93b465f4b394a325"
+    },
+    {
+      "path": "repository\\stt_monitor\\analyze.py",
+      "sha256": "cd958f5ea6ced3547e08fe666a0bd2cf4fc5801bc5d33748c6ad396c3c00f6da"
+    },
+    {
+      "path": "analysis-local\\protocol-review-20261021\\candidate\\protocol.py",
+      "sha256": "fe1b1e45df6a029c50b3f0263c775f9b9248cfd52f896ab76372301ec485b0e2"
+    },
+    {
+      "path": "analysis-local\\protocol-review-20261021\\candidate\\play_protocol.py",
+      "sha256": "b7d2c7c45169ecb0eade873a957f2ee116036142aff07d68e4e1a3f0feca57cc"
+    }
+  ],
+  "fetched_candidate_blobs": [
+    {
+      "path": "stt_monitor/protocol.py",
+      "branch": "prototype/vita-3d-20261021",
+      "git_blob_sha": "96997adfefcfff09fbdb9f73a94974e0db18cdb1"
+    },
+    {
+      "path": "stt_monitor/play_protocol.py",
+      "branch": "prototype/vita-3d-20261021",
+      "git_blob_sha": "f6ac57a08c6d95705519558637834ecde61f7dbb"
+    },
+    {
+      "path": "contracts/examples/snapshot.json",
+      "branch": "prototype/vita-3d-20261021",
+      "git_blob_sha": "da3d19b8089389fafe85cc918fdf1625bcdf6baf"
+    },
+    {
+      "path": "contracts/examples/hit.json",
+      "branch": "prototype/vita-3d-20261021",
+      "git_blob_sha": "e350d141a9ba0cfa13be673b17ecfbf5b0a9836a"
+    }
+  ]
+}
