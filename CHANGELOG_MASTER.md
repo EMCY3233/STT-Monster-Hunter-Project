@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Informes recibidos y tareas redistribuidas
+
+- Recibidos PR15/puentepropio,PR13–14/corrección ypausas,yFTPlectura monitor00.50;avance MH4U Citra aún sin cierrevisual. Evidencia atribuida a propietarios.
+- Encargados lectorC deposes,validaciónconjuntaPC delmonitor ycierre trazable/visualdelensayoMH4U. Sin fusionarPR ni nuevas operacionesconsola.
+
 ## 21-10-2026 — Regresión cerrada y fallo remoto derivado
 
 - Investigación:106/106pruebas sintéticas,21/21CLI y sintaxis correctos sobrec4215e8;sin nuevosensayoscomerciales.

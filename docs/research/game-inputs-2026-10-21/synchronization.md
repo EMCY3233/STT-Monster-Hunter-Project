@@ -143,3 +143,11 @@ El usuario autorizó ejecución dejuegos en emuladorPC;preservar perfilesaislado
 PR7 publicó matriz:106/106pruebas sintéticas correctas sobrec4215e801bc14d5158321860a3afddeda790d561,21/21herramientas con sintaxis yCLIhelp correctos,78archivos cotejados. HashSQLite antes/después idéntico. No hubo nuevas ejecuciones de emulador,dumps o decodificación real;no acredita fidelidadcomercial. [Matrizdelpropietario](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/research/stt-engineering-resources-20261021/docs/research/stt-re-20261021/pc-regression-matrix.md). Investigaciónemuladores activa porplataforma;sinresultadosfinales todavía.
 
 PR13/head193c7b467e60bce7e17e721f4f9aba5bf6f7fb94:Monitor tests39674410982 completed/failure,Vita agent build39674411028 completed/success. Diagnóstico/corrección encargado alpropietario,causapendiente. No se modifican susfuentes desdePR3,nosefusionanPR niinstalaartefacto. No atribuir éxito decompilación apruebasPCfallidas.
+
+## Recepción y nueva distribución de tareas
+
+Informes de los propietarios recibidos:prototipos PR15 STT Pose/1,exportación/reimportación de192poses y149.293bytes,29pruebasPC yCI declaradas; lectorC/runtime pendientes. Monitor PR13/d112214 corrige pruebaCLI yPR14/e702126 añade análisis de pausas,CI declarada correcta;sin fusión. FTPlectura delpropietario confirmaSFO STTM00001 00.50 coincidente conVPK;STTP00001 SFO550 no prueba ausencia global. Estos resultados se atribuyen a sus propietarios,no son ensayos repetidos aquí.
+
+Órdenes siguientes enviadas:prototipos lectorCportableSTTPose/1 con pruebas cruzadas/entradasmalformadas ymemoria;monitor validación conjuntaPC dedirecto/pausas con sesiones,reordenación/reloj/entrada inválida;investigación cerrar comparaciónemuladores yprocedencia delnuevoMH4U.3ds,seguida de aceptaciónvisual acotada si existen medios fiables. El avance Citra es carga inicial porlogs,no jugabilidadvalidada.
+
+No nuevas conexionesFTP tras inspección cubierta;sin transferencia/instalación/consola,fusionesPR oalteración de banco/originales. Tres frentes con tareas diferenciadas; resultados nuevos pendientes de cierre,evidencia yrevisión.
