@@ -1,6 +1,6 @@
 # Start The Travesy, Monster Hunter
 
-**Estado vigente y coordinación:** [estado consolidado](docs/PROJECT_STATUS.md) y [sincronización de frentes](docs/research/game-inputs-2026-10-21/synchronization.md). Monitor0.5 está en main; esta rama documental conserva material de etapas anteriores. Banco general sin clasificación por armas. Copia Frontier Vita en curso, sin declarar cierre ni descifrado. Las PR3/7 abiertas no equivalen a integración en main.
+**Estado vigente y coordinación:** [estado consolidado](docs/PROJECT_STATUS.md) y [sincronización de frentes](docs/research/game-inputs-2026-10-21/synchronization.md). Monitor0.5 está en main; esta rama documental conserva material de etapas anteriores. Banco general sin clasificación por armas. Copia Frontier Vita terminada y registrada:8261archivos añadidos,banco9888. [Censo final](docs/research/game-inputs-2026-10-21/frontier-complete.md). No se declara descifrado ni jugabilidad. Las PR3/7 abiertas no equivalen a integración en main.
 
 Base inicial de investigación y desarrollo. No existe todavía un juego nativo ni una conversión demostrada. El monitor PC incluye receptor de telemetría y generador simulado en Python 3.11 o posterior. El agente Vita experimental está en la versión 0.2: hay un ensayo de telemetría anterior documentado y confirmación visual del usuario para 0.2; las pruebas físicas restantes siguen pendientes.
 
