@@ -2,6 +2,7 @@
 #include <psp2/kernel/processmgr.h>
 #include <psp2/kernel/threadmgr.h>
 #include <psp2/net/net.h>
+#include <psp2/net/netctl.h>
 #include <psp2/power.h>
 #include <psp2/rtc.h>
 #include <psp2/sysmodule.h>
@@ -11,10 +12,12 @@
 #include <string.h>
 #include "debugScreen.h"
 #include "telemetry.h"
+#include "recovery.h"
+#include "deadline_clock.h"
 
 /* Stable rows: repaint changed text only, without clearing the framebuffer. */
 static void screen_line(int row, const char *text) {
-    static char previous[14][60];
+    static char previous[15][60];
     char current[60];
     snprintf(current, sizeof current, "%-59.59s", text);
     if (strcmp(current, previous[row]) != 0) {
@@ -23,11 +26,34 @@ static void screen_line(int row, const char *text) {
     }
 }
 
+static int capture_net_errno(void) {
+    int *value = sceNetErrnoLoc();
+    return value ? *value : 0;
+}
+
+static int open_udp(int *detail) {
+    int socket_id = sceNetSocket("stt-monitor", SCE_NET_AF_INET, SCE_NET_SOCK_DGRAM, 0);
+    if (socket_id < 0) { *detail = capture_net_errno(); return socket_id; }
+    int enabled = 1;
+    int code = sceNetSetsockopt(socket_id, SCE_NET_SOL_SOCKET, SCE_NET_SO_NBIO, &enabled, sizeof enabled);
+    if (code < 0) {
+        *detail = capture_net_errno();
+        sceNetSocketClose(socket_id);
+        return code;
+    }
+    return socket_id;
+}
+
 int main(void) {
     unsigned char ip[4] = {192, 168, 1, 2};
-    unsigned int previous = 0, seq = 0, sent = 0, errors = 0, consecutive = 0;
+    unsigned int previous = 0, seq = 0, sent = 0, errors = 0;
     int selected = 3, active = 0, sock = -1, net_ready = 0, module_ready = 0;
-    int result = 0, last_error = 0;
+    int result = 0, last_error = 0, last_net_errno = 0;
+    int netctl_ready = 0;
+    SttRecovery recovery;
+    SttDeadlineClock deadline_clock;
+    uint64_t budget_ms = 0;
+    int clock_error = 0;
     uint64_t start = 0, next = 0;
     char session[65] = "", payload[512], destination[16];
     void *memory = NULL;
@@ -49,12 +75,9 @@ int main(void) {
     result = sceNetInit(&init);
     if (result < 0) goto failure;
     net_ready = 1;
-    sock = sceNetSocket("stt-monitor", SCE_NET_AF_INET, SCE_NET_SOCK_DGRAM, 0);
-    if (sock < 0) { result = sock; goto failure; }
-    int nonblocking = 1;
-    result = sceNetSetsockopt(sock, SCE_NET_SOL_SOCKET, SCE_NET_SO_NBIO,
-                             &nonblocking, sizeof nonblocking);
+    result = sceNetCtlInit();
     if (result < 0) goto failure;
+    netctl_ready = 1;
 
     while (1) {
         SceCtrlData controls;
@@ -75,10 +98,17 @@ int main(void) {
             if (pressed & SCE_CTRL_CROSS) {
                 if (!stt_private_ip(ip)) status = "IP privada; ultimo bloque entre 1 y 254.";
                 else {
+                    if (sock >= 0) sceNetSocketClose(sock);
+                    sock = -1;
                     SceRtcTick tick;
                     result = sceRtcGetCurrentTick(&tick);
                     if (result < 0) goto failure;
                     start = sceKernelGetProcessTimeWide();
+                    if (stt_clock_start(&deadline_clock, start, tick.tick, sceRtcGetTickResolution()) < 0) {
+                        result = -1; goto failure;
+                    }
+                    budget_ms = 0;
+                    clock_error = 0;
                     snprintf(session, sizeof session, "vita-%" PRIx64 "-%" PRIx64,
                              (uint64_t)tick.tick, start);
                     snprintf(destination, sizeof destination, "%u.%u.%u.%u", ip[0], ip[1], ip[2], ip[3]);
@@ -88,8 +118,8 @@ int main(void) {
                     address.sin_port = sceNetHtons(32100);
                     result = sceNetInetPton(SCE_NET_AF_INET, destination, &address.sin_addr);
                     if (result != 1) { result = -1; goto failure; }
-                    seq = sent = errors = consecutive = 0;
-                    last_error = 0;
+                    seq = sent = errors = 0;
+                    stt_recovery_start(&recovery, 0);
                     next = start;
                     active = 1;
                     status = "Enviando. Confirma recepcion en el PC.";
@@ -97,21 +127,61 @@ int main(void) {
             }
         }
         uint64_t now = sceKernelGetProcessTimeWide();
+        if (active) {
+            SceRtcTick current_tick = {0};
+            int rtc_result = sceRtcGetCurrentTick(&current_tick);
+            if (stt_clock_sample(&deadline_clock, now, current_tick.tick, rtc_result >= 0, &budget_ms) < 0) {
+                active = 0;
+                clock_error = rtc_result < 0 ? rtc_result : -1;
+                status = "Parado: reloj no fiable; pulsa Cruz.";
+            } else if (budget_ms >= 180000) {
+                /* Check before any socket operation, including first frame after resume. */
+                active = 0;
+                status = "Parado: limite total de 180 segundos.";
+            }
+        }
         if (active && now >= next) {
-            int size = stt_encode(payload, sizeof payload, session, seq,
-                                  (now - start) / 1000, scePowerGetBatteryLifePercent());
-            if (size < 0) { result = -1; goto failure; }
-            result = sceNetSendto(sock, payload, size, SCE_NET_MSG_DONTWAIT,
-                                 (SceNetSockaddr *)&address, sizeof address);
-            if (result == size) { sent++; consecutive = 0; }
-            else { errors++; consecutive++; last_error = result; }
-            seq++;
             next = now + UINT64_C(1000000);
-            if (consecutive >= 3) { active = 0; status = "Parado: 3 errores de envio consecutivos."; }
-            else if (seq >= 60) { active = 0; status = "Terminado: 60 intentos. Revisa el PC."; }
+            int network_state = SCE_NETCTL_STATE_DISCONNECTED;
+            int state_result = sceNetCtlInetGetState(&network_state);
+            if (state_result < 0) { last_error = state_result; last_net_errno = 0; }
+            SttRecoveryAction action = stt_recovery_step(&recovery, budget_ms,
+                state_result >= 0 && network_state == SCE_NETCTL_STATE_CONNECTED, seq);
+            if (action == STT_DONE) { active = 0; status = "Terminado: 60 intentos. Revisa el PC."; }
+            else if (action == STT_STOP_DEADLINE) { active = 0; status = "Parado: limite total de 180 segundos."; }
+            else if (action == STT_STOP_RETRIES) { active = 0; status = "Parado: 5 fallos de red consecutivos."; }
+            else if (action == STT_STOP_OFFLINE) { active = 0; status = "Parado: 30 segundos sin conexion."; }
+            else if (action == STT_WAIT) {
+                if (sock >= 0) { sceNetSocketClose(sock); sock = -1; }
+                status = "Sin conexion. Esperando Wi-Fi (max 30s).";
+            } else {
+                if (action == STT_OPEN_SOCKET) {
+                    if (sock >= 0) sceNetSocketClose(sock);
+                    sock = open_udp(&last_net_errno);
+                    stt_recovery_opened(&recovery, sock >= 0);
+                    if (sock < 0) { last_error = sock; status = "Reintentando apertura de red..."; }
+                }
+                if (sock >= 0) {
+                    SttDiagnostics diagnostics = {sent, errors, last_error, last_net_errno};
+                    int size = stt_encode_v2(payload, sizeof payload, session, seq,
+                        (now - start) / 1000, scePowerGetBatteryLifePercent(), &diagnostics);
+                    if (size < 0) { result = -1; goto failure; }
+                    result = sceNetSendto(sock, payload, size, SCE_NET_MSG_DONTWAIT,
+                                         (SceNetSockaddr *)&address, sizeof address);
+                    int success = result == size;
+                    if (success) { sent++; status = "Enviando. Confirma recepcion en el PC."; }
+                    else {
+                        last_net_errno = capture_net_errno(); errors++; last_error = result;
+                        status = "Fallo de envio. Recreando socket...";
+                    }
+                    stt_recovery_sent(&recovery, success);
+                    seq++;
+                    if (seq >= 60) { active = 0; status = "Terminado: 60 intentos. Revisa el PC."; }
+                }
+            }
         }
         char line[128];
-        screen_line(0, "STT VITA MONITOR 0.2 - EXPERIMENTAL");
+        screen_line(0, "STT VITA MONITOR 0.5 - EXPERIMENTAL");
         screen_line(1, "");
         snprintf(line, sizeof line, "PC: %u.%u.%u.%u :32100", ip[0], ip[1], ip[2], ip[3]);
         screen_line(2, line);
@@ -126,10 +196,14 @@ int main(void) {
         screen_line(9, line);
         snprintf(line, sizeof line, "Ultimo error: 0x%08X", (unsigned int)last_error);
         screen_line(10, line);
-        snprintf(line, sizeof line, "Sesion: %s", session);
+        snprintf(line, sizeof line, "Detalle red: %d (0x%08X)", last_net_errno, (unsigned int)last_net_errno);
         screen_line(11, line);
-        screen_line(12, "");
-        screen_line(13, "UDP: un envio no confirma entrega.");
+        snprintf(line, sizeof line, "Sesion: %s", session);
+        screen_line(12, line);
+        if (clock_error) snprintf(line, sizeof line, "Reloj: error 0x%08X", (unsigned int)clock_error);
+        else snprintf(line, sizeof line, "Tiempo de limite: %" PRIu64 " / 180 s", budget_ms / 1000);
+        screen_line(13, line);
+        screen_line(14, "UDP: un envio no confirma entrega.");
         sceKernelDelayThread(50000);
     }
     result = 0;
@@ -140,6 +214,7 @@ failure:
     sceKernelDelayThread(3000000);
 cleanup:
     if (sock >= 0) sceNetSocketClose(sock);
+    if (netctl_ready) sceNetCtlTerm();
     if (net_ready) sceNetTerm();
     free(memory);
     if (module_ready) sceSysmoduleUnloadModule(SCE_SYSMODULE_NET);

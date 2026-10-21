@@ -33,3 +33,16 @@ La herramienta valida archivos/recibo,exige que fuente/salida/banco/evidencia pe
 Cinco pruebas nuevas aprobadas:enlace/idempotencia y consulta sin mutación SQLite,tamper de salida,tamper de recibo,fuente ausente del catálogo y rutas externas. Cinco pruebas anteriores del banco pasaron tras ampliar la búsqueda. También se ejecutó la consulta real por hash y se cotejó otra vez el hash SQLite con el registro original de Vita.
 
 Sin clasificación por armas,adaptación comercial,publicación de contenidos,FTP ni cambios de consola. Antes de ampliar JKR queda pendiente una aceptación útil del formato interior,como documenta investigación.
+
+## Segundo derivado: contraste acotado
+
+Excepción explícita: una sola muestra adicional, salida declarada hasta4KiB, selección por tamaño/ruta excluyendo la primera fuente. No autoriza descompresión masiva.
+
+Fuente `rePatch/PCSG00350/dat/load/uc/uc00_000_01.bin`, ID9802,1.058bytes. SHA-256 `29d9e008ccd705a82185c3574f7e58327d6a77f4ccedb9ad89d5599c62fb2463`.
+Salida1.884bytes, SHA-256 `fa22ddcc947003496640007bd8f9cd5153e25b61a33b98e430bb1b4eb88352c8`. Recibo SHA-256 `cb3ef44eaf5c45e3ec97132efe62cb5652d3ebd65d95cbcc8c38b1acdccb54b2`.
+
+Investigación produjo1.884/1.884bytes consumiendo1.042/1.042bytes de carga. Aquí se cotejaron fuente/salida/recibo y catálogo,sin repetir decodificación. Patrón parcial del control ausente en segunda muestra; cero tramos bajo criterio CP932/kana. No prueba ausencia de texto ni formato diferente. Gramática interior pendiente;42JKR sin ampliar.
+
+[Informe PR7, commit90dc6d1](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/90dc6d1/docs/research/stt-re-20261021/frontier-jkr-pair.md). Ocho pruebas nuevas comunicadas por investigación,no reproducidas aquí.
+
+Estado actual: dos derivados en registro adicional;9.888archivos físicos/21.696entradasARC/8.823objetos yhashSQLite intactos. La descripción anterior de una entrada corresponde a la primera incorporación. Conservar ambos decoded.bin/receipt.json locales. Sin formatos semánticos/modelos/animaciones identificados ni adaptación aprobada.

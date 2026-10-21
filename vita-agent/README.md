@@ -1,6 +1,12 @@
-# Agente Vita experimental — STT/1
+# Agente Vita experimental — STT/2
 
-Aplicación independiente experimental. La versión 0.1 completó un primer ensayo físico con 60 muestras y salida por START confirmada: [resultado](../docs/STT-MON-001-hardware-result.md). En la versión 0.2, el usuario confirmó texto mayor y desaparición del parpadeo en Vita. El nuevo ensayo de telemetría y los casos de parada/desconexión siguen pendientes.
+Revisión 0.5: [control temporal durante suspensión](../docs/suspend-deadlines.md), pendiente de prueba física. Añade RTC al presupuesto, comprueba el plazo antes de transmitir al reanudar, detiene ante reloj no fiable y muestra «Tiempo de limite». No cambia STT/2 ni el significado de uptime_ms. Los resultados anteriores pertenecen a sus versiones indicadas.
+
+Revisión 0.4: [recuperación automática acotada](../docs/auto-recovery.md). Tras un primer intento detenido, se recibió una sesión completa de 60 muestras con pausa y regreso sin otro Cruz confirmado por el usuario: [resultado físico](../docs/STT-MON-006-auto-result.md). Consulta el estado de red y recrea el socket al volver la conexión o tras fallar un envío; no enciende Wi-Fi ni cambia perfiles. Límites implementados: 30 s sin conexión observada, cinco fallos consecutivos, 180 s y 60 intentos reales. Los tiempos usan reloj del proceso y no se han validado como tiempo de pared durante suspensión.
+
+Revisión 0.3: emite STT/2 con diagnóstico de envío, compatible con el receptor actualizado que también acepta STT/1. Captura el detalle sceNetErrnoLoc, conserva el último fallo mientras la aplicación siga abierta y crea un socket nuevo al pulsar Cruz para otro ensayo. En hardware se recibieron las 60 muestras de una nueva sesión tras un corte Wi-Fi, incluido el error anterior preservado: [resultado](../docs/STT-MON-005-diagnostic-result.md). Se valida recuperación manual; no hay reconexión automática. [Protocolo y límites de entrega de diagnósticos](../docs/monitor-protocol.md).
+
+Aplicación independiente experimental. La versión 0.1 completó un primer ensayo físico con 60 muestras y salida por START confirmada: [resultado](../docs/STT-MON-001-hardware-result.md). En 0.2, el usuario confirmó texto mayor, desaparición del parpadeo y parada con Círculo tras recibir diez muestras: [resultado](../docs/STT-MON-003-stop-result.md). Siguen pendientes un ensayo completo de 60 muestras en 0.2, desconexión y suspensión.
 
 ## Funciones del código
 
@@ -8,11 +14,11 @@ Aplicación independiente experimental. La versión 0.1 completó un primer ensa
 - Destino IP editable en RAM con cruceta. Solo rangos privados RFC1918 y último octeto 1–254. El valor inicial 192.168.1.2 es un ejemplo: sustituir por la IP del PC. No valida la máscara de subred; evitar direcciones de red/broadcast de la LAN.
 - CROSS inicia hasta 60 intentos de envío, uno por segundo aproximadamente; CIRCLE detiene y START sale. Antes de CROSS no envía telemetría.
 - Arriba/abajo cambian el bloque IP seleccionado en +/-1; Cuadrado/Triángulo en +/-10, con vuelta al superar 0–255. Izquierda/derecha seleccionan bloque. Por ejemplo, de 2 a 134: 13 pulsaciones de Cuadrado y dos de Arriba.
-- UDP no bloqueante, sin recibir comandos. Tres errores consecutivos detienen el ensayo; se muestra el último error. Un envío correcto no confirma entrega.
+- UDP no bloqueante, sin recibir comandos. En 0.4, cinco fallos consecutivos de apertura/envío detienen el ensayo; se muestra el último error. Un envío correcto no confirma entrega.
 - source=vita, sesión basada en tick RTC e inicio monotónico, secuencia de intentos, tiempo transcurrido del proceso y batería por API. Batería fuera de rango se codifica como null. La sesión es un identificador práctico, no criptográfico.
 - Cierre de socket, memoria y módulo NET. Sin cambios de frecuencias, firmware, plugins, lectura de otros procesos o escrituras de archivos.
 
-Usa la conexión Wi-Fi existente, sin configurar perfiles. No garantiza reconexión tras suspensión ni monitoriza otros juegos.
+Usa la conexión Wi-Fi existente, sin configurar perfiles. La recuperación 0.4 requiere validación real, especialmente tras suspensión; no monitoriza otros juegos. El corte Wi-Fi en 0.2 no recuperó recepción en el PC: [resultado](../docs/STT-MON-004-wifi-result.md).
 
 ## Compilación sin consola
 

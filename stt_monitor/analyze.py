@@ -21,6 +21,8 @@ def summarize(lines):
         state = sessions.setdefault(key, {'packets': 0, 'duplicates': 0,
                                          'out_of_order': 0, 'seen': set(), 'highest': -1})
         seq = packet['seq']
+        if packet['version'] == 2 and seq >= state['highest']:
+            state['diagnostics_latest'] = packet['diagnostics'].copy()
         state['packets'] += 1
         if seq in state['seen']:
             state['duplicates'] += 1

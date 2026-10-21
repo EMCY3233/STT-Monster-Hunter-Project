@@ -75,3 +75,15 @@ PR abiertas comprobadas: [contratos STT/3](https://github.com/EMCY3233/STT-Monst
 ## Regiones compatibles con texto en el derivado JKR
 
 [SondeoCP932](frontier-jkr-text-regions.md) sobre los mismos349bytes:14tramosNULcompatiblesCP932conkana,160bytes,12sincontroles/2concontroles;14rechazanUTF8estricto. No se exportaron cadenas. Seis pruebas sintéticas correctas yhashfuente igual. No acredita formato,codificacióncanónica ni función. Investigación recibió el hallazgo para gramática/bordes de esta misma muestra;losotros43JKRsiguenpendientes,sin nuevaextracción.
+
+## Contraste JKR y preparación de PR3
+
+## 21-10-2026 — Segundo JKR y preparación de PR3
+
+- Contraste limitado a una muestra adicional: fuente1.058bytes, salida1.884bytes, carga1.042/1.042 consumida. Fuente/salida/recibo cotejados con banco; original intacto. Dos derivados enlazados por metadatos, SQLite intacto.
+- Patrón de prefijos del control no reproducido; cero tramos cumplen el criterio CP932/kana, sin probar ausencia de texto. Gramática pendiente,42JKR sin ampliar. PR7 commit90dc6d1 comunica8pruebas nuevas; no repetidas aquí.
+- Conflicto exclusivo de changelog con main410b1dd70a resuelto conservando ambas historias en copia aislada. No se fusiona PR3 en main ni se modifican ramas ajenas.
+
+[Registro actualizado de dos derivados](bank-derivatives.md).
+
+Verificación de preparación PR3: 60 pruebas automatizadas PC correctas y ensayo CLI de diez paquetes simulados aprobado. La primera ejecución aislada no recibió UDP local (59/60); repetición autorizada fuera del aislamiento:60/60. Sin tráfico hacia Vita. Diferencias de código del monitor respecto a origin/main: ninguna; únicamente documentación e instrumentos de inventario propios. CI remota de esta preparación pendiente de publicación/ejecución.

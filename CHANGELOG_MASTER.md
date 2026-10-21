@@ -1,5 +1,11 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Segundo JKR y preparación de PR3
+
+- Contraste limitado a una muestra adicional: fuente1.058bytes, salida1.884bytes, carga1.042/1.042 consumida. Fuente/salida/recibo cotejados con banco; original intacto. Dos derivados enlazados por metadatos, SQLite intacto.
+- Patrón de prefijos del control no reproducido; cero tramos cumplen el criterio CP932/kana, sin probar ausencia de texto. Gramática pendiente,42JKR sin ampliar. PR7 commit90dc6d1 comunica8pruebas nuevas; no repetidas aquí.
+- Conflicto exclusivo de changelog con main410b1dd70a resuelto conservando ambas historias en copia aislada. No se fusiona PR3 en main ni se modifican ramas ajenas.
+
 ## 21-10-2026 — Regiones compatibles con CP932 en la muestra JKR
 
 - Sobre la salida existente de 349 bytes: 14 tramos entre NUL compatibles con CP932 y bloques kana; 160 bytes en esos tramos, doce sin controles y dos con controles. Los catorce rechazan UTF-8 estricto.
@@ -85,6 +91,40 @@
 - Actualizados portada, estado consolidado y fichas 01–10 con dependencias y siguientes pasos. Respuestas de Diseño 02/04/07 y contratos propuestos 03/05/08 registrados; no equivalen a inspección independiente ni aprobación de implementación.
 - Conservados originales y trabajo del monitor. Solo documentación, metadatos y código propio en [PR #3](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/3), independiente y sin recursos comerciales. Ninguna instalación, transferencia a Vita ni actividad FTP en este frente.
 - Pendientes: prueba íntegra de 7z, identidad interna accesible, clasificación de contenedores/ejecutables, evidencia primaria Frontier y validación de interfaces. No se demuestra un juego nativo ni adaptación de assets.
+## 2026-10-21 — STT-MON-008 / límite temporal durante suspensión 0.5
+
+- Corrige el control que usaba solo reloj de proceso: [presupuesto conservador proceso+RTC](docs/suspend-deadlines.md), con parada ante lectura fallida/retroceso y protección ante saltos/desbordamientos.
+- Comprueba 180 s antes de transmitir al reanudar y usa el mismo presupuesto para los 30 s sin conexión observada. Muestra «Tiempo de limite» sin cambiar uptime_ms ni STT/2.
+- Pruebas C de reloj/política, compilación Vita e inspección VPK correctas ([CI Vita](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39552818266)); quince pruebas PC y ensayo CLI correctos ([CI PC](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39552818196)). VPK 0.5 transferido con hash verificado e instalación/apertura confirmadas.
+- [Prueba física](docs/STT-MON-008-suspend-result.md): suspensión breve con 39 s de presupuesto y 15 envíos; suspensión larga termina con 181 s, 14 intentos/14 envíos y «Parado: limite total», confirmado por usuario. PC recibió 14 muestras y ninguna posterior mientras receptor/firewall seguían activos.
+- Receptores cerrados y retirada del firewall comprobada. Instaladores 0.4 anteriores retirados, conservando paquete vigente y evidencias. Sin transferencia por este cierre documental.
+- No cambia el reloj ni ajustes de la consola. Pendientes físicos: límite sin red durante suspensión y fallos/retrocesos de reloj; cubiertos automáticamente, sin validación física de todas las rutas.
+
+## 2026-10-21 — STT-MON-007 / recuperación automática acotada 0.4
+
+- Implementada [política de recuperación](docs/auto-recovery.md): consulta de estado con SceNetCtl, pausa sin consumir intentos durante desconexión y recreación del socket al volver la conexión o después de un fallo de envío.
+- Mantiene STT/2 y la sesión durante la recuperación. Límites: 30 s desde desconexión observada, cinco fallos consecutivos de apertura/envío, 180 s totales y 60 intentos reales. Círculo/START mantienen parada/salida manual.
+- Pruebas C portables de transición/socket/límites, compilación Vita e inspección VPK correctas ([Actions 39550515715](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39550515715)). Quince pruebas PC y ensayo CLI correctos ([Actions 39550515789](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39550515789)).
+- [Validación física 0.4](docs/STT-MON-006-auto-result.md): primer intento detenido por cinco fallos según usuario, con falta de señal observada. Repetición con 60 muestras 0–59 de la misma sesión, pausa de 53,863822 s y regreso sin otro Cruz confirmado por el usuario. Sin errores de envío nuevos declarados; diagnóstico histórico preservado.
+- La pausa del PC excedió el avance del reloj de proceso: suspensión no aislada y límites de tiempo de pared no validados durante ella. No se afirma causa raíz identificada ni todas las rutas de recuperación verificadas.
+- VPK 0.4 transferido, verificado e instalado; instaladores 0.3 retirados de Vita y PC. Receptor cerrado y retirada de firewall comprobada. Sin nuevas transferencias por este cierre documental.
+- No se atribuye una causa raíz nueva a 0x80412112; esta revisión intenta recuperar la comunicación y conserva diagnóstico. Sin modificaciones de firmware/plugins, perfiles Wi-Fi ni juegos.
+
+## 2026-10-21 — STT-MON-006 / fallo Wi-Fi y diagnóstico 0.3
+
+- [Ensayo Wi-Fi 0.2](docs/STT-MON-004-wifi-result.md): PC recibió 39 muestras 0–38; usuario informó 60 intentos, 46 envíos aceptados, 14 errores y último retorno 0x804101CD (SCE_NET_ERROR_ERETURN). No se observó recuperación de recepción; causa subyacente todavía no identificada.
+- Captura cerrada y excepción temporal retirada. Sin modificar firmware/plugins ni borrar juegos.
+- Revisión 0.3: captura sceNetErrnoLoc inmediatamente tras fallo, conserva último código/detalle en RAM y los añade a STT/2. Receptor/analizador compatibles con STT/1 y STT/2. Nuevo socket en cada inicio manual con Cruz; sin promesa de reconexión automática.
+- Quince pruebas PC y ensayo CLI correctos en Windows/Linux Python 3.11/3.13 ([Actions 39548761830](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39548761830)). Compilación C/Vita e inspección VPK correctas ([Actions 39548761895](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39548761895)).
+- [Prueba física 0.3](docs/STT-MON-005-diagnostic-result.md): tras el corte, usuario informa 60 intentos/51 envíos/9 errores, retorno 0x80412112 y errno 205. PC recibió 46 muestras; recuperación automática no observada. Al pulsar Cruz sin cerrar la aplicación llegaron las 60 muestras de la sesión nueva y el error anterior se recibió automáticamente por STT/2. Recuperación manual y transporte del último diagnóstico validados; causa raíz pendiente.
+- Actualización transferida y verificada; instaladores 0.2 anteriores eliminados en Vita y PC. Receptor cerrado y retirada del firewall comprobada. Este cierre documental no requiere nuevas transferencias ni reinstalación.
+
+## 2026-10-21 — STT-MON-005 / parada con Círculo validada en 0.2
+
+- [Resultado físico de recepción y parada](docs/STT-MON-003-stop-result.md): último ensayo con diez mensajes, secuencias 0–9 sin huecos internos, duplicados ni desorden; usuario confirma «Parado» y contador detenido tras Círculo. Sin nuevos mensajes durante diez segundos de observación adicional.
+- Captura completa: veinte mensajes en tres sesiones, con prefijo 0–1 ausente en la primera. No se declara ausencia de pérdida para toda la captura ni reconexión Wi-Fi validada.
+- Receptor de prueba cerrado; retirada de excepción temporal de firewall comprobada. Sin transferencias ni reinstalación por este cambio documental.
+- Pendientes: ensayo completo 0.2, desconexión y suspensión. Informe automático de errores al PC todavía no implementado; los errores actuales se muestran solo en Vita.
 
 ## 2026-10-21 — STT-MON-004 / primer ensayo físico y pantalla 0.2
 
@@ -93,7 +133,7 @@
 - Usuario informa texto pequeño y parpadeo. Corrección 0.2: fuente duplicada, filas estables que se redibujan solo si cambia el texto, sin borrar toda la pantalla cada 50 ms. Añadidos saltos de +/-10 para editar IP con menos pulsaciones.
 - Compilación 0.2, codificador C e inspección de paquete correctos ([Actions 39545465268](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39545465268)); pruebas PC correctas ([Actions 39545465267](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39545465267)). Usuario confirma en Vita texto mayor y desaparición del parpadeo. [PR #2](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/2) integrada.
 - VPK 0.2 transferido con hash verificado. Instalador y carpeta de transferencia 0.1 eliminados de Vita, y VPK/ZIP anteriores eliminados del PC; conservados paquete vigente y registros. Preferencia de limpieza futura registrada en AGENTS.md.
-- Pendientes: nuevo ensayo de telemetría en 0.2, desconexión, suspensión y parada con Círculo. La confirmación visual no sustituye esas pruebas.
+- Recepción y parada con Círculo validadas posteriormente en STT-MON-005. Siguen pendientes ensayo completo 0.2, desconexión y suspensión.
 
 ## 2026-10-21 — STT-MON-003 / agente Vita experimental
 
