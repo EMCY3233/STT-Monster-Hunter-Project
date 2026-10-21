@@ -1,5 +1,18 @@
 # Herramientas y protocolo de estudio
 
+## Estado vigente al cierre de PR3/1b59dd0
+
+El plan inicial que sigue es histórico. Banco actual:9.888archivos,21.696entradasARC,8.823objetos; dos derivados JKR enlazados por separado. Copia Frontier completa; baseG01.00/parcheZ01.99 confirmados por SFO. No se acredita ZZ. [Índice de evidencias actuales](README.md) y [sincronización](synchronization.md).
+
+| Área | Evidencia disponible | Siguiente aceptación |
+|---|---|---|
+|02|Metadatos/formatos y análisis estático limitado de ejecutables en PR7|Mantener CPU/ABI y envoltura separados de código interpretado; no ejecutar juegos|
+|04|44JKR candidatos; dos salidas con recibos, interiores sin validar|No generalizar gramática;42pendientes,sin clasificación por armas|
+|07|83cargasMOD y cuatro bibliotecasLMT localizadas; análisis de vectores documentado por PR7|Un único MOD230 ya catalogado: límites,tablas y requisitos para una malla; no afirmar reproducción o adaptación|
+
+La comprobación MOD se encarga al propietario de investigación para evitar duplicar análisis. Presupuesto:una muestra, selección por menor tamaño y desempatehash, procedencia completa, sin extracción masiva ni cambios del banco. Se publicarán metadatos y código propio; los bytes comerciales permanecen locales. No hay modelo comercial aprobado para adaptar a prototipos.
+
+
 **Actualización posterior del 21-10-2026:** [herramientas y extracción local](extraction-tools.md). Los dos conjuntos 7z ya pasaron prueba íntegra y extracción; hay metadatos de sus CIA y listado RomFS del parche. Los párrafos iniciales que indican «sin prueba de carga» o «herramientas no disponibles» describen la primera etapa, superada donde lo precisa ese informe. MHXX es el nombre japonés relacionado con Generations Ultimate; se conserva por separado la plataforma 3DS observada en el CIA.
 
 

@@ -87,3 +87,9 @@ PR abiertas comprobadas: [contratos STT/3](https://github.com/EMCY3233/STT-Monst
 [Registro actualizado de dos derivados](bank-derivatives.md).
 
 Verificación de preparación PR3: 60 pruebas automatizadas PC correctas y ensayo CLI de diez paquetes simulados aprobado. La primera ejecución aislada no recibió UDP local (59/60); repetición autorizada fuera del aislamiento:60/60. Sin tráfico hacia Vita. Diferencias de código del monitor respecto a origin/main: ninguna; únicamente documentación e instrumentos de inventario propios. CI remota de esta preparación pendiente de publicación/ejecución.
+
+## CI de la preparación PR3 y siguiente etapa
+
+Para el commit exacto `1b59dd01ac5cf745b36dba48ceda5984d642e4c9`, GitHub confirmó ambas ejecuciones completed/success: [Monitor tests39576768233](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39576768233) y [Vita agent build39576768171](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39576768171). Esto no acredita hardware ni se atribuye a commits documentales posteriores. No se descargó ni transfirió el artefacto.
+
+PR3 permanecía borrador/abierta, mergeable=true ysin fusionar. Se encargó a investigación una revisión estructural de un único MOD230 ya catalogado; Área07, límites/tablas y bloqueos antes de geometría. [Plan vigente](analysis-plan.md). No repetir descompresión JKR ni ampliar42restantes.

@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — CI confirmada y plan estructural de modelo
+
+- Confirmadas pruebas y compilación remotas correctas de1b59dd0; enlaces/alcance en sincronización. Sin descarga o reinstalación de artefactos.
+- Índice actualizado a dos derivados JKR y plan vigente separado de historia inicial. Siguiente ensayo encargado a PR7:una muestra MOD230 catalogada, solo estructura/límites y bloqueos de malla. Sin adaptación comercial ni clasificación por armas.
+
 ## 21-10-2026 — Segundo JKR y preparación de PR3
 
 - Contraste limitado a una muestra adicional: fuente1.058bytes, salida1.884bytes, carga1.042/1.042 consumida. Fuente/salida/recibo cotejados con banco; original intacto. Dos derivados enlazados por metadatos, SQLite intacto.
