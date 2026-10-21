@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-21T05:18:12.396011+00:00",
+  "input_root_label": "containers",
+  "method": "read-only streaming SHA-256 and bounded structural probes; no extraction/decryption",
+  "records": [
+    {
+      "path": "MH4U/EUR - Monster Hunter 4 Ultimate (0004000000126100).cia",
+      "filename": "EUR - Monster Hunter 4 Ultimate (0004000000126100).cia",
+      "version_from_filename_only": null,
+      "version_verified": null,
+      "access": "full_read_ok",
+      "bytes": 2734762304,
+      "sha256": "3b11095265bd96436306cbde7aa6256e7550164e83914d3ec9f8a139902e8069",
+      "size_mtime_stable_during_read": true,
+      "probe": {
+        "format": "CIA_structural_header",
+        "header_version": 0,
+        "sections_within_file": true,
+        "content_bytes_declared": 2734747648,
+        "tmd_bytes": 2916,
+        "cryptographic_validation": "not_performed",
+        "title_id_tmd": "0004000000126100",
+        "title_version_raw": 0,
+        "title_version_components": [
+          0,
+          0,
+          0
+        ],
+        "content_count_tmd": 2,
+        "contents_metadata": [
+          {
+            "id": "00000000",
+            "index": 0,
+            "type_flags": 1,
+            "encrypted_flag": true,
+            "declared_bytes": 2727489536
+          },
+          {
+            "id": "00000001",
+            "index": 1,
+            "type_flags": 1,
+            "encrypted_flag": true,
+            "declared_bytes": 7258112
+          }
+        ],
+        "first_content_has_plain_ncch_marker": false
+      },
+      "version_metadata_observed": {
+        "tmd_raw": 0,
+        "components": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "path": "MHXX/Monster Hunter XX  JPN (0004000000197100).cia",
+      "filename": "Monster Hunter XX  JPN (0004000000197100).cia",
+      "version_from_filename_only": null,
+      "version_verified": null,
+      "access": "full_read_ok",
+      "bytes": 2330896704,
+      "sha256": "195570856aa2cd623001d00aaa7c7e20d1e563fe8782979e054570ac83982245",
+      "size_mtime_stable_during_read": true,
+      "probe": {
+        "format": "CIA_structural_header",
+        "header_version": 0,
+        "sections_within_file": true,
+        "content_bytes_declared": 2330882048,
+        "tmd_bytes": 2916,
+        "cryptographic_validation": "not_performed",
+        "title_id_tmd": "0004000000197100",
+        "title_version_raw": 48,
+        "title_version_components": [
+          0,
+          3,
+          0
+        ],
+        "content_count_tmd": 2,
+        "contents_metadata": [
+          {
+            "id": "00000005",
+            "index": 0,
+            "type_flags": 1,
+            "encrypted_flag": true,
+            "declared_bytes": 2328694784
+          },
+          {
+            "id": "00000003",
+            "index": 1,
+            "type_flags": 1,
+            "encrypted_flag": true,
+            "declared_bytes": 2187264
+          }
+        ],
+        "first_content_has_plain_ncch_marker": false
+      },
+      "version_metadata_observed": {
+        "tmd_raw": 48,
+        "components": [
+          0,
+          3,
+          0
+        ]
+      }
+    }
+  ]
+}
