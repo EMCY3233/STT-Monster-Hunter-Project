@@ -1,5 +1,13 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-003 / agente Vita experimental
+
+- CI del commit 610c076 confirmado correcto: [Actions 39542198933](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39542198933).
+- Implementado agente independiente VitaSDK con IP privada editable, inicio manual, envío STT/1 no bloqueante, límite de 60 intentos, parada/salida y corte tras tres errores consecutivos. No incluye monitorización de otros juegos.
+- Añadido codificador C portable, validación de destino y pruebas cruzadas C → protocolo Python en CI.
+- Preparado build remoto con imagen VitaSDK fechada, dependencia de pantalla fijada por commit y artefacto VPK experimental con hash. Resultado de compilación pendiente al crear esta entrada; consultar el workflow de la rama.
+- Sin ejecución en Vita, transferencias FTP, cambios de firmware/plugins, instalación de software local ni borrado de juegos. Compatibilidad física pendiente de autorización y pruebas.
+
 ## 2026-10-21 — STT-MON-002 / análisis de capturas
 
 - Confirmada ejecución remota correcta del primer commit: [Actions 39541986872](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39541986872), conclusión success. Esto resuelve el pendiente de CI de STT-BOOTSTRAP-001.
