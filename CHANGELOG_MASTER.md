@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-011 / validación conjunta y duración PC
+
+- Ensayo sintético reproducible de dos procesos para vista en directo y análisis: STT/2, reinicio con error histórico, duplicado/desorden, entrada inválida/truncada, salto/retroceso de reloj PC y cierre limpio. Incorporado a CI; no representa una prueba física.
+- Limitación localizada: un flujo continuo válido podía mantener abierta una captura sin límite de muestras. Nueva opción PC `--duration`, independiente del tráfico y de los plazos de Vita; conserva el comportamiento por defecto.
+- 20 pruebas locales correctas, incluido límite total con tráfico válido e inválido continuo, y ensayo conjunto correcto. CI remota pendiente al publicar. [Matriz de compatibilidad y límites](docs/monitor-pc-compatibility.md).
+- Dependencia explícita PR #14, a su vez basada en #13; sin fusión automática. Sin FTP, consola, instalación ni cambios en contratos STT o prototipos.
+
 ## 2026-10-21 — STT-MON-010 / intervalos de recepción
 
 - Analizador con resumen temporal por sesión: horas UTC, timestamps no utilizables, retrocesos del reloj PC y mayor intervalo con secuencias/diferencia de uptime. No atribuye causa ni modifica capturas o contratos STT; amplía el JSON de resumen.

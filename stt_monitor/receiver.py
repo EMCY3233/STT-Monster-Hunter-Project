@@ -24,12 +24,15 @@ def live_line(record):
     return text
 
 
-def receive(sock, output, *, idle_timeout=5.0, max_packets=0, live_output=None):
-    """Stop after inactivity or max valid packets; bounded memory, append-only output."""
+def receive(sock, output, *, idle_timeout=5.0, max_packets=0, live_output=None, duration=None):
+    """Stop at inactivity, packet count or total duration; append-only output."""
     accepted = rejected = 0
-    deadline = time.monotonic() + idle_timeout
+    started = time.monotonic()
+    deadline = started + idle_timeout
+    capture_deadline = None if duration is None else started + duration
     while not max_packets or accepted < max_packets:
-        remaining = deadline - time.monotonic()
+        limit = deadline if capture_deadline is None else min(deadline, capture_deadline)
+        remaining = limit - time.monotonic()
         if remaining <= 0:
             break
         sock.settimeout(remaining)
@@ -43,6 +46,8 @@ def receive(sock, output, *, idle_timeout=5.0, max_packets=0, live_output=None):
                 rejected += 1
                 continue
             raise
+        if capture_deadline is not None and time.monotonic() >= capture_deadline:
+            break
         try:
             packet = decode(raw)
         except ValueError:
@@ -67,11 +72,15 @@ def main():
     parser.add_argument('--output', default='telemetry.jsonl')
     parser.add_argument('--idle-timeout', type=float, default=5)
     parser.add_argument('--max-packets', type=int, default=0)
+    parser.add_argument('--duration', type=float, default=None,
+                        help='maximum capture seconds (0 < duration <= 3600), independent of traffic')
     parser.add_argument('--live', action='store_true',
                         help='show each received sample and prior-attempt diagnostics')
     args = parser.parse_args()
     if not 1 <= args.port <= 65535 or not 0 < args.idle_timeout <= 3600 or args.max_packets < 0:
         parser.error('invalid port, timeout or packet limit')
+    if args.duration is not None and not 0 < args.duration <= 3600:
+        parser.error('invalid capture duration')
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             sock.bind((args.bind, args.port))
@@ -81,7 +90,7 @@ def main():
                       'Sin muestras no se puede confirmar parada ni desconexion.', flush=True)
             with open(args.output, 'a', encoding='utf-8') as output:
                 print(json.dumps(receive(sock, output, idle_timeout=args.idle_timeout,
-                                         max_packets=args.max_packets,
+                                         max_packets=args.max_packets, duration=args.duration,
                                          live_output=sys.stdout if args.live else None)))
     except KeyboardInterrupt:
         print('Stopped')

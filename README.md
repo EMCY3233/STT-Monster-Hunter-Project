@@ -30,6 +30,8 @@ python -m stt_monitor.receiver --live --max-packets 10 --idle-timeout 30
 
 El archivo JSONL conserva el mismo formato y sigue añadiendo registros. Los contadores describen intentos anteriores al mensaje actual; «último error conservado» puede pertenecer a una sesión previa. Una recepción no confirma el resultado del envío actual. STT/1 no aporta diagnóstico. La falta de mensajes no demuestra desconexión ni parada: STT/2 no transmite el estado de parada ni el presupuesto RTC. Esta vista no necesita actualizar el VPK.
 
+Para acotar también un flujo continuo, añadir `--duration 180`: el plazo total usa el reloj monotónico del PC y no se reinicia con cada muestra. Se aplica el primer límite alcanzado entre duración, inactividad y máximo de muestras. No cambia el plazo de la Vita ni limita bytes en disco. [Compatibilidad, límites y ensayo conjunto](docs/monitor-pc-compatibility.md).
+
 ## Analizar una captura
 
 ```powershell
