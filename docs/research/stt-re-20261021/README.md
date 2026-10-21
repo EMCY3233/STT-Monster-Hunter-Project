@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: primera muestra JKR
+## Estado más reciente: bordes de la muestra JKR
+
+[Contraste de gramáticas y bordes](frontier-jkr-layout.md): se reutilizan las 14 anclas del sondeo central, sin exportar texto ni repetir CP932. Patrón repetido de 11 bytes observado; estructuras públicas examinadas no aceptan el bloque desde cero. Gramática interior pendiente, sin ampliar a los otros 43 JKR. 70 pruebas sintéticas aprobadas.
+
+
+## Etapa anterior: primera muestra JKR
 
 [Una muestra Frontier JKR/LZ descomprimida](frontier-jkr-sample.md): 349/349 bytes, toda la carga consumida, hash registrado, original intacto. Salida todavía sin firma reconocida ni semántica validada. 65 pruebas sintéticas aprobadas. Código con adaptación MIT atribuida; resultados comerciales solo locales.
 
