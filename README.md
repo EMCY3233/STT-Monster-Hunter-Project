@@ -20,6 +20,14 @@ python -m unittest discover -s tests -v
 
 No hay dependencias de terceros. Si Windows abre Microsoft Store al invocar `python`, instalar/configurar Python o usar su ruta completa.
 
+## Analizar una captura
+
+```powershell
+python -m stt_monitor.analyze telemetry.jsonl
+```
+
+Produce un resumen por IP, origen declarado y sesión: muestras, duplicados, llegadas fuera de orden y números ausentes entre el mínimo y el máximo observados. Los huecos no demuestran pérdidas en la red: la captura puede ser parcial. No cuenta como perdidos los mensajes anteriores al primero o posteriores al último recibido. La etiqueta de origen no autentica un dispositivo. El analizador guarda en memoria las secuencias únicas; usar capturas acotadas.
+
 ## Documentación
 
 - [Áreas 01–10](docs/areas/README.md)

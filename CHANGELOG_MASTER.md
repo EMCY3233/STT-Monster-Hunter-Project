@@ -1,5 +1,15 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-002 / análisis de capturas
+
+- Confirmada ejecución remota correcta del primer commit: [Actions 39541986872](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39541986872), conclusión success. Esto resuelve el pendiente de CI de STT-BOOTSTRAP-001.
+- Añadido analizador JSONL por IP, origen declarado y sesión; cuenta muestras únicas, duplicados, llegadas fuera de orden y huecos entre secuencias observadas. No atribuye huecos a pérdidas de red ni autentica dispositivos.
+- Añadidas cuatro pruebas de análisis; el ensayo de dos procesos CLI se incorpora también a CI.
+- Validación local Windows/Python 3.12.14: **10/10 pruebas OK** y **ensayo CLI PASS**, diez muestras simuladas, cero rechazos. Nueva ejecución remota pendiente al publicar este commit.
+- Revisión oficial de APIs y límites del entorno en vita-agent/API_REVIEW.md. No hay toolchain utilizable localizado; sin compilación Vita, VPK ni prueba física. No se instaló software del sistema.
+- Limitación del analizador: mantiene las secuencias únicas en memoria; utilizar capturas acotadas. No añade métricas de juegos ni modifica los registros de entrada.
+- Se mantienen las restricciones sobre consola, FTP, firmware, plugins y juegos.
+
 ## 2026-10-21 — STT-BOOTSTRAP-001 / STT Vita Monitor 0.1
 
 Zona de referencia: Europe/Madrid. Primera base de desarrollo autorizada en EMCY3233/STT-Monster-Hunter-Project.
