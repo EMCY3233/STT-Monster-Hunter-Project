@@ -1,5 +1,15 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-007 / recuperación automática acotada 0.4
+
+- Implementada [política de recuperación](docs/auto-recovery.md): consulta de estado con SceNetCtl, pausa sin consumir intentos durante desconexión y recreación del socket al volver la conexión o después de un fallo de envío.
+- Mantiene STT/2 y la sesión durante la recuperación. Límites: 30 s desde desconexión observada, cinco fallos consecutivos de apertura/envío, 180 s totales y 60 intentos reales. Círculo/START mantienen parada/salida manual.
+- Pruebas C portables de transición/socket/límites, compilación Vita e inspección VPK correctas ([Actions 39550515715](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39550515715)). Quince pruebas PC y ensayo CLI correctos ([Actions 39550515789](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39550515789)).
+- [Validación física 0.4](docs/STT-MON-006-auto-result.md): primer intento detenido por cinco fallos según usuario, con falta de señal observada. Repetición con 60 muestras 0–59 de la misma sesión, pausa de 53,863822 s y regreso sin otro Cruz confirmado por el usuario. Sin errores de envío nuevos declarados; diagnóstico histórico preservado.
+- La pausa del PC excedió el avance del reloj de proceso: suspensión no aislada y límites de tiempo de pared no validados durante ella. No se afirma causa raíz identificada ni todas las rutas de recuperación verificadas.
+- VPK 0.4 transferido, verificado e instalado; instaladores 0.3 retirados de Vita y PC. Receptor cerrado y retirada de firewall comprobada. Sin nuevas transferencias por este cierre documental.
+- No se atribuye una causa raíz nueva a 0x80412112; esta revisión intenta recuperar la comunicación y conserva diagnóstico. Sin modificaciones de firmware/plugins, perfiles Wi-Fi ni juegos.
+
 ## 2026-10-21 — STT-MON-006 / fallo Wi-Fi y diagnóstico 0.3
 
 - [Ensayo Wi-Fi 0.2](docs/STT-MON-004-wifi-result.md): PC recibió 39 muestras 0–38; usuario informó 60 intentos, 46 envíos aceptados, 14 errores y último retorno 0x804101CD (SCE_NET_ERROR_ERETURN). No se observó recuperación de recepción; causa subyacente todavía no identificada.

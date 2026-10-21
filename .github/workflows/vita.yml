@@ -15,6 +15,10 @@ jobs:
           cc -std=c99 -Wall -Wextra -Werror -Ivita-agent/src vita-agent/src/telemetry.c vita-agent/tests/test_telemetry.c -o /tmp/stt-encoder-test
           /tmp/stt-encoder-test > /tmp/stt-c-packets.txt
           python -c "from stt_monitor.protocol import decode; from pathlib import Path; packets=[decode(line) for line in Path('/tmp/stt-c-packets.txt').read_bytes().splitlines()]; assert len(packets)==3; assert packets[0]['battery_pct'] is None; assert packets[1]['seq']==59; assert all(p['source']=='vita' for p in packets); assert packets[2]['version']==2; assert packets[2]['diagnostics']['send_errors']==14; assert packets[2]['diagnostics']['last_result'] & 0xffffffff == 0x804101CD"
+      - name: Test bounded recovery policy without hardware
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -Ivita-agent/src vita-agent/src/recovery.c vita-agent/tests/test_recovery.c -o /tmp/stt-recovery-test
+          /tmp/stt-recovery-test
   build:
     runs-on: ubuntu-latest
     container: vitasdk/vitasdk:2026.08-20260815@sha256:7f5eee50ff95b73c8c847dbfef6227aa0035886444b4d0254c21da8369ff1efc
