@@ -1,0 +1,519 @@
+{
+  "scope": "Shared changed-file blob identity across prototype PR heads only. No checkout, merge simulation, CI, install, hardware, runtime or whole-repository equivalence test.",
+  "observed_date": "2026-10-21",
+  "prs": [
+    {
+      "pr": 8,
+      "base": "main",
+      "base_sha": "410b1dd70a3713b500a829aed55cb99cb74ad1d0",
+      "head": "prototype/contracts-20261021",
+      "head_sha": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable_individually_reported": true
+    },
+    {
+      "pr": 9,
+      "base": "main",
+      "base_sha": "410b1dd70a3713b500a829aed55cb99cb74ad1d0",
+      "head": "prototype/combat-lab-20261021",
+      "head_sha": "dad7350b48f425bac1f44acf329ac6f7a77d9204",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable_individually_reported": true
+    },
+    {
+      "pr": 10,
+      "base": "main",
+      "base_sha": "410b1dd70a3713b500a829aed55cb99cb74ad1d0",
+      "head": "prototype/asset-lab-20261021",
+      "head_sha": "f06e289f5209806b767a09814c920901bc4df606",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable_individually_reported": true
+    },
+    {
+      "pr": 11,
+      "base": "main",
+      "base_sha": "410b1dd70a3713b500a829aed55cb99cb74ad1d0",
+      "head": "prototype/vita-3d-20261021",
+      "head_sha": "0403d6467f4837f0f538de454eb159499881b5e0",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable_individually_reported": true
+    }
+  ],
+  "shared_paths": 17,
+  "blob_observations": 36,
+  "identical_shared_paths": 16,
+  "different_shared_paths": 1,
+  "errors": [],
+  "comparisons": [
+    {
+      "path": "CHANGELOG_MASTER.md",
+      "prs": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "identical": false,
+      "records": [
+        {
+          "path": "CHANGELOG_MASTER.md",
+          "pr": 8,
+          "ref": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+          "blob_sha": "cdf47244082e120422f72f986b16eefff385e2ae",
+          "error": false
+        },
+        {
+          "path": "CHANGELOG_MASTER.md",
+          "pr": 9,
+          "ref": "dad7350b48f425bac1f44acf329ac6f7a77d9204",
+          "blob_sha": "86c36abab59c29ffe70d9de97e0533f808dd975c",
+          "error": false
+        },
+        {
+          "path": "CHANGELOG_MASTER.md",
+          "pr": 10,
+          "ref": "f06e289f5209806b767a09814c920901bc4df606",
+          "blob_sha": "9f0d1da0a8aa94ea90daf8fa8fcae7b78a823712",
+          "error": false
+        },
+        {
+          "path": "CHANGELOG_MASTER.md",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "d8e1ae501cb056b875cb7d584bd0e37c2d84b53b",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "contracts/examples/hit.json",
+      "prs": [
+        8,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "contracts/examples/hit.json",
+          "pr": 8,
+          "ref": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+          "blob_sha": "e350d141a9ba0cfa13be673b17ecfbf5b0a9836a",
+          "error": false
+        },
+        {
+          "path": "contracts/examples/hit.json",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "e350d141a9ba0cfa13be673b17ecfbf5b0a9836a",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "contracts/examples/snapshot.json",
+      "prs": [
+        8,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "contracts/examples/snapshot.json",
+          "pr": 8,
+          "ref": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+          "blob_sha": "da3d19b8089389fafe85cc918fdf1625bcdf6baf",
+          "error": false
+        },
+        {
+          "path": "contracts/examples/snapshot.json",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "da3d19b8089389fafe85cc918fdf1625bcdf6baf",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "contracts/stt_play.c",
+      "prs": [
+        8,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "contracts/stt_play.c",
+          "pr": 8,
+          "ref": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+          "blob_sha": "f8089d9c3540e91b49a908696cfb04e63bd1ccda",
+          "error": false
+        },
+        {
+          "path": "contracts/stt_play.c",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "f8089d9c3540e91b49a908696cfb04e63bd1ccda",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "contracts/stt_play.h",
+      "prs": [
+        8,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "contracts/stt_play.h",
+          "pr": 8,
+          "ref": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+          "blob_sha": "cb8025da03b64f9ea46e596f14cc2b971231abc8",
+          "error": false
+        },
+        {
+          "path": "contracts/stt_play.h",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "cb8025da03b64f9ea46e596f14cc2b971231abc8",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "contracts/tests/encode.c",
+      "prs": [
+        8,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "contracts/tests/encode.c",
+          "pr": 8,
+          "ref": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+          "blob_sha": "f721c8859a68c499a7772bc2ef18f41d6dc3aff0",
+          "error": false
+        },
+        {
+          "path": "contracts/tests/encode.c",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "f721c8859a68c499a7772bc2ef18f41d6dc3aff0",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "docs/prototypes/contracts.md",
+      "prs": [
+        8,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "docs/prototypes/contracts.md",
+          "pr": 8,
+          "ref": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+          "blob_sha": "568ae58aa9331c84188dc5661478e6c049f2d02f",
+          "error": false
+        },
+        {
+          "path": "docs/prototypes/contracts.md",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "568ae58aa9331c84188dc5661478e6c049f2d02f",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "stt_monitor/play_protocol.py",
+      "prs": [
+        8,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "stt_monitor/play_protocol.py",
+          "pr": 8,
+          "ref": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+          "blob_sha": "f6ac57a08c6d95705519558637834ecde61f7dbb",
+          "error": false
+        },
+        {
+          "path": "stt_monitor/play_protocol.py",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "f6ac57a08c6d95705519558637834ecde61f7dbb",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "stt_monitor/protocol.py",
+      "prs": [
+        8,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "stt_monitor/protocol.py",
+          "pr": 8,
+          "ref": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+          "blob_sha": "96997adfefcfff09fbdb9f73a94974e0db18cdb1",
+          "error": false
+        },
+        {
+          "path": "stt_monitor/protocol.py",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "96997adfefcfff09fbdb9f73a94974e0db18cdb1",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "tests/test_play_protocol.py",
+      "prs": [
+        8,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "tests/test_play_protocol.py",
+          "pr": 8,
+          "ref": "b685bbecbe39d8a7ea37f1884ef39fa04adfbf99",
+          "blob_sha": "400c56920165e62fe70375e6c34ae7c13c45d59d",
+          "error": false
+        },
+        {
+          "path": "tests/test_play_protocol.py",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "400c56920165e62fe70375e6c34ae7c13c45d59d",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/combat-lab.yml",
+      "prs": [
+        9,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": ".github/workflows/combat-lab.yml",
+          "pr": 9,
+          "ref": "dad7350b48f425bac1f44acf329ac6f7a77d9204",
+          "blob_sha": "268813d9fc469023a4c6120fc5833f1680b186de",
+          "error": false
+        },
+        {
+          "path": ".github/workflows/combat-lab.yml",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "268813d9fc469023a4c6120fc5833f1680b186de",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "combat-lab/CMakeLists.txt",
+      "prs": [
+        9,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "combat-lab/CMakeLists.txt",
+          "pr": 9,
+          "ref": "dad7350b48f425bac1f44acf329ac6f7a77d9204",
+          "blob_sha": "26f4c142f8611ab5c382bda20f08296b2a8680c9",
+          "error": false
+        },
+        {
+          "path": "combat-lab/CMakeLists.txt",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "26f4c142f8611ab5c382bda20f08296b2a8680c9",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "combat-lab/include/stt_combat.h",
+      "prs": [
+        9,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "combat-lab/include/stt_combat.h",
+          "pr": 9,
+          "ref": "dad7350b48f425bac1f44acf329ac6f7a77d9204",
+          "blob_sha": "b0c292d16af0f2d3c376b347d6d446618fcc3d3b",
+          "error": false
+        },
+        {
+          "path": "combat-lab/include/stt_combat.h",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "b0c292d16af0f2d3c376b347d6d446618fcc3d3b",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "combat-lab/src/demo.c",
+      "prs": [
+        9,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "combat-lab/src/demo.c",
+          "pr": 9,
+          "ref": "dad7350b48f425bac1f44acf329ac6f7a77d9204",
+          "blob_sha": "580e96d74b19ad928ee7ea45048ba089e5758c2e",
+          "error": false
+        },
+        {
+          "path": "combat-lab/src/demo.c",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "580e96d74b19ad928ee7ea45048ba089e5758c2e",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "combat-lab/src/stt_combat.c",
+      "prs": [
+        9,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "combat-lab/src/stt_combat.c",
+          "pr": 9,
+          "ref": "dad7350b48f425bac1f44acf329ac6f7a77d9204",
+          "blob_sha": "1fd5c76a4cb61fc803ebe84ec3ef97b0c7fd892f",
+          "error": false
+        },
+        {
+          "path": "combat-lab/src/stt_combat.c",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "1fd5c76a4cb61fc803ebe84ec3ef97b0c7fd892f",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "combat-lab/tests/test_combat.c",
+      "prs": [
+        9,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "combat-lab/tests/test_combat.c",
+          "pr": 9,
+          "ref": "dad7350b48f425bac1f44acf329ac6f7a77d9204",
+          "blob_sha": "035757d454296d82fe84ba7e51c5138497b7eff5",
+          "error": false
+        },
+        {
+          "path": "combat-lab/tests/test_combat.c",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "035757d454296d82fe84ba7e51c5138497b7eff5",
+          "error": false
+        }
+      ]
+    },
+    {
+      "path": "docs/prototypes/combat.md",
+      "prs": [
+        9,
+        11
+      ],
+      "identical": true,
+      "records": [
+        {
+          "path": "docs/prototypes/combat.md",
+          "pr": 9,
+          "ref": "dad7350b48f425bac1f44acf329ac6f7a77d9204",
+          "blob_sha": "296fd7cd07f6496faf459e1330b4c651c10abef9",
+          "error": false
+        },
+        {
+          "path": "docs/prototypes/combat.md",
+          "pr": 11,
+          "ref": "0403d6467f4837f0f538de454eb159499881b5e0",
+          "blob_sha": "296fd7cd07f6496faf459e1330b4c651c10abef9",
+          "error": false
+        }
+      ]
+    }
+  ],
+  "changelog_suffixes": [
+    {
+      "pr": 8,
+      "common_prefix_characters": 12864,
+      "suffix_headings": [
+        "## 2026-10-21 — Prototipos iniciales: contratos STT/3"
+      ],
+      "suffix_length": 450
+    },
+    {
+      "pr": 9,
+      "common_prefix_characters": 12864,
+      "suffix_headings": [
+        "## 2026-10-21 — STT Combat Lab 0.1 (propuesta independiente)"
+      ],
+      "suffix_length": 599
+    },
+    {
+      "pr": 10,
+      "common_prefix_characters": 12864,
+      "suffix_headings": [
+        "## 2026-10-21 — Prototipos iniciales Vita · B Asset Lab PC 0.1"
+      ],
+      "suffix_length": 868
+    },
+    {
+      "pr": 11,
+      "common_prefix_characters": 12864,
+      "suffix_headings": [
+        "## 2026-10-21 — STT Combat Lab 0.1 (propuesta independiente)",
+        "## 2026-10-21 — Prototipos iniciales: contratos STT/3",
+        "## 2026-10-21 — STT Vita Prototype 0.1 / rama de integración",
+        "## 2026-10-21 — Prototipos iniciales Vita: entrega integrada revisable"
+      ],
+      "suffix_length": 2886
+    }
+  ],
+  "conclusion": "All shared files except changelog have identical Git blob IDs. Changelog consolidation remains a review step, not a proven merge conflict. No claim about nonshared files or combined mergeability."
+}
