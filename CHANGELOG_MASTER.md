@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Primer derivado Frontier enlazado al banco
+
+- Investigación descomprimió unJKR:349bytes,sin firma reconocida. Se cotejaron fuente238bytes,salida y recibo contra hashes y catálogo,sin repetir decodificación.
+- Registro adicional derivatives.jsonl,1entrada;sin copiar contenidos ni cambiarSQLite,sus manifiestos o conteos. Consulta ampliada por ruta/hashfuente o salida.
+- Cinco pruebas nuevas y cinco de regresión correctas. Consulta real por hash y SQLite idéntico al recibo original tras incorporación de metadatos.
+- Documentación:docs/research/game-inputs-2026-10-21/bank-derivatives.md. Conservar salida/recibo en su ubicación local. No ampliar otros43JKR antes de aceptación útil de estructura interior.
+
 ## 21-10-2026 — Revisión offline de contratos STT/3
 
 -15casos sintéticos de compatibilidad correctos,sin sockets ni cambios de fuentes de otros frentes. STT/1–2 conservados en casos probados;STT/3aceptado por candidato y rechazado deliberadamente por protocolo vigente.
