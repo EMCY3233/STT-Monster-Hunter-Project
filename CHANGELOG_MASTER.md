@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-RESEARCH-004 / piloto ARC y revisión de trabajo existente
+
+- Extraído RomFS del parche MHXX: 1.609 archivos, 28.822.254 bytes; 1.228 archivos con extensión ARC y firma ARC nula final. La inspección completa se limita a title/resident/quest ARC v17: 782/782 entradas con zlib y longitud correctos.
+- [Lector acotado, muestras y límites](docs/research/game-inputs-2026-10-21/arc-pilot.md): exportadas localmente dos entradas, hashes cotejados; firmas candidatas 99 TEX, 48 GMD, 32 MRL y 32 MOD. No se validan todavía modelos, esqueletos o animaciones. Ocho pruebas sintéticas aprobadas; siete originales mantienen SHA-256.
+- [Investigación externa](docs/research/game-inputs-2026-10-21/existing-research.md): proyectos de MH4U, Portable 2nd G y MH3U Wii U documentados con sus límites. No se encontró evidencia primaria de decompilación completa pública MHXX/MHGU utilizable con las entradas actuales. No se descargaron juegos preparados, claves ni proyectos de terceros para ejecución.
+- Todo contenido comercial permanece en analysis-local fuera de Git. Sin cambios de originales o código del monitor, PS Vita/FTP, adaptación de recursos ni port demostrado.
+
 ## 2026-10-21 — STT-RESEARCH-003 / herramientas y extracción exterior
 
 - Corregida la precisión de nombres: Capcom identifica Generations Ultimate como Monster Hunter XX en Japón; se conserva la plataforma por separado. La entrada local extraída es CIA 3DS, no una imagen Switch.
