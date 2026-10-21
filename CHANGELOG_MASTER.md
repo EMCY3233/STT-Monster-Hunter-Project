@@ -1,5 +1,11 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-010 / intervalos de recepción
+
+- Analizador con resumen temporal por sesión: horas UTC, timestamps no utilizables, retrocesos del reloj PC y mayor intervalo con secuencias/diferencia de uptime. No atribuye causa ni modifica capturas o contratos STT; amplía el JSON de resumen.
+- 19 pruebas locales correctas, incluidas separación de sesiones, zonas horarias, ausencia de timestamp y llegada desordenada. Captura física existente STT-MON-007 reproducida en lectura: 15 muestras y mayor intervalo de 25,892994 s entre secuencias 9–10, frente a 1011 ms de proceso, coincidente con el resultado ya documentado. No es un ensayo físico nuevo. CI remota pendiente al publicar.
+- Rama dependiente de la mejora de recepción en directo de PR #13, sin fusión automática. Sin consola, FTP, reinstalación ni cambios de firewall.
+
 ## 2026-10-21 — STT-MON-009 / diagnósticos visibles en el PC
 
 - Receptor con opción `--live`: muestra cada recepción, sesión, secuencia, batería y diagnóstico STT/2; distingue contadores previos y último error conservado, que puede ser histórico. STT/1 se identifica sin diagnóstico.

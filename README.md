@@ -38,6 +38,8 @@ python -m stt_monitor.analyze telemetry.jsonl
 
 Produce un resumen por IP, origen declarado y sesión: muestras, duplicados, llegadas fuera de orden y números ausentes entre el mínimo y el máximo observados. Los huecos no demuestran pérdidas en la red: la captura puede ser parcial. No cuenta como perdidos los mensajes anteriores al primero o posteriores al último recibido. La etiqueta de origen no autentica un dispositivo. El analizador guarda en memoria las secuencias únicas; usar capturas acotadas.
 
+El resumen también incluye `reception_timing`: primeras/últimas horas válidas en orden de archivo, normalizadas a UTC, número de horas ausentes/inválidas, retrocesos del reloj del PC y mayor intervalo observado por sesión. `largest_gap` conserva secuencias y diferencia de `uptime_ms` de las dos muestras comparadas. Un timestamp sin zona, ausente o inválido interrumpe la comparación temporal de esa sesión, sin descartar su paquete. Un retroceso se cuenta y no se considera un intervalo positivo. Los mensajes duplicados o desordenados siguen siendo observaciones: una diferencia negativa de uptime no demuestra fallo del reloj del agente. Estos intervalos no identifican por sí solos suspensión, latencia ni causa de un corte. STT y JSONL no cambian; se añaden campos al informe del analizador.
+
 ## Documentación
 
 - [Áreas 01–10](docs/areas/README.md)
