@@ -1,5 +1,7 @@
 # STT — Inventario de entradas de juegos, 21-10-2026
 
+**Última comprobación:** [modelos y animaciones localizados](located-models-animations.md): 1228 tablas ARC, 83 cargas MOD y 4 LMT leídas; seis muestras locales con hashes y cabeceras comprobados. Diez pruebas sintéticas del lector pasaron. Las limitaciones históricas de acceso a ARC/MOD/LMT que figuran abajo quedan superadas solo para el parche MHXX indicado.
+
 **Actualización posterior del 21-10-2026:** [herramientas y extracción local](extraction-tools.md). Los dos conjuntos 7z ya pasaron prueba íntegra y extracción; hay metadatos de sus CIA y listado RomFS del parche. Los párrafos iniciales que indican «sin prueba de carga» o «herramientas no disponibles» describen la primera etapa, superada donde lo precisa ese informe. MHXX es el nombre japonés relacionado con Generations Ultimate; se conserva por separado la plataforma 3DS observada en el CIA.
 
 
