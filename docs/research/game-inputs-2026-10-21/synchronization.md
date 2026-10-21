@@ -215,3 +215,9 @@ PR7/93455dcab83d823d1b4218b039aa29e951e5e7a1:una.code9.091.360bytes,cotejadaante
 No se repitióSHAdeimagen4GiB:hashNCSDhistórico,noafirmarimagenenteraintactareverificada. Statigualnopruebaotrasregiones;whole_image_unchanged_reverified=false. SinRomFSparseado/extraído,arranque,banco oconsola. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/93455dcab83d823d1b4218b039aa29e951e5e7a1/docs/research/stt-re-20261021/mh4u-code-blz.md).
 
 Siguienteaceptación:comprobarlinaje/aplicabilidad deunasegundaimplementaciónBLZ ycontrastaruna salida siindependenciaacreditable;deotro modo cerrar bloqueoexplícito. No acreditarsemántica/ARMThumb/funcionesporhashcorrecto.
+
+## 22-10-2026 — Independencia BLZ bloqueada y visualPC cerrada
+
+PR7/a914801aa3865a516aba848a214d055243ca6284 revisóCTRTool,CUE/PeterLemon y3dstool con fuentes/linaje/licencias;no aceptóindependencia suficiente. No implica que todas sean dependientes:procedenciaindependiente no acreditada bajo criterio fijado. second_decoder_executed=false;igualdad tamaño/hash/consumo=null,no cero. Sin nuevaslecturasimagen/descompresiones/pruebas. Whole_image_unchanged_reverified=false conservado. Reabrir solo con evidencia primariaaplicable,norepetirbúsquedaidéntica. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/a914801aa3865a516aba848a214d055243ca6284/docs/research/stt-re-20261021/mh4u-blz-independent-review.md).
+
+Prototipos entregó revisiónvisualPC dePR21:dosposesobservadas ydefectodecobertura alinvertirtriánguloscorregido;sanitizadores,VPK einspeccióncorrectos segúnpropietario. Noacredita renderGPUVita. Siguienteaceptaciónrequierehardware:carga/controles/suspensión/rendimiento. No se ordenan instalación/FTP/ejecuciónconsola con autorizaciónactual de revisiónlectura. Sinfusión ni cambiosbanco/originales.

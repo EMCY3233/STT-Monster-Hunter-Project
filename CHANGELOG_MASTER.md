@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — BloqueoBLZ yvisualPC
+
+-PR7/a914801:sinsegundodecoderaceptado,comparaciónnumérica noejecutada/valoresnull. No dependenciacomún afirmada sinprueba.
+-PR21visualPCcerrada,dosposes ydefectocoberturacorregido;Vita físicapendiente,sininstalación.
+
 ## 21-10-2026 — MH4U BLZ cerrado
 
 -PR7/93455dc:salida16.261.120bytes yhashcotejados,segmentosrespaldados;sinreverificarimagencompleta4GiB.
