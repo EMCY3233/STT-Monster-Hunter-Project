@@ -1,6 +1,6 @@
 # Agente Vita experimental — STT/1
 
-Revisión 0.3: emite STT/2 con diagnóstico de envío, compatible con el receptor actualizado que también acepta STT/1. Captura el detalle sceNetErrnoLoc, conserva el último fallo mientras la aplicación siga abierta y crea un socket nuevo al pulsar Cruz para otro ensayo. Validación física de 0.3 pendiente. [Protocolo y límites de entrega de diagnósticos](../docs/monitor-protocol.md).
+Revisión 0.3: emite STT/2 con diagnóstico de envío, compatible con el receptor actualizado que también acepta STT/1. Captura el detalle sceNetErrnoLoc, conserva el último fallo mientras la aplicación siga abierta y crea un socket nuevo al pulsar Cruz para otro ensayo. En hardware se recibieron las 60 muestras de una nueva sesión tras un corte Wi-Fi, incluido el error anterior preservado: [resultado](../docs/STT-MON-005-diagnostic-result.md). Se valida recuperación manual; no hay reconexión automática. [Protocolo y límites de entrega de diagnósticos](../docs/monitor-protocol.md).
 
 Aplicación independiente experimental. La versión 0.1 completó un primer ensayo físico con 60 muestras y salida por START confirmada: [resultado](../docs/STT-MON-001-hardware-result.md). En 0.2, el usuario confirmó texto mayor, desaparición del parpadeo y parada con Círculo tras recibir diez muestras: [resultado](../docs/STT-MON-003-stop-result.md). Siguen pendientes un ensayo completo de 60 muestras en 0.2, desconexión y suspensión.
 
