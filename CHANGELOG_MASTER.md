@@ -4,8 +4,10 @@
 
 - Corrige el control que usaba solo reloj de proceso: [presupuesto conservador proceso+RTC](docs/suspend-deadlines.md), con parada ante lectura fallida/retroceso y protección ante saltos/desbordamientos.
 - Comprueba 180 s antes de transmitir al reanudar y usa el mismo presupuesto para los 30 s sin conexión observada. Muestra «Tiempo de limite» sin cambiar uptime_ms ni STT/2.
-- Añadidas pruebas C de reloj y política con pausa simulada, límites exactos y fallos de reloj. Compilación/CI y prueba física de suspensión pendientes al crear esta entrada. No se ha transferido 0.5.
-- No cambia el reloj ni ajustes de la consola; no se afirma tiempo de pared validado hasta la prueba física.
+- Pruebas C de reloj/política, compilación Vita e inspección VPK correctas ([CI Vita](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39552818266)); quince pruebas PC y ensayo CLI correctos ([CI PC](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39552818196)). VPK 0.5 transferido con hash verificado e instalación/apertura confirmadas.
+- [Prueba física](docs/STT-MON-008-suspend-result.md): suspensión breve con 39 s de presupuesto y 15 envíos; suspensión larga termina con 181 s, 14 intentos/14 envíos y «Parado: limite total», confirmado por usuario. PC recibió 14 muestras y ninguna posterior mientras receptor/firewall seguían activos.
+- Receptores cerrados y retirada del firewall comprobada. Instaladores 0.4 anteriores retirados, conservando paquete vigente y evidencias. Sin transferencia por este cierre documental.
+- No cambia el reloj ni ajustes de la consola. Pendientes físicos: límite sin red durante suspensión y fallos/retrocesos de reloj; cubiertos automáticamente, sin validación física de todas las rutas.
 
 ## 2026-10-21 — STT-MON-007 / recuperación automática acotada 0.4
 
