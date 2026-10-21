@@ -1,5 +1,11 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Índice de evidencias actualizado
+
+- Reorganizado el índice de investigación con el banco actual de 9.888 archivos, cierre de Frontier, derivado enlazado e interfaces de prototipos. El inventario inicial de siete archivos queda identificado como evidencia histórica.
+- Separadas las raíces realmente catalogadas de futuros archivos de ensayo, y las propuestas de las funciones implementadas. Conservados enlaces a los informes y al historial Git, sin duplicar contenidos.
+- Comprobados 22 enlaces locales del índice, sin destinos ausentes; revisión de diferencias sin errores. Sin repetir pruebas de recursos ni modificar banco, originales o consola.
+
 ## 21-10-2026 — Coherencia de archivos compartidos de prototipos
 
 -36lecturasdeblobs acommitsfijos enPR8–11:17rutascompartidas,16idénticas. Contratos yCombatLab copiados enPR11 coinciden con sus PR propias.
