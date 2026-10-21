@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Auditoría del banco y primeras PR de prototipos
+
+- Auditoría de metadatos SQLite en solo lectura:9888archivos/21696entradas/8823objetos,sin errores de referencias/estados/tamaños ni objetos huérfanos.161grupos de hashes físicos repetidos conservados;ninguna eliminación.
+- Cinco pruebas sintéticas nuevas del auditor aprobadas; hash de SQLite tras lectura coincide con recibo de registro. Informe:docs/research/game-inputs-2026-10-21/bank-catalog-audit.md.
+- Investigación comunica50cabeceras Frontier contrastadas:44JKR/LZ,5ECD y1SCE;sin contenidos decodificados. Sus52pruebas son de PR7,no de esta auditoría.
+- Primeras PR de prototipos verificadas abiertas:8contratosSTT/3,9CombatLab,10AssetLab,11Vita3D. Pruebas PC/compilación comunicadas por responsable; visual/físico pendientes. VPKcon telemetría local,sinUDP;interoperabilidad conMonitorSTT/1–2 pendiente. Sin fusión ni instalación desde este frente.
+
 ## 21-10-2026 — Cierre de copia Frontier y censo completo
 
 - Copiados y registrados8261archivos/5212490427bytes; banco9888archivos. Procesos terminados0 y hashes de los catálogos cotejados.
