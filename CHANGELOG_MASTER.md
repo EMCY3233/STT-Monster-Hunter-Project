@@ -1,5 +1,15 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-RESEARCH-002 / consolidación de investigación y áreas
+
+- Inventariados siete archivos locales, 7.861.039.260 bytes, mediante lectura completa y SHA-256; dos pasadas con hashes idénticos. [Resultados y límites](docs/research/game-inputs-2026-10-21/README.md).
+- MHFU: ISO9660, ULES01213 y DISC_VERSION 1.01 observados en SFO. MH3U: CIA/TMD con contenidos marcados como cifrados. MH4U y MHXX: cabeceras de conjuntos 7z divididos con CRC correcto; carga comprimida sin prueba completa. La carpeta MHGU no acredita una edición Switch. Sin Frontier inventariado.
+- Seis pruebas sintéticas nuevas aprobadas. La ejecución amplia local tuvo 15/16 (fallo UDP previo dentro del entorno restringido); no se presenta como diagnóstico de red. CI del commit 1b68b5b correcto: [Monitor tests 39547319058](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39547319058) y [Vita agent build 39547319029](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39547319029). Estos resultados corresponden a ese commit, no a futuras revisiones.
+- Incorporada la documentación de [Frontier Clásico](docs/research/frontier-classic/README.md): 13 registros de investigación, fuentes y vacíos explícitos. Selección del usuario: corte de retirada + corte evasivo + estocada perforante cargable. La fusión propuesta es diseño original; Extremo permanece independiente. Sin botones, tiempos ni parámetros internos históricos confirmados.
+- Actualizados portada, estado consolidado y fichas 01–10 con dependencias y siguientes pasos. Respuestas de Diseño 02/04/07 y contratos propuestos 03/05/08 registrados; no equivalen a inspección independiente ni aprobación de implementación.
+- Conservados originales y trabajo del monitor. Solo documentación, metadatos y código propio en [PR #3](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/3), independiente y sin recursos comerciales. Ninguna instalación, transferencia a Vita ni actividad FTP en este frente.
+- Pendientes: prueba íntegra de 7z, identidad interna accesible, clasificación de contenedores/ejecutables, evidencia primaria Frontier y validación de interfaces. No se demuestra un juego nativo ni adaptación de assets.
+
 ## 2026-10-21 — STT-MON-004 / primer ensayo físico y pantalla 0.2
 
 - [Ensayo físico STT-MON-001](docs/STT-MON-001-hardware-result.md): 60 muestras, secuencias 0–59, cero rechazos, huecos, duplicados o llegadas fuera de orden; batería declarada 91 %. Salida con START confirmada por el usuario.
