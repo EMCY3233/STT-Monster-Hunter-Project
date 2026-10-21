@@ -1,0 +1,53 @@
+{
+  "source_bytes": 990,
+  "version": 230,
+  "mesh_count": 1,
+  "mesh_offset": 288,
+  "global_index_count": 30,
+  "mesh_index_count": 28,
+  "revil_global_read": {
+    "offset": 932,
+    "bytes": 60,
+    "u16_count": 30,
+    "end": 992,
+    "in_file": false
+  },
+  "revil_mesh_read": {
+    "offset": 932,
+    "bytes": 56,
+    "u16_count": 28,
+    "end": 988,
+    "in_file": true
+  },
+  "mhff_mesh_read_plus_two_bytes": {
+    "offset": 932,
+    "bytes": 58,
+    "u16_count": 29,
+    "end": 990,
+    "in_file": true
+  },
+  "mesh_tail_word_at_relative_40": 0,
+  "tail_semantics": "RevilLib splits into min/max u16; MH4U reader leaves this word unused",
+  "geometry_validated": false,
+  "mesh_declared_checks": {
+    "indices_in_vertex_range": true,
+    "restart_count": 0,
+    "consecutive_triplets": 26,
+    "distinct_index_triplets": 6,
+    "not_a_geometric_area_or_winding_check": true
+  },
+  "mesh_plus_one_checks": {
+    "indices_in_vertex_range": true,
+    "restart_count": 0,
+    "consecutive_triplets": 27,
+    "distinct_index_triplets": 6,
+    "not_a_geometric_area_or_winding_check": true
+  },
+  "source_sha256": "ec1b20b25f022db69ba759bb525e0e9a88d05c2ccaf727812d900a61efc280b0",
+  "source_unchanged": true,
+  "receipt_sha256": "a970b3c73b866af6022e038b190efcdb840da4359c499297ac9c82d287e5a215",
+  "new_synthetic_tests_passed": 4,
+  "mhff_commit": "6ef14c8ffa341ccbe44e0e6a93eb4bfe541265cf",
+  "mhff_blob": "0da950c275caf78bfcfa310f6a45c488e890d94b",
+  "applicability": "reader explicitly MH4U/E6; MHXX global counter and tail semantics unresolved"
+}

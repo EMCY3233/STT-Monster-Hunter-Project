@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: una malla MOD230
+## Estado más reciente: convenciones de índices MOD230
+
+[Contraste documental en la misma muestra](mod230-index-conventions.md): un lector primario MH4U/E6 lee dos bytes adicionales por malla; sus 29 índices encajan exactamente en EOF y mantienen seis ternas con índices distintos. Contador global 30 sin explicar; nombres min/max genéricos no confirmados para MHXX. Cuatro pruebas nuevas aprobadas. Aceptación delimitada, sin geometría completa validada ni expansión de muestras.
+
+
+## Etapa anterior: una malla MOD230
 
 [Una muestra de 990 bytes](mod230-smallest.md), elegida por mínimo tamaño: tablas y spans de una malla en rango; 16 registros de posición/UV finitos, 28 índices en 0–15, stride 28 y formato referenciado. Discrepancia global de índices y campos min/max pendiente; geometría completa y skinning sin validar. Ocho pruebas nuevas aprobadas. Ninguna ampliación a JKR ni otros modelos.
 
