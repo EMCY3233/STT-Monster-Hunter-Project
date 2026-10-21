@@ -14,9 +14,25 @@ jobs:
         run: |
           cc -std=c99 -Wall -Wextra -Werror -Ivita-prototype/src vita-prototype/src/control.c vita-prototype/tests/test_control.c -lm -o /tmp/stt-controls
           /tmp/stt-controls
-          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Ivita-prototype/src -Icombat-lab/include -Icontracts vita-prototype/src/control.c vita-prototype/src/render.c vita-prototype/src/snapshot.c combat-lab/src/stt_combat.c contracts/stt_play.c vita-prototype/tests/test_integration.c -lm -o /tmp/stt-integration
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include -Icontracts pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/control.c vita-prototype/src/render.c vita-prototype/src/snapshot.c combat-lab/src/stt_combat.c contracts/stt_play.c vita-prototype/tests/test_integration.c -lm -o /tmp/stt-integration
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-integration /tmp/stt-scene.ppm > /tmp/stt-adapter.jsonl
           python -c "from pathlib import Path; from stt_monitor.protocol import decode; p=decode(Path('/tmp/stt-adapter.jsonl').read_bytes().strip()); assert p['play']['hits'][0]['damage']==10; assert p['source']=='simulator'"
+      - name: Original pose loading, fallback and renderer
+        run: |
+          python -c "import hashlib; from pathlib import Path; assert hashlib.sha256(Path('vita-prototype/assets/practice.pose.json').read_bytes()).hexdigest()=='a6648b5901bf6282457062911946399aa3019cc7fb23a661bfc5aa81550dfcdc'"
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c vita-prototype/tests/test_asset_render.c -lm -o /tmp/stt-asset-render
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-asset-render vita-prototype/assets/practice.pose.json stt-own-anchor.ppm stt-own-pose.ppm > stt-pose-render-evidence.json
+          cat stt-pose-render-evidence.json
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/control.c combat-lab/src/stt_combat.c vita-prototype/tests/test_raster_contract.c -lm -o /tmp/stt-raster-contract
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-raster-contract
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-own-pose-pc-render
+          path: |
+            stt-own-pose.ppm
+            stt-own-anchor.ppm
+            stt-pose-render-evidence.json
+          retention-days: 14
   build:
     runs-on: ubuntu-latest
     container: vitasdk/vitasdk:2026.08-20260815@sha256:7f5eee50ff95b73c8c847dbfef6227aa0035886444b4d0254c21da8369ff1efc
