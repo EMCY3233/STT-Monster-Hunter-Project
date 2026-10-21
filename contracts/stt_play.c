@@ -7,7 +7,7 @@ static const char *states[]={"idle","move","windup","active","recovery","stunned
 int stt_play_encode(char *out,size_t cap,const SttPlaySample *s) {
  char hits[256]="", battery[8]; size_t n; unsigned i; int used=0,r;
  if(!out||!s||!s->session||cap==0) return -1;
- out[0]=0; n=strlen(s->session);
+ out[0]=0; for(n=0;n<65&&s->session[n];n++) {}
  if(n<1||n>64||s->state>5||s->hit_count>2||s->vita<0||s->vita>1||
  s->seq>9007199254740991ULL||s->tick>9007199254740991ULL||s->uptime_ms>9007199254740991ULL||
  s->battery_pct < -1||s->battery_pct>100||s->hp>1000000||

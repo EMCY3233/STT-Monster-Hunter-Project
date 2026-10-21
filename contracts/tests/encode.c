@@ -13,6 +13,9 @@ int main(void){
  s.hit_count=3;assert(stt_play_encode(out,sizeof(out),&s)==-1);s.hit_count=1;
  s.session="bad\"";assert(stt_play_encode(out,sizeof(out),&s)==-1);s.session="synthetic";
  s.hit_count=2;s.hits[1]=s.hits[0];assert(stt_play_encode(out,sizeof(out),&s)==-1);
- s.hit_count=1;s.camera_pitch_mdeg=89001;assert(stt_play_encode(out,sizeof(out),&s)==-1);
+ s.hit_count=1;
+ s.session="abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm";
+ assert(stt_play_encode(out,sizeof(out),&s)==-1);s.session="synthetic";
+ s.camera_pitch_mdeg=89001;assert(stt_play_encode(out,sizeof(out),&s)==-1);
  return 0;
 }
