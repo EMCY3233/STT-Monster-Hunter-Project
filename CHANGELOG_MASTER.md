@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Captura PC acotada por duración
+
+- RecibidoPR16/79a8969,ensayoconjunto y20pruebaslocales;dependencia13→14→16,sinfusión. CIeventopendiente al cierre.
+- Encargadoslímitesdeconteo/tamaño conparadalimpia.PrototiposC e investigaciónBLZ continúan,sin resultadosfinales atribuidos.
+
 ## 21-10-2026 — Emuladores comparados y baseMH4U legible
 
 - RecibidaPR7/964770ad:comparativaemuladores yensayo MH4U NCSDlegible,Citracarga/DSP,sinvisual/jugabilidad. LasCIAcifradas noquedanresueltas.

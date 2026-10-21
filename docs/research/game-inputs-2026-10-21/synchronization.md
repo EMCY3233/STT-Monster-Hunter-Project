@@ -161,3 +161,11 @@ NuevaentradaMH4U EUR NCSD.3ds de4GiB,SHA-2563832beef353d134bcba6ef83dc987e7ae228
 ContrasteTEX delpropietario:segundalectura descarta alfa;no acredita fidelidadRGBA/RGB/orientación. Derivadoprivado,noaptitudparaadaptación. No confundir aceptaciónestructural anterior conimagenfiel.
 
 Bloqueovisual:superficieCUA disponible sinAPIsnativas;noobservaciónvisualrealizada,norepetirarranquesconmismoslogs. Encargada alternativa:.codeMHXX,flag/rangosBLZ ysegmentosantesdedescompresión;no forzar codec si flags noaplican. Fuente/derivadoslocales,metadatospublicables,sincambiosconsola/banco/originales.
+
+## Monitor: ensayo conjunto y duración acotada
+
+Propietario entregóPR16/79a8969,sin fusionar,dependenciaPR13→PR14→PR16. Ensayo cubre reinicios/duplicados/desorden/reloj/entradasinválidas;20pruebaslocales yensayosintético correctos según informe. Opción--duration detiene captura incluso con tráfico continuo. CIpushPC/Vita correcta segúnpropietario;eventoPRpendiente al cierre. No atribuirlo apruebasfísicas.
+
+Nuevaaceptación encargada:límites explícitos de memoria porconteo y tamaño dearchivo,paradalimpia/resultadoparcial marcado sin descartes silenciosos,pruebasdecasos límite. No afirmar bytesRAM medidos si solo se limita número deelementos. Sinconsola/FTP.
+
+Prototipos continúan lectorC/pruebaC-Python/VitaSDK yadaptador de triángulos,sin cierre definitivo aún;investigación ExHeader/BLZ MHXX en curso,compresiónindicada ysalida declarada13.045.760bytes,pendiente aplicación/recibo. Avances provisionales,noaceptacionescerradas.
