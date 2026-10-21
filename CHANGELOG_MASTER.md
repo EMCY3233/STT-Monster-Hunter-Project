@@ -1,5 +1,11 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Coherencia de archivos compartidos de prototipos
+
+-36lecturasdeblobs acommitsfijos enPR8–11:17rutascompartidas,16idénticas. Contratos yCombatLab copiados enPR11 coinciden con sus PR propias.
+- Únicadiferencia compartida:CHANGELOG_MASTER.md,con entradasporfrente. Prefijocomún12864caracteres;consolidaciónpendiente parafutura integraciónautorizada.
+- Recibo decommits/rutas/blobs ylímites en docs/research/game-inputs-2026-10-21/prototype-overlap-review.md. Sinmerge,CI/runtime repetidos,descargadejuegos,FTP o cambios debanco/consola.
+
 ## 21-10-2026 — Revisión numérica de interfaz AssetLab→Vita
 
 - Evaluada muestra originalSTTAsset/1 por hash:4huesos,48vértices,72triángulos,192poses en cuadrícula1/60s,sin coordenadas no finitas. Ambas duraciones y7claves caen en ticks enteros de60Hz.
