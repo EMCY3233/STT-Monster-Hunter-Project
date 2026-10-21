@@ -63,3 +63,7 @@ PR abiertas comprobadas: [contratos STT/3](https://github.com/EMCY3233/STT-Monst
 ## Primer derivado Frontier enlazado
 
 [Derivado local y procedencia](bank-derivatives.md): salida JKR349bytes obtenida por investigación y cotejada aquí con su fuente/recibo/hash. Registro adicional derivatives.jsonl,1entrada; bytes externos conservados,sin copia ni cambio de SQLite. Consulta ampliada por ruta/hash. Cinco pruebas nuevas y cinco de regresión aprobadas;consulta real y hashSQLite cotejados. La salida sigue sin identificar. Las65pruebas del decodificador pertenecen a PR7;no se repitió aquí la descompresión. No ampliar los otros43JKR sin aceptación útil del interior.
+
+## Revisión AssetLab→Vita con muestra propia
+
+[Puente de recursos](asset-bridge-review.md): muestra STTAsset/1 original de4huesos/48vértices/72triángulos,192poses a1/60s calculadas sin valores no finitos. Duraciones2s/1,2s y7claves en cuadrícula60Hz; solo se evaluó esta muestra. Conversión numérica×1000 y límites muestreados documentados; sin cambiar base ni exportar formato destino. Redondeo y empaquetado son propuestas explícitas,no contratos aprobados ni memoria Vita medida. Pendientes:ejes/avance,winding,evaluador/importador,runtime/memoria,GUI y física. Coordinador de prototipos informado,sin encargo de implementar por este aviso.
