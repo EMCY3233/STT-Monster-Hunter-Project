@@ -13,9 +13,14 @@ Este registro coordina estados y propiedad de archivos. No iguala los contenidos
 Propietarios: este chat mantiene inventory-work, el banco y los recibos FTP; STTMH Investigacion e ingenieria inversa mantiene research-work/PR7; Desarrolla el prototipo STT Vita mantiene repository y pruebas de monitor. No cambiar archivos ni ramas de otros frentes.
 
 ## Banco y copia de Frontier
+
+**Cierre verificado:** [copia y censo final de Frontier](frontier-complete.md):8261 archivos/5212490427bytes incorporados; banco actual9888archivos. BaseG1.00 y parcheZ01.99 confirmados, sin afirmar ZZ, descifrado o jugabilidad.
+
+Estado actualizado: ambos procesos terminaron con código0,0.partial, integridadSQLiteok y hashes de catálogos cotejados. El cierre de investigación está recibido (PR7,commit097f64f). Las correcciones de monitor están publicadas en PR12 abierta, rama docs/monitor-status-sync-20261021,commit6200812; repository está en esa rama limpia. main mantiene410b1dd. Los párrafos de transferencia siguientes conservan el plan inicial; queda superado su estado «en curso».
+
 Banco inicial verificado:1627 archivos físicos,21696 entradas ARC descomprimidas,8823 objetos únicos. Las cifras del banco inicial no incluyen todavía la copia de Vita.
 
-Única copia FTP autorizada en curso: PCSG00350, carpetas app/patch/rePatch,8261 archivos y5212490427 bytes, con una licencia excluida. SFO base confirma FrontierG1.00, no Z/ZZ. Los conteos de archivos observados durante la copia son provisionales y pueden diferir por momento de lectura. No iniciar otra copia, lectura FTP concurrente ni recatalogación del banco.
+Copia FTP de lectura finalizada: PCSG00350, carpetas app/patch/rePatch,8261 archivos y5212490427 bytes, con una licencia excluida. SFO base confirma FrontierG1.00, no Z/ZZ. Los conteos de archivos observados durante la copia son provisionales y pueden diferir por momento de lectura. No iniciar otra copia, lectura FTP concurrente ni recatalogación del banco.
 
 Fuente de estado: analysis-local/logs/vita-bank-status.json.
 Cierre exige completed=true en vita-copy-PCSG00350.json, phase=complete y vita-registration.json válido. finish_vita_copy.py espera la copia completa y registra tras volver a comprobar hashes locales. La validación de flujo/local no es un hash calculado independientemente en Vita.
@@ -34,7 +39,7 @@ Se sustituyen las afirmaciones vigentes antiguas «Monitor0.2», «sin Frontier 
 
 Las pruebas de hardware del monitor pertenecen al chat propietario; no repetir instalaciones por sincronizar documentos. La descarga no prueba descifrado ni semántica de formatos. Los ensayos Citra y ELF de investigación pertenecen a PR7 y se actualizan por ese propietario.
 
-Monitor confirmó main local=GitHub, árbol limpio, STT/1+STT/2 en receptor, agente STT/2 y UDP32100. Detectó tres textos antiguos (README general, README del agente y descripción de PR6); su corrección documental se encargó al propietario, sin reinstalación ni fusión automática. Investigación sigue activa y su cierre de sincronía está pendiente. Pendiente también confirmar inicio efectivo del Work de prototipos. Los mensajes enviados se consideran entregados por la herramienta, no aceptados técnicamente hasta respuesta.
+Monitor confirmó main local=GitHub, árbol limpio, STT/1+STT/2 en receptor, agente STT/2 y UDP32100. Detectó tres textos antiguos (README general, README del agente y descripción de PR6); su corrección documental se encargó al propietario, sin reinstalación ni fusión automática. Investigación remitió cierre en PR7; el estudio de formatos continúa con los candidatos del censo final. Pendiente confirmar inicio efectivo del Work de prototipos. Los mensajes enviados se consideran entregados por la herramienta, no aceptados técnicamente hasta respuesta.
 
 ## Secuencia después de la descarga
 1. Verificar recibos y registro del banco, incluyendo integridad SQLite y hashes.
