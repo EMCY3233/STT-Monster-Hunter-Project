@@ -1,5 +1,7 @@
 # Continuación autorizada: PSP y Frontier local
 
+**Nota editorial de consolidación (22-10-2026):** Este documento conserva los cortes parciales de Frontier. La copia local se completó después (A09); aquí no se sustituye la verificación independiente de50candidatos por un nuevo cotejo de8261archivos. Véase [el índice de aceptaciones](acceptance-index.md).
+
 21-10-2026, Europe/Madrid. El usuario excluyó GU Switch y autorizó continuar. Alcance actual: MH3U/MH4U/MHXX 3DS, MHFU PSP y Frontier Vita. Las referencias históricas a Switch del informe inicial se conservan como antecedentes, sin nuevas pruebas ni requisitos sobre esa plataforma.
 
 ## Frontier Vita: material nuevo, todavía incompleto

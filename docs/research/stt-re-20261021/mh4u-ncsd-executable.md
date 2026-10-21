@@ -1,5 +1,7 @@
 # Base MH4U EUR: una partición ejecutable sin extracción
 
+**Nota editorial de consolidación (22-10-2026):** La ausencia de descompresión describe solo este sondeo. A26validó después una única BLZ; los datos anteriores y la corrección del campo romfs_read se conservan. Véase [el índice de aceptaciones](acceptance-index.md).
+
 2026-10-21. Aceptación Área02 sobre la base NCSD .3ds encontrada durante [la prueba Citra](citra-current-inputs.md), **distinta del update MHXX**. Se inspecciona únicamente la partición0, ExHeader y ExeFS; no se repite arranque ni se produce/descomprime código o RomFS.
 
 ## Identidad y alcance de lectura

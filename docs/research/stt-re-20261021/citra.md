@@ -1,5 +1,7 @@
 # Prueba ejecutada: Citra y entradas 3DS
 
+**Nota editorial de consolidación (22-10-2026):** El bloqueo descrito para CIA sigue vigente. La conclusión general de ninguna base3DSlegible quedó superada por una NCSD distinta de MH4U (A21/A25/A26); no se infiere equivalencia CIA↔NCSD. Véase [el índice de aceptaciones](acceptance-index.md).
+
 Fecha: 2026-10-21. Solo PC, perfil portátil nuevo por ensayo. GU Switch excluido. No se descargaron juegos, claves ni firmware. No se actuó sobre ninguna consola.
 
 ## Procedencia y límites

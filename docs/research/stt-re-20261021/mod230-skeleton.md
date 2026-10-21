@@ -1,5 +1,7 @@
 # MOD230: una jerarquía con tres huesos
 
+**Nota editorial de consolidación (22-10-2026):** La propiedad numérica posterior A29no confirmó el modelo de matrices. Rangos, jerarquía y finitud anteriores permanecen; no existe rig funcional aceptado. Véase [el índice de aceptaciones](acceptance-index.md).
+
 2026-10-22, Área07. Aceptación distinta del MOD de990bytes: solo cabecera y tablas del esqueleto de **una** muestra ya catalogada con bone_count>0. No se busca otra geometría para ocultar la discrepancia anterior, ni se asocia LMT por nombres.
 
 ## Selección reproducible

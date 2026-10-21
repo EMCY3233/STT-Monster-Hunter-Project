@@ -1,5 +1,7 @@
 # Coordinación de necesidades 02, 03, 04, 05, 07 y 10
 
+**Nota editorial de consolidación (22-10-2026):** Registro de coordinación de su etapa, no constancia de envío/recepción de todas las aceptaciones posteriores. Esta consolidación no realiza envíos entre chats. Véase [el índice de aceptaciones](acceptance-index.md).
+
 21-10-2026, Europe/Madrid. Autorización: encargo del usuario de coordinar estas seis áreas. Alcance de mensajes: revisión documental del informe y sus contratos; sin implementación ni acceso a consola.
 
 ## Contexto recuperado

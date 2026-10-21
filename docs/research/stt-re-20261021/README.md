@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: propiedad de matrices no confirmada
+## Estado más reciente: índice consolidado de aceptaciones
+
+[Índice de 29 aceptaciones](acceptance-index.md) y [registro estructurado](acceptance-index.json), 22-10-2026: cubre 23 commits hasta e8a0c7b; delimita alcance, entradas/hashes, estado y criterio de reapertura. Incluye 10 conclusiones históricas superadas sin borrar evidencia. Consolidación documental: sin nuevos ensayos, censos, descargas de herramientas o lectura de juegos.
+
+
+## Etapa anterior: propiedad de matrices no confirmada
 
 [Misma muestra MOD230](mod230-matrix-property.md): modelo global×inversa derivado de referencia, tolerancia fijada0,0001;0/3pares aceptados,residuo máximo143,626968. Sin buscar órdenes/transposiciones alternativos, ejes o unidades.8pruebas sintéticas nuevas aprobadas. La jerarquía estructural anterior permanece; relación funcional entre matrices/bind pose bloqueada.
 
@@ -101,6 +106,8 @@ Ensayos reales de [Citra para 3DS](citra.md): bases MH3U/MH4U/MHXX bloqueadas po
 
 
 ## Antecedentes de las etapas anteriores
+
+**Contexto histórico:** los apartados siguientes conservan la fotografía inicial. Frontier incompleto/ausente, ausencia general de base3DSlegible y .code sin descompresión fueron ampliados en etapas posteriores; los snapshots no son un nuevo censo actual. [Mapa de sustituciones y límites vigentes](acceptance-index.md#conclusiones-históricas-superadas).
 
 Encargo STT-RE-20261021. Informe de ejecución del 21-10-2026, Europe/Madrid.
 

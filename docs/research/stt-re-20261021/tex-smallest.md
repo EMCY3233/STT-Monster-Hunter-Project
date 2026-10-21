@@ -1,5 +1,7 @@
 # MHXX: una carga TEX, cabecera y rangos sin píxeles
 
+**Nota editorial de consolidación (22-10-2026):** El alcance de este ensayo era solo cabecera. A22ensayó después el alfa de una carga y detectó pérdida en el lector; no valida ETC1A4 completo ni aspecto visual. Véase [el índice de aceptaciones](acceptance-index.md).
+
 Fecha: 2026-10-21. La evidencia anterior solo contaba 220 firmas TEX, sin validar sus cabeceras. Se selecciona **una sola carga**, sin decodificar imagen, visualizar, exportar píxeles ni cambiar banco/originales.
 
 ## Selección y fuente

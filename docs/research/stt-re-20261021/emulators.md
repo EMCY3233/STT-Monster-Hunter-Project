@@ -1,5 +1,7 @@
 # Emuladores y primer descifrado contrastado: MHFU
 
+**Nota editorial de consolidación (22-10-2026):** Las menciones de Frontier parcial pertenecen a esta etapa; la copia completa posterior se registra en A09. Las pruebas PPSSPP siguen siendo acotadas, sin FPS o jugabilidad acreditados. Véase [el índice de aceptaciones](acceptance-index.md).
+
 21-10-2026, Europe/Madrid. El usuario autorizó el descifrado y pidió apoyarse en emuladores. GU Switch continúa excluido. Se realizó una prueba real con PPSSPP; Azahar y Vita3K se investigaron documentalmente y no se presentan como ejecutados.
 
 ## PPSSPP 1.20.4: preparación y evidencia
