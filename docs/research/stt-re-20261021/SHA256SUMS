@@ -15,6 +15,8 @@ b997d32c77e524a5cf26705a8bd08f2a100463cb3bef83c383e4cb9d528f004a  docs/research/
 a7ee30f21f423d31259e61343ff3e1a410b6d13f4f9eb240e5916668a1b0c316  docs/research/stt-re-20261021/frontier-jkr-pair-evidence.json
 47a26cceea79eb0c77a5704014e67389b80b7ea8b88915137457a6e37138b9ca  docs/research/stt-re-20261021/frontier-jkr-pair.md
 8cbee3f4164e3d386e297e01107f5c0896df9c2dd55341b7c202fc26a29236c2  docs/research/stt-re-20261021/frontier-jkr-sample.md
+369304f7596f241f720c31290f0521b862da3b2ec1b4e5e5bc0caf863070c083  docs/research/stt-re-20261021/lmt-one-track-review-evidence.json
+f91da0eb55d1670638878b449fe7beb437824e05864b807b4c77c103ec21891e  docs/research/stt-re-20261021/lmt-one-track-review.md
 668aee52ec2efba37157d0453b4900f5edbd5ec615fdcd99c90796d83585f1f9  docs/research/stt-re-20261021/lmt-vectors-receipt.json
 79d68c2d23c304e7e41c6407a7ce8ccdfb64db0dc43c267e85c330b7e9384fb4  docs/research/stt-re-20261021/lmt-vectors-summary.json
 b12d62968f3c0c58ac4fd3f06aa5a08676e3d192b4b56143e3a255f6e6c886a7  docs/research/stt-re-20261021/lmt-vectors.md
@@ -30,7 +32,7 @@ e241d93c7e2b33ea87396b46dd115d8659613b8c86491f5799fd85d988458986  docs/research/
 f00b97c68c22aba4db77b83461adb33b2c5c8ff98e1f415dee210cd2ab6fbb3a  docs/research/stt-re-20261021/plain-executables.json
 966dbcdbe24dd5773205a832f5495285da3532d93852a578628b702504d3857e  docs/research/stt-re-20261021/provenance.json
 b0ad05632223b50cafb32d53b0206253dd217433153dd2ab8ff212a2a4572f2f  docs/research/stt-re-20261021/psp-files.json
-c0fa0db3aa49f40db548292ac1207239b9f8bb355477f92268b23e117a4688ef  docs/research/stt-re-20261021/README.md
+e0cc270b6dae2b579e2e689e941a065707a061338a06ae09a7579ff5800bb5ab  docs/research/stt-re-20261021/README.md
 0b98e274b925a2db76e6148e7652e9e4dafd82a86fb050a10c11dfe7227e09da  docs/research/stt-re-20261021/resource-headers.json
 bb443e912372d6a536aad036009e16dea90bebc8aa8e4e8442f6574a7ccae821  docs/research/stt-re-20261021/sources.md
 50db8e031bcf32a35352be8069e851a8cf202fa139d906fa16ab030f5b21414a  tests/test_stt_re_arc.py

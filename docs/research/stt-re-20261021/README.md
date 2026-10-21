@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: una referencia de imports PSP
+## Estado más reciente: contraste documental de una pista LMT
+
+[Una pista cuantizada seleccionada](lmt-one-track-review.md): payload mínimo de 8 bytes, dos claves. Segunda implementación MHW coincide documentalmente en fórmula y acumulación bruta, pero no se establece independencia ni compatibilidad de contenedor LE32/LMT67. Validación cruzada bloqueada, errores/tolerancias null; FPS, ejes, unidades y rig desconocidos. Sin nuevos valores comerciales, decodificación masiva o supuestas pruebas de fidelidad.
+
+
+## Etapa anterior: una referencia de imports PSP
 
 [Mapa estático de una referencia MHFU](mhfu-import-reference.md): primer registro .lib.stub compatible con PSPSDK, puntero NID a VA 0x0890EC78 / offset 0x0010D22C / sección .rodata.sceNid; sección y PT_LOAD coinciden. Alta confianza estructural, sin identificar funciones ni comportamiento. Cinco pruebas nuevas aprobadas; sin ejecutar ELF o repetir 620 secciones.
 
