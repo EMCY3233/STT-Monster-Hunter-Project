@@ -1,0 +1,221 @@
+{
+  "date": "2026-10-22",
+  "kenney_pack_sha256": "9e1d48e6d7b8479ebbe84df71eb5bd8e1b3f0da546dea641890dccc8a02d0999",
+  "weapons_pack_sha256": "546d6e168d71cc3ea0c5d388a7834658619ac2ace8be960050e5fb1dbd344a2a",
+  "character": {
+    "bytes": 246916,
+    "sha256": "77572792bfe2773b715b8cd8e18644b52b3e1f155fe10450254b50f9c364382a",
+    "meshes": [
+      {
+        "name": "body-mesh",
+        "position_entries": 804,
+        "triangles": 450,
+        "distinct_positions": 298
+      },
+      {
+        "name": "head-mesh",
+        "position_entries": 455,
+        "triangles": 273,
+        "distinct_positions": 191
+      }
+    ],
+    "skin_joint_counts": [
+      7,
+      7
+    ],
+    "clips": [
+      {
+        "name": "static",
+        "channels": 21,
+        "duration": 0.10000000149011612
+      },
+      {
+        "name": "idle",
+        "channels": 4,
+        "duration": 1.3333333730697632
+      },
+      {
+        "name": "walk",
+        "channels": 7,
+        "duration": 0.6666666865348816
+      },
+      {
+        "name": "sprint",
+        "channels": 7,
+        "duration": 0.5
+      },
+      {
+        "name": "jump",
+        "channels": 7,
+        "duration": 0.5
+      },
+      {
+        "name": "fall",
+        "channels": 5,
+        "duration": 0.3333333432674408
+      },
+      {
+        "name": "crouch",
+        "channels": 8,
+        "duration": 0.1666666716337204
+      },
+      {
+        "name": "sit",
+        "channels": 5,
+        "duration": 0.1666666716337204
+      },
+      {
+        "name": "drive",
+        "channels": 5,
+        "duration": 0.1666666716337204
+      },
+      {
+        "name": "die",
+        "channels": 8,
+        "duration": 0.3333333432674408
+      },
+      {
+        "name": "pick-up",
+        "channels": 4,
+        "duration": 0.3333333432674408
+      },
+      {
+        "name": "emote-yes",
+        "channels": 4,
+        "duration": 0.6666666865348816
+      },
+      {
+        "name": "emote-no",
+        "channels": 4,
+        "duration": 0.6666666865348816
+      },
+      {
+        "name": "holding-right",
+        "channels": 2,
+        "duration": 0.1666666716337204
+      },
+      {
+        "name": "holding-left",
+        "channels": 2,
+        "duration": 0.1666666716337204
+      },
+      {
+        "name": "holding-both",
+        "channels": 2,
+        "duration": 0.1666666716337204
+      },
+      {
+        "name": "holding-right-shoot",
+        "channels": 4,
+        "duration": 0.20000000298023224
+      },
+      {
+        "name": "holding-left-shoot",
+        "channels": 4,
+        "duration": 0.20000000298023224
+      },
+      {
+        "name": "holding-both-shoot",
+        "channels": 4,
+        "duration": 0.20000000298023224
+      },
+      {
+        "name": "attack-melee-right",
+        "channels": 7,
+        "duration": 0.4166666567325592
+      },
+      {
+        "name": "attack-melee-left",
+        "channels": 7,
+        "duration": 0.4166666567325592
+      },
+      {
+        "name": "attack-kick-right",
+        "channels": 7,
+        "duration": 0.5333333611488342
+      },
+      {
+        "name": "attack-kick-left",
+        "channels": 7,
+        "duration": 0.5333333611488342
+      },
+      {
+        "name": "interact-right",
+        "channels": 4,
+        "duration": 0.6666666865348816
+      },
+      {
+        "name": "interact-left",
+        "channels": 4,
+        "duration": 0.6666666865348816
+      },
+      {
+        "name": "wheelchair-sit",
+        "channels": 7,
+        "duration": 0.1666666716337204
+      },
+      {
+        "name": "wheelchair-look-left",
+        "channels": 9,
+        "duration": 0.3333333432674408
+      },
+      {
+        "name": "wheelchair-look-right",
+        "channels": 9,
+        "duration": 0.3333333432674408
+      },
+      {
+        "name": "wheelchair-move-forward",
+        "channels": 9,
+        "duration": 0.5
+      },
+      {
+        "name": "wheelchair-move-back",
+        "channels": 9,
+        "duration": 0.5
+      },
+      {
+        "name": "wheelchair-move-left",
+        "channels": 9,
+        "duration": 0.5
+      },
+      {
+        "name": "wheelchair-move-right",
+        "channels": 9,
+        "duration": 0.5
+      }
+    ],
+    "limits": "Structural inspection only; no animation evaluation, skinning, or Vita import"
+  },
+  "sword": {
+    "source": "OBJ/Sword.obj",
+    "source_sha256": "c5f220e6a9789cb9817f42244aba39d1cbc00c12ac0ccdaf76020a8e28099de1",
+    "source_vertices": 438,
+    "source_triangles": 872,
+    "output_vertices": 199,
+    "output_triangles": 394,
+    "scale_to_height_m": 1.4,
+    "pivot": "minimum source Y, not verified hand grip",
+    "conversion": "Identity axes, uniform scale, no textures/materials; centroid vertex clustering, collapsed faces removed",
+    "pose_bytes": 7474,
+    "pose_sha256": "da8c1a437b2d090acda2f3f3b7fbe61bd548c665537b72a9134c994da6c09dd8",
+    "grid": [
+      12,
+      32,
+      3
+    ],
+    "collapsed_triangles": 470,
+    "duplicate_triangles": 8,
+    "max_source_vertex_displacement": 0.022260592909569867
+  },
+  "license_evidence": {
+    "kenney": "License.txt inside archive: CC0",
+    "weapons": "Official author page states CC0; archive has no license file",
+    "urls": [
+      "https://kenney.nl/assets/mini-characters",
+      "https://quaternius.itch.io/lowpoly-medieval-weapons"
+    ]
+  },
+  "validation": "5 PC tests passed locally and CI39685472711; C reader accepted derived pose with ASan/UBSan; Python comparison image observed; no C raster/VPK/hardware/FTP",
+  "evidence_code_commit": "5dcad85a4120e8348497bbbca7ea8b7e7f906316"
+}

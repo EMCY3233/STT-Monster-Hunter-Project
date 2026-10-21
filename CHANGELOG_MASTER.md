@@ -125,3 +125,10 @@ Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototip
 - Perfil JSON canónico C explícito, sin modificar STT Pose/1 general.
 - 30 pruebas Python PC aprobadas; 288 casos C/Python con ASan/UBSan y compilación de objeto Vita aprobados (CI 39677522635, código 0c9fd354).
 - Sin nuevo VPK, consola, FTP ni recursos comerciales.
+
+## 2026-10-22 — Evaluación autorizada de modelos CC0
+
+- Descargas oficiales Kenney Mini Characters y Quaternius Medieval Weapons con hashes/licencias registrados; ZIPs conservados solo localmente.
+- Personaje inspeccionado: 723 triángulos, 7 articulaciones por skin, 32 clips declarados; adaptación pendiente.
+- Espada derivada de estudio: 199 vértices/394 triángulos, Pose/1 7474 bytes; simplificación con pérdidas documentada y vista comparativa observada.
+- 5 pruebas PC locales aprobadas; validación C con ASan/UBSan y 5 pruebas Python aprobadas en CI39685472711 (código5dcad85a). No nuevo VPK, FTP ni consola.
