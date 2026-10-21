@@ -98,3 +98,15 @@ Zona de referencia: Europe/Madrid. Primera base de desarrollo autorizada en EMCY
 - STT/1 carece de autenticación/cifrado y el archivo de registro no tiene rotación automática; no exponer a Internet y limitar ensayos.
 
 Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototipo y su documentación. No se incorporan cambios de otros chats ni recursos de juegos.
+
+## 2026-10-21 — Prototipos iniciales Vita · B Asset Lab PC 0.1
+
+- Inspector PC Python/Tk ejecutable para contrato propio STT Asset/1: malla 3D ortográfica,
+  árbol/esqueleto, clips, reproducción/pausa, huesos y cámara orbital; importación/exportación
+  JSON con límites y rechazo estricto de entradas malformadas.
+- Muestra original generada: muñeco rígido de cuatro huesos, 48 vértices, 72 triángulos y dos
+  clips. Sin material comercial ni soporte atribuido a formatos Monster Hunter.
+- 23 pruebas PC locales aprobadas y compilación sintáctica Python correcta. GUI sin revisión
+  visual por ausencia de pantalla; CI PC Windows/Linux separada pendiente de verificación remota.
+- Paquete ZIP determinista, contrato, comandos, arquitectura, controles, SHA-256 y límites en
+  `docs/prototypes/asset-lab.md` y `asset-lab/README.md`. Sin pruebas/instalación física Vita.
