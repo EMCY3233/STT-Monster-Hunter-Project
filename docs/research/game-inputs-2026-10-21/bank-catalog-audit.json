@@ -1,0 +1,391 @@
+{
+  "scope": "Metadata consistency only; no rehash of source or object bytes, deletion, repacking or semantic equivalence inference.",
+  "sqlite_integrity_check": "ok",
+  "physical_files": 9888,
+  "physical_bytes_in_catalog": 18205335558,
+  "unique_physical_hashes": 9535,
+  "physical_duplicate_hash_groups": 161,
+  "physical_repeated_occurrences": 353,
+  "physical_repeated_bytes": 144631792,
+  "entries": 21696,
+  "object_records": 8823,
+  "unreferenced_object_records": 0,
+  "physical_hashes_also_present_as_objects": 105,
+  "combined_unique_hashes": 18253,
+  "duplicate_samples": [
+    {
+      "sha256": "7736eff599caa94850209ab39ab446e42bde246c0f21dad060ffc8fafcf8f3e7",
+      "bytes_each": 15756856,
+      "occurrences": 2,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/extend/wf000.abn"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/dat/extend/wf000.abn"
+        }
+      ]
+    },
+    {
+      "sha256": "86252e77f80cb32cd4e5fb185fd8cde4fcc00e033861cc02ca4759a511aa99aa",
+      "bytes_each": 14635027,
+      "occurrences": 2,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/dat/fone-vita.bin"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/dat/mhf-vita.bin"
+        }
+      ]
+    },
+    {
+      "sha256": "db9436c029f6eb51d90c93b4f0caf42067ff5cf43b3e075259080648cb7e9bce",
+      "bytes_each": 13236927,
+      "occurrences": 2,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/fone-vita.bin"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/mhf-vita.bin"
+        }
+      ]
+    },
+    {
+      "sha256": "e64dae689af7daeddef46b9738f8f46c00ed4ea51e25c7320d62b4b685bd2f08",
+      "bytes_each": 12123866,
+      "occurrences": 2,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/extend/we500.abn"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/dat/extend/we500.abn"
+        }
+      ]
+    },
+    {
+      "sha256": "b40751bf1af13c1703283d1d0c7befe3ab77595242e2e9931c63910b3aeca23a",
+      "bytes_each": 196292,
+      "occurrences": 39,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x28.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x61.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x62.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x63.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x64.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x65.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x66.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x67.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x68.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x69.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x70.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x71.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x72.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x73.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x74.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x75.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x76.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x77.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x78.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x79.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x80.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x81.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x82.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x83.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x84.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x85.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x86.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x87.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x88.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x89.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x91.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x92.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x93.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x94.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x95.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x96.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x97.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x98.txb"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/campaign/x99.txb"
+        }
+      ]
+    },
+    {
+      "sha256": "60197d54e4efaa4ee77605705c3def420f0b8bcdb50ba262a41afa80db604616",
+      "bytes_each": 625708,
+      "occurrences": 11,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/011.png"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/012.png"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/013.png"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/014.png"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/015.png"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/016.png"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/017.png"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/018.png"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/019.png"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/020.png"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/sce_sys/manual/021.png"
+        }
+      ]
+    },
+    {
+      "sha256": "71a867560421b57c516bf2e4384a41f97b3035bfce722b18c48c982c60e6bde0",
+      "bytes_each": 2764340,
+      "occurrences": 3,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/extend/st372.pac"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/stage/st/st3/st372.pac"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/dat/stage/st/st3/st372.pac"
+        }
+      ]
+    },
+    {
+      "sha256": "d3c26d10c30798d09dc161253339d93e006b72e93421345aa2c95a513196426b",
+      "bytes_each": 2743620,
+      "occurrences": 3,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/extend/st371.pac"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/stage/st/st3/st371.pac"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/dat/stage/st/st3/st371.pac"
+        }
+      ]
+    },
+    {
+      "sha256": "6c8a46fdff5148aa59fbb668bf84eb0a4cbaccafe8077e2f010e7ca0ada72b45",
+      "bytes_each": 4924827,
+      "occurrences": 2,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/extend/f00_haircut.abn"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/dat/extend/f00_haircut.abn"
+        }
+      ]
+    },
+    {
+      "sha256": "f12cd706d422cb04083d24bf4430a42af8108fc16bfacb459cc312e16916da42",
+      "bytes_each": 4744603,
+      "occurrences": 2,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/extend/m00_haircut.abn"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/dat/extend/m00_haircut.abn"
+        }
+      ]
+    },
+    {
+      "sha256": "8dfa902c7344e280aed9b2a0c946b453e4c35b795f0b6de4742d37e0a7b45fdf",
+      "bytes_each": 3238007,
+      "occurrences": 2,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/parts/f00/f_editpl.bin"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/dat/parts/f00/f_editpl.bin"
+        }
+      ]
+    },
+    {
+      "sha256": "cb546c132a3d9859d8d2627e1525c964cf2976fa7209e8de8a4779bdb11817f3",
+      "bytes_each": 3189577,
+      "occurrences": 2,
+      "locations": [
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/app/PCSG00350/dat/parts/m00/m_editpl.bin"
+        },
+        {
+          "root_label": "originals",
+          "path": "MHF-Vita/PCSG00350/patch/PCSG00350/dat/parts/m00/m_editpl.bin"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "byte_identity_basis": "Previously recorded SHA-256 and sizes; no license, provenance or gameplay equivalence established."
+}
