@@ -1,5 +1,8 @@
 # STT — Ingeniería inversa y recursos
 
+[Sondeo antes/después](live-transition-probe.md): 12 lecturas correctas, rangos estables; la pantalla no avanzó y no se confirmó que el juego aceptara la pulsación.
+
+
 [Observador de sesiones Citra](live-session-observer.md): lectura RPC verificada con MH4U abierto, 6/6 muestras de cuatro bytes coincidentes con el código estático; cinco pruebas sintéticas. Semántica de combate y sincronización por acciones pendientes.
 
 
