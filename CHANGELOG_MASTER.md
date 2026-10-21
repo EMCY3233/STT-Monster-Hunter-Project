@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Regresión PC y nuevos recibos verificados
+
+-60pruebasPC yensayoCLI dediezpaquetes correctos sobre062e085. Solicitada regresión de lectoresPR7,resultadopendiente.
+-PR7/c4215e8:TEX84bytes estructuralmente coherente,sinimagen;logsPSP corroboran secciones,noinvocación. Recibos cotejados;11pruebas nuevas pertenecen ainvestigación.
+
 ## 21-10-2026 — Bloqueo LMT y siguiente recurso general
 
 - PR7/19d6e9d:acuerdo documental de codec,no validación cruzada;segunda referencia independiente/compatible pendiente. Recibo de selección cotejado;errores/toleranciasnull,FPS/rig/ejes/unidades desconocidos.

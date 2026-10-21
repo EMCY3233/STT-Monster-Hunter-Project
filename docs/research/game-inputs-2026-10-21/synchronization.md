@@ -127,3 +127,13 @@ No repetir bibliotecas completas,exportar claves comerciales,asociar rig,rotacio
 Recibo de selección cotejado aquí por SHA-256 `3db66f07db494024c8b890efa5f40ec1d891c841c9356f157aedb099772deb58`. Sin repetir decodificación,pruebas o publicar claves comerciales. Bloqueo:segunda referencia independiente ycompatible o especificación que justifique equivalencia. Conservar pista como control,sin ampliar bibliotecas.
 
 Siguiente tarea encargada a investigación:una cargaTEX ya catalogada,solo cabecera/versión/dimensiones/mips/rangos con referencia aplicable. Sin exportar imagen ni adaptar. Resultado pendiente;no se declara textura validada. Banco yoriginales intactos.
+
+## Pruebas solicitadas: TEX y corroboración PSP
+
+[PR7/c4215e8](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/7):una cargaTEX de84bytes,cabecera16+tabla4+carga64,8×8,unmip,ETC1A4 segúnreferencia3DS aplicable. Rangos coherentes;no se decodificaron píxeles ni validó imagen/swizzle/alfa visual. Siete pruebas sintéticas nuevas pertenecen a investigación. Aquí cotejados ambos recibos porhash.
+
+DoslogsPPSSPP previos corroboran direcciones/tamaños de secciones de la referenciaPSP;no prueban lectura concreta delpuntero,resolución oinvocaciónfuncional. Cuatro pruebas nuevas del comparador pertenecen a investigación;recibo cotejado aquí. Otroarranque con iguales mensajes no añade esa evidencia;no se repitió.
+
+Por solicitud expresa«todaslaspruebas»,este frente ejecutó60pruebasPC correctas yensayoCLI dediezpaquetes simulados aprobado sobre062e085. Sin tráficoVita. Investigación recibió campaña de regresión pertinente de lectores;resultado pendiente. No repetir censos/extracciones ni considerar bloqueoscriptográficos/semánticos resueltos por pruebas sintéticas.
+
+El usuario autorizó ejecución dejuegos en emuladorPC;preservar perfilesaislados,fuentes ypartidas. No implica permiso de instalar/ejecutar enPSVita. Los ensayos futuros requieren aceptaciónconcreta,no repetirarranque porduración.
