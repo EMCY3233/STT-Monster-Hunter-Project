@@ -9,7 +9,7 @@ Actualización:21-10-2026, Europe/Madrid. Véase [sincronización](research/game
 - [Copia de Frontier Vita](research/game-inputs-2026-10-21/vita-frontier-copy.md) terminada y registrada:PCSG00350,app/patch/rePatch,8261archivos/5212490427bytes seleccionados. SFO base FrontierG1.00 y parcheFrontierZ01.99 comprobados. Descarga/registro completos; descifrado,semántica,jugabilidad y ZZ no acreditados.
 - MH4U/MHXX7z íntegramente probados y extraídos; las CIA base conservan bloqueos de cifrado. El parche3DS es accesible bajo el alcance documentado. MHGU Switch excluido del frente de investigación por decisión posterior del usuario, según PR7.
 - [PR7 de investigación](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/7) conserva análisis de formatos/ejecutables y límites. Los ensayos en curso de ese frente no se atribuyen a pruebas propias de este chat.
-- Prototipos VitaSDK,AssetLab y CombatLab con muestras propias encargados. El chat emisor confirma orden en cola; implementación, contratos finales y artefactos aún pendientes de verificación.
+- Prototipos publicados en PR abiertas:[STT/3](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/8),[CombatLab](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/9),[AssetLab](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/10),[Vita3D](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/11). Responsable comunica pruebas PC y compilación; pendientes visual/físico. STTP00001 usa telemetría local,sinUDP;compatibilidad conMonitorSTT/1–2 pendiente.
 
 ## Prioridades y alcance
 La instrucción vigente es banco general y estudio técnico, sin clasificación por armas ni búsqueda de relaciones con Espada Larga. El [catálogo inicial](research/frontier-classic/README.md) y la propuesta de fusión se conservan como planificación histórica; no son comportamiento implementado ni parámetros confirmados.
@@ -38,3 +38,7 @@ La continuación automática de este chat está activa cada15min hasta nuevo avi
 
 ## Evidencia histórica
 El inventario inicial de7archivos y el piloto de3ARC/782entradas fueron etapas superadas por el banco posterior dentro de su alcance. CI de1b68b5b y el fallo UDP local anterior son evidencia fechada, no validación automática de las publicaciones recientes. Conservados los informes [de extracción](research/game-inputs-2026-10-21/extraction-tools.md),[del piloto](research/game-inputs-2026-10-21/arc-pilot.md) y[de investigación pública](research/game-inputs-2026-10-21/existing-research.md).
+
+## Auditoría de catálogo
+
+[Auditoría posterior](research/game-inputs-2026-10-21/bank-catalog-audit.md):0errores de referencias/estados/tamaños,0objetos huérfanos,161grupos físicos de hashes repetidos conservados. Cinco pruebas del auditor aprobadas; SQLite sin cambios por la lectura.
