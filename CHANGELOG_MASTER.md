@@ -98,3 +98,9 @@ Zona de referencia: Europe/Madrid. Primera base de desarrollo autorizada en EMCY
 - STT/1 carece de autenticación/cifrado y el archivo de registro no tiene rotación automática; no exponer a Internet y limitar ensayos.
 
 Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototipo y su documentación. No se incorporan cambios de otros chats ni recursos de juegos.
+
+## 2026-10-21 — STT Combat Lab 0.1 (propuesta independiente)
+
+- Núcleo C99 original determinista 60 Hz: movimiento acotado, espada experimental, combo de tres, buffer, hitbox y deduplicación contra objetivo con vida/reacción.
+- Demo PC, suite de fronteras y reproducción de 10000 ticks; pruebas GCC con ASan/UBSan aprobadas (LSan desactivado por restricción de `/proc`). CI PC Windows/Linux propia, sin atribuir validación Vita.
+- Interfaz fuente compartida con el prototipo Vita; unidades/ejes/ventanas y límites en `docs/prototypes/combat.md`. Sin recursos comerciales ni cambios en monitor/main.
