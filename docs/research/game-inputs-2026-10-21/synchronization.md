@@ -67,3 +67,7 @@ PR abiertas comprobadas: [contratos STT/3](https://github.com/EMCY3233/STT-Monst
 ## Revisión AssetLab→Vita con muestra propia
 
 [Puente de recursos](asset-bridge-review.md): muestra STTAsset/1 original de4huesos/48vértices/72triángulos,192poses a1/60s calculadas sin valores no finitos. Duraciones2s/1,2s y7claves en cuadrícula60Hz; solo se evaluó esta muestra. Conversión numérica×1000 y límites muestreados documentados; sin cambiar base ni exportar formato destino. Redondeo y empaquetado son propuestas explícitas,no contratos aprobados ni memoria Vita medida. Pendientes:ejes/avance,winding,evaluador/importador,runtime/memoria,GUI y física. Coordinador de prototipos informado,sin encargo de implementar por este aviso.
+
+## Coherencia de fuentes entre PR8–11
+
+[Comparación a commits fijados](prototype-overlap-review.md):17rutas compartidas,36observaciones deblobGit;16rutas idénticas ysoloCHANGELOGdistinto. PR11 conserva9rutasdecontratos dePR8 y7deCombatLabdePR9. Los4changelogs comparten prefijo yentradaspropias;requierenconsolidación futura. No se probó fusión combinada ni archivos exclusivos/runtime. Las4PR estaban abiertas,enborrador ysin fusionar. Coordinador informado;sin cambios en ramas.
