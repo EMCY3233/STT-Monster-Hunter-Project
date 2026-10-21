@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "roots": [
+    {
+      "label": "originals"
+    },
+    {
+      "label": "containers"
+    },
+    {
+      "label": "romfs"
+    },
+    {
+      "label": "samples"
+    }
+  ],
+  "files": 1627,
+  "file_status": {
+    "hashed": 1627
+  },
+  "entries": 21696,
+  "entry_status": {
+    "decoded_and_hash_verified": 21696
+  },
+  "unique_objects": 8823,
+  "object_bytes": 31612051,
+  "formats_observed": {
+    "extension_only:.cia": 4,
+    "7z_signature": 2,
+    "extension_only:.002": 2,
+    "extension_only:.iso": 1,
+    "extension_only:.00000000": 1,
+    "extension_only:.crr": 1,
+    "ARC_signature": 1228,
+    "extension_only:.cro": 109,
+    "extension_only:.crs": 1,
+    "GMD_signature": 271,
+    "MOD_signature": 3,
+    "LMT_signature": 4
+  },
+  "errors": [],
+  "scope": "All physical game files under selected roots; supported ARC17 payloads only. Other containers stay cataloged, not recursively decoded.",
+  "sqlite_integrity_check": "ok"
+}
