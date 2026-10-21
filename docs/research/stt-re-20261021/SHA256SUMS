@@ -24,8 +24,8 @@ b997d32c77e524a5cf26705a8bd08f2a100463cb3bef83c383e4cb9d528f004a  docs/research/
 a7ee30f21f423d31259e61343ff3e1a410b6d13f4f9eb240e5916668a1b0c316  docs/research/stt-re-20261021/frontier-jkr-pair-evidence.json
 47a26cceea79eb0c77a5704014e67389b80b7ea8b88915137457a6e37138b9ca  docs/research/stt-re-20261021/frontier-jkr-pair.md
 8cbee3f4164e3d386e297e01107f5c0896df9c2dd55341b7c202fc26a29236c2  docs/research/stt-re-20261021/frontier-jkr-sample.md
-b435bc501e689b43902f4182ec7247df1830d661ed9fcc977059282379a2f32c  docs/research/stt-re-20261021/live-session-observer-evidence.json
-6d05ffb644173d1edeac73cdb7bd25477d0fd623fa559c53b060bbab8f0f63e4  docs/research/stt-re-20261021/live-session-observer.md
+f5b8ea9a6327a4415ab6ac82b69301030d84f7c46c3a80df51e68132b9a53336  docs/research/stt-re-20261021/live-session-observer-evidence.json
+0902f092d844eed5e75e5663cb0e9a7be350f0cff49f426b667a37bcc51ffe61  docs/research/stt-re-20261021/live-session-observer.md
 369304f7596f241f720c31290f0521b862da3b2ec1b4e5e5bc0caf863070c083  docs/research/stt-re-20261021/lmt-one-track-review-evidence.json
 f91da0eb55d1670638878b449fe7beb437824e05864b807b4c77c103ec21891e  docs/research/stt-re-20261021/lmt-one-track-review.md
 668aee52ec2efba37157d0453b4900f5edbd5ec615fdcd99c90796d83585f1f9  docs/research/stt-re-20261021/lmt-vectors-receipt.json
@@ -63,7 +63,7 @@ b00519fa40e3efc9a6c8a05b7a0dcba39069d39e0a6216f8be3b0f7dde64f8e6  docs/research/
 f00b97c68c22aba4db77b83461adb33b2c5c8ff98e1f415dee210cd2ab6fbb3a  docs/research/stt-re-20261021/plain-executables.json
 966dbcdbe24dd5773205a832f5495285da3532d93852a578628b702504d3857e  docs/research/stt-re-20261021/provenance.json
 b0ad05632223b50cafb32d53b0206253dd217433153dd2ab8ff212a2a4572f2f  docs/research/stt-re-20261021/psp-files.json
-167694436371e7b84300d87d06912c14aa3c0f36e4822aac11fb8019098eb6be  docs/research/stt-re-20261021/README.md
+2fcd61800d1e0254523a9b1d0731c967a082ce58fe7e092ea7b1acfe51301d32  docs/research/stt-re-20261021/README.md
 0b98e274b925a2db76e6148e7652e9e4dafd82a86fb050a10c11dfe7227e09da  docs/research/stt-re-20261021/resource-headers.json
 bb443e912372d6a536aad036009e16dea90bebc8aa8e4e8442f6574a7ccae821  docs/research/stt-re-20261021/sources.md
 d3b4c600d17197c805d668412f19e4090d1c239bb524062b78d89fa140549111  docs/research/stt-re-20261021/tex-decoder-audit-evidence.json

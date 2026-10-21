@@ -1,6 +1,7 @@
 # STT — Ingeniería inversa y recursos
 
-[Observador de sesiones Citra](live-session-observer.md): herramienta de solo lectura, cinco pruebas sintéticas; ventana Qt y selector observados, lectura con juego pendiente tras errores del control de interfaz.
+[Observador de sesiones Citra](live-session-observer.md): lectura RPC verificada con MH4U abierto, 6/6 muestras de cuatro bytes coincidentes con el código estático; cinco pruebas sintéticas. Semántica de combate y sincronización por acciones pendientes.
+
 
 
 
