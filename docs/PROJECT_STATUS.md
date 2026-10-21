@@ -1,13 +1,13 @@
 # Estado consolidado — Start The Travesy, Monster Hunter
 
-Actualización:21-10-2026, Europe/Madrid. Véase [sincronización](research/game-inputs-2026-10-21/synchronization.md) para responsables, fuentes de estado y dependencias.
+Actualización:22-10-2026, Europe/Madrid. Véase [sincronización](research/game-inputs-2026-10-21/synchronization.md) para responsables, fuentes de estado y dependencias.
 
 ## Comprobado
-- Monitor0.5 en main, commit410b1dd70a3713b500a829aed55cb99cb74ad1d0; repository limpio en rama documental docs/monitor-status-sync-20261021 al cierre,commit6200812; correcciones en PR12 abierta,sin fusionar. [PR6](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/6) integrada según cierre del chat propietario; su documentación separa pruebas automatizadas y físicas.
+- Monitor: agente0.5/00.50 confirmado por lecturaSFO; seis mejorasPC integradas mediante autorización directa del usuario en el chat propietario. PR13→14→16→18→19→20 cerradas; merge final `f199bd07b4e05ee4f7e56ed616840518374f3300`. GitHub confirma PR20 fusionada. CI final correcta según propietario; sin reinstalación. Pruebas físicas de red/reloj pendientes.
 - [Banco local](research/game-inputs-2026-10-21/resource-bank.md):9888 archivos físicos tras añadir8261deFrontier;1627correspondían al banco inicial,21696 cargas ARC descomprimidas y8823 objetos únicos del alcance inicial. Siete originales conservan sus hashes. Los catálogos detallados y objetos permanecen locales. [Cierre y censo completo](research/game-inputs-2026-10-21/frontier-complete.md) verificado.
 - [Modelos y animaciones localizados](research/game-inputs-2026-10-21/located-models-animations.md):4bibliotecas LMT y83 cargas MOD en el parche MHXX3DS; cabeceras seleccionadas verificadas. Esto no valida reproducción, geometría ni asociación a esqueletos.
 - [Copia de Frontier Vita](research/game-inputs-2026-10-21/vita-frontier-copy.md) terminada y registrada:PCSG00350,app/patch/rePatch,8261archivos/5212490427bytes seleccionados. SFO base FrontierG1.00 y parcheFrontierZ01.99 comprobados. Descarga/registro completos; descifrado,semántica,jugabilidad y ZZ no acreditados.
-- MH4U/MHXX7z íntegramente probados y extraídos; las CIA base conservan bloqueos de cifrado. El parche3DS es accesible bajo el alcance documentado. MHGU Switch excluido del frente de investigación por decisión posterior del usuario, según PR7.
+- MH4U/MHXX7z íntegramente probados y extraídos; las CIA base conservan bloqueos de cifrado. El parche3DS es accesible bajo el alcance documentado. Existe además una base MH4U NCSD legible, separada de las CIA cifradas; Citra acredita carga/DSP por logs, sin imagen o jugabilidad validadas. MHGU Switch excluido del frente de investigación por decisión posterior del usuario, según PR7.
 - [PR7 de investigación](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/7) conserva análisis de formatos/ejecutables y límites. Los ensayos en curso de ese frente no se atribuyen a pruebas propias de este chat.
 - Prototipos publicados en PR abiertas:[STT/3](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/8),[CombatLab](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/9),[AssetLab](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/10),[Vita3D](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/11). Responsable comunica pruebas PC y compilación; pendientes visual/físico. STTP00001 usa telemetría local,sinUDP. La revisión offline de15casos STT/1–3 pasó; receptor vigente rechazaSTT/3 deliberadamente. EncoderC/transporte integrado/físico pendientes.
 
@@ -51,3 +51,14 @@ El inventario inicial de7archivos y el piloto de3ARC/782entradas fueron etapas s
 - [Interoperabilidad offline](research/game-inputs-2026-10-21/protocol-interop-review.md),[puente numérico con muestra propia](research/game-inputs-2026-10-21/asset-bridge-review.md) y[coherencia de fuentes PR8–11](research/game-inputs-2026-10-21/prototype-overlap-review.md) son aceptaciones separadas; no prueban integración conjunta.
 
 CI confirmada solo para commit1b59dd0:Monitor tests39576768233yVita agent build39576768171 correctos. Los commits documentales posteriores no heredan esa ejecución. PR3 fue preparada sobre main410b1dd con conflicto exclusivo de changelog resuelto,sin fusión enmain ni cambios propios de código monitor.
+
+## Cierres y bloqueos vigentes al 22-10-2026
+
+| Frente | Aceptación cerrada | Límite siguiente |
+|---|---|---|
+| MH4U base | ExHeader/ExeFS y BLZ: salida16.261.120bytes, hash cotejado; solo rango.code revalidado | Segundo decoder independiente no aceptado; no se revalidó imagen completa en ensayoBLZ ni semántica |
+| MHXX update | BLZ13.045.760bytes y referencia de entrada derivada del loader | No es base arrancable demostrada; no funciones identificadas |
+| Prototipo propio | PR15/17/21: formato poses,lectorC,renderer y dosposes visualesPC; VPK00.11 compilado | PR21 abierta,sin fusionar; carga/controles/suspensión/rendimiento Vita pendientes |
+| Recursos comerciales | MOD230 parcial,TEX estructural,LMT documental | ContadorMOD,alfa/fidelidadTEX e independenciaLMT no resueltos |
+
+GitHub verificó PR21 abierta a `41bd4479d79792d4726affa82c01f43abfe59313`. La comprobación visualPC de esa muestra propia no valida GPU/rendimiento en Vita. No reabrir bloqueos repitiendo pruebas idénticas. Banco físico y registros existentes permanecen separados de nuevos derivados de análisis no catalogados. Véase sincronización para fuentes y recibos por etapa.

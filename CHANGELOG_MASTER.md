@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Estado consolidado al cierre de etapas
+
+- Sustituidos estados históricos de monitor no integrado y base3DS no disponible; separadas pruebasPC/compilación/visual/físico. GitHub confirmaPR20fusionada yPR21abierta.
+- Documentados bloqueos vigentes MH4U/MHXX,MOD/TEX/LMT sin repetirensayos oatribuirsemántica.
+
 ## 22-10-2026 — BloqueoBLZ yvisualPC
 
 -PR7/a914801:sinsegundodecoderaceptado,comparaciónnumérica noejecutada/valoresnull. No dependenciacomún afirmada sinprueba.
