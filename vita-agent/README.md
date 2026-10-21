@@ -1,5 +1,7 @@
 # Agente Vita experimental — STT/1
 
+Revisión 0.3: emite STT/2 con diagnóstico de envío, compatible con el receptor actualizado que también acepta STT/1. Captura el detalle sceNetErrnoLoc, conserva el último fallo mientras la aplicación siga abierta y crea un socket nuevo al pulsar Cruz para otro ensayo. Validación física de 0.3 pendiente. [Protocolo y límites de entrega de diagnósticos](../docs/monitor-protocol.md).
+
 Aplicación independiente experimental. La versión 0.1 completó un primer ensayo físico con 60 muestras y salida por START confirmada: [resultado](../docs/STT-MON-001-hardware-result.md). En 0.2, el usuario confirmó texto mayor, desaparición del parpadeo y parada con Círculo tras recibir diez muestras: [resultado](../docs/STT-MON-003-stop-result.md). Siguen pendientes un ensayo completo de 60 muestras en 0.2, desconexión y suspensión.
 
 ## Funciones del código
@@ -12,7 +14,7 @@ Aplicación independiente experimental. La versión 0.1 completó un primer ensa
 - source=vita, sesión basada en tick RTC e inicio monotónico, secuencia de intentos, tiempo transcurrido del proceso y batería por API. Batería fuera de rango se codifica como null. La sesión es un identificador práctico, no criptográfico.
 - Cierre de socket, memoria y módulo NET. Sin cambios de frecuencias, firmware, plugins, lectura de otros procesos o escrituras de archivos.
 
-Usa la conexión Wi-Fi existente, sin configurar perfiles. No garantiza reconexión tras suspensión ni monitoriza otros juegos.
+Usa la conexión Wi-Fi existente, sin configurar perfiles. No garantiza reconexión tras suspensión ni monitoriza otros juegos. El corte Wi-Fi en 0.2 no recuperó recepción en el PC: [resultado](../docs/STT-MON-004-wifi-result.md).
 
 ## Compilación sin consola
 

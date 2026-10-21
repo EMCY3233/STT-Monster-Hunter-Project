@@ -1,4 +1,4 @@
-"""Strict, bounded STT/1 datagrams. Standard library only."""
+"""Strict, bounded STT/1 and STT/2 datagrams. Standard library only."""
 import json
 import math
 import re
@@ -8,10 +8,14 @@ FIELDS = {'version', 'session', 'source', 'seq', 'uptime_ms', 'battery_pct'}
 
 
 def validate(packet):
-    if not isinstance(packet, dict) or set(packet) != FIELDS:
-        raise ValueError('unexpected or missing fields')
-    if type(packet['version']) is not int or packet['version'] != 1:
+    if not isinstance(packet, dict):
+        raise ValueError('expected object')
+    version = packet.get('version')
+    if type(version) is not int or version not in (1, 2):
         raise ValueError('unsupported version')
+    expected = FIELDS if version == 1 else FIELDS | {'diagnostics'}
+    if set(packet) != expected:
+        raise ValueError('unexpected or missing fields')
     if not isinstance(packet['session'], str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,64}', packet['session']):
         raise ValueError('invalid session')
     if packet['source'] not in ('simulator', 'vita'):
@@ -22,6 +26,18 @@ def validate(packet):
     battery = packet['battery_pct']
     if battery is not None and (type(battery) not in (int, float) or not math.isfinite(battery) or not 0 <= battery <= 100):
         raise ValueError('invalid battery_pct')
+    if version == 2:
+        d = packet['diagnostics']
+        if not isinstance(d, dict) or set(d) != {'send_ok', 'send_errors', 'last_result', 'net_errno'}:
+            raise ValueError('invalid diagnostics fields')
+        for key in ('send_ok', 'send_errors'):
+            if type(d[key]) is not int or not 0 <= d[key] <= packet['seq']:
+                raise ValueError('invalid diagnostics counter')
+        if d['send_ok'] + d['send_errors'] != packet['seq']:
+            raise ValueError('diagnostics counters must describe prior attempts')
+        for key in ('last_result', 'net_errno'):
+            if type(d[key]) is not int or not -(2**31) <= d[key] < 2**31:
+                raise ValueError('invalid diagnostics code')
     return packet
 
 

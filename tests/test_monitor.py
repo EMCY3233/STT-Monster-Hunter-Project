@@ -55,13 +55,17 @@ class ReceiverTests(unittest.TestCase):
             thread.start()
             sender.sendto(b'bad', receiver.getsockname())
             for seq in (2, 2, 0):
-                sender.sendto(encode(packet('test', seq, 0)), receiver.getsockname())
+                p = packet('test', seq, 0)
+                if seq == 2:
+                    p.update(version=2, diagnostics=dict(send_ok=2, send_errors=0, last_result=0, net_errno=0))
+                sender.sendto(encode(p), receiver.getsockname())
             thread.join(4)
             self.assertFalse(thread.is_alive())
         self.assertEqual(result, {'accepted': 3, 'rejected': 1})
         records = [json.loads(line) for line in output.getvalue().splitlines()]
         self.assertEqual([r['packet']['seq'] for r in records], [2, 2, 0])
         self.assertTrue(all(r['peer_ip'] == '127.0.0.1' for r in records))
+        self.assertEqual(records[0]['packet']['diagnostics']['send_ok'], 2)
 
     def test_inactivity(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:

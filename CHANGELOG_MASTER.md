@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-006 / fallo Wi-Fi y diagnóstico 0.3
+
+- [Ensayo Wi-Fi 0.2](docs/STT-MON-004-wifi-result.md): PC recibió 39 muestras 0–38; usuario informó 60 intentos, 46 envíos aceptados, 14 errores y último retorno 0x804101CD (SCE_NET_ERROR_ERETURN). No se observó recuperación de recepción; causa subyacente todavía no identificada.
+- Captura cerrada y excepción temporal retirada. Sin modificar firmware/plugins ni borrar juegos.
+- Revisión 0.3: captura sceNetErrnoLoc inmediatamente tras fallo, conserva último código/detalle en RAM y los añade a STT/2. Receptor/analizador compatibles con STT/1 y STT/2. Nuevo socket en cada inicio manual con Cruz; sin promesa de reconexión automática.
+- Quince pruebas PC y ensayo CLI local correctos. Compilación C/Vita y validación física de 0.3 pendientes al crear esta entrada. No se ha transferido todavía el nuevo agente.
+
 ## 2026-10-21 — STT-MON-005 / parada con Círculo validada en 0.2
 
 - [Resultado físico de recepción y parada](docs/STT-MON-003-stop-result.md): último ensayo con diez mensajes, secuencias 0–9 sin huecos internos, duplicados ni desorden; usuario confirma «Parado» y contador detenido tras Círculo. Sin nuevos mensajes durante diez segundos de observación adicional.
