@@ -1,5 +1,7 @@
 # Índice consolidado de aceptaciones PR7
 
+**Nota de herramientas posterior al índice:** [sky mediante computer-use](native-visual-surface.md) tiene importación/listado nativo comprobados. La limitación previa solo se acreditó para CUA REPL; captura de Citra aún no probada, sin nuevo arranque ni cambio de estado A21.
+
 Consolidación documental: 22-10-2026, Europe/Madrid. Fuente: los 23 commits de PR7 hasta [e8a0c7b](https://github.com/EMCY3233/STT-Monster-Hunter-Project/commit/e8a0c7bcb65ca0ef474285087d4f15c2a7d50c88). Este índice no incorpora pruebas, censos o lecturas nuevas de juegos. Los recibos originales se conservan.
 
 **29 aceptaciones:** 22 verificadas dentro de su alcance, 2 negativas y 5 bloqueadas. Una aceptación verificada no implica semántica, jugabilidad, rig funcional o fidelidad de hardware.

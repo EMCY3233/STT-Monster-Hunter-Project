@@ -1,5 +1,7 @@
 # CIA y nueva base MH4U .3ds: revisión con Citra
 
+**Actualización de superficie visual (22-10-2026):** la restricción nativa observada era de CUA REPL. [sky mediante computer-use](native-visual-surface.md) se ha inicializado y listado aplicaciones; captura/accesibilidad en Citra aún sin probar. No se inicia otro arranque ni se declara jugabilidad.
+
 Fecha: 2026-10-21. Petición directa del usuario: «revisa los archivos cia y 3ds con el emulador». Resultado: cinco archivos CIA cotejados con pruebas anteriores y **una nueva ejecución de una base NCSD .3ds de MH4U EUR**. No se descargaron juegos, claves o firmware ni se alteró el banco.
 
 ## Entrada nueva realmente accesible

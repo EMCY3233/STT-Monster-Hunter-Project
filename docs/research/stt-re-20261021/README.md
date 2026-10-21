@@ -1,5 +1,7 @@
 # STT — Ingeniería inversa y recursos
 
+**Actualización de herramientas (22-10-2026):** [sky disponible mediante computer-use](native-visual-surface.md); importación/listado nativos verificados, captura Citra pendiente. La restricción anterior correspondía solo a CUA REPL. Sin nuevo arranque.
+
 ## Estado más reciente: índice consolidado de aceptaciones
 
 [Índice de 29 aceptaciones](acceptance-index.md) y [registro estructurado](acceptance-index.json), 22-10-2026: cubre 23 commits hasta e8a0c7b; delimita alcance, entradas/hashes, estado y criterio de reapertura. Incluye 10 conclusiones históricas superadas sin borrar evidencia. Consolidación documental: sin nuevos ensayos, censos, descargas de herramientas o lectura de juegos.

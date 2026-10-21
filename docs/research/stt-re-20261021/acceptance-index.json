@@ -1143,5 +1143,15 @@
     "MH3U/MH4U/MHXX CIA encryption unchanged; MH4U NCSD is distinct",
     "No game functions, IA, hitboxes, scenario collision, complete UI/audio/VFX/quest schemas or hardware fidelity validated"
   ],
-  "no_new_aggregate_suite_claim": true
+  "no_new_aggregate_suite_claim": true,
+  "tool_surface_update": {
+    "date": "2026-10-22",
+    "evidence": "native-visual-surface-evidence.json",
+    "report": "native-visual-surface.md",
+    "source_index_commit": "e2671fb4026c3ebc5b30dc91e2afdc0def106485",
+    "affects_acceptance": "A21",
+    "native_alternative_available": true,
+    "citra_capture_tested": false,
+    "new_game_acceptance": false
+  }
 }
