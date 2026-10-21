@@ -1,5 +1,7 @@
 # Recuperación acotada — agente 0.4
 
+Actualización 0.5: los límites pasan a usar un [presupuesto proceso+RTC con comprobaciones](suspend-deadlines.md). La prueba 0.4 y sus limitaciones históricas se conservan abajo. La nueva semántica de tiempo requiere validación física propia.
+
 Implementación con [un ensayo físico de continuidad superado](STT-MON-006-auto-result.md), tras un primer intento detenido. Mantiene STT/2, IP privada elegida manualmente y un máximo de 60 intentos de envío por ensayo. No cambia perfiles ni enciende la radio Wi-Fi. La suspensión no se aisló y los límites de tiempo de pared durante ella siguen pendientes.
 
 ## Comportamiento
