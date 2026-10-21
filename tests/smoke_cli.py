@@ -12,12 +12,14 @@ with tempfile.TemporaryDirectory() as folder:
     receiver = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     try:
         assert receiver.stdout.readline().startswith('Listening'), 'receiver not ready'
+        # Consume all startup text before sending packets. TextIOWrapper may
+        # read ahead; communicate() must not be relied on to recover that buffer.
+        assert receiver.stdout.readline().startswith('Vista de recepcion:'), 'live view not ready'
         subprocess.run([sys.executable, '-m', 'stt_monitor.simulator', '--port', '32109',
                         '--count', '10', '--interval', '0.02'], check=True, timeout=10)
         stdout, stderr = receiver.communicate(timeout=15)
         assert receiver.returncode == 0, stderr
         lines = stdout.splitlines()
-        assert lines[0].startswith('Vista de recepcion:'), stdout
         assert len([line for line in lines if line.startswith('Recibido ')]) == 10, stdout
         assert json.loads(lines[-1]) == {'accepted': 10, 'rejected': 0}, stdout
         records = [json.loads(line) for line in output.read_text().splitlines()]

@@ -4,6 +4,7 @@
 
 - Receptor con opción `--live`: muestra cada recepción, sesión, secuencia, batería y diagnóstico STT/2; distingue contadores previos y último error conservado, que puede ser histórico. STT/1 se identifica sin diagnóstico.
 - Conserva JSONL, contrato, comportamiento por defecto y recepción sin respuestas. No infiere parada/desconexión del silencio ni modifica el agente Vita 0.5.
+- CI inicial PC falló en el ensayo CLI por mezclar readline y communicate: el aviso de inicio podía quedar en el búfer de texto en Linux. Corregida la prueba para consumir ambos avisos antes de iniciar el emisor; no era un fallo de recepción ni un error transitorio. Nueva validación remota pendiente.
 - Validación local: 16 pruebas correctas y ensayo CLI de diez muestras simuladas con salida en directo. Primer intento dentro del sandbox bloqueó recepción loopback/temporales; repetición fuera del sandbox correcta. CI remota pendiente al publicar. Sin prueba física nueva, FTP ni reinstalación.
 
 ## 2026-10-21 — STT-MON-008 / límite temporal durante suspensión 0.5
