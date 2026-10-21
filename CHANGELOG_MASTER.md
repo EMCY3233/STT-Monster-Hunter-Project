@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-007 / recuperación automática acotada 0.4
+
+- Implementada [política de recuperación](docs/auto-recovery.md): consulta de estado con SceNetCtl, pausa sin consumir intentos durante desconexión y recreación del socket al volver la conexión o después de un fallo de envío.
+- Mantiene STT/2 y la sesión durante la recuperación. Límites: 30 s desde desconexión observada, cinco fallos consecutivos de apertura/envío, 180 s totales y 60 intentos reales. Círculo/START mantienen parada/salida manual.
+- Añadidas pruebas C portables de transición, socket obsoleto y límites exactos. Compilación/pruebas remotas y validación en Vita pendientes al crear la entrada. No se transfirió ni instaló todavía 0.4.
+- No se atribuye una causa raíz nueva a 0x80412112; esta revisión intenta recuperar la comunicación y conserva diagnóstico. Sin modificaciones de firmware/plugins, perfiles Wi-Fi ni juegos.
+
 ## 2026-10-21 — STT-MON-006 / fallo Wi-Fi y diagnóstico 0.3
 
 - [Ensayo Wi-Fi 0.2](docs/STT-MON-004-wifi-result.md): PC recibió 39 muestras 0–38; usuario informó 60 intentos, 46 envíos aceptados, 14 errores y último retorno 0x804101CD (SCE_NET_ERROR_ERETURN). No se observó recuperación de recepción; causa subyacente todavía no identificada.

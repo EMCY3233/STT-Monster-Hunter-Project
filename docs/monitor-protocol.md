@@ -35,13 +35,15 @@ Conserva todos los campos base con version=2 y añade exactamente un objeto `dia
 |---|---|
 | send_ok | Envíos aceptados localmente antes del intento actual |
 | send_errors | Fallos de envío antes del intento actual |
-| last_result | Último retorno de error de envío/apertura de socket, entero con signo de 32 bits |
-| net_errno | Detalle de sceNetErrnoLoc capturado al fallar, entero con signo de 32 bits |
+| last_result | Último retorno de error de envío/apertura de socket o consulta de estado, entero con signo de 32 bits |
+| net_errno | Detalle de sceNetErrnoLoc capturado al fallar un socket; cero si no aplica a la operación, entero con signo de 32 bits |
 
 Los contadores son enteros no negativos y su suma debe igualar seq. La muestra se codifica **antes** del envío actual, por lo que no puede informar de su propio resultado. Se rechazan campos desconocidos, booleanos como contadores y valores fuera de rango. Para mostrar un código firmado en hexadecimal, usar su representación de 32 bits (`value & 0xffffffff`).
 
 El último error y su detalle persisten durante la vida de la aplicación, incluso al iniciar otra sesión con Cruz; los contadores y seq se reinician por sesión. Cero significa que todavía no se ha capturado error. Un retorno correcto posterior no borra la evidencia anterior. El detalle de errno es información del sistema, no una causa validada automáticamente.
 
 El receptor nuevo acepta STT/1 y STT/2; un receptor anterior a esta ampliación rechaza STT/2. El simulador existente sigue emitiendo STT/1. Las pruebas C generan muestras de ambas versiones para verificar compatibilidad.
+
+En 0.4, esperar red o fallar al abrir un socket no consume seq ni contadores de envío. La sesión se conserva al recuperar conexión automáticamente; uptime_ms puede saltar aunque las secuencias sean consecutivas. Ver [política y límites](auto-recovery.md). El detalle cero no demuestra ausencia de error si last_result indica fallo de una operación sin errno aplicable.
 
 No hay canal alternativo ni archivo de errores en Vita: sin conectividad no se pueden enviar diagnósticos. El error más reciente puede viajar en una muestra posterior que sí llegue, incluso tras iniciar manualmente otra sesión. Si se cierra la aplicación antes, ese estado en RAM se pierde. No se garantiza un informe de cada fallo ni del último intento de una sesión si no hay otro envío posterior. El analizador expone `diagnostics_latest` de la secuencia diagnóstica más alta recibida por sesión.
