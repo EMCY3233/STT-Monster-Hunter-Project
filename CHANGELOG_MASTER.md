@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-005 / parada con Círculo validada en 0.2
+
+- [Resultado físico de recepción y parada](docs/STT-MON-003-stop-result.md): último ensayo con diez mensajes, secuencias 0–9 sin huecos internos, duplicados ni desorden; usuario confirma «Parado» y contador detenido tras Círculo. Sin nuevos mensajes durante diez segundos de observación adicional.
+- Captura completa: veinte mensajes en tres sesiones, con prefijo 0–1 ausente en la primera. No se declara ausencia de pérdida para toda la captura ni reconexión Wi-Fi validada.
+- Receptor de prueba cerrado; retirada de excepción temporal de firewall comprobada. Sin transferencias ni reinstalación por este cambio documental.
+- Pendientes: ensayo completo 0.2, desconexión y suspensión. Informe automático de errores al PC todavía no implementado; los errores actuales se muestran solo en Vita.
+
 ## 2026-10-21 — STT-MON-004 / primer ensayo físico y pantalla 0.2
 
 - [Ensayo físico STT-MON-001](docs/STT-MON-001-hardware-result.md): 60 muestras, secuencias 0–59, cero rechazos, huecos, duplicados o llegadas fuera de orden; batería declarada 91 %. Salida con START confirmada por el usuario.
@@ -7,7 +14,7 @@
 - Usuario informa texto pequeño y parpadeo. Corrección 0.2: fuente duplicada, filas estables que se redibujan solo si cambia el texto, sin borrar toda la pantalla cada 50 ms. Añadidos saltos de +/-10 para editar IP con menos pulsaciones.
 - Compilación 0.2, codificador C e inspección de paquete correctos ([Actions 39545465268](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39545465268)); pruebas PC correctas ([Actions 39545465267](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39545465267)). Usuario confirma en Vita texto mayor y desaparición del parpadeo. [PR #2](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/2) integrada.
 - VPK 0.2 transferido con hash verificado. Instalador y carpeta de transferencia 0.1 eliminados de Vita, y VPK/ZIP anteriores eliminados del PC; conservados paquete vigente y registros. Preferencia de limpieza futura registrada en AGENTS.md.
-- Pendientes: nuevo ensayo de telemetría en 0.2, desconexión, suspensión y parada con Círculo. La confirmación visual no sustituye esas pruebas.
+- Recepción y parada con Círculo validadas posteriormente en STT-MON-005. Siguen pendientes ensayo completo 0.2, desconexión y suspensión.
 
 ## 2026-10-21 — STT-MON-003 / agente Vita experimental
 

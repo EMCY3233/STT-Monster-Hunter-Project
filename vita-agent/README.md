@@ -1,6 +1,6 @@
 # Agente Vita experimental — STT/1
 
-Aplicación independiente experimental. La versión 0.1 completó un primer ensayo físico con 60 muestras y salida por START confirmada: [resultado](../docs/STT-MON-001-hardware-result.md). En la versión 0.2, el usuario confirmó texto mayor y desaparición del parpadeo en Vita. El nuevo ensayo de telemetría y los casos de parada/desconexión siguen pendientes.
+Aplicación independiente experimental. La versión 0.1 completó un primer ensayo físico con 60 muestras y salida por START confirmada: [resultado](../docs/STT-MON-001-hardware-result.md). En 0.2, el usuario confirmó texto mayor, desaparición del parpadeo y parada con Círculo tras recibir diez muestras: [resultado](../docs/STT-MON-003-stop-result.md). Siguen pendientes un ensayo completo de 60 muestras en 0.2, desconexión y suspensión.
 
 ## Funciones del código
 
