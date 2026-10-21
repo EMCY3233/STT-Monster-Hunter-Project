@@ -1,0 +1,26 @@
+name: Combat Lab PC
+on:
+  push:
+    paths: ['combat-lab/**', '.github/workflows/combat-lab.yml']
+  pull_request:
+    paths: ['combat-lab/**', '.github/workflows/combat-lab.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - run: cmake -S combat-lab -B build/combat -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build/combat --config Release
+      - run: ctest --test-dir build/combat -C Release --output-on-failure
+  sanitize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - run: |
+          cc -std=c99 -Wall -Wextra -Werror -pedantic -fsanitize=address,undefined -Icombat-lab/include combat-lab/src/stt_combat.c combat-lab/tests/test_combat.c -o /tmp/stt-combat-test
+          /tmp/stt-combat-test

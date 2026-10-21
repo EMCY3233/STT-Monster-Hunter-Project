@@ -11,6 +11,9 @@ def validate(packet):
     if not isinstance(packet, dict):
         raise ValueError('expected object')
     version = packet.get('version')
+    if type(version) is int and version == 3:
+        from .play_protocol import validate_play
+        return validate_play(packet)
     if type(version) is not int or version not in (1, 2):
         raise ValueError('unsupported version')
     expected = FIELDS if version == 1 else FIELDS | {'diagnostics'}
