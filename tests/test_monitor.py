@@ -114,6 +114,43 @@ class ReceiverTests(unittest.TestCase):
                 self.assertEqual(result, expected)
                 self.assertAlmostEqual(sock.now, 1)
 
+    def test_byte_limit_exact_boundary_and_no_silent_discard(self):
+        class DatagramSocket:
+            calls = 0
+            def settimeout(self, seconds):
+                pass
+            def recvfrom(self, size):
+                self.calls += 1
+                return encode(packet('bounded', 0, 0)), ('127.0.0.1', 1234)
+        from datetime import datetime, timezone
+        fixed = datetime(2026, 10, 21, tzinfo=timezone.utc)
+        def capture(**kwargs):
+            output = io.StringIO()
+            sock = DatagramSocket()
+            with patch('stt_monitor.receiver.datetime') as clock:
+                clock.now.return_value = fixed
+                result = receive(sock, output, **kwargs)
+            return result, output.getvalue(), sock.calls
+        _, single, _ = capture(max_packets=1)
+        size = len(single.encode('utf-8'))
+        result, logged, calls = capture(max_bytes=size, max_packets=1)
+        self.assertEqual(logged, single)
+        self.assertEqual(result['accepted'], 1)
+        result, logged, calls = capture(max_bytes=size*2-1)
+        self.assertEqual(result['stop_reason'], 'max_bytes')
+        self.assertEqual(result['not_recorded'], 1)
+        self.assertEqual(result['bytes_written'], size)
+        self.assertEqual(result['accepted'], 1)
+        self.assertEqual(logged, single)
+        self.assertEqual(calls, 2)
+        result, logged, calls = capture(max_bytes=size, initial_bytes=size)
+        self.assertEqual(result['not_recorded'], 0)
+        self.assertEqual(logged, '')
+        self.assertEqual(calls, 0)
+        result, logged, _ = capture(max_bytes=size, initial_bytes=1)
+        self.assertEqual(result['not_recorded'], 1)
+        self.assertEqual(logged, '')
+
     def test_inactivity(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             sock.bind(('127.0.0.1', 0))
