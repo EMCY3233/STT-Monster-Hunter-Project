@@ -5,7 +5,9 @@
 - [Ensayo físico STT-MON-001](docs/STT-MON-001-hardware-result.md): 60 muestras, secuencias 0–59, cero rechazos, huecos, duplicados o llegadas fuera de orden; batería declarada 91 %. Salida con START confirmada por el usuario.
 - VPK 0.1 transferido con autorización a carpeta nueva y verificado por lectura de vuelta. Excepción temporal del firewall autorizada por separado y retirada al terminar; retirada comprobada.
 - Usuario informa texto pequeño y parpadeo. Corrección 0.2: fuente duplicada, filas estables que se redibujan solo si cambia el texto, sin borrar toda la pantalla cada 50 ms. Añadidos saltos de +/-10 para editar IP con menos pulsaciones.
-- Compilación de 0.2 y validación visual pendientes al publicar esta entrada. Pruebas de desconexión, suspensión y parada con Círculo siguen pendientes.
+- Compilación 0.2, codificador C e inspección de paquete correctos ([Actions 39545465268](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39545465268)); pruebas PC correctas ([Actions 39545465267](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39545465267)). Usuario confirma en Vita texto mayor y desaparición del parpadeo. [PR #2](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/2) integrada.
+- VPK 0.2 transferido con hash verificado. Instalador y carpeta de transferencia 0.1 eliminados de Vita, y VPK/ZIP anteriores eliminados del PC; conservados paquete vigente y registros. Preferencia de limpieza futura registrada en AGENTS.md.
+- Pendientes: nuevo ensayo de telemetría en 0.2, desconexión, suspensión y parada con Círculo. La confirmación visual no sustituye esas pruebas.
 
 ## 2026-10-21 — STT-MON-003 / agente Vita experimental
 

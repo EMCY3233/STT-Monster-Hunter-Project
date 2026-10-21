@@ -38,4 +38,4 @@ El registro íntegro se conserva localmente, sin publicar IP ni identificador de
 
 ## Pendientes
 
-Prueba física de Círculo para detener, desconexión/reconexión Wi-Fi, suspensión y rendimiento sostenido. La corrección de tamaño/parpadeo 0.2 debe compilarse y validarse visualmente en consola antes de considerarla confirmada.
+Prueba física de Círculo para detener, desconexión/reconexión Wi-Fi, suspensión y rendimiento sostenido. La versión 0.2 compiló correctamente y el usuario confirmó posteriormente el aumento de texto y desaparición del parpadeo; no se ha repetido todavía el ensayo de telemetría con ese paquete.
