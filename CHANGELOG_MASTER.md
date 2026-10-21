@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Índice deaceptaciones recibido
+
+-PR7 consolidó29aceptaciones:22verificadasdentrodealcance,2negativas,5bloqueadas,snapshothastae8a0c7b.
+-Ensayoposterior sinentradaAconfirmada,no vínculomemoria↔acción. Eigentcontinúabloqueadosinresultadofinal.
+
 ## 22-10-2026 — Resultado negativo de matrices
 
 -PR7/e8a0c7b:0/3pares cumplen1e-4;8pruebasdelaherramientapasaron,no confirman rig/posebase.

@@ -237,3 +237,11 @@ Centralrecibióinforme porlecturadeestado;elenvíoderegresodelpropietariofue rec
 PR7/e8a0c7b:0/3pares dematrices cumplen tolerancia0,0001;8pruebasnuevas deherramientacorrectas segúnpropietario. No convertir prueba negativa en corrupciónconfirmada orelacióninversaaceptada. Jerarquíaestructuralprevia conservaaceptación;rigfuncional/posebasependientes. No ampliar toleranciaparaforzaréxito.
 
 Cerradoensayo deestamuestra;reabrir con fuentesemánticanueva,no expandirconvenciones/muestrasindiscriminadamente. Encargada consolidación documentalPR7 deaceptaciones/commits/límites/criteriosdereapertura yconclusioneshistóricassuperadas,sin ensayos nuevos. Banco yrecibosFTP completos,sin cambios.
+
+## 22-10-2026 — ÍndicePR7 consolidado y controles pendientes
+
+Índice delpropietario consolida29aceptaciones hastae8a0c7b:22verificadasdentrodesualcance,2negativas,5bloqueadas. No son29funcionesdeljuegovalidadas;mantener snapshot/commits ycriteriosdereapertura. [Índice](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/research/stt-engineering-resources-20261021/docs/research/stt-re-20261021/acceptance-index.md).
+
+Avanceposterior comunicado:12lecturas de2rangos sinvariación;traspulsaciónautomáticaA no se confirmóentrada reconocida,pornotanto sinvínculodatos↔acción. Noconcluir ausenciaestadovariable.No repetirlecturas hasta confirmarentrada/estado observable.
+
+Eigent auditoríadocumentalpública permaneceesperando aprobación search_actions(mcp.tool.write);0archivosdesalida, no informefinal. No aprobada ni reintentada. Bloqueoyacomunicadoalusuario;sinrepetiravisosinalterados. Banco/completitudrecibos sin cambios.
