@@ -110,3 +110,11 @@ Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototip
   visual por ausencia de pantalla; CI PC Windows/Linux separada pendiente de verificación remota.
 - Paquete ZIP determinista, contrato, comandos, arquitectura, controles, SHA-256 y límites en
   `docs/prototypes/asset-lab.md` y `asset-lab/README.md`. Sin pruebas/instalación física Vita.
+
+## 2026-10-21 — Puente original STT Pose/1 (PC)
+
+- Exportador y lector PC acotados, ejes sin reflexión, mm y poses a 60 Hz.
+- 29 pruebas PC aprobadas; muestra propia 192 poses/149293 bytes.
+- Contrato y límites: docs/prototypes/asset-pose-bridge.md.
+- Sin parser VPK, GUI, compilación Vita nueva ni validación física de este puente.
+
