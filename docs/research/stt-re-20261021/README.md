@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: una jerarquía MOD230
+## Estado más reciente: propiedad de matrices no confirmada
+
+[Misma muestra MOD230](mod230-matrix-property.md): modelo global×inversa derivado de referencia, tolerancia fijada0,0001;0/3pares aceptados,residuo máximo143,626968. Sin buscar órdenes/transposiciones alternativos, ejes o unidades.8pruebas sintéticas nuevas aprobadas. La jerarquía estructural anterior permanece; relación funcional entre matrices/bind pose bloqueada.
+
+
+## Etapa anterior: una jerarquía MOD230
 
 [Una muestra con3huesos](mod230-skeleton.md),22-10-2026: selección mínima entre3candidatos existentes conhuesos;2raíces,sinciclos,tablas enrangoy6matricesfinitas.804bytes deparseo,sin geometría,skinning,LMT oexportacióndematrices.10pruebas nuevasaprobadas. Rigfuncional yconvenciones dematrices pendientes;discrepanciaMOD990eindependenciaBLZ/LMT permanecen abiertas.
 
