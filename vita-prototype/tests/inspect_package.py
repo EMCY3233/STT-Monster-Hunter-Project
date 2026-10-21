@@ -37,15 +37,17 @@ def inspect(folder):
         raise ValueError('VPK checksum mismatch')
     with zipfile.ZipFile(package) as archive:
         names = archive.namelist()
-        if len(names) != len(set(names)) or set(names) != {'eboot.bin', 'sce_sys/param.sfo'}:
+        if len(names) != len(set(names)) or set(names) != {'eboot.bin', 'sce_sys/param.sfo', 'assets/practice.pose.json'}:
             raise ValueError('Unexpected package contents')
         if sum(entry.file_size for entry in archive.infolist()) > 4 * 1024 * 1024:
             raise ValueError('Unexpected uncompressed size')
         if not archive.read('eboot.bin').startswith(b'SCE\0'):
             raise ValueError('Invalid SELF header')
         sfo = sfo_strings(archive.read('sce_sys/param.sfo'))
-        if sfo.get('TITLE_ID') != 'STTP00001' or sfo.get('TITLE') != 'STT Vita Prototype' or sfo.get('APP_VER') != '00.10':
+        if sfo.get('TITLE_ID') != 'STTP00001' or sfo.get('TITLE') != 'STT Vita Prototype' or sfo.get('APP_VER') != '00.11':
             raise ValueError('Application identity mismatch; do not install')
+        if hashlib.sha256(archive.read('assets/practice.pose.json')).hexdigest() != 'a6648b5901bf6282457062911946399aa3019cc7fb23a661bfc5aa81550dfcdc':
+            raise ValueError('Original sample mismatch')
     print('PASS structural VPK / SELF / SFO identity inspection: STTP00001')
     print('SHA256:', actual)
 

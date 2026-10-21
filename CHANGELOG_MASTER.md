@@ -123,3 +123,10 @@ Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototip
 - [Entrega y evidencias](docs/prototypes/initial-delivery.md): CI PC de B/C/contratos correcta y CI Vita39560756730 correcta, incluida inspección VPK/SFO independiente. Corrección de portabilidad de enum ARM y regresión `-fshort-enums`.
 - VPK STTP00001 de51.745 bytes: SHA-256 `e8b0a0bded89881c9a79a035028bec04fbed2bd99e85533abc662a0af993ffa5`; ZIP Asset Lab: `916638957260b3a7eea59581fcde8b83d539706faf294958d4a4360c8928fe99`. Ambos descargados/contrastados localmente.
 - Juego offline con movimiento/cámara/golpe/vida/reacción. Buzón STT/3 local; UDP y Aquatic pendientes. GUI B sin revisión visual; rendimiento/suspensión en consola sin confirmar. Sin acceso FTP desde Work, instalación ni prueba física en este encargo. Monitor STTM00001 intacto.
+
+## 2026-10-21 — Integración de muestra original STT Pose/1
+
+- Carga acotada del asset propio y emisión de triángulos en renderer de PR11.
+- Fallback controlado por ausencia/error, buffers fijos y clips a tick60Hz.
+- STTP00001 versión00.11; sin FTP ni instalación.
+- Pruebas PC, VPK e inspección pendientes de CI al publicar.

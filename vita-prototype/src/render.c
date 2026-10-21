@@ -41,7 +41,11 @@ static const unsigned char glyph[38][5]={
 static void rect(int x,int y,int w,int h,uint32_t color){for(int j=y;j<y+h;j++)for(int i=x;i<x+w;i++)if(i>=0&&i<STT_WIDTH&&j>=0&&j<STT_HEIGHT)fb[j*STT_PITCH+i]=color;}
 static void text(int x,int y,const char*s,uint32_t color){for(;*s;s++,x+=6){int n=*s>='0'&&*s<='9'?*s-'0':*s>='A'&&*s<='Z'?*s-'A'+10:*s==':'?36:*s=='-'?37:-1;
  if(n<0){continue;}for(int i=0;i<5;i++)for(int j=0;j<7;j++)if(glyph[n][i]&(1<<j))rect(x+i,y+j,1,1,color);}}
-void stt_render(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused){
+static int pose_triangle(void *context,const float p[3][3]){
+ (void)context;
+ tri((V){p[0][0],p[0][1],p[0][2]},(V){p[1][0],p[1][1],p[1][2]},(V){p[2][0],p[2][1],p[2][2]},RGB(42,168,213));return 1;
+}
+void stt_render_with_asset(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused,SttAsset *asset){
  fb=pixels;zb=depth;memset(zb,0,sizeof(float)*STT_WIDTH*STT_HEIGHT);
  for(int y=0;y<STT_HEIGHT;y++)for(int x=0;x<STT_WIDTH;x++)fb[y*STT_PITCH+x]=RGB(18+y/12,27+y/10,47+y/8);
  float hx=c->hunter.x_mm*.001f,hz=c->hunter.z_mm*.001f,sy=sinf(cam.yaw),cy=cosf(cam.yaw),sp=sinf(cam.pitch),cp=cosf(cam.pitch);
@@ -51,18 +55,26 @@ void stt_render(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,un
   uint32_t col=(x+z)&1?RGB(49,67,69):RGB(57,77,78);V a={x*2,0,z*2},b={x*2+2,0,z*2},d={x*2,0,z*2+2},e={x*2+2,0,z*2+2};tri(a,b,e,col);tri(a,e,d,col);
  }
  float yaw=c->hunter.yaw_turn*(6.28318530718f/65536);
- box(hx,.8f,hz,.55f,.8f,.32f,yaw,RGB(42,168,213));box(hx,1.45f,hz,.38f,.4f,.38f,yaw,RGB(245,207,161));
- box(hx-.17f,.25f,hz,.20f,.5f,.23f,yaw,RGB(30,66,101));box(hx+.17f,.25f,hz,.20f,.5f,.23f,yaw,RGB(30,66,101));
+ int posed=asset&&asset->status==STT_ASSET_READY&&stt_pose_emit(&asset->pose,stt_asset_clip(asset,c->hunter.state!=STT_IDLE),c->tick,c->hunter.x_mm,c->hunter.z_mm,c->hunter.yaw_turn,&asset->scratch,pose_triangle,NULL);
+ if(!posed){
+  if(asset&&asset->status==STT_ASSET_READY)asset->status=STT_ASSET_INVALID;
+  box(hx,.8f,hz,.55f,.8f,.32f,yaw,RGB(42,168,213));box(hx,1.45f,hz,.38f,.4f,.38f,yaw,RGB(245,207,161));
+  box(hx-.17f,.25f,hz,.20f,.5f,.23f,yaw,RGB(30,66,101));box(hx+.17f,.25f,hz,.20f,.5f,.23f,yaw,RGB(30,66,101));
+ }
  float blade_yaw=yaw+(c->hunter.state==STT_ACTIVE?.5f:0);float reach=c->hunter.state==STT_ACTIVE?1.0f:.65f;
  box(hx+sinf(blade_yaw)*reach+cosf(yaw)*.4f,.85f,hz+cosf(blade_yaw)*reach-sinf(yaw)*.4f,.10f,.10f,1.6f,blade_yaw,c->hunter.state==STT_ACTIVE?RGB(255,234,125):RGB(172,205,220));
  float tx=c->target.x_mm*.001f,tz=c->target.z_mm*.001f;
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-1  ORIGINAL SCENE",RGB(119,223,235));
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-11 ORIGINAL SCENE",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
  rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE  RIGHT CAMERA  CROSS ATTACK  START EXIT",RGB(238,239,223));
  snprintf(line,sizeof line,"TRIANGLE RESET  FRAME US %u  DROPPED %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
  if(paused){rect(85,115,310,34,RGB(9,17,27));text(102,128,"RESUMED - RELEASE STICKS AND BUTTONS",RGB(255,234,125));}
+ if(asset)text(8,36,asset->status==STT_ASSET_READY?"ASSET READY":asset->status==STT_ASSET_MISSING?"ASSET MISSING - SIMPLE HUNTER":"ASSET INVALID - SIMPLE HUNTER",RGB(255,234,125));
+}
+void stt_render(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused){
+ stt_render_with_asset(pixels,depth,c,cam,frame_us,dropped,paused,NULL);
 }
 
 void stt_render_error(uint32_t *pixels,int error){
