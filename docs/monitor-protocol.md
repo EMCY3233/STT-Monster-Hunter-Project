@@ -1,4 +1,4 @@
-# STT Vita Monitor — arquitectura y STT/1
+# STT Vita Monitor — arquitectura y STT/1–STT/2
 
 Flujo: emisor simulado (hoy) o aplicación Vita independiente (futuro) → UDP IPv4 → receptor Python en Windows → JSONL. El receptor no envía respuestas ni comandos. No hay descubrimiento automático, administración remota ni lectura de procesos.
 
@@ -26,3 +26,22 @@ Escucha por defecto en 127.0.0.1. Para una futura prueba Vita habrá que selecci
 El receptor mantiene memoria acotada y descarga cada registro al archivo. No hay rotación ni límite de almacenamiento automático. `--max-packets` limita muestras válidas; la inactividad cuenta desde la última muestra válida. Los paquetes inválidos no prolongan ese plazo. Los fallos de disco o enlace de socket detienen el proceso con error, salvo datagramas demasiado grandes, que se descartan. No se han medido rendimiento sostenido, consumo Vita ni resistencia a tráfico hostil.
 
 Decisión inicial: 1 muestra/segundo, solo estado del propio agente. FPS, RAM global, temperaturas, trazas del kernel y telemetría de otros juegos quedan fuera del contrato hasta verificar APIs y viabilidad. Una aplicación independiente no demuestra monitorización concurrente de un juego.
+
+## STT/2 — diagnósticos de red
+
+Conserva todos los campos base con version=2 y añade exactamente un objeto `diagnostics`:
+
+| Campo | Significado |
+|---|---|
+| send_ok | Envíos aceptados localmente antes del intento actual |
+| send_errors | Fallos de envío antes del intento actual |
+| last_result | Último retorno de error de envío/apertura de socket, entero con signo de 32 bits |
+| net_errno | Detalle de sceNetErrnoLoc capturado al fallar, entero con signo de 32 bits |
+
+Los contadores son enteros no negativos y su suma debe igualar seq. La muestra se codifica **antes** del envío actual, por lo que no puede informar de su propio resultado. Se rechazan campos desconocidos, booleanos como contadores y valores fuera de rango. Para mostrar un código firmado en hexadecimal, usar su representación de 32 bits (`value & 0xffffffff`).
+
+El último error y su detalle persisten durante la vida de la aplicación, incluso al iniciar otra sesión con Cruz; los contadores y seq se reinician por sesión. Cero significa que todavía no se ha capturado error. Un retorno correcto posterior no borra la evidencia anterior. El detalle de errno es información del sistema, no una causa validada automáticamente.
+
+El receptor nuevo acepta STT/1 y STT/2; un receptor anterior a esta ampliación rechaza STT/2. El simulador existente sigue emitiendo STT/1. Las pruebas C generan muestras de ambas versiones para verificar compatibilidad.
+
+No hay canal alternativo ni archivo de errores en Vita: sin conectividad no se pueden enviar diagnósticos. El error más reciente puede viajar en una muestra posterior que sí llegue, incluso tras iniciar manualmente otra sesión. Si se cierra la aplicación antes, ese estado en RAM se pierde. No se garantiza un informe de cada fallo ni del último intento de una sesión si no hay otro envío posterior. El analizador expone `diagnostics_latest` de la secuencia diagnóstica más alta recibida por sesión.

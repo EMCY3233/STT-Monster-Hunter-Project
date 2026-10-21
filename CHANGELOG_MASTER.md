@@ -1,5 +1,14 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-006 / fallo Wi-Fi y diagnóstico 0.3
+
+- [Ensayo Wi-Fi 0.2](docs/STT-MON-004-wifi-result.md): PC recibió 39 muestras 0–38; usuario informó 60 intentos, 46 envíos aceptados, 14 errores y último retorno 0x804101CD (SCE_NET_ERROR_ERETURN). No se observó recuperación de recepción; causa subyacente todavía no identificada.
+- Captura cerrada y excepción temporal retirada. Sin modificar firmware/plugins ni borrar juegos.
+- Revisión 0.3: captura sceNetErrnoLoc inmediatamente tras fallo, conserva último código/detalle en RAM y los añade a STT/2. Receptor/analizador compatibles con STT/1 y STT/2. Nuevo socket en cada inicio manual con Cruz; sin promesa de reconexión automática.
+- Quince pruebas PC y ensayo CLI correctos en Windows/Linux Python 3.11/3.13 ([Actions 39548761830](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39548761830)). Compilación C/Vita e inspección VPK correctas ([Actions 39548761895](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39548761895)).
+- [Prueba física 0.3](docs/STT-MON-005-diagnostic-result.md): tras el corte, usuario informa 60 intentos/51 envíos/9 errores, retorno 0x80412112 y errno 205. PC recibió 46 muestras; recuperación automática no observada. Al pulsar Cruz sin cerrar la aplicación llegaron las 60 muestras de la sesión nueva y el error anterior se recibió automáticamente por STT/2. Recuperación manual y transporte del último diagnóstico validados; causa raíz pendiente.
+- Actualización transferida y verificada; instaladores 0.2 anteriores eliminados en Vita y PC. Receptor cerrado y retirada del firewall comprobada. Este cierre documental no requiere nuevas transferencias ni reinstalación.
+
 ## 2026-10-21 — STT-MON-005 / parada con Círculo validada en 0.2
 
 - [Resultado físico de recepción y parada](docs/STT-MON-003-stop-result.md): último ensayo con diez mensajes, secuencias 0–9 sin huecos internos, duplicados ni desorden; usuario confirma «Parado» y contador detenido tras Círculo. Sin nuevos mensajes durante diez segundos de observación adicional.
