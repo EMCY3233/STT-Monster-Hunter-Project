@@ -1,5 +1,15 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Sincronización de frentes y continuación
+
+- Monitor confirmado en main410b1dd70a, versión0.5; sustituidos resúmenes centrales antiguos.
+- Banco inicial1627archivos/21696entradas/8823objetos separado de copia Frontier Vita todavía en curso; cierre sujeto a recibos y registro final.
+- Scope vigente: banco y análisis general, sin clasificación por armas. Prototipos propios encargados, inicio efectivo pendiente de verificar.
+- Propiedad de inventory-work/PR3, research-work/PR7 y repository delimitada. Monitor detectó documentación antigua en su frente y recibió encargo de corrección; no se fusiona ni reinstala por sincronizar.
+- Continuación de este chat activa cada15min hasta nuevo aviso, con verificación previa de descarga/banco y avisos solo por novedades significativas o bloqueos.
+- Los informes históricos conservan sus resultados fechados; no se atribuye CI antigua a publicaciones nuevas.
+
+
 ## 2026-10-21 — STT-RESEARCH-004 / piloto ARC y revisión de trabajo existente
 
 - Extraído RomFS del parche MHXX: 1.609 archivos, 28.822.254 bytes; 1.228 archivos con extensión ARC y firma ARC nula final. La inspección completa se limita a title/resident/quest ARC v17: 782/782 entradas con zlib y longitud correctos.
