@@ -1,6 +1,6 @@
 # Start The Travesy, Monster Hunter
 
-Base inicial de investigación y desarrollo. No existe todavía un juego nativo ni una conversión demostrada. El primer componente ejecutable es **STT Vita Monitor 0.1**, receptor de telemetría para Windows y generador simulado, escrito con la biblioteca estándar de Python 3.11 o posterior.
+Base inicial de investigación y desarrollo. No existe todavía un juego nativo ni una conversión demostrada. El componente ejecutable es **STT Vita Monitor**: receptor y generador simulado para Windows con Python 3.11 o posterior, y agente Vita independiente **0.5**. El receptor acepta STT/1 y STT/2; el simulador emite STT/1 y el agente actual STT/2. La [recuperación de red en 0.4](docs/STT-MON-006-auto-result.md) y la [parada tras suspensión en 0.5](docs/STT-MON-008-suspend-result.md) tienen resultados físicos documentados; siguen pendientes pruebas físicas del límite sin red durante suspensión y de fallos/retrocesos del reloj. No monitoriza otros juegos.
 
 ## Prueba en Windows (dos terminales en esta carpeta)
 
@@ -31,9 +31,9 @@ Produce un resumen por IP, origen declarado y sesión: muestras, duplicados, lle
 ## Documentación
 
 - [Áreas 01–10](docs/areas/README.md)
-- [Arquitectura y protocolo STT/1](docs/monitor-protocol.md)
+- [Arquitectura y protocolos STT/1–STT/2](docs/monitor-protocol.md)
 - [Plan STT-MON-001 y resultados](docs/STT-MON-001.md)
 - [Agente Vita experimental y compilación](vita-agent/README.md)
 - [Changelog maestro](CHANGELOG_MASTER.md)
 
-La conexión FTP y las características del hardware proceden de confirmación del usuario. Esta entrega no accede a la consola ni utiliza WinSCP. No incluye recursos de juegos, firmware ni plugins. El workflow del agente prepara un VPK experimental para revisión; no lo instala ni transfiere.
+La conexión FTP y las características del hardware proceden de confirmación del usuario. El agente 0.5 fue transferido e instalado con autorización y hash verificado; las pruebas y la retirada de las excepciones temporales de firewall están documentadas. No incluye recursos de juegos, firmware ni plugins. El workflow del agente prepara un VPK experimental para revisión; no lo instala ni transfiere.
