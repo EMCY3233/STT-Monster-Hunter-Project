@@ -231,3 +231,9 @@ Nuevaorden de investigación:una muestraMOD230 ya catalogada conhuesos,selecció
 PR7/16111d8,según propietario:una muestra catalogada con3huesos,2raíces,0ciclos y6matricesfinitas;10pruebas nuevas correctas. Acredita estructuraacotada,no rigfuncional,skinning,bindpose oasociaciónLMT. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/16111d8/docs/research/stt-re-20261021/mod230-skeleton.md).
 
 Centralrecibióinforme porlecturadeestado;elenvíoderegresodelpropietariofue rechazadopor revisiónautomática yno se reintenta. No bloqueatrabajolocal. Siguienteaceptaciónencargada:sobre mismamuestra,propiedadnuméricadelasdosfamiliasdematrices solo confuenteprimariaaplicable,toleranciaexplícita ymetadatosagregados. Si semántica noacreditada,cerrar bloqueo;sinmatricescomercialespublicadas,nuevoLMT/skin/render/banco/consola.
+
+## 22-10-2026 — Relación entre matrices no confirmada
+
+PR7/e8a0c7b:0/3pares dematrices cumplen tolerancia0,0001;8pruebasnuevas deherramientacorrectas segúnpropietario. No convertir prueba negativa en corrupciónconfirmada orelacióninversaaceptada. Jerarquíaestructuralprevia conservaaceptación;rigfuncional/posebasependientes. No ampliar toleranciaparaforzaréxito.
+
+Cerradoensayo deestamuestra;reabrir con fuentesemánticanueva,no expandirconvenciones/muestrasindiscriminadamente. Encargada consolidación documentalPR7 deaceptaciones/commits/límites/criteriosdereapertura yconclusioneshistóricassuperadas,sin ensayos nuevos. Banco yrecibosFTP completos,sin cambios.

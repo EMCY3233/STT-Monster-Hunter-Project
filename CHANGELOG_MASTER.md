@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Resultado negativo de matrices
+
+-PR7/e8a0c7b:0/3pares cumplen1e-4;8pruebasdelaherramientapasaron,no confirman rig/posebase.
+-Encargadoíndice consolidadoPR7,sin ampliarensayo/cambiar tolerancia.
+
 ## 22-10-2026 — Jerarquía parcialMOD230
 
 -PR7/16111d8:3huesos,2raíces,0ciclos,6matricesfinitas;10pruebasnuevasdelpropietario. No rigfuncional.
