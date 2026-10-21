@@ -54,3 +54,7 @@ El programa solo abre entradas en modo `rb`, hace lecturas acotadas y escribe un
 Las seis pruebas nuevas usan estructuras sintéticas: truncamiento, límites CIA, metadatos TMD, SFO inválido, extensión ISO engañosa y CRC 7z que cruza una frontera de partes con corrupción deliberada. Todas pasaron. La ejecución amplia encontró un fallo en la prueba UDP preexistente del monitor (0 mensajes recibidos frente a 3 esperados) dentro del entorno restringido; las otras 15 pruebas pasaron. No se modificó el monitor ni se realizó ensayo con Vita. La atribución del fallo al entorno es hipótesis, no diagnóstico demostrado.
 
 Fuentes consultadas el 21-10-2026: [implementación CIA de pyctr](https://github.com/ihaveamac/pyctr/blob/master/pyctr/type/cia.py), [TMD de pyctr](https://github.com/ihaveamac/pyctr/blob/master/pyctr/type/tmd.py), [formato 7z](https://www.7-zip.org/7z.html). Los offsets TMD y alineación CIA se contrastaron con el código de pyctr. Las páginas 3dbrew CIA/TMD devolvieron 403; no se usaron como evidencia leída.
+
+## Actualización de CI y documentación consolidada
+
+CI del commit `1b68b5b` completada correctamente: [Monitor tests](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39547319058) y [Vita agent build](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39547319029). No convierte el fallo UDP local previo en un diagnóstico resuelto ni valida hardware. Véase [estado consolidado](../../PROJECT_STATUS.md) para áreas 01–10 y [catálogo Frontier](../frontier-classic/README.md) para su estado independiente.
