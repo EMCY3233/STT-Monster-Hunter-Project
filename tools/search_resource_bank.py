@@ -14,7 +14,17 @@ def search(bank, text, limit=50):
         needle = '%' + text.replace('!', '!!').replace('%', '!%').replace('_', '!_') + '%'
         files = [dict(r) for r in db.execute("SELECT * FROM files WHERE relative_path LIKE ? ESCAPE '!' OR sha256=? ORDER BY id LIMIT ?", (needle, text, limit))]
         entries = [dict(r) for r in db.execute("SELECT e.*,f.root_label,f.relative_path AS archive_path,o.relative_path AS object_path FROM entries e JOIN files f ON f.id=e.file_id LEFT JOIN objects o ON e.sha256=o.sha256 WHERE e.internal_path LIKE ? ESCAPE '!' OR e.sha256=? ORDER BY e.file_id,e.entry_index LIMIT ?", (needle, text, limit))]
-        return {'files': files, 'entries': entries, 'limit_per_category': limit}
+        derivatives = []
+        sidecar = Path(bank) / 'derivatives.jsonl'
+        if sidecar.exists():
+            with sidecar.open(encoding='utf-8') as stream:
+                for line in stream:
+                    item = json.loads(line)
+                    if text.lower() in (item['source_relative_path'] + '\n' + item['output_relative_path']).lower() or text in (item['source_sha256'], item['output_sha256']):
+                        derivatives.append(item)
+                        if len(derivatives) >= limit:
+                            break
+        return {'files': files, 'entries': entries, 'derivatives': derivatives, 'limit_per_category': limit}
     finally:
         db.close()
 
