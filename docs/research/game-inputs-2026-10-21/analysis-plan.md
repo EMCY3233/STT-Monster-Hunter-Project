@@ -1,5 +1,8 @@
 # Herramientas y protocolo de estudio
 
+**Actualización posterior del 21-10-2026:** [herramientas y extracción local](extraction-tools.md). Los dos conjuntos 7z ya pasaron prueba íntegra y extracción; hay metadatos de sus CIA y listado RomFS del parche. Los párrafos iniciales que indican «sin prueba de carga» o «herramientas no disponibles» describen la primera etapa, superada donde lo precisa ese informe. MHXX es el nombre japonés relacionado con Generations Ultimate; se conserva por separado la plataforma 3DS observada en el CIA.
+
+
 Estado: preparado, sin extracción de assets ni ejecución de juegos. Seleccionar herramientas por firma y versión real, no solo extensión. No se demuestra conversión nativa a Vita.
 
 ## Herramientas identificadas
