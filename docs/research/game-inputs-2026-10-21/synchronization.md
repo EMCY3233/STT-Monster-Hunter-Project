@@ -191,3 +191,11 @@ Propietario prototipos:PR17 dependiente15,lectorCacotadoSTTPose/1 yadaptadortri�
 Propietario monitor:PR18/208a5d7 cuota10MiB ylímites1000sesiones/100000secuencias,parada/parcialexplícitos;PR19/89f99b2 rechaza anexadotrasarchivo sinLFfinal,conservándolo.26pruebas/CI PC-Vitacorrectas;CI16 confirmada. Cadena13→14→16→18→19 sinfusionar. LímitesdeconteonoRAMmedida. Encargadarevisiónfinaldependencias/CLI/formatos yordenpropuesto,sinfeaturesnuevasinnecesarias.
 
 Resultados atribuidos asuspropietarios,no repetidosenPR3. Banco completoconrecibos sin cambios;sinFTP/instalación/consola niadaptacióncomercial.
+
+## Renderer propio integrado y monitor listo para revisión
+
+InformeprototiposPR21:Pose/1 conectado alrenderer con muestrapropia,límite160KiB yfallbackcontrolado;sanitizadores/anclas/animación/16cámaras aprobadossegúnpropietario. VPKSTTP00001/00.11 compilado/inspeccionado;almacenamientoassetPC172.904bytes,noRAMVita medida. Visual/físicopendiente. Encargada comprobaciónvisualPC solo si backendexistente viable;sincrearmotorcompleto oinstalarconsola.
+
+MonitorPR20/f30e8d4 entregamatriz/heads/orden13→14→16→18→19→20;26pruebas/CIdecódigocorrectas segúnpropietario. CI documentalpendiente,encargadocierre;frente listopararevisión,sinfusión ofeaturesadicionalesinnecesarias. Pendientesfísicosred/reloj no se sustituyenconPC.
+
+Investigaciónrecibe siguienteaceptación:una particiónNCCH ejecutable de nueva baseMH4Ulegible,ExHeader/ExeFS/flags/rangos conprocedencia;sinRomFSmasivo,nuevosemuruns odescompresiónautomática. Banco/otrasramas/originalesintactos.

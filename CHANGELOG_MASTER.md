@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Renderer00.11 ymatrizmonitor
+
+-RecibidoPR21:muestrapropiaintegrada,VPK00.11compilado,sinvisual/físico. EncargadaverificaciónPCviable.
+-PR20 ordenadacadena monitor;CI documentalpendiente,sinmásfeaturesinnecesarias. InvestigacióncontinúaExHeader/ExeFS deMH4Ulegible.
+
 ## 21-10-2026 — LectorC ylímitesPC cerrados
 
 -RecibidoPR17:288casosC/Pythonconsanitizadores yobjetoVitaSDK;conexiónrendererpendiente.
