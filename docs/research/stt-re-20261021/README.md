@@ -1,5 +1,9 @@
 # STT — Ingeniería inversa y recursos
 
+[Observador de sesiones Citra](live-session-observer.md): herramienta de solo lectura, cinco pruebas sintéticas; ventana Qt y selector observados, lectura con juego pendiente tras errores del control de interfaz.
+
+
+
 **Actualización de herramientas (22-10-2026):** [sky disponible mediante computer-use](native-visual-surface.md); importación/listado nativos verificados, captura Citra pendiente. La restricción anterior correspondía solo a CUA REPL. Sin nuevo arranque.
 
 ## Estado más reciente: índice consolidado de aceptaciones
