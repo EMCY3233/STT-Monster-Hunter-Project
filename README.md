@@ -12,7 +12,7 @@ python -m stt_monitor.receiver --max-packets 10 --idle-timeout 30
 python -m stt_monitor.simulator --count 10
 ```
 
-El receptor añade líneas a `telemetry.jsonl` sin truncar el archivo. Si un archivo existente no termina en LF, el CLI se detiene antes de abrir el socket y pide otra ruta `--output`; no repara ni concatena una nueva muestra a la línea incompleta. Cada muestra está marcada `source=simulator`. Resumen esperado: 10 aceptadas, 0 rechazadas. El límite por inactividad permite finalizar si desaparece el emisor; Ctrl+C también detiene el receptor. El archivo tiene por defecto una cuota total de 10 MiB, incluido su contenido previo; `--max-bytes` permite cambiarla. Al alcanzarla se detiene sin truncar.
+El receptor añade líneas a `telemetry.jsonl` sin truncar el archivo. Si un archivo existente no vacío no termina en LF, el CLI se detiene antes de abrir el socket y pide otra ruta `--output`; no repara ni concatena una nueva muestra a la línea incompleta. Cada muestra está marcada `source=simulator`. Resumen esperado: 10 aceptadas, 0 rechazadas. El límite por inactividad permite finalizar si desaparece el emisor; Ctrl+C también detiene el receptor. El archivo tiene por defecto una cuota total de 10 MiB, incluido su contenido previo; `--max-bytes` permite cambiarla. Al alcanzarla se detiene sin truncar.
 
 ```powershell
 python -m unittest discover -s tests -v
@@ -30,7 +30,7 @@ python -m stt_monitor.receiver --live --max-packets 10 --idle-timeout 30
 
 El archivo JSONL conserva el mismo formato y sigue añadiendo registros. Los contadores describen intentos anteriores al mensaje actual; «último error conservado» puede pertenecer a una sesión previa. Una recepción no confirma el resultado del envío actual. STT/1 no aporta diagnóstico. La falta de mensajes no demuestra desconexión ni parada: STT/2 no transmite el estado de parada ni el presupuesto RTC. Esta vista no necesita actualizar el VPK.
 
-Para acotar también un flujo continuo, añadir `--duration 180`: el plazo total usa el reloj monotónico del PC y no se reinicia con cada muestra. Se aplica el primer límite alcanzado entre duración, inactividad y máximo de muestras. No cambia el plazo de la Vita. La cuota independiente `--max-bytes` limita los bytes añadidos al archivo. [Compatibilidad, límites y ensayo conjunto](docs/monitor-pc-compatibility.md).
+Para acotar también un flujo continuo, añadir `--duration 180`: el plazo total usa el reloj monotónico del PC y no se reinicia con cada muestra. Se aplica el primer límite alcanzado entre duración, inactividad y máximo de muestras. No cambia el plazo de la Vita. La cuota independiente `--max-bytes` limita el tamaño total del archivo, incluido su contenido previo. [Compatibilidad, límites y ensayo conjunto](docs/monitor-pc-compatibility.md).
 
 ## Analizar una captura
 
@@ -48,6 +48,7 @@ El resumen también incluye `reception_timing`: primeras/últimas horas válidas
 - [Arquitectura y protocolos STT/1–STT/2](docs/monitor-protocol.md)
 - [Plan STT-MON-001 y resultados](docs/STT-MON-001.md)
 - [Agente Vita experimental y compilación](vita-agent/README.md)
+- [Revisión y orden propuesto de integración del monitor PC](docs/monitor-integration-review.md)
 - [Changelog maestro](CHANGELOG_MASTER.md)
 
 La conexión FTP y las características del hardware proceden de confirmación del usuario. El agente 0.5 fue transferido e instalado con autorización y hash verificado; las pruebas y la retirada de las excepciones temporales de firewall están documentadas. No incluye recursos de juegos, firmware ni plugins. El workflow del agente prepara un VPK experimental para revisión; no lo instala ni transfiere.

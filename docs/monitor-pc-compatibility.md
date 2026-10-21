@@ -30,9 +30,9 @@ python tests/smoke_diagnostics.py
 python tests/smoke_limits.py
 ```
 
-El último ensayo crea receptor y emisor en dos procesos independientes, solo en loopback puerto 32110, con archivo temporal. Todos sus paquetes son sintéticos, incluso `source=vita`, utilizado para probar el contrato. Espera cinco muestras aceptadas y dos datagramas inválidos rechazados; secuencias 0,2,2,1 y una nueva sesión con 0. Confirma cierre correcto, conservación JSONL y diagnóstico histórico con contadores reiniciados. Los saltos de reloj se inyectan después en copias en memoria para el analizador, sin cambiar el reloj del equipo ni registros de hardware. Añade dos líneas truncadas/inválidas al análisis; no se escriben al archivo de captura.
+`smoke_diagnostics.py` crea receptor y emisor en dos procesos independientes, solo en loopback puerto 32110, con archivo temporal. Todos sus paquetes son sintéticos, incluso `source=vita`, utilizado para probar el contrato. Espera cinco muestras aceptadas y dos datagramas inválidos rechazados; secuencias 0,2,2,1 y una nueva sesión con 0. Confirma cierre correcto, conservación JSONL y diagnóstico histórico con contadores reiniciados. Los saltos de reloj se inyectan después en copias en memoria para el analizador, sin cambiar el reloj del equipo ni registros de hardware. Añade dos líneas truncadas/inválidas al análisis; no se escriben al archivo de captura.
 
-La prueba STT/1 de dos procesos cubre diez muestras. Los retrocesos del reloj en el análisis y los límites temporales del receptor también se prueban de forma determinista: no dependen de dormir largos periodos ni de tocar el Wi-Fi.
+`smoke_limits.py` usa loopback puerto 32112 para comprobar cuota, contenido previo intacto, informe parcial y rechazo de anexado sin LF. `smoke_cli.py` cubre STT/1 con diez muestras. Los retrocesos del reloj en el análisis y los límites temporales del receptor también se prueban de forma determinista: no dependen de dormir largos periodos ni de tocar el Wi-Fi.
 
 ## Memoria, duración y disco
 
