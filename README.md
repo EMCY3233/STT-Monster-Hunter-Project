@@ -1,6 +1,6 @@
 # Start The Travesy, Monster Hunter
 
-Base inicial de investigación y desarrollo. No existe todavía un juego nativo ni una conversión demostrada. El primer componente ejecutable es **STT Vita Monitor 0.1**, receptor de telemetría para Windows y generador simulado, escrito con la biblioteca estándar de Python 3.11 o posterior.
+Base inicial de investigación y desarrollo. No existe todavía un juego nativo ni una conversión demostrada. El monitor PC incluye receptor de telemetría y generador simulado en Python 3.11 o posterior. El agente Vita experimental está en la versión 0.2: hay un ensayo de telemetría anterior documentado y confirmación visual del usuario para 0.2; las pruebas físicas restantes siguen pendientes.
 
 ## Prueba en Windows (dos terminales en esta carpeta)
 
@@ -27,6 +27,14 @@ python -m stt_monitor.analyze telemetry.jsonl
 ```
 
 Produce un resumen por IP, origen declarado y sesión: muestras, duplicados, llegadas fuera de orden y números ausentes entre el mínimo y el máximo observados. Los huecos no demuestran pérdidas en la red: la captura puede ser parcial. No cuenta como perdidos los mensajes anteriores al primero o posteriores al último recibido. La etiqueta de origen no autentica un dispositivo. El analizador guarda en memoria las secuencias únicas; usar capturas acotadas.
+
+## Estado actual
+
+- [Estado consolidado, decisiones y próximos pasos](docs/PROJECT_STATUS.md)
+- [Inventario de siete archivos locales y SHA-256](docs/research/game-inputs-2026-10-21/README.md)
+- [Catálogo Frontier, propuesta de fusión e interfaces](docs/research/frontier-classic/README.md)
+
+Los archivos comerciales permanecen fuera del repositorio. El inventario distingue metadatos observados de autenticidad o compatibilidad no demostradas. No hay Frontier identificado entre las entradas locales.
 
 ## Documentación
 
