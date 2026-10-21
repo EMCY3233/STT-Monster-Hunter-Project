@@ -12,7 +12,7 @@ python -m stt_monitor.receiver --max-packets 10 --idle-timeout 30
 python -m stt_monitor.simulator --count 10
 ```
 
-El receptor añade líneas a `telemetry.jsonl` sin truncar el archivo. Cada muestra está marcada `source=simulator`. Resumen esperado: 10 aceptadas, 0 rechazadas. El límite por inactividad permite finalizar si desaparece el emisor; Ctrl+C también detiene el receptor. El archivo tiene por defecto una cuota total de 10 MiB, incluido su contenido previo; `--max-bytes` permite cambiarla. Al alcanzarla se detiene sin truncar.
+El receptor añade líneas a `telemetry.jsonl` sin truncar el archivo. Si un archivo existente no termina en LF, el CLI se detiene antes de abrir el socket y pide otra ruta `--output`; no repara ni concatena una nueva muestra a la línea incompleta. Cada muestra está marcada `source=simulator`. Resumen esperado: 10 aceptadas, 0 rechazadas. El límite por inactividad permite finalizar si desaparece el emisor; Ctrl+C también detiene el receptor. El archivo tiene por defecto una cuota total de 10 MiB, incluido su contenido previo; `--max-bytes` permite cambiarla. Al alcanzarla se detiene sin truncar.
 
 ```powershell
 python -m unittest discover -s tests -v

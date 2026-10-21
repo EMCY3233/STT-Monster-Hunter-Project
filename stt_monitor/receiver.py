@@ -83,6 +83,19 @@ def receive(sock, output, *, idle_timeout=5.0, max_packets=0, live_output=None, 
     return {'accepted': accepted, 'rejected': rejected}
 
 
+def check_append_boundary(path):
+    """Do not join a new record to an unfinished existing physical line."""
+    try:
+        with open(path, 'rb') as source:
+            source.seek(0, os.SEEK_END)
+            if source.tell():
+                source.seek(-1, os.SEEK_END)
+                if source.read(1) != b'\n':
+                    raise ValueError('capture ends without newline; choose a new --output; existing file unchanged')
+    except FileNotFoundError:
+        pass
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--bind', default='127.0.0.1')
@@ -103,6 +116,10 @@ def main():
         parser.error('capture byte limit must be positive')
     if args.duration is not None and not 0 < args.duration <= 3600:
         parser.error('invalid capture duration')
+    try:
+        check_append_boundary(args.output)
+    except ValueError as exc:
+        parser.error(str(exc))
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             sock.bind((args.bind, args.port))

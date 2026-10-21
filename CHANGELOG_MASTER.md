@@ -1,5 +1,11 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-013 / frontera de anexado
+
+- Fallo reproducido con datos sintéticos en memoria: anexar tras una línea sin LF devolvía una muestra aceptada, pero el JSONL combinado era inválido y no recuperable por el analizador como muestra.
+- CLI comprueba último byte antes de abrir socket; rechaza un archivo no vacío sin LF con error 2 y pide otro destino. Conserva bytes originales; no repara, trunca ni certifica registros anteriores. Admite archivo nuevo, vacío, LF y CRLF. La API de stream requiere frontera válida proporcionada por su llamante.
+- 26 pruebas locales y ensayo de cuota/anexado correctos, incluidos rechazo anterior al socket y archivos sin salto final intactos. CI remota pendiente al publicar. Rama dependiente de PR #18, sin fusión ni acceso a consola.
+
 ## 2026-10-21 — STT-MON-012 / cuotas de captura y análisis
 
 - Receptor: cuota total de archivo de 10 MiB por defecto (`--max-bytes`), incluido contenido previo. Escribe registros completos UTF-8/LF o para, sin truncar. Resumen visible con causa, bytes añadidos y datagrama válido no guardado si no cabía.

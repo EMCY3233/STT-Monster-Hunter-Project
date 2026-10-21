@@ -2,10 +2,12 @@ import io
 import json
 import socket
 import threading
+import tempfile
+from pathlib import Path
 import unittest
 from unittest.mock import patch
 from stt_monitor.protocol import decode, encode
-from stt_monitor.receiver import receive
+from stt_monitor.receiver import receive, check_append_boundary, main
 from stt_monitor.simulator import packet
 
 
@@ -150,6 +152,29 @@ class ReceiverTests(unittest.TestCase):
         result, logged, _ = capture(max_bytes=size, initial_bytes=1)
         self.assertEqual(result['not_recorded'], 1)
         self.assertEqual(logged, '')
+
+    def test_incomplete_append_is_rejected_before_socket_and_file_unchanged(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'incomplete.jsonl'
+            for content in (b'{"unfinished":', b'{"complete":true}', b'\r'):
+                with self.subTest(content=content):
+                    path.write_bytes(content)
+                    with patch('sys.argv', ['receiver', '--output', str(path)]), \
+                         patch('stt_monitor.receiver.socket.socket') as network, \
+                         patch('sys.stderr', io.StringIO()) as errors:
+                        with self.assertRaises(SystemExit) as raised:
+                            main()
+                        self.assertEqual(raised.exception.code, 2)
+                        network.assert_not_called()
+                        self.assertIn('choose a new --output', errors.getvalue())
+                    self.assertEqual(path.read_bytes(), content)
+            for content in (b'', b'{"complete":true}\n', b'{"complete":true}\r\n'):
+                path.write_bytes(content)
+                check_append_boundary(path)
+                self.assertEqual(path.read_bytes(), content)
+            missing = Path(folder) / 'missing.jsonl'
+            check_append_boundary(missing)
+            self.assertFalse(missing.exists())
 
     def test_inactivity(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:

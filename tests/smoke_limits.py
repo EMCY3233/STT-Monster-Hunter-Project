@@ -41,8 +41,17 @@ with tempfile.TemporaryDirectory() as folder:
         assert report['partial'] and report['stop_reason'] == 'max_unique'
         assert report['invalid_lines'] == 1  # Preserved original prefix, not a record.
         assert report['processed_packets'] == 1
+        incomplete = Path(folder) / 'incomplete.jsonl'
+        unfinished = b'{"unfinished":'
+        incomplete.write_bytes(unfinished)
+        refused = subprocess.run([sys.executable, '-m', 'stt_monitor.receiver',
+                                  '--output', str(incomplete)], capture_output=True,
+                                 text=True, timeout=5)
+        assert refused.returncode == 2 and 'choose a new --output' in refused.stderr
+        assert 'Listening' not in refused.stdout
+        assert incomplete.read_bytes() == unfinished
         print('PASS: continuous synthetic traffic, actual UTF-8/LF file quota, '
-              'existing CRLF prefix preserved, over-cap no append, partial CLI report')
+              'existing CRLF prefix preserved, over-cap no append, partial CLI report, incomplete append refused')
     finally:
         if receiver.poll() is None:
             receiver.kill()
