@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: Citra y DATA.BIN completo
+## Estado más reciente: Frontier completo
+
+El frente de inventario cerró la copia local. [Contraste independiente de 50 candidatos](frontier-complete-headers.md): 44 cabeceras JKR/LZ, 5 ECD y 1 firma SCE, con hashes coincidentes. Sin descifrado/descompresión de esos candidatos ni validación semántica. 52 pruebas sintéticas aprobadas. Los párrafos de copia parcial siguientes describen etapas anteriores.
+
+
+## Etapa anterior: Citra y DATA.BIN completo
 
 Ensayos reales de [Citra para 3DS](citra.md): bases MH3U/MH4U/MHXX bloqueadas por material criptográfico ausente; parche MHXX instalado con contenido de hash coincidente, ejecución aislada termina con crash. [MHFU DATA.BIN](mhfu-data.md): 6.657 entradas procesadas con comprobación de reversibilidad. [PPSSPP y Frontier](emulators.md): ELF PSP obtenido y contrastado; Frontier continúa siendo copia parcial. 46 pruebas sintéticas aprobadas. No demuestra reproducción visual ni validación semántica completa.
 
