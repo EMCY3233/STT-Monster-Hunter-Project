@@ -1,0 +1,22 @@
+name: CC0 model study
+on:
+  push:
+    paths: ['samples/cc0-sword-study/**','tools/evaluate_models.py','tools/test_evaluation.py','.github/workflows/cc0-model-study.yml']
+  pull_request:
+    paths: ['samples/cc0-sword-study/**','tools/evaluate_models.py','tools/test_evaluation.py','.github/workflows/cc0-model-study.yml']
+permissions:
+  contents: read
+jobs:
+  offline-pc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m unittest discover -s tools -p test_evaluation.py -v
+      - name: C Pose reader accepts prepared derived asset
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime pose-runtime/stt_pose.c pose-runtime/tests/pose_probe.c -lm -o /tmp/stt-cc0-pose
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-cc0-pose samples/cc0-sword-study/quaternius-sword-study.pose.json > /tmp/cc0-pose-result.txt
+          python -c "from pathlib import Path; fields=list(map(int,Path('/tmp/cc0-pose-result.txt').read_text().splitlines()[0].split())); assert fields[2:]==[1,199,394,1,1]; print('PASS C reader: 1 root, 199 vertices, 394 triangles, 1 static pose')"
