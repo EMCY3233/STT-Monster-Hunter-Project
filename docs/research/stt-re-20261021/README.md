@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: MH4U NCSD y comparativa
+## Estado más reciente: .code MHXX BLZ
+
+[Una entrada de update descomprimida](mhxx-code-blz.md): flag activado, hashes ExHeader/ExeFS verificados y13.045.760bytes de salida coincidentes con segmentos. Fuente intacta, flujo y prefijo completos.116/116tests sintéticos aprobados; salida comercial privada, sin arranque o desensamblado. Compresión resuelta para esta entrada; semántica y contraste independiente pendientes.
+
+
+## Etapa anterior: MH4U NCSD y comparativa
 
 [Nueva base MH4U .3ds probada en Citra](citra-current-inputs.md): cuatro GiB, NCCH no_crypto, carga e inicialización DSP acreditadas en 15 s; sin observación visual/gameplay. Cinco CIA cotejadas por hash con ensayos previos. [Comparativa PPSSPP/Azahar/Vita3K](emulator-comparison.md), fuentes/versiones/hashes, compatibilidad exacta y bloqueos. [Auditoría TEX](tex-decoder-audit.md): el lector mhff descarta alfa, demostrado con controles sintéticos y una carga existente. Sin tocar banco ni Vita.
 
