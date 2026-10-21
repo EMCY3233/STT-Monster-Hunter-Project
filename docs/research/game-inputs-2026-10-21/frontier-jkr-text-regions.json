@@ -1,0 +1,156 @@
+{
+  "source_bytes": 349,
+  "source_sha256": "592fe0ca19e741430f4fa669eea3df71e83935dec2812bf51524ad279074691c",
+  "probe_budget_bytes": 65536,
+  "matching_regions": 14,
+  "bytes_in_regions": 160,
+  "control_free_regions": 12,
+  "regions": [
+    {
+      "offset": 52,
+      "bytes": 30,
+      "decoded_codepoints": 15,
+      "kana_block_codepoints": 14,
+      "cjk_ideograph_codepoints": 0,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 83,
+      "bytes": 9,
+      "decoded_codepoints": 6,
+      "kana_block_codepoints": 3,
+      "cjk_ideograph_codepoints": 0,
+      "control_codepoints": 3,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 104,
+      "bytes": 14,
+      "decoded_codepoints": 7,
+      "kana_block_codepoints": 5,
+      "cjk_ideograph_codepoints": 1,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 119,
+      "bytes": 7,
+      "decoded_codepoints": 5,
+      "kana_block_codepoints": 2,
+      "cjk_ideograph_codepoints": 0,
+      "control_codepoints": 3,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 138,
+      "bytes": 8,
+      "decoded_codepoints": 4,
+      "kana_block_codepoints": 1,
+      "cjk_ideograph_codepoints": 3,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 159,
+      "bytes": 10,
+      "decoded_codepoints": 5,
+      "kana_block_codepoints": 4,
+      "cjk_ideograph_codepoints": 1,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 181,
+      "bytes": 8,
+      "decoded_codepoints": 4,
+      "kana_block_codepoints": 2,
+      "cjk_ideograph_codepoints": 2,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 201,
+      "bytes": 10,
+      "decoded_codepoints": 5,
+      "kana_block_codepoints": 2,
+      "cjk_ideograph_codepoints": 3,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 223,
+      "bytes": 10,
+      "decoded_codepoints": 5,
+      "kana_block_codepoints": 5,
+      "cjk_ideograph_codepoints": 0,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 245,
+      "bytes": 8,
+      "decoded_codepoints": 4,
+      "kana_block_codepoints": 4,
+      "cjk_ideograph_codepoints": 0,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 265,
+      "bytes": 12,
+      "decoded_codepoints": 6,
+      "kana_block_codepoints": 6,
+      "cjk_ideograph_codepoints": 0,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 289,
+      "bytes": 8,
+      "decoded_codepoints": 4,
+      "kana_block_codepoints": 3,
+      "cjk_ideograph_codepoints": 0,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 309,
+      "bytes": 8,
+      "decoded_codepoints": 4,
+      "kana_block_codepoints": 4,
+      "cjk_ideograph_codepoints": 0,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    },
+    {
+      "offset": 329,
+      "bytes": 18,
+      "decoded_codepoints": 9,
+      "kana_block_codepoints": 4,
+      "cjk_ideograph_codepoints": 2,
+      "control_codepoints": 0,
+      "utf8_strict_valid": false,
+      "nul_terminated": true
+    }
+  ],
+  "exports_text": false,
+  "format_identified": false,
+  "encoding_declared_by_format_verified": false,
+  "semantics_verified": false,
+  "rule": "Maximal non-NUL spans, strict CP932 decode, at least one U+3040..U+30FF codepoint. Metadata only; not a string-table parser.",
+  "source_hash_unchanged": true
+}
