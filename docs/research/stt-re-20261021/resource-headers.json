@@ -1,0 +1,2244 @@
+[
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 213,
+    "internal_path": "effect\\base\\cm050_000",
+    "bytes": 4126,
+    "sha256": "998b2fbee2d06b726fad75c3395404139fa8204de74657cfa4128e442e7746ac",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 3,
+      "material_count_declared": 3,
+      "vertex_count_declared": 98,
+      "index_count_declared": 154,
+      "edge_count_declared": 56,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 228,
+    "internal_path": "effect\\base\\cm100_000",
+    "bytes": 144558,
+    "sha256": "32cc22770257f21bebc037e18d3180de8c9709c0dc3c23dbf01ab64ce183d8a3",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 58,
+      "material_count_declared": 16,
+      "vertex_count_declared": 4425,
+      "index_count_declared": 6630,
+      "edge_count_declared": 3840,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 233,
+    "internal_path": "effect\\base\\cm151_000",
+    "bytes": 11854,
+    "sha256": "ca44c8364ae7836fc8750da4fa48d2aeec47d055eb924cd0a8f7382fd1d2f9d3",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 5,
+      "material_count_declared": 2,
+      "vertex_count_declared": 387,
+      "index_count_declared": 530,
+      "edge_count_declared": 367,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 235,
+    "internal_path": "effect\\base\\cm102_003",
+    "bytes": 8082,
+    "sha256": "5578870328e2309bba64c759e91f2fb3c0ff741d50cb746e918fe8445c3a8041",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 6,
+      "material_count_declared": 1,
+      "vertex_count_declared": 240,
+      "index_count_declared": 360,
+      "edge_count_declared": 120,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 238,
+    "internal_path": "effect\\base\\cm102_002",
+    "bytes": 33154,
+    "sha256": "c65fee98e0943a966b2d354c77f43f75cb186b089d0af2bce4f6143329185af5",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 8,
+      "material_count_declared": 1,
+      "vertex_count_declared": 1152,
+      "index_count_declared": 1728,
+      "edge_count_declared": 576,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 240,
+    "internal_path": "effect\\base\\cm151_001",
+    "bytes": 9874,
+    "sha256": "4edda01d45095ebf60fce627383e5b7b4bb5acdd90668533e3486d8ee5617492",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 3,
+      "material_count_declared": 1,
+      "vertex_count_declared": 338,
+      "index_count_declared": 416,
+      "edge_count_declared": 290,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 243,
+    "internal_path": "effect\\base\\cm101_000",
+    "bytes": 104642,
+    "sha256": "0943bf9e8ac26ff395c995c344f97f821a338b9f5e67b8eac053ca2bb3444943",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 27,
+      "material_count_declared": 1,
+      "vertex_count_declared": 3137,
+      "index_count_declared": 5250,
+      "edge_count_declared": 3904,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 249,
+    "internal_path": "effect\\base\\cm100_007",
+    "bytes": 9098,
+    "sha256": "ae284919a08bb8f2f238f6c9c921ed447741ced4f3a09854f7635ab517c33f3e",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 4,
+      "material_count_declared": 2,
+      "vertex_count_declared": 279,
+      "index_count_declared": 560,
+      "edge_count_declared": 240,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 252,
+    "internal_path": "effect\\base\\cm154_001",
+    "bytes": 26050,
+    "sha256": "f67aa9d58464d1fadc8734b38dece24794fca3b203fde11ceef86945372d4311",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 4,
+      "material_count_declared": 1,
+      "vertex_count_declared": 911,
+      "index_count_declared": 1516,
+      "edge_count_declared": 432,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 254,
+    "internal_path": "effect\\base\\cm100_006",
+    "bytes": 5162,
+    "sha256": "fc556ea52df3fe33f9cd84b616bf476383e822dff116c4b0b73efc990e144481",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 3,
+      "material_count_declared": 1,
+      "vertex_count_declared": 151,
+      "index_count_declared": 304,
+      "edge_count_declared": 144,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 257,
+    "internal_path": "effect\\base\\cm101_006",
+    "bytes": 27826,
+    "sha256": "66df497f63f10ca0a4cdc64f6c32434eeaac016f8d38859b52e2b1098081598a",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 5,
+      "material_count_declared": 1,
+      "vertex_count_declared": 874,
+      "index_count_declared": 988,
+      "edge_count_declared": 798,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 260,
+    "internal_path": "effect\\base\\cm102_001",
+    "bytes": 36610,
+    "sha256": "ac04d1b8d9234a44e4373b442487afb0730f83906f6578327561ccfc8def2008",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 8,
+      "material_count_declared": 1,
+      "vertex_count_declared": 1280,
+      "index_count_declared": 1920,
+      "edge_count_declared": 640,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 263,
+    "internal_path": "effect\\base\\cm150_001",
+    "bytes": 24898,
+    "sha256": "99dd0591ee8977fc317609b749d87c188f8f926d6c486923e2e4a5943043b9e6",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 8,
+      "material_count_declared": 1,
+      "vertex_count_declared": 816,
+      "index_count_declared": 1632,
+      "edge_count_declared": 272,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 266,
+    "internal_path": "effect\\base\\cm150_000",
+    "bytes": 103442,
+    "sha256": "f7eba99582c2beec3d71f80c6a4bee0a24cd5ec1b7f5a3362b41f7ff92683641",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 15,
+      "material_count_declared": 1,
+      "vertex_count_declared": 3716,
+      "index_count_declared": 5320,
+      "edge_count_declared": 2892,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 270,
+    "internal_path": "effect\\base\\cm153_000",
+    "bytes": 15394,
+    "sha256": "76681ffdbc779e34f4cbca3a2515e90be0ae683b2b7676acab90870339040dc6",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 5,
+      "material_count_declared": 1,
+      "vertex_count_declared": 456,
+      "index_count_declared": 624,
+      "edge_count_declared": 384,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 273,
+    "internal_path": "effect\\base\\cm154_000",
+    "bytes": 37506,
+    "sha256": "b1f2774f430e0269d86dc87510a86d3b7c35925467c46605e54d583653d09c9d",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 4,
+      "material_count_declared": 2,
+      "vertex_count_declared": 1311,
+      "index_count_declared": 2380,
+      "edge_count_declared": 534,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 276,
+    "internal_path": "effect\\base\\cm153_001",
+    "bytes": 6194,
+    "sha256": "0fb8c42d0d9103aeedd96fe0536ccf241ed79ebfcdb29bb3c229811c0244b3fb",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 168,
+      "index_count_declared": 392,
+      "edge_count_declared": 192,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 283,
+    "internal_path": "effect\\base\\cm101_002",
+    "bytes": 10346,
+    "sha256": "a50ae800c4ddfb3ac1b80d6e0b2bf482b8a9721edbc1e9faff0d54a06bfa954c",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 4,
+      "material_count_declared": 2,
+      "vertex_count_declared": 280,
+      "index_count_declared": 612,
+      "edge_count_declared": 403,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 291,
+    "internal_path": "effect\\base\\cm150_003",
+    "bytes": 23418,
+    "sha256": "4b5cfe194ce96e669b383a286ee4cb145c1867853e8408b47fa06da6719f5333",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 14,
+      "material_count_declared": 6,
+      "vertex_count_declared": 648,
+      "index_count_declared": 1336,
+      "edge_count_declared": 760,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 294,
+    "internal_path": "effect\\base\\cm150_002",
+    "bytes": 69922,
+    "sha256": "54908bf3e9f9c73337aca7f1a0d83a0a2ec3a44b1cb9a43f9fd67d0fef369b30",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 5,
+      "material_count_declared": 1,
+      "vertex_count_declared": 2448,
+      "index_count_declared": 4896,
+      "edge_count_declared": 816,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 303,
+    "internal_path": "effect\\base\\cm100_001",
+    "bytes": 2666,
+    "sha256": "83a00ebb859a251218fe7cd0ae9c6d27871cd7708ff2e82cf4d543991e4e43e1",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 70,
+      "index_count_declared": 140,
+      "edge_count_declared": 64,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 311,
+    "internal_path": "effect\\base\\cm120_020",
+    "bytes": 7450,
+    "sha256": "ba59f96ce640c1ac378abb3ad2c4c0ce548c658bbb23bbca959ff61100f3b887",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 216,
+      "index_count_declared": 348,
+      "edge_count_declared": 272,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 313,
+    "internal_path": "effect\\base\\cm120_016",
+    "bytes": 18630,
+    "sha256": "a56fe8887935f170f055f10fb149ebdd9a6479d6a1280cdbedc0840c10d5819c",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 5,
+      "material_count_declared": 1,
+      "vertex_count_declared": 546,
+      "index_count_declared": 982,
+      "edge_count_declared": 758,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 319,
+    "internal_path": "effect\\base\\cm120_021",
+    "bytes": 31906,
+    "sha256": "62974087561e8cde2fb9d245c12e2c2bf3474b1f480dadf440f90741c03658ff",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 9,
+      "material_count_declared": 6,
+      "vertex_count_declared": 988,
+      "index_count_declared": 1696,
+      "edge_count_declared": 882,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 328,
+    "internal_path": "effect\\base\\cm120_012",
+    "bytes": 2362,
+    "sha256": "6bcd965f89f2a40ac7334c66b84b87891c606090043d4e85bd141cb60b9bd9f4",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 59,
+      "index_count_declared": 120,
+      "edge_count_declared": 48,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 335,
+    "internal_path": "effect\\base\\cm120_032",
+    "bytes": 3218,
+    "sha256": "cfdfbf0bef536091a243d05a63c58ebf4ce858f631c83c0f531265ca1abb3102",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 2,
+      "vertex_count_declared": 83,
+      "index_count_declared": 132,
+      "edge_count_declared": 98,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 347,
+    "internal_path": "effect\\base\\cm001_010",
+    "bytes": 13666,
+    "sha256": "8b3526e7c4e863d5ac8e62b6736bbf08c010c379449821c91cc533439f97e469",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 12,
+      "material_count_declared": 1,
+      "vertex_count_declared": 394,
+      "index_count_declared": 632,
+      "edge_count_declared": 223,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 350,
+    "internal_path": "effect\\base\\cm001_003",
+    "bytes": 26354,
+    "sha256": "05ab7b1d1f9c3495aeccb938676d322e5e09cbf66914e84dbf0104b89c75372a",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 4,
+      "material_count_declared": 1,
+      "vertex_count_declared": 924,
+      "index_count_declared": 1512,
+      "edge_count_declared": 1120,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 357,
+    "internal_path": "effect\\base\\cm100_010",
+    "bytes": 52258,
+    "sha256": "373848a3de32b278ba039a5d4c752a2301ef527cf3597be37d90dbf526430ba0",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 14,
+      "material_count_declared": 2,
+      "vertex_count_declared": 1555,
+      "index_count_declared": 2598,
+      "edge_count_declared": 1476,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 361,
+    "internal_path": "effect\\base\\cm120_006",
+    "bytes": 9006,
+    "sha256": "a164f8080a8ae473fdc5a1c890037db39e004446546a9bcc16d3f2f43ba980fe",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 2,
+      "vertex_count_declared": 276,
+      "index_count_declared": 486,
+      "edge_count_declared": 300,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 363,
+    "internal_path": "effect\\base\\cm200_108",
+    "bytes": 1526,
+    "sha256": "d96deb9b0e650bbb67b51b68b07bf168caad860af551dbf2343a84c90967e1cc",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 2,
+      "vertex_count_declared": 25,
+      "index_count_declared": 46,
+      "edge_count_declared": 18,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/quest.arc",
+    "index": 368,
+    "internal_path": "quest\\marukage\\marukage",
+    "bytes": 2186,
+    "sha256": "1b356dd359ce5cbb6a166182676981b912f14321791a15a95a04ff0bd76ccd87",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 1,
+      "material_count_declared": 1,
+      "vertex_count_declared": 58,
+      "index_count_declared": 156,
+      "edge_count_declared": 112,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 39,
+    "internal_path": "npc\\mod\\npc009\\npc009",
+    "bytes": 65102,
+    "sha256": "1f8fad8515b613e0dc20c3bf8e56aa5153d83c6a6146680452cf139e5d80310d",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 14,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 1556,
+      "index_count_declared": 3128,
+      "edge_count_declared": 1820,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 82,
+    "internal_path": "npc\\mod\\npc010\\npc010",
+    "bytes": 27622,
+    "sha256": "9645245127e3f979d801570ac0352219b5ecaab5cacd3177d0487d80955a2da8",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 14,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 609,
+      "index_count_declared": 1434,
+      "edge_count_declared": 868,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 84,
+    "internal_path": "npc\\mot\\com_0",
+    "bytes": 247504,
+    "sha256": "a4cf8054ebecebfa53f82bae923353b0e1221f2fc46242ee507e1bfe7df39fa9",
+    "kind": "LMT_candidate",
+    "header_probe": {
+      "format": "LMT",
+      "version": 67,
+      "pointer_layout_tested": "32-bit little-endian",
+      "slots_declared": 144,
+      "nonempty_slots": 46,
+      "unique_block_offsets": 46,
+      "clips": [
+        {
+          "slot": 1,
+          "offset": 592,
+          "tracks_declared": 21,
+          "frames_declared": 813,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 2,
+          "offset": 656,
+          "tracks_declared": 21,
+          "frames_declared": 433,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 3,
+          "offset": 720,
+          "tracks_declared": 21,
+          "frames_declared": 301,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 4,
+          "offset": 784,
+          "tracks_declared": 21,
+          "frames_declared": 111,
+          "loop_frame_declared": 36
+        },
+        {
+          "slot": 11,
+          "offset": 848,
+          "tracks_declared": 21,
+          "frames_declared": 211,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 12,
+          "offset": 912,
+          "tracks_declared": 21,
+          "frames_declared": 139,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 21,
+          "offset": 976,
+          "tracks_declared": 21,
+          "frames_declared": 201,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 22,
+          "offset": 1040,
+          "tracks_declared": 21,
+          "frames_declared": 301,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 31,
+          "offset": 1104,
+          "tracks_declared": 21,
+          "frames_declared": 201,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 32,
+          "offset": 1168,
+          "tracks_declared": 21,
+          "frames_declared": 197,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 41,
+          "offset": 1232,
+          "tracks_declared": 21,
+          "frames_declared": 201,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 42,
+          "offset": 1296,
+          "tracks_declared": 21,
+          "frames_declared": 423,
+          "loop_frame_declared": 26
+        },
+        {
+          "slot": 51,
+          "offset": 1360,
+          "tracks_declared": 21,
+          "frames_declared": 201,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 52,
+          "offset": 1424,
+          "tracks_declared": 21,
+          "frames_declared": 279,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 61,
+          "offset": 1488,
+          "tracks_declared": 23,
+          "frames_declared": 365,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 62,
+          "offset": 1552,
+          "tracks_declared": 23,
+          "frames_declared": 285,
+          "loop_frame_declared": 170
+        },
+        {
+          "slot": 63,
+          "offset": 1616,
+          "tracks_declared": 23,
+          "frames_declared": 207,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 64,
+          "offset": 1680,
+          "tracks_declared": 23,
+          "frames_declared": 339,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 65,
+          "offset": 1744,
+          "tracks_declared": 23,
+          "frames_declared": 367,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 71,
+          "offset": 1808,
+          "tracks_declared": 16,
+          "frames_declared": 123,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 72,
+          "offset": 1872,
+          "tracks_declared": 16,
+          "frames_declared": 223,
+          "loop_frame_declared": 56
+        },
+        {
+          "slot": 81,
+          "offset": 1936,
+          "tracks_declared": 17,
+          "frames_declared": 123,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 82,
+          "offset": 2000,
+          "tracks_declared": 17,
+          "frames_declared": 229,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 83,
+          "offset": 2064,
+          "tracks_declared": 16,
+          "frames_declared": 91,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 84,
+          "offset": 2128,
+          "tracks_declared": 16,
+          "frames_declared": 387,
+          "loop_frame_declared": 24
+        },
+        {
+          "slot": 91,
+          "offset": 2192,
+          "tracks_declared": 21,
+          "frames_declared": 201,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 92,
+          "offset": 2256,
+          "tracks_declared": 21,
+          "frames_declared": 301,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 101,
+          "offset": 2320,
+          "tracks_declared": 21,
+          "frames_declared": 321,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 102,
+          "offset": 2384,
+          "tracks_declared": 21,
+          "frames_declared": 279,
+          "loop_frame_declared": 108
+        },
+        {
+          "slot": 103,
+          "offset": 2448,
+          "tracks_declared": 21,
+          "frames_declared": 141,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 104,
+          "offset": 2512,
+          "tracks_declared": 21,
+          "frames_declared": 129,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 105,
+          "offset": 2576,
+          "tracks_declared": 21,
+          "frames_declared": 89,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 111,
+          "offset": 2640,
+          "tracks_declared": 26,
+          "frames_declared": 471,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 112,
+          "offset": 2704,
+          "tracks_declared": 27,
+          "frames_declared": 359,
+          "loop_frame_declared": 150
+        },
+        {
+          "slot": 113,
+          "offset": 2768,
+          "tracks_declared": 26,
+          "frames_declared": 591,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 121,
+          "offset": 2832,
+          "tracks_declared": 21,
+          "frames_declared": 203,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 122,
+          "offset": 2896,
+          "tracks_declared": 21,
+          "frames_declared": 275,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 123,
+          "offset": 2960,
+          "tracks_declared": 21,
+          "frames_declared": 315,
+          "loop_frame_declared": 88
+        },
+        {
+          "slot": 124,
+          "offset": 3024,
+          "tracks_declared": 21,
+          "frames_declared": 377,
+          "loop_frame_declared": 214
+        },
+        {
+          "slot": 125,
+          "offset": 3088,
+          "tracks_declared": 21,
+          "frames_declared": 81,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 131,
+          "offset": 3152,
+          "tracks_declared": 22,
+          "frames_declared": 53,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 132,
+          "offset": 3216,
+          "tracks_declared": 22,
+          "frames_declared": 183,
+          "loop_frame_declared": 6
+        },
+        {
+          "slot": 133,
+          "offset": 3280,
+          "tracks_declared": 22,
+          "frames_declared": 83,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 141,
+          "offset": 3344,
+          "tracks_declared": 22,
+          "frames_declared": 81,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 142,
+          "offset": 3408,
+          "tracks_declared": 22,
+          "frames_declared": 161,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 143,
+          "offset": 3472,
+          "tracks_declared": 22,
+          "frames_declared": 83,
+          "loop_frame_declared": 0
+        }
+      ],
+      "table_and_block_headers_in_bounds": true,
+      "fps": null,
+      "track_codecs_and_skeleton_binding_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 85,
+    "internal_path": "npc\\mot\\par_0",
+    "bytes": 99304,
+    "sha256": "35fb4bd3efaba3fc321821c92258aebfc90bd93bb29385008f97631c839faf08",
+    "kind": "LMT_candidate",
+    "header_probe": {
+      "format": "LMT",
+      "version": 67,
+      "pointer_layout_tested": "32-bit little-endian",
+      "slots_declared": 73,
+      "nonempty_slots": 35,
+      "unique_block_offsets": 35,
+      "clips": [
+        {
+          "slot": 1,
+          "offset": 304,
+          "tracks_declared": 17,
+          "frames_declared": 123,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 2,
+          "offset": 368,
+          "tracks_declared": 16,
+          "frames_declared": 97,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 3,
+          "offset": 432,
+          "tracks_declared": 17,
+          "frames_declared": 161,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 4,
+          "offset": 496,
+          "tracks_declared": 17,
+          "frames_declared": 117,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 5,
+          "offset": 560,
+          "tracks_declared": 16,
+          "frames_declared": 387,
+          "loop_frame_declared": 24
+        },
+        {
+          "slot": 6,
+          "offset": 624,
+          "tracks_declared": 16,
+          "frames_declared": 91,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 7,
+          "offset": 688,
+          "tracks_declared": 17,
+          "frames_declared": 411,
+          "loop_frame_declared": 58
+        },
+        {
+          "slot": 8,
+          "offset": 752,
+          "tracks_declared": 17,
+          "frames_declared": 171,
+          "loop_frame_declared": 50
+        },
+        {
+          "slot": 9,
+          "offset": 816,
+          "tracks_declared": 17,
+          "frames_declared": 229,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 11,
+          "offset": 880,
+          "tracks_declared": 17,
+          "frames_declared": 123,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 12,
+          "offset": 944,
+          "tracks_declared": 17,
+          "frames_declared": 229,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 13,
+          "offset": 1008,
+          "tracks_declared": 16,
+          "frames_declared": 333,
+          "loop_frame_declared": 128
+        },
+        {
+          "slot": 21,
+          "offset": 1072,
+          "tracks_declared": 17,
+          "frames_declared": 123,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 22,
+          "offset": 1136,
+          "tracks_declared": 17,
+          "frames_declared": 229,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 23,
+          "offset": 1200,
+          "tracks_declared": 16,
+          "frames_declared": 91,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 24,
+          "offset": 1264,
+          "tracks_declared": 16,
+          "frames_declared": 387,
+          "loop_frame_declared": 24
+        },
+        {
+          "slot": 31,
+          "offset": 1328,
+          "tracks_declared": 21,
+          "frames_declared": 201,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 32,
+          "offset": 1392,
+          "tracks_declared": 21,
+          "frames_declared": 71,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 33,
+          "offset": 1456,
+          "tracks_declared": 21,
+          "frames_declared": 287,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 34,
+          "offset": 1520,
+          "tracks_declared": 21,
+          "frames_declared": 57,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 35,
+          "offset": 1584,
+          "tracks_declared": 21,
+          "frames_declared": 405,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 41,
+          "offset": 1648,
+          "tracks_declared": 21,
+          "frames_declared": 201,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 42,
+          "offset": 1712,
+          "tracks_declared": 21,
+          "frames_declared": 71,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 43,
+          "offset": 1776,
+          "tracks_declared": 21,
+          "frames_declared": 287,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 44,
+          "offset": 1840,
+          "tracks_declared": 21,
+          "frames_declared": 57,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 45,
+          "offset": 1904,
+          "tracks_declared": 21,
+          "frames_declared": 405,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 51,
+          "offset": 1968,
+          "tracks_declared": 21,
+          "frames_declared": 201,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 52,
+          "offset": 2032,
+          "tracks_declared": 21,
+          "frames_declared": 71,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 53,
+          "offset": 2096,
+          "tracks_declared": 21,
+          "frames_declared": 287,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 54,
+          "offset": 2160,
+          "tracks_declared": 21,
+          "frames_declared": 57,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 55,
+          "offset": 2224,
+          "tracks_declared": 21,
+          "frames_declared": 405,
+          "loop_frame_declared": -1
+        },
+        {
+          "slot": 61,
+          "offset": 2288,
+          "tracks_declared": 16,
+          "frames_declared": 245,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 62,
+          "offset": 2352,
+          "tracks_declared": 16,
+          "frames_declared": 387,
+          "loop_frame_declared": 24
+        },
+        {
+          "slot": 71,
+          "offset": 2416,
+          "tracks_declared": 16,
+          "frames_declared": 75,
+          "loop_frame_declared": 0
+        },
+        {
+          "slot": 72,
+          "offset": 2480,
+          "tracks_declared": 16,
+          "frames_declared": 387,
+          "loop_frame_declared": 24
+        }
+      ],
+      "table_and_block_headers_in_bounds": true,
+      "fps": null,
+      "track_codecs_and_skeleton_binding_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 86,
+    "internal_path": "npc\\mot\\lpet_p_s",
+    "bytes": 2516,
+    "sha256": "ad1a8ae24be18ab64c4a857f0fbeec64c00b04c98a505f26ff230f2904f758ee",
+    "kind": "LMT_candidate",
+    "header_probe": {
+      "format": "LMT",
+      "version": 67,
+      "pointer_layout_tested": "32-bit little-endian",
+      "slots_declared": 2,
+      "nonempty_slots": 1,
+      "unique_block_offsets": 1,
+      "clips": [
+        {
+          "slot": 1,
+          "offset": 16,
+          "tracks_declared": 21,
+          "frames_declared": 113,
+          "loop_frame_declared": 0
+        }
+      ],
+      "table_and_block_headers_in_bounds": true,
+      "fps": null,
+      "track_codecs_and_skeleton_binding_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 87,
+    "internal_path": "npc\\mot\\lpet_y_s",
+    "bytes": 2124,
+    "sha256": "2ef3c57d4075c57ff71805d3aa8cd6631f9e0c0dd54008b17e73596e9f5e1aae",
+    "kind": "LMT_candidate",
+    "header_probe": {
+      "format": "LMT",
+      "version": 67,
+      "pointer_layout_tested": "32-bit little-endian",
+      "slots_declared": 2,
+      "nonempty_slots": 1,
+      "unique_block_offsets": 1,
+      "clips": [
+        {
+          "slot": 1,
+          "offset": 16,
+          "tracks_declared": 21,
+          "frames_declared": 111,
+          "loop_frame_declared": 0
+        }
+      ],
+      "table_and_block_headers_in_bounds": true,
+      "fps": null,
+      "track_codecs_and_skeleton_binding_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 377,
+    "internal_path": "effect\\base\\cm080_000",
+    "bytes": 990,
+    "sha256": "ec1b20b25f022db69ba759bb525e0e9a88d05c2ccaf727812d900a61efc280b0",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 1,
+      "material_count_declared": 1,
+      "vertex_count_declared": 16,
+      "index_count_declared": 30,
+      "edge_count_declared": 6,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 381,
+    "internal_path": "effect\\base\\cm030_009",
+    "bytes": 10130,
+    "sha256": "97c6eab52899385061224e07b6d1ac92be1c77f85e04bbcf99826644ec61c3c5",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 329,
+      "index_count_declared": 764,
+      "edge_count_declared": 464,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 384,
+    "internal_path": "effect\\base\\cm101_000",
+    "bytes": 104642,
+    "sha256": "0943bf9e8ac26ff395c995c344f97f821a338b9f5e67b8eac053ca2bb3444943",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 27,
+      "material_count_declared": 1,
+      "vertex_count_declared": 3137,
+      "index_count_declared": 5250,
+      "edge_count_declared": 3904,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 390,
+    "internal_path": "effect\\base\\cm202_014",
+    "bytes": 50794,
+    "sha256": "d828d4184b7d4f1131242263607cce7a87b53b0b83f7678daa7b3838dd9b7cab",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 12,
+      "material_count_declared": 4,
+      "vertex_count_declared": 1548,
+      "index_count_declared": 2572,
+      "edge_count_declared": 1562,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 404,
+    "internal_path": "effect\\base\\cm100_000",
+    "bytes": 144558,
+    "sha256": "32cc22770257f21bebc037e18d3180de8c9709c0dc3c23dbf01ab64ce183d8a3",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 58,
+      "material_count_declared": 16,
+      "vertex_count_declared": 4425,
+      "index_count_declared": 6630,
+      "edge_count_declared": 3840,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 412,
+    "internal_path": "effect\\base\\cm080_001",
+    "bytes": 13002,
+    "sha256": "461907173b54799953e9bfb6a0d9e0fbc0643e04adcbe71e34f0091c88284317",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 3,
+      "material_count_declared": 1,
+      "vertex_count_declared": 435,
+      "index_count_declared": 816,
+      "edge_count_declared": 396,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 414,
+    "internal_path": "effect\\base\\cm080_002",
+    "bytes": 9042,
+    "sha256": "400c89ea044223b9f9d93c3a4edda9b8daa4299d57fd246bb842e99785661e44",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 300,
+      "index_count_declared": 568,
+      "edge_count_declared": 276,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 416,
+    "internal_path": "effect\\base\\cm080_003",
+    "bytes": 9234,
+    "sha256": "6fad835c83356414eeebe236ead47997a287fd46da23f71575da9886ef9f8070",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 306,
+      "index_count_declared": 592,
+      "edge_count_declared": 312,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 434,
+    "internal_path": "effect\\base\\cm080_010",
+    "bytes": 43222,
+    "sha256": "7aa690915cd32d6dbb3801f5ea2b016adead386c719516b39bea998b7ec83792",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 14,
+      "material_count_declared": 5,
+      "vertex_count_declared": 1420,
+      "index_count_declared": 2618,
+      "edge_count_declared": 1566,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 445,
+    "internal_path": "effect\\base\\cm080_020",
+    "bytes": 18182,
+    "sha256": "f83ab0650caef09de5c1cabd3af430d6a63ed3d217fb6bfb433c63135b8edbb1",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 11,
+      "material_count_declared": 2,
+      "vertex_count_declared": 554,
+      "index_count_declared": 1018,
+      "edge_count_declared": 552,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 448,
+    "internal_path": "effect\\base\\cm102_003",
+    "bytes": 8082,
+    "sha256": "5578870328e2309bba64c759e91f2fb3c0ff741d50cb746e918fe8445c3a8041",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 6,
+      "material_count_declared": 1,
+      "vertex_count_declared": 240,
+      "index_count_declared": 360,
+      "edge_count_declared": 120,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 451,
+    "internal_path": "effect\\base\\cm120_000",
+    "bytes": 9642,
+    "sha256": "172a7be64c55a7fc5e8f26368a2b144785f60114944223a76878c47b7dc84dc5",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 2,
+      "vertex_count_declared": 280,
+      "index_count_declared": 484,
+      "edge_count_declared": 396,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 456,
+    "internal_path": "effect\\base\\cm120_021",
+    "bytes": 31906,
+    "sha256": "62974087561e8cde2fb9d245c12e2c2bf3474b1f480dadf440f90741c03658ff",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 9,
+      "material_count_declared": 6,
+      "vertex_count_declared": 988,
+      "index_count_declared": 1696,
+      "edge_count_declared": 882,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 460,
+    "internal_path": "effect\\base\\cm120_029",
+    "bytes": 5998,
+    "sha256": "88915b91b57904ad7847fbe797619c2ce23af5e4d4e306b6575f1907e008167c",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 2,
+      "vertex_count_declared": 162,
+      "index_count_declared": 314,
+      "edge_count_declared": 184,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 466,
+    "internal_path": "effect\\base\\cm400_000",
+    "bytes": 26402,
+    "sha256": "6d98d22019ceafc1c44801ed45692610ed5c0b2db461dc1fb813526c7af374be",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 3,
+      "mesh_count_declared": 3,
+      "material_count_declared": 1,
+      "vertex_count_declared": 793,
+      "index_count_declared": 1496,
+      "edge_count_declared": 820,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 471,
+    "internal_path": "effect\\base\\cm150_001",
+    "bytes": 24898,
+    "sha256": "99dd0591ee8977fc317609b749d87c188f8f926d6c486923e2e4a5943043b9e6",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 8,
+      "material_count_declared": 1,
+      "vertex_count_declared": 816,
+      "index_count_declared": 1632,
+      "edge_count_declared": 272,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 474,
+    "internal_path": "effect\\base\\cm120_012",
+    "bytes": 2362,
+    "sha256": "6bcd965f89f2a40ac7334c66b84b87891c606090043d4e85bd141cb60b9bd9f4",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 59,
+      "index_count_declared": 120,
+      "edge_count_declared": 48,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 480,
+    "internal_path": "effect\\base\\cm200_101",
+    "bytes": 19406,
+    "sha256": "8b817e41474a614139c22975618d04fcbba0e26a9d3508687a2c8d8ac307d87f",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 3,
+      "material_count_declared": 1,
+      "vertex_count_declared": 671,
+      "index_count_declared": 1114,
+      "edge_count_declared": 380,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 483,
+    "internal_path": "effect\\base\\cm150_002",
+    "bytes": 69922,
+    "sha256": "54908bf3e9f9c73337aca7f1a0d83a0a2ec3a44b1cb9a43f9fd67d0fef369b30",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 5,
+      "material_count_declared": 1,
+      "vertex_count_declared": 2448,
+      "index_count_declared": 4896,
+      "edge_count_declared": 816,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 487,
+    "internal_path": "effect\\base\\cm030_008",
+    "bytes": 11794,
+    "sha256": "d9fb0ad82c20fbcccd5b03615313087253c575314bbb82b452742e507029e51e",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 405,
+      "index_count_declared": 684,
+      "edge_count_declared": 340,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 492,
+    "internal_path": "effect\\base\\cm400_002",
+    "bytes": 26206,
+    "sha256": "17239a9ef33a2b97660940f150cab6784a96c59d8f5e2ec7f5c7aef6a49a022e",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 4,
+      "material_count_declared": 2,
+      "vertex_count_declared": 873,
+      "index_count_declared": 1986,
+      "edge_count_declared": 966,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 499,
+    "internal_path": "effect\\base\\cm102_002",
+    "bytes": 33154,
+    "sha256": "c65fee98e0943a966b2d354c77f43f75cb186b089d0af2bce4f6143329185af5",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 8,
+      "material_count_declared": 1,
+      "vertex_count_declared": 1152,
+      "index_count_declared": 1728,
+      "edge_count_declared": 576,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 502,
+    "internal_path": "effect\\base\\cm120_004",
+    "bytes": 6266,
+    "sha256": "5760ecac6f86a095fff81bf7b02e370f8e737c7c762e39096ee51361894909ce",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 1,
+      "material_count_declared": 1,
+      "vertex_count_declared": 186,
+      "index_count_declared": 288,
+      "edge_count_declared": 240,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 505,
+    "internal_path": "effect\\base\\cm120_005",
+    "bytes": 2610,
+    "sha256": "e6782ef4e8d52e55abe51dc9bfafea2f09fe9b582032671035eb85d737ab0f1c",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 60,
+      "index_count_declared": 112,
+      "edge_count_declared": 64,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 508,
+    "internal_path": "effect\\base\\cm120_025",
+    "bytes": 7766,
+    "sha256": "9719ef0b5b0251d030677e4788fde989e8f47f857102df0632508ef07a546d83",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 6,
+      "material_count_declared": 2,
+      "vertex_count_declared": 188,
+      "index_count_declared": 386,
+      "edge_count_declared": 152,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 514,
+    "internal_path": "effect\\base\\cm200_212",
+    "bytes": 8154,
+    "sha256": "4caf3d327fade433299a9e685955ba2075a495a016841ac5ee82339f798832d3",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 1,
+      "material_count_declared": 1,
+      "vertex_count_declared": 290,
+      "index_count_declared": 356,
+      "edge_count_declared": 256,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 517,
+    "internal_path": "effect\\base\\cm153_000",
+    "bytes": 15394,
+    "sha256": "76681ffdbc779e34f4cbca3a2515e90be0ae683b2b7676acab90870339040dc6",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 5,
+      "material_count_declared": 1,
+      "vertex_count_declared": 456,
+      "index_count_declared": 624,
+      "edge_count_declared": 384,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 526,
+    "internal_path": "effect\\base\\cm070_000",
+    "bytes": 22118,
+    "sha256": "9d332decaef027a7627cf5725dc02296b6b17e893643fe65b8cca7988c4f9c0d",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 6,
+      "material_count_declared": 3,
+      "vertex_count_declared": 705,
+      "index_count_declared": 1670,
+      "edge_count_declared": 766,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 531,
+    "internal_path": "effect\\base\\cm082_000",
+    "bytes": 5634,
+    "sha256": "8e86e370765daab0bcb802b5683ebbad57b68af6284f84b465b43ba56592db21",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 1,
+      "material_count_declared": 1,
+      "vertex_count_declared": 186,
+      "index_count_declared": 344,
+      "edge_count_declared": 126,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 534,
+    "internal_path": "effect\\base\\cm071_000",
+    "bytes": 9410,
+    "sha256": "a2ff58f556fa46f8ac9081f8489e6a00d9d4af4c10752e7b5d1c2e27a392982e",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 4,
+      "material_count_declared": 1,
+      "vertex_count_declared": 255,
+      "index_count_declared": 558,
+      "edge_count_declared": 358,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 540,
+    "internal_path": "effect\\base\\cm081_000",
+    "bytes": 2482,
+    "sha256": "b8c2ffb2a769b866950546d6a98e8e5820f55d3635909a6ba82271e9b452d04b",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 1,
+      "material_count_declared": 1,
+      "vertex_count_declared": 66,
+      "index_count_declared": 76,
+      "edge_count_declared": 64,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 547,
+    "internal_path": "effect\\base\\cm070_001",
+    "bytes": 4866,
+    "sha256": "9a184e06981b27ac41a128bc81c827898a2be767cdadb1c912fc948f42bab517",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 1,
+      "material_count_declared": 1,
+      "vertex_count_declared": 117,
+      "index_count_declared": 320,
+      "edge_count_declared": 204,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 554,
+    "internal_path": "effect\\base\\cm070_002",
+    "bytes": 3178,
+    "sha256": "e2519f481db76a19cd733616864c555e8575e779dca24d0a6a75b6f1c48a4f62",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 1,
+      "material_count_declared": 1,
+      "vertex_count_declared": 96,
+      "index_count_declared": 196,
+      "edge_count_declared": 160,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 561,
+    "internal_path": "effect\\base\\cm150_000",
+    "bytes": 103442,
+    "sha256": "f7eba99582c2beec3d71f80c6a4bee0a24cd5ec1b7f5a3362b41f7ff92683641",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 15,
+      "material_count_declared": 1,
+      "vertex_count_declared": 3716,
+      "index_count_declared": 5320,
+      "edge_count_declared": 2892,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 566,
+    "internal_path": "effect\\base\\cm120_020",
+    "bytes": 7450,
+    "sha256": "ba59f96ce640c1ac378abb3ad2c4c0ce548c658bbb23bbca959ff61100f3b887",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 216,
+      "index_count_declared": 348,
+      "edge_count_declared": 272,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 568,
+    "internal_path": "effect\\base\\cm120_016",
+    "bytes": 18630,
+    "sha256": "a56fe8887935f170f055f10fb149ebdd9a6479d6a1280cdbedc0840c10d5819c",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 5,
+      "material_count_declared": 1,
+      "vertex_count_declared": 546,
+      "index_count_declared": 982,
+      "edge_count_declared": 758,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 574,
+    "internal_path": "effect\\base\\cm030_003",
+    "bytes": 36402,
+    "sha256": "4be3c35021310a90103b13fd72242c2c41843c2678b678fb7306e1ec3febfae1",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 10,
+      "material_count_declared": 2,
+      "vertex_count_declared": 1234,
+      "index_count_declared": 2080,
+      "edge_count_declared": 877,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 577,
+    "internal_path": "effect\\base\\cm101_002",
+    "bytes": 10346,
+    "sha256": "a50ae800c4ddfb3ac1b80d6e0b2bf482b8a9721edbc1e9faff0d54a06bfa954c",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 4,
+      "material_count_declared": 2,
+      "vertex_count_declared": 280,
+      "index_count_declared": 612,
+      "edge_count_declared": 403,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 591,
+    "internal_path": "effect\\base\\cm150_003",
+    "bytes": 23418,
+    "sha256": "4b5cfe194ce96e669b383a286ee4cb145c1867853e8408b47fa06da6719f5333",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 14,
+      "material_count_declared": 6,
+      "vertex_count_declared": 648,
+      "index_count_declared": 1336,
+      "edge_count_declared": 760,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 596,
+    "internal_path": "effect\\base\\cm100_005",
+    "bytes": 4494,
+    "sha256": "2a1e37662a13bfb1096bd0a6c6a054ca0944e0db872cf774852216bf1c3fb7f7",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 4,
+      "material_count_declared": 3,
+      "vertex_count_declared": 107,
+      "index_count_declared": 198,
+      "edge_count_declared": 96,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 607,
+    "internal_path": "effect\\base\\cm130_018",
+    "bytes": 8434,
+    "sha256": "cd8c315ffc0967ed15f22bb3a164c201aedf588b0e23b2be8341c511e7715493",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 272,
+      "index_count_declared": 600,
+      "edge_count_declared": 398,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 612,
+    "internal_path": "effect\\base\\cm120_007",
+    "bytes": 20250,
+    "sha256": "7761088b5695aca512f23f112930eb76743abe65967bd8481f9bf825b7d35c50",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 3,
+      "material_count_declared": 1,
+      "vertex_count_declared": 612,
+      "index_count_declared": 1092,
+      "edge_count_declared": 696,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 614,
+    "internal_path": "effect\\base\\cm120_006",
+    "bytes": 9006,
+    "sha256": "a164f8080a8ae473fdc5a1c890037db39e004446546a9bcc16d3f2f43ba980fe",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 2,
+      "vertex_count_declared": 276,
+      "index_count_declared": 486,
+      "edge_count_declared": 300,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 620,
+    "internal_path": "effect\\base\\cm400_201",
+    "bytes": 1266,
+    "sha256": "e0b82b9126ee3b5cfa90bb7c9103c7a301ce2f29803b8825c78b5cef3ccc0e52",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 1,
+      "material_count_declared": 1,
+      "vertex_count_declared": 25,
+      "index_count_declared": 42,
+      "edge_count_declared": 22,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 623,
+    "internal_path": "effect\\base\\cm130_107",
+    "bytes": 3354,
+    "sha256": "5aee18a4445752d026c6c5542b4c4d94c9263f53f27edb4481e224391d8d7069",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 96,
+      "index_count_declared": 172,
+      "edge_count_declared": 44,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 629,
+    "internal_path": "effect\\base\\cm130_021",
+    "bytes": 6646,
+    "sha256": "b2ddd6c88d39ba2f04fa15f2a12e0f64547c4a275d3983dc0ec52b633be7c72f",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 3,
+      "material_count_declared": 1,
+      "vertex_count_declared": 210,
+      "index_count_declared": 338,
+      "edge_count_declared": 198,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 633,
+    "internal_path": "effect\\base\\cm200_106",
+    "bytes": 11162,
+    "sha256": "c434a107551c96d7e3c1751a51446a344a6b5b5b0e288f0a6ab0721431d156a9",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 2,
+      "material_count_declared": 1,
+      "vertex_count_declared": 393,
+      "index_count_declared": 512,
+      "edge_count_declared": 385,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 646,
+    "internal_path": "effect\\base\\cm190_000",
+    "bytes": 55950,
+    "sha256": "3c8334439f50ed443856bf507aaadcad48267b46e378fe99be9881545bf2349e",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 17,
+      "material_count_declared": 5,
+      "vertex_count_declared": 1748,
+      "index_count_declared": 3538,
+      "edge_count_declared": 1244,
+      "geometry_and_skeleton_validated": false
+    }
+  },
+  {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "index": 656,
+    "internal_path": "effect\\base\\cm400_200",
+    "bytes": 3630,
+    "sha256": "bb38dadbdfdb082f6c0adef0b6e501ef754a29b29aa9b24f741bd9e2cde1e5b2",
+    "kind": "MOD_candidate",
+    "header_probe": {
+      "format": "MOD",
+      "version": 230,
+      "bone_count_declared": 0,
+      "mesh_count_declared": 1,
+      "material_count_declared": 1,
+      "vertex_count_declared": 104,
+      "index_count_declared": 118,
+      "edge_count_declared": 102,
+      "geometry_and_skeleton_validated": false
+    }
+  }
+]

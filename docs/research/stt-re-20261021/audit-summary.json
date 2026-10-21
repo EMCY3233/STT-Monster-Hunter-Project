@@ -1,0 +1,75 @@
+{
+  "generated_utc": "2026-10-21T06:06:19.793294+00:00",
+  "scope": "All physical project files except .git, links and this output; hash/read only. ARC decoding only plain v17 RomFS. No semantic asset validation.",
+  "files": 10641,
+  "bytes": 13045602968,
+  "status": {
+    "read_ok": 10641
+  },
+  "excluded": [
+    "analysis-local/stt-re-audit-20261021",
+    "inventory-work/.git",
+    "repository/.git"
+  ],
+  "originals": [
+    {
+      "path": "MH3U/EUR - Monster Hunter 3 Ultimate(00040000000b1d00).cia",
+      "bytes": 1871489344,
+      "sha256": "aa108914574a1a28b87e13964322441e2b619814a6d97401affce9f68ddcfd4f",
+      "matches_baseline": true
+    },
+    {
+      "path": "MH4U/EUR - Monster Hunter 4 Ultimate (0004000000126100).7z.001",
+      "bytes": 1610612736,
+      "sha256": "e87b28badf258a739e3d4ece1db265c69dc329e3a31ba9a02c7181afaa5a3e2f",
+      "matches_baseline": true
+    },
+    {
+      "path": "MH4U/EUR - Monster Hunter 4 Ultimate (0004000000126100).7z.002",
+      "bytes": 1124307744,
+      "sha256": "88571b2ad5e4ab0845bbe008ef0360263fc94d3d35ecc6e9edbd0f854c1408c3",
+      "matches_baseline": true
+    },
+    {
+      "path": "MHFU/Monster Hunter Freedom Unite.iso",
+      "bytes": 886702080,
+      "sha256": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+      "matches_baseline": true
+    },
+    {
+      "path": "MHGU/MHXX_MHGU_English_Patch_v2.cia",
+      "bytes": 36897728,
+      "sha256": "8438c0c026203c20b9dd81fc3b6ec9c31c94abc80e5bb7f6618cd58f804ac4ac",
+      "matches_baseline": true
+    },
+    {
+      "path": "MHGU/Monster Hunter XX  JPN (0004000000197100).7z.001",
+      "bytes": 1610612736,
+      "sha256": "b4133f4707a0ace9cf1932dd4f623ad654366f794eeff623d4b2454d9329c8c9",
+      "matches_baseline": true
+    },
+    {
+      "path": "MHGU/Monster Hunter XX  JPN (0004000000197100).7z.002",
+      "bytes": 720416892,
+      "sha256": "d4bad63aef5133e0504f48e84775b924ed7af2249ca5acee687be28421772a57",
+      "matches_baseline": true
+    }
+  ],
+  "arc": {
+    "entries": 21696,
+    "archives": 1228
+  },
+  "entry_signatures": {
+    "GMD_candidate": 2637,
+    "unclassified": 18669,
+    "TEX_candidate": 220,
+    "MRL_candidate": 83,
+    "MOD_candidate": 83,
+    "LMT_candidate": 4
+  },
+  "arc_errors": [],
+  "bank_hash_errors": [],
+  "bank_objects_checked": 8823,
+  "sqlite_integrity": "ok",
+  "psp_files": 13
+}

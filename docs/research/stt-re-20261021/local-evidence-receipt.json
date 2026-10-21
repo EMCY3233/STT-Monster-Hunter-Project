@@ -1,0 +1,32 @@
+[
+  {
+    "local_path": "analysis-local/stt-re-audit-20261021/physical-files.jsonl",
+    "bytes": 2670551,
+    "sha256": "ed339208d70504b93fce704dfa7e6d64019de4c3b7e73f3cf058a46e97ff7862"
+  },
+  {
+    "local_path": "analysis-local/stt-re-audit-20261021/resource-headers.json",
+    "bytes": 67221,
+    "sha256": "a7ebd1bcf2203bb4a08120787ab32a742db2de436fad0d111ee76828869c643f"
+  },
+  {
+    "local_path": "analysis-local/stt-re-audit-20261021/psp-files.json",
+    "bytes": 3573,
+    "sha256": "546eba49f954ad6f66f16c96986b7eb840cd6948e79e7851fe2693d040b75406"
+  },
+  {
+    "local_path": "analysis-local/stt-re-audit-20261021/summary.json",
+    "bytes": 2441,
+    "sha256": "18f97359850a80c8e4f27df40116fa42e07806761141b1d753f8a031a3b3bca6"
+  },
+  {
+    "local_path": "analysis-local/stt-re-audit-20261021/plain-executables.json",
+    "bytes": 57841,
+    "sha256": "2cf22d989d3096992f2061e56167dec6366dc8ae71de6b69a929616e07615505"
+  },
+  {
+    "local_path": "analysis-local/stt-re-audit-20261021/entry-type-labels.json",
+    "bytes": 18487,
+    "sha256": "bc9d4f5773eb9b2cc83f92dc02e777e11f00b5c98855e3ef8bc0a7f0d85f0dc2"
+  }
+]
