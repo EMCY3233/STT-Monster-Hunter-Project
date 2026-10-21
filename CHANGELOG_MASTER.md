@@ -1,5 +1,12 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Cierre de copia Frontier y censo completo
+
+- Copiados y registrados8261archivos/5212490427bytes; banco9888archivos. Procesos terminados0 y hashes de los catálogos cotejados.
+- Segunda lectura de8252archivos coincide con banco;9metadatos de paquete excluidos del segundo sondeo,ya verificados en registro. Sin cambios durante censo ni.partial.
+- SFO confirma baseFrontierG1.00 y parcheFrontierZ01.99.44JKR y5ECD candidatos; envolturaSCE en rePatch/eboot. Sin descifrado,jugabilidad ni ZZ acreditados.
+- Informe y metadatos en docs/research/game-inputs-2026-10-21/frontier-complete.md. Candidatos compartidos con investigación para continuar sin duplicar trabajo. PR12 contiene correcciones documentales del monitor,sin fusionar.
+
 ## 21-10-2026 — Sincronización de frentes y continuación
 
 - Monitor confirmado en main410b1dd70a, versión0.5; sustituidos resúmenes centrales antiguos.
