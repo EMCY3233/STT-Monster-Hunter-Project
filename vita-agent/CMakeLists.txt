@@ -22,4 +22,4 @@ target_link_libraries(stt_vita_monitor SceNet_stub SceSysmodule_stub SceCtrl_stu
 vita_create_self(stt_vita_monitor.self stt_vita_monitor)
 # Developer package only; no installation or transfer automation.
 vita_create_vpk(stt_vita_monitor.vpk STTM00001 stt_vita_monitor.self
-  VERSION 00.10 NAME "STT Vita Monitor")
+  VERSION 00.20 NAME "STT Vita Monitor")

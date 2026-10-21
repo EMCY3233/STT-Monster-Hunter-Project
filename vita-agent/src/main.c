@@ -12,6 +12,17 @@
 #include "debugScreen.h"
 #include "telemetry.h"
 
+/* Stable rows: repaint changed text only, without clearing the framebuffer. */
+static void screen_line(int row, const char *text) {
+    static char previous[14][60];
+    char current[60];
+    snprintf(current, sizeof current, "%-59.59s", text);
+    if (strcmp(current, previous[row]) != 0) {
+        psvDebugScreenPrintf("\033[%d;1H%s", row + 1, current);
+        memcpy(previous[row], current, sizeof current);
+    }
+}
+
 int main(void) {
     unsigned char ip[4] = {192, 168, 1, 2};
     unsigned int previous = 0, seq = 0, sent = 0, errors = 0, consecutive = 0;
@@ -20,10 +31,15 @@ int main(void) {
     uint64_t start = 0, next = 0;
     char session[65] = "", payload[512], destination[16];
     void *memory = NULL;
+    PsvDebugScreenFont *original_font = NULL, *large_font = NULL;
     SceNetSockaddrIn address;
-    const char *status = "EDIT PC IP, THEN CROSS TO START";
+    const char *status = "Configura IP del PC y pulsa Cruz.";
 
     if (psvDebugScreenInit() < 0) return 1;
+    original_font = psvDebugScreenGetFont();
+    large_font = psvDebugScreenScaleFont2x(original_font);
+    if (large_font) psvDebugScreenSetFont(large_font);
+    psvDebugScreenPuts("\033[2J\033[H");
     result = sceSysmoduleLoadModule(SCE_SYSMODULE_NET);
     if (result < 0) goto failure;
     module_ready = 1;
@@ -48,14 +64,16 @@ int main(void) {
         unsigned int pressed = controls.buttons & ~previous;
         previous = controls.buttons;
         if (pressed & SCE_CTRL_START) break;
-        if (pressed & SCE_CTRL_CIRCLE) { active = 0; status = "STOPPED"; }
+        if (pressed & SCE_CTRL_CIRCLE) { active = 0; status = "Parado."; }
         if (!active) {
             if (pressed & SCE_CTRL_LEFT) selected = (selected + 3) % 4;
             if (pressed & SCE_CTRL_RIGHT) selected = (selected + 1) % 4;
             if (pressed & SCE_CTRL_UP) ip[selected]++;
             if (pressed & SCE_CTRL_DOWN) ip[selected]--;
+            if (pressed & SCE_CTRL_SQUARE) ip[selected] += 10;
+            if (pressed & SCE_CTRL_TRIANGLE) ip[selected] -= 10;
             if (pressed & SCE_CTRL_CROSS) {
-                if (!stt_private_ip(ip)) status = "USE PRIVATE PC IP, LAST OCTET 1..254";
+                if (!stt_private_ip(ip)) status = "IP privada; ultimo bloque entre 1 y 254.";
                 else {
                     SceRtcTick tick;
                     result = sceRtcGetCurrentTick(&tick);
@@ -74,7 +92,7 @@ int main(void) {
                     last_error = 0;
                     next = start;
                     active = 1;
-                    status = "RUNNING (UDP SEND IS NOT DELIVERY CONFIRMATION)";
+                    status = "Enviando. Confirma recepcion en el PC.";
                 }
             }
         }
@@ -89,17 +107,29 @@ int main(void) {
             else { errors++; consecutive++; last_error = result; }
             seq++;
             next = now + UINT64_C(1000000);
-            if (consecutive >= 3) { active = 0; status = "STOPPED: 3 CONSECUTIVE SEND ERRORS"; }
-            else if (seq >= 60) { active = 0; status = "COMPLETE: 60 ATTEMPTS; CHECK PC LOG"; }
+            if (consecutive >= 3) { active = 0; status = "Parado: 3 errores de envio consecutivos."; }
+            else if (seq >= 60) { active = 0; status = "Terminado: 60 intentos. Revisa el PC."; }
         }
-        psvDebugScreenPrintf("\033[H\033[2JSTT VITA MONITOR 0.1 - EXPERIMENTAL\n\n"
-            "PC IP: %u.%u.%u.%u :32100   EDIT OCTET: %d\n"
-            "LEFT/RIGHT: select; UP/DOWN: change (one press)\n"
-            "CROSS: start 60 samples; CIRCLE: stop; START: exit\n\n"
-            "%s\nAttempts: %u  Sent: %u  Errors: %u  Last: 0x%08X\n"
-            "Session: %s\n\nNo commands received. No files written.\n",
-            ip[0], ip[1], ip[2], ip[3], selected + 1, status,
-            seq, sent, errors, (unsigned int)last_error, session);
+        char line[128];
+        screen_line(0, "STT VITA MONITOR 0.2 - EXPERIMENTAL");
+        screen_line(1, "");
+        snprintf(line, sizeof line, "PC: %u.%u.%u.%u :32100", ip[0], ip[1], ip[2], ip[3]);
+        screen_line(2, line);
+        snprintf(line, sizeof line, "Bloque IP seleccionado: %d", selected + 1);
+        screen_line(3, line);
+        screen_line(4, "Izq/Der: bloque   Arriba/Abajo: +/-1");
+        screen_line(5, "Cuadrado: +10   Triangulo: -10");
+        screen_line(6, "Cruz: iniciar   Circulo: parar   START: salir");
+        screen_line(7, "");
+        screen_line(8, status);
+        snprintf(line, sizeof line, "Intentos: %u/60   Envios: %u   Errores: %u", seq, sent, errors);
+        screen_line(9, line);
+        snprintf(line, sizeof line, "Ultimo error: 0x%08X", (unsigned int)last_error);
+        screen_line(10, line);
+        snprintf(line, sizeof line, "Sesion: %s", session);
+        screen_line(11, line);
+        screen_line(12, "");
+        screen_line(13, "UDP: un envio no confirma entrega.");
         sceKernelDelayThread(50000);
     }
     result = 0;
@@ -113,6 +143,11 @@ cleanup:
     if (net_ready) sceNetTerm();
     free(memory);
     if (module_ready) sceSysmoduleUnloadModule(SCE_SYSMODULE_NET);
+    if (large_font) {
+        psvDebugScreenSetFont(original_font);
+        free(large_font->glyphs);
+        free(large_font);
+    }
     psvDebugScreenFinish();
     sceKernelExitProcess(result < 0 ? 1 : 0);
     return 0;

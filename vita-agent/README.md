@@ -1,12 +1,13 @@
 # Agente Vita experimental — STT/1
 
-Primera implementación de aplicación independiente. El workflow `Vita agent build` comprobará la compilación. No ejecutada en hardware: una compilación correcta no acredita compatibilidad con firmware 3.65 ni recepción Wi-Fi real.
+Aplicación independiente experimental. La versión 0.1 completó un primer ensayo físico con 60 muestras y salida por START confirmada: [resultado](../docs/STT-MON-001-hardware-result.md). La versión 0.2 amplía el texto y evita el borrado continuo de pantalla; requiere su propia validación visual.
 
 ## Funciones del código
 
-- Pantalla de diagnóstico mediante common/debugScreen de los ejemplos VitaSDK, fijados al commit fe8fbef570f3280586c0c20157146e3faefb2181. FetchContent descarga esa dependencia al configurar, sin construir los demás ejemplos. Sus avisos y licencias se conservan en la dependencia descargada.
+- Pantalla de diagnóstico con texto 2x y filas actualizadas solo al cambiar su contenido, mediante common/debugScreen de los ejemplos VitaSDK, fijados al commit fe8fbef570f3280586c0c20157146e3faefb2181. FetchContent descarga esa dependencia al configurar, sin construir los demás ejemplos. Sus avisos y licencias se conservan en la dependencia descargada.
 - Destino IP editable en RAM con cruceta. Solo rangos privados RFC1918 y último octeto 1–254. El valor inicial 192.168.1.2 es un ejemplo: sustituir por la IP del PC. No valida la máscara de subred; evitar direcciones de red/broadcast de la LAN.
 - CROSS inicia hasta 60 intentos de envío, uno por segundo aproximadamente; CIRCLE detiene y START sale. Antes de CROSS no envía telemetría.
+- Arriba/abajo cambian el bloque IP seleccionado en +/-1; Cuadrado/Triángulo en +/-10, con vuelta al superar 0–255. Izquierda/derecha seleccionan bloque. Por ejemplo, de 2 a 134: 13 pulsaciones de Cuadrado y dos de Arriba.
 - UDP no bloqueante, sin recibir comandos. Tres errores consecutivos detienen el ensayo; se muestra el último error. Un envío correcto no confirma entrega.
 - source=vita, sesión basada en tick RTC e inicio monotónico, secuencia de intentos, tiempo transcurrido del proceso y batería por API. Batería fuera de rango se codifica como null. La sesión es un identificador práctico, no criptográfico.
 - Cierre de socket, memoria y módulo NET. Sin cambios de frecuencias, firmware, plugins, lectura de otros procesos o escrituras de archivos.

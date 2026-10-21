@@ -17,9 +17,12 @@ Reproducir con los comandos del README. Usar un archivo nuevo por ensayo si se d
 | Inactividad sin emisor | Automatizada; resultado en changelog |
 | Dos procesos CLI y 10 muestras | Resultado en changelog |
 | CI Windows/Linux, Python 3.11/3.13 | Correcto en 610c076; ejecución enlazada en changelog |
-| Wi-Fi entre PC y Vita | Pendiente; requiere autorización adicional |
-| Desconexión/reconexión física y batería real | Pendiente |
+| Wi-Fi entre PC y Vita | 60 muestras correctas; ver resultado físico enlazado abajo |
+| Lectura de batería del emisor | 91 % durante primer ensayo; no se mide consumo |
+| Desconexión/reconexión física | Pendiente |
 | Compilación de agente Vita | Workflow remoto en rama experimental; consultar su resultado |
-| Instalación/salida de agente Vita | Pendiente en hardware; requiere autorización adicional |
+| Instalación/salida de agente Vita | Ejecutada con autorización; START confirmado por usuario |
 
 El ensayo de inactividad automatizado cubre ausencia de datagramas; no prueba una desconexión Wi-Fi física. No se afirma rendimiento ni compatibilidad en consola.
+
+[Resultado del primer ensayo físico, alcance y límites](STT-MON-001-hardware-result.md). La prueba confirma este flujo en la configuración declarada, sin establecer compatibilidad general ni validar todavía la pantalla 0.2.
