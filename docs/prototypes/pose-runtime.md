@@ -59,3 +59,21 @@ versión/hz/base, límites enteros, conteos, duplicados, índice/jerarquía, tie
 y módulo (incluido UINT64_MAX), offsets dañados del índice y muestra original.
 No hay mediciones de FPS, GUI ni ejecución física. Integración con el renderer
 se prepara tras validar el lector; las fuentes del renderer siguen en PR11.
+
+## Preparación mínima del render
+
+Tras aprobar la primera prueba C/Python del lector (job cross-pc de
+run39677218607, commit ff7171ce), se añadió `stt_pose_emit`: toma una pose,
+conserva winding e índices, aplica mm→metros/posición/yaw y llama a un callback
+por triángulo. Usa el scratch del llamador; no reserva otra malla ni mantiene
+punteros al triángulo después del callback. Callback cancelable y validación
+de índices de nuevo antes de acceder al vértice. Una cancelación puede haber
+emitido un prefijo: el consumidor debe descartar su frame incompleto.
+
+La prueba PC compara el número de triángulos y sumas de coordenadas emitidas
+con un cálculo independiente Python a yaw90°, posición (4,0,5)m, por cada clip.
+La transformación del ancla tiene además assertions C de orientación y rango.
+Esto prepara la conexión al tri() de render.c de PR11; no se copió ni modificó
+ese renderer, no se rasterizó una escena ni se presenta una imagen como revisada.
+Se mantienen pendientes la conexión del callback en PR11, errores de carga en
+aplicación, selección de clip y verificación de render/tiempos en hardware.

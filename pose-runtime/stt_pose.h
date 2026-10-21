@@ -28,4 +28,10 @@ int stt_pose_frame(const SttPose *pose, unsigned clip, uint64_t tick, SttPoseFra
 /* Same handedness and yaw as PR11: yaw 0 faces +Z. No combat/hitbox binding. */
 int stt_pose_transform(const int32_t model_mm[3], int32_t x_mm, int32_t z_mm,
                        uint16_t yaw_turn, float world_m[3]);
+typedef int (*SttPoseTriangleSink)(void *context, const float triangle_m[3][3]);
+/* Adapter seam for renderer tri(): reuses caller's one-frame scratch buffer.
+   Sink must consume/copy each triangle immediately. Failure may emit a prefix. */
+int stt_pose_emit(const SttPose *pose, unsigned clip, uint64_t tick,
+                  int32_t x_mm, int32_t z_mm, uint16_t yaw_turn,
+                  SttPoseFrame *scratch, SttPoseTriangleSink sink, void *context);
 #endif

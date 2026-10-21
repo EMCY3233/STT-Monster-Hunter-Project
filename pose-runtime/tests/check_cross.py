@@ -53,10 +53,22 @@ def main():
             for clip in imported['clips']:
                 for f in clip['frames']:
                     expected.append([n for p in f['joints']+f['vertices'] for n in p])
-            actual=[list(map(int,line.split())) for line in output[1:]]
+            actual=[list(map(int,line.split())) for line in output[1:] if not line.startswith('mesh ')]
             assert actual==expected
             assert info[2:]==[len(value['parents']),len(value['clips'][0]['frames'][0]['vertices']),
                              len(value['triangles']),len(value['clips']),len(expected)]
+            emitted=[line.split() for line in output if line.startswith('mesh ')]
+            assert len(emitted)==len(imported['clips'])
+            for c,line in enumerate(emitted):
+                assert int(line[1])==c and int(line[2])==len(value['triangles'])
+                expected_sum=[0.,0.,0.]
+                for triangle in imported['triangles']:
+                    for index in triangle:
+                        x,y,z=imported['clips'][c]['frames'][0]['vertices'][index]
+                        for j,n in enumerate([4+z*.001,y*.001,5-x*.001]): expected_sum[j]+=n
+                for a,b in zip(map(float,line[3:]),expected_sum):
+                    # Float32 transform, summed as double: account for ±1000 m boundaries.
+                    assert abs(a-b) <= .001*max(1,len(value['triangles']))
         raw=bridge.runtime_dumps(anchor)
         malformed=[b'',raw+b'0',raw.replace(b'"version":1',b'"version":2'),
                    raw.replace(b'"hz":60',b'"hz":30'), raw.replace(b'"parents":[-1,0]',b'"parents":[-1,1]'),

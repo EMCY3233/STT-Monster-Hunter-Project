@@ -16,7 +16,9 @@ jobs:
           python-version: '3.11'
       - run: python pose-runtime/tests/check_cross.py > pose-pc-evidence.json
         env:
-          POSE_CFLAGS: '-fsanitize=undefined,bounds -fno-sanitize-recover=all'
+          POSE_CFLAGS: '-fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer -no-pie'
+          ASAN_OPTIONS: 'detect_leaks=0'
+      - run: cat pose-pc-evidence.json
       - uses: actions/upload-artifact@v4
         with:
           name: stt-pose-pc-evidence

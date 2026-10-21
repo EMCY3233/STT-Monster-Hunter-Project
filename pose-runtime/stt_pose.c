@@ -165,3 +165,20 @@ int stt_pose_transform(const int32_t p[3], int32_t x, int32_t z, uint16_t yaw, f
     out[2]=((float)z+(float)p[2]*c-(float)p[0]*s)*.001f;
     return 1;
 }
+int stt_pose_emit(const SttPose *pose, unsigned clip, uint64_t tick,
+                  int32_t x, int32_t z, uint16_t yaw,
+                  SttPoseFrame *scratch, SttPoseTriangleSink sink, void *context) {
+    if (!pose || !sink || !scratch || pose->triangle_count==0 ||
+        pose->triangle_count>STT_POSE_TRIANGLES ||
+        !stt_pose_frame(pose,clip,tick,scratch)) return 0;
+    for (unsigned i=0;i<pose->triangle_count;++i) {
+        float triangle[3][3];
+        for (unsigned j=0;j<3;++j) {
+            unsigned index=pose->triangles[i][j];
+            if (index>=pose->vertices ||
+                !stt_pose_transform(scratch->vertices[index],x,z,yaw,triangle[j])) return 0;
+        }
+        if (!sink(context,(const float (*)[3])triangle)) return 0;
+    }
+    return 1;
+}

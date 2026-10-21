@@ -4,6 +4,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+
+typedef struct { unsigned count; double sum[3]; } Mesh;
+static int sink(void *context, const float triangle[3][3]) {
+    Mesh *mesh=context;
+    for (unsigned i=0;i<3;++i) for (unsigned j=0;j<3;++j) {
+        assert(isfinite(triangle[i][j]));
+        mesh->sum[j]+=triangle[i][j];
+    }
+    ++mesh->count; return 1;
+}
+static int cancel(void *context, const float triangle[3][3]) {
+    (void)context; (void)triangle; return 0;
+}
 
 int main(int argc, char **argv) {
     static SttPose pose;
@@ -45,6 +59,15 @@ int main(int argc, char **argv) {
             puts("");
         }
     }
+    for (unsigned c=0;c<pose.clips;++c) {
+        Mesh mesh={0,{0,0,0}};
+        assert(stt_pose_emit(&pose,c,0,4000,5000,16384,&result,sink,&mesh));
+        assert(mesh.count==pose.triangle_count);
+        printf("mesh %u %u %.9f %.9f %.9f\n",c,mesh.count,mesh.sum[0],mesh.sum[1],mesh.sum[2]);
+    }
+    assert(!stt_pose_emit(&pose,0,0,0,0,0,&result,cancel,NULL));
+    assert(!stt_pose_emit(&pose,0,0,0,0,0,&result,NULL,NULL));
+    assert(!stt_pose_emit(&pose,0,0,INT_MAX,0,0,&result,sink,NULL));
     /* Validate offset guards even for accidentally damaged public index. */
     pose.frame_offset[0]=UINT32_MAX;
     assert(!stt_pose_frame(&pose,0,0,&result));
