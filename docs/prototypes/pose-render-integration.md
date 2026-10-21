@@ -66,3 +66,35 @@ archivo ausente/inválido/sobredimensionado, fallback igual en región de escena
 aparición y cambio temporal de malla, 16 cámaras/yaws y canarios de framebuffer,
 depth y estado. Compilación/enlace Vita y paquete se verifican por jobs separados.
 Al abrir esta rama esos resultados están pendientes; no hay prueba física.
+
+## Resultados verificados al cierre
+
+Código `a8284a5bbae7b24fd93b8c256fe1307f56a9fb50`,
+[CI 39680285352](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39680285352)
+aprobada: controls-and-adapter-pc, build e inspect-package.
+La prueba PC con ASan/UBSan pasó las anclas, bucles, errores/fallback, escena
+variable con tiempo y16cámaras con canarios. La prueba previa de combate/control
+y snapshot también pasó en esta rama. No son pruebas de usuario en hardware.
+
+El ejecutable PC x64 midió `sizeof(SttAsset)=172904` bytes, incluido el buffer
+fijo163841bytes, índice5600bytes y scratch3456bytes más enum/padding.
+Es almacenamiento estático de ese objeto, no pico de memoria del proceso;
+no equivale al ABI ni al uso de RAM en Vita. No hubo malloc nuevo por frame.
+
+VPK de esta CI:
+[artefacto12383447931](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39680285352/artifacts/12383447931),
+STTP00001/00.11, SHA256
+`e0077e77b36afd24987443e820a26416499285c76be27d81a24dfb900c87853a`.
+La inspección descargó el paquete dentro de CI y comprobó checksum, cabeceras,
+SFO y hash de la muestra empaquetada. El tamaño del ZIP contenedor de Actions
+no se presenta como tamaño del VPK. No se descargó ni instaló en la consola.
+
+El [artefacto PC12383477797](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39680285352/artifacts/12383477797)
+contiene PPM rasterizado y recibo numérico. No se ha hecho revisión visual;
+producir la imagen no demuestra calidad gráfica. El siguiente bloqueo es
+revisar esa imagen y, cuando proceda bajo autorización separada, comprobar en
+hardware carga/controles/animación, errores y recursos. Este encargo no realiza
+FTP, instalación ni ejecución física. No se fusiona ninguna PR.
+
+[Recibo estructurado](pose-render-evidence.json). Los commits documentales
+posteriores no alteran el código probado ni justifican recompilar/reinstalar.

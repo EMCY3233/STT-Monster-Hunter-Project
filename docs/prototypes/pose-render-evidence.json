@@ -1,0 +1,23 @@
+{
+  "code_commit": "a8284a5bbae7b24fd93b8c256fe1307f56a9fb50",
+  "run": 39680285352,
+  "pc_job": 119500670686,
+  "vita_build_job": 119500671056,
+  "inspect_job": 119500960421,
+  "pc_result": "success with address/undefined sanitizers",
+  "vita_result": "VPK built and structurally inspected; not executed",
+  "pc_asset_sizeof": 172904,
+  "pc_index_sizeof": 5600,
+  "pc_scratch_sizeof": 3456,
+  "input_bytes": 149293,
+  "camera_cases": 16,
+  "application": "STTP00001",
+  "app_version": "00.11",
+  "vpk_sha256": "e0077e77b36afd24987443e820a26416499285c76be27d81a24dfb900c87853a",
+  "vpk_artifact": 12383447931,
+  "pc_render_artifact": 12383477797,
+  "visual_review": false,
+  "vita_execution": false,
+  "ftp": false,
+  "installation": false
+}

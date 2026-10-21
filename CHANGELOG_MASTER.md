@@ -129,4 +129,4 @@ Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototip
 - Carga acotada del asset propio y emisión de triángulos en renderer de PR11.
 - Fallback controlado por ausencia/error, buffers fijos y clips a tick60Hz.
 - STTP00001 versión00.11; sin FTP ni instalación.
-- Pruebas PC, VPK e inspección pendientes de CI al publicar.
+- Pruebas PC con sanitizadores, compilación VPK e inspección aprobadas (CI39680285352, código a8284a5b). Revisión visual/hardware pendientes.
