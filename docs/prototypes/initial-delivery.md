@@ -94,3 +94,15 @@ completo de near-plane. Suspensión y rutas de error probadas en lógica/compila
 pendientes de observación física. Extensión acuática null, sin natación implementada.
 No soporte de modelos comerciales, rig avanzado, skinning ponderado o importadores
 Monster Hunter. No se necesita ningún decoder no validado para ejecutar esta entrega.
+
+## Revalidación al cierre
+
+Main continúa en410b1dd. Se observaron avances concurrentes ajenos a este encargo:
+PR3 ahora7ae447d29a4d3d82978c626ff862fb32944e2122 y
+PR7 ahora097f64f31b4133f6f721cdd25d69efc51700f867; también apareció PR12 documental
+del monitor. No se editaron esas ramas ni se incorporaron sus investigaciones.
+La base y los datos originales de los prototipos no dependen de esos avances.
+ZIP B descargado de CI: validación CLI real correcta,4 huesos,48 vértices,
+clips Idle y Practice swing. Se eliminaron únicamente los dos ZIP contenedores
+propios de descarga después de verificar los paquetes internos; se conservan
+paquetes vigentes, recibos, evidencias e historial Git.
