@@ -5,10 +5,10 @@ Este registro coordina estados y propiedad de archivos. No iguala los contenidos
 ## Fuentes de verdad y responsables
 | Frente | Espacio y rama | Estado comprobado |
 |---|---|---|
-| Monitor | repository; main | 410b1dd70a3713b500a829aed55cb99cb74ad1d0; árbol limpio; Monitor0.5. PR6 integrada según cierre del chat propietario |
+| Monitor | repository; docs/monitor-status-sync-20261021 | main conserva410b1dd y Monitor0.5; correcciones documentales6200812 en PR12 abierta; árbol limpio en la revisión |
 | Banco y documentación central | inventory-work; docs/game-input-inventory-20261021 | PR3 abierta; cambios locales propios y publicaciones por conector. El HEAD local no representa necesariamente el último commit remoto |
 | Ingeniería inversa | research-work; research/stt-engineering-resources-20261021 | PR7 abierta; espacio mantenido por el otro chat. Es una carpeta de trabajo de publicación, no se exige que sea un checkout Git local |
-| Prototipos | chat Inicia prototipos Vita | Orden enviada y creación Work en cola según confirmación del responsable. Sin rama/PR propia ni archivos modificados desde el chat emisor; inicio efectivo de implementación pendiente de verificar |
+| Prototipos | PR8contratos,PR9CombatLab,PR10AssetLab,PR11Vita3D | Primeras implementaciones publicadas,PR abiertas. Pruebas PC/compilación informadas por responsable; visual/físico pendientes,UDP no implementado |
 
 Propietarios: este chat mantiene inventory-work, el banco y los recibos FTP; STTMH Investigacion e ingenieria inversa mantiene research-work/PR7; Desarrolla el prototipo STT Vita mantiene repository y pruebas de monitor. No cambiar archivos ni ramas de otros frentes.
 
@@ -20,7 +20,7 @@ Estado actualizado: ambos procesos terminaron con código0,0.partial, integridad
 
 Banco inicial verificado:1627 archivos físicos,21696 entradas ARC descomprimidas,8823 objetos únicos. Las cifras del banco inicial no incluyen todavía la copia de Vita.
 
-Copia FTP de lectura finalizada: PCSG00350, carpetas app/patch/rePatch,8261 archivos y5212490427 bytes, con una licencia excluida. SFO base confirma FrontierG1.00, no Z/ZZ. Los conteos de archivos observados durante la copia son provisionales y pueden diferir por momento de lectura. No iniciar otra copia, lectura FTP concurrente ni recatalogación del banco.
+Copia FTP de lectura finalizada: PCSG00350, carpetas app/patch/rePatch,8261 archivos y5212490427 bytes, con una licencia excluida. SFO base confirma FrontierG1.00 y SFO de parcheFrontierZ01.99. No se confirma ZZ. Los conteos provisionales anteriores fueron sustituidos por el censo completo estable. No iniciar otra copia, lectura FTP concurrente ni recatalogación del banco.
 
 Fuente de estado: analysis-local/logs/vita-bank-status.json.
 Cierre exige completed=true en vita-copy-PCSG00350.json, phase=complete y vita-registration.json válido. finish_vita_copy.py espera la copia completa y registra tras volver a comprobar hashes locales. La validación de flujo/local no es un hash calculado independientemente en Vita.
@@ -28,7 +28,7 @@ Cierre exige completed=true en vita-copy-PCSG00350.json, phase=complete y vita-r
 ## Decisiones vigentes
 - Banco y análisis de recursos generales, sin clasificar por armas ni buscar relaciones con Espada Larga.
 - Catálogo y fusión anteriores son material histórico, no prioridad del banco actual.
-- Prototipos con muestras propias pueden avanzar independientemente del análisis comercial. Sus contratos Monitor/HUD/Aquatic están encargados; no se presentan como implementados.
+- Prototipos con muestras propias pueden avanzar independientemente del análisis comercial. La propuesta e implementación STT/3 está en PR8; no se acredita interoperabilidad con el receptor MonitorSTT/1–STT/2. El VPK usa telemetría local; UDP pendiente.
 - No adaptación comercial sin activos legales. No publicar juegos, recursos, licencias o claves.
 - Copia FTP de lectura expresamente autorizada; ninguna instalación ni escritura en consola desde este frente.
 - PR3 y PR7 abiertas no equivalen a integración en main. No fusionar automáticamente.
@@ -39,7 +39,7 @@ Se sustituyen las afirmaciones vigentes antiguas «Monitor0.2», «sin Frontier 
 
 Las pruebas de hardware del monitor pertenecen al chat propietario; no repetir instalaciones por sincronizar documentos. La descarga no prueba descifrado ni semántica de formatos. Los ensayos Citra y ELF de investigación pertenecen a PR7 y se actualizan por ese propietario.
 
-Monitor confirmó main local=GitHub, árbol limpio, STT/1+STT/2 en receptor, agente STT/2 y UDP32100. Detectó tres textos antiguos (README general, README del agente y descripción de PR6); su corrección documental se encargó al propietario, sin reinstalación ni fusión automática. Investigación remitió cierre en PR7; el estudio de formatos continúa con los candidatos del censo final. Pendiente confirmar inicio efectivo del Work de prototipos. Los mensajes enviados se consideran entregados por la herramienta, no aceptados técnicamente hasta respuesta.
+Monitor confirmó main local=GitHub, árbol limpio, STT/1+STT/2 en receptor, agente STT/2 y UDP32100. Detectó tres textos antiguos (README general, README del agente y descripción de PR6); su corrección documental se encargó al propietario, sin reinstalación ni fusión automática. Investigación remitió cierre en PR7; el estudio de formatos continúa con los candidatos del censo final. Inicio y entrega de prototipos confirmados por responsable:PR8–11 abiertas,STTP00001 independiente de STTM00001. Pendientes revisión visual,interoperabilidad e instalación/pruebas físicas; no se realizan desde este frente. Los mensajes enviados se consideran entregados por la herramienta, no aceptados técnicamente hasta respuesta.
 
 ## Secuencia después de la descarga
 1. Verificar recibos y registro del banco, incluyendo integridad SQLite y hashes.
@@ -47,3 +47,11 @@ Monitor confirmó main local=GitHub, árbol limpio, STT/1+STT/2 en receptor, age
 3. Inventariar formatos y accesibilidad con lecturas acotadas; compartir hashes/procedencia con02y07.
 4. Estudiar ejecutables y estructuras/modelos/animaciones generales; documentar límites criptográficos e incógnitas.
 5. Actualizar PR3 y coordinar referencias cruzadas con PR7/prototipos; conservar ramas y propiedad separadas.
+
+## Auditoría posterior del catálogo
+
+[Auditoría de metadatos](bank-catalog-audit.md):9888archivos,21696entradas,8823objetos;0errores de referencias/estados/tamaños y0objetos sin referencia.161grupos de hashes físicos repetidos,conservados. Cinco pruebas nuevas aprobadas. Hash SQLite tras auditoría coincide con recibo del registro; no se rehashearon archivos de juegos en esta fase.
+
+## Entrega inicial de prototipos
+
+PR abiertas comprobadas: [contratos STT/3](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/8),[CombatLab](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/9),[AssetLab](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/10),[Vita3D](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/11). El chat responsable comunicó pruebas PC y compilación correctas; no se ejecutaron ni reprodujeron aquí. Ninguna está fusionada. El siguiente cruce de integración debe revisar dependencia entre contratos/núcleo y telemetría; no afirmar conexión UDP física que aún no existe.
