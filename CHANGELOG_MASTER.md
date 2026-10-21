@@ -1,5 +1,11 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Revisión offline de contratos STT/3
+
+-15casos sintéticos de compatibilidad correctos,sin sockets ni cambios de fuentes de otros frentes. STT/1–2 conservados en casos probados;STT/3aceptado por candidato y rechazado deliberadamente por protocolo vigente.
+- Ejemplos386/432bytes y casoamplio715bytes;rechazoJSONduplicado/1025bytes confirmado. Analizador compuesto con validador candidato cuenta2muestrasSTT/3;no estadísticascombate.
+- Informe,hashes y reproducción:docs/research/game-inputs-2026-10-21/protocol-interop-review.md. SinencoderC,VPK,UDP ni hardware ensayados en esta revisión. No fusión/instalación.
+
 ## 21-10-2026 — Auditoría del banco y primeras PR de prototipos
 
 - Auditoría de metadatos SQLite en solo lectura:9888archivos/21696entradas/8823objetos,sin errores de referencias/estados/tamaños ni objetos huérfanos.161grupos de hashes físicos repetidos conservados;ninguna eliminación.
