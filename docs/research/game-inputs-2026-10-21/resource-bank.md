@@ -47,3 +47,7 @@ Descomprimir correctamente no valida semántica, reproducción, geometría ni au
 En GitHub se publican esta documentación, resumen, recibo de verificación y herramientas propias. El catálogo detallado y los contenidos comerciales permanecen locales. No se usó PS Vita ni FTP.
 
 Esta etapa amplía el análisis anterior de 87 cargas seleccionadas: ahora se comprobaron las 21696 cargas ARC del parche. El alcance sigue limitado a ese parche para la extracción interna.
+
+## Catálogo adicional de derivados
+
+[Primer derivado enlazado](bank-derivatives.md):1registro externo verificado de349bytes,sin modificar SQLite ni sus conteos. La consulta devuelve ahora derivatives además de files/entries. Los archivos enlazados y sus recibos deben conservarse; la búsqueda solo consulta metadatos.
