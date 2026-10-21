@@ -32,8 +32,17 @@ static uint64_t render(SttCombat *combat,SttCamera camera) {
     }
     return hash;
 }
+static void write_frame(const char *path) {
+    FILE *out=fopen(path,"wb");assert(out);
+    fprintf(out,"P6\n%d %d\n255\n",STT_WIDTH,STT_HEIGHT);
+    for(unsigned y=0;y<STT_HEIGHT;y++)for(unsigned x=0;x<STT_WIDTH;x++) {
+        uint32_t p=pixels[1+y*STT_PITCH+x];unsigned char rgb[3]={(unsigned char)p,(unsigned char)(p>>8),(unsigned char)(p>>16)};
+        assert(fwrite(rgb,1,3,out)==3);
+    }
+    assert(fclose(out)==0);
+}
 int main(int argc,char **argv) {
-    assert(argc==3);
+    assert(argc==4);
     owned.before=0x11223344;owned.after=0x55667788;
     SttAsset *a=&owned.asset;
     assert(stt_asset_memory(a,anchor,sizeof anchor-1)==STT_ASSET_READY);
@@ -56,6 +65,7 @@ int main(int argc,char **argv) {
     SttPoseFrame first=a->scratch;
     assert(stt_pose_frame(&a->pose,0,120,&a->scratch)&&!memcmp(&first,&a->scratch,sizeof first));
     uint64_t sample=render(&combat,cam);assert(sample!=missing);
+    write_frame(argv[2]); /* Sample reference pose: clip0/tick0, fixed camera. */
     combat.tick=60;uint64_t later=render(&combat,cam);assert(later!=sample);
     assert(!memcmp(copy,a->bytes,a->pose.bytes));
     combat.hunter.state=STT_ACTIVE;combat.tick=18;
@@ -67,13 +77,7 @@ int main(int argc,char **argv) {
         combat.hunter.yaw_turn=(uint16_t)(i*4096u);render(&combat,cam);
     }
     cam=(SttCamera){.45f,.4f};combat.hunter.yaw_turn=0;render(&combat,cam);
-    FILE *out=fopen(argv[2],"wb");assert(out);
-    fprintf(out,"P6\n%d %d\n255\n",STT_WIDTH,STT_HEIGHT);
-    for(unsigned y=0;y<STT_HEIGHT;y++)for(unsigned x=0;x<STT_WIDTH;x++) {
-        uint32_t p=pixels[1+y*STT_PITCH+x];unsigned char rgb[3]={(unsigned char)p,(unsigned char)(p>>8),(unsigned char)(p>>16)};
-        assert(fwrite(rgb,1,3,out)==3);
-    }
-    assert(fclose(out)==0);
+    write_frame(argv[3]); /* Same camera: clip1/tick18 after camera stress tests. */
     printf("{\"sizeof_asset_pc\":%zu,\"input_bytes\":%zu,\"pose_index_pc\":%zu,\"pose_scratch_pc\":%zu,\"camera_cases\":16,\"scope\":\"PC raster only, not Vita hardware\"}\n",sizeof *a,a->pose.bytes,sizeof a->pose,sizeof a->scratch);
     return 0;
 }

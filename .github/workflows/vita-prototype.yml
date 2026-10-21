@@ -21,13 +21,16 @@ jobs:
         run: |
           python -c "import hashlib; from pathlib import Path; assert hashlib.sha256(Path('vita-prototype/assets/practice.pose.json').read_bytes()).hexdigest()=='a6648b5901bf6282457062911946399aa3019cc7fb23a661bfc5aa81550dfcdc'"
           cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c vita-prototype/tests/test_asset_render.c -lm -o /tmp/stt-asset-render
-          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-asset-render vita-prototype/assets/practice.pose.json stt-own-pose.ppm > stt-pose-render-evidence.json
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-asset-render vita-prototype/assets/practice.pose.json stt-own-anchor.ppm stt-own-pose.ppm > stt-pose-render-evidence.json
           cat stt-pose-render-evidence.json
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/control.c combat-lab/src/stt_combat.c vita-prototype/tests/test_raster_contract.c -lm -o /tmp/stt-raster-contract
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-raster-contract
       - uses: actions/upload-artifact@v4
         with:
           name: stt-own-pose-pc-render
           path: |
             stt-own-pose.ppm
+            stt-own-anchor.ppm
             stt-pose-render-evidence.json
           retention-days: 14
   build:
