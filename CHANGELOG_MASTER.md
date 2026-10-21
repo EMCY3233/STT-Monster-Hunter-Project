@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — LectorC ylímitesPC cerrados
+
+-RecibidoPR17:288casosC/Pythonconsanitizadores yobjetoVitaSDK;conexiónrendererpendiente.
+-RecibidosPR18/19:cuotas yprotecciónanexado,26pruebas/CIcorrectas. Encargadarevisiónfinalcadena sinfusión;prototiposcontinúan integraciónrendererpropio.
+
 ## 21-10-2026 — EntradaMHXX derivada delcargador
 
 -PR7/d419d6b:VA0x00100000→offset0/text yA32 esperado sustentados por rutaAzahar,no campoentryExHeader niobservaciónhardware.124pruebasdelpropietario.

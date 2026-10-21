@@ -183,3 +183,11 @@ Siguienteaceptaciónencargada:unaVA↔offset↔segmentoARM respaldadaporExHeader
 PR7/d419d6b41e7c21ee9cb11025df50fb120f0a75f2:mapaúnico VA0x00100000→offset0→text,rango[0,4) respaldado porarchivo,noBSS/padding. Entryderivado delrutaloaderAzahar2126.2,no campo explícitoExHeader;CPSR.T=0/A32 esperado según implementación,alta confianza estructural. Sin opcode comercial publicado,funciónidentificada,ejecuciónhardware oparchearrancable demostrado.
 
 Propietario comunica8pruebasnuevas/124suitecorrecta,fuentesversionadas yhashesNCCH/code conservados. Reutilizócode.bin,sinnuevaBLZ/emu/binarios/banco. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/d419d6b41e7c21ee9cb11025df50fb120f0a75f2/docs/research/stt-re-20261021/mhxx-entry-reference.md). Contrasteindependiente ysemántica siguen pendientes;no atribuirIA/hitboxes.
+
+## Cierres lectorC y límites delmonitor
+
+Propietario prototipos:PR17 dependiente15,lectorCacotadoSTTPose/1 yadaptadortriángulos,288casosC/Pythonconsanitizadores,30pruebasPython yobjetoVitaSDK correctos. MemoriaPC comunicada:índice5.600bytes,salidapose3.456bytes;no presupuestoRAMVita completo. SinVPKnuevo ovalidacióngráfica/física. EncargadaconexiónalrendererPR11 con muestrapropia,pruebasPC/compilación yfallocontrolado.
+
+Propietario monitor:PR18/208a5d7 cuota10MiB ylímites1000sesiones/100000secuencias,parada/parcialexplícitos;PR19/89f99b2 rechaza anexadotrasarchivo sinLFfinal,conservándolo.26pruebas/CI PC-Vitacorrectas;CI16 confirmada. Cadena13→14→16→18→19 sinfusionar. LímitesdeconteonoRAMmedida. Encargadarevisiónfinaldependencias/CLI/formatos yordenpropuesto,sinfeaturesnuevasinnecesarias.
+
+Resultados atribuidos asuspropietarios,no repetidosenPR3. Banco completoconrecibos sin cambios;sinFTP/instalación/consola niadaptacióncomercial.
