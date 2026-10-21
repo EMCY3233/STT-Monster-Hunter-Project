@@ -24,3 +24,7 @@ jobs:
       - run: |
           cc -std=c99 -Wall -Wextra -Werror -pedantic -fsanitize=address,undefined -Icombat-lab/include combat-lab/src/stt_combat.c combat-lab/tests/test_combat.c -o /tmp/stt-combat-test
           /tmp/stt-combat-test
+      - name: Verify unsigned short-enum state validation
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -pedantic -fshort-enums -Icombat-lab/include combat-lab/src/stt_combat.c combat-lab/tests/test_combat.c -o /tmp/stt-combat-short-enum-test
+          /tmp/stt-combat-short-enum-test
