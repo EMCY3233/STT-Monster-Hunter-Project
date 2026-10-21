@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: partición ejecutable MH4U
+## Estado más reciente: .code base MH4U BLZ
+
+[Una entrada descomprimida](mh4u-code-blz.md):16.261.120bytes, flujo y prefijo76bytes completos, hash salida registrado y segmentos respaldados; BSS separado. Recibo anterior fijado y rango.code reverificado antes/después, sin repetir hashes completos4GiB. Siete pruebas nuevas aprobadas; sin arranque, RomFS o instrucciones publicadas. Contraste independiente y semántica pendientes.
+
+
+## Etapa anterior: partición ejecutable MH4U
 
 [Base NCSD/partición0 comprobada](mh4u-ncsd-executable.md): ProgramID0004000000126100, ExHeader/ExeFS y tres hashes verificados. Pie BLZ declara16.261.120bytes coherentes con segmentos; sin descompresión, extracción o arranque. Siete pruebas nuevas aprobadas, sin repetir la suite124. Original intacto, modos CPU como solicitudes, semántica pendiente.
 
