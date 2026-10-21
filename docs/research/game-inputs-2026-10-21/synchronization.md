@@ -59,3 +59,7 @@ PR abiertas comprobadas: [contratos STT/3](https://github.com/EMCY3233/STT-Monst
 ## Revisión offline STT/3
 
 [Interoperabilidad](protocol-interop-review.md):15casos sintéticos PC correctos. Validador candidato conserva casosSTT/1–2 y acepta ejemplosSTT/3 de386/432bytes; casoamplio715bytes. Validador vigente rechazaSTT/3 deliberadamente. Composición con analizador vigente resume2muestras, sin estadísticascombate. NoUDP,encoderC,VPK ni hardware probados en este recorrido; no se acredita instalación o integración enmain. El buzón del prototipo continúa local. Prototipos recibieron el informe; no hay encargo de cambiar el rechazo esperado del receptor antiguo.
+
+## Primer derivado Frontier enlazado
+
+[Derivado local y procedencia](bank-derivatives.md): salida JKR349bytes obtenida por investigación y cotejada aquí con su fuente/recibo/hash. Registro adicional derivatives.jsonl,1entrada; bytes externos conservados,sin copia ni cambio de SQLite. Consulta ampliada por ruta/hash. Cinco pruebas nuevas y cinco de regresión aprobadas;consulta real y hashSQLite cotejados. La salida sigue sin identificar. Las65pruebas del decodificador pertenecen a PR7;no se repitió aquí la descompresión. No ampliar los otros43JKR sin aceptación útil del interior.
