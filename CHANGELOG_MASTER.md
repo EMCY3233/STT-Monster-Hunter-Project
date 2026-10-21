@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Regresión cerrada y fallo remoto derivado
+
+- Investigación:106/106pruebas sintéticas,21/21CLI y sintaxis correctos sobrec4215e8;sin nuevosensayoscomerciales.
+- MonitorPR13:testsremotos fallidos en193c7b4,buildVita correcto. Diagnóstico encargado alpropietario,causapendiente;sin cambios en ramaajena.
+
 ## 21-10-2026 — Regresión PC y nuevos recibos verificados
 
 -60pruebasPC yensayoCLI dediezpaquetes correctos sobre062e085. Solicitada regresión de lectoresPR7,resultadopendiente.

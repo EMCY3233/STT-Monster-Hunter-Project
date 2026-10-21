@@ -137,3 +137,9 @@ DoslogsPPSSPP previos corroboran direcciones/tamaños de secciones de la referen
 Por solicitud expresa«todaslaspruebas»,este frente ejecutó60pruebasPC correctas yensayoCLI dediezpaquetes simulados aprobado sobre062e085. Sin tráficoVita. Investigación recibió campaña de regresión pertinente de lectores;resultado pendiente. No repetir censos/extracciones ni considerar bloqueoscriptográficos/semánticos resueltos por pruebas sintéticas.
 
 El usuario autorizó ejecución dejuegos en emuladorPC;preservar perfilesaislados,fuentes ypartidas. No implica permiso de instalar/ejecutar enPSVita. Los ensayos futuros requieren aceptaciónconcreta,no repetirarranque porduración.
+
+## Cierre de regresión de investigación y fallo monitor comunicado
+
+PR7 publicó matriz:106/106pruebas sintéticas correctas sobrec4215e801bc14d5158321860a3afddeda790d561,21/21herramientas con sintaxis yCLIhelp correctos,78archivos cotejados. HashSQLite antes/después idéntico. No hubo nuevas ejecuciones de emulador,dumps o decodificación real;no acredita fidelidadcomercial. [Matrizdelpropietario](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/research/stt-engineering-resources-20261021/docs/research/stt-re-20261021/pc-regression-matrix.md). Investigaciónemuladores activa porplataforma;sinresultadosfinales todavía.
+
+PR13/head193c7b467e60bce7e17e721f4f9aba5bf6f7fb94:Monitor tests39674410982 completed/failure,Vita agent build39674411028 completed/success. Diagnóstico/corrección encargado alpropietario,causapendiente. No se modifican susfuentes desdePR3,nosefusionanPR niinstalaartefacto. No atribuir éxito decompilación apruebasPCfallidas.
