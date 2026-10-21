@@ -1,5 +1,11 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Regiones compatibles con CP932 en la muestra JKR
+
+- Sobre la salida existente de 349 bytes: 14 tramos entre NUL compatibles con CP932 y bloques kana; 160 bytes en esos tramos, doce sin controles y dos con controles. Los catorce rechazan UTF-8 estricto.
+- Herramienta propia limitada a 64 KiB, sin exportación de texto; seis pruebas sintéticas correctas y hash fuente conservado. No identifica formato completo, codificación declarada ni función del recurso.
+- Recibo y límites en docs/research/game-inputs-2026-10-21/frontier-jkr-text-regions.md. Investigación recibió la evidencia para estudiar la misma muestra; no se amplió a otros JKR ni se modificó banco o consola.
+
 ## 21-10-2026 — Índice de evidencias actualizado
 
 - Reorganizado el índice de investigación con el banco actual de 9.888 archivos, cierre de Frontier, derivado enlazado e interfaces de prototipos. El inventario inicial de siete archivos queda identificado como evidencia histórica.
