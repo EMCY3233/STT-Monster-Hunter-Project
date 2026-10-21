@@ -1,7 +1,7 @@
 # Copia local de Frontier desde PS Vita — 2026-10-21
 
 ## Estado de esta publicación
-**Transferencia iniciada y todavía incompleta.** No declarar el juego añadido al banco hasta que el recibo local indique completed=true y la incorporación termine con phase=complete.
+**Transferencia terminada e incorporada al banco.** Se comprobaron completed=true,phase=complete y el recibo de registro. Véase [cierre y censo completo](frontier-complete.md). Este documento conserva el plan y método de transferencia.
 
 El usuario autorizó expresamente copiar desde su Vita el juego instalado en ux0 y añadirlo al banco. Esta autorización amplía para esta tarea la condición anterior de no usar FTP; no autoriza instalación ni escritura en la consola.
 
@@ -13,7 +13,7 @@ Se estableció conexión con un servidor que responde FTPVita y se leyó:
 - APP_VER y VERSION: 01.00.
 - CATEGORY: gd.
 
-Esto identifica la aplicación base. No confirma por sí solo que el conjunto instalado corresponda a Frontier Z/ZZ. Los metadatos de actualización siguen pendientes de lectura local cuando se copien.
+Esto identifica la aplicación base. No confirma por sí solo que el conjunto instalado corresponda a Frontier Z/ZZ. La lectura posterior completa confirma TITLE Frontier Z y APP_VER01.99 en el parche; no acredita ZZ.
 
 ## Plan realmente enumerado
 | Carpeta del título | Archivos enumerados |
