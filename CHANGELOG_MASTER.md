@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Referencia estática PSP trazable
+
+- PR7/c529799 mapea una referencia de imports ELF MHFU:VA0x0890EC78,offset0x0010D22C,.rodata.sceNid; sección/PT_LOAD coinciden. Confianza estructural alta,sin identificar función ni comportamiento.
+- Cotejados aquí artefacto/prefijo/recibo;cinco pruebas pertenecen a investigación. Sin repetir620secciones,ejecutar juego,cambiar banco o ampliar automáticamente análisis. Informe psp-import-followup.md.
+
 ## 21-10-2026 — Convenciones MOD230 delimitadas
 
 - PR7/4d0e9a9: lectura MH4U/E6 por malla encaja29índices en990bytes; contador global30 sigue sin explicación MHXX. Min/max genérico no confirmado para esta variante; no se atribuye corrupción.

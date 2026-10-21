@@ -83,3 +83,5 @@ Esta tarea no instala ni ejecuta juegos, modifica originales, firmware, plugins,
 [Estado consolidado del proyecto](../../PROJECT_STATUS.md) · [Changelog](../../../CHANGELOG_MASTER.md).
 
 [Última aceptación parcial de MOD230 y discrepancias](mod230-followup.md): estructura de una muestra; no geometría o skinning completos.
+
+[Referencia estática PSP aceptada y límites](psp-import-followup.md).
