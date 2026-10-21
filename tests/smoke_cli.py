@@ -8,7 +8,7 @@ import tempfile
 with tempfile.TemporaryDirectory() as folder:
     output = pathlib.Path(folder) / 'smoke.jsonl'
     command = [sys.executable, '-m', 'stt_monitor.receiver', '--port', '32109',
-               '--max-packets', '10', '--idle-timeout', '10', '--output', str(output)]
+               '--live', '--max-packets', '10', '--idle-timeout', '10', '--output', str(output)]
     receiver = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     try:
         assert receiver.stdout.readline().startswith('Listening'), 'receiver not ready'
@@ -16,7 +16,10 @@ with tempfile.TemporaryDirectory() as folder:
                         '--count', '10', '--interval', '0.02'], check=True, timeout=10)
         stdout, stderr = receiver.communicate(timeout=15)
         assert receiver.returncode == 0, stderr
-        assert json.loads(stdout) == {'accepted': 10, 'rejected': 0}, stdout
+        lines = stdout.splitlines()
+        assert lines[0].startswith('Vista de recepcion:'), stdout
+        assert len([line for line in lines if line.startswith('Recibido ')]) == 10, stdout
+        assert json.loads(lines[-1]) == {'accepted': 10, 'rejected': 0}, stdout
         records = [json.loads(line) for line in output.read_text().splitlines()]
         assert [r['packet']['seq'] for r in records] == list(range(10))
         assert all(r['packet']['source'] == 'simulator' for r in records)

@@ -1,5 +1,11 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-21 — STT-MON-009 / diagnósticos visibles en el PC
+
+- Receptor con opción `--live`: muestra cada recepción, sesión, secuencia, batería y diagnóstico STT/2; distingue contadores previos y último error conservado, que puede ser histórico. STT/1 se identifica sin diagnóstico.
+- Conserva JSONL, contrato, comportamiento por defecto y recepción sin respuestas. No infiere parada/desconexión del silencio ni modifica el agente Vita 0.5.
+- Validación local: 16 pruebas correctas y ensayo CLI de diez muestras simuladas con salida en directo. Primer intento dentro del sandbox bloqueó recepción loopback/temporales; repetición fuera del sandbox correcta. CI remota pendiente al publicar. Sin prueba física nueva, FTP ni reinstalación.
+
 ## 2026-10-21 — STT-MON-008 / límite temporal durante suspensión 0.5
 
 - Corrige el control que usaba solo reloj de proceso: [presupuesto conservador proceso+RTC](docs/suspend-deadlines.md), con parada ante lectura fallida/retroceso y protección ante saltos/desbordamientos.
