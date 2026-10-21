@@ -52,9 +52,10 @@ ejecutable de prueba y compara todas las coordenadas con Python. POSE_CFLAGS
 permite sanitizadores. CI separa pruebas PC y compilación de objeto con VitaSDK
 fijado por digest; no instala ni ejecuta en consola. El ejecutable de prueba
 reporta sizeof y evidencia de muestra. Estado inicial local: 30 pruebas Python
-aprobadas; C local bloqueado por falta de compilador, pendiente CI de esta PR.
+aprobadas en Python 3.12.14; C local no disponible. La evidencia C remota se
+registra abajo, separada de esas pruebas locales.
 
-Pruebas previstas del ejecutable: cada truncamiento del documento de ancla,
+Pruebas ejecutadas en CI: cada truncamiento del documento de ancla,
 versión/hz/base, límites enteros, conteos, duplicados, índice/jerarquía, tiempos
 y módulo (incluido UINT64_MAX), offsets dañados del índice y muestra original.
 No hay mediciones de FPS, GUI ni ejecución física. Integración con el renderer
@@ -77,3 +78,26 @@ Esto prepara la conexión al tri() de render.c de PR11; no se copió ni modific�
 ese renderer, no se rasterizó una escena ni se presenta una imagen como revisada.
 Se mantienen pendientes la conexión del callback en PR11, errores de carga en
 aplicación, selección de clip y verificación de render/tiempos en hardware.
+
+## Resultado verificado de esta revisión
+
+Commit de código `0c9fd354b7d9e0ea6cfda723dd7665b3618b988f`,
+[CI 39677522635](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39677522635):
+cross-pc y compile-vita aprobados. PC: 288 casos ejecutados con
+AddressSanitizer y UndefinedBehaviorSanitizer, incluidos los truncamientos del
+ancla, comparación de todas las poses y callback de triángulos por clip.
+Vita: objeto C99 compilado con advertencias como errores en SDK fijado;
+no es enlace de VPK ni ejecución en consola. La prueba inicial de solo lector
+ff7171ce también pasó ambos jobs (39677218607).
+
+`sizeof(SttPose)=5600`, `sizeof(SttPoseFrame)=3456` medidos por el ejecutable
+PC x64. Para la muestra propia, buffer+índice+salida suman 158349 bytes;
+al máximo de archivo, 2106208 bytes. Son tamaños de almacenamiento calculados
+con sizeof real, NO memoria pico del proceso ni memoria medida Vita; omiten
+pila, asignador, librerías y render. El parser/lector no usa malloc; el probe
+reserva solo el buffer de entrada y lo libera al terminar.
+
+Muestra exportada: 149293 bytes, SHA256
+`a6648b5901bf6282457062911946399aa3019cc7fb23a661bfc5aa81550dfcdc`.
+No se modificó el asset original. Los cambios posteriores de documentación
+no cambian el código cubierto por esta evidencia.

@@ -1,0 +1,17 @@
+{
+  "code_commit": "0c9fd354b7d9e0ea6cfda723dd7665b3618b988f",
+  "workflow_run": 39677522635,
+  "cross_pc_job": 119491133059,
+  "cases": 288,
+  "sanitizers": ["address", "undefined"],
+  "compile_vita": "success; object only",
+  "sample_bytes": 149293,
+  "sample_sha256": "a6648b5901bf6282457062911946399aa3019cc7fb23a661bfc5aa81550dfcdc",
+  "pc_sizeof_index": 5600,
+  "pc_sizeof_frame": 3456,
+  "pc_local_python": "3.12.14",
+  "local_python_tests": 30,
+  "physical_execution": false,
+  "ftp": false,
+  "renderer": "triangle callback numerically tested; no raster or VPK change"
+}
