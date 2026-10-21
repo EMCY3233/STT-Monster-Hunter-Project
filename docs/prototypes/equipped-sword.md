@@ -71,3 +71,40 @@ No FTP, instalación, ejecución consola ni fusión.
 Personaje Kenney: sigue inspeccionado, no importado. Necesita evaluación de
 skinning/quaterniones, simplificación y presupuesto temporal/memoria propio.
 No se convierte un rig 3D general al perfil planar por cambiar sus nombres.
+
+## Resultado verificado
+
+Código `017d81e94da0c419ce0373b4ac5d644a85488be8`,
+[CI39687110125](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39687110125)
+aprobada: controls-and-adapter-pc, build e inspect-package. Con ASan/UBSan:
+384anclas sobre192poses/yaw0/90°, grip/tip, errores/cotas/índices,12tri fallback
+y394reales, canarios/16cámaras y combate1impacto/HP90 sin mutación desde render.
+prepare_body.py regeneró exactamente el archivo versionado (git diff vacío).
+
+PC x64:SttAsset172904bytes y SttWeapon17256bytes, suma190160bytes de objetos
+estáticos de datos. Payload JSON cuerpo126315 + arma7474 =133789bytes; los
+objetos incluyen capacidad no usada, índices/scratch y padding. No es memoria
+pico ni medida Vita; quedan fuera framebuffers, depth, pila, libc y otros datos.
+No hay una reserva nueva de malla por frame ni una medición de rendimiento.
+
+Se descargaron y abrieron realmente las tres capturas del
+[artefacto12386787095](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39687110125/artifacts/12386787095),
+PC480×272. Idle muestra espada gris en la mano al final del brazo; swing tick18
+la eleva con el mismo apoyo; archivo corrupto muestra hoja simple propia y
+SWORD FALLBACK. No se observa la vieja hoja duplicada ni un arma independiente
+flotando junto al muñeco en estas vistas. La animación/daño siguen desacoplados.
+Frame_us33333 del HUD es entrada sintética, no FPS/tiempo real medido.
+
+Hashes SHA256 PPM:
+- idle:7ea04dc06663b5f934cb09e67fe6f1d018323c748c51e2a0aac7ed48ea5bf60e
+- swing:c4f0ea9bf1c1c10e02156db4ab751ac10297d2cef1a2f5f840ec8728ac35d813
+- fallback:68459985311f8fe798c0ad0db3af79f9d344082aee6d743e0eda1cb13abb020c
+
+VPK STTP00001/00.12, inspeccionado en CI con SELF/SFO, créditos y hashes:
+[artefacto12386553261](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39687110125/artifacts/12386553261),
+SHA256 `597a05de9553a62e21d0ce5ad6971f2be577908361ce3b539a7668c3ad44a2b2`.
+No se instala ni transfiere. Commits de cierre solo documentales.
+
+Pendientes:posición/visibilidad/controles/suspensión y recursos reales en Vita;
+el clipping parcial sigue fuera como en PR21. El cuerpo Kenney requiere su
+adaptación propia:esta entrega no lo importa. No hay validación GPU/hardware.

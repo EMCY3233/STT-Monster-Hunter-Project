@@ -1,0 +1,22 @@
+{
+  "code_commit": "017d81e94da0c419ce0373b4ac5d644a85488be8",
+  "workflow_run": 39687110125,
+  "socket_anchor_checks": 384,
+  "body_sizeof_pc": 172904,
+  "weapon_sizeof_pc": 17256,
+  "body_json_bytes": 126315,
+  "weapon_json_bytes": 7474,
+  "combat_hits": 1,
+  "target_hp": 90,
+  "sanitizers": ["address", "undefined"],
+  "pc_capture_artifact": 12386787095,
+  "observed_pc_images": ["idle", "swing", "fallback"],
+  "application": "STTP00001",
+  "app_version": "00.12",
+  "vpk_artifact": 12386553261,
+  "vpk_sha256": "597a05de9553a62e21d0ce5ad6971f2be577908361ce3b539a7668c3ad44a2b2",
+  "kenney_character_imported": false,
+  "ftp": false,
+  "installation": false,
+  "vita_execution": false
+}
