@@ -2,6 +2,8 @@
 
 Encargo STT-RE-20261021. Informe de ejecución del 21-10-2026, Europe/Madrid.
 
+**Avance más reciente:** [decodificación limitada de pistas MHXX](lmt-vectors.md): 1.772 claves vectoriales en 90 pistas; 89 presentan variación. Aún sin rotaciones, binding o reproducción visual; datos extraídos solo locales. El usuario autorizó el descifrado; las entradas cifradas siguen sujetas a requisitos técnicos. Suite ampliada a 36 pruebas.
+
 **Actualización posterior autorizada:** [continuación PSP y Frontier local](continuation.md). GU Switch queda excluido por el usuario. Hay ahora archivos Frontier Vita locales en una copia todavía incompleta; su SFO identifica la base G 1.00, sin revisión Z/ZZ demostrada. Las menciones de ausencia de Frontier y los conteos siguientes describen la primera fotografía, no el estado posterior. El nuevo lector amplía a 620 secciones ELF PSP; 25 pruebas aprobadas.
 
 ## Resultado y alcance real
