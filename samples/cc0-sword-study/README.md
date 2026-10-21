@@ -80,3 +80,14 @@ Validación local:5 pruebas aprobadas (convexidad/índices relativos, rechazo de
 entradas inválidas, simplificación determinista, geometría y cuantización sin
 inversión/degeneración). CI C del lector sobre el derivado pendiente al abrir.
 No se ha compilado un VPK con estos modelos ni probado en consola.
+
+### Resultado C verificado
+
+[CI39685472711](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39685472711),
+código5dcad85a: las5pruebas Python aprobaron y el lector C real, compilado con
+ASan/UBSan, aceptó la pose de1raíz/199vértices/394triángulos/1frame. Se ejercita
+también el callback de triángulos del probe existente. No se rasterizó este
+asset en el renderer C ni se compiló un VPK que lo incluya. El informe visual
+corresponde únicamente a la comparación generada por el script Python/Pillow.
+Un nuevo resultado generado por el script requiere su propia observación: el
+generador no atribuye automáticamente aceptación visual a ejecuciones futuras.

@@ -216,5 +216,6 @@
       "https://quaternius.itch.io/lowpoly-medieval-weapons"
     ]
   },
-  "validation": "5 local synthetic/prepared-geometry tests passed; comparison image inspected; C reader pending CI; no VPK/hardware/FTP"
+  "validation": "5 PC tests passed locally and CI39685472711; C reader accepted derived pose with ASan/UBSan; Python comparison image observed; no C raster/VPK/hardware/FTP",
+  "evidence_code_commit": "5dcad85a4120e8348497bbbca7ea8b7e7f906316"
 }

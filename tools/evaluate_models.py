@@ -148,7 +148,7 @@ def main():
             pose_bytes=len(pose),pose_sha256=sha(pose),**metrics),
         license_evidence=dict(kenney='License.txt inside archive: CC0',weapons='Official author page states CC0; archive has no license file',
             urls=['https://kenney.nl/assets/mini-characters','https://quaternius.itch.io/lowpoly-medieval-weapons']),
-        validation='PC Python bridge roundtrip; comparison preview inspected locally; no C renderer/VPK/hardware/FTP')
+        validation='PC Python bridge roundtrip; generated preview requires separate observation; no C renderer/VPK/hardware/FTP')
     (out/'inspection.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf8')
     print(json.dumps(dict(character=character,sword=report['sword']),indent=2))
 
