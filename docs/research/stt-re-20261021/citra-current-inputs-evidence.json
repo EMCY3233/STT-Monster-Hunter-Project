@@ -1,0 +1,218 @@
+{
+  "date": "2026-10-21",
+  "cias": [
+    {
+      "path": "Juegos\\MH3U\\EUR - Monster Hunter 3 Ultimate(00040000000b1d00).cia",
+      "bytes": 1871489344,
+      "sha256": "aa108914574a1a28b87e13964322441e2b619814a6d97401affce9f68ddcfd4f",
+      "matching_previous_citra_trials": [
+        "mh3u"
+      ],
+      "new_emulator_run": false
+    },
+    {
+      "path": "Juegos\\MHGU\\MHXX_MHGU_English_Patch_v2.cia",
+      "bytes": 36897728,
+      "sha256": "8438c0c026203c20b9dd81fc3b6ec9c31c94abc80e5bb7f6618cd58f804ac4ac",
+      "matching_previous_citra_trials": [
+        "mhxx-patch",
+        "mhxx-patch-short"
+      ],
+      "new_emulator_run": false
+    },
+    {
+      "path": "Juegos\\MHGU\\Monster Hunter XX  JPN (0004000000197100).cia",
+      "bytes": 2330896704,
+      "sha256": "195570856aa2cd623001d00aaa7c7e20d1e563fe8782979e054570ac83982245",
+      "matching_previous_citra_trials": [
+        "mhxx"
+      ],
+      "new_emulator_run": false
+    },
+    {
+      "path": "analysis-local\\containers\\MH4U\\EUR - Monster Hunter 4 Ultimate (0004000000126100).cia",
+      "bytes": 2734762304,
+      "sha256": "3b11095265bd96436306cbde7aa6256e7550164e83914d3ec9f8a139902e8069",
+      "matching_previous_citra_trials": [
+        "mh4u"
+      ],
+      "new_emulator_run": false
+    },
+    {
+      "path": "analysis-local\\containers\\MHXX\\Monster Hunter XX  JPN (0004000000197100).cia",
+      "bytes": 2330896704,
+      "sha256": "195570856aa2cd623001d00aaa7c7e20d1e563fe8782979e054570ac83982245",
+      "matching_previous_citra_trials": [
+        "mhxx"
+      ],
+      "new_emulator_run": false
+    }
+  ],
+  "previous_trials": [
+    {
+      "label": "mh3u",
+      "receipt_relative": "analysis-local\\citra-mh3u-20261021\\receipt.json",
+      "receipt_sha256": "d391919f49e4f78fbd1a949886b40e60956fb2fa07c62016da42383d372e9ca1",
+      "input_sha256": "aa108914574a1a28b87e13964322441e2b619814a6d97401affce9f68ddcfd4f",
+      "returncode": 1,
+      "input_unchanged": true
+    },
+    {
+      "label": "mh4u",
+      "receipt_relative": "analysis-local\\citra-mh4u-20261021\\receipt.json",
+      "receipt_sha256": "b7c99ae0b05e2cf45c2edbcfb0cdd1cd7ea506987c8903554153148f2de49f63",
+      "input_sha256": "3b11095265bd96436306cbde7aa6256e7550164e83914d3ec9f8a139902e8069",
+      "returncode": 1,
+      "input_unchanged": true
+    },
+    {
+      "label": "mhxx",
+      "receipt_relative": "analysis-local\\citra-mhxx-20261021\\receipt.json",
+      "receipt_sha256": "0873fec1d11f2e8f6a052cacd2c1a34d1417b79262eacf9338c718105d4aead5",
+      "input_sha256": "195570856aa2cd623001d00aaa7c7e20d1e563fe8782979e054570ac83982245",
+      "returncode": 1,
+      "input_unchanged": true
+    },
+    {
+      "label": "mhxx-patch",
+      "receipt_relative": "analysis-local\\citra-mhxx-patch-20261021\\receipt.json",
+      "receipt_sha256": "1deec13a60c9826201e31d12f7216516ecea85613d180e27e3949f3f881336e3",
+      "input_sha256": "8438c0c026203c20b9dd81fc3b6ec9c31c94abc80e5bb7f6618cd58f804ac4ac",
+      "returncode": 1,
+      "input_unchanged": true
+    },
+    {
+      "label": "mhxx-patch-short",
+      "receipt_relative": "analysis-local\\citra-mhxx-patch-short-20261021\\receipt.json",
+      "receipt_sha256": "ed765415a5c4530ed20fd4b602e9f2df314e852fee3b5289f20af0ec178ece48",
+      "input_sha256": "8438c0c026203c20b9dd81fc3b6ec9c31c94abc80e5bb7f6618cd58f804ac4ac",
+      "returncode": 1,
+      "input_unchanged": true
+    },
+    {
+      "label": "mhxx-patch-boot",
+      "receipt_relative": "analysis-local\\citra-mhxx-patch-boot-20261021\\receipt.json",
+      "receipt_sha256": "4c38b97066531b474652c289b75954ef2afecf334846f1eacdbe477ed760e4d6",
+      "input_sha256": "1ed304a0d11d01ed66cdfeebefb140a072b1b20728f8c611c13ebab75a8be473",
+      "returncode": 3221225477,
+      "input_unchanged": true
+    }
+  ],
+  "new_3ds_trial_receipt": {
+    "executable_sha256": "53087fb66a5e76bf6fe23bfe324c25c257c39b97fb1eefd8c69a8c917a104f27",
+    "source_relative": "Juegos\\Monster Hunter 4 Ultimate (Europe) (En,Fr,De,Es,It)\\Monster Hunter 4 Ultimate (Europe) (En,Fr,De,Es,It).3ds",
+    "source_bytes": 4294967296,
+    "input_sha256": "3832beef353d134bcba6ef83dc987e7ae228c43dc32a6ba52519f5f103f52581",
+    "input_sha256_after": "3832beef353d134bcba6ef83dc987e7ae228c43dc32a6ba52519f5f103f52581",
+    "input_unchanged": true,
+    "initial_config_sha256": "cee1e217347c22a90d983b377beb622b0e86bd2081fda2fee7a5e5fd1e9fca02",
+    "returncode": 1,
+    "terminated_after_timeout": true,
+    "elapsed_seconds": 15.640999999974156,
+    "ncsd_signature": "NCSD",
+    "partitions": [
+      {
+        "index": 0,
+        "offset": 16384,
+        "bytes": 2727489536,
+        "magic": "NCCH",
+        "program_id": "0004000000126100",
+        "ncch_no_crypto": true,
+        "in_file": true
+      },
+      {
+        "index": 1,
+        "offset": 2727505920,
+        "bytes": 7258112,
+        "magic": "NCCH",
+        "program_id": "0004000000126100",
+        "ncch_no_crypto": true,
+        "in_file": true
+      },
+      {
+        "index": 7,
+        "offset": 2734764032,
+        "bytes": 32186368,
+        "magic": "NCCH",
+        "program_id": "0004000000126100",
+        "ncch_no_crypto": true,
+        "in_file": true
+      }
+    ],
+    "logs": [
+      {
+        "path": "config\\sdl2-config.ini",
+        "bytes": 144,
+        "sha256": "cee1e217347c22a90d983b377beb622b0e86bd2081fda2fee7a5e5fd1e9fca02"
+      },
+      {
+        "path": "config\\telemetry_id",
+        "bytes": 8,
+        "sha256": "6f49053a30d1b0c6d5b941ba847e8100046705bfbd48be83384047a1883bc31d"
+      },
+      {
+        "path": "log\\citra_log.txt",
+        "bytes": 16548,
+        "sha256": "6f3b4ebb2248ec15a08ebc3d6f4773df9213939a1fbfc7e99228b20aa49d6823"
+      },
+      {
+        "path": "sysdata\\mcu.dat",
+        "bytes": 24,
+        "sha256": "7a9931d0e2c8e245a08653d77a1b6d33699e50c87a5f0fc9bc57d47ab0b3c56f"
+      },
+      {
+        "path": "nand\\data\\00000000000000000000000000000000\\extdata\\00048000\\F000000B\\metadata",
+        "bytes": 16,
+        "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+      },
+      {
+        "path": "nand\\data\\00000000000000000000000000000000\\extdata\\00048000\\F000000B\\user\\gamecoin.dat",
+        "bytes": 20,
+        "sha256": "e5ad6a70466faa9bde8c818ae80f51a39f6ca0a68e2c766d37364010e4a6e19e"
+      },
+      {
+        "path": "nand\\data\\00000000000000000000000000000000\\sysdata\\00010017\\00000000\\config",
+        "bytes": 32768,
+        "sha256": "7eb7ec481fb645105cc18df504503c3facc11527db1f9deca260b557af564b4d"
+      },
+      {
+        "path": "nand\\data\\00000000000000000000000000000000\\sysdata\\00010026\\00000000\\eventlog.dat",
+        "bytes": 200020,
+        "sha256": "f37c380dcc7348b04ca575ea3e8f078e23cc172b8be0df13c5abb9ed85d51f3c"
+      },
+      {
+        "path": "nand\\data\\00000000000000000000000000000000\\sysdata\\00010026\\00000000\\CEC\\MBoxList____",
+        "bytes": 396,
+        "sha256": "2aa9374fec6f45bd0eab9ae10fc1d0f38f1f3b779a089fccf160f435b378fc2f"
+      },
+      {
+        "path": "nand\\data\\00000000000000000000000000000000\\sysdata\\00010035\\00000000\\news.db",
+        "bytes": 11216,
+        "sha256": "ef87d94f1e43e12588760015a801dbeaa9f7277009bb8bda8f5129aa9c7d305f"
+      },
+      {
+        "path": "sdmc\\Nintendo 3DS\\00000000000000000000000000000000\\00000000000000000000000000000000\\title\\00040000\\00126100\\data\\00000001.metadata",
+        "bytes": 16,
+        "sha256": "709b9746278cd6d8dbd847a96ea621ec33794d6102084af7dab361e4e1279ee3"
+      },
+      {
+        "path": "shaders\\opengl\\transferable\\0004000000126100.bin",
+        "bytes": 165164,
+        "sha256": "6b52da9c20f4e541b4b2a8ea8c48cd1bd9ac8ff078e1bb939a96d040022cb1bb"
+      },
+      {
+        "path": "shaders\\opengl\\precompiled\\separable\\0004000000126100.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "visual_observation": false,
+    "gameplay_verified": false
+  },
+  "new_3ds_trial_receipt_sha256": "4ab801fa0bb5cc5709bfa9a2aafc13870b0f5afaf9eae90e8e90d26450737167",
+  "new_emulator_runs": 1,
+  "cia_repeated_runs": 0,
+  "reason_no_cia_repeat": "Current hashes match previous installation trials; no changed input or supplied key. New NCSD is a distinct legible input and was executed once.",
+  "private_current_inputs_sha256": "2788c2ce9a25c4d4d6dc6e9ab30c1d97af963f9e6143383405b56dbdba54189a",
+  "evidence_scope": "current hashes and one new NCSD run; previous CIA runs reused without rerun"
+}

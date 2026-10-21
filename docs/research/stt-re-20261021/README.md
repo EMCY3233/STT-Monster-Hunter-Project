@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: regresión PC completa
+## Estado más reciente: MH4U NCSD y comparativa
+
+[Nueva base MH4U .3ds probada en Citra](citra-current-inputs.md): cuatro GiB, NCCH no_crypto, carga e inicialización DSP acreditadas en 15 s; sin observación visual/gameplay. Cinco CIA cotejadas por hash con ensayos previos. [Comparativa PPSSPP/Azahar/Vita3K](emulator-comparison.md), fuentes/versiones/hashes, compatibilidad exacta y bloqueos. [Auditoría TEX](tex-decoder-audit.md): el lector mhff descarta alfa, demostrado con controles sintéticos y una carga existente. Sin tocar banco ni Vita.
+
+
+## Etapa anterior: regresión PC completa
 
 [Matriz de campaña](pc-regression-matrix.md), snapshot c4215e8 / CPython 3.12.14: 106/106 pruebas sintéticas, 21/21 sintaxis y 21/21 ayudas CLI aprobadas. SQLite sin cambios, manifiesto cotejado. Sin nuevos arranques, extracciones, censos o decodificaciones comerciales; bloqueos de fidelidad/compatibilidad permanecen abiertos.
 
