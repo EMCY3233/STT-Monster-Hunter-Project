@@ -92,15 +92,23 @@ def classify(data):
             if valid and nonempty: return dict(signature='headerless_offset_size_table_candidate',entry_count=count,nonempty_entries=len(nonempty),bounds_valid=True)
     return dict(signature='unclassified',semantics_verified=False)
 
+def select_candidate(rows,excluded=None,max_declared=LIMIT):
+    if not 0<max_declared<=LIMIT: raise ValueError('selection budget outside decoder limit')
+    eligible=[r for r in rows if r.get('kind')=='JKR' and r.get('version')==0x108 and r.get('codec')==3 and r.get('sha256')!=excluded and 0<r['declared_output_bytes']<=max_declared]
+    if not eligible: raise ValueError('no verified JKR within selection budget')
+    return min(eligible,key=lambda r:(r['declared_output_bytes'],r['path']))
+
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--root',type=Path,required=True)
     p.add_argument('--candidates',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--exclude-sha256')
+    p.add_argument('--max-declared',type=int,default=LIMIT)
     a=p.parse_args(); root=a.root.resolve(strict=True); out=a.out.resolve()
     if out.is_relative_to(root) or any((q/'.git').exists() for q in (out,*out.parents)): raise ValueError('derived output must stay outside sources and Git')
     candidates=json.loads(a.candidates.read_text())['rows']
-    row=min((r for r in candidates if r.get('kind')=='JKR'),key=lambda r:(r['declared_output_bytes'],r['path']))
+    row=select_candidate(candidates,a.exclude_sha256,a.max_declared)
     source=(root/row['path']).resolve(strict=True)
     if not source.is_relative_to(root) or source.stat().st_size>LIMIT: raise ValueError('input outside root/budget')
     original=source.read_bytes(); digest=hashlib.sha256(original).hexdigest()
@@ -110,6 +118,6 @@ if __name__=='__main__':
     started=time.monotonic(); decoded,details=decode_container((out/'source.jkr').read_bytes())
     if hashlib.sha256(source.read_bytes()).hexdigest()!=digest: raise ValueError('source changed during decode')
     (out/'decoded.bin').write_bytes(decoded)
-    report=dict(source_path=row['path'],source_bytes=len(original),source_sha256=digest,source_unchanged=True,output_sha256=hashlib.sha256(decoded).hexdigest(),seconds=time.monotonic()-started,classification=classify(decoded),**details)
+    report=dict(source_path=row['path'],source_bytes=len(original),source_sha256=digest,source_unchanged=True,output_sha256=hashlib.sha256(decoded).hexdigest(),seconds=time.monotonic()-started,classification=classify(decoded),selection_excluded_sha256=a.exclude_sha256,selection_max_declared_bytes=a.max_declared,**details)
     (out/'receipt.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(report))

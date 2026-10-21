@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: bordes de la muestra JKR
+## Estado más reciente: un par JKR
+
+[Un único contraste adicional](frontier-jkr-pair.md), seleccionado determinísticamente con presupuesto de 4 KiB: 1.884/1.884 bytes, toda la carga consumida, original intacto. El patrón parcial de prefijos de A no aparece en B; criterio CP932 no aporta anclas en B. Gramáticas interiores pendientes, sin ampliar a los otros 42 JKR. Ocho pruebas nuevas aprobadas; setenta previas conservadas sin repetir censo/batería.
+
+
+## Etapa anterior: bordes de la muestra JKR
 
 [Contraste de gramáticas y bordes](frontier-jkr-layout.md): se reutilizan las 14 anclas del sondeo central, sin exportar texto ni repetir CP932. Patrón repetido de 11 bytes observado; estructuras públicas examinadas no aceptan el bloque desde cero. Gramática interior pendiente, sin ampliar a los otros 43 JKR. 70 pruebas sintéticas aprobadas.
 

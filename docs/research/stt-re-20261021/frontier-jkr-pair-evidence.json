@@ -1,0 +1,132 @@
+{
+  "receipt.json": {
+    "source_path": "rePatch/PCSG00350/dat/load/uc/uc00_000_01.bin",
+    "source_bytes": 1058,
+    "source_sha256": "29d9e008ccd705a82185c3574f7e58327d6a77f4ccedb9ad89d5599c62fb2463",
+    "source_unchanged": true,
+    "output_sha256": "fa22ddcc947003496640007bd8f9cd5153e25b61a33b98e430bb1b4eb88352c8",
+    "seconds": 0.0,
+    "classification": {
+      "signature": "unclassified",
+      "semantics_verified": false
+    },
+    "selection_excluded_sha256": "4fcc62ad49f42b315d69013b2d312845b2d301dc97d47526047497f37125d385",
+    "selection_max_declared_bytes": 4096,
+    "version": 264,
+    "codec": 3,
+    "data_offset": 16,
+    "declared_output_bytes": 1884,
+    "actual_output_bytes": 1884,
+    "consumed_payload_bytes": 1042,
+    "trailing_payload_bytes": 0,
+    "unused_control_bits": 7,
+    "termination": "declared output size reached; no end marker asserted",
+    "operations": {
+      "literal": 482,
+      "short": 50,
+      "long_b": 2,
+      "long_a": 23,
+      "medium": 156
+    }
+  },
+  "cp932-regions.json": {
+    "source_bytes": 1884,
+    "source_sha256": "fa22ddcc947003496640007bd8f9cd5153e25b61a33b98e430bb1b4eb88352c8",
+    "probe_budget_bytes": 65536,
+    "matching_regions": 0,
+    "bytes_in_regions": 0,
+    "control_free_regions": 0,
+    "regions": [],
+    "exports_text": false,
+    "format_identified": false,
+    "encoding_declared_by_format_verified": false,
+    "semantics_verified": false,
+    "rule": "Maximal non-NUL spans, strict CP932 decode, at least one U+3040..U+30FF codepoint. Metadata only; not a string-table parser.",
+    "source_hash_unchanged": true
+  },
+  "comparison.json": {
+    "control": {
+      "bytes": 349,
+      "sha256": "592fe0ca19e741430f4fa669eea3df71e83935dec2812bf51524ad279074691c",
+      "nul_bytes": 143,
+      "nonempty_nul_spans": 44,
+      "nonempty_span_length_histogram": {
+        "1": 17,
+        "2": 11,
+        "3": 1,
+        "4": 1,
+        "7": 1,
+        "8": 5,
+        "9": 1,
+        "10": 3,
+        "12": 1,
+        "14": 1,
+        "18": 1,
+        "30": 1
+      },
+      "maximum_nonempty_span": 30,
+      "ends_with_nul": false
+    },
+    "contrast": {
+      "bytes": 1884,
+      "sha256": "fa22ddcc947003496640007bd8f9cd5153e25b61a33b98e430bb1b4eb88352c8",
+      "nul_bytes": 364,
+      "nonempty_nul_spans": 89,
+      "nonempty_span_length_histogram": {
+        "1": 35,
+        "2": 6,
+        "3": 16,
+        "4": 9,
+        "5": 2,
+        "8": 1,
+        "9": 1,
+        "41": 1,
+        "43": 1,
+        "47": 1,
+        "53": 1,
+        "58": 1,
+        "62": 2,
+        "64": 1,
+        "65": 1,
+        "69": 1,
+        "72": 1,
+        "76": 2,
+        "85": 2,
+        "91": 1,
+        "92": 2,
+        "129": 1
+      },
+      "maximum_nonempty_span": 129,
+      "ends_with_nul": false
+    },
+    "common_prefix_bytes": 2,
+    "control_prefix_windows": 12,
+    "invariant_prefix_columns": [
+      0,
+      1,
+      2,
+      5,
+      6,
+      7,
+      9,
+      10
+    ],
+    "contrast_partial_pattern_matches": [],
+    "pattern_is_not_grammar": true,
+    "semantics_verified": false,
+    "scope": "one pair only; NUL span statistics and control-derived byte-pattern hypothesis, no strings",
+    "inputs_unchanged": true
+  },
+  "evidence_hashes": {
+    "receipt.json": "cb3ef44eaf5c45e3ec97132efe62cb5652d3ebd65d95cbcc8c38b1acdccb54b2",
+    "cp932-regions.json": "bd02af928d0dc33bb86e4adec1b3e7c38f74dae94d259d7abf26a8d31b77ef6c",
+    "comparison.json": "c6a801e0e6ec110f00336d2f67b775dd87a79c5601c4cf9a32fcb4ee510fcecf"
+  },
+  "cp932_probe_sha256": "4cb89b68898bbcb6f6b3ce5158180507bdb0d8018ce04347e0f52c8e542a1bcb",
+  "validation": {
+    "new_selection_tests_passed": 5,
+    "new_comparison_tests_passed": 3,
+    "previous_tests_passed": 70,
+    "previous_suite_rerun": false
+  }
+}
