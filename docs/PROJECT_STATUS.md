@@ -35,9 +35,13 @@ Los [contratos 03/05/08](research/frontier-classic/03-interfaces.md) proponen co
 
 1. Carga comprimida MH4U/MHXX probada y CIA extraídos localmente; 7/7 originales con hashes conservados. Véase [extracción y herramientas](research/game-inputs-2026-10-21/extraction-tools.md).
 2. Contrastar identidades internas de bases/parche y clasificación de ejecutables accesibles.
-3. Identificar contenedores e índices antes de asignar modelos/animaciones a movimientos.
+3. Piloto de tres ARC completado; validar estructura y dependencias del pequeño candidato MOD antes de asignar modelos/animaciones a movimientos.
 4. Completar evidencias primarias Frontier; no usar MHFU como sustituto.
 5. Resolver interfaces y diseñar pruebas con recursos propios; separar Extremo.
 6. Ensayos físicos pendientes del monitor solo en una tarea con autorización aplicable.
 
 No hay juego nativo ni conversión demostrada. No se han publicado juegos, claves o recursos comerciales ni realizado transferencias/instalaciones Vita en este frente. El trabajo se conserva en [PR #3](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/3), independiente del monitor.
+
+## Piloto ARC y búsqueda externa — 21-10-2026
+
+[Ensayo local ARC](research/game-inputs-2026-10-21/arc-pilot.md): RomFS del parche extraído, tres ARC v17 con 782 entradas descomprimidas correctamente y dos exportaciones locales con hash cotejado. Firmas candidatas: 99 TEX, 48 GMD, 32 MOD y 32 MRL; sin rig o animación verificados. Ocho pruebas sintéticas nuevas aprobadas y 7/7 originales con hashes conservados. [Búsqueda de proyectos públicos](research/game-inputs-2026-10-21/existing-research.md): no se verificó decompilación completa de MHXX/MHGU; sí referencias de MH4U, Portable 2nd G y MH3U Wii U con límites de plataforma/versión y afirmaciones del autor separadas de pruebas propias.
