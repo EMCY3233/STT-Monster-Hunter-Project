@@ -169,3 +169,11 @@ Propietario entregóPR16/79a8969,sin fusionar,dependenciaPR13→PR14→PR16. Ens
 Nuevaaceptación encargada:límites explícitos de memoria porconteo y tamaño dearchivo,paradalimpia/resultadoparcial marcado sin descartes silenciosos,pruebasdecasos límite. No afirmar bytesRAM medidos si solo se limita número deelementos. Sinconsola/FTP.
 
 Prototipos continúan lectorC/pruebaC-Python/VitaSDK yadaptador de triángulos,sin cierre definitivo aún;investigación ExHeader/BLZ MHXX en curso,compresiónindicada ysalida declarada13.045.760bytes,pendiente aplicación/recibo. Avances provisionales,noaceptacionescerradas.
+
+## MHXX .code: aceptación BLZ cerrada
+
+PR7/3e9bbdb032cf448194b09c07499fb5ee4ecde264:una entrada NCCHexistente,flagcompresión confirmado,pieBLZ ysegmentos declaran13.045.760bytes;salidaúnica coincide,flujo completo,prefijo84bytes conservado. BSSseparado,no añadido a salida. SHA-256code.bin `6f66928e0deecdcd20c3b0e67c614e6313dfe92c8dc0b9ba2d7a906d1efe4fe8`;reciboprivado `bcfa81ad09d0bc68476e75340006b9d5d9f29b7e73be84aaf2827f3f91ec02cc`. Ambos cotejados aquí,sin repetirdescompresión.
+
+Investigación declara10pruebasnuevas,116/116suitecorrecta;decodificador adaptado deAzahar GPL2+ conatribución/licencia. No hashdescomprimidoindependiente encontenedor ni contrasteindependienterealizado. Valida algoritmo/rangos,nosemántica,ejecución,baseMHXXcifrada oparchearrancable. Derivadosprivados fueraGit,sin incorporaciónalbanco. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/3e9bbdb032cf448194b09c07499fb5ee4ecde264/docs/research/stt-re-20261021/mhxx-code-blz.md).
+
+Siguienteaceptaciónencargada:unaVA↔offset↔segmentoARM respaldadaporExHeader/fuenteprimaria;distinguirtextstartdeentrypoint yARM/Thumbsolo sihaybase. Sin inferirfunciones odesensambladocomercialpublicado,ni repetirBLZ/emu.

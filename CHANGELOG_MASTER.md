@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — .codeMHXX descomprimido y trazable
+
+-PR7/3e9bbdb:salidaBLZ13.045.760bytes coincideconsegmentos;recibo/hashsalida cotejados aquí.116pruebasdelpropietario,sincontrasteindependiente osemántica acreditados.
+-Encargadomapaestático deunareferenciaARMconprocedencia;sinrepetirBLZ ni modificarbanco/consola.
+
 ## 21-10-2026 — Captura PC acotada por duración
 
 - RecibidoPR16/79a8969,ensayoconjunto y20pruebaslocales;dependencia13→14→16,sinfusión. CIeventopendiente al cierre.
