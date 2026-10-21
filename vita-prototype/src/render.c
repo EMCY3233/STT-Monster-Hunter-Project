@@ -20,7 +20,9 @@ static void tri(V a,V b,V c,uint32_t color){
  int y1=clamp((int)fmaxf(a.y,fmaxf(b.y,c.y)),0,STT_HEIGHT-1);
  float area=edge(a,b,c.x,c.y);if(fabsf(area)<.001f)return;
  for(int y=y0;y<=y1;y++)for(int x=x0;x<=x1;x++){
-   float u=edge(b,c,x+.5f,y+.5f)/area,v=edge(c,a,x+.5f,y+.5f)/area,w=1-u-v;
+   /* Evaluate all three edges: deriving w=1-u-v changed boundary coverage
+      under reversed winding because the subtraction rounded differently. */
+   float u=edge(b,c,x+.5f,y+.5f)/area,v=edge(c,a,x+.5f,y+.5f)/area,w=edge(a,b,x+.5f,y+.5f)/area;
    if(u>=0&&v>=0&&w>=0){float inv=u/a.z+v/b.z+w/c.z;int at=y*STT_WIDTH+x;
      if(inv>zb[at]){zb[at]=inv;fb[y*STT_PITCH+x]=color;}}
  }
