@@ -97,3 +97,11 @@ PR3 permanecía borrador/abierta, mergeable=true ysin fusionar. Se encargó a in
 ## MOD230: evidencia parcial recibida
 
 [Seguimiento y límites](mod230-followup.md). PR7/10f3f10: una muestra990bytes,16posiciones/UV finitos y28índices accesibles. Discrepancia global30declarados/29disponibles y min/max0/0 pendientes. Aquí cotejados objeto/copia/3recibos yhashSQLite; sin nueva extracción,duplicación de objeto o pruebas del lector. Ocho pruebas comunicadas por investigación; geometría completa no validada.
+
+## Contraste de convenciones: discrepancia delimitada
+
+[Investigación PR7/4d0e9a9](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/4d0e9a9/docs/research/stt-re-20261021/mod230-index-conventions.md) encontró que un lector público explícitamente MH4U/E6 lee cantidad de malla+un u16:29índices,58bytes desde932,hastaEOF990. El índice adicional añade una terna con repetición; ambas ventanas mantienen seis ternas de índices distintos. No es comprobación de área/winding.
+
+Ese lector deja sin usar el u32 que RevilLib denomina dos campos min/max. Su semántica MHXX no está probada:0/0 frente a0–15 es diferencia de interpretación, no corrupción confirmada. El contador global30 permanece sin explicación específica MHXX. No se rellena ni corrige el archivo. Geometría completa no validada; cierre del ensayo como delimitación, sin ampliar modelos.
+
+Aquí se cotejó SHA-256 del recibo `index-conventions.json`: `a970b3c73b866af6022e038b190efcdb840da4359c499297ac9c82d287e5a215` y copia fuente contra evidencia. Cuatro pruebas nuevas pertenecen a investigación y no se repitieron. Fuente documental fijada:mhff6ef14c8ffa341ccbe44e0e6a93eb4bfe541265cf, aplicabilidad declarada MH4U/E6; no implica compatibilidad MHXX. Banco y derivados sin cambios.

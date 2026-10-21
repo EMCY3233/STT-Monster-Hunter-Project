@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Convenciones MOD230 delimitadas
+
+- PR7/4d0e9a9: lectura MH4U/E6 por malla encaja29índices en990bytes; contador global30 sigue sin explicación MHXX. Min/max genérico no confirmado para esta variante; no se atribuye corrupción.
+- Recibo y fuente cotejados; cuatro pruebas de investigación no repetidas. Geometría completa pendiente,sin ampliar modelos ni alterar banco. Véase mod230-followup.md.
+
 ## 21-10-2026 — Recepción del análisis estructural MOD230
 
 - Una muestra990bytes,16registros de posición/UV finitos y28índices accesibles segúnPR7/10f3f10. Discrepancias global30/29índices y min/max pendientes; geometría completa no validada.
