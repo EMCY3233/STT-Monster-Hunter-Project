@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: una cabecera TEX 3DS
+## Estado más reciente: contraste con logs PPSSPP
+
+[Dos registros anteriores cotejados](mhfu-import-runtime-review.md) anuncian .lib.stub y .rodata.sceNid en direcciones/tamaños idénticos al mapa estático. Corroboración parcial del loader; lectura concreta del puntero e invocación funcional sin demostrar. Cero nuevos arranques/dumps; cuatro pruebas nuevas aprobadas. Sin FPS o validación visual.
+
+
+## Etapa anterior: una cabecera TEX 3DS
 
 [Una carga mínima de 84 bytes](tex-smallest.md): versión A6, 8×8, una imagen/mip, formato 0x0C ETC1A4 referenciado; 16 bytes de cabecera + 4 de tabla + 64 de bloques encajan exactamente. Siete pruebas nuevas aprobadas. No se decodificaron ni visualizaron píxeles; banco y originales intactos.
 
