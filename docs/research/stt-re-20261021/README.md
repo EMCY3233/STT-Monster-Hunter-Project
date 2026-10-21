@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: Frontier completo
+## Estado más reciente: primera muestra JKR
+
+[Una muestra Frontier JKR/LZ descomprimida](frontier-jkr-sample.md): 349/349 bytes, toda la carga consumida, hash registrado, original intacto. Salida todavía sin firma reconocida ni semántica validada. 65 pruebas sintéticas aprobadas. Código con adaptación MIT atribuida; resultados comerciales solo locales.
+
+
+## Etapa anterior: Frontier completo
 
 El frente de inventario cerró la copia local. [Contraste independiente de 50 candidatos](frontier-complete-headers.md): 44 cabeceras JKR/LZ, 5 ECD y 1 firma SCE, con hashes coincidentes. Sin descifrado/descompresión de esos candidatos ni validación semántica. 52 pruebas sintéticas aprobadas. Los párrafos de copia parcial siguientes describen etapas anteriores.
 
