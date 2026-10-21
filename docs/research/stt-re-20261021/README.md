@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: referencia de inicio MHXX
+## Estado más reciente: partición ejecutable MH4U
+
+[Base NCSD/partición0 comprobada](mh4u-ncsd-executable.md): ProgramID0004000000126100, ExHeader/ExeFS y tres hashes verificados. Pie BLZ declara16.261.120bytes coherentes con segmentos; sin descompresión, extracción o arranque. Siete pruebas nuevas aprobadas, sin repetir la suite124. Original intacto, modos CPU como solicitudes, semántica pendiente.
+
+
+## Etapa anterior: referencia de inicio MHXX
 
 [Una VA del update mapeada](mhxx-entry-reference.md): entrada derivada explícitamente del loader Azahar2126.2, VA0x00100000→offset0/text, lectura-ejecución y estado inicial ARM/A32 según contexto del emulador. Sin instrucciones exportadas, ejecución o nueva descompresión.124/124tests sintéticos aprobados; semántica y observación en hardware siguen pendientes.
 
