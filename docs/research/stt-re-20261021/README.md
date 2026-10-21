@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: .code MHXX BLZ
+## Estado más reciente: referencia de inicio MHXX
+
+[Una VA del update mapeada](mhxx-entry-reference.md): entrada derivada explícitamente del loader Azahar2126.2, VA0x00100000→offset0/text, lectura-ejecución y estado inicial ARM/A32 según contexto del emulador. Sin instrucciones exportadas, ejecución o nueva descompresión.124/124tests sintéticos aprobados; semántica y observación en hardware siguen pendientes.
+
+
+## Etapa anterior: .code MHXX BLZ
 
 [Una entrada de update descomprimida](mhxx-code-blz.md): flag activado, hashes ExHeader/ExeFS verificados y13.045.760bytes de salida coincidentes con segmentos. Fuente intacta, flujo y prefijo completos.116/116tests sintéticos aprobados; salida comercial privada, sin arranque o desensamblado. Compresión resuelta para esta entrada; semántica y contraste independiente pendientes.
 
