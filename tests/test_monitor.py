@@ -67,6 +67,30 @@ class ReceiverTests(unittest.TestCase):
         self.assertTrue(all(r['peer_ip'] == '127.0.0.1' for r in records))
         self.assertEqual(records[0]['packet']['diagnostics']['send_ok'], 2)
 
+    def test_live_diagnostics_preserve_log_and_historical_error(self):
+        output, live = io.StringIO(), io.StringIO()
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as receiver, socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sender:
+            receiver.bind(('127.0.0.1', 0))
+            sender.sendto(b'bad', receiver.getsockname())
+            old = packet('v1', 0, 0)
+            current = packet('new-session', 0, 0)
+            current.update(version=2, diagnostics=dict(send_ok=0, send_errors=0,
+                           last_result=0x804101CD - 2**32, net_errno=205))
+            for item in (old, current):
+                sender.sendto(encode(item), receiver.getsockname())
+            result = receive(receiver, output, idle_timeout=2, max_packets=2, live_output=live)
+            sender.settimeout(0.02)
+            with self.assertRaises(socket.timeout):
+                sender.recvfrom(1024)  # Reception must never send replies.
+        self.assertEqual(result, {'accepted': 2, 'rejected': 1})
+        self.assertEqual([json.loads(line)['packet'] for line in output.getvalue().splitlines()], [old, current])
+        lines = live.getvalue().splitlines()
+        self.assertEqual(len(lines), 2)
+        self.assertIn('STT/1: sin diagnostico', lines[0])
+        self.assertIn('sesion=new-session muestra=0', lines[1])
+        self.assertIn('intentos previos: env=0 err=0', lines[1])
+        self.assertIn('ultimo error conservado=0x804101CD detalle=0x000000CD', lines[1])
+
     def test_inactivity(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             sock.bind(('127.0.0.1', 0))

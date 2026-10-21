@@ -20,6 +20,16 @@ python -m unittest discover -s tests -v
 
 El monitor PC no tiene dependencias de terceros. Si Windows abre Microsoft Store al invocar `python`, instalar/configurar Python o usar su ruta completa.
 
+## Ver diagnósticos en directo
+
+Añadir `--live` al receptor muestra cada muestra recibida, sesión, batería y diagnóstico STT/2. Por ejemplo, para simulación local:
+
+```powershell
+python -m stt_monitor.receiver --live --max-packets 10 --idle-timeout 30
+```
+
+El archivo JSONL conserva el mismo formato y sigue añadiendo registros. Los contadores describen intentos anteriores al mensaje actual; «último error conservado» puede pertenecer a una sesión previa. Una recepción no confirma el resultado del envío actual. STT/1 no aporta diagnóstico. La falta de mensajes no demuestra desconexión ni parada: STT/2 no transmite el estado de parada ni el presupuesto RTC. Esta vista no necesita actualizar el VPK.
+
 ## Analizar una captura
 
 ```powershell
