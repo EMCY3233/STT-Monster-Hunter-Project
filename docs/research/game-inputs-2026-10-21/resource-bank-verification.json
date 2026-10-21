@@ -1,0 +1,63 @@
+{
+  "originals": [
+    {
+      "path": "MH3U/EUR - Monster Hunter 3 Ultimate(00040000000b1d00).cia",
+      "matches_baseline": true
+    },
+    {
+      "path": "MH4U/EUR - Monster Hunter 4 Ultimate (0004000000126100).7z.001",
+      "matches_baseline": true
+    },
+    {
+      "path": "MH4U/EUR - Monster Hunter 4 Ultimate (0004000000126100).7z.002",
+      "matches_baseline": true
+    },
+    {
+      "path": "MHFU/Monster Hunter Freedom Unite.iso",
+      "matches_baseline": true
+    },
+    {
+      "path": "MHGU/MHXX_MHGU_English_Patch_v2.cia",
+      "matches_baseline": true
+    },
+    {
+      "path": "MHGU/Monster Hunter XX  JPN (0004000000197100).7z.001",
+      "matches_baseline": true
+    },
+    {
+      "path": "MHGU/Monster Hunter XX  JPN (0004000000197100).7z.002",
+      "matches_baseline": true
+    }
+  ],
+  "root_counts": {
+    "containers": 3,
+    "originals": 7,
+    "romfs": 1609,
+    "samples": 8
+  },
+  "entry_signatures": {
+    "GMD_candidate": 2637,
+    "LMT_candidate": 4,
+    "MOD_candidate": 83,
+    "MRL_candidate": 83,
+    "TEX_candidate": 220,
+    "unclassified": 18669
+  },
+  "catalogs": [
+    {
+      "name": "catalog.sqlite",
+      "bytes": 9334784,
+      "sha256": "034844bd096eefbca72ebabbf310416397238141a70da25006ff6ed976c755f4"
+    },
+    {
+      "name": "catalog-files.jsonl",
+      "bytes": 510087,
+      "sha256": "fb6bb0c9a09c443c8c59fe11e1928de36c5336ff40ec9e7f8f8e384a009dddef"
+    },
+    {
+      "name": "catalog-entries.jsonl",
+      "bytes": 7784727,
+      "sha256": "f927b43dede5d9eaa5be6aa4e742214850ea5096a4d99a4e39735013131fd488"
+    }
+  ]
+}
