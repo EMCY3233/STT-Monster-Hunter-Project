@@ -130,3 +130,10 @@ Trazabilidad: el commit Git que introduce esta entrada contiene todo el prototip
 - Fallback controlado por ausencia/error, buffers fijos y clips a tick60Hz.
 - STTP00001 versión00.11; sin FTP ni instalación.
 - Pruebas PC con sanitizadores, compilación VPK e inspección aprobadas (CI39680285352, código a8284a5b). Revisión visual/hardware pendientes.
+
+### Revisión visual PC de la muestra propia
+
+- Dos vistas PC observadas (referencia tick0 y animada tick18); anclas de proyección/winding/clipping comprobadas.
+- Corregida cobertura de borde dependiente del winding; regresión exacta preservada.
+- CI39682179024 aprobada, código d5df0516. VPK candidato actualizado e inspeccionado, sin transferencias.
+- near-plane sigue rechazando triángulos completos; sin GPU, FPS ni hardware acreditados.

@@ -1,9 +1,9 @@
 {
-  "code_commit": "a8284a5bbae7b24fd93b8c256fe1307f56a9fb50",
-  "run": 39680285352,
-  "pc_job": 119500670686,
-  "vita_build_job": 119500671056,
-  "inspect_job": 119500960421,
+  "code_commit": "d5df0516e44280035f4dcb4a2eb834183468b0ae",
+  "run": 39682179024,
+  "pc_job": 119507153888,
+  "vita_build_job": 119507153388,
+  "inspect_job": 119507405264,
   "pc_result": "success with address/undefined sanitizers",
   "vita_result": "VPK built and structurally inspected; not executed",
   "pc_asset_sizeof": 172904,
@@ -13,11 +13,12 @@
   "camera_cases": 16,
   "application": "STTP00001",
   "app_version": "00.11",
-  "vpk_sha256": "e0077e77b36afd24987443e820a26416499285c76be27d81a24dfb900c87853a",
-  "vpk_artifact": 12383447931,
-  "pc_render_artifact": 12383477797,
-  "visual_review": false,
+  "vpk_sha256": "bc95fdf5f5c1dbb5ea00e563eb26ff81ca4e5bbd6d580129a46be1e2bdb943a6",
+  "vpk_artifact": 12384288044,
+  "pc_render_artifact": 12383454645,
+  "visual_review": true,
   "vita_execution": false,
   "ftp": false,
-  "installation": false
+  "installation": false,
+  "visual_scope": "Two CPU-rendered reference/animated frames inspected; no Vita/GPU validation"
 }

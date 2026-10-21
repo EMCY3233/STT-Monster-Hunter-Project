@@ -98,3 +98,13 @@ FTP, instalación ni ejecución física. No se fusiona ninguna PR.
 
 [Recibo estructurado](pose-render-evidence.json). Los commits documentales
 posteriores no alteran el código probado ni justifican recompilar/reinstalar.
+
+## Revisión visual posterior y candidato vigente
+
+La [aceptación visual PC](pose-visual-review.md) revisó realmente ambas vistas y
+añadió anclas de proyección/winding/near-plane. Encontró y corrigió un problema
+de cobertura de borde; el código vigente es d5df0516, probado en CI39682179024.
+VPK candidato actual SHA256
+`bc95fdf5f5c1dbb5ea00e563eb26ff81ca4e5bbd6d580129a46be1e2bdb943a6`.
+La evidencia anterior de a8284a5b queda como antecedente, no como binario actual.
+La revisión visual PC está hecha; hardware sigue pendiente y no hay FTP.
