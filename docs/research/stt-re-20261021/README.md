@@ -1,6 +1,11 @@
 # STT — Ingeniería inversa y recursos
 
-## Estado más reciente: contraste BLZ independiente pendiente
+## Estado más reciente: una jerarquía MOD230
+
+[Una muestra con3huesos](mod230-skeleton.md),22-10-2026: selección mínima entre3candidatos existentes conhuesos;2raíces,sinciclos,tablas enrangoy6matricesfinitas.804bytes deparseo,sin geometría,skinning,LMT oexportacióndematrices.10pruebas nuevasaprobadas. Rigfuncional yconvenciones dematrices pendientes;discrepanciaMOD990eindependenciaBLZ/LMT permanecen abiertas.
+
+
+## Etapa anterior: contraste BLZ independiente pendiente
 
 [Revisión de linaje/licencias](mh4u-blz-independent-review.md), cierre22-10-2026: CTRTool, CUE y3dstool no aceptados aún como referencia suficientemente independiente. Sin segundo decoder ni coincidencia numérica inventada: tamaño/hash/consumo comparados=null. Cero arranques, descompresiones, instalaciones o lecturas de imagen. Invariantes MH4U previas intactas; independencia y semántica pendientes.
 
