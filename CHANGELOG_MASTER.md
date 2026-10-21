@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 21-10-2026 — Estado consolidado alineado con evidencias
+
+- Sustituidas prioridades superadas de espera de copia e inicio de prototipos por cierres y PR ya documentados. Resumidos dosJKR,MOD230parcial,referenciaPSP e interfaces offline con límites propios.
+- Sin nuevos ensayos de recursos,transferencias o cambios de banco. La actualización documental no se atribuye CI de otrocommit ni acredita integración física.
+
 ## 21-10-2026 — Referencia estática PSP trazable
 
 - PR7/c529799 mapea una referencia de imports ELF MHFU:VA0x0890EC78,offset0x0010D22C,.rodata.sceNid; sección/PT_LOAD coinciden. Confianza estructural alta,sin identificar función ni comportamiento.
