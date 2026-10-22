@@ -1,3 +1,9 @@
+# 2026-10-22 — Prototipo 0.13
+
+- Estados de equipamiento, anclajes espalda/mano y vaina geométrica propia.
+- Tiempos STT provisionales, pruebas automatizadas y revisión física pendiente.
+- Detalles: docs/prototypes/carry-study.md.
+
 # Changelog maestro — Start The Travesy, Monster Hunter
 
 ## 2026-10-21 — STT-MON-008 / límite temporal durante suspensión 0.5
