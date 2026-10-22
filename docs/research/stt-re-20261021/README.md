@@ -1,5 +1,7 @@
 # STT — Ingeniería inversa y recursos
 
+[Extractor ARC v17 completado](arc-extractor.md): 1341 entradas reales de cuatro contenedores MHXX 3DS, exportadas localmente y verificadas; diez pruebas y CLI de listado/extracción/verificación. Sin conversión semántica ni bytes comerciales publicados.
+
 [Reposo y acciones controladas](runtime-controlled-actions.md): control táctil y gesto Wave confirmados dentro de una captura de 598 muestras; comparación manual 0/11/0 cambios a +24, pero variación también antes de entradas del asistente. No es un campo de movimiento identificado.
 
 
