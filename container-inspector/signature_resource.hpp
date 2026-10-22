@@ -50,9 +50,11 @@ void inspect_signature(Reader& r,U base,const Header& h,bool encrypted,U ex,std:
 }
 struct ResourceStats {
     U files=0,arcs=0,arcEntries=0,textures=0,other=0,unsupported=0;
+    U decodedEntries=0,decodedBytes=0,compressedBytes=0;
     std::map<U,U> arcVersions,texVersions,typeCodes;
+    std::map<std::pair<std::string,U>,U> decodedHeaders;
 };
-void inspect_resource(Reader& r,U base,U size,ResourceStats& stats) {
+void inspect_resource(Reader& r,U base,U size,ResourceStats& stats,bool decompress) {
     ++stats.files;
     Header h{}; size_t prefix=static_cast<size_t>(std::min<U>(size,16));
     if(prefix) r.read(base,h.data(),prefix);
@@ -71,6 +73,17 @@ void inspect_resource(Reader& r,U base,U size,ResourceStats& stats) {
             range(offset,compressed,size);
             require(offset>=12+bytes,"ARC payload overlaps metadata");
             if(compressed) ranges.push_back({offset,compressed});
+            if(decompress) {
+                U expected=rawle(table,p+72)&0x0fffffff;
+                require(expected<=U(8)*1024*1024*1024-stats.decodedBytes,"ARC total output budget exceeded");
+                require(compressed<=U(8)*1024*1024*1024-stats.compressedBytes,"ARC total input budget exceeded");
+                auto decoded=validate_zlib(r,base+offset,compressed,expected);
+                auto kind=decoded_kind(decoded);
+                U decodedVersion=kind=="other" || decoded.size<6 ? 0 : U(decoded.bytes[4])|(U(decoded.bytes[5])<<8);
+                ++stats.decodedHeaders[{kind,decodedVersion}];
+                require(stats.decodedHeaders.size()<=4096,"decoded header category budget exceeded");
+                ++stats.decodedEntries; stats.decodedBytes+=decoded.size; stats.compressedBytes+=compressed;
+            }
             ++stats.typeCodes[rawle(table,p+64)];
             require(stats.typeCodes.size()<=4096,"ARC distinct type code budget exceeded");
         }
@@ -85,10 +98,17 @@ void inspect_resource(Reader& r,U base,U size,ResourceStats& stats) {
         require(width>0 && height>0 && mips>0 && h[12]>0,"invalid TEX header dimensions/counts");
     } else ++stats.other;
 }
-void resource_report(const ResourceStats& stats,std::ostream& out) {
+void resource_report(const ResourceStats& stats,std::ostream& out,bool decompress) {
     out<<"resources files="<<stats.files<<" arc="<<stats.arcs<<" arc19_entries="<<stats.arcEntries
        <<" tex="<<stats.textures<<" other="<<stats.other<<" unsupported="<<stats.unsupported
-       <<" payloads=not_decompressed pixels=not_decoded\n";
+       <<" payloads="<<(decompress?"arc19_zlib_validated_in_memory":"not_decompressed")<<" pixels=not_decoded\n";
+    if(decompress) {
+        out<<"arc_zlib validated_entries="<<stats.decodedEntries<<" decoded_bytes="<<stats.decodedBytes
+           <<" compressed_bytes="<<stats.compressedBytes<<" retained=prefix_16_bytes_only\n";
+        for(const auto& v:stats.decodedHeaders)
+            out<<"decoded_header kind="<<v.first.first<<" version_field16="<<v.first.second
+               <<" entries="<<v.second<<" scope=magic_and_version_only\n";
+    }
     for(const auto& v:stats.arcVersions) out<<"arc_version="<<v.first<<" files="<<v.second<<"\n";
     for(const auto& v:stats.texVersions) out<<"tex_version="<<v.first<<" files="<<v.second<<" scope=header_only\n";
     for(const auto& v:stats.typeCodes) out<<"arc_type_code="<<v.first<<" entries="<<v.second<<" semantic=not_confirmed\n";

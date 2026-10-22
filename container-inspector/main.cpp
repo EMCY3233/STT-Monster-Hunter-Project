@@ -13,6 +13,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <zlib.h>
 #ifdef _WIN32
 #define NOMINMAX
 #include <windows.h>
@@ -158,12 +159,13 @@ void verify_exefs(Reader& r,U base,U size,std::ostream& out) {
     out<<"exefs_files=verified count="<<count<<"\n";
 }
 
-struct Options { bool verify=false, list=false, integrity=false, index=false, signatures=false, resources=false; };
+struct Options { bool verify=false, list=false, integrity=false, index=false, signatures=false, resources=false, decompress=false; };
 U rawle(const std::vector<unsigned char>& b,U p,size_t n=4) {
     range(p,n,b.size()); U v=0;
     for(size_t i=0;i<n;++i) v|=U(b[static_cast<size_t>(p)+i])<<(8*i);
     return v;
 }
+#include "decompression.hpp"
 #include "signature_resource.hpp"
 struct Node { U parent,next,child,file,offset,size,hashNext; std::uint32_t pathHash; std::string name; };
 std::string name16(const std::vector<unsigned char>& b,U p,U n) {
@@ -204,7 +206,7 @@ void verify_buckets(Reader& r,U base,U offset,U size,const std::map<U,Node>& nod
        <<" used="<<used<<" entries="<<seen.size()<<" max_chain="<<maxChain<<"\n";
 }
 
-void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false,bool printFiles=true,bool verifyIndex=false,bool resources=false) {
+void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false,bool printFiles=true,bool verifyIndex=false,bool resources=false,bool decompress=false) {
     require(size>=0x60,"short IVFC"); Header iv{}; r.read(base,iv.data(),0x60);
     require(std::equal(iv.begin(),iv.begin()+4,"IVFC") && le(iv,4)==0x10000,"unsupported IVFC");
     U exponent=le(iv,0x4c); require(exponent>=9 && exponent<=20,"unsupported IVFC block size");
@@ -269,7 +271,7 @@ void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false,boo
             require(total<=std::numeric_limits<U>::max()-file.size,"RomFS total overflow"); total+=file.size;
             reportBytes+=w.path.size()+file.name.size()+128;
             require(reportBytes<=32*1024*1024,"RomFS report budget exceeded");
-            if(resources) inspect_resource(r,base+start+data+file.offset,file.size,resourceStats);
+            if(resources) inspect_resource(r,base+start+data+file.offset,file.size,resourceStats,decompress);
             if(printFiles) out<<"romfs_file path=\""<<w.path<<"/"<<file.name<<"\" size="<<file.size
                <<" absolute_offset="<<base+start+data+file.offset<<"\n";
             f=file.next;
@@ -287,7 +289,7 @@ void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false,boo
         }
     }
     require(seenDirs.size()==dn.size() && seenFiles.size()==fn.size(),"unreachable RomFS metadata");
-    if(resources) resource_report(resourceStats,out);
+    if(resources) resource_report(resourceStats,out,decompress);
     out<<"romfs_summary directories="<<dn.size()<<" files="<<fn.size()<<" file_bytes="<<total
        <<" ivfc_tree="<<(treeVerified?"verified":"not_verified")<<" hash_buckets="<<(verifyIndex?"verified":"not_verified")<<"\n";
 }
@@ -360,13 +362,13 @@ void ncch(Reader& r,U base,U available,std::ostream& out,const Options& options)
     }
     if((options.list || options.index || options.resources) && le(h,0x1b4)) {
         if(encrypted) out<<(options.index?"romfs_index":"romfs_listing")<<"=skipped_encrypted\n";
-        else romfs(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b4),exp),out,options.integrity,options.list,options.index,options.resources);
+        else romfs(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b4),exp),out,options.integrity,options.list,options.index,options.resources,options.decompress);
     }
 
 }
 int main(int argc,char** argv) {
     Options options;
-    if(argc<2) { std::cerr<<"usage: stt-inspect input [--verify] [--list-romfs] [--verify-integrity] [--verify-romfs-index] [--inspect-signatures] [--inspect-resources]\n"; return 2; }
+    if(argc<2) { std::cerr<<"usage: stt-inspect input [--verify] [--list-romfs] [--verify-integrity] [--verify-romfs-index] [--inspect-signatures] [--inspect-resources] [--validate-arc-zlib]\n"; return 2; }
     for(int i=2;i<argc;++i) {
         std::string arg=argv[i];
         if(arg=="--verify") options.verify=true;
@@ -374,6 +376,7 @@ int main(int argc,char** argv) {
         else if(arg=="--verify-integrity") { options.integrity=true; options.verify=true; }
         else if(arg=="--verify-romfs-index") { options.index=true; options.integrity=true; options.verify=true; }
         else if(arg=="--inspect-signatures") options.signatures=true;
+        else if(arg=="--validate-arc-zlib") { options.decompress=true; options.resources=true; options.index=true; options.integrity=true; options.verify=true; }
         else if(arg=="--inspect-resources") { options.resources=true; options.index=true; options.integrity=true; options.verify=true; }
         else { std::cerr<<"unknown option\n"; return 2; }
     }

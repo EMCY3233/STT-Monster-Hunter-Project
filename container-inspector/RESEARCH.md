@@ -107,3 +107,24 @@ Con un módulo público aportado por la misma imagen se puede comprobar coherenc
 de firma, pero no establecer la confianza del emisor. La ausencia de una raíz
 externa confiable mantiene la autenticidad bloqueada. No se incorporan ni
 exportan claves de Nintendo o del archivo, ni se elude esta limitación.
+
+## Validación de cargas zlib
+
+Se comprobó la versión estable 1.3.2 en la web oficial, el archivo, hash y
+licencia del autor. CMake fija la versión y SHA-256 y compila la biblioteca
+estática sin instalarla globalmente:
+https://zlib.net/
+https://github.com/madler/zlib/releases/tag/v1.3.2
+https://zlib.net/manual.html
+https://github.com/madler/zlib/blob/v1.3.2/LICENSE
+
+El uso de inflate de zlib valida formato y Adler-32. El wrapper propio exige
+fin de flujo, tamaños exactos, todos los bytes consumidos y presupuestos, sin
+guardar las salidas. Las pruebas Python comprimen muestras sintéticas, alteran
+checksum/longitudes/colas/diccionarios y comprueban rechazo. La comprobación
+privada independiente usa decompressobj con máximo de salida y exige eof,
+unused_data y unconsumed_tail coherentes.
+
+Los magics y campos de versión de las cargas no equivalen a conversión completa
+ni validan semántica MOD/MRL/LMT/TEX. Se mantienen separados el éxito de zlib,
+la integridad externa y la autenticidad todavía no establecida.

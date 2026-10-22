@@ -158,3 +158,45 @@ La versión y los resultados de ARC19/MH4U se mantienen separados.
 Suite local ampliada a 60 pruebas, con RSA efímero válido/alterado/fuera de módulo,
 perfiles omitidos, ARC19 fuera de rango/truncado y TEX inválido/truncado.
 Fuentes y límites de estas comprobaciones: RESEARCH.md.
+
+## Validación zlib ARC19 en memoria
+
+    stt-inspect imagen.cci --validate-arc-zlib --inspect-signatures
+
+Incluye --inspect-resources y sus verificaciones de integridad e índices.
+Para cada entrada ARC19 valida un único flujo zlib completo, checksum Adler-32
+incluido, sin diccionario externo. Exige tamaño de salida exacto (bits 0..27 del
+campo de tamaño ARC19), consumo de todos los bytes comprimidos declarados y
+ausencia de datos sobrantes o segundo flujo. No admite DEFLATE crudo/gzip.
+
+No exporta las cargas: usa dos buffers de 64 KiB y conserva un prefijo de
+16 bytes para clasificar magics MOD/TEX/MRL/LMT/ARC y el campo crudo de versión
+de 16 bits. No recorre archivos anidados ni interpreta la estructura completa.
+En TEX ese campo incluye bits adicionales: su versión de formato es bits 0..11.
+
+Límites: 64 MiB de entrada/salida por carga, 8 GiB de entrada y 8 GiB de salida
+acumuladas por partición, 4.096 categorías de cabecera. Rechaza falta de progreso,
+exceso del tamaño declarado, truncamientos, checksum inválido y diccionarios.
+Otras versiones ARC siguen marcadas como no soportadas, sin descompresión.
+El límite de memoria de los buffers no incluye el estado interno de zlib ni
+las tablas de metadatos ya documentadas.
+
+Dependencia externa: zlib 1.3.2, descargada por CMake desde el archivo oficial
+https://zlib.net/fossils/zlib-1.3.2.tar.gz
+SHA-256: bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16.
+Se compila estáticamente en todas las plataformas; la primera configuración
+necesita red. C y C++17 son requisitos de compilación. No se instala zlib global.
+Linux Debug instrumenta el lector y zlib con ASan/UBSan.
+Créditos y licencia: THIRD_PARTY_NOTICES.md.
+
+Suite local ampliada a 68 pruebas. Incluye bloques múltiples de entrada/salida,
+salida vacía, checksum corrupto, truncamiento, datos finales, flujos concatenados,
+DEFLATE crudo, diccionario, tamaño incorrecto y exceso de expansión.
+
+Resultado privado: 112.427 flujos válidos, 1.243.496.720 bytes comprimidos y
+2.157.656.686 descomprimidos. Cabeceras identificadas:
+MOD230 10.472, MRL32 13.341, LMT67 1.466 y TEX versión baja A5 38.170;
+48.978 prefijos quedan como otros. Referencia Python independiente coincide
+en cantidades, categorías y SHA-256 completo. No son modelos/animaciones/
+texturas convertidos. La discrepancia de firma de cabecera sigue presente
+y la autenticidad continúa sin establecerse.

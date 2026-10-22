@@ -1,6 +1,7 @@
 import hashlib
 import secrets
 import math
+import zlib
 import pathlib
 import struct
 import subprocess
@@ -210,6 +211,16 @@ def arc19():
     b=bytearray(100)
     b[:4]=b"ARC"+bytes(1);struct.pack_into("<HH",b,4,19,1)
     b[12:16]=b"test";struct.pack_into("<4I",b,76,123,8,10,92)
+    return b
+
+
+def compressed_arc(payload, compressed=None, expected=None):
+    packed=zlib.compress(payload) if compressed is None else compressed
+    b=bytearray(92+len(packed))
+    b[:4]=b"ARC"+bytes(1);struct.pack_into("<HH",b,4,19,1)
+    b[12:16]=b"test"
+    struct.pack_into("<4I",b,76,123,len(packed),len(payload) if expected is None else expected,92)
+    b[92:]=packed
     return b
 
 class Inspector(unittest.TestCase):
@@ -515,6 +526,38 @@ class Inspector(unittest.TestCase):
         b=signed_synthetic_image();b[:256]=bytes([255])*256
         self.assertIn("ncch_header_signature=invalid_with_embedded_key",
                       self.run_image(b,options=("--inspect-signatures",)))
+
+
+    def test_arc_zlib_valid_prefix(self):
+        payload=b"MOD"+bytes(1)+struct.pack("<H",230)+bytes(range(256))*1024
+        out=self.run_image(resource_image(compressed_arc(payload)),options=("--validate-arc-zlib",))
+        self.assertIn("validated_entries=1",out)
+        self.assertIn("kind=MOD version_field16=230 entries=1",out)
+    def test_arc_zlib_input_chunks(self):
+        payload=secrets.token_bytes(150000)
+        out=self.run_image(resource_image(compressed_arc(payload)),options=("--validate-arc-zlib",))
+        self.assertIn("decoded_bytes=150000",out)
+    def test_arc_zlib_empty_output(self):
+        out=self.run_image(resource_image(compressed_arc(b"")),options=("--validate-arc-zlib",))
+        self.assertIn("validated_entries=1 decoded_bytes=0",out)
+    def test_arc_zlib_corruption(self):
+        payload=b"TEX"+bytes(1)+struct.pack("<H",165)+b"abc"*1000
+        packed=zlib.compress(payload)
+        bad_checksum=bytearray(packed);bad_checksum[-1]^=1
+        for broken in [bytes(bad_checksum),packed[:-1],b"bad",packed+b"junk",packed+packed,packed[2:-4]]:
+            self.run_image(resource_image(compressed_arc(payload,broken)),False,("--validate-arc-zlib",))
+    def test_arc_zlib_size_mismatch(self):
+        for size in [0,9,11,64*1024*1024+1]:
+            self.run_image(resource_image(compressed_arc(b"0123456789",expected=size)),False,("--validate-arc-zlib",))
+    def test_arc_zlib_expansion_limit(self):
+        self.run_image(resource_image(compressed_arc(bytes(1000000),expected=8)),False,("--validate-arc-zlib",))
+    def test_arc_zlib_dictionary_rejected(self):
+        c=zlib.compressobj(zdict=b"some dictionary")
+        payload=b"some dictionary repeated"
+        packed=c.compress(payload)+c.flush()
+        self.run_image(resource_image(compressed_arc(payload,packed)),False,("--validate-arc-zlib",))
+    def test_arc_zlib_empty_input_rejected(self):
+        self.run_image(resource_image(compressed_arc(b"",b"")),False,("--validate-arc-zlib",))
 
     def test_usage(self):
         self.assertEqual(subprocess.run([EXE],capture_output=True).returncode,2)
