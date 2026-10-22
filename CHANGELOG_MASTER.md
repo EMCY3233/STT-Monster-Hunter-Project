@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — PiezasMH4Ulocalizadas
+
+-Investigacióncomunica7piezaslocales,torso1280vértices/19huesos;conjunto/equipo/animaciónsinvalidar.
+-Extraccionescomercialesprivadas,separadasdelbancohistórico yprototiposoriginales.
+
 ## 22-10-2026 — EntradaPC sostenida ycombinada
 
 -Investigacióninforma13pruebas ydesplazamientovisibleconentradasacotadas/liberacióncontrolada. No detectorinterno ovalidaciónVita.

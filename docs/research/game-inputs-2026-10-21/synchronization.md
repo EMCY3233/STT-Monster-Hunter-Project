@@ -285,3 +285,9 @@ GitHubverificaPR27 abierta/sinfusionar,head4251cd6ef58a8011d8b26171005dedbd9c8bc
 ## 22-10-2026 — Control de entrada acotado en emuladorPC
 
 Propietario investigación cierra ampliación:teclas sostenidashasta30s,combinaciónhasta4teclas yliberaciónantepérdidadefoco/error;13pruebasaprobadas. Citra:diagonal4s ycombinación3teclascon desplazamientovisible,enValHabar/cercaforja. Resultadoobservacionaldeentrada,no detectorinternodemovimiento,semántica dememoria ovalidaciónVita. Registrodelpropietario actualizado;centralnoejecutóni duplicóensayo. Banco/comercialesprivadossin cambiosdesdeestefrente.
+
+## 22-10-2026 — Extracciones locales de piezas MH4U
+
+Propietarioinvestigación entrega7piezaslocales delcazadormasculinoMH4U(torso,brazos,piernas,cintura,casco,rostro,cabello),texturas/materialesasociados. EjemplotorsoMOD230:1.280vértices/19huesos yhashverificado segúninforme. Reporteprivado analysis-local/mh4u-hunter-search-20261022/REPORT.md. Noensamblaje/visualconjunto ni equipodelpersonajeconfirmados;no personajeanimadovalidado.
+
+Cierreprevio declaró1.341archivosMHXXextraídosde4ARC contamaños/hashes;OBJestático/dosPNG ymaterialesparciales,interpretacióncompletapendiente. Sonalcancesnuevosdeanálisislocal,noseañadenautomáticamentealcatálogohistórico9888archivos/21696entradas/8823objetos. No recatalogar desdecentral para duplicarfrente. Recursoscomerciales permanecenlocales,fueradeGit yprototipospropios;adaptaciónlegalnoacreditada.
