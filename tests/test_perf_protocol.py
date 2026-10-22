@@ -32,6 +32,16 @@ class PerfTests(unittest.TestCase):
         self.assertEqual(len(result['groups']),2)
         self.assertEqual(result['groups'][0]['fps'],12)
         self.assertIsNone(result['groups'][0]['minimum_free_bytes']['phy_free'])
+    def test_v5_stages_and_raster_modes(self):
+        p=sample();p['version']=5
+        p['perf'].update(raster_mode=1,clear_us=100,ground_us=1000,body_us=2000,weapon_us=3000,target_us=400,hud_us=500)
+        self.assertEqual(decode(encode(p)),p)
+        q=copy.deepcopy(p);q['seq']=1;q['perf']['raster_mode']=0
+        result=analyze({'packet':x} for x in [p,q])
+        self.assertEqual(len(result['groups']),2)
+        self.assertEqual(result['groups'][0]['render_stages_us']['weapon_us'],3000)
+        del p['perf']['body_us']
+        with self.assertRaises(ValueError):encode(p)
     def test_receiver_accepts_performance(self):
         from stt_monitor.receiver import receive
         class Socket:

@@ -11,7 +11,7 @@ def validate(packet):
     if not isinstance(packet, dict):
         raise ValueError('expected object')
     version = packet.get('version')
-    if type(version) is int and version == 4:
+    if type(version) is int and version in (4, 5):
         from .perf_protocol import validate_perf
         return validate_perf(packet)
     if type(version) is int and version == 3:

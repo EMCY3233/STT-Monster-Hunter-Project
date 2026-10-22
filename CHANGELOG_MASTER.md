@@ -1,3 +1,10 @@
+## 2026-10-22 — Prototipo 0.16: raster y fases
+
+- Raster incremental con referencia T0/T1, cobertura cuantizada y profundidad incremental.
+- Transformaciones del cuerpo reutilizadas por vértice.
+- Seis fases de render en STT/5, conservación del receptor STT/4 y comparación porG/T.
+- Pruebas de referencia geométrica, fases y contratos; mejora física pendiente.
+
 ## 2026-10-22 — Prototipo 0.15: agente y rendimiento
 
 - Usuario confirma controles y combate de0.14; observación física comunicada:10–12FPS, sin captura sincronizada aún.

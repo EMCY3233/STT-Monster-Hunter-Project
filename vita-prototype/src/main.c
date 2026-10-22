@@ -20,7 +20,9 @@ static int power_callback(int id,int count,int flags,void *user){
  if((unsigned)flags&(SCE_POWER_CB_SYSTEM_SUSPEND|SCE_POWER_CB_SYSTEM_RESUMING|SCE_POWER_CB_SYSTEM_RESUME|SCE_POWER_CB_APP_RESUME|SCE_POWER_CB_APP_SUSPEND))resync_requested=1;
  return 0;
 }
+static uint64_t render_clock(void){return sceKernelGetProcessTimeWide();}
 int main(void){
+ stt_render_set_clock(render_clock);
  SceUID memory[2]={-1,-1},callback=-1;uint32_t *buffers[2]={NULL,NULL};float *depth=NULL;uint32_t *cached_pixels=NULL;
  int result=0,registered=0,shown=0,front=0,need_release=0;unsigned previous=0,pending_attack=0,pending_toggle=0,frame_us=0,dropped=0,update_us=0;
  uint64_t previous_time=0,accumulator=0,seq=0,next_sample=0,start=sceKernelGetProcessTimeWide();
@@ -54,6 +56,7 @@ int main(void){
   if(elapsed>100000)dropped++; /* Slow rendering is not a power/resume event. */
   unsigned pressed=controls.buttons&~previous;previous=controls.buttons;
   if(pressed&SCE_CTRL_SELECT)stt_monitor_toggle(&monitor,frame_start);
+  if(pressed&SCE_CTRL_RTRIGGER)stt_render_set_raster(!stt_render_get_raster());
   if(pressed&SCE_CTRL_LTRIGGER)stt_render_set_ground(!stt_render_get_ground());
   if(pressed&SCE_CTRL_START){result=0;break;}
   if(need_release&&controls.buttons==0&&stt_axis(controls.lx)==0&&stt_axis(controls.ly)==0&&stt_axis(controls.rx)==0&&stt_axis(controls.ry)==0)need_release=0;
@@ -87,7 +90,7 @@ int main(void){
   result=sceDisplayWaitVblankStartCB();if(result<0)break;front^=1;
   present_us=(unsigned)(sceKernelGetProcessTimeWide()-present_start);
   uint64_t telemetry_start=sceKernelGetProcessTimeWide();
-  stt_monitor_frame(&monitor,session,telemetry_start,combat.tick,(unsigned)equipment.mode,stt_render_get_ground(),update_us,render_us,present_us,telemetry_us);
+  stt_monitor_frame(&monitor,session,telemetry_start,combat.tick,(unsigned)equipment.mode,stt_render_get_ground(),stt_render_get_raster(),stt_render_profile(),update_us,render_us,present_us,telemetry_us);
   telemetry_us=(unsigned)(sceKernelGetProcessTimeWide()-telemetry_start);
   unsigned work_us=(unsigned)(sceKernelGetProcessTimeWide()-frame_start);
   if(work_us>33333)dropped++;
