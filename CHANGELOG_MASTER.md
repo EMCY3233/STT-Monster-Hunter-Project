@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — BancoMH4Useparado ycámaraoriginal
+
+-Propietarioentrega113.280entradas/59.553contenidosúnicos;referencias/animacionesparciales,sinfuncionalidadVita demostrada. No se sumanalbancohistórico.
+-CámaraPROPIA de referencia,5testsPC,integraciónpendiente;nocontroladorcomercialrecuperado.
+
 ## 22-10-2026 — AuditoríaEigent ylímitesLMT
 
 -RecibidaauditoríadocumentalEigent;contrastedetextoshistóricosencargadoalmonitor,sinduplicarPROJECT_STATUSdePR3.
