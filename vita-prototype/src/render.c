@@ -11,7 +11,7 @@ static float dot(V a,V b){return a.x*b.x+a.y*b.y+a.z*b.z;}
 static V project(V p){V r=sub(p,eye);float z=dot(r,forward);return(V){240+250*dot(r,right)/z,142-250*dot(r,up)/z,z};}
 static float edge(V a,V b,float x,float y){return(x-a.x)*(b.y-a.y)-(y-a.y)*(b.x-a.x);}
 static int clamp(int x,int a,int b){return x<a?a:x>b?b:x;}
-static void tri(V a,V b,V c,uint32_t color){
+static void tri_reference(V a,V b,V c,uint32_t color){
  a=project(a);b=project(b);c=project(c);
  /* Bounded near-plane rejection; ground is tiled so no huge near triangles. */
  if(a.z<.15f||b.z<.15f||c.z<.15f)return;
@@ -28,6 +28,44 @@ static void tri(V a,V b,V c,uint32_t color){
      if(inv>zb[at]){zb[at]=inv;fb[y*STT_PITCH+x]=color;}}
  }
 }
+/* Integer subpixel coverage (1/16 pixel), canonical winding, incremental depth.
+   Reference rasterizer stays selectable. Edges can differ by <=1 pixel. */
+static unsigned raster_mode=1;
+static SttRenderClock profile_clock;static SttRenderProfile profile;
+void stt_render_set_clock(SttRenderClock clock){profile_clock=clock;}
+const SttRenderProfile *stt_render_profile(void){return &profile;}
+void stt_render_set_raster(unsigned mode){raster_mode=mode?1u:0u;}
+unsigned stt_render_get_raster(void){return raster_mode;}
+static uint64_t mark(void){return profile_clock?profile_clock():0;}
+static int64_t fixed_edge(int64_t ax,int64_t ay,int64_t bx,int64_t by,int64_t px,int64_t py){return (px-ax)*(by-ay)-(py-ay)*(bx-ax);}
+static void tri_incremental(V a,V b,V c,uint32_t color){
+ a=project(a);b=project(b);c=project(c);
+ if(a.z<.15f||b.z<.15f||c.z<.15f)return;
+ V v[3]={a,b,c};int64_t px[3],py[3];
+ for(unsigned i=0;i<3;i++){
+  if(!isfinite(v[i].x)||!isfinite(v[i].y)||!isfinite(v[i].z)||fabsf(v[i].x)>8000000||fabsf(v[i].y)>8000000)return;
+  px[i]=(int64_t)llroundf(v[i].x*16);py[i]=(int64_t)llroundf(v[i].y*16);
+ }
+ int64_t area=fixed_edge(px[0],py[0],px[1],py[1],px[2],py[2]);if(!area)return;
+ if(area<0){int64_t t=px[1];px[1]=px[2];px[2]=t;t=py[1];py[1]=py[2];py[2]=t;V tv=v[1];v[1]=v[2];v[2]=tv;area=-area;}
+ int x0=clamp((int)fminf(a.x,fminf(b.x,c.x))-1,0,STT_WIDTH-1),x1=clamp((int)fmaxf(a.x,fmaxf(b.x,c.x))+1,0,STT_WIDTH-1);
+ int y0=clamp((int)fminf(a.y,fminf(b.y,c.y))-1,0,STT_HEIGHT-1),y1=clamp((int)fmaxf(a.y,fmaxf(b.y,c.y))+1,0,STT_HEIGHT-1);
+ int64_t ex[3],ey[3],row[3];float iz[3];
+ for(unsigned i=0;i<3;i++){
+  unsigned j=(i+1)%3,k=(i+2)%3;ex[i]=(py[k]-py[j])*16;ey[i]=-(px[k]-px[j])*16;
+  row[i]=fixed_edge(px[j],py[j],px[k],py[k],x0*16+8,y0*16+8);iz[i]=1.0f/((float)area*v[i].z);
+ }
+ float dz=(float)ex[0]*iz[0]+(float)ex[1]*iz[1]+(float)ex[2]*iz[2];
+ for(int y=y0;y<=y1;y++){
+  int64_t e0=row[0],e1=row[1],e2=row[2];float inv=(float)e0*iz[0]+(float)e1*iz[1]+(float)e2*iz[2];
+  for(int x=x0;x<=x1;x++){
+   if(e0>=0&&e1>=0&&e2>=0){int at=y*STT_WIDTH+x;if(inv>zb[at]){zb[at]=inv;fb[y*STT_PITCH+x]=color;}}
+   e0+=ex[0];e1+=ex[1];e2+=ex[2];inv+=dz;
+  }
+  for(unsigned i=0;i<3;i++)row[i]+=ey[i];
+ }
+}
+static void tri(V a,V b,V c,uint32_t color){if(raster_mode)tri_incremental(a,b,c,color);else tri_reference(a,b,c,color);}
 static unsigned ground_mode=1;
 static int monitor_active,monitor_result;static unsigned monitor_sent;
 void stt_render_set_ground(unsigned mode){ground_mode=mode?1u:0u;}
@@ -78,15 +116,18 @@ static int sword_triangle(void *context,const float p[3][3]){
  tri((V){p[0][0],p[0][1],p[0][2]},(V){p[1][0],p[1][1],p[1][2]},(V){p[2][0],p[2][1],p[2][2]},color);return 1;
 }
 static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused,SttAsset *asset,SttWeapon *weapon,const SttEquipment *equipment){
+ uint64_t phase=mark();memset(&profile,0,sizeof profile);
  fb=pixels;zb=depth;memset(zb,0,sizeof(float)*STT_WIDTH*STT_HEIGHT);
  for(int y=0;y<STT_HEIGHT;y++)for(int x=0;x<STT_WIDTH;x++)fb[y*STT_PITCH+x]=RGB(18+y/12,27+y/10,47+y/8);
  float hx=c->hunter.x_mm*.001f,hz=c->hunter.z_mm*.001f,sy=sinf(cam.yaw),cy=cosf(cam.yaw),sp=sinf(cam.pitch),cp=cosf(cam.pitch);
  eye=(V){hx-sy*6*cp,1.1f+sp*6,hz-cy*6*cp};right=(V){cy,0,-sy};forward=(V){sy*cp,-sp,cy*cp};up=(V){sy*sp,cp,cy*sp};
  int center_x=(int)floorf(hx/2),center_z=(int)floorf(hz/2);
+ profile.clear_us=(unsigned)(mark()-phase);phase=mark();
  if(ground_mode)ground_scanline(center_x,center_z);
  else for(int z=center_z-8;z<center_z+8;z++)for(int x=center_x-8;x<center_x+8;x++){
   uint32_t col=(x+z)&1?RGB(49,67,69):RGB(57,77,78);V a={x*2,0,z*2},b={x*2+2,0,z*2},d={x*2,0,z*2+2},e={x*2+2,0,z*2+2};tri(a,b,e,col);tri(a,e,d,col);
  }
+ profile.ground_us=(unsigned)(mark()-phase);phase=mark();
  float yaw=c->hunter.yaw_turn*(6.28318530718f/65536);
  int posed=asset&&asset->status==STT_ASSET_READY&&stt_pose_emit(&asset->pose,stt_asset_clip(asset,c->hunter.state!=STT_IDLE),c->tick,c->hunter.x_mm,c->hunter.z_mm,c->hunter.yaw_turn,&asset->scratch,pose_triangle,NULL);
  if(!posed){
@@ -94,6 +135,7 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
   box(hx,.8f,hz,.55f,.8f,.32f,yaw,RGB(42,168,213));box(hx,1.45f,hz,.38f,.4f,.38f,yaw,RGB(245,207,161));
   box(hx-.17f,.25f,hz,.20f,.5f,.23f,yaw,RGB(30,66,101));box(hx+.17f,.25f,hz,.20f,.5f,.23f,yaw,RGB(30,66,101));
  }
+ profile.body_us=(unsigned)(mark()-phase);phase=mark();
  float blade_yaw=yaw+(c->hunter.state==STT_ACTIVE?.5f:0);float reach=c->hunter.state==STT_ACTIVE?1.0f:.65f;
  uint32_t blade_color=c->hunter.state==STT_ACTIVE?RGB(255,234,125):RGB(172,205,220);
  SttPoseFrame carry={0};
@@ -106,18 +148,21 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  int equipped=weapon&&posed&&asset->pose.bones==4&&asset->pose.parents[2]==1&&asset->pose.parents[3]==2&&stt_weapon_emit(weapon,socket,c->hunter.x_mm,c->hunter.z_mm,c->hunter.yaw_turn,sword_triangle,&blade_color);
  if(!equipped&&equipment&&!in_hand)stt_weapon_emit(NULL,&carry,c->hunter.x_mm,c->hunter.z_mm,c->hunter.yaw_turn,sword_triangle,&blade_color);
  else if(!equipped)box(hx+sinf(blade_yaw)*reach+cosf(yaw)*.4f,.85f,hz+cosf(blade_yaw)*reach-sinf(yaw)*.4f,.10f,.10f,1.6f,blade_yaw,blade_color);
+ profile.weapon_us=(unsigned)(mark()-phase);phase=mark();
  float tx=c->target.x_mm*.001f,tz=c->target.z_mm*.001f;
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-15 PERF LAB",RGB(119,223,235));
+ profile.target_us=(unsigned)(mark()-phase);phase=mark();
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-16 RASTER LAB",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
  rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE RIGHT CAMERA CROSS DRAW-ATTACK START EXIT",RGB(238,239,223));
- snprintf(line,sizeof line,"L GROUND  SELECT MONITOR  US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
+ snprintf(line,sizeof line,"L GROUND R RASTER SELECT NET US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
  if(paused){rect(65,110,350,46,RGB(9,17,27));text(78,120,"RELEASE STICKS AND GAME BUTTONS",RGB(255,234,125));text(78,137,"OR PRESS TRIANGLE TO RESET",RGB(255,234,125));}
  if(asset)text(8,36,asset->status==STT_ASSET_READY?"ASSET READY":asset->status==STT_ASSET_MISSING?"ASSET MISSING - SIMPLE HUNTER":"ASSET INVALID - SIMPLE HUNTER",RGB(255,234,125));
  if(equipment){static const char *modes[]={"SHEATHED","DRAWING","DRAWN","SHEATHING"};text(330,36,modes[(unsigned)equipment->mode<=STT_SHEATHING?equipment->mode:0],RGB(255,234,125));}
- snprintf(line,sizeof line,"FPS %u G%u NET %s %u R%d",frame_us?1000000u/frame_us:0,ground_mode,monitor_active?"ON":"OFF",monitor_sent,monitor_result);text(125,45,line,RGB(153,185,191));
+ snprintf(line,sizeof line,"FPS %u G%u T%u NET %s %u",frame_us?1000000u/frame_us:0,ground_mode,raster_mode,monitor_active?"ON":"OFF",monitor_sent);text(125,45,line,RGB(153,185,191));
  if(weapon)text(8,45,weapon->status==STT_ASSET_READY&&equipped?"SWORD READY":"SWORD FALLBACK",RGB(255,234,125));
+ profile.hud_us=(unsigned)(mark()-phase);
 }
 void stt_render_with_asset(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused,SttAsset *asset){
  stt_render_equipped(pixels,depth,c,cam,frame_us,dropped,paused,asset,NULL);

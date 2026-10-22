@@ -22,7 +22,7 @@ def live_line(record):
         text += (f" | intentos previos: env={d['send_ok']} err={d['send_errors']}"
                  f" | ultimo error conservado=0x{d['last_result'] & 0xffffffff:08X}"
                  f" detalle=0x{d['net_errno'] & 0xffffffff:08X}")
-    elif p['version'] == 4:
+    elif p['version'] in (4,5):
         f=p['perf'];text += f" | FPS={f['frames']*1e6/f['window_us']:.1f} G{f['ground_mode']} render={f['render_us']}us"
     elif p['version'] == 3:
         text += ' | STT/3: juego'

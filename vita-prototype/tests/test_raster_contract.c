@@ -9,6 +9,7 @@ static float test_depth[STT_WIDTH*STT_HEIGHT];
 static void clear(uint32_t *image){
  fb=image;zb=test_depth;memset(image,0,sizeof image_a);memset(test_depth,0,sizeof test_depth);
 }
+static uint64_t fake_clock(void){static uint64_t t;t+=10;return t;}
 int main(void){
  eye=(V){0,0,0};right=(V){1,0,0};up=(V){0,1,0};forward=(V){0,0,1};
  V a=project((V){0,0,2}),b=project((V){.8f,.4f,2});
@@ -41,6 +42,29 @@ int main(void){
   }
   assert(checked>25);
  }
+ /* New raster is checked against the preserved implementation, not its own math. */
+ eye=(V){0,0,0};right=(V){1,0,0};up=(V){0,1,0};forward=(V){0,0,1};
+ for(unsigned n=0;n<24;n++){
+  V a={-.9f+n*.015f,-.6f,1.7f},b={.8f,.15f+n*.01f,2.8f},c={-.1f,.7f,2.1f};
+  clear(image_a);tri_reference(a,b,c,0xff123456u);float old_depth[STT_WIDTH*STT_HEIGHT];memcpy(old_depth,test_depth,sizeof old_depth);
+  clear(image_b);tri_incremental(a,b,c,0xff123456u);
+  unsigned shared=0;
+  for(int y=1;y<STT_HEIGHT-1;y++)for(int x=1;x<STT_WIDTH-1;x++){
+   int at=y*STT_PITCH+x;int pa=image_a[at]!=0,pb=image_b[at]!=0;
+   if(pa&&pb){assert(fabsf(old_depth[y*STT_WIDTH+x]-test_depth[y*STT_WIDTH+x])<.002f);shared++;}
+   if(pa!=pb){
+    const uint32_t *other=pa?image_b:image_a;int neighbor=0;
+    for(int j=-1;j<=1;j++)for(int k=-1;k<=1;k++)neighbor|=other[(y+j)*STT_PITCH+x+k]!=0;
+    assert(neighbor);
+   }
+  }
+  assert(shared>2000);
+ }
+ stt_render_set_clock(fake_clock);SttCombat combat;stt_combat_init(&combat);
+ stt_render(image_a,test_depth,&combat,(SttCamera){.45f,.4f},33333,0,0);
+ const SttRenderProfile *profile=stt_render_profile();
+ assert(profile->clear_us==10&&profile->ground_us==10&&profile->body_us==10&&profile->weapon_us==10&&profile->target_us==10&&profile->hud_us==10);
+ stt_render_set_clock(NULL);
  puts("PASS CPU projection anchors, double-sided winding, bounded near-plane rejection and degenerate triangle");
  return 0;
 }

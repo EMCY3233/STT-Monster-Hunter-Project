@@ -171,12 +171,22 @@ int stt_pose_emit(const SttPose *pose, unsigned clip, uint64_t tick,
     if (!pose || !sink || !scratch || pose->triangle_count==0 ||
         pose->triangle_count>STT_POSE_TRIANGLES ||
         !stt_pose_frame(pose,clip,tick,scratch)) return 0;
+    if(x<-1000000||x>1000000||z<-1000000||z>1000000)return 0;
+    float world[STT_POSE_VERTICES][3];
+    float angle=(float)yaw*(6.283185307179586f/65536.0f),s=sinf(angle),c=cosf(angle);
+    for(unsigned i=0;i<pose->vertices;i++){
+        const int32_t *p=scratch->vertices[i];
+        for(unsigned j=0;j<3;j++)if(p[j]<-1000000||p[j]>1000000)return 0;
+        world[i][0]=((float)x+p[0]*c+p[2]*s)*.001f;
+        world[i][1]=p[1]*.001f;
+        world[i][2]=((float)z+p[2]*c-p[0]*s)*.001f;
+    }
     for (unsigned i=0;i<pose->triangle_count;++i) {
         float triangle[3][3];
         for (unsigned j=0;j<3;++j) {
             unsigned index=pose->triangles[i][j];
-            if (index>=pose->vertices ||
-                !stt_pose_transform(scratch->vertices[index],x,z,yaw,triangle[j])) return 0;
+            if(index>=pose->vertices)return 0;
+            memcpy(triangle[j],world[index],sizeof triangle[j]);
         }
         if (!sink(context,(const float (*)[3])triangle)) return 0;
     }
