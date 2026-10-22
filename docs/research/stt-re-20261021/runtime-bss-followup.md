@@ -1,5 +1,7 @@
 # Seguimiento de candidatos y primer rango BSS variable — 22-10-2026
 
+Estado posterior: [reposo y acciones táctiles controladas](runtime-controlled-actions.md). La nueva etapa compara campos y confirma Wave dentro de una captura; también observa variación a +24 antes de entradas del asistente, por lo que no lo identifica como movimiento.
+
 ## Hallazgo confirmado
 
 Un rango de 32 bytes en **`0x0110D000`**, dentro de la BSS derivada para MH4U, varió repetidamente: 118 respuestas RPC válidas en 12 segundos, 117 hashes distintos y 116 diferencias entre muestras consecutivas. No hubo errores. Es un objetivo variable verificado, **sin identidad semántica**: no se han identificado movimiento, animaciones, hitboxes, IA ni campos concretos. Un reloj o contador global sería una hipótesis posible, no un resultado.

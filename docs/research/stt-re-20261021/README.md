@@ -1,5 +1,8 @@
 # STT — Ingeniería inversa y recursos
 
+[Reposo y acciones controladas](runtime-controlled-actions.md): control táctil y gesto Wave confirmados dentro de una captura de 598 muestras; comparación manual 0/11/0 cambios a +24, pero variación también antes de entradas del asistente. No es un campo de movimiento identificado.
+
+
 [Seguimiento y primer rango BSS variable](runtime-bss-followup.md): los doce candidatos de datos permanecen estables; BSS aporta una ventana variable en 0x0110D000, confirmada con 118 lecturas y 116 cambios sucesivos. Semántica todavía desconocida.
 
 
