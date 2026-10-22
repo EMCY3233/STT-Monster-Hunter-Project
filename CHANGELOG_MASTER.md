@@ -1,5 +1,9 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — EntradaPC sostenida ycombinada
+
+-Investigacióninforma13pruebas ydesplazamientovisibleconentradasacotadas/liberacióncontrolada. No detectorinterno ovalidaciónVita.
+
 ## 22-10-2026 — Diálogo yvínculosdemateriales
 
 -Investigaciónconfirmadiálogo/avanceGuildmarmconlecturasimultánea,noestadosemánticoidentificado.

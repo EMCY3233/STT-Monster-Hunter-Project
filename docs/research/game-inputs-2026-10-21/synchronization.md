@@ -281,3 +281,7 @@ SinoperacionesVita/FTP desdecentral;no repetirconversiones ni ligartextura/model
 Propietario investigación informa diálogoGuildmarm/avance de texto observados conlecturadememoria simultánea;noestado de diálogo identificado,sinmisióniniciada. Registro local,no repetirensayo desdecentral.
 
 GitHubverificaPR27 abierta/sinfusionar,head4251cd6ef58a8011d8b26171005dedbd9c8bcaca,títuloverbatim«MHXX 3DS: add verified material linkage evidence probe». Su propietario declara analizadorlecturaMOD230/MRL32/TEX:51modelos,99coincidenciasCRCcomplementadoMRLmisma ruta,91referenciastextualesexactasTEX;6pruebassintéticas yhashesprevios cotejados. CRCeshipótesisdeidentificación,no semánticashader/materialcompleto. Slots/asignacionesenMRLmúltiplespendientes;sinrecursoscomercialespublicados. NuevaPRindependientedePR7,noseedita ni fusionadesdecentral. [PR27](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/27).
+
+## 22-10-2026 — Control de entrada acotado en emuladorPC
+
+Propietario investigación cierra ampliación:teclas sostenidashasta30s,combinaciónhasta4teclas yliberaciónantepérdidadefoco/error;13pruebasaprobadas. Citra:diagonal4s ycombinación3teclascon desplazamientovisible,enValHabar/cercaforja. Resultadoobservacionaldeentrada,no detectorinternodemovimiento,semántica dememoria ovalidaciónVita. Registrodelpropietario actualizado;centralnoejecutóni duplicóensayo. Banco/comercialesprivadossin cambiosdesdeestefrente.
