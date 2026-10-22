@@ -1,12 +1,12 @@
 # Agente Vita experimental — STT/2
 
-Revisión 0.5: [control temporal durante suspensión](../docs/suspend-deadlines.md), pendiente de prueba física. Añade RTC al presupuesto, comprueba el plazo antes de transmitir al reanudar, detiene ante reloj no fiable y muestra «Tiempo de limite». No cambia STT/2 ni el significado de uptime_ms. Los resultados anteriores pertenecen a sus versiones indicadas.
+Revisión 0.5: [control temporal durante suspensión](../docs/suspend-deadlines.md), con [prueba física completada](../docs/STT-MON-008-suspend-result.md): 39 s tras suspensión breve y parada por límite total con 181 s mostrados tras suspensión larga. Añade RTC al presupuesto, comprueba el plazo antes de transmitir al reanudar, detiene ante reloj no fiable y muestra «Tiempo de limite». No cambia STT/2 ni el significado de uptime_ms. Los resultados anteriores pertenecen a sus versiones indicadas.
 
 Revisión 0.4: [recuperación automática acotada](../docs/auto-recovery.md). Tras un primer intento detenido, se recibió una sesión completa de 60 muestras con pausa y regreso sin otro Cruz confirmado por el usuario: [resultado físico](../docs/STT-MON-006-auto-result.md). Consulta el estado de red y recrea el socket al volver la conexión o tras fallar un envío; no enciende Wi-Fi ni cambia perfiles. Límites implementados: 30 s sin conexión observada, cinco fallos consecutivos, 180 s y 60 intentos reales. Los tiempos usan reloj del proceso y no se han validado como tiempo de pared durante suspensión.
 
 Revisión 0.3: emite STT/2 con diagnóstico de envío, compatible con el receptor actualizado que también acepta STT/1. Captura el detalle sceNetErrnoLoc, conserva el último fallo mientras la aplicación siga abierta y crea un socket nuevo al pulsar Cruz para otro ensayo. En hardware se recibieron las 60 muestras de una nueva sesión tras un corte Wi-Fi, incluido el error anterior preservado: [resultado](../docs/STT-MON-005-diagnostic-result.md). Se valida recuperación manual; no hay reconexión automática. [Protocolo y límites de entrega de diagnósticos](../docs/monitor-protocol.md).
 
-Aplicación independiente experimental. La versión 0.1 completó un primer ensayo físico con 60 muestras y salida por START confirmada: [resultado](../docs/STT-MON-001-hardware-result.md). En 0.2, el usuario confirmó texto mayor, desaparición del parpadeo y parada con Círculo tras recibir diez muestras: [resultado](../docs/STT-MON-003-stop-result.md). Siguen pendientes un ensayo completo de 60 muestras en 0.2, desconexión y suspensión.
+Aplicación independiente experimental. La versión 0.1 completó un primer ensayo físico con 60 muestras y salida por START confirmada: [resultado](../docs/STT-MON-001-hardware-result.md). En 0.2, el usuario confirmó texto mayor, desaparición del parpadeo y parada con Círculo tras recibir diez muestras: [resultado](../docs/STT-MON-003-stop-result.md). El ensayo completo de 60 muestras de 0.2 no quedó validado. Los resultados posteriores de desconexión y suspensión se describen por versión; no acreditan retrospectivamente 0.2.
 
 ## Funciones del código
 
@@ -18,7 +18,7 @@ Aplicación independiente experimental. La versión 0.1 completó un primer ensa
 - source=vita, sesión basada en tick RTC e inicio monotónico, secuencia de intentos, tiempo transcurrido del proceso y batería por API. Batería fuera de rango se codifica como null. La sesión es un identificador práctico, no criptográfico.
 - Cierre de socket, memoria y módulo NET. Sin cambios de frecuencias, firmware, plugins, lectura de otros procesos o escrituras de archivos.
 
-Usa la conexión Wi-Fi existente, sin configurar perfiles. La recuperación 0.4 requiere validación real, especialmente tras suspensión; no monitoriza otros juegos. El corte Wi-Fi en 0.2 no recuperó recepción en el PC: [resultado](../docs/STT-MON-004-wifi-result.md).
+Usa la conexión Wi-Fi existente, sin configurar perfiles. La recuperación automática 0.4 se observó en la repetición documentada, y 0.5 validó la parada por límite total tras suspensión. Siguen pendientes físicos el límite de 30 s sin red durante suspensión y los fallos/retrocesos del reloj; esas rutas tienen pruebas automatizadas. No monitoriza otros juegos. El corte Wi-Fi en 0.2 no recuperó recepción en el PC: [resultado](../docs/STT-MON-004-wifi-result.md).
 
 ## Compilación sin consola
 
@@ -32,9 +32,11 @@ docker run --rm -v "$PWD:/workspace" vitasdk/vitasdk:2026.08-20260815 sh -c 'cma
 
 CI fija el digest sha256:7f5eee50ff95b73c8c847dbfef6227aa0035886444b4d0254c21da8369ff1efc, observado en el primer build correcto. Para usar exactamente la misma imagen localmente, añadir ese digest a la etiqueta del comando anterior. El runner y las acciones también pueden cambiar; no se afirma reproducibilidad bit a bit. Identificador de desarrollo STTM00001: verificar que no colisiona con una aplicación instalada antes de una futura instalación.
 
-## Prueba física pendiente
+## Estado de las pruebas físicas
 
-Se requiere autorización adicional antes de transferir o instalar. Revisar paquete y hash, confirmar identificador libre e IP del receptor. Después comprobar inicio/salida, ausencia de envíos antes de CROSS, máximo de muestras, batería, desconexión y errores.
+La instalación y apertura de 0.5 están confirmadas por el usuario. Las pruebas de suspensión breve y parada por límite total, las observaciones del PC y sus límites constan en el [resultado 0.5](../docs/STT-MON-008-suspend-result.md). Los resultados anteriores están enlazados por versión arriba; no implican que todas las rutas se hayan probado en hardware.
+
+Pendientes físicos: límite de 30 s sin red durante suspensión y fallos/retrocesos de reloj. No se ha medido consumo ni rendimiento sostenido. Este ajuste documental no requiere nuevas transferencias o reinstalación.
 
 Hardware declarado por el usuario: PS Vita 1000, firmware 3.65 HENkaku/ensō, VitaShell y SD2Vita 64 GB. No inspeccionado físicamente.
 

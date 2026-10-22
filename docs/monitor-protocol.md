@@ -1,6 +1,6 @@
 # STT Vita Monitor — arquitectura y STT/1–STT/2
 
-Flujo: emisor simulado (hoy) o aplicación Vita independiente (futuro) → UDP IPv4 → receptor Python en Windows → JSONL. El receptor no envía respuestas ni comandos. No hay descubrimiento automático, administración remota ni lectura de procesos.
+Flujo: emisor simulado STT/1 o aplicación Vita independiente 0.5 STT/2 → UDP IPv4 → receptor Python en Windows → JSONL. El receptor no envía respuestas ni comandos. No hay descubrimiento automático, administración remota ni lectura de procesos.
 
 ## Contrato de transporte
 
@@ -21,9 +21,9 @@ El receptor añade `received_at` (UTC), `peer_ip` y `packet`. UDP puede perder, 
 
 ## Límites y operación
 
-Escucha por defecto en 127.0.0.1. Para una futura prueba Vita habrá que seleccionar explícitamente la IP privada del PC con `--bind` y autorizar primero la prueba física. No abrir puertos en el router ni exponerlo a Internet. STT/1 no tiene cifrado ni autenticación: IP y `source` no prueban identidad. No mandar secretos o datos personales. En una LAN cualquier emisor alcanzable puede inyectar muestras.
+Escucha por defecto en 127.0.0.1. Las pruebas Vita autorizadas seleccionaron explícitamente la IP privada del PC con `--bind`; los resultados se registran por versión en el changelog. No abrir puertos en el router ni exponerlo a Internet. STT/1 no tiene cifrado ni autenticación: IP y `source` no prueban identidad. No mandar secretos o datos personales. En una LAN cualquier emisor alcanzable puede inyectar muestras.
 
-El receptor mantiene memoria acotada y descarga cada registro al archivo. No hay rotación ni límite de almacenamiento automático. `--max-packets` limita muestras válidas; la inactividad cuenta desde la última muestra válida. Los paquetes inválidos no prolongan ese plazo. Los fallos de disco o enlace de socket detienen el proceso con error, salvo datagramas demasiado grandes, que se descartan. No se han medido rendimiento sostenido, consumo Vita ni resistencia a tráfico hostil.
+El receptor mantiene memoria acotada y descarga cada registro al archivo. No hay rotación; el receptor tiene cuota por defecto de 10 MiB por archivo, incluido contenido existente, configurable con `--max-bytes`. Se detiene antes de excederla sin truncar registros. `--max-packets` limita muestras válidas; la inactividad cuenta desde la última muestra válida. Los paquetes inválidos no prolongan ese plazo. `--duration` puede limitar el tiempo total incluso con tráfico continuo. [Límites y estadísticas parciales](monitor-pc-compatibility.md). Los fallos de disco o enlace de socket detienen el proceso con error, salvo datagramas demasiado grandes, que se descartan. No se han medido rendimiento sostenido, consumo Vita ni resistencia a tráfico hostil.
 
 Decisión inicial: 1 muestra/segundo, solo estado del propio agente. FPS, RAM global, temperaturas, trazas del kernel y telemetría de otros juegos quedan fuera del contrato hasta verificar APIs y viabilidad. Una aplicación independiente no demuestra monitorización concurrente de un juego.
 

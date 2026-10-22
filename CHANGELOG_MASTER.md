@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Preparación PR3 tras integración del monitor
+
+- Rama de inventario actualizada sobre mainf199bd0 en copia propia; conflictos deREADME/changelog resueltos conservando evidencias deambosfrentes ydescripciones vigentes. Sin fusión dePR3 enmain.
+- Corregidas referenciasantiguas aagente0.2 yFrontiernoidentificado; código monitor procedeíntegramentedemain,sin modificaciones propias. Pruebas de preparación se registran por separado.
+
 ## 22-10-2026 — Índice deaceptaciones recibido
 
 -PR7 consolidó29aceptaciones:22verificadasdentrodealcance,2negativas,5bloqueadas,snapshothastae8a0c7b.
@@ -205,6 +210,39 @@
 - Actualizados portada, estado consolidado y fichas 01–10 con dependencias y siguientes pasos. Respuestas de Diseño 02/04/07 y contratos propuestos 03/05/08 registrados; no equivalen a inspección independiente ni aprobación de implementación.
 - Conservados originales y trabajo del monitor. Solo documentación, metadatos y código propio en [PR #3](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/3), independiente y sin recursos comerciales. Ninguna instalación, transferencia a Vita ni actividad FTP en este frente.
 - Pendientes: prueba íntegra de 7z, identidad interna accesible, clasificación de contenedores/ejecutables, evidencia primaria Frontier y validación de interfaces. No se demuestra un juego nativo ni adaptación de assets.
+## 2026-10-21 — STT-MON-013 / frontera de anexado
+
+- Fallo reproducido con datos sintéticos en memoria: anexar tras una línea sin LF devolvía una muestra aceptada, pero el JSONL combinado era inválido y no recuperable por el analizador como muestra.
+- CLI comprueba último byte antes de abrir socket; rechaza un archivo no vacío sin LF con error 2 y pide otro destino. Conserva bytes originales; no repara, trunca ni certifica registros anteriores. Admite archivo nuevo, vacío, LF y CRLF. La API de stream requiere frontera válida proporcionada por su llamante.
+- 26 pruebas locales y ensayo de cuota/anexado correctos, incluidos rechazo anterior al socket y archivos sin salto final intactos. CI remota pendiente al publicar. Rama dependiente de PR #18, sin fusión ni acceso a consola.
+
+## 2026-10-21 — STT-MON-012 / cuotas de captura y análisis
+
+- Receptor: cuota total de archivo de 10 MiB por defecto (`--max-bytes`), incluido contenido previo. Escribe registros completos UTF-8/LF o para, sin truncar. Resumen visible con causa, bytes añadidos y datagrama válido no guardado si no cabía.
+- Analizador: máximos por defecto de 1000 sesiones y 100000 secuencias únicas globales; CLI con lectura por línea acotada a 4096 bytes. Al exceder estado, informe parcial explícito con causa y conteos exactos para el prefijo incluido. No afirma bytes RAM medidos ni estadísticas del resto omitido.
+- 25 pruebas locales y ensayos STT/1, diagnóstico conjunto y cuota con tráfico continuo sintético correctos. Archivo temporal con prefijo CRLF preservado, cuota real comprobada y parada sin añadir si ya supera el nuevo límite. CI remota pendiente al publicar.
+- CI de PR #16 ya completa: Monitor tests 39677198707 y Vita agent build 39677198790 correctas. Esta rama depende de #16, sin fusión. Sin consola, FTP, originales ni banco.
+
+## 2026-10-21 — STT-MON-011 / validación conjunta y duración PC
+
+- Ensayo sintético reproducible de dos procesos para vista en directo y análisis: STT/2, reinicio con error histórico, duplicado/desorden, entrada inválida/truncada, salto/retroceso de reloj PC y cierre limpio. Incorporado a CI; no representa una prueba física.
+- Limitación localizada: un flujo continuo válido podía mantener abierta una captura sin límite de muestras. Nueva opción PC `--duration`, independiente del tráfico y de los plazos de Vita; conserva el comportamiento por defecto.
+- 20 pruebas locales correctas, incluido límite total con tráfico válido e inválido continuo, y ensayo conjunto correcto. CI remota pendiente al publicar. [Matriz de compatibilidad y límites](docs/monitor-pc-compatibility.md).
+- Dependencia explícita PR #14, a su vez basada en #13; sin fusión automática. Sin FTP, consola, instalación ni cambios en contratos STT o prototipos.
+
+## 2026-10-21 — STT-MON-010 / intervalos de recepción
+
+- Analizador con resumen temporal por sesión: horas UTC, timestamps no utilizables, retrocesos del reloj PC y mayor intervalo con secuencias/diferencia de uptime. No atribuye causa ni modifica capturas o contratos STT; amplía el JSON de resumen.
+- 19 pruebas locales correctas, incluidas separación de sesiones, zonas horarias, ausencia de timestamp y llegada desordenada. Captura física existente STT-MON-007 reproducida en lectura: 15 muestras y mayor intervalo de 25,892994 s entre secuencias 9–10, frente a 1011 ms de proceso, coincidente con el resultado ya documentado. No es un ensayo físico nuevo. CI remota pendiente al publicar.
+- Rama dependiente de la mejora de recepción en directo de PR #13, sin fusión automática. Sin consola, FTP, reinstalación ni cambios de firewall.
+
+## 2026-10-21 — STT-MON-009 / diagnósticos visibles en el PC
+
+- Receptor con opción `--live`: muestra cada recepción, sesión, secuencia, batería y diagnóstico STT/2; distingue contadores previos y último error conservado, que puede ser histórico. STT/1 se identifica sin diagnóstico.
+- Conserva JSONL, contrato, comportamiento por defecto y recepción sin respuestas. No infiere parada/desconexión del silencio ni modifica el agente Vita 0.5.
+- CI inicial PC falló en el ensayo CLI por mezclar readline y communicate: el aviso de inicio podía quedar en el búfer de texto en Linux. Corregida la prueba para consumir ambos avisos antes de iniciar el emisor; no era un fallo de recepción ni un error transitorio. Nueva validación remota pendiente.
+- Validación local: 16 pruebas correctas y ensayo CLI de diez muestras simuladas con salida en directo. Primer intento dentro del sandbox bloqueó recepción loopback/temporales; repetición fuera del sandbox correcta. CI remota pendiente al publicar. Sin prueba física nueva, FTP ni reinstalación.
+
 ## 2026-10-21 — STT-MON-008 / límite temporal durante suspensión 0.5
 
 - Corrige el control que usaba solo reloj de proceso: [presupuesto conservador proceso+RTC](docs/suspend-deadlines.md), con parada ante lectura fallida/retroceso y protección ante saltos/desbordamientos.

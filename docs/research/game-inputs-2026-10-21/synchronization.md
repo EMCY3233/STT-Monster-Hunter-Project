@@ -245,3 +245,9 @@ Cerradoensayo deestamuestra;reabrir con fuentesemánticanueva,no expandirconvenc
 Avanceposterior comunicado:12lecturas de2rangos sinvariación;traspulsaciónautomáticaA no se confirmóentrada reconocida,pornotanto sinvínculodatos↔acción. Noconcluir ausenciaestadovariable.No repetirlecturas hasta confirmarentrada/estado observable.
 
 Eigent auditoríadocumentalpública permaneceesperando aprobación search_actions(mcp.tool.write);0archivosdesalida, no informefinal. No aprobada ni reintentada. Bloqueoyacomunicadoalusuario;sinrepetiravisosinalterados. Banco/completitudrecibos sin cambios.
+
+## 22-10-2026 — PR3 preparada sobre main integrado
+
+Copiaaislada dePR3 actualizada conmainf199bd07b4e05ee4f7e56ed616840518374f3300;solo conflictosREADME/changelog,ambashistoriasconservadas yreferenciasvigentes corregidas. Código stt_monitor/vita-agent/workflows idénticoamain. No fusión dePR3 enmain.
+
+Validaciónlocaldelárbolpreparado:71/71pruebasPC correctas,CLI10muestras ysmoke_limits correctos(cuotaUTF8/LF,CRLFprevio,intactos,rechazoanexadoincompleto,informeparcial). Tráficoexclusivobuclelocal,sinVita/FTP. CIremota deesta preparaciónpendientedecomprobar.
