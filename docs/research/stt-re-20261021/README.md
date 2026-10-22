@@ -1,5 +1,7 @@
 # STT — Ingeniería inversa y recursos
 
+[Auditoría del índice de relaciones MH4U](resource-relations-audit.md): cero enlaces huérfanos o duplicados; 3.670 referencias con destino ambiguo, sin relaciones semánticas confirmadas.
+
 [NPC e instalaciones de Val Habar](village-interactions-20261022.md): entrada y regreso de Gathering Hall y Your House, lectura del Voucher y caja, movimiento combinado y sincronización con PR #27.
 
 [Lecturas guiadas y catálogo de conversión](guided-reading-catalog.md): estado visible contrastado, 864 lecturas nuevas, 261 entradas MOD/TEX auditadas y verificación ARC reforzada.

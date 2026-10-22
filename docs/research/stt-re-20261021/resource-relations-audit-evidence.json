@@ -1,0 +1,55 @@
+{
+  "resource_rows": 113280,
+  "asset_rows": 59553,
+  "invalid_resource_ids": 0,
+  "empty_resource_paths": 0,
+  "duplicate_resource_ids": 0,
+  "duplicate_asset_hash_rows": 0,
+  "invalid_asset_hash_rows": 0,
+  "resource_rows_missing_asset": 0,
+  "resource_rows_invalid_hash": 0,
+  "distinct_paths": 56081,
+  "repeated_paths": 23716,
+  "paths_with_multiple_contents": 11871,
+  "normalized_paths_with_multiple_contents": 11871,
+  "normalized_alias_groups": 0,
+  "links": {
+    "links": 64420,
+    "source_missing_asset": 0,
+    "source_missing_resource_occurrence": 0,
+    "target_missing_exact_path": 0,
+    "target_missing_normalized_path": 0,
+    "target_exact_multiple_contents": 3670,
+    "target_normalized_multiple_contents": 3670,
+    "self_content_reference_candidates": 1607,
+    "invalid_occurrence_counts": 0,
+    "invalid_semantic_flags": 0,
+    "duplicate_link_groups": 0,
+    "duplicate_link_excess_rows": 0,
+    "normalized_duplicate_link_groups": 0,
+    "normalized_duplicate_link_excess_rows": 0,
+    "distinct_ambiguous_exact_targets": 1730
+  },
+  "match_kind_counts": {
+    "exact_normalized_ascii_path": 64420
+  },
+  "recorded_semantic_flag_counts": {
+    "0": 64420
+  },
+  "distinct_link_sources": 18084,
+  "distinct_link_targets": 33382,
+  "type_name_crc_candidates": 21,
+  "type_name_crc_formula_mismatches": 0,
+  "independently_confirmed_semantic_links": 0,
+  "asset_payloads_opened": 0,
+  "sqlite_integrity_check": [
+    "ok"
+  ],
+  "sqlite_foreign_key_check_rows": 0,
+  "declared_foreign_keys": 0,
+  "index_sha256_before": "7abc060d796c70ea591351171646375ae23fa2896bce8915be50b7d995802ad0",
+  "index_sha256_after": "7abc060d796c70ea591351171646375ae23fa2896bce8915be50b7d995802ad0",
+  "index_unchanged": true,
+  "read_only": true,
+  "semantics_note": "Path and CRC matches are candidates. Stored semantic flags are not independently verified by this audit."
+}
