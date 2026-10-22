@@ -18,7 +18,7 @@ def analyze(records):
     results=[]
     for (source,session,mode,raster,ceiling,target),packets in groups.items():
         trial=re.fullmatch(r'vita-0019-f(30|45)-[0-9a-f]+',session)
-        roof_trial=re.fullmatch(r'vita-(0020|0021|0022|0023)-f(30|45)-c([012])-[0-9a-f]+',session)
+        roof_trial=re.fullmatch(r'vita-(0020|0021|0022)-f(30|45)-c([012])-[0-9a-f]+',session)
         f=[p['perf'] for p in packets];frames=sum(p['frames'] for p in f)
         seconds=sum(p['window_us'] for p in f)/1e6
         avg=lambda k: sum(p[k]*p['frames'] for p in f)/frames
