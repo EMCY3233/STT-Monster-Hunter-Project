@@ -181,8 +181,11 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  uint64_t phase=mark();memset(&profile,0,sizeof profile);
  fb=pixels;zb=depth;memset(zb,0,sizeof(float)*STT_WIDTH*STT_HEIGHT);
  for(int y=0;y<STT_HEIGHT;y++)for(int x=0;x<STT_WIDTH;x++)fb[y*STT_PITCH+x]=RGB(18+y/12,27+y/10,47+y/8);
- float hx=c->hunter.x_mm*.001f,hz=c->hunter.z_mm*.001f,sy=sinf(cam.yaw),cy=cosf(cam.yaw),sp=sinf(cam.pitch),cp=cosf(cam.pitch);
- eye=(V){hx-sy*6*cp,1.1f+sp*6,hz-cy*6*cp};right=(V){cy,0,-sy};forward=(V){sy*cp,-sp,cy*cp};up=(V){sy*sp,cp,cy*sp};
+ float hx=c->hunter.x_mm*.001f,hz=c->hunter.z_mm*.001f;
+ SttCameraView view;
+ if(!stt_camera_view(cam,c->hunter.x_mm,c->hunter.z_mm,&view))stt_camera_view((SttCamera){.45f,.4f},0,0,&view);
+ eye=(V){view.eye[0],view.eye[1],view.eye[2]};right=(V){view.right[0],view.right[1],view.right[2]};
+ forward=(V){view.forward[0],view.forward[1],view.forward[2]};up=(V){view.up[0],view.up[1],view.up[2]};
  int center_x=(int)floorf(hx/2),center_z=(int)floorf(hz/2);
  profile.clear_us=(unsigned)(mark()-phase);phase=mark();
  if(ground_mode==2)ground_spans(center_x,center_z);
@@ -216,7 +219,7 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
  profile.target_us=(unsigned)(mark()-phase);phase=mark();
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-17 GROUND LAB",RGB(119,223,235));
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-18 CAMERA UP",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
  rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE RIGHT CAMERA CROSS DRAW-ATTACK START EXIT",RGB(238,239,223));
  snprintf(line,sizeof line,"L GROUND R RASTER SELECT NET US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));

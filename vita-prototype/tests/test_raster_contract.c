@@ -46,11 +46,12 @@ int main(void){
  /* Span ground must match the unmodified scanline ground bit for bit. */
  unsigned long compared=0;
  for(unsigned n=0;n<120;n++){
-  float yaw=n*.3926990817f,pitch=.12f+(n%5)*.2325f;
+  float yaw=n*.3926990817f,pitch=STT_CAMERA_MIN_PITCH+(n%5)*.375f;
   float hx=((int)(n%7)-3)*.37f,hz=((int)(n%9)-4)*.43f;
   if(n>=80){hx=n&1?99.37f:-99.37f;hz=n&2?98.71f:-98.71f;}
-  float sy=sinf(yaw),cy=cosf(yaw),sp=sinf(pitch),cp=cosf(pitch);
-  eye=(V){hx-sy*6*cp,1.1f+sp*6,hz-cy*6*cp};right=(V){cy,0,-sy};forward=(V){sy*cp,-sp,cy*cp};up=(V){sy*sp,cp,cy*sp};
+  SttCameraView view;assert(stt_camera_view((SttCamera){yaw,pitch},(int32_t)lroundf(hx*1000),(int32_t)lroundf(hz*1000),&view));
+  eye=(V){view.eye[0],view.eye[1],view.eye[2]};right=(V){view.right[0],view.right[1],view.right[2]};
+  forward=(V){view.forward[0],view.forward[1],view.forward[2]};up=(V){view.up[0],view.up[1],view.up[2]};
   int cx=(int)floorf(hx/2),cz=(int)floorf(hz/2);
   clear(image_a);ground_scanline(cx,cz);memcpy(reference_depth,test_depth,sizeof reference_depth);
   clear(image_b);ground_spans(cx,cz);

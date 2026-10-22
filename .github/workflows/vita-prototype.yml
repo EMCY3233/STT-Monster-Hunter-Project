@@ -42,6 +42,18 @@ jobs:
         run: |
           cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c vita-prototype/tests/test_carry.c -lm -o /tmp/stt-carry
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-carry vita-prototype/assets/hunter-body.pose.json vita-prototype/assets/quaternius-sword.pose.json stt-sheathed.ppm stt-drawing.ppm stt-drawn.ppm stt-sheathing.ppm
+      - name: Upward camera and current hunter mesh clearance
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c vita-prototype/tests/test_camera.c -lm -o /tmp/stt-camera
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-camera vita-prototype/assets/hunter-body.pose.json vita-prototype/assets/quaternius-sword.pose.json stt-camera-up.ppm stt-camera-level.ppm stt-camera-down.ppm > stt-camera-evidence.json
+          cat stt-camera-evidence.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-camera-pc
+          path: |
+            stt-camera-*.ppm
+            stt-camera-evidence.json
+          retention-days: 14
       - uses: actions/upload-artifact@v4
         with:
           name: stt-carry-pc
