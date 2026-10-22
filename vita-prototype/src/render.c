@@ -83,11 +83,11 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  float tx=c->target.x_mm*.001f,tz=c->target.z_mm*.001f;
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-13 CARRY STUDY",RGB(119,223,235));
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-14 INPUT FIX",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
  rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE RIGHT CAMERA CROSS DRAW-ATTACK START EXIT",RGB(238,239,223));
  snprintf(line,sizeof line,"SQUARE SHEATHE  TRI RESET  US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
- if(paused){rect(85,115,310,34,RGB(9,17,27));text(102,128,"RESUMED - RELEASE STICKS AND BUTTONS",RGB(255,234,125));}
+ if(paused){rect(65,110,350,46,RGB(9,17,27));text(78,120,"RELEASE STICKS AND GAME BUTTONS",RGB(255,234,125));text(78,137,"OR PRESS TRIANGLE TO RESET",RGB(255,234,125));}
  if(asset)text(8,36,asset->status==STT_ASSET_READY?"ASSET READY":asset->status==STT_ASSET_MISSING?"ASSET MISSING - SIMPLE HUNTER":"ASSET INVALID - SIMPLE HUNTER",RGB(255,234,125));
  if(equipment){static const char *modes[]={"SHEATHED","DRAWING","DRAWN","SHEATHING"};text(330,36,modes[(unsigned)equipment->mode<=STT_SHEATHING?equipment->mode:0],RGB(255,234,125));}
  if(weapon)text(8,45,weapon->status==STT_ASSET_READY&&equipped?"SWORD READY":"SWORD FALLBACK",RGB(255,234,125));

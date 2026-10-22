@@ -1,6 +1,7 @@
 #include "control.h"
 #include <math.h>
 #define PI 3.14159265358979323846f
+unsigned stt_game_buttons(unsigned raw) { return raw&0x0000ffffu; }
 float stt_axis(unsigned char value) {
     float x=((float)value-127.5f)/127.5f;
     if (fabsf(x)<0.18f) return 0;
@@ -25,7 +26,7 @@ SttMove stt_camera_move(SttCamera c,unsigned char lx,unsigned char ly,uint16_t p
     return m;
 }
 unsigned stt_frame_ticks(uint64_t elapsed,uint64_t *acc) {
-    if(elapsed>100000){*acc=0;return 0;}
+    if(elapsed>100000){elapsed=100000;*acc=0;}
     *acc+=elapsed;unsigned n=(unsigned)(*acc/16667);
     if(n>4){n=4;*acc=0;}else *acc-=n*16667;
     return n;

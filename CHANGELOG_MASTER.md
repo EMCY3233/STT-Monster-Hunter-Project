@@ -1,3 +1,10 @@
+## 2026-10-22 — Prototipo 0.14: bloqueo de reanudación
+
+- Usuario confirma mensaje de reanudación persistente en Vita 0.13. Causa concreta pendiente de nueva prueba física.
+- Fotogramas lentos ya no activan el bloqueo ni detienen la simulación; se limita recuperación a cuatro pasos.
+- Filtrado de bits de auriculares/volumen/sistema en botones de juego. Triángulo permite reiniciar y salir del bloqueo sin disparar ataques pendientes.
+- Regresiones de fotogramas lentos sostenidos y bits de estado.
+
 # 2026-10-22 — Prototipo 0.13
 
 - Estados de equipamiento, anclajes espalda/mano y vaina geométrica propia.

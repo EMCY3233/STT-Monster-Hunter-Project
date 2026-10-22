@@ -44,12 +44,15 @@ int main(void){
   SceCtrlData controls;memset(&controls,0,sizeof controls);
   result=sceCtrlPeekBufferPositive(0,&controls,1);if(result<0)break;
   if(result==0){sceKernelDelayThreadCB(1000);continue;}
-  uint64_t elapsed=frame_start>=previous_time?frame_start-previous_time:100001;previous_time=frame_start;
-  if(resync_requested||elapsed>100000){resync_requested=0;accumulator=0;elapsed=0;previous=controls.buttons;pending_attack=0;pending_toggle=0;need_release=1;dropped++;}
+  controls.buttons=stt_game_buttons(controls.buttons);
+  int clock_reset=frame_start<previous_time;
+  uint64_t elapsed=clock_reset?0:frame_start-previous_time;previous_time=frame_start;
+  if(resync_requested||clock_reset){resync_requested=0;accumulator=0;elapsed=0;previous=controls.buttons;pending_attack=0;pending_toggle=0;need_release=1;dropped++;}
+  if(elapsed>100000)dropped++; /* Slow rendering is not a power/resume event. */
   unsigned pressed=controls.buttons&~previous;previous=controls.buttons;
   if(pressed&SCE_CTRL_START){result=0;break;}
   if(need_release&&controls.buttons==0&&stt_axis(controls.lx)==0&&stt_axis(controls.ly)==0&&stt_axis(controls.rx)==0&&stt_axis(controls.ry)==0)need_release=0;
-  if(pressed&SCE_CTRL_TRIANGLE){stt_combat_init(&combat);stt_equipment_init(&equipment);pending_toggle=0;camera=(SttCamera){.45f,.40f};accumulator=0;pending_attack=0;
+  if(pressed&SCE_CTRL_TRIANGLE){need_release=0;pressed&=~(SCE_CTRL_CROSS|SCE_CTRL_SQUARE);stt_combat_init(&combat);stt_equipment_init(&equipment);pending_toggle=0;camera=(SttCamera){.45f,.40f};accumulator=0;pending_attack=0;
    start=frame_start;seq=0;next_sample=0;memset(&mailbox,0,sizeof mailbox);snprintf(session,sizeof session,"vita-play-%" PRIx64,start);}
   if(!need_release&&(pressed&SCE_CTRL_CROSS))pending_attack=1;
   if(!need_release&&(pressed&SCE_CTRL_SQUARE))pending_toggle=1;
