@@ -34,6 +34,8 @@ int main(void){
  float ceiling[2]={1,2.2f};c=(SttFollowCamera){0};angles=(SttCamera){0,1.05f};assert(stt_follow_step(&c,&cfg,angles,p,.1f,1,plane,ceiling,&v));assert(v.collision&&v.view.eye[1]<2.0f);
  c=(SttFollowCamera){0};angles=(SttCamera){0,0};assert(stt_follow_step(&c,&cfg,angles,p,.01f,1,NULL,NULL,&v));angles.yaw=3.14159265359f;
  assert(stt_follow_step(&c,&cfg,angles,p,.1f,0,NULL,NULL,&v));assert(hypotf(v.view.eye[0],v.view.eye[2])>=STT_CAMERA_MIN_BOOM-.001f);
+ c=(SttFollowCamera){0};angles.yaw=0;assert(stt_follow_step(&c,&cfg,angles,p,.01f,1,clear,NULL,&v));angles.yaw=3.14159265359f;
+ assert(stt_follow_step(&c,&cfg,angles,p,.1f,0,clear,NULL,&v));assert(hypotf(v.view.eye[0],v.view.eye[2])>=STT_CAMERA_MIN_BOOM-.001f);
  p[0]=100;p[1]=8;p[2]=9;assert(stt_follow_step(&c,&cfg,angles,p,1,1,NULL,NULL,&v));assert(v.dt_used==.1f&&fabsf(v.focus[1]-9.1f)<1e-5f);
  SttFollowCamera before=c;assert(!stt_follow_step(&c,&cfg,angles,p,.01f,0,invalid,NULL,&v));assert(!memcmp(&before,&c,sizeof c));
  p[0]=NAN;assert(!stt_follow_step(&c,&cfg,angles,p,.01f,0,NULL,NULL,&v));p[0]=0;assert(!stt_follow_step(&c,&cfg,angles,p,0,0,NULL,NULL,&v));

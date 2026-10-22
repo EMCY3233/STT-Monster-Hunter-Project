@@ -41,8 +41,14 @@ int stt_follow_step(SttFollowCamera *state,const SttFollowConfig *c,SttCamera an
  /* Smooth recovery may cut the orbit inside the hunter on a large recenter.
     Without world constraints, snap to the safe boom rather than enter it. */
  float dx=v.view.eye[0]-hunter[0],dz=v.view.eye[2]-hunter[2];
- if(!sweep&&(dx*dx+dz*dz<STT_CAMERA_MIN_BOOM*STT_CAMERA_MIN_BOOM||v.view.eye[1]<hunter[1]+c->min_height))memcpy(v.view.eye,safe,sizeof safe);
- v.distance=distance(v.view.eye,v.focus);v.framing_compromised=v.distance<STT_CAMERA_MIN_BOOM||v.distance<c->radius*2;
+ if(dx*dx+dz*dz<STT_CAMERA_MIN_BOOM*STT_CAMERA_MIN_BOOM||v.view.eye[1]<hunter[1]+c->min_height){
+  float cut[3];memcpy(cut,safe,sizeof cut);
+  if(sweep&&state->ready&&!snap&&!constrain(c,sweep,context,state->eye,cut,&v.collision))return 0;
+  /* A body-avoiding cut is allowed only when the world sweep permits it. */
+  if(!sweep||distance(cut,safe)<1e-6f)memcpy(v.view.eye,safe,sizeof safe);
+ }
+ dx=v.view.eye[0]-hunter[0];dz=v.view.eye[2]-hunter[2];
+ v.distance=distance(v.view.eye,v.focus);v.framing_compromised=v.distance<STT_CAMERA_MIN_BOOM||v.distance<c->radius*2||dx*dx+dz*dz<STT_CAMERA_MIN_BOOM*STT_CAMERA_MIN_BOOM;
  for(unsigned i=0;i<3;i++)v.view.forward[i]=v.distance>1e-7f?(v.focus[i]-v.view.eye[i])/v.distance:-direction[i];
  /* Existing renderer convention: +Z forward has +X screen-right. The Python
     reference's cross(forward,Y) has the opposite handedness; do not port it. */
