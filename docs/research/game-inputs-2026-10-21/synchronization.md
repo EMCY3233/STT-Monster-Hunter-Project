@@ -275,3 +275,9 @@ PropietarioPR7 entrega864lecturasnuevas/0errores enaldea;dinero ysaludcontrastad
 Cierreprevio:unamallalocalOBJ16vértices/6triángulos y2texturasPNG contransparencia,8pruebas ycontrasteotrolectorsegúnpropietario. Derivadoscomerciales soloanalysis-local,noGit/adaptación. Sinmaterialesenlazados/rig/animación/personajecompleto. Ampliacióncatálogo:19modelosúnicospasanconversión deprueba,92texturasúnicasconcabecerascompatibles;noafirmar92imágenesfieles o19modelosfuncionales.4tests nuevos/10regresióncomunicados. Banco físicohistórico noincrementadoautomáticamente.
 
 SinoperacionesVita/FTP desdecentral;no repetirconversiones ni ligartextura/modeloporcercaníanombre. Reutilizacióncomercial mantiene bloqueoactivoslegales. ResultadosatribuidosaPR7,noensayosrepetidosaquí.
+
+## 22-10-2026 — Diálogo observable y enlace de materiales independiente
+
+Propietario investigación informa diálogoGuildmarm/avance de texto observados conlecturadememoria simultánea;noestado de diálogo identificado,sinmisióniniciada. Registro local,no repetirensayo desdecentral.
+
+GitHubverificaPR27 abierta/sinfusionar,head4251cd6ef58a8011d8b26171005dedbd9c8bcaca,títuloverbatim«MHXX 3DS: add verified material linkage evidence probe». Su propietario declara analizadorlecturaMOD230/MRL32/TEX:51modelos,99coincidenciasCRCcomplementadoMRLmisma ruta,91referenciastextualesexactasTEX;6pruebassintéticas yhashesprevios cotejados. CRCeshipótesisdeidentificación,no semánticashader/materialcompleto. Slots/asignacionesenMRLmúltiplespendientes;sinrecursoscomercialespublicados. NuevaPRindependientedePR7,noseedita ni fusionadesdecentral. [PR27](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/27).

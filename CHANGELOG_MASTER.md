@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Diálogo yvínculosdemateriales
+
+-Investigaciónconfirmadiálogo/avanceGuildmarmconlecturasimultánea,noestadosemánticoidentificado.
+-PR27abierta:analizadorMOD/MRL/TEX,6testsdelpropietario;CRCcomohipótesis,asignacionesmaterialpendientes.
+
 ## 22-10-2026 — Contrastevisualacotado yderivadosdeanálisis
 
 -PR7:864lecturassinerror,dinero/saludcontrastadosenaldea,resistenciahipotética.
