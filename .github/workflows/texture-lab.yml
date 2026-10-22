@@ -1,0 +1,57 @@
+name: Vita GPU texture lab
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  scene-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python texture-lab/fixtures.py /tmp/texture-fixture
+          cc -std=c99 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ivita-prototype/src texture-lab/scene.c texture-lab/test_scene.c -lm -o /tmp/texture-tests
+          /tmp/texture-tests /tmp/texture-fixture/valid.bin /tmp/texture-fixture/truncated.bin /tmp/texture-fixture/trailing.bin /tmp/texture-fixture/count.bin /tmp/texture-fixture/index.bin /tmp/texture-fixture/nonfinite.bin /tmp/texture-fixture/uv.bin /tmp/texture-fixture/dimension.bin
+  build:
+    runs-on: ubuntu-latest
+    container: vitasdk/vitasdk:2026.08-20260815@sha256:7f5eee50ff95b73c8c847dbfef6227aa0035886444b4d0254c21da8369ff1efc
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          cmake -S texture-lab -B build/texture
+          cmake --build build/texture --parallel 2
+          sha256sum build/texture/stt_vita_prototype.vpk > build/texture/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-vita-texture-STTP00001
+          path: |
+            build/texture/stt_vita_prototype.vpk
+            build/texture/SHA256SUMS
+          retention-days: 14
+  package:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: stt-vita-texture-STTP00001
+          path: build/package
+      - run: python texture-lab/inspect_package.py build/package
+  windows-review:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - shell: pwsh
+        run: |
+          $sttCompiler = @('C:/mingw64/bin/gcc.exe','C:/msys64/mingw64/bin/gcc.exe') | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+          if (-not $sttCompiler) { $sttCompiler = (Get-Command gcc.exe -ErrorAction Stop).Source }
+          & $sttCompiler -std=c99 -O2 -Wall -Wextra -Werror -Ivita-prototype/src texture-lab/scene.c texture-lab/test_scene.c -static -lm -o stt-texture-review.exe
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-texture-review-windows
+          path: stt-texture-review.exe
+          retention-days: 14

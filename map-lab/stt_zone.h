@@ -11,5 +11,6 @@ void stt_zone_position(float out[3]);
 float stt_zone_yaw(void);
 float stt_zone_slope(void);
 unsigned stt_zone_contact(void);
+unsigned stt_zone_phase(void);
 unsigned stt_zone_emit(int hunter,SttZoneTriangle callback,void *context);
 #endif

@@ -7,6 +7,9 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef STT_BUILD_CODE
+#define STT_BUILD_CODE "0021"
+#endif
 void stt_monitor_init(SttPrototypeMonitor *m){memset(m,0,sizeof *m);m->socket=-1;}
 void stt_monitor_close(SttPrototypeMonitor *m){
  if(m->socket>=0)sceNetSocketClose(m->socket);
@@ -49,7 +52,7 @@ void stt_monitor_frame(SttPrototypeMonitor *m,const char *session,uint64_t now,u
  if(!m->active)return;
  if(now<m->started||now-m->started>=180000000ULL){stt_monitor_close(m);return;}
  if(m->last_target!=target_fps||m->last_ceiling!=ceiling_mode){
-  m->last_target=target_fps;m->last_ceiling=ceiling_mode;snprintf(m->session,sizeof m->session,"vita-0021-f%u-c%u-%"PRIx64,target_fps,ceiling_mode,now);
+  m->last_target=target_fps;m->last_ceiling=ceiling_mode;snprintf(m->session,sizeof m->session,"vita-" STT_BUILD_CODE "-f%u-c%u-%"PRIx64,target_fps,ceiling_mode,now);
   /* New session per target: retain safety timeout and cumulative send counters. */
   m->seq=0;m->last_ground=3;
  }
