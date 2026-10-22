@@ -114,3 +114,47 @@ no las certifica. No interpreta modelos, texturas, animaciones o lógica MH4U.
 Fuentes y búsqueda en plataformas: RESEARCH.md. Implementación propia basada
 en el formato; no se copiaron implementaciones ni se añadieron dependencias de
 CTRTool, GodMode9, libctru o REA.
+
+## Firmas embebidas y recursos MH4U
+
+    stt-inspect imagen.cci --inspect-signatures
+    stt-inspect imagen.cci --inspect-resources --inspect-signatures
+
+--inspect-signatures comprueba únicamente la firma RSA-2048/PKCS#1 v1.5 SHA-256
+de la cabecera CXI (bytes 0x100..0x1ff), usando el módulo público embebido en su
+AccessDesc y el perfil de exponente 65537. No incorpora ni exporta claves.
+Resultado valid_with_embedded_key significa coherencia matemática con ese módulo
+no confiado, no autenticidad. invalid_with_embedded_key informa discrepancia.
+CFA, exheader cifrado o módulo no admitido se marcan explícitamente sin comprobar.
+No se verifican firmas NCSD/AccessDesc ni cadena de confianza; se informa
+not_checked_no_trust_anchor. El retorno 0 sigue significando inspección realizada,
+también si el estado de una firma es invalid_with_embedded_key.
+
+Windows usa BCrypt RSA y Linux OpenSSL BIGNUM para la operación pública y
+comprobación completa de la codificación PKCS#1. Las pruebas generan pares RSA
+sintéticos efímeros en memoria; no hay claves de prueba persistidas ni se firman
+datos comerciales.
+
+--inspect-resources incluye --verify-romfs-index y examina por magic los archivos
+RomFS en claro. ARC v19: cabecera de 12 bytes, tabla de registros de 80 bytes,
+tipo declarado y rangos de cargas comprimidas, sin solapamientos o datos fuera
+del archivo. No descomprime ni verifica las cargas zlib. Presupuesto: 32.768
+entradas por ARC, 2.000.000 en total por partición y 4.096 tipos distintos.
+ARC de otra versión se identifica como no soportado, sin reinterpretarlo.
+
+TEX A5: valida la cabecera de 16 bytes y campos no nulos de dimensiones/mips/
+texturas; no valida offsets de píxeles, niveles o datos, ni convierte imágenes.
+Los códigos de tipo de ARC se reportan sin confirmar su semántica. No se leen
+modelos o animaciones dentro de las cargas comprimidas.
+
+La imagen privada contiene 10.592 ARC19, 112.427 entradas y 150 cabeceras TEX A5
+en la partición principal; tablas y rangos dentro del alcance comprobados.
+La firma de su cabecera principal no coincide con el módulo embebido; la
+referencia Python independiente confirma ese resultado. No se atribuye una causa
+ni se certifica autenticidad. Los hashes internos de la imagen siguen coherentes.
+
+Esta ampliación no modifica el extractor ARC17/MHXX de PR #7.
+La versión y los resultados de ARC19/MH4U se mantienen separados.
+Suite local ampliada a 60 pruebas, con RSA efímero válido/alterado/fuera de módulo,
+perfiles omitidos, ARC19 fuera de rango/truncado y TEX inválido/truncado.
+Fuentes y límites de estas comprobaciones: RESEARCH.md.

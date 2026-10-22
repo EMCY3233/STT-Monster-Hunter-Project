@@ -1,4 +1,6 @@
 import hashlib
+import secrets
+import math
 import pathlib
 import struct
 import subprocess
@@ -157,6 +159,58 @@ def indexed_image(names=(), filename="a", buckets=3):
 def rehash_index_image(b):
     n=struct.unpack_from("<Q",b,512+0x44)[0]
     return integrity_image(n,b[1024:1024+n])
+
+
+_EPHEMERAL_RSA=None
+def synthetic_rsa():
+    global _EPHEMERAL_RSA
+    if _EPHEMERAL_RSA:return _EPHEMERAL_RSA
+    def probable_prime(n):
+        small=[2,3,5,7,11,13,17,19,23,29,31,37]
+        if any(n%p==0 for p in small):return False
+        d=n-1;s=0
+        while d%2==0:s+=1;d//=2
+        for a in small:
+            x=pow(a,d,n)
+            if x in (1,n-1):continue
+            for _ in range(s-1):
+                x=x*x%n
+                if x==n-1:break
+            else:return False
+        return True
+    def prime():
+        while True:
+            n=secrets.randbits(1024)|(1<<1023)|1
+            if math.gcd(n-1,65537)==1 and probable_prime(n):return n
+    while True:
+        p,q=prime(),prime()
+        n=p*q
+        if p!=q and n.bit_length()==2048:break
+    _EPHEMERAL_RSA=(n,pow(65537,-1,(p-1)*(q-1)))
+    return _EPHEMERAL_RSA
+def signed_synthetic_image():
+    n,d=synthetic_rsa()
+    b=bytearray(4096);b[256:260]=b"NCCH"
+    put(b,0x104,8);put(b,0x180,0x400);b[0x18f]=4;b[0x18d]=2
+    b[0x700:0x800]=n.to_bytes(256,"big")
+    em=bytes.fromhex("0001"+"ff"*202+"00"+"3031300d060960864801650304020105000420")+hashlib.sha256(b[256:512]).digest()
+    b[:256]=pow(int.from_bytes(em,"big"),d,n).to_bytes(256,"big")
+    return b
+def resource_image(payload):
+    b=indexed_image()
+    lvsize=struct.unpack_from("<Q",b,512+0x44)[0]
+    lv=bytearray(b[1024:1024+lvsize])
+    fm=struct.unpack_from("<I",lv,28)[0]
+    data=struct.unpack_from("<I",lv,36)[0]
+    if data+len(payload)>len(lv):lv+=bytes((data+len(payload)+511)//512*512-len(lv))
+    struct.pack_into("<Q",lv,fm+16,len(payload))
+    lv[data:data+len(payload)]=payload
+    return integrity_image(len(lv),lv)
+def arc19():
+    b=bytearray(100)
+    b[:4]=b"ARC"+bytes(1);struct.pack_into("<HH",b,4,19,1)
+    b[12:16]=b"test";struct.pack_into("<4I",b,76,123,8,10,92)
+    return b
 
 class Inspector(unittest.TestCase):
     def run_image(self, b, valid=True, options=()):
@@ -403,6 +457,56 @@ class Inspector(unittest.TestCase):
     def test_romfs_index_encrypted_skip(self):
         b=indexed_image(); b[0x18f]=0
         self.assertIn("romfs_index=skipped_encrypted",self.run_image(b,options=("--verify-romfs-index",)))
+
+
+    def test_signature_valid_embedded_untrusted(self):
+        out=self.run_image(signed_synthetic_image(),options=("--inspect-signatures",))
+        self.assertIn("ncch_header_signature=valid_with_embedded_key",out)
+        self.assertIn("trust=not_established",out)
+    def test_signature_invalid(self):
+        b=signed_synthetic_image();b[0x120]^=1
+        self.assertIn("ncch_header_signature=invalid_with_embedded_key",
+                      self.run_image(b,options=("--inspect-signatures",)))
+    def test_signature_invalid_signature_bytes(self):
+        b=signed_synthetic_image();b[0]^=1
+        self.assertIn("ncch_header_signature=invalid_with_embedded_key",
+                      self.run_image(b,options=("--inspect-signatures",)))
+    def test_signature_invalid_modulus(self):
+        b=signed_synthetic_image();b[0x700:0x800]=bytes(256)
+        self.assertIn("not_checked_invalid_embedded_modulus",
+                      self.run_image(b,options=("--inspect-signatures",)))
+    def test_signature_skip_profiles(self):
+        self.assertIn("not_checked_no_embedded_key",self.run_image(ncch(),options=("--inspect-signatures",)))
+        b=signed_synthetic_image();b[0x18f]=0
+        self.assertIn("not_checked_encrypted_exheader",self.run_image(b,options=("--inspect-signatures",)))
+    def test_resource_arc19(self):
+        out=self.run_image(resource_image(arc19()),options=("--inspect-resources",))
+        self.assertIn("arc=1 arc19_entries=1",out)
+        self.assertIn("arc_version=19 files=1",out)
+    def test_resource_arc19_ranges(self):
+        for p,v in [(80,99),(88,11),(88,1000)]:
+            b=arc19();put(b,p,v)
+            self.run_image(resource_image(b),False,("--inspect-resources",))
+    def test_resource_arc_table_truncated(self):
+        self.run_image(resource_image(arc19()[:80]),False,("--inspect-resources",))
+    def test_resource_arc_unsupported(self):
+        b=arc19();struct.pack_into("<H",b,4,17)
+        out=self.run_image(resource_image(b),options=("--inspect-resources",))
+        self.assertIn("unsupported=1",out)
+    def test_resource_tex_header(self):
+        b=bytearray(16);b[:4]=b"TEX"+bytes(1)
+        put(b,4,165);put(b,8,1|(16<<6)|(32<<19));b[12]=1
+        self.assertIn("tex=1",self.run_image(resource_image(b),options=("--inspect-resources",)))
+        put(b,8,1)
+        self.run_image(resource_image(b),False,("--inspect-resources",))
+    def test_resource_truncated_magic(self):
+        for payload in [b"ARC"+bytes(1),b"TEX"+bytes(1)]:
+            self.run_image(resource_image(payload),False,("--inspect-resources",))
+
+    def test_signature_outside_modulus(self):
+        b=signed_synthetic_image();b[:256]=bytes([255])*256
+        self.assertIn("ncch_header_signature=invalid_with_embedded_key",
+                      self.run_image(b,options=("--inspect-signatures",)))
 
     def test_usage(self):
         self.assertEqual(subprocess.run([EXE],capture_output=True).returncode,2)

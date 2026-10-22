@@ -1,6 +1,8 @@
 #include <array>
 #include <algorithm>
 #include <cstdint>
+#include <cstring>
+#include <memory>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -17,6 +19,7 @@
 #include <bcrypt.h>
 #else
 #include <openssl/evp.h>
+#include <openssl/bn.h>
 #endif
 using U = std::uint64_t;
 using Header = std::array<unsigned char,512>;
@@ -128,7 +131,7 @@ void verify_ivfc(Reader& r,U base,U size,std::ostream& out) {
         }
         out<<"ivfc_level="<<i+1<<" hash=verified blocks="<<count<<" block_bytes="<<block[i]<<"\n";
     }
-    out<<"ivfc_tree=verified levels=3 blocks="<<budget<<" signatures=not_verified\n";
+    out<<"ivfc_tree=verified levels=3 blocks="<<budget<<" authenticity=not_established\n";
 }
 void verify_exefs(Reader& r,U base,U size,std::ostream& out) {
     require(size>=512,"short ExeFS"); auto h=r.header(base);
@@ -155,12 +158,13 @@ void verify_exefs(Reader& r,U base,U size,std::ostream& out) {
     out<<"exefs_files=verified count="<<count<<"\n";
 }
 
-struct Options { bool verify=false, list=false, integrity=false, index=false; };
+struct Options { bool verify=false, list=false, integrity=false, index=false, signatures=false, resources=false; };
 U rawle(const std::vector<unsigned char>& b,U p,size_t n=4) {
     range(p,n,b.size()); U v=0;
     for(size_t i=0;i<n;++i) v|=U(b[static_cast<size_t>(p)+i])<<(8*i);
     return v;
 }
+#include "signature_resource.hpp"
 struct Node { U parent,next,child,file,offset,size,hashNext; std::uint32_t pathHash; std::string name; };
 std::string name16(const std::vector<unsigned char>& b,U p,U n) {
     require(n%2==0 && n<=1024,"invalid RomFS name length"); range(p,n,b.size());
@@ -200,7 +204,7 @@ void verify_buckets(Reader& r,U base,U offset,U size,const std::map<U,Node>& nod
        <<" used="<<used<<" entries="<<seen.size()<<" max_chain="<<maxChain<<"\n";
 }
 
-void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false,bool printFiles=true,bool verifyIndex=false) {
+void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false,bool printFiles=true,bool verifyIndex=false,bool resources=false) {
     require(size>=0x60,"short IVFC"); Header iv{}; r.read(base,iv.data(),0x60);
     require(std::equal(iv.begin(),iv.begin()+4,"IVFC") && le(iv,4)==0x10000,"unsupported IVFC");
     U exponent=le(iv,0x4c); require(exponent>=9 && exponent<=20,"unsupported IVFC block size");
@@ -249,7 +253,7 @@ void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false,boo
     struct Work { U id,parent,depth; std::string path; };
     std::vector<Work> pending{{0,0,0,""}};
     std::set<U> seenDirs,seenFiles;
-    U total=0,reportBytes=0,pendingBytes=0;
+    U total=0,reportBytes=0,pendingBytes=0; ResourceStats resourceStats;
     while(!pending.empty()) {
         auto w=pending.back(); pending.pop_back(); pendingBytes-=w.path.size();
         require(w.depth<=128 && w.path.size()<=8192,"RomFS path budget exceeded");
@@ -265,6 +269,7 @@ void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false,boo
             require(total<=std::numeric_limits<U>::max()-file.size,"RomFS total overflow"); total+=file.size;
             reportBytes+=w.path.size()+file.name.size()+128;
             require(reportBytes<=32*1024*1024,"RomFS report budget exceeded");
+            if(resources) inspect_resource(r,base+start+data+file.offset,file.size,resourceStats);
             if(printFiles) out<<"romfs_file path=\""<<w.path<<"/"<<file.name<<"\" size="<<file.size
                <<" absolute_offset="<<base+start+data+file.offset<<"\n";
             f=file.next;
@@ -282,6 +287,7 @@ void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false,boo
         }
     }
     require(seenDirs.size()==dn.size() && seenFiles.size()==fn.size(),"unreachable RomFS metadata");
+    if(resources) resource_report(resourceStats,out);
     out<<"romfs_summary directories="<<dn.size()<<" files="<<fn.size()<<" file_bytes="<<total
        <<" ivfc_tree="<<(treeVerified?"verified":"not_verified")<<" hash_buckets="<<(verifyIndex?"verified":"not_verified")<<"\n";
 }
@@ -309,6 +315,7 @@ void ncch(Reader& r,U base,U available,std::ostream& out,const Options& options)
     std::vector<Range> regions{{0,512}};
     U ex=le(h,0x180);
     if(ex) { require(ex==0x400,"unsupported extended header size"); range(512,0x800,size); regions.push_back({512,0x800}); }
+    if(options.signatures) inspect_signature(r,base,h,encrypted,ex,out);
     const char* names[]={"plain","logo","exefs","romfs"};
     const size_t fields[]={0x190,0x198,0x1a0,0x1b0};
     for(size_t i=0;i<4;++i) {
@@ -324,7 +331,7 @@ void ncch(Reader& r,U base,U available,std::ostream& out,const Options& options)
        <<"exefs_sha256_stored="<<hex(h.data()+0x1c0,32)<<"\n"
        <<"romfs_sha256_stored="<<hex(h.data()+0x1e0,32)<<"\n"
        <<"stored_hashes="<<(options.verify?"reported comparisons=per_region":"reported_only")
-       <<" signatures=not_verified\n";
+       <<" signatures="<<(options.signatures?"per_partition":"not_verified")<<"\n";
     if(options.verify) {
         U logo=scale(le(h,0x19c),exp);
         verify_region(r,base+scale(le(h,0x198),exp),logo,h,0x130,"logo",out);
@@ -351,21 +358,23 @@ void ncch(Reader& r,U base,U available,std::ostream& out,const Options& options)
             }
         }
     }
-    if((options.list || options.index) && le(h,0x1b4)) {
+    if((options.list || options.index || options.resources) && le(h,0x1b4)) {
         if(encrypted) out<<(options.index?"romfs_index":"romfs_listing")<<"=skipped_encrypted\n";
-        else romfs(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b4),exp),out,options.integrity,options.list,options.index);
+        else romfs(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b4),exp),out,options.integrity,options.list,options.index,options.resources);
     }
 
 }
 int main(int argc,char** argv) {
     Options options;
-    if(argc<2) { std::cerr<<"usage: stt-inspect input [--verify] [--list-romfs] [--verify-integrity] [--verify-romfs-index]\n"; return 2; }
+    if(argc<2) { std::cerr<<"usage: stt-inspect input [--verify] [--list-romfs] [--verify-integrity] [--verify-romfs-index] [--inspect-signatures] [--inspect-resources]\n"; return 2; }
     for(int i=2;i<argc;++i) {
         std::string arg=argv[i];
         if(arg=="--verify") options.verify=true;
         else if(arg=="--list-romfs") options.list=true;
         else if(arg=="--verify-integrity") { options.integrity=true; options.verify=true; }
         else if(arg=="--verify-romfs-index") { options.index=true; options.integrity=true; options.verify=true; }
+        else if(arg=="--inspect-signatures") options.signatures=true;
+        else if(arg=="--inspect-resources") { options.resources=true; options.index=true; options.integrity=true; options.verify=true; }
         else { std::cerr<<"unknown option\n"; return 2; }
     }
     try {
@@ -378,6 +387,7 @@ int main(int argc,char** argv) {
             report<<"NCSD declared_size="<<declared<<" actual_size="<<r.size
                   <<" trimmed="<<(r.size<declared)<<" flags="<<hex(h.data()+0x188,8)<<"\n";
             require(r.size<=declared,"file exceeds declared NCSD size");
+            if(options.signatures) report<<"ncsd_signature=not_checked_no_trust_anchor authenticity=not_established\n";
             std::vector<Range> parts;
             for(size_t i=0;i<8;++i) {
                 U off=scale(le(h,0x120+i*8),h[0x18e]),len=scale(le(h,0x124+i*8),h[0x18e]);

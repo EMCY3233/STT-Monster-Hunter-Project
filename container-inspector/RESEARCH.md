@@ -74,3 +74,36 @@ el rechazo comprueba la semántica de buckets y no solo la integridad de bytes.
 También se prueba una cadena válida con colisiones, raíz, árbol anidado, tabla
 de archivos vacía, nombres con unidades UTF-16 fuera de ASCII y no mostrar
 nombres de archivos cuando solo se verifica el índice.
+
+## Firmas y recursos MH4U
+
+Fuentes primarias adicionales:
+- NCCH/exheader y límites de confianza:
+  https://docs.mikage.app/NCCH/
+  https://docs.mikage.app/NCCH/Extended_Header/
+- Perfil RSA público, exponente 01 00 01 y PKCS#1 SHA-256, CTRTool fijado:
+  https://github.com/3DSGuy/Project_CTR/blob/046bb359ee95423938886dbf477d00690aaecd3e/ctrtool/ctr.c
+- ARC MH4U:
+  https://github.com/svanheulen/mhff/wiki/MH4U-rArchive-Format
+  https://github.com/svanheulen/mhff/blob/master/n3ds/arc.py
+  Blob consultado: cef2abdeeb74ac278bf9fc57e97c529d8d963958.
+- TEX MH4U:
+  https://github.com/svanheulen/mhff/wiki/MH4U-rTexture-Format
+  https://github.com/svanheulen/mhff/blob/master/n3ds/tex.py
+  Blob consultado: 1f8f48d4d248479f76e780ffcd60e82d096c0305.
+
+Búsquedas de comunidad: GBAtemp MH4U/MHX ROM Hacking Guide, ZenHAX MH4U ARC
+y Reddit MH4U. Se consultaron como pistas; no se descargaron recursos.
+Los campos y disposiciones se contrastaron con las fuentes primarias; no se
+copiaron implementaciones. Las operaciones criptográficas se limitan a comprobar
+una firma pública embebida y datos sintéticos generados durante las pruebas.
+
+La revisión de PR #7 encontró un extractor ya existente para ARC17/MHXX.
+La imagen actual declara ARC19/MH4U: no se modifica aquella rama ni se generalizan
+sus resultados. El lector nuevo solo comprueba metadatos/rangos ARC19 y cabeceras
+TEX A5; conversión, zlib, MOD/MRL/LMT y fidelidad gráfica siguen fuera de alcance.
+
+Con un módulo público aportado por la misma imagen se puede comprobar coherencia
+de firma, pero no establecer la confianza del emisor. La ausencia de una raíz
+externa confiable mantiene la autenticidad bloqueada. No se incorporan ni
+exportan claves de Nintendo o del archivo, ni se elude esta limitación.
