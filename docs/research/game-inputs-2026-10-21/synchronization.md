@@ -291,3 +291,9 @@ Propietario investigación cierra ampliación:teclas sostenidashasta30s,combinac
 Propietarioinvestigación entrega7piezaslocales delcazadormasculinoMH4U(torso,brazos,piernas,cintura,casco,rostro,cabello),texturas/materialesasociados. EjemplotorsoMOD230:1.280vértices/19huesos yhashverificado segúninforme. Reporteprivado analysis-local/mh4u-hunter-search-20261022/REPORT.md. Noensamblaje/visualconjunto ni equipodelpersonajeconfirmados;no personajeanimadovalidado.
 
 Cierreprevio declaró1.341archivosMHXXextraídosde4ARC contamaños/hashes;OBJestático/dosPNG ymaterialesparciales,interpretacióncompletapendiente. Sonalcancesnuevosdeanálisislocal,noseañadenautomáticamentealcatálogohistórico9888archivos/21696entradas/8823objetos. No recatalogar desdecentral para duplicarfrente. Recursoscomerciales permanecenlocales,fueradeGit yprototipospropios;adaptaciónlegalnoacreditada.
+
+## 22-10-2026 — Indicios de adaptación al terreno
+
+Propietario investigación entrega indiciosMH4U deajustespelvis/inclinación,altura/normaldesuelo,consultasparedes einfraestructuraIK/talón/suelo. No controladorrecuperado ni uso efectivo delcazador demostrado.13archivosanimaciónúnicoslocales;clipsespecíficossubir/bajarsinidentificar. Los conteosprovisionalesde418entradas/18766claves sondecodificaciónparcial,noreproducción/rigvalidado. No equiparar colisiones de cadenasropa/pelo concontactosuelo.
+
+Elpropietario informó envíoalfrenteprototipos;centralnorepiteencargo. Interfaces debenconservarindicios como hipótesis yalgoritmos/activospropios separadosdelcomercial;sin copiarparámetros orecursos paraadaptación. Banco histórico nocambiadoautomáticamente,nuevosderivadoslocales privados. SinoperacionesVita/FTP/fusión desdecentral.

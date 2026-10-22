@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Terreno:indiciosdearquitectura
+
+-Investigaciónreportasuelo/paredes/postura/IK y13LMTúnicos;controlador yclipsespecíficospendientes. No funciónintegralconfirmada.
+-Hallazgoscompartidosporpropietarioconprototipos;mantenerrecursospropios ysemánticapendiente.
+
 ## 22-10-2026 — PiezasMH4Ulocalizadas
 
 -Investigacióncomunica7piezaslocales,torso1280vértices/19huesos;conjunto/equipo/animaciónsinvalidar.
