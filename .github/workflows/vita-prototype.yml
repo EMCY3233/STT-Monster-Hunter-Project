@@ -20,6 +20,8 @@ jobs:
         run: |
           cc -std=c99 -Wall -Wextra -Werror -Ivita-prototype/src vita-prototype/src/control.c vita-prototype/tests/test_control.c -lm -o /tmp/stt-controls
           /tmp/stt-controls
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -no-pie -Ivita-prototype/src vita-prototype/tests/test_pacer.c -o /tmp/stt-pacer
+          /tmp/stt-pacer
           cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include -Icontracts pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c vita-prototype/src/snapshot.c combat-lab/src/stt_combat.c contracts/stt_play.c vita-prototype/tests/test_integration.c -lm -o /tmp/stt-integration
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-integration /tmp/stt-scene.ppm > /tmp/stt-adapter.jsonl
           python -c "from pathlib import Path; from stt_monitor.protocol import decode; p=decode(Path('/tmp/stt-adapter.jsonl').read_bytes().strip()); assert p['play']['hits'][0]['damage']==10; assert p['source']=='simulator'"

@@ -12,6 +12,7 @@
 #include "render.h"
 #include "snapshot.h"
 #include "monitor.h"
+#include "pacer.h"
 static volatile int resync_requested;
 static SttAsset original_asset;
 static SttWeapon equipped_sword;
@@ -44,6 +45,7 @@ int main(void){
  callback=sceKernelCreateCallback("stt-prototype-power",0,power_callback,NULL);if(callback<0){result=callback;goto cleanup;}
  result=scePowerRegisterCallback(callback);if(result<0)goto cleanup;registered=1;
  previous_time=sceKernelGetProcessTimeWide();
+ unsigned target_fps=45;SttPacer pacer;stt_pacer_reset(&pacer,previous_time,target_fps);
  for(;;){
   uint64_t frame_start=sceKernelGetProcessTimeWide();sceKernelCheckCallback();
   SceCtrlData controls;memset(&controls,0,sizeof controls);
@@ -52,9 +54,11 @@ int main(void){
   controls.buttons=stt_game_buttons(controls.buttons);
   int clock_reset=frame_start<previous_time;
   uint64_t elapsed=clock_reset?0:frame_start-previous_time;previous_time=frame_start;
-  if(resync_requested||clock_reset){resync_requested=0;accumulator=0;elapsed=0;previous=controls.buttons;pending_attack=0;pending_toggle=0;need_release=1;dropped++;}
+  if(resync_requested||clock_reset){stt_pacer_reset(&pacer,frame_start,target_fps);resync_requested=0;accumulator=0;elapsed=0;previous=controls.buttons;pending_attack=0;pending_toggle=0;need_release=1;dropped++;}
   if(elapsed>100000)dropped++; /* Slow rendering is not a power/resume event. */
   unsigned pressed=controls.buttons&~previous;previous=controls.buttons;
+  if(pressed&SCE_CTRL_CIRCLE){target_fps=target_fps==45?30:45;stt_pacer_reset(&pacer,frame_start,target_fps);}
+  stt_render_set_target(target_fps);
   if(pressed&SCE_CTRL_SELECT)stt_monitor_toggle(&monitor,frame_start);
   if(pressed&SCE_CTRL_RTRIGGER)stt_render_set_raster(!stt_render_get_raster());
   if(pressed&SCE_CTRL_LTRIGGER)stt_render_set_ground((stt_render_get_ground()+1)%3);
@@ -90,12 +94,13 @@ int main(void){
   result=sceDisplayWaitVblankStartCB();if(result<0)break;front^=1;
   present_us=(unsigned)(sceKernelGetProcessTimeWide()-present_start);
   uint64_t telemetry_start=sceKernelGetProcessTimeWide();
-  stt_monitor_frame(&monitor,session,telemetry_start,combat.tick,(unsigned)equipment.mode,stt_render_get_ground(),stt_render_get_raster(),stt_render_profile(),update_us,render_us,present_us,telemetry_us);
+  stt_monitor_frame(&monitor,session,telemetry_start,combat.tick,(unsigned)equipment.mode,stt_render_get_ground(),stt_render_get_raster(),target_fps,stt_render_profile(),update_us,render_us,present_us,telemetry_us);
   telemetry_us=(unsigned)(sceKernelGetProcessTimeWide()-telemetry_start);
   unsigned work_us=(unsigned)(sceKernelGetProcessTimeWide()-frame_start);
-  if(work_us>33333)dropped++;
-  else sceKernelDelayThreadCB(33333-work_us);
-  frame_us=(unsigned)(sceKernelGetProcessTimeWide()-frame_start); /* 30 render FPS cap; simulation stays 60 Hz. */
+  if(work_us>1000000/target_fps)dropped++;
+  unsigned wait_us=stt_pacer_wait(&pacer,sceKernelGetProcessTimeWide());
+  if(wait_us)sceKernelDelayThreadCB(wait_us);
+  frame_us=(unsigned)(sceKernelGetProcessTimeWide()-frame_start); /* Absolute 30/45 render cap; simulation stays 60 Hz. */
  }
 cleanup:
  stt_monitor_close(&monitor);

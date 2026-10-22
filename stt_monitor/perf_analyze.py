@@ -1,6 +1,7 @@
 """Summarize real STT/4 capture windows separately per source/session/render mode."""
 import argparse
 import json
+import re
 from collections import defaultdict
 from .protocol import validate
 
@@ -16,10 +17,11 @@ def analyze(records):
         groups[(p['source'],p['session'],p['perf']['ground_mode'],p['perf'].get('raster_mode',0))].append(p)
     results=[]
     for (source,session,mode,raster),packets in groups.items():
+        trial=re.fullmatch(r'vita-0019-f(30|45)-[0-9a-f]+',session)
         f=[p['perf'] for p in packets];frames=sum(p['frames'] for p in f)
         seconds=sum(p['window_us'] for p in f)/1e6
         avg=lambda k: sum(p[k]*p['frames'] for p in f)/frames
-        results.append(dict(source=source,session=session,ground_mode=mode,raster_mode=raster,samples=len(f),
+        results.append(dict(source=source,session=session,build='00.19' if trial else None,target_fps=int(trial[1]) if trial else None,ground_mode=mode,raster_mode=raster,samples=len(f),
             fps=frames/seconds,update_us=avg('update_us'),render_us=avg('render_us'),
             present_us=avg('present_us'),telemetry_us=avg('telemetry_us'),
             minimum_free_bytes={k:min((p[k] for p in f if p[k] is not None),default=None)

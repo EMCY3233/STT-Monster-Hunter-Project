@@ -13,6 +13,13 @@ def sample():
         gpu_load_pct=None,fg_app=None,vnz=None,send_ok=0,send_errors=0))
 
 class PerfTests(unittest.TestCase):
+    def test_trial_targets_are_separate(self):
+        a=sample();a["session"]="vita-0019-f45-abc"
+        b=copy.deepcopy(a);b["session"]="vita-0019-f30-def"
+        groups=analyze({"packet":p} for p in (a,b))["groups"]
+        self.assertEqual([g["target_fps"] for g in groups],[45,30])
+        self.assertEqual(groups[0]["build"],"00.19")
+        self.assertIsNone(analyze([{"packet":sample()}])["groups"][0]["target_fps"])
     def test_roundtrip(self):
         p=sample();self.assertEqual(decode(encode(p)),p)
     def test_no_fabricated_counters(self):
