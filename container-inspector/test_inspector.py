@@ -487,6 +487,14 @@ class Inspector(unittest.TestCase):
         for p,v in [(80,99),(88,11),(88,1000)]:
             b=arc19();put(b,p,v)
             self.run_image(resource_image(b),False,("--inspect-resources",))
+        overlapping=bytearray(180);overlapping[:4]=b"ARC"+bytes(1)
+        struct.pack_into("<HH",overlapping,4,19,2)
+        struct.pack_into("<4I",overlapping,76,1,8,8,172)
+        struct.pack_into("<4I",overlapping,156,2,8,8,172)
+        self.run_image(resource_image(overlapping),False,("--inspect-resources",))
+        oversized=bytearray(12);oversized[:4]=b"ARC"+bytes(1)
+        struct.pack_into("<HH",oversized,4,19,65535)
+        self.run_image(resource_image(oversized),False,("--inspect-resources",))
     def test_resource_arc_table_truncated(self):
         self.run_image(resource_image(arc19()[:80]),False,("--inspect-resources",))
     def test_resource_arc_unsupported(self):
