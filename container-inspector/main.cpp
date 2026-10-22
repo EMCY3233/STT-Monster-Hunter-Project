@@ -302,8 +302,17 @@ void ncch(Reader& r,U base,U available,std::ostream& out,const Options& options)
     if(options.integrity) {
         if(encrypted) out<<"file_integrity=skipped_encrypted\n";
         else {
-            if(le(h,0x1a4)) verify_exefs(r,base+scale(le(h,0x1a0),exp),scale(le(h,0x1a4),exp),out);
-            if(le(h,0x1b4)) verify_ivfc(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b4),exp),out);
+            if(le(h,0x1a4)) {
+                require(scale(le(h,0x1a8),exp)>=512,"ExeFS header hash coverage missing");
+                verify_exefs(r,base+scale(le(h,0x1a0),exp),scale(le(h,0x1a4),exp),out);
+            }
+            if(le(h,0x1b4)) {
+                U off=scale(le(h,0x1b0),exp),len=scale(le(h,0x1b4),exp);
+                require(len>=96,"short IVFC");
+                Header iv{}; r.read(base+off,iv.data(),96);
+                require(scale(le(h,0x1b8),exp)>=96+le(iv,8),"IVFC master hash coverage missing");
+                verify_ivfc(r,base+off,len,out);
+            }
         }
     }
     if(options.list && le(h,0x1b4)) {

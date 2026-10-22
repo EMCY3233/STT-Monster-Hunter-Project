@@ -141,7 +141,7 @@ ExeFS admite diez registros, offsets relativos al final de la cabecera de
 512 bytes y hashes en orden inverso. Rechaza nombres duplicados, padding de
 nombre inválido, rangos fuera del contenedor y archivos solapados.
 
-Suite ampliada a 36 pruebas: árbol completo y multibloque, cola parcial,
+Suite ampliada a 38 pruebas: árbol completo y multibloque, cola parcial,
 padding corrupto, alteraciones en cada nivel, layout y exponentes inválidos,
 archivos ExeFS corruptos, hashes intercambiados y límites/solapamientos.
 
@@ -149,3 +149,17 @@ Este modo no verifica firmas RSA, autenticidad ni buckets hash de nombres
 RomFS. Un árbol coherente es una comprobación de integridad interna, no una
 certificación de procedencia.
 Fuentes y búsqueda en plataformas: RESEARCH.md.
+
+El modo --verify-integrity exige que el hash NCCH cubra la cabecera ExeFS
+completa y la cabecera/master hashes IVFC; rechaza una cobertura declarada
+insuficiente. --verify conserva su informe explícito de rangos vacíos.
+
+Resultado local sobre la imagen privada indicada por el usuario: coinciden los
+tres archivos ExeFS y los 673.229 bloques IVFC de las tres particiones. Referencia
+Python independiente reproduce los tres hashes ExeFS y los recuentos IVFC
+[41,5144,658418], [1,14,1755], [1,61,7794]. SHA-256 completo idéntico al anterior.
+No se publican nombres RomFS, contenidos ni hash privado de la imagen.
+
+Los pendientes históricos de hashes por archivo ExeFS/IVFC descritos arriba
+quedan cubiertos por --verify-integrity en este perfil. Siguen pendientes los
+buckets de nombres, firmas/autenticidad y formatos internos de recursos MH4U.

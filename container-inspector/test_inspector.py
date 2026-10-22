@@ -315,6 +315,13 @@ class Inspector(unittest.TestCase):
         b=integrity_image(); b[0x18f]=0
         self.assertIn("file_integrity=skipped_encrypted",self.run_image(b,options=("--verify-integrity",)))
 
+    def test_integrity_requires_master_coverage(self):
+        b=integrity_image(); put(b,0x1b8,0)
+        self.run_image(b,False,("--verify-integrity",))
+    def test_integrity_requires_exefs_header_coverage(self):
+        b=exefs_image(); put(b,0x1a8,0)
+        self.run_image(b,False,("--verify-integrity",))
+
     def test_usage(self):
         self.assertEqual(subprocess.run([EXE],capture_output=True).returncode,2)
 
