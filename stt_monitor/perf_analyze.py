@@ -18,11 +18,11 @@ def analyze(records):
     results=[]
     for (source,session,mode,raster,ceiling,target),packets in groups.items():
         trial=re.fullmatch(r'vita-0019-f(30|45)-[0-9a-f]+',session)
-        roof_trial=re.fullmatch(r'vita-0020-f(30|45)-c([012])-[0-9a-f]+',session)
+        roof_trial=re.fullmatch(r'vita-(0020|0021)-f(30|45)-c([012])-[0-9a-f]+',session)
         f=[p['perf'] for p in packets];frames=sum(p['frames'] for p in f)
         seconds=sum(p['window_us'] for p in f)/1e6
         avg=lambda k: sum(p[k]*p['frames'] for p in f)/frames
-        results.append(dict(source=source,session=session,build='00.20' if roof_trial else '00.19' if trial else None,target_fps=target if target is not None else int(trial[1]) if trial else None,ground_mode=mode,raster_mode=raster,ceiling_mode=ceiling,samples=len(f),
+        results.append(dict(source=source,session=session,build=('00.20' if roof_trial[1]=='0020' else '00.21') if roof_trial else '00.19' if trial else None,target_fps=target if target is not None else int(trial[1]) if trial else None,ground_mode=mode,raster_mode=raster,ceiling_mode=ceiling,samples=len(f),
             fps=frames/seconds,update_us=avg('update_us'),render_us=avg('render_us'),
             present_us=avg('present_us'),telemetry_us=avg('telemetry_us'),
             minimum_free_bytes={k:min((p[k] for p in f if p[k] is not None),default=None)

@@ -16,42 +16,47 @@ jobs:
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-perf > /tmp/stt-perf.json
           python -c "from pathlib import Path; from stt_monitor.protocol import decode; p=decode(Path('/tmp/stt-perf.json').read_bytes().strip()); assert p['version']==7; assert p['perf']['target_fps']==45; assert p['perf']['ceiling_us']==2300; assert p['perf']['frames']==12; assert p['perf']['cpu_load_pct'] is None"
           python -m unittest discover -s tests -p 'test_perf_protocol.py'
+      - name: Original zone fixture and bounded native scene reader
+        run: |
+          python map-lab/make_fixture.py /tmp/zone-fixture
+          cc -std=c99 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Imap-lab map-lab/stt_zone.c map-lab/test_zone.c -lm -o /tmp/stt-zone
+          /tmp/stt-zone /tmp/zone-fixture/synthetic.bin /tmp/zone-fixture/truncated.bin /tmp/zone-fixture/bad-count.bin /tmp/zone-fixture/nonfinite.bin /tmp/zone-fixture/bad-index.bin
       - name: Portable controls, camera, core adapter and renderer
         run: |
           cc -std=c99 -Wall -Wextra -Werror -Ivita-prototype/src vita-prototype/src/control.c vita-prototype/tests/test_control.c -lm -o /tmp/stt-controls
           /tmp/stt-controls
           cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -no-pie -Ivita-prototype/src vita-prototype/tests/test_pacer.c -o /tmp/stt-pacer
           /tmp/stt-pacer
-          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include -Icontracts pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c vita-prototype/src/snapshot.c combat-lab/src/stt_combat.c contracts/stt_play.c vita-prototype/tests/test_integration.c -lm -o /tmp/stt-integration
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include -Icontracts pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c vita-prototype/src/snapshot.c combat-lab/src/stt_combat.c map-lab/stt_zone.c contracts/stt_play.c vita-prototype/tests/test_integration.c -lm -o /tmp/stt-integration
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-integration /tmp/stt-scene.ppm > /tmp/stt-adapter.jsonl
           python -c "from pathlib import Path; from stt_monitor.protocol import decode; p=decode(Path('/tmp/stt-adapter.jsonl').read_bytes().strip()); assert p['play']['hits'][0]['damage']==10; assert p['source']=='simulator'"
       - name: Original pose loading, fallback and renderer
         run: |
           python -c "import hashlib; from pathlib import Path; assert hashlib.sha256(Path('vita-prototype/assets/practice.pose.json').read_bytes()).hexdigest()=='a6648b5901bf6282457062911946399aa3019cc7fb23a661bfc5aa81550dfcdc'"
-          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c vita-prototype/tests/test_asset_render.c -lm -o /tmp/stt-asset-render
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c map-lab/stt_zone.c vita-prototype/tests/test_asset_render.c -lm -o /tmp/stt-asset-render
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-asset-render vita-prototype/assets/practice.pose.json stt-own-anchor.ppm stt-own-pose.ppm > stt-pose-render-evidence.json
           cat stt-pose-render-evidence.json
-          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c combat-lab/src/stt_combat.c vita-prototype/tests/test_raster_contract.c -lm -o /tmp/stt-raster-contract
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c combat-lab/src/stt_combat.c map-lab/stt_zone.c vita-prototype/tests/test_raster_contract.c -lm -o /tmp/stt-raster-contract
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-raster-contract
       - name: CC0 sword attachment and fallback
         run: |
           python vita-prototype/tools/prepare_body.py
           git diff --exit-code -- vita-prototype/assets/hunter-body.pose.json
-          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c vita-prototype/tests/test_equipment.c -lm -o /tmp/stt-equipment
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c map-lab/stt_zone.c vita-prototype/tests/test_equipment.c -lm -o /tmp/stt-equipment
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-equipment vita-prototype/assets/hunter-body.pose.json vita-prototype/assets/quaternius-sword.pose.json stt-equipped-idle.ppm stt-equipped-swing.ppm stt-equipped-fallback.ppm > stt-equipment-evidence.json
           cat stt-equipment-evidence.json
       - name: Carry states and independent sheath
         run: |
-          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c vita-prototype/tests/test_carry.c -lm -o /tmp/stt-carry
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c map-lab/stt_zone.c vita-prototype/tests/test_carry.c -lm -o /tmp/stt-carry
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-carry vita-prototype/assets/hunter-body.pose.json vita-prototype/assets/quaternius-sword.pose.json stt-sheathed.ppm stt-drawing.ppm stt-drawn.ppm stt-sheathing.ppm
       - name: Upward camera and current hunter mesh clearance
         run: |
-          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c vita-prototype/tests/test_camera.c -lm -o /tmp/stt-camera
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c map-lab/stt_zone.c vita-prototype/tests/test_camera.c -lm -o /tmp/stt-camera
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-camera vita-prototype/assets/hunter-body.pose.json vita-prototype/assets/quaternius-sword.pose.json stt-camera-up.ppm stt-camera-level.ppm stt-camera-down.ppm > stt-camera-evidence.json
           cat stt-camera-evidence.json
       - name: Ceiling reference, spans and occlusion
         run: |
-          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c combat-lab/src/stt_combat.c vita-prototype/tests/test_ceiling.c -lm -o /tmp/stt-ceiling
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c combat-lab/src/stt_combat.c map-lab/stt_zone.c vita-prototype/tests/test_ceiling.c -lm -o /tmp/stt-ceiling
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-ceiling vita-prototype/assets/hunter-body.pose.json vita-prototype/assets/quaternius-sword.pose.json stt-ceiling > stt-ceiling-evidence.json
           cat stt-ceiling-evidence.json
       - uses: actions/upload-artifact@v4
@@ -120,3 +125,20 @@ jobs:
           name: stt-vita-prototype-STTP00001
           path: build/package
       - run: python vita-prototype/tests/inspect_package.py build/package
+
+  zone-pc-windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build portable local scene reviewer
+        shell: pwsh
+        run: |
+          $zoneCompiler = @('C:/mingw64/bin/gcc.exe','C:/msys64/mingw64/bin/gcc.exe') | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+          if (-not $zoneCompiler) { $zoneCompiler = (Get-Command gcc.exe -ErrorAction Stop).Source }
+          & $zoneCompiler -std=c99 -O2 -Wall -Wextra -Werror -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include -Imap-lab pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c map-lab/stt_zone.c map-lab/review_zone.c -static -lm -o stt-zone-review.exe
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-zone-review-windows
+          path: stt-zone-review.exe
+          retention-days: 14

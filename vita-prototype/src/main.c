@@ -13,6 +13,7 @@
 #include "snapshot.h"
 #include "monitor.h"
 #include "pacer.h"
+#include "../../map-lab/stt_zone.h"
 static volatile int resync_requested;
 static SttAsset original_asset;
 static SttWeapon equipped_sword;
@@ -24,6 +25,7 @@ static int power_callback(int id,int count,int flags,void *user){
 static uint64_t render_clock(void){return sceKernelGetProcessTimeWide();}
 int main(void){
  stt_render_set_clock(render_clock);
+ stt_zone_load("ux0:/data/STTP00001/map-zone.bin");
  SceUID memory[2]={-1,-1},callback=-1;uint32_t *buffers[2]={NULL,NULL};float *depth=NULL;uint32_t *cached_pixels=NULL;
  int result=0,registered=0,shown=0,front=0,need_release=0;unsigned previous=0,pending_attack=0,pending_toggle=0,frame_us=0,dropped=0,update_us=0;
  uint64_t previous_time=0,accumulator=0,seq=0,next_sample=0,start=sceKernelGetProcessTimeWide();
@@ -60,12 +62,12 @@ int main(void){
   if(pressed&SCE_CTRL_CIRCLE){target_fps=target_fps==45?30:45;stt_pacer_reset(&pacer,frame_start,target_fps);}
   stt_render_set_target(target_fps);
   if(pressed&SCE_CTRL_SELECT)stt_monitor_toggle(&monitor,frame_start);
-  if(pressed&SCE_CTRL_UP)stt_render_set_ceiling((stt_render_get_ceiling()+1)%3);
+  if(!stt_zone_active()&&(pressed&SCE_CTRL_UP))stt_render_set_ceiling((stt_render_get_ceiling()+1)%3);
   if(pressed&SCE_CTRL_RTRIGGER)stt_render_set_raster(!stt_render_get_raster());
-  if(pressed&SCE_CTRL_LTRIGGER)stt_render_set_ground((stt_render_get_ground()+1)%3);
+  if(!stt_zone_active()&&(pressed&SCE_CTRL_LTRIGGER))stt_render_set_ground((stt_render_get_ground()+1)%3);
   if(pressed&SCE_CTRL_START){result=0;break;}
   if(need_release&&controls.buttons==0&&stt_axis(controls.lx)==0&&stt_axis(controls.ly)==0&&stt_axis(controls.rx)==0&&stt_axis(controls.ry)==0)need_release=0;
-  if(pressed&SCE_CTRL_TRIANGLE){need_release=0;pressed&=~(SCE_CTRL_CROSS|SCE_CTRL_SQUARE);stt_combat_init(&combat);stt_equipment_init(&equipment);pending_toggle=0;camera=(SttCamera){.45f,.40f};accumulator=0;pending_attack=0;
+  if(pressed&SCE_CTRL_TRIANGLE){stt_zone_reset();need_release=0;pressed&=~(SCE_CTRL_CROSS|SCE_CTRL_SQUARE);stt_combat_init(&combat);stt_equipment_init(&equipment);pending_toggle=0;camera=(SttCamera){.45f,.40f};accumulator=0;pending_attack=0;
    start=frame_start;seq=0;next_sample=0;memset(&mailbox,0,sizeof mailbox);snprintf(session,sizeof session,"vita-play-%" PRIx64,start);}
   if(!need_release&&(pressed&SCE_CTRL_CROSS))pending_attack=1;
   if(!need_release&&(pressed&SCE_CTRL_SQUARE))pending_toggle=1;
@@ -76,6 +78,7 @@ int main(void){
    SttMove move=stt_camera_move(camera,controls.lx,controls.ly,combat.hunter.yaw_turn);
    SttCombatInput input={move.x_mm,move.z_mm,move.yaw_turn,pending_attack!=0};
    stt_equipment_step(&equipment,&combat,input,pending_toggle!=0);pending_attack=0;pending_toggle=0;
+   if(stt_zone_active()){float p[3];stt_zone_move(move.x_mm*.001f,move.z_mm*.001f);stt_zone_position(p);combat.hunter.x_mm=(int32_t)(p[0]*1000);combat.hunter.z_mm=(int32_t)(p[2]*1000);combat.hunter.yaw_turn=(uint16_t)(int32_t)(stt_zone_yaw()*10430.37835f);}
    /* A latest-only snapshot at 10 Hz and immediately on impact. No network operations. */
    if(combat.impact_count||combat.tick>=next_sample){
     SttPlaySample sample;stt_vita_snapshot(&sample,&combat,camera,session,seq++,(frame_start-start)/1000,frame_us,update_us,dropped);
@@ -104,7 +107,7 @@ int main(void){
   frame_us=(unsigned)(sceKernelGetProcessTimeWide()-frame_start); /* Absolute 30/45 render cap; simulation stays 60 Hz. */
  }
 cleanup:
- stt_monitor_close(&monitor);
+ stt_monitor_close(&monitor);stt_zone_close();
  if(result<0){
   fprintf(stderr,"STT Vita Prototype failed: 0x%08X\n",(unsigned)result);
   if(buffers[front]){
