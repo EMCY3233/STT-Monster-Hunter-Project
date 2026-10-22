@@ -90,6 +90,38 @@ def etc_fixture(alpha=True, levels=3):
     return header + struct.pack('<' + 'I' * levels, *offsets) + payload, expected
 
 
+def cube_fixture(kind=11):
+    offsets, payload, expected = [], bytearray(), []
+    for face in range(6):
+        face_pixels = []
+        if kind in (3, 17):
+            normal, pixels = fixture(kind, 32, 32, 3)
+            normal_offsets = struct.unpack_from('<3I', normal, 16)
+            offsets.extend(len(payload) + o for o in normal_offsets)
+            payload.extend((v + face * 3) % 256 for v in normal[28:])
+            for rgba in pixels:
+                face_pixels.append(bytes((v + face * 3) % 256 if kind == 3 or i % 4 != 3
+                                         else 255 for i, v in enumerate(rgba)))
+        else:
+            for mip in range(3):
+                offsets.append(len(payload))
+                width = 32 >> mip
+                r, g, b = face + 1, mip + 1, 8
+                info = r * 0x11 << 24 | g * 0x11 << 16 | b * 0x11 << 8
+                block = struct.pack('<II', 0, info)
+                a = (face * 3 + mip) % 16 if kind == 12 else 15
+                if kind == 12:
+                    block = bytes([a * 17]) * 8 + block
+                payload.extend(block * (width * width // 16))
+                face_pixels.append(bytes((r * 17 + 2, g * 17 + 2, b * 17 + 2, a * 17))
+                                   * (width * width))
+        expected.append(face_pixels)
+    header = struct.pack('<4I', 0x584554, 0x600400a5, 3 | 32 << 6 | 32 << 19,
+                         0x10006 | kind << 8)
+    # Opaque metadata is deliberately nonzero: content is not given axis semantics.
+    return header + bytes(range(108)) + struct.pack('<18I', *offsets) + payload, expected
+
+
 class Tests(unittest.TestCase):
     def run_case(self, data, args=(), good=True):
         with tempfile.TemporaryDirectory() as tmp:
@@ -214,6 +246,32 @@ class Tests(unittest.TestCase):
                     data.extend(rng.getrandbits(64).to_bytes(8, 'little'))
                 data.extend(struct.pack('<II', rng.getrandbits(32), info))
             self.assertEqual(hashlib.sha256(self.run_case(data)).hexdigest(), wanted)
+
+    def test_cube_every_face_and_mip(self):
+        for kind in (3, 17, 11, 12):
+            data, expected = cube_fixture(kind)
+            for face in range(6):
+                for mip in range(3):
+                    with self.subTest(kind=kind, face=face, mip=mip):
+                        self.assertEqual(self.run_case(data, ['--face', str(face), '--mip', str(mip)]),
+                                         expected[face][mip])
+
+    def test_cube_rejects_bad_selection_and_metadata(self):
+        data, _ = cube_fixture()
+        for args in (['--face', '6'], ['--face', '-1'], ['--face', '0', '--face', '1']):
+            self.run_case(data, args, good=False)
+        self.run_case(fixture()[0], ['--face', '1'], good=False)
+        for pos, value in ((8, 3 | 32 << 6 | 16 << 19), (12, 0x10b05),
+                           (12, 0x10b01), (124, 1), (124 + 17 * 4, 0)):
+            bad = bytearray(data)
+            struct.pack_into('<I', bad, pos, value)
+            self.run_case(bad, good=False)
+
+    def test_cube_truncated_table_payload_and_trailing(self):
+        data, _ = cube_fixture()
+        for cut in (16, 123, 124, 195, len(data) - 1):
+            self.run_case(data[:cut], good=False)
+        self.run_case(data + b'X', good=False)
 
 
 if __name__ == '__main__':

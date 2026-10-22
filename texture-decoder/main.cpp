@@ -82,13 +82,16 @@ static void decode_etc(const Bytes& b, size_t start, bool alpha, Image& image) {
         }
     }
 }
-static Image decode(const Bytes& b, uint64_t mip) {
+static Image decode(const Bytes& b, uint64_t mip, uint64_t face) {
     require(word(b, 0) == 0x00584554, "not TEX");
     const auto flags = word(b, 4), dimensions = word(b, 8), format = word(b, 12);
     require((flags & 0xfff) == 0xa5, "only TEX A5 supported");
-    require((flags >> 28) == 2 && ((flags >> 24) & 15) == 0,
-            "only normal 2D textures with size_shift zero supported");
-    require((format & 255) == 1, "only one texture supported");
+    const bool cube = (flags >> 28) == 6;
+    require(((flags >> 28) == 2 || cube) && ((flags >> 24) & 15) == 0,
+            "only normal 2D/cubemap textures with size_shift zero supported");
+    const uint32_t faces = cube ? 6 : 1;
+    require((format & 255) == faces, "texture count does not match layout");
+    require(face < faces, "invalid face selection");
     require((format >> 16) == 1, "unsupported texture layout flags");
     const uint32_t type = (format >> 8) & 255;
     require(type == 3 || type == 17 || type == 11 || type == 12,
@@ -100,20 +103,26 @@ static Image decode(const Bytes& b, uint64_t mip) {
             (width & (width - 1)) == 0 && (height & (height - 1)) == 0,
             "dimensions must be powers of two from 8 to 4096");
     require(levels >= 1 && levels <= 13 && mip < levels, "invalid mip selection/count");
-    const size_t base = 16 + size_t(levels) * 4;
+    require(!cube || width == height, "cubemap faces must be square");
+    // The cubemap's extra 108 bytes remain opaque; do not infer axis orientation.
+    const size_t table = 16 + (cube ? 108 : 0);
+    const size_t base = table + size_t(levels) * faces * 4;
     require(base <= b.size(), "truncated offset table");
     const size_t channels = type == 3 ? 4 : 3;
     size_t expected = 0, selected = 0;
-    uint32_t w = width, h = height, sw = 0, sh = 0;
-    for (uint32_t i = 0; i < levels; ++i) {
-        // Sub-8 mip padding is deliberately unsupported until independently verified.
-        require(w >= 8 && h >= 8, "sub-8 mip layout unsupported");
-        require(word(b, 16 + size_t(i) * 4) == expected,
-                "mip offsets must be contiguous, relative to pixel data, and start at zero");
-        if (i == mip) { selected = expected; sw = w; sh = h; }
-        expected += compressed ? size_t(w) * h / 16 * (type == 12 ? 16 : 8)
-                               : size_t(w) * h * channels;
-        w /= 2; h /= 2;
+    uint32_t sw = 0, sh = 0;
+    for (uint32_t f = 0; f < faces; ++f) {
+        uint32_t w = width, h = height;
+        for (uint32_t i = 0; i < levels; ++i) {
+            // Sub-8 mip padding is deliberately unsupported until independently verified.
+            require(w >= 8 && h >= 8, "sub-8 mip layout unsupported");
+            require(word(b, table + (size_t(f) * levels + i) * 4) == expected,
+                    "face/mip offsets must be contiguous, relative to pixel data, and start at zero");
+            if (i == mip && f == face) { selected = expected; sw = w; sh = h; }
+            expected += compressed ? size_t(w) * h / 16 * (type == 12 ? 16 : 8)
+                                   : size_t(w) * h * channels;
+            w /= 2; h /= 2;
+        }
     }
     require(expected == b.size() - base, "payload length does not match all mip levels");
     Image image{sw, sh, Bytes(size_t(sw) * sh * 4)};
@@ -142,9 +151,9 @@ static Image decode(const Bytes& b, uint64_t mip) {
 }
 int main(int argc, char** argv) {
     try {
-        require(argc >= 2, "usage: stt-tex INPUT --out NEW_DIRECTORY [--offset N --size N --mip N]");
+        require(argc >= 2, "usage: stt-tex INPUT --out NEW_DIRECTORY [--offset N --size N --mip N --face N]");
         fs::path input = argv[1], output;
-        uint64_t offset = 0, length = 0, mip = 0;
+        uint64_t offset = 0, length = 0, mip = 0, face = 0;
         bool has_size = false;
         std::vector<std::string> seen;
         for (int i = 2; i < argc; i += 2) {
@@ -156,6 +165,7 @@ int main(int argc, char** argv) {
             else if (option == "--offset") offset = number(argv[i + 1]);
             else if (option == "--size") { length = number(argv[i + 1]); has_size = true; }
             else if (option == "--mip") mip = number(argv[i + 1]);
+            else if (option == "--face") face = number(argv[i + 1]);
             else throw std::runtime_error("unknown option");
         }
         require(!output.empty(), "--out required");
@@ -170,7 +180,7 @@ int main(int argc, char** argv) {
         Bytes bytes(static_cast<size_t>(length));
         source.read(reinterpret_cast<char*>(bytes.data()), static_cast<std::streamsize>(length));
         require(bool(source), "input read failed");
-        const auto image = decode(bytes, mip);
+        const auto image = decode(bytes, mip, face);
         require(fs::create_directory(output), "output directory must be new");
         std::ofstream target(output / "image.pam", std::ios::binary);
         target << "P7\nWIDTH " << image.width << "\nHEIGHT " << image.height
@@ -179,7 +189,7 @@ int main(int argc, char** argv) {
                      static_cast<std::streamsize>(image.rgba.size()));
         target.close();
         require(bool(target), "output write failed");
-        std::cout << "TEX A5 mip=" << mip << " width=" << image.width
+        std::cout << "TEX A5 face=" << face << " mip=" << mip << " width=" << image.width
                   << " height=" << image.height << " RGBA_bytes=" << image.rgba.size() << '\n';
         return 0;
     } catch (const std::exception& e) {

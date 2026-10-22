@@ -1,11 +1,12 @@
 # Read-only TEX A5 decoder (C++17)
 
-Standalone, dependency-free first increment. Reads a TEX file or an explicit byte
+Standalone, dependency-free decoder. Reads a TEX file or an explicit byte
 range of a larger read-only file. Writes a new directory containing `image.pam`
 (PAM RGBA, lossless). Never opens the input for writing or overwrites an existing
 output directory. Do not commit private inputs or decoded commercial images.
 
-Supported: TEX A5, normal 2D/size_shift=0, one texture, BGR888 (0x11) and
+Supported: TEX A5, size_shift=0, normal 2D (one texture) or cubemap (six faces),
+BGR888 (0x11) and
 ABGR8888 (0x03), ETC1 (0x0B) and ETC1A4 (0x0C), power-of-two dimensions
 8..4096, contiguous mip offsets
 relative to the pixel data. Every declared level must remain at least 8x8;
@@ -15,10 +16,13 @@ converted to row-major RGBA without flipping rows. ETC color words are
 little-endian; A4 alpha precedes each color word and expands by 17.
 Both ETC1 individual/differential modes, splits, selectors and modifier tables
 are supported. Invalid differential base colors fail before output; only the
-selected mip's color blocks are decoded, while lengths/offsets cover all mips.
-Orientation in the game is not verified.
+selected face/mip's color blocks are decoded, while lengths/offsets cover all
+faces and mips. Cubemaps must be square, carry 108 extra header bytes and store
+each face's complete mip chain before the next face. Extra metadata remains
+opaque. `--face 0..5` selects storage order only; axis assignments, rotations
+and orientation in the game are not verified. The default face/mip are both zero.
 
-Explicitly unsupported: A6, cubemaps, arrays, sub-8 mips/padding,
+Explicitly unsupported: A6, arrays, sub-8 mips/padding,
 other pixel formats, material references, model rendering and animation.
 The input range is capped at 128 MiB; malformed input fails before output.
 An output I/O failure can leave a partial new directory, reported as an error.
@@ -28,6 +32,7 @@ cmake -S texture-decoder -B build
 cmake --build build --config Release
 ctest --test-dir build -C Release --output-on-failure
 stt-tex input.tex --out new-output --mip 0
+stt-tex cubemap.tex --out new-face-output --face 5 --mip 1
 stt-tex image.3ds --offset DECIMAL_OFFSET --size DECIMAL_LENGTH --out new-output
 ```
 
@@ -55,8 +60,8 @@ ETC1 color bit layout and invalid differential overflow policy follow the
 [Azahar texture decoding](https://github.com/azahar-emu/azahar/blob/0ff3440232d6bc9226e37c41c05c5aead03f37fd/src/video_core/texture/texture_decode.cpp).
 No third-party decoder source is copied or linked into this implementation.
 
-Next: verify small mip padding and cubemap layouts against separate test
-vectors, then resolve texture/material/model references.
+Next: resolve texture/material/model references. Small mip padding remains
+unsupported pending real samples; the local survey found none below 8x8.
 
 ## Local validation (23 October 2026)
 
@@ -67,8 +72,8 @@ local image and converted to PAM/PNG outside Git. Visual inspection found a
 coherent logo. Every RGBA byte matched a separately written Python coordinate
 traversal (16x8 groups); this checks the same documented layout, not game fidelity.
 RGBA SHA256: `9569af882b11b667d70372f7f6f375e32c871116263dc105692e0f26fa21d81c`.
-The source image SHA256 remained unchanged. Real-image ABGR8888/alpha and mipmaps
-have not been checked; those cases currently have synthetic coverage only.
+The source image SHA256 remained unchanged. Real-image ABGR8888/alpha and its
+mipmaps have not been checked; those cases currently have synthetic coverage only.
 
 ### ETC1/ETC1A4 extension
 
@@ -85,9 +90,32 @@ ETC1 512x256 (arena image), and ETC1A4 1024x16 (font strip, all 16 alpha values)
 The reference backend validates RGB independently; A4 uses separate coordinate
 code and synthetic expectations, not a second independent A4 codec.
 Both were visually inspected outside Git; no commercial fixtures are included.
-Real compressed mip chains have not yet been tested. A6 remains unsupported.
+Real ETC1A4 mip chains have not yet been tested. A6 remains unsupported.
 
 Reference wheel: `texture2ddecoder-1.0.6-cp311-abi3-win_amd64.whl`, SHA256
 `1bad8209d9dfbfc7daf13ea2e545236ea2bbc1e423b2992b6e7563909975a47b`,
 verified against [official PyPI metadata](https://pypi.org/pypi/texture2ddecoder/1.0.6/json).
 This optional reference was unpacked locally, not installed globally or bundled.
+
+### Cubemaps and real ETC1 mip chains
+
+Fifteen synthetic test methods pass locally in Debug and Release. New tests
+compare all 6 faces x 3 mip levels x 4 formats with different face colors/alpha;
+they reject nonsquare cubes, wrong counts, out-of-range/duplicate face options,
+truncated metadata/table/payload, trailing bytes and corrupt offsets in an
+unselected face. The 108-byte extension is not interpreted or regenerated.
+
+A bounded header survey of 38,320 local TEX resources (150 direct, 38,170 in
+ARC19) found 147 cubemaps and no declared mip dimension below 8. The survey
+decoded only prefixes and is not a new full-stream checksum audit. All 147
+cubemaps were subsequently read in full with zlib checksums where applicable,
+and all face/mip offsets and payload extents matched. All are ETC1: 74 at 32x32
+with 2 mips, 49 at 64x64 with 3 mips, 24 at 128x128 with 4 mips.
+
+Every cube's first face/mip, plus every face/mip of one cube per size, was
+converted by C++ and matched pixel-for-pixel against the independent RGB backend
+and separate face/tile traversal: 198 selections total. A local 6-column,
+3-row contact sheet was visually inspected (columns: storage face 0..5;
+rows: mip 0..2 enlarged for viewing). No spatial face orientation is asserted.
+Cubemap ABGR8888/BGR888/ETC1A4 currently have synthetic coverage only.
+No commercial data or generated images are committed.
