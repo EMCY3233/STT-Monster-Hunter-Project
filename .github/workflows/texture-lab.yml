@@ -10,6 +10,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Visual image and scene C to Python, CPU and GPU dimensions
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Icontracts -Ivita-prototype/src -Icombat-lab/include contracts/stt_play.c vita-prototype/src/visual.c vita-prototype/tests/test_visual.c -o /tmp/stt-visual
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-visual /tmp/stt-cpu.bin /tmp/stt-gpu.bin
+          python tests/inspect_visual_fixture.py /tmp/stt-cpu.bin stt-visual-cpu-synthetic.png
+          python tests/inspect_visual_fixture.py /tmp/stt-gpu.bin stt-visual-gpu-synthetic.png gpu
+          python -m unittest discover -s tests -p test_visual.py -v
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-visual-gpu-synthetic
+          path: stt-visual-*-synthetic.png
+          retention-days: 7
       - run: |
           python texture-lab/fixtures.py /tmp/texture-fixture
           cc -std=c99 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ivita-prototype/src texture-lab/scene.c texture-lab/test_scene.c -lm -o /tmp/texture-tests

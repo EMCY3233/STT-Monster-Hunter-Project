@@ -14,6 +14,7 @@ void stt_monitor_init(SttPrototypeMonitor *m){memset(m,0,sizeof *m);m->socket=-1
 void stt_monitor_close(SttPrototypeMonitor *m){
  if(m->socket>=0)sceNetSocketClose(m->socket);
  if(m->network)sceNetTerm();
+ free(m->visual);m->visual=NULL;
  free(m->memory);
  if(m->module)sceSysmoduleUnloadModule(SCE_SYSMODULE_NET);
  m->socket=-1;m->memory=NULL;m->network=m->module=m->active=0;
@@ -42,7 +43,9 @@ void stt_monitor_toggle(SttPrototypeMonitor *m,uint64_t now){
  memcpy(m->address,&address,sizeof address);
  snprintf(m->session,sizeof m->session,"vita-perf-%"PRIx64,now);
  m->started=m->window_start=now;m->next=now+1000000;m->seq=0;m->sent=m->errors=m->frames=0;
- m->update_sum=m->render_sum=m->present_sum=m->telemetry_sum=0;m->last_ground=m->last_raster=2;m->last_target=0;m->last_ceiling=3;memset(m->stage_sum,0,sizeof m->stage_sum);m->active=1;return;
+ m->update_sum=m->render_sum=m->present_sum=m->telemetry_sum=0;m->last_ground=m->last_raster=2;m->last_target=0;m->last_ceiling=3;memset(m->stage_sum,0,sizeof m->stage_sum);m->active=1;
+ m->visual=calloc(1,sizeof *m->visual);m->visual_next=now;m->visual_frame=m->visual_errors=0;
+ if(!m->visual){m->last_result=-5;goto fail;}return;
 fail:
  stt_monitor_close(m);
 }
@@ -79,4 +82,20 @@ void stt_monitor_frame(SttPrototypeMonitor *m,const char *session,uint64_t now,u
  memset(m->stage_sum,0,sizeof m->stage_sum);
  m->window_start=now;m->next=now+1000000;m->frames=0;m->update_sum=m->render_sum=m->present_sum=m->telemetry_sum=0;
  if(m->errors>=5)stt_monitor_close(m);
+}
+
+void stt_monitor_visual_gpu(SttPrototypeMonitor *m,uint64_t now,const uint32_t *pixels,size_t pitch,const SttGpuVisualScene *scene){
+ if(!m->active||!m->visual||m->visual_errors>=5)return;
+ if(now<m->started||now-m->started>=180000000ULL){stt_monitor_close(m);return;}
+ SttVisual *v=m->visual;
+ if(v->offset==v->total&&now>=m->visual_next){
+  if(stt_visual_capture_gpu(v,pixels,pitch,scene,m->started,m->visual_frame++,m->session)<0){m->visual_errors++;return;}
+  m->visual_next=now+2000000;
+ }
+ SceNetSockaddrIn destination;memcpy(&destination,m->address,sizeof destination);destination.sin_port=sceNetHtons(32101);
+ for(unsigned i=0;i<4;i++){
+  uint8_t payload[STT_VISUAL_HEADER+STT_VISUAL_CHUNK];int bytes=stt_visual_next(v,payload,sizeof payload);if(!bytes)break;
+  int sent=bytes<0?-1:sceNetSendto(m->socket,payload,bytes,SCE_NET_MSG_DONTWAIT,(SceNetSockaddr*)&destination,sizeof destination);
+  if(bytes<0||sent!=bytes){m->visual_errors++;v->offset=v->total;break;}
+ }
 }

@@ -22,7 +22,7 @@ int main(void){
  if(!vita2d_init_advanced(4*1024*1024)){sceKernelExitProcess(1);return 1;}
  vita2d_set_vblank_wait(1);vita2d_set_clear_color(RGBA8(105,132,135,255));font=vita2d_load_default_pgf();
  if(!stt_zone_load("ux0:/data/STTP00001/map-zone.bin")||!stt_tex_load(&scene,"ux0:/data/STTP00001/texture-zone.bin")||!stt_gpu_init(&scene)){
-  for(unsigned i=0;i<300;i++){vita2d_start_drawing();vita2d_clear_screen();if(font)vita2d_pgf_draw_text(font,30,100,0xffffffff,1,"STT 00.22: scene or GPU initialization failed");vita2d_end_drawing();vita2d_swap_buffers();vita2d_wait_rendering_done();}result=1;goto cleanup;
+  for(unsigned i=0;i<300;i++){vita2d_start_drawing();vita2d_clear_screen();if(font)vita2d_pgf_draw_text(font,30,100,0xffffffff,1,"STT 00.24: scene or GPU initialization failed");vita2d_end_drawing();vita2d_swap_buffers();vita2d_wait_rendering_done();}result=1;goto cleanup;
  }
  gpu_ready=1;sceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG);
  callback=sceKernelCreateCallback("stt-texture-power",0,power_event,NULL);if(callback<0){result=1;goto cleanup;}
@@ -32,7 +32,7 @@ int main(void){
   uint64_t start=sceKernelGetProcessTimeWide();sceKernelCheckCallback();SceCtrlData pad;memset(&pad,0,sizeof pad);int read=sceCtrlPeekBufferPositive(0,&pad,1);if(read<0){result=1;break;}if(!read){sceKernelDelayThreadCB(1000);continue;}
   pad.buttons=stt_game_buttons(pad.buttons);unsigned pressed=pad.buttons&~previous;previous=pad.buttons;
   uint64_t elapsed=start>=last?start-last:0;last=start;
-  if(resync){resync=0;paused=1;elapsed=acc=0;stt_pacer_reset(&pacer,start,target);}
+  if(resync){stt_monitor_close(&monitor);resync=0;paused=1;elapsed=acc=0;stt_pacer_reset(&pacer,start,target);}
   if(paused&&!pad.buttons&&!stt_axis(pad.lx)&&!stt_axis(pad.ly)&&!stt_axis(pad.rx)&&!stt_axis(pad.ry))paused=0;
   if(pressed&SCE_CTRL_START)break;
   if(pressed&SCE_CTRL_CIRCLE){target=target==30?45:30;stt_pacer_reset(&pacer,start,target);}
@@ -56,11 +56,19 @@ int main(void){
   stt_tex_matrix(matrix,&view,position,stt_zone_yaw(),0);unsigned terrain=stt_gpu_draw(&scene,0,matrix,0,linear);profile.ground_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);stamp=sceKernelGetProcessTimeWide();
   stt_tex_matrix(matrix,&view,position,stt_zone_yaw(),1);unsigned hunter=stt_gpu_draw(&scene,1,matrix,stt_zone_phase(),linear);profile.body_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);stamp=sceKernelGetProcessTimeWide();
   sceGxmSetFrontDepthFunc(ctx,SCE_GXM_DEPTH_FUNC_ALWAYS);sceGxmSetBackDepthFunc(ctx,SCE_GXM_DEPTH_FUNC_ALWAYS);sceGxmSetFrontDepthWriteEnable(ctx,SCE_GXM_DEPTH_WRITE_DISABLED);sceGxmSetBackDepthWriteEnable(ctx,SCE_GXM_DEPTH_WRITE_DISABLED);
-  char text[180];snprintf(text,sizeof text,"STT 00.22 GPU | %.1f FPS | CAP %u | %s | MAP %u HUNTER %u",frame_us?1000000.0f/frame_us:0,target,linear?"LINEAR":"POINT",terrain,hunter);
+  char text[180];snprintf(text,sizeof text,"STT 00.24 GPU | %.1f FPS | CAP %u | %s | MAP %u HUNTER %u",frame_us?1000000.0f/frame_us:0,target,linear?"LINEAR":"POINT",terrain,hunter);
   if(font){vita2d_pgf_draw_text(font,16,26,0xffffffff,.7f,text);vita2d_pgf_draw_text(font,16,530,0xffffffff,.65f,paused?"Release sticks/buttons | Triangle reset":"R filter | Circle 30/45 | Select metrics | Triangle reset | Start exit");}
+  if(font){snprintf(text,sizeof text,"VISUAL %s ATT %u ERR %u",monitor.active?"ON":"OFF",monitor.visual_frame,monitor.visual_errors);vita2d_pgf_draw_text(font,16,48,0xffffffff,.65f,text);}
   profile.hud_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);vita2d_end_drawing();unsigned render_us=profile.clear_us+profile.ground_us+profile.body_us+profile.hud_us;
   stamp=sceKernelGetProcessTimeWide();vita2d_swap_buffers();vita2d_wait_rendering_done();unsigned present_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);
-  stamp=sceKernelGetProcessTimeWide();stt_monitor_frame(&monitor,"gpu",stamp,tick,0,2,linear,0,target,&profile,update_us,render_us,present_us,telemetry_us);telemetry_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);
+  stamp=sceKernelGetProcessTimeWide();stt_monitor_frame(&monitor,"gpu",stamp,tick,0,2,linear,0,target,&profile,update_us,render_us,present_us,telemetry_us);if(monitor.active){
+   SttGpuVisualScene visual={0};visual.vita=1;visual.tick=tick;visual.target_fps=target;visual.filter_linear=linear;
+   visual.yaw_mdeg=(int32_t)lroundf(stt_zone_yaw()*57295.779513f);while(visual.yaw_mdeg>180000)visual.yaw_mdeg-=360000;while(visual.yaw_mdeg < -180000)visual.yaw_mdeg+=360000;
+   visual.animation_frame=(int32_t)stt_zone_phase();visual.camera_yaw_mdeg=(int32_t)lroundf(camera.yaw*57295.779513f);visual.camera_pitch_mdeg=(int32_t)lroundf(camera.pitch*57295.779513f);
+   for(unsigned i=0;i<3;i++){visual.pos_mm[i]=(int32_t)lroundf(position[i]*1000);visual.eye_mm[i]=(int32_t)lroundf(view.eye[i]*1000);visual.right_ppm[i]=(int32_t)lroundf(view.right[i]*1000000);visual.up_ppm[i]=(int32_t)lroundf(view.up[i]*1000000);visual.forward_ppm[i]=(int32_t)lroundf(view.forward[i]*1000000);}
+   stt_monitor_visual_gpu(&monitor,sceKernelGetProcessTimeWide(),vita2d_get_current_fb(),960,&visual);
+  }
+  telemetry_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);
   unsigned wait=stt_pacer_wait(&pacer,sceKernelGetProcessTimeWide());if(wait)sceKernelDelayThreadCB(wait);frame_us=(unsigned)(sceKernelGetProcessTimeWide()-start);
  }
 cleanup:

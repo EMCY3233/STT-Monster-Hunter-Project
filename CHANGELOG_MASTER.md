@@ -62,6 +62,13 @@ Pruebas portables cubren cadencia con vblank de 60 Hz, sobrecarga, cambio de obj
 
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-22 — Agente visual GPU0.24 (propuesto)
+
+- Corrige la base0.15de la prueba visual0.16: integración directa en GPU0.22/PR33, conservando mapa, texturas y controles. Sin cámara experimental0.23.
+- Captura del framebuffer propio terminado, reducción960×544→240×136 y escenaXYZ/basis de cámara; metadatos visuales2 sin cambiar contratos STT existentes.
+- [Prueba histórica0.16](docs/prototypes/visual-016-result.md):35parejas físicas y parada Select verificadas. No acredita esta capturaGPU. Instalador0.22conservado y firewall retirado.
+- Pruebas PC aprobadas; fixtureC/compilaciónVita e inspección00.24pendientes deCI al publicar. [Diseño y límites](docs/prototypes/visual-agent.md).
+
 ## 2026-10-21 — STT-MON-008 / límite temporal durante suspensión 0.5
 
 - Corrige el control que usaba solo reloj de proceso: [presupuesto conservador proceso+RTC](docs/suspend-deadlines.md), con parada ante lectura fallida/retroceso y protección ante saltos/desbordamientos.
