@@ -6,7 +6,7 @@ set(VITASDK "$ENV{VITASDK}")
 set(CMAKE_TOOLCHAIN_FILE "${VITASDK}/share/vita.toolchain.cmake" CACHE FILEPATH "Vita toolchain")
 project(stt_vita_prototype C)
 include("${VITASDK}/share/vita.cmake" REQUIRED)
-add_executable(stt_vita_prototype src/main.c src/monitor.c ../map-lab/stt_zone.c ../contracts/stt_perf.c src/control.c src/render.c src/snapshot.c src/asset.c src/weapon.c ../pose-runtime/stt_pose.c
+add_executable(stt_vita_prototype src/main.c src/monitor.c src/visual.c ../map-lab/stt_zone.c ../contracts/stt_perf.c src/control.c src/render.c src/snapshot.c src/asset.c src/weapon.c ../pose-runtime/stt_pose.c
   ../combat-lab/src/stt_combat.c ../contracts/stt_play.c)
 target_include_directories(stt_vita_prototype PRIVATE src ../combat-lab/include ../contracts ../pose-runtime)
 set_property(TARGET stt_vita_prototype PROPERTY C_STANDARD 99)

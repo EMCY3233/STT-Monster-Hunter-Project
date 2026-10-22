@@ -1,3 +1,9 @@
+## 00.24 — Agente visual GPU (2026-10-22)
+
+- Captura del framebuffer propio con mapa/texturas de la base GPU 00.22, imágenes 240×136 y datos versionados de posición/cámara por STV/1; cámara experimental 00.23 excluida.
+- CI superada y prueba física: 24 parejas PNG/JSON, 23 posiciones y cámaras distintas; usuario confirma Select OFF y ERR 0. Receptor cerrado y excepción temporal retirada.
+- FPS comparativo y suspensión pendientes; sin afirmación de entrega UDP sin pérdidas. Limpieza local 0.16 y retirada de instaladores remotos 00.16/00.22 completadas con hash/identidad verificados; paquete 00.24 y datos conservados. Véase docs/prototypes/visual-agent.md.
+
 ## 00.22 — GPU texture trial (2026-10-22)
 
 - Separate bounded texture stream and small local terrain/hunter trial with original UVs.
@@ -61,6 +67,13 @@ Pruebas portables cubren cadencia con vblank de 60 Hz, sobrecarga, cambio de obj
 - Detalles: docs/prototypes/carry-study.md.
 
 # Changelog maestro — Start The Travesy, Monster Hunter
+
+## 2026-10-22 — Agente visual GPU0.24 (propuesto)
+
+- Corrige la base0.15de la prueba visual0.16: integración directa en GPU0.22/PR33, conservando mapa, texturas y controles. Sin cámara experimental0.23.
+- Captura del framebuffer propio terminado, reducción960×544→240×136 y escenaXYZ/basis de cámara; metadatos visuales2 sin cambiar contratos STT existentes.
+- [Prueba histórica0.16](docs/prototypes/visual-016-result.md):35parejas físicas y parada Select verificadas. No acredita esta capturaGPU. Instalador0.22conservado y firewall retirado.
+- Pruebas PC aprobadas; fixtureC/compilaciónVita e inspección00.24pendientes deCI al publicar. [Diseño y límites](docs/prototypes/visual-agent.md).
 
 ## 2026-10-21 — STT-MON-008 / límite temporal durante suspensión 0.5
 
