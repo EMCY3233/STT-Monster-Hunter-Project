@@ -1,5 +1,8 @@
 # STT — Ingeniería inversa y recursos
 
+[Seguimiento y primer rango BSS variable](runtime-bss-followup.md): los doce candidatos de datos permanecen estables; BSS aporta una ventana variable en 0x0110D000, confirmada con 118 lecturas y 116 cambios sucesivos. Semántica todavía desconocida.
+
+
 [Ampliación de lectura y extracción](runtime-extraction-improvements.md): 902 lecturas correctas, 450 ventanas por pasada; doce diferencias respecto al archivo estático, estables entre muestras. Herramienta de extracción privada e investigación de protocolos, con siete pruebas nuevas.
 
 

@@ -2,10 +2,26 @@ from pathlib import Path
 import sys,json,hashlib,tempfile,unittest
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools/stt_re'))
-from sample_citra_data_windows import plan_windows,compare_windows,capture
+from sample_citra_data_windows import plan_windows,plan_bss_windows,compare_windows,capture
 
 
 class SparseTests(unittest.TestCase):
+    def test_bss_has_no_file_backing_and_starts_after_mapped_data(self):
+        mapping=dict(segments=[dict(name='data',address=8192,code_bytes=4090,mapped_bytes=4096,file_offset=0)],bss_bytes=4097)
+        self.assertEqual(plan_bss_windows(mapping,4096),[dict(address=12288,size=32,file_offset=None),dict(address=16384,size=1,file_offset=None)])
+        with self.assertRaises(ValueError):plan_bss_windows(mapping,4095)
+
+    def test_bss_capture_never_claims_static_match(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            image=Path(tmp)/'image';image.write_bytes(b'abcd'+bytes(4096))
+            mapping=Path(tmp)/'map'
+            mapping.write_text(json.dumps(dict(output_sha256=hashlib.sha256(image.read_bytes()).hexdigest(),segments=[dict(name='text',address=4096,file_offset=0),dict(name='data',address=8192,code_bytes=4090,mapped_bytes=4096,file_offset=4)],bss_bytes=8)))
+            def read(address,size,**kw):return b'abcd' if address==4096 else bytes(size)
+            with patch('sample_citra_data_windows.read_memory',side_effect=read),patch('sample_citra_data_windows.time.sleep'):
+                r=capture(mapping,image,Path(tmp)/'out',region='bss')
+            rows=[json.loads(x) for x in (Path(tmp)/'out/reads.jsonl').read_text().splitlines()]
+            self.assertEqual(r['region'],'bss');self.assertTrue(all(x['matches_static'] is None for x in rows if x['window']>=0))
+
     def fixture(self,tmp,length=4097):
         image=Path(tmp)/'image';image.write_bytes(b'abcdxxxx'+bytes(length))
         mapping=Path(tmp)/'map.json'

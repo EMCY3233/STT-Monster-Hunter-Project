@@ -1,5 +1,7 @@
 # Ampliación de lectura y extracción — 22-10-2026
 
+Estado posterior: [seguimiento de candidatos y BSS](runtime-bss-followup.md). El ensayo de datos descrito aquí se conserva; la nueva etapa añade un modo BSS delimitado por el loader y encuentra un rango variable. Sus resultados no convierten esta captura anterior en un volcado de BSS.
+
 ## Resultado implementado y ejecutado
 
 `tools/stt_re/sample_citra_data_windows.py` amplía el lector RPC v1 existente. En vez de repetir solo el inicio del segmento de datos, construye ventanas reproducibles a partir del mapa ExHeader previamente verificado: 32 bytes al inicio de cada página de 4 KiB, sin salir de los bytes declarados del segmento. Revalida el hash de todo el `.code` estático antes de leer. Cada pasada empieza con un control de cuatro bytes de código; un control distinto detiene la captura.

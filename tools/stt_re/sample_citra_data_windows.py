@@ -38,7 +38,17 @@ def compare_windows(first, last):
                 unpaired_windows=len(first.keys() ^ last.keys()), changed_windows=result)
 
 
-def capture(mapping_path, image_path, out, sweeps=2, stride=4096, rate=20, seconds=60):
+def plan_bss_windows(mapping, image_size, stride=4096):
+    """Citra 0ff3440 loader appends page-rounded BSS after page-rounded data."""
+    data=next(s for s in mapping['segments'] if s['name']=='data')
+    mapped=data['mapped_bytes'];length=mapping['bss_bytes']
+    if type(mapped) is not int or mapped%4096 or mapped<data['code_bytes'] or data['file_offset']+mapped!=image_size:
+        raise ValueError('BSS layout does not match loader backing')
+    planned=plan_windows(dict(address=data['address']+mapped,code_bytes=length,file_offset=0),stride)
+    return [dict(address=w['address'],size=w['size'],file_offset=None) for w in planned]
+
+
+def capture(mapping_path, image_path, out, sweeps=2, stride=4096, rate=20, seconds=60, region='data'):
     if type(sweeps) is not int or not 2 <= sweeps <= 3:
         raise ValueError('two or three sweeps required')
     if not math.isfinite(rate) or not 1 <= rate <= 20:
@@ -52,8 +62,9 @@ def capture(mapping_path, image_path, out, sweeps=2, stride=4096, rate=20, secon
         raise ValueError('static image hash mismatch')
     data = next(s for s in mapping['segments'] if s['name']=='data')
     text = next(s for s in mapping['segments'] if s['name']=='text')
-    windows = plan_windows(data, stride)
-    if any(w['file_offset']+w['size'] > len(image) for w in windows):
+    if region not in ('data','bss'):raise ValueError('unknown region')
+    windows = plan_windows(data, stride) if region=='data' else plan_bss_windows(mapping,len(image),stride)
+    if any(w['file_offset'] is not None and w['file_offset']+w['size'] > len(image) for w in windows):
         raise ValueError('static backing outside image')
     control = dict(address=text['address'], size=4, file_offset=text['file_offset'])
     if not 0 <= control['address'] <= 2**32-4 or not 0 <= control['file_offset'] <= len(image)-4:
@@ -68,7 +79,8 @@ def capture(mapping_path, image_path, out, sweeps=2, stride=4096, rate=20, secon
         windows=windows, sweeps=sweeps, control=control, stride=stride,
         maximum_requests_per_second=rate, maximum_seconds=seconds,
         maximum_extracted_bytes=budget, atomic_snapshot=False,
-        scope='sparse file-backed data only; no heap, BSS, VRAM or process scan')
+        region=region,scope='sparse '+region+' only; no heap, VRAM or process scan',
+        bss_loader_reference='Citra 0ff3440232d6bc9226e37c41c05c5aead03f37fd/src/core/loader/ncch.cpp' if region=='bss' else None)
     (out/'protocol.json').write_text(json.dumps(protocol,indent=2)+'\n',encoding='utf-8')
     started=time.monotonic(); deadline=started+seconds
     first={}; last={}; attempts=successes=errors=consecutive=0
@@ -86,7 +98,7 @@ def capture(mapping_path, image_path, out, sweeps=2, stride=4096, rate=20, secon
                     value=read_memory(w['address'],w['size'],timeout=min(0.25,deadline-begun))
                     latency=time.monotonic()-begun;latencies.append(latency)
                     record.update(sha256=sha(value),binary_offset=bytes_saved,
-                        matches_static=value==image[w['file_offset']:w['file_offset']+w['size']])
+                        matches_static=None if w['file_offset'] is None else value==image[w['file_offset']:w['file_offset']+w['size']])
                     binary.write(value);bytes_saved+=len(value);successes+=1;consecutive=0
                     if index==-1 and not record['matches_static']:
                         reason='control_mismatch'
@@ -105,7 +117,7 @@ def capture(mapping_path, image_path, out, sweeps=2, stride=4096, rate=20, secon
             if reason!='complete':break
     comparison=compare_windows(first,last)
     receipt=dict(schema=1,stop_reason=reason,elapsed_seconds=time.monotonic()-started,
-        requested_sweeps=sweeps,completed_sweeps=completed_sweeps,
+        region=region,requested_sweeps=sweeps,completed_sweeps=completed_sweeps,
         attempts=attempts,successes=successes,errors=errors,extracted_bytes=bytes_saved,
         windows_per_sweep=len(windows),comparison=comparison,
         mean_request_seconds=sum(latencies)/len(latencies) if latencies else None,
@@ -127,5 +139,6 @@ if __name__=='__main__':
     p.add_argument('--stride',type=int,default=4096)
     p.add_argument('--rate',type=float,default=20)
     p.add_argument('--seconds',type=float,default=60)
+    p.add_argument('--region',choices=['data','bss'],default='data')
     a=p.parse_args()
-    print(json.dumps(capture(a.mapping,a.image,a.out,a.sweeps,a.stride,a.rate,a.seconds)))
+    print(json.dumps(capture(a.mapping,a.image,a.out,a.sweeps,a.stride,a.rate,a.seconds,a.region)))
