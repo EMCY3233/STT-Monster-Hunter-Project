@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — AuditoríaEigent ylímitesLMT
+
+-RecibidaauditoríadocumentalEigent;contrastedetextoshistóricosencargadoalmonitor,sinduplicarPROJECT_STATUSdePR3.
+-PaqueteLMTprivadoanálisis,noreproducciónVita;activospropios/legalespara prototipos.
+
 ## 22-10-2026 — Terreno:indiciosdearquitectura
 
 -Investigaciónreportasuelo/paredes/postura/IK y13LMTúnicos;controlador yclipsespecíficospendientes. No funciónintegralconfirmada.
