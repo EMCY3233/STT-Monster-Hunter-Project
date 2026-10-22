@@ -1,3 +1,9 @@
+## 2026-10-22 — Prototipo 0.18: cámara hacia arriba
+
+- Mirada por encima del horizonte con palanca derecha y altura mínima respecto al suelo.
+- Vista centralizada, exclusión horizontal del cazador y comprobación del cuerpo/equipo actuales en todas sus poses.
+- Capturas arriba/horizonte/abajo y pruebas de suelo con pitch negativo. Ver docs/prototypes/camera-up.md.
+
 ## 2026-10-22 — Prototipo 0.17: suelo por tramos
 
 - G2 agrupa píxeles de cada celda; G0/G1 se conservan para comparar.

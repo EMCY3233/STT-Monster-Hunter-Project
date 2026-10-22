@@ -10,10 +10,20 @@ float stt_axis(unsigned char value) {
 void stt_camera_step(SttCamera *c,unsigned char rx,unsigned char ry) {
     c->yaw+=stt_axis(rx)*0.035f;
     c->pitch+=stt_axis(ry)*0.025f;
-    if(c->pitch<0.12f)c->pitch=0.12f;
-    if(c->pitch>1.05f)c->pitch=1.05f;
+    if(c->pitch<STT_CAMERA_MIN_PITCH)c->pitch=STT_CAMERA_MIN_PITCH;
+    if(c->pitch>STT_CAMERA_MAX_PITCH)c->pitch=STT_CAMERA_MAX_PITCH;
     if(c->yaw>PI)c->yaw-=2*PI;
     if(c->yaw<-PI)c->yaw+=2*PI;
+}
+int stt_camera_view(SttCamera camera,int32_t x,int32_t z,SttCameraView *view){
+ if(!view||!isfinite(camera.yaw)||!isfinite(camera.pitch)||x<-1000000||x>1000000||z<-1000000||z>1000000)return 0;
+ float pitch=fmaxf(STT_CAMERA_MIN_PITCH,fminf(STT_CAMERA_MAX_PITCH,camera.pitch));
+ float sy=sinf(camera.yaw),cy=cosf(camera.yaw),sp=sinf(pitch),cp=cosf(pitch);
+ float boom=fmaxf(6*cp,STT_CAMERA_MIN_BOOM);
+ *view=(SttCameraView){
+  {x*.001f-sy*boom,fmaxf(STT_CAMERA_MIN_HEIGHT,1.1f+sp*6),z*.001f-cy*boom},
+  {cy,0,-sy},{sy*cp,-sp,cy*cp},{sy*sp,cp,cy*sp}};
+ return 1;
 }
 SttMove stt_camera_move(SttCamera c,unsigned char lx,unsigned char ly,uint16_t previous) {
     float side=stt_axis(lx),forward=-stt_axis(ly),length=sqrtf(side*side+forward*forward);
