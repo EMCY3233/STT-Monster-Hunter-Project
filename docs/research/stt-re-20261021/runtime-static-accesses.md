@@ -1,5 +1,7 @@
 # Accesos estáticos candidatos y contraste con ejecución — 22-10-2026
 
+> Seguimiento: [archivo de sesiones, prioridades y exportación](runtime-session-archive.md).
+
 ## Hallazgo y límite
 
 Se encontraron **24 sitios estáticos candidatos de lectura** de dos campos BSS vecinos: 18 para `0x0110CF4C` y seis para `0x0110CF50`. La secuencia examinada carga una dirección mediante un literal relativo a PC, conserva una base conocida y lee un desplazamiento calculable. Los 24 sitios son distintos; no son 24 ejecuciones observadas. Las 71 palabras únicas que los sustentan —semillas, literales y accesos— coinciden entre la imagen estática y las lecturas de Citra.
