@@ -1,5 +1,8 @@
 # STT — Ingeniería inversa y recursos
 
+[Ampliación de lectura y extracción](runtime-extraction-improvements.md): 902 lecturas correctas, 450 ventanas por pasada; doce diferencias respecto al archivo estático, estables entre muestras. Herramienta de extracción privada e investigación de protocolos, con siete pruebas nuevas.
+
+
 [Sondeo antes/después](live-transition-probe.md): 12 lecturas correctas, rangos estables; la pantalla no avanzó y no se confirmó que el juego aceptara la pulsación.
 
 
