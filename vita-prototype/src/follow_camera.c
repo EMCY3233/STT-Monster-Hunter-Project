@@ -41,7 +41,11 @@ int stt_follow_step(SttFollowCamera *state,const SttFollowConfig *c,SttCamera an
  /* Smooth recovery may cut the orbit inside the hunter on a large recenter.
     Without world constraints, snap to the safe boom rather than enter it. */
  float dx=v.view.eye[0]-hunter[0],dz=v.view.eye[2]-hunter[2];
- if(dx*dx+dz*dz<STT_CAMERA_MIN_BOOM*STT_CAMERA_MIN_BOOM||v.view.eye[1]<hunter[1]+c->min_height){
+ float old_dx=state->eye[0]-hunter[0],old_dz=state->eye[2]-hunter[2];
+ int entering_body=state->ready&&old_dx*old_dx+old_dz*old_dz>=STT_CAMERA_MIN_BOOM*STT_CAMERA_MIN_BOOM&&dx*dx+dz*dz<STT_CAMERA_MIN_BOOM*STT_CAMERA_MIN_BOOM;
+ /* A previously compressed boom must still recover gradually. Only prevent
+    a new shortcut into the body, rather than snapping outward from a wall. */
+ if(entering_body||v.view.eye[1]<hunter[1]+c->min_height){
   float cut[3];memcpy(cut,safe,sizeof cut);
   if(sweep&&state->ready&&!snap&&!constrain(c,sweep,context,state->eye,cut,&v.collision))return 0;
   /* A body-avoiding cut is allowed only when the world sweep permits it. */
@@ -58,3 +62,4 @@ int stt_follow_step(SttFollowCamera *state,const SttFollowConfig *c,SttCamera an
  if(!finite3(v.view.eye)||!finite3(v.focus)||!finite3(v.view.up))return 0;
  memcpy(state->eye,v.view.eye,sizeof state->eye);memcpy(state->focus,v.focus,sizeof state->focus);state->ready=1;*out=v;return 1;
 }
+
