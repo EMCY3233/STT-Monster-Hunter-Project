@@ -8,7 +8,7 @@ target_include_directories(stt_vita_prototype PRIVATE . ../vita-prototype/src ..
 set_property(TARGET stt_vita_prototype PROPERTY C_STANDARD 99)
 target_compile_definitions(stt_vita_prototype PRIVATE STT_BUILD_CODE="0022")
 target_compile_options(stt_vita_prototype PRIVATE -O2 -Wall -Wextra -Werror)
-target_link_libraries(stt_vita_prototype vita2d freetype png jpeg z m SceGxm_stub SceDisplay_stub SceCtrl_stub ScePgf_stub ScePvf_stub SceSysmodule_stub SceNet_stub ScePower_stub SceCommonDialog_stub SceAppMgr_stub SceSharedFb_stub)
+target_link_libraries(stt_vita_prototype vita2d freetype png jpeg z m SceGxm_stub SceDisplay_stub SceCtrl_stub ScePgf_stub ScePvf_stub SceSysmodule_stub SceNet_stub ScePower_stub SceCommonDialog_stub SceAppMgr_stub)
 vita_create_self(stt_vita_prototype.self stt_vita_prototype)
 vita_create_vpk(stt_vita_prototype.vpk STTP00001 stt_vita_prototype.self VERSION 00.22 NAME "STT Vita Prototype")
 
