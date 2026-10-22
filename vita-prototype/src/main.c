@@ -50,7 +50,7 @@ int main(void){
   controls.buttons=stt_game_buttons(controls.buttons);
   int clock_reset=frame_start<previous_time;
   uint64_t elapsed=clock_reset?0:frame_start-previous_time;previous_time=frame_start;
-  if(resync_requested||clock_reset){resync_requested=0;accumulator=0;elapsed=0;previous=controls.buttons;pending_attack=0;pending_toggle=0;need_release=1;dropped++;}
+  if(resync_requested||clock_reset){stt_monitor_close(&monitor);resync_requested=0;accumulator=0;elapsed=0;previous=controls.buttons;pending_attack=0;pending_toggle=0;need_release=1;dropped++;}
   if(elapsed>100000)dropped++; /* Slow rendering is not a power/resume event. */
   unsigned pressed=controls.buttons&~previous;previous=controls.buttons;
   if(pressed&SCE_CTRL_SELECT)stt_monitor_toggle(&monitor,frame_start);
@@ -77,6 +77,7 @@ int main(void){
   }
   update_us=(unsigned)(sceKernelGetProcessTimeWide()-update_start);
   stt_render_monitor_status(monitor.active,monitor.sent,monitor.last_result);
+  stt_render_visual_status(monitor.visual_frame,monitor.visual_errors);
   uint64_t render_start=sceKernelGetProcessTimeWide();
   stt_render_equipment(cached_pixels,depth,&combat,camera,frame_us,dropped,need_release,&original_asset,&equipped_sword,&equipment);
   render_us=(unsigned)(sceKernelGetProcessTimeWide()-render_start);
@@ -88,6 +89,14 @@ int main(void){
   present_us=(unsigned)(sceKernelGetProcessTimeWide()-present_start);
   uint64_t telemetry_start=sceKernelGetProcessTimeWide();
   stt_monitor_frame(&monitor,session,telemetry_start,combat.tick,(unsigned)equipment.mode,stt_render_get_ground(),update_us,render_us,present_us,telemetry_us);
+  if(monitor.active){
+  SttPlaySample visual_scene;
+  stt_vita_snapshot(&visual_scene,&combat,camera,session,0,0,frame_us,update_us,dropped);
+  if(combat.hunter.state==STT_IDLE&&(equipment.mode==STT_SHEATHED||equipment.mode==STT_DRAWN)&&
+     (stt_axis(controls.lx)!=0||stt_axis(controls.ly)!=0)&&!need_release)visual_scene.state=1;
+  visual_scene.battery_pct=scePowerGetBatteryLifePercent();
+  stt_monitor_visual(&monitor,sceKernelGetProcessTimeWide(),cached_pixels,STT_PITCH,&visual_scene,(unsigned)equipment.mode,stt_render_get_ground(),&combat.target);
+  }
   telemetry_us=(unsigned)(sceKernelGetProcessTimeWide()-telemetry_start);
   unsigned work_us=(unsigned)(sceKernelGetProcessTimeWide()-frame_start);
   if(work_us>33333)dropped++;

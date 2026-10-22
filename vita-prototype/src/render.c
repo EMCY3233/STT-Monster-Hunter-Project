@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 #define RGB(r,g,b) (0xff000000u | (unsigned)(b)<<16 | (unsigned)(g)<<8 | (r))
+static unsigned visual_frames,visual_errors;
+void stt_render_visual_status(unsigned frames,unsigned errors){visual_frames=frames;visual_errors=errors;}
 typedef struct{float x,y,z;} V;
 static uint32_t *fb;static float *zb;static V eye,right,up,forward;
 static V sub(V a,V b){return(V){a.x-b.x,a.y-b.y,a.z-b.z};}
@@ -109,7 +111,7 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  float tx=c->target.x_mm*.001f,tz=c->target.z_mm*.001f;
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-15 PERF LAB",RGB(119,223,235));
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-16 VISUAL",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
  rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE RIGHT CAMERA CROSS DRAW-ATTACK START EXIT",RGB(238,239,223));
  snprintf(line,sizeof line,"L GROUND  SELECT MONITOR  US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
@@ -117,6 +119,7 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  if(asset)text(8,36,asset->status==STT_ASSET_READY?"ASSET READY":asset->status==STT_ASSET_MISSING?"ASSET MISSING - SIMPLE HUNTER":"ASSET INVALID - SIMPLE HUNTER",RGB(255,234,125));
  if(equipment){static const char *modes[]={"SHEATHED","DRAWING","DRAWN","SHEATHING"};text(330,36,modes[(unsigned)equipment->mode<=STT_SHEATHING?equipment->mode:0],RGB(255,234,125));}
  snprintf(line,sizeof line,"FPS %u G%u NET %s %u R%d",frame_us?1000000u/frame_us:0,ground_mode,monitor_active?"ON":"OFF",monitor_sent,monitor_result);text(125,45,line,RGB(153,185,191));
+ snprintf(line,sizeof line,"VISUAL ATT %u ERR %u SELECT START-STOP",visual_frames,visual_errors);text(8,55,line,RGB(153,185,191));
  if(weapon)text(8,45,weapon->status==STT_ASSET_READY&&equipped?"SWORD READY":"SWORD FALLBACK",RGB(255,234,125));
 }
 void stt_render_with_asset(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused,SttAsset *asset){

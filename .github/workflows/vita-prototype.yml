@@ -10,6 +10,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Visual wire C to Python, bounded fragments and scene pairing
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Icontracts -Ivita-prototype/src -Icombat-lab/include contracts/stt_play.c vita-prototype/src/visual.c vita-prototype/tests/test_visual.c -o /tmp/stt-visual
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-visual /tmp/stt-visual.bin
+          python tests/inspect_visual_fixture.py /tmp/stt-visual.bin stt-visual-synthetic.png
+          python -m unittest discover -s tests -p 'test_visual.py' -v
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-visual-synthetic
+          path: stt-visual-synthetic.png
+          retention-days: 7
       - name: Performance wire contract and PC monitor integration
         run: |
           cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Icontracts contracts/stt_perf.c contracts/tests/test_perf.c -o /tmp/stt-perf

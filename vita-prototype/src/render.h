@@ -17,4 +17,5 @@ void stt_render_equipment(uint32_t *pixels,float *depth,const SttCombat *combat,
 void stt_render_set_ground(unsigned mode);
 unsigned stt_render_get_ground(void);
 void stt_render_monitor_status(int active,unsigned sent,int result);
+void stt_render_visual_status(unsigned frames,unsigned errors);
 #endif

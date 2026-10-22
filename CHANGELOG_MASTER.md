@@ -20,6 +20,12 @@
 
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-22 — Agente visual integrado 0.16 (propuesto)
+
+- Rama derivada de PR #25: imágenes 240×136 RGB565 del buffer propio y escena emparejada; protocolo STV/1 separado en UDP32101, sin cambiar STT/3–4. Select controla captura, sin órdenes remotas.
+- Receptor visual con PNG/JSON y vista HTML local, memoria de ensamblaje/caducidad/cuotas acotadas, sin imágenes incompletas presentadas como válidas.
+- Pruebas Python locales en PC; fixture C/sanitizadores, VPK e inspección 00.16 pendientes de CI al publicar. Sin recepción física nueva, FTP, instalación ni firewall. [Alcance y límites](docs/prototypes/visual-agent.md).
+
 ## 2026-10-21 — STT-MON-008 / límite temporal durante suspensión 0.5
 
 - Corrige el control que usaba solo reloj de proceso: [presupuesto conservador proceso+RTC](docs/suspend-deadlines.md), con parada ante lectura fallida/retroceso y protección ante saltos/desbordamientos.

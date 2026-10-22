@@ -1,5 +1,7 @@
 # STT 0.15 — medición del prototipo y comparación del suelo
 
+Revisión posterior 0.16: [agente visual integrado](visual-agent.md), con canal separado para imágenes y escena. Los resultados y pendientes de esta página corresponden a 0.15.
+
 El usuario confirmó movimiento, cámara, extracción y golpe en 0.14 y observó 10–12 FPS. Es un resultado comunicado por el usuario, no una captura sincronizada ni un perfil del dispositivo. Esta versión añade el productor de lectura al mismo proceso del prototipo; abrir el monitor independiente en primer plano no mide de forma equivalente el juego suspendido.
 
 ## Uso
