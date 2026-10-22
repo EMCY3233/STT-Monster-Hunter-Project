@@ -13,5 +13,5 @@ with zipfile.ZipFile(vpk) as z:
  assert z.read('eboot.bin').startswith(b'SCE\0')
  assert sum(i.file_size for i in z.infolist())<4*1024*1024
  s=module.sfo_strings(z.read('sce_sys/param.sfo'))
- assert s['TITLE_ID']=='STTP00001' and s['TITLE']=='STT Vita Prototype' and s['APP_VER']=='00.22'
+ assert s['TITLE_ID']=='STTP00001' and s['TITLE']=='STT Vita Prototype' and s['APP_VER']=='00.23'
 print('PASS GPU VPK identity, hash and no embedded scene resources')

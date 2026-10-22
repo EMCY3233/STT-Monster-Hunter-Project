@@ -1,10 +1,12 @@
-# STT 00.22 — GPU texture comparison
+# STT 00.22 â€” GPU texture comparison
 
 Small local terrain crop and assembled hunter with original-size decoded base textures and UVs. Reuses original STT gait and SBC contact controller. GXM performs projection, near/far clipping, perspective texture sampling and depth testing. No runtime shader compiler or plugin installation is required: the build links libvita2d and its precompiled shader objects.
 
 The VPK contains only executable and metadata; private texture-zone.bin and existing map-zone.bin stay outside GitHub. The texture stream has bounded counts, dimensions, byte budget, finite-coordinate/index checks and exact EOF. The loader keeps a previous scene unchanged on failed replacement. Sources assume little-endian IEEE float32 as Vita/CI targets.
 
-Controls: sticks move/orbit; R switches linear/point sampling on the same scene; Circle switches 30/45 cap; Triangle resets; Select starts/stops the existing three-minute metric sender; Start exits. Movement stays within a 10 m test radius; terrain triangles are cropped at 14 m. This is a renderer trial, not the complete map or combat lab.
+Camera 00.23 adds XYZ following, frame-time smoothing and L recenter; see CAMERA_CONTRACT.md. It has no native world-sweep backend, no console validation and no inherited 00.22 FPS guarantee. The five reference Python tests pass independently. Monitor files remain unchanged from PR33; build-prefixed sender uses the existing compile definition.
+
+Controls: sticks move/orbit; L recenters; R switches linear/point sampling on the same scene; Circle switches 30/45 cap; Triangle resets; Select starts/stops the existing three-minute metric sender; Start exits. Movement stays within a 10 m test radius; terrain triangles are cropped at 14 m. This is a renderer trial, not the complete map or combat lab.
 
 Limitations: no native foot IK; STT gait is not a recovered MH4U animation; base-color shader is opaque and does not reproduce original materials, foliage cutouts, lighting or effects. No mip chain in this trial. Original texture resolution is preserved, without AI enlargement. GPU submission stage times are CPU timings; present_us includes synchronous completion and display queue work, not a GPU utilization percentage. Compare fixed camera/action captures; the cropped GPU scene is not geometry-equivalent to the full 00.21 scene. No physical FPS or visual result is asserted by CI.
 
