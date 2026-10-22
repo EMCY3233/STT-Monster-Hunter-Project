@@ -1,3 +1,9 @@
+## 00.24 — Agente visual GPU (2026-10-22)
+
+- Captura del framebuffer propio con mapa/texturas de la base GPU 00.22, imágenes 240×136 y datos versionados de posición/cámara por STV/1; cámara experimental 00.23 excluida.
+- CI superada y prueba física: 24 parejas PNG/JSON, 23 posiciones y cámaras distintas; usuario confirma Select OFF y ERR 0. Receptor cerrado y excepción temporal retirada.
+- FPS comparativo y suspensión pendientes; sin afirmación de entrega UDP sin pérdidas. Limpieza local 0.16 completada; instaladores remotos pendientes por FTP cerrado. Véase docs/prototypes/visual-agent.md.
+
 ## 00.22 — GPU texture trial (2026-10-22)
 
 - Separate bounded texture stream and small local terrain/hunter trial with original UVs.
