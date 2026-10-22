@@ -1,5 +1,7 @@
 # Flechas normales sostenidas — 22-10-2026
 
+> Seguimiento: [primera interpretación de contadores y comparación BSS](runtime-counter-translation.md).
+
 Se creó `tools/stt_re/hold_citra_arrow.py` y se verificó desplazamiento visible en MH4U mediante flecha derecha dos segundos; izquierda dos segundos devolvió al personaje hacia el punto anterior. Una repetición de derecha se realizó íntegramente dentro de una captura de treinta segundos: 299/299 lecturas válidas, cero errores y controles de código correctos antes/después. Esto resuelve la limitación previa de pulsaciones breves sin movimiento confirmado.
 
 ## Entrada y protecciones

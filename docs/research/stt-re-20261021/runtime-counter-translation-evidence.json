@@ -1,0 +1,257 @@
+{
+  "phases": [
+    {
+      "condition": "pause_shortcut_attempt_not_paused",
+      "summary": {
+        "samples": 80,
+        "fields": {
+          "4": {
+            "changed_pairs": 79,
+            "observed_units": 474,
+            "units_per_host_second": 59.78779816535282,
+            "small_forward_deltas_only": true
+          },
+          "8": {
+            "changed_pairs": 79,
+            "observed_units": 474,
+            "units_per_host_second": 59.78779816535282,
+            "small_forward_deltas_only": true
+          }
+        },
+        "paired_fields_equal": true,
+        "paired_difference_u32_counts": [
+          {
+            "delta": 0,
+            "count": 80
+          }
+        ],
+        "interpretation": "periodic progress candidates; equality reported separately; field meaning and frame identity unverified",
+        "semantic_identity_verified": false
+      },
+      "receipt_sha256": "7185a746f7447d14c164a767e326ffe2bc3a3bdef80e76dc4e8e5698ca174bf4",
+      "samples_sha256": "685618889b2e2d41604df4575edfddea13359aa58d388eb4d69160c3d3233af6",
+      "reads_sha256": "2eea2f84e4d46e497276b34d36661d48bfe22855e62ea325f7dddefc0ba95534"
+    },
+    {
+      "condition": "visually_confirmed_emulator_pause",
+      "summary": {
+        "samples": 80,
+        "fields": {
+          "4": {
+            "changed_pairs": 0,
+            "observed_units": 0,
+            "units_per_host_second": 0.0,
+            "small_forward_deltas_only": true
+          },
+          "8": {
+            "changed_pairs": 0,
+            "observed_units": 0,
+            "units_per_host_second": 0.0,
+            "small_forward_deltas_only": true
+          }
+        },
+        "paired_fields_equal": false,
+        "paired_difference_u32_counts": [
+          {
+            "delta": 4294967295,
+            "count": 80
+          }
+        ],
+        "interpretation": "periodic progress candidates; equality reported separately; field meaning and frame identity unverified",
+        "semantic_identity_verified": false
+      },
+      "receipt_sha256": "c32d87f29e8df7ce6a9c81ccf706c4c3b820c26da2f30b46f032bc207dc8e701",
+      "samples_sha256": "9b2ab62ed8cca7975dd6b361071ef806acca71a4c8b5a2720727ec57e735e47e",
+      "reads_sha256": "845dc12f6270217aefbe845a9d239dc652fc094e3d6316490369375ca4fed9f4"
+    },
+    {
+      "condition": "resumed",
+      "summary": {
+        "samples": 80,
+        "fields": {
+          "4": {
+            "changed_pairs": 79,
+            "observed_units": 474,
+            "units_per_host_second": 59.79524096554587,
+            "small_forward_deltas_only": true
+          },
+          "8": {
+            "changed_pairs": 79,
+            "observed_units": 474,
+            "units_per_host_second": 59.79524096554587,
+            "small_forward_deltas_only": true
+          }
+        },
+        "paired_fields_equal": true,
+        "paired_difference_u32_counts": [
+          {
+            "delta": 0,
+            "count": 80
+          }
+        ],
+        "interpretation": "periodic progress candidates; equality reported separately; field meaning and frame identity unverified",
+        "semantic_identity_verified": false
+      },
+      "receipt_sha256": "bade8ef35a7e4f6fc98fe7d6c6cc94e802d1e8e7b46c29624ff25cd7f0c8249b",
+      "samples_sha256": "425f5e6c7aaeaff857e4ae09ff00134e041082509085ae62be4cd977df94a3c5",
+      "reads_sha256": "053ba14dddc81392e65ffc1a55f7b8e20da74c9bac5de0d96e2f6e51f7cab494"
+    }
+  ],
+  "dense_comparison": {
+    "phase_names": [
+      "idle-a",
+      "idle-b",
+      "right",
+      "left"
+    ],
+    "receipts": [
+      {
+        "address": 17878016,
+        "size": 4096,
+        "atomic_snapshot": false,
+        "maximum_requests_per_second": 20,
+        "errors": 0,
+        "semantic_identity_verified": false,
+        "raw_bytes_private": true,
+        "utc_start": 1792631237.1804442,
+        "image_sha256": "63940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc",
+        "control_before_matches": true,
+        "control_after_matches": true,
+        "bytes": 4096,
+        "block_sha256": "18d12ceeae91d96436409e30a9fcf95abadeff51fcbc75abd485c04cd5d1dd57",
+        "reads_sha256": "d1f152b814de204e343907e20ddb5cd401da464f1a2c8d7a5c0235a92d8a748b",
+        "status": "complete",
+        "utc_end": 1792631243.6923678
+      },
+      {
+        "address": 17878016,
+        "size": 4096,
+        "atomic_snapshot": false,
+        "maximum_requests_per_second": 20,
+        "errors": 0,
+        "semantic_identity_verified": false,
+        "raw_bytes_private": true,
+        "utc_start": 1792631246.6589556,
+        "image_sha256": "63940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc",
+        "control_before_matches": true,
+        "control_after_matches": true,
+        "bytes": 4096,
+        "block_sha256": "14fe195e242656596a1b6c47340fc488191b98bb4b76417bef4a7cad209465bd",
+        "reads_sha256": "00a711d7e43babad1b2d5aeea0ccfd93206d21a9332ebbd20fcbc9bfdcda25eb",
+        "status": "complete",
+        "utc_end": 1792631253.2067137
+      },
+      {
+        "address": 17878016,
+        "size": 4096,
+        "atomic_snapshot": false,
+        "maximum_requests_per_second": 20,
+        "errors": 0,
+        "semantic_identity_verified": false,
+        "raw_bytes_private": true,
+        "utc_start": 1792631280.6841257,
+        "image_sha256": "63940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc",
+        "control_before_matches": true,
+        "control_after_matches": true,
+        "bytes": 4096,
+        "block_sha256": "177ba9f5c713492751d9378bbbf1077b792cb786086fba9c1d62a2430cefa51c",
+        "reads_sha256": "0ab20e4d1f8b733d05c4e1b7cb4dbaee132bed3fbc2be87c3819b65c072aa935",
+        "status": "complete",
+        "utc_end": 1792631287.1836917
+      },
+      {
+        "address": 17878016,
+        "size": 4096,
+        "atomic_snapshot": false,
+        "maximum_requests_per_second": 20,
+        "errors": 0,
+        "semantic_identity_verified": false,
+        "raw_bytes_private": true,
+        "utc_start": 1792631303.270474,
+        "image_sha256": "63940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc",
+        "control_before_matches": true,
+        "control_after_matches": true,
+        "bytes": 4096,
+        "block_sha256": "6da2487047871ce435563276c57e5d274c59980a161d70b1146b266c14bfd79d",
+        "reads_sha256": "d12efac9ebd8466eded1875d5fbdc16572e0de80c41b6901f7a546388926b3f0",
+        "status": "complete",
+        "utc_end": 1792631309.7976258
+      }
+    ],
+    "changed_aligned_words": [
+      {
+        "address": 17878720,
+        "idle_stable": true,
+        "changed_after_right": false,
+        "returned_after_left": false,
+        "distinct_patterns": 2
+      },
+      {
+        "address": 17878860,
+        "idle_stable": true,
+        "changed_after_right": false,
+        "returned_after_left": false,
+        "distinct_patterns": 2
+      },
+      {
+        "address": 17878864,
+        "idle_stable": false,
+        "changed_after_right": true,
+        "returned_after_left": false,
+        "distinct_patterns": 2
+      },
+      {
+        "address": 17879036,
+        "idle_stable": false,
+        "changed_after_right": false,
+        "returned_after_left": false,
+        "distinct_patterns": 2
+      },
+      {
+        "address": 17879040,
+        "idle_stable": false,
+        "changed_after_right": false,
+        "returned_after_left": false,
+        "distinct_patterns": 2
+      },
+      {
+        "address": 17879044,
+        "idle_stable": false,
+        "changed_after_right": true,
+        "returned_after_left": false,
+        "distinct_patterns": 4
+      },
+      {
+        "address": 17879048,
+        "idle_stable": false,
+        "changed_after_right": true,
+        "returned_after_left": false,
+        "distinct_patterns": 4
+      },
+      {
+        "address": 17879064,
+        "idle_stable": false,
+        "changed_after_right": true,
+        "returned_after_left": false,
+        "distinct_patterns": 4
+      }
+    ],
+    "candidates_stable_in_two_idle_reads": [],
+    "semantic_identity_verified": false,
+    "visual_movement_verified": true,
+    "atomic_snapshot": false,
+    "raw_values_private": true
+  },
+  "possible_translation": {
+    "addresses": [
+      "0x0110D004",
+      "0x0110D008"
+    ],
+    "label": "paired periodic progress candidates linked to emulation advancement",
+    "confidence": "behavior verified in pause/resume assay; exact semantic identity unverified",
+    "frames_verified": false
+  },
+  "tests_passed": 7,
+  "raw_bytes_private": true,
+  "memory_writes": false
+}
