@@ -57,7 +57,7 @@ int main(void){
   unsigned pressed=controls.buttons&~previous;previous=controls.buttons;
   if(pressed&SCE_CTRL_SELECT)stt_monitor_toggle(&monitor,frame_start);
   if(pressed&SCE_CTRL_RTRIGGER)stt_render_set_raster(!stt_render_get_raster());
-  if(pressed&SCE_CTRL_LTRIGGER)stt_render_set_ground(!stt_render_get_ground());
+  if(pressed&SCE_CTRL_LTRIGGER)stt_render_set_ground((stt_render_get_ground()+1)%3);
   if(pressed&SCE_CTRL_START){result=0;break;}
   if(need_release&&controls.buttons==0&&stt_axis(controls.lx)==0&&stt_axis(controls.ly)==0&&stt_axis(controls.rx)==0&&stt_axis(controls.ry)==0)need_release=0;
   if(pressed&SCE_CTRL_TRIANGLE){need_release=0;pressed&=~(SCE_CTRL_CROSS|SCE_CTRL_SQUARE);stt_combat_init(&combat);stt_equipment_init(&equipment);pending_toggle=0;camera=(SttCamera){.45f,.40f};accumulator=0;pending_attack=0;

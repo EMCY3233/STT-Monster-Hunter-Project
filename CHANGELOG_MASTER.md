@@ -1,3 +1,10 @@
+## 2026-10-22 — Prototipo 0.17: suelo por tramos
+
+- G2 agrupa píxeles de cada celda; G0/G1 se conservan para comparar.
+- Mismos color, profundidad y límites; comparación exacta contraG1 en120cámaras.
+- STT/6 amplía el modo de suelo y conserva recepción de contratos anteriores.
+- Mejora física pendiente. Véase docs/prototypes/ground-spans.md.
+
 ## 2026-10-22 — Prototipo 0.16: raster y fases
 
 - Raster incremental con referencia T0/T1, cobertura cuantizada y profundidad incremental.

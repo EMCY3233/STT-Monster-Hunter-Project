@@ -8,7 +8,7 @@ def analyze(records):
     groups=defaultdict(list);seen=set();duplicates=0
     for record in records:
         p=record['packet']
-        if p.get('version') not in (4,5): continue
+        if p.get('version') not in (4,5,6): continue
         validate(p)
         identity=(p['source'],p['session'],p['seq'])
         if identity in seen: duplicates+=1;continue

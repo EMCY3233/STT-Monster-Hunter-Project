@@ -6,6 +6,7 @@
 static uint32_t image_a[STT_PITCH*STT_HEIGHT];
 static uint32_t image_b[STT_PITCH*STT_HEIGHT];
 static float test_depth[STT_WIDTH*STT_HEIGHT];
+static float reference_depth[STT_WIDTH*STT_HEIGHT];
 static void clear(uint32_t *image){
  fb=image;zb=test_depth;memset(image,0,sizeof image_a);memset(test_depth,0,sizeof test_depth);
 }
@@ -42,6 +43,22 @@ int main(void){
   }
   assert(checked>25);
  }
+ /* Span ground must match the unmodified scanline ground bit for bit. */
+ unsigned long compared=0;
+ for(unsigned n=0;n<120;n++){
+  float yaw=n*.3926990817f,pitch=.12f+(n%5)*.2325f;
+  float hx=((int)(n%7)-3)*.37f,hz=((int)(n%9)-4)*.43f;
+  if(n>=80){hx=n&1?99.37f:-99.37f;hz=n&2?98.71f:-98.71f;}
+  float sy=sinf(yaw),cy=cosf(yaw),sp=sinf(pitch),cp=cosf(pitch);
+  eye=(V){hx-sy*6*cp,1.1f+sp*6,hz-cy*6*cp};right=(V){cy,0,-sy};forward=(V){sy*cp,-sp,cy*cp};up=(V){sy*sp,cp,cy*sp};
+  int cx=(int)floorf(hx/2),cz=(int)floorf(hz/2);
+  clear(image_a);ground_scanline(cx,cz);memcpy(reference_depth,test_depth,sizeof reference_depth);
+  clear(image_b);ground_spans(cx,cz);
+  assert(!memcmp(image_a,image_b,sizeof image_a));
+  assert(!memcmp(reference_depth,test_depth,sizeof reference_depth));
+  compared+=STT_WIDTH*STT_HEIGHT;
+ }
+ printf("PASS span ground matches %lu pixels and inverse depths across 120 cameras/positions\n",compared);
  /* New raster is checked against the preserved implementation, not its own math. */
  eye=(V){0,0,0};right=(V){1,0,0};up=(V){0,1,0};forward=(V){0,0,1};
  for(unsigned n=0;n<24;n++){
