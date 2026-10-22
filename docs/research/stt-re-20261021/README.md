@@ -1,5 +1,7 @@
 # STT — Ingeniería inversa y recursos
 
+[Lecturas guiadas y catálogo de conversión](guided-reading-catalog.md): estado visible contrastado, 864 lecturas nuevas, 261 entradas MOD/TEX auditadas y verificación ARC reforzada.
+
 [Primera conversión de recursos](first-resource-conversion.md): un OBJ estático de 16 vértices/seis triángulos y dos PNG verificados, con alfa A4 conservado. Materiales, rig y animaciones siguen pendientes.
 
 [Extractor ARC v17 completado](arc-extractor.md): 1341 entradas reales de cuatro contenedores MHXX 3DS, exportadas localmente y verificadas; diez pruebas y CLI de listado/extracción/verificación. Sin conversión semántica ni bytes comerciales publicados.

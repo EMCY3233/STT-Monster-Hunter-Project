@@ -5,7 +5,7 @@ No encrypted containers, DRM/key handling, format conversion or game execution.
 """
 import argparse,hashlib,json,re
 from pathlib import Path
-from probe_arc import MAX_ARCHIVE,parse_table,decode_entry,classify
+from probe_arc import MAX_ARCHIVE,MAX_ENTRY,MAX_TOTAL,parse_table,decode_entry,classify
 
 
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -79,13 +79,17 @@ def verify(folder,source=None):
     m=json.loads(raw)
     if m['schema']!=1 or m['status']!='complete' or m['format']!='ARC_LE_v17_zlib':raise ValueError('unsupported manifest')
     if len(m['entries'])!=m['entry_count']:raise ValueError('entry count mismatch')
+    if not 0<=m['entry_count']<=65535 or not 0<=m['extracted_bytes']<=MAX_TOTAL:raise ValueError('manifest budgets exceeded')
     names=set();total=0
     for i,e in enumerate(m['entries']):
         name=e['output_file']
         if e['index']!=i or not re.fullmatch(r'entries/[0-9]{5}\.(bin|tex|mod|lmt|gmd|rcn|mrl)',name) or name in names:
             raise ValueError('unsafe or duplicate export identity')
         names.add(name);target=folder/name
+        if int(Path(name).stem)!=i:raise ValueError('filename index mismatch')
+        if not 0<=e['observed_bytes']<=MAX_ENTRY or e['observed_bytes']!=e['declared_bytes']:raise ValueError('entry size budget or declaration mismatch')
         if target.is_symlink() or (folder/'entries').is_symlink():raise ValueError('symlink export rejected')
+        if target.stat().st_size!=e['observed_bytes']:raise ValueError('export hash/size mismatch')
         data=target.read_bytes()
         if len(data)!=e['observed_bytes'] or sha(data)!=e['sha256']:raise ValueError('export hash/size mismatch')
         total+=len(data)
