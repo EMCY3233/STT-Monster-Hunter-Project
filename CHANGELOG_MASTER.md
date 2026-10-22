@@ -1,5 +1,274 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Cámara00.23integradaenPR35
+
+-PruebasPC/compilacióninspecciónVita correctas segúnPR35;colisiónmaparealno conectada,no físicade00.23.
+-Diseñooriginal/sincomerciales,PRabierta ysininstalación.
+
+## 22-10-2026 — ReferenciasMH4Uauditadas
+
+-PR7/98f98f9:64.420referencias,0huérfanas/duplicadas,3.670ambiguas,sinsemánticaconfirmada;5testsdelpropietario. Banco intacto.
+-CámaraPCsiguependientedeintegración,noresultadoinventado.
+
+## 22-10-2026 — BancoMH4Useparado ycámaraoriginal
+
+-Propietarioentrega113.280entradas/59.553contenidosúnicos;referencias/animacionesparciales,sinfuncionalidadVita demostrada. No se sumanalbancohistórico.
+-CámaraPROPIA de referencia,5testsPC,integraciónpendiente;nocontroladorcomercialrecuperado.
+
+## 22-10-2026 — AuditoríaEigent ylímitesLMT
+
+-RecibidaauditoríadocumentalEigent;contrastedetextoshistóricosencargadoalmonitor,sinduplicarPROJECT_STATUSdePR3.
+-PaqueteLMTprivadoanálisis,noreproducciónVita;activospropios/legalespara prototipos.
+
+## 22-10-2026 — Terreno:indiciosdearquitectura
+
+-Investigaciónreportasuelo/paredes/postura/IK y13LMTúnicos;controlador yclipsespecíficospendientes. No funciónintegralconfirmada.
+-Hallazgoscompartidosporpropietarioconprototipos;mantenerrecursospropios ysemánticapendiente.
+
+## 22-10-2026 — PiezasMH4Ulocalizadas
+
+-Investigacióncomunica7piezaslocales,torso1280vértices/19huesos;conjunto/equipo/animaciónsinvalidar.
+-Extraccionescomercialesprivadas,separadasdelbancohistórico yprototiposoriginales.
+
+## 22-10-2026 — EntradaPC sostenida ycombinada
+
+-Investigacióninforma13pruebas ydesplazamientovisibleconentradasacotadas/liberacióncontrolada. No detectorinterno ovalidaciónVita.
+
+## 22-10-2026 — Diálogo yvínculosdemateriales
+
+-Investigaciónconfirmadiálogo/avanceGuildmarmconlecturasimultánea,noestadosemánticoidentificado.
+-PR27abierta:analizadorMOD/MRL/TEX,6testsdelpropietario;CRCcomohipótesis,asignacionesmaterialpendientes.
+
+## 22-10-2026 — Contrastevisualacotado yderivadosdeanálisis
+
+-PR7:864lecturassinerror,dinero/saludcontrastadosenaldea,resistenciahipotética.
+-UnaOBJ16vértices/6triángulosy2PNGlocales;catálogo19modelosprueba/92cabecerasTEX,sinrig/materialescompletosniadaptaciónautorizada.
+
+## 22-10-2026 — Referenciasexternas delimitadas
+
+-PR7:fuentescoincidentes noindependientes,v1.0/v1.1separadas;valorcandidato1500sinpantallaverificada,punterosnulosnoseguidos.
+-Sin trucos/escriturasdememoria ni semánticaconfirmada.
+
+## 22-10-2026 — Capturas reconstruibles
+
+-PR7comunica2.400lecturassinerror,9exportacionesverificadas/9pruebas;memoria muestreada,norecursosoriginalesidentificados.
+-24candidatosestáticos de lectura sin ejecución/escritoresconfirmados;nocausalidadinferida.
+
+## 22-10-2026 — CI yrelacióncontadores/fotograma
+
+-CI966fb5f PC/Vita confirmadacorrecta;no hardware.
+-PR7 comunica100lecturassinerror y3pasosdefotograma +1enamboscontadores. No posición/animación/escritoresidentificados;4pruebasdelpropietario.
+
+## 22-10-2026 — Preparación PR3 tras integración del monitor
+
+- Rama de inventario actualizada sobre mainf199bd0 en copia propia; conflictos deREADME/changelog resueltos conservando evidencias deambosfrentes ydescripciones vigentes. Sin fusión dePR3 enmain.
+- Corregidas referenciasantiguas aagente0.2 yFrontiernoidentificado; código monitor procedeíntegramentedemain,sin modificaciones propias. Pruebas de preparación se registran por separado.
+
+## 22-10-2026 — Índice deaceptaciones recibido
+
+-PR7 consolidó29aceptaciones:22verificadasdentrodealcance,2negativas,5bloqueadas,snapshothastae8a0c7b.
+-Ensayoposterior sinentradaAconfirmada,no vínculomemoria↔acción. Eigentcontinúabloqueadosinresultadofinal.
+
+## 22-10-2026 — Resultado negativo de matrices
+
+-PR7/e8a0c7b:0/3pares cumplen1e-4;8pruebasdelaherramientapasaron,no confirman rig/posebase.
+-Encargadoíndice consolidadoPR7,sin ampliarensayo/cambiar tolerancia.
+
+## 22-10-2026 — Jerarquía parcialMOD230
+
+-PR7/16111d8:3huesos,2raíces,0ciclos,6matricesfinitas;10pruebasnuevasdelpropietario. No rigfuncional.
+-Encargadapropiedadnuméricadematricescondicionadaafuenteaplicable,sinampliarmuestras.
+
+## 22-10-2026 — Estado consolidado al cierre de etapas
+
+- Sustituidos estados históricos de monitor no integrado y base3DS no disponible; separadas pruebasPC/compilación/visual/físico. GitHub confirmaPR20fusionada yPR21abierta.
+- Documentados bloqueos vigentes MH4U/MHXX,MOD/TEX/LMT sin repetirensayos oatribuirsemántica.
+
+## 22-10-2026 — BloqueoBLZ yvisualPC
+
+-PR7/a914801:sinsegundodecoderaceptado,comparaciónnumérica noejecutada/valoresnull. No dependenciacomún afirmada sinprueba.
+-PR21visualPCcerrada,dosposes ydefectocoberturacorregido;Vita físicapendiente,sininstalación.
+
+## 21-10-2026 — MH4U BLZ cerrado
+
+-PR7/93455dc:salida16.261.120bytes yhashcotejados,segmentosrespaldados;sinreverificarimagencompleta4GiB.
+-ContrasteindependienteBLZencargado condicionadoalinaje/aplicabilidad,sinsemánticaojuegoejecutado.
+
+## 21-10-2026 — MH4Ubase ymonitor integrado
+
+-PR7/1bdf73e:cabeceras/hashesMH4Ubasecoherentes;BLZsolo.codeencargada,salidaacotada16.261.120bytes.
+-Monitorinforma6PRintegradasconautorizaciónhumanadirecta,mainf199bd0/CIcorrecta;sinreinstalación. No extiendepermisoamásfusiones.
+
+## 21-10-2026 — Renderer00.11 ymatrizmonitor
+
+-RecibidoPR21:muestrapropiaintegrada,VPK00.11compilado,sinvisual/físico. EncargadaverificaciónPCviable.
+-PR20 ordenadacadena monitor;CI documentalpendiente,sinmásfeaturesinnecesarias. InvestigacióncontinúaExHeader/ExeFS deMH4Ulegible.
+
+## 21-10-2026 — LectorC ylímitesPC cerrados
+
+-RecibidoPR17:288casosC/Pythonconsanitizadores yobjetoVitaSDK;conexiónrendererpendiente.
+-RecibidosPR18/19:cuotas yprotecciónanexado,26pruebas/CIcorrectas. Encargadarevisiónfinalcadena sinfusión;prototiposcontinúan integraciónrendererpropio.
+
+## 21-10-2026 — EntradaMHXX derivada delcargador
+
+-PR7/d419d6b:VA0x00100000→offset0/text yA32 esperado sustentados por rutaAzahar,no campoentryExHeader niobservaciónhardware.124pruebasdelpropietario.
+-Sin repetirBLZ,ejecutarupdate oatribuirfunciones;contrasteindependiente/semánticapendientes.
+
+## 21-10-2026 — .codeMHXX descomprimido y trazable
+
+-PR7/3e9bbdb:salidaBLZ13.045.760bytes coincideconsegmentos;recibo/hashsalida cotejados aquí.116pruebasdelpropietario,sincontrasteindependiente osemántica acreditados.
+-Encargadomapaestático deunareferenciaARMconprocedencia;sinrepetirBLZ ni modificarbanco/consola.
+
+## 21-10-2026 — Captura PC acotada por duración
+
+- RecibidoPR16/79a8969,ensayoconjunto y20pruebaslocales;dependencia13→14→16,sinfusión. CIeventopendiente al cierre.
+- Encargadoslímitesdeconteo/tamaño conparadalimpia.PrototiposC e investigaciónBLZ continúan,sin resultadosfinales atribuidos.
+
+## 21-10-2026 — Emuladores comparados y baseMH4U legible
+
+- RecibidaPR7/964770ad:comparativaemuladores yensayo MH4U NCSDlegible,Citracarga/DSP,sinvisual/jugabilidad. LasCIAcifradas noquedanresueltas.
+- ContrasteTEX noacreditafidelidadalfa;controlvisualbloqueado. Siguienteaceptación:.codeMHXX,flags/rangos antesdeBLZ,sinforzarcodec.
+
+## 21-10-2026 — Informes recibidos y tareas redistribuidas
+
+- Recibidos PR15/puentepropio,PR13–14/corrección ypausas,yFTPlectura monitor00.50;avance MH4U Citra aún sin cierrevisual. Evidencia atribuida a propietarios.
+- Encargados lectorC deposes,validaciónconjuntaPC delmonitor ycierre trazable/visualdelensayoMH4U. Sin fusionarPR ni nuevas operacionesconsola.
+
+## 21-10-2026 — Regresión cerrada y fallo remoto derivado
+
+- Investigación:106/106pruebas sintéticas,21/21CLI y sintaxis correctos sobrec4215e8;sin nuevosensayoscomerciales.
+- MonitorPR13:testsremotos fallidos en193c7b4,buildVita correcto. Diagnóstico encargado alpropietario,causapendiente;sin cambios en ramaajena.
+
+## 21-10-2026 — Regresión PC y nuevos recibos verificados
+
+-60pruebasPC yensayoCLI dediezpaquetes correctos sobre062e085. Solicitada regresión de lectoresPR7,resultadopendiente.
+-PR7/c4215e8:TEX84bytes estructuralmente coherente,sinimagen;logsPSP corroboran secciones,noinvocación. Recibos cotejados;11pruebas nuevas pertenecen ainvestigación.
+
+## 21-10-2026 — Bloqueo LMT y siguiente recurso general
+
+- PR7/19d6e9d:acuerdo documental de codec,no validación cruzada;segunda referencia independiente/compatible pendiente. Recibo de selección cotejado;errores/toleranciasnull,FPS/rig/ejes/unidades desconocidos.
+- Encargada una cabeceraTEX ya catalogada,sin imagen/exportación/adaptación. Resultado pendiente,sin ampliar LMT/JKR/MOD ni cambiar banco.
+
+## 21-10-2026 — Aceptación LMT acotada encargada
+
+- Solicitado contraste independiente de una sola pista vectorialLMT67 previamente decodificada. Resultado pendiente,no validación atribuida. FPS/rig/unidades/ejes sin confirmar; sin extracción masiva o adaptación.
+
+## 21-10-2026 — Estado consolidado alineado con evidencias
+
+- Sustituidas prioridades superadas de espera de copia e inicio de prototipos por cierres y PR ya documentados. Resumidos dosJKR,MOD230parcial,referenciaPSP e interfaces offline con límites propios.
+- Sin nuevos ensayos de recursos,transferencias o cambios de banco. La actualización documental no se atribuye CI de otrocommit ni acredita integración física.
+
+## 21-10-2026 — Referencia estática PSP trazable
+
+- PR7/c529799 mapea una referencia de imports ELF MHFU:VA0x0890EC78,offset0x0010D22C,.rodata.sceNid; sección/PT_LOAD coinciden. Confianza estructural alta,sin identificar función ni comportamiento.
+- Cotejados aquí artefacto/prefijo/recibo;cinco pruebas pertenecen a investigación. Sin repetir620secciones,ejecutar juego,cambiar banco o ampliar automáticamente análisis. Informe psp-import-followup.md.
+
+## 21-10-2026 — Convenciones MOD230 delimitadas
+
+- PR7/4d0e9a9: lectura MH4U/E6 por malla encaja29índices en990bytes; contador global30 sigue sin explicación MHXX. Min/max genérico no confirmado para esta variante; no se atribuye corrupción.
+- Recibo y fuente cotejados; cuatro pruebas de investigación no repetidas. Geometría completa pendiente,sin ampliar modelos ni alterar banco. Véase mod230-followup.md.
+
+## 21-10-2026 — Recepción del análisis estructural MOD230
+
+- Una muestra990bytes,16registros de posición/UV finitos y28índices accesibles segúnPR7/10f3f10. Discrepancias global30/29índices y min/max pendientes; geometría completa no validada.
+- Cotejados aquí objeto/copia/tresrecibos ySQLite intacto; sin recatalogación o extracción adicional. Ocho pruebas del lector pertenecen a investigación. Informe mod230-followup.md conserva límites e interfaces02/04/07.
+
+## 21-10-2026 — CI confirmada y plan estructural de modelo
+
+- Confirmadas pruebas y compilación remotas correctas de1b59dd0; enlaces/alcance en sincronización. Sin descarga o reinstalación de artefactos.
+- Índice actualizado a dos derivados JKR y plan vigente separado de historia inicial. Siguiente ensayo encargado a PR7:una muestra MOD230 catalogada, solo estructura/límites y bloqueos de malla. Sin adaptación comercial ni clasificación por armas.
+
+## 21-10-2026 — Segundo JKR y preparación de PR3
+
+- Contraste limitado a una muestra adicional: fuente1.058bytes, salida1.884bytes, carga1.042/1.042 consumida. Fuente/salida/recibo cotejados con banco; original intacto. Dos derivados enlazados por metadatos, SQLite intacto.
+- Patrón de prefijos del control no reproducido; cero tramos cumplen el criterio CP932/kana, sin probar ausencia de texto. Gramática pendiente,42JKR sin ampliar. PR7 commit90dc6d1 comunica8pruebas nuevas; no repetidas aquí.
+- Conflicto exclusivo de changelog con main410b1dd70a resuelto conservando ambas historias en copia aislada. No se fusiona PR3 en main ni se modifican ramas ajenas.
+
+## 21-10-2026 — Regiones compatibles con CP932 en la muestra JKR
+
+- Sobre la salida existente de 349 bytes: 14 tramos entre NUL compatibles con CP932 y bloques kana; 160 bytes en esos tramos, doce sin controles y dos con controles. Los catorce rechazan UTF-8 estricto.
+- Herramienta propia limitada a 64 KiB, sin exportación de texto; seis pruebas sintéticas correctas y hash fuente conservado. No identifica formato completo, codificación declarada ni función del recurso.
+- Recibo y límites en docs/research/game-inputs-2026-10-21/frontier-jkr-text-regions.md. Investigación recibió la evidencia para estudiar la misma muestra; no se amplió a otros JKR ni se modificó banco o consola.
+
+## 21-10-2026 — Índice de evidencias actualizado
+
+- Reorganizado el índice de investigación con el banco actual de 9.888 archivos, cierre de Frontier, derivado enlazado e interfaces de prototipos. El inventario inicial de siete archivos queda identificado como evidencia histórica.
+- Separadas las raíces realmente catalogadas de futuros archivos de ensayo, y las propuestas de las funciones implementadas. Conservados enlaces a los informes y al historial Git, sin duplicar contenidos.
+- Comprobados 22 enlaces locales del índice, sin destinos ausentes; revisión de diferencias sin errores. Sin repetir pruebas de recursos ni modificar banco, originales o consola.
+
+## 21-10-2026 — Coherencia de archivos compartidos de prototipos
+
+-36lecturasdeblobs acommitsfijos enPR8–11:17rutascompartidas,16idénticas. Contratos yCombatLab copiados enPR11 coinciden con sus PR propias.
+- Únicadiferencia compartida:CHANGELOG_MASTER.md,con entradasporfrente. Prefijocomún12864caracteres;consolidaciónpendiente parafutura integraciónautorizada.
+- Recibo decommits/rutas/blobs ylímites en docs/research/game-inputs-2026-10-21/prototype-overlap-review.md. Sinmerge,CI/runtime repetidos,descargadejuegos,FTP o cambios debanco/consola.
+
+## 21-10-2026 — Revisión numérica de interfaz AssetLab→Vita
+
+- Evaluada muestra originalSTTAsset/1 por hash:4huesos,48vértices,72triángulos,192poses en cuadrícula1/60s,sin coordenadas no finitas. Ambas duraciones y7claves caen en ticks enteros de60Hz.
+- Límites muestreados enmm documentados,sin inferir extremoscontinuos. Cinco anclas de conversión comprobadas;redondeo/empaquetado solo propuestas,no formato ni presupuesto Vita aprobado.
+- Criterios pendientes de base/avance,winding,tiempo,importador y validaciónruntime en docs/research/game-inputs-2026-10-21/asset-bridge-review.md. Sin recursos comerciales,GUI,VPK,red,consola ni cambios de fuentes de otros frentes.
+
+## 21-10-2026 — Primer derivado Frontier enlazado al banco
+
+- Investigación descomprimió unJKR:349bytes,sin firma reconocida. Se cotejaron fuente238bytes,salida y recibo contra hashes y catálogo,sin repetir decodificación.
+- Registro adicional derivatives.jsonl,1entrada;sin copiar contenidos ni cambiarSQLite,sus manifiestos o conteos. Consulta ampliada por ruta/hashfuente o salida.
+- Cinco pruebas nuevas y cinco de regresión correctas. Consulta real por hash y SQLite idéntico al recibo original tras incorporación de metadatos.
+- Documentación:docs/research/game-inputs-2026-10-21/bank-derivatives.md. Conservar salida/recibo en su ubicación local. No ampliar otros43JKR antes de aceptación útil de estructura interior.
+
+## 21-10-2026 — Revisión offline de contratos STT/3
+
+-15casos sintéticos de compatibilidad correctos,sin sockets ni cambios de fuentes de otros frentes. STT/1–2 conservados en casos probados;STT/3aceptado por candidato y rechazado deliberadamente por protocolo vigente.
+- Ejemplos386/432bytes y casoamplio715bytes;rechazoJSONduplicado/1025bytes confirmado. Analizador compuesto con validador candidato cuenta2muestrasSTT/3;no estadísticascombate.
+- Informe,hashes y reproducción:docs/research/game-inputs-2026-10-21/protocol-interop-review.md. SinencoderC,VPK,UDP ni hardware ensayados en esta revisión. No fusión/instalación.
+
+## 21-10-2026 — Auditoría del banco y primeras PR de prototipos
+
+- Auditoría de metadatos SQLite en solo lectura:9888archivos/21696entradas/8823objetos,sin errores de referencias/estados/tamaños ni objetos huérfanos.161grupos de hashes físicos repetidos conservados;ninguna eliminación.
+- Cinco pruebas sintéticas nuevas del auditor aprobadas; hash de SQLite tras lectura coincide con recibo de registro. Informe:docs/research/game-inputs-2026-10-21/bank-catalog-audit.md.
+- Investigación comunica50cabeceras Frontier contrastadas:44JKR/LZ,5ECD y1SCE;sin contenidos decodificados. Sus52pruebas son de PR7,no de esta auditoría.
+- Primeras PR de prototipos verificadas abiertas:8contratosSTT/3,9CombatLab,10AssetLab,11Vita3D. Pruebas PC/compilación comunicadas por responsable; visual/físico pendientes. VPKcon telemetría local,sinUDP;interoperabilidad conMonitorSTT/1–2 pendiente. Sin fusión ni instalación desde este frente.
+
+## 21-10-2026 — Cierre de copia Frontier y censo completo
+
+- Copiados y registrados8261archivos/5212490427bytes; banco9888archivos. Procesos terminados0 y hashes de los catálogos cotejados.
+- Segunda lectura de8252archivos coincide con banco;9metadatos de paquete excluidos del segundo sondeo,ya verificados en registro. Sin cambios durante censo ni.partial.
+- SFO confirma baseFrontierG1.00 y parcheFrontierZ01.99.44JKR y5ECD candidatos; envolturaSCE en rePatch/eboot. Sin descifrado,jugabilidad ni ZZ acreditados.
+- Informe y metadatos en docs/research/game-inputs-2026-10-21/frontier-complete.md. Candidatos compartidos con investigación para continuar sin duplicar trabajo. PR12 contiene correcciones documentales del monitor,sin fusionar.
+
+## 21-10-2026 — Sincronización de frentes y continuación
+
+- Monitor confirmado en main410b1dd70a, versión0.5; sustituidos resúmenes centrales antiguos.
+- Banco inicial1627archivos/21696entradas/8823objetos separado de copia Frontier Vita todavía en curso; cierre sujeto a recibos y registro final.
+- Scope vigente: banco y análisis general, sin clasificación por armas. Prototipos propios encargados, inicio efectivo pendiente de verificar.
+- Propiedad de inventory-work/PR3, research-work/PR7 y repository delimitada. Monitor detectó documentación antigua en su frente y recibió encargo de corrección; no se fusiona ni reinstala por sincronizar.
+- Continuación de este chat activa cada15min hasta nuevo aviso, con verificación previa de descarga/banco y avisos solo por novedades significativas o bloqueos.
+- Los informes históricos conservan sus resultados fechados; no se atribuye CI antigua a publicaciones nuevas.
+
+
+## 2026-10-21 — STT-RESEARCH-004 / piloto ARC y revisión de trabajo existente
+
+- Extraído RomFS del parche MHXX: 1.609 archivos, 28.822.254 bytes; 1.228 archivos con extensión ARC y firma ARC nula final. La inspección completa se limita a title/resident/quest ARC v17: 782/782 entradas con zlib y longitud correctos.
+- [Lector acotado, muestras y límites](docs/research/game-inputs-2026-10-21/arc-pilot.md): exportadas localmente dos entradas, hashes cotejados; firmas candidatas 99 TEX, 48 GMD, 32 MRL y 32 MOD. No se validan todavía modelos, esqueletos o animaciones. Ocho pruebas sintéticas aprobadas; siete originales mantienen SHA-256.
+- [Investigación externa](docs/research/game-inputs-2026-10-21/existing-research.md): proyectos de MH4U, Portable 2nd G y MH3U Wii U documentados con sus límites. No se encontró evidencia primaria de decompilación completa pública MHXX/MHGU utilizable con las entradas actuales. No se descargaron juegos preparados, claves ni proyectos de terceros para ejecución.
+- Todo contenido comercial permanece en analysis-local fuera de Git. Sin cambios de originales o código del monitor, PS Vita/FTP, adaptación de recursos ni port demostrado.
+
+## 2026-10-21 — STT-RESEARCH-003 / herramientas y extracción exterior
+
+- Corregida la precisión de nombres: Capcom identifica Generations Ultimate como Monster Hunter XX en Japón; se conserva la plataforma por separado. La entrada local extraída es CIA 3DS, no una imagen Switch.
+- 7zr portátil 26.04: listado, prueba íntegra de descompresión/CRC y extracción de los dos conjuntos MH4U/MHXX correctos. SHA-256 de los dos CIA y TMD públicos registrados; contenidos de ambas bases marcados como cifrados.
+- CTRTool portátil 1.3.0, ZIP cotejado con digest de publicación: extraído contenido NCCH sin cifrar del parche y listado RomFS correcto (1.228 entradas .arc y 270 .gmd). La opción anunciada --listexefs fue rechazada; sin asumir validación completa de ExeFS o assets.
+- [Informe con herramientas, fuentes, hashes y límites](docs/research/game-inputs-2026-10-21/extraction-tools.md). Arc Explorer declara soporte específico de los juegos de interés; Kuriimu2 y mhtools quedan como candidatos no probados con los recursos locales.
+- Siete originales cotejados tras extracción: 7/7 SHA-256 conservados. Derivados, herramientas y logs permanecen fuera del repo, en analysis-local; sin claves, tickets, recursos comerciales publicados ni acceso PS Vita/FTP.
+
+## 2026-10-21 — STT-RESEARCH-002 / consolidación de investigación y áreas
+
+- Inventariados siete archivos locales, 7.861.039.260 bytes, mediante lectura completa y SHA-256; dos pasadas con hashes idénticos. [Resultados y límites](docs/research/game-inputs-2026-10-21/README.md).
+- MHFU: ISO9660, ULES01213 y DISC_VERSION 1.01 observados en SFO. MH3U: CIA/TMD con contenidos marcados como cifrados. MH4U y MHXX: cabeceras de conjuntos 7z divididos con CRC correcto; carga comprimida sin prueba completa. La carpeta MHGU no acredita una edición Switch. Sin Frontier inventariado.
+- Seis pruebas sintéticas nuevas aprobadas. La ejecución amplia local tuvo 15/16 (fallo UDP previo dentro del entorno restringido); no se presenta como diagnóstico de red. CI del commit 1b68b5b correcto: [Monitor tests 39547319058](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39547319058) y [Vita agent build 39547319029](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39547319029). Estos resultados corresponden a ese commit, no a futuras revisiones.
+- Incorporada la documentación de [Frontier Clásico](docs/research/frontier-classic/README.md): 13 registros de investigación, fuentes y vacíos explícitos. Selección del usuario: corte de retirada + corte evasivo + estocada perforante cargable. La fusión propuesta es diseño original; Extremo permanece independiente. Sin botones, tiempos ni parámetros internos históricos confirmados.
+- Actualizados portada, estado consolidado y fichas 01–10 con dependencias y siguientes pasos. Respuestas de Diseño 02/04/07 y contratos propuestos 03/05/08 registrados; no equivalen a inspección independiente ni aprobación de implementación.
+- Conservados originales y trabajo del monitor. Solo documentación, metadatos y código propio en [PR #3](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/3), independiente y sin recursos comerciales. Ninguna instalación, transferencia a Vita ni actividad FTP en este frente.
+- Pendientes: prueba íntegra de 7z, identidad interna accesible, clasificación de contenedores/ejecutables, evidencia primaria Frontier y validación de interfaces. No se demuestra un juego nativo ni adaptación de assets.
 ## 2026-10-21 — STT-MON-013 / frontera de anexado
 
 - Fallo reproducido con datos sintéticos en memoria: anexar tras una línea sin LF devolvía una muestra aceptada, pero el JSONL combinado era inválido y no recuperable por el analizador como muestra.

@@ -12,3 +12,7 @@ Nombres y dependencias del mapa local del proyecto. La prioridad actual autoriza
 - [08 · HUD, controles y accesibilidad](08.md)
 - [09 · Misiones, mapas, economía y progresión](09.md)
 - [10 · Integración, optimización, pruebas y multijugador](10.md)
+
+## Estado consolidado — 21-10-2026
+
+Consultar el [estado del proyecto](../PROJECT_STATUS.md), el [inventario de entradas](../research/game-inputs-2026-10-21/README.md) y el [frente Frontier](../research/frontier-classic/README.md). Las fichas 01–10 incluyen actualización documental. Los campos pendientes y propuestas no equivalen a funciones implementadas.

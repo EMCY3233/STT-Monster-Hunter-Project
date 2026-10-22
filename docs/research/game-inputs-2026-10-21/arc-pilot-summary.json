@@ -1,0 +1,91 @@
+{
+  "reports": [
+    {
+      "schema_version": 1,
+      "source_name": "title.arc",
+      "source_sha256": "6c73a0cfb275ed54b0909d4aac8989b887af3db10b69b4a3dfe342ac4753446e",
+      "source_bytes": 2421728,
+      "source_hash_unchanged": true,
+      "format_observed": "ARC_LE_v17",
+      "entry_count": 121,
+      "decompression_counts": {
+        "ok": 121
+      },
+      "signature_candidates": {
+        "GMD_candidate": 11,
+        "TEX_candidate": 22,
+        "unclassified": 88
+      },
+      "exported_local_name": "entry_0000.bin",
+      "exported_local_sha256": "e478a0480d0590a56256b4afb0369b6ac8608e3f10b6e19373989a20de995d26"
+    },
+    {
+      "schema_version": 1,
+      "source_name": "resident.arc",
+      "source_sha256": "63c29d8e0d87d1096082babc82b66677f9c781a0bee479f8fc1743ec2d2f4c49",
+      "source_bytes": 1917494,
+      "source_hash_unchanged": true,
+      "format_observed": "ARC_LE_v17",
+      "entry_count": 288,
+      "decompression_counts": {
+        "ok": 288
+      },
+      "signature_candidates": {
+        "TEX_candidate": 17,
+        "unclassified": 240,
+        "GMD_candidate": 31
+      },
+      "exported_local_name": null,
+      "exported_local_sha256": null
+    },
+    {
+      "schema_version": 1,
+      "source_name": "quest.arc",
+      "source_sha256": "63714c4c4ddd7eba78560d9a998dadf8319d788963e79928844e88f0814054be",
+      "source_bytes": 1953795,
+      "source_hash_unchanged": true,
+      "format_observed": "ARC_LE_v17",
+      "entry_count": 373,
+      "decompression_counts": {
+        "ok": 373
+      },
+      "signature_candidates": {
+        "TEX_candidate": 60,
+        "unclassified": 243,
+        "GMD_candidate": 6,
+        "MRL_candidate": 32,
+        "MOD_candidate": 32
+      },
+      "exported_local_name": "entry_0213.bin",
+      "exported_local_sha256": "998b2fbee2d06b726fad75c3395404139fa8204de74657cfa4128e442e7746ac"
+    }
+  ],
+  "exported_entries": [
+    {
+      "index": 0,
+      "path": "table\\TitleMsg_jpn",
+      "type_id": "242BB29A",
+      "compressed_bytes": 3437,
+      "declared_bytes": 8215,
+      "flags": 1,
+      "offset": 9712,
+      "decompression": "ok",
+      "observed_bytes": 8215,
+      "sha256": "e478a0480d0590a56256b4afb0369b6ac8608e3f10b6e19373989a20de995d26",
+      "signature_candidate": "GMD_candidate"
+    },
+    {
+      "index": 213,
+      "path": "effect\\base\\cm050_000",
+      "type_id": "58A15856",
+      "compressed_bytes": 1852,
+      "declared_bytes": 4126,
+      "flags": 5,
+      "offset": 1301596,
+      "decompression": "ok",
+      "observed_bytes": 4126,
+      "sha256": "998b2fbee2d06b726fad75c3395404139fa8204de74657cfa4128e442e7746ac",
+      "signature_candidate": "MOD_candidate"
+    }
+  ]
+}

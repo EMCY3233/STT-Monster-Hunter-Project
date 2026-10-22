@@ -1,0 +1,714 @@
+{
+  "scope": "MHXX 3DS patch only; no conversion, playback or game execution",
+  "resources": [
+    {
+      "archive": "arc/village/common.arc",
+      "archive_sha256": "8694d2381e6c2e4b892831ca36c744d0ba6da9d5b2ce18e6376263659d9910c1",
+      "index": 39,
+      "internal_path": "npc\\mod\\npc009\\npc009",
+      "bytes": 65102,
+      "sha256": "1f8fad8515b613e0dc20c3bf8e56aa5153d83c6a6146680452cf139e5d80310d",
+      "local_filename": "common_entry_0039.mod",
+      "probe": {
+        "format": "MOD",
+        "version": 230,
+        "bone_count_declared": 14,
+        "mesh_count_declared": 2,
+        "material_count_declared": 1,
+        "vertex_count_declared": 1556,
+        "index_count_declared": 3128,
+        "edge_count_declared": 1820,
+        "geometry_and_skeleton_validated": false
+      }
+    },
+    {
+      "archive": "arc/village/common.arc",
+      "archive_sha256": "8694d2381e6c2e4b892831ca36c744d0ba6da9d5b2ce18e6376263659d9910c1",
+      "index": 82,
+      "internal_path": "npc\\mod\\npc010\\npc010",
+      "bytes": 27622,
+      "sha256": "9645245127e3f979d801570ac0352219b5ecaab5cacd3177d0487d80955a2da8",
+      "local_filename": "common_entry_0082.mod",
+      "probe": {
+        "format": "MOD",
+        "version": 230,
+        "bone_count_declared": 14,
+        "mesh_count_declared": 2,
+        "material_count_declared": 1,
+        "vertex_count_declared": 609,
+        "index_count_declared": 1434,
+        "edge_count_declared": 868,
+        "geometry_and_skeleton_validated": false
+      }
+    },
+    {
+      "archive": "arc/village/common.arc",
+      "archive_sha256": "8694d2381e6c2e4b892831ca36c744d0ba6da9d5b2ce18e6376263659d9910c1",
+      "index": 84,
+      "internal_path": "npc\\mot\\com_0",
+      "bytes": 247504,
+      "sha256": "a4cf8054ebecebfa53f82bae923353b0e1221f2fc46242ee507e1bfe7df39fa9",
+      "local_filename": "common_entry_0084.lmt",
+      "probe": {
+        "format": "LMT",
+        "version": 67,
+        "pointer_layout_tested": "32-bit little-endian",
+        "slots_declared": 144,
+        "nonempty_slots": 46,
+        "unique_block_offsets": 46,
+        "clips": [
+          {
+            "slot": 1,
+            "offset": 592,
+            "tracks_declared": 21,
+            "frames_declared": 813,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 2,
+            "offset": 656,
+            "tracks_declared": 21,
+            "frames_declared": 433,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 3,
+            "offset": 720,
+            "tracks_declared": 21,
+            "frames_declared": 301,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 4,
+            "offset": 784,
+            "tracks_declared": 21,
+            "frames_declared": 111,
+            "loop_frame_declared": 36
+          },
+          {
+            "slot": 11,
+            "offset": 848,
+            "tracks_declared": 21,
+            "frames_declared": 211,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 12,
+            "offset": 912,
+            "tracks_declared": 21,
+            "frames_declared": 139,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 21,
+            "offset": 976,
+            "tracks_declared": 21,
+            "frames_declared": 201,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 22,
+            "offset": 1040,
+            "tracks_declared": 21,
+            "frames_declared": 301,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 31,
+            "offset": 1104,
+            "tracks_declared": 21,
+            "frames_declared": 201,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 32,
+            "offset": 1168,
+            "tracks_declared": 21,
+            "frames_declared": 197,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 41,
+            "offset": 1232,
+            "tracks_declared": 21,
+            "frames_declared": 201,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 42,
+            "offset": 1296,
+            "tracks_declared": 21,
+            "frames_declared": 423,
+            "loop_frame_declared": 26
+          },
+          {
+            "slot": 51,
+            "offset": 1360,
+            "tracks_declared": 21,
+            "frames_declared": 201,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 52,
+            "offset": 1424,
+            "tracks_declared": 21,
+            "frames_declared": 279,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 61,
+            "offset": 1488,
+            "tracks_declared": 23,
+            "frames_declared": 365,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 62,
+            "offset": 1552,
+            "tracks_declared": 23,
+            "frames_declared": 285,
+            "loop_frame_declared": 170
+          },
+          {
+            "slot": 63,
+            "offset": 1616,
+            "tracks_declared": 23,
+            "frames_declared": 207,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 64,
+            "offset": 1680,
+            "tracks_declared": 23,
+            "frames_declared": 339,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 65,
+            "offset": 1744,
+            "tracks_declared": 23,
+            "frames_declared": 367,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 71,
+            "offset": 1808,
+            "tracks_declared": 16,
+            "frames_declared": 123,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 72,
+            "offset": 1872,
+            "tracks_declared": 16,
+            "frames_declared": 223,
+            "loop_frame_declared": 56
+          },
+          {
+            "slot": 81,
+            "offset": 1936,
+            "tracks_declared": 17,
+            "frames_declared": 123,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 82,
+            "offset": 2000,
+            "tracks_declared": 17,
+            "frames_declared": 229,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 83,
+            "offset": 2064,
+            "tracks_declared": 16,
+            "frames_declared": 91,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 84,
+            "offset": 2128,
+            "tracks_declared": 16,
+            "frames_declared": 387,
+            "loop_frame_declared": 24
+          },
+          {
+            "slot": 91,
+            "offset": 2192,
+            "tracks_declared": 21,
+            "frames_declared": 201,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 92,
+            "offset": 2256,
+            "tracks_declared": 21,
+            "frames_declared": 301,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 101,
+            "offset": 2320,
+            "tracks_declared": 21,
+            "frames_declared": 321,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 102,
+            "offset": 2384,
+            "tracks_declared": 21,
+            "frames_declared": 279,
+            "loop_frame_declared": 108
+          },
+          {
+            "slot": 103,
+            "offset": 2448,
+            "tracks_declared": 21,
+            "frames_declared": 141,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 104,
+            "offset": 2512,
+            "tracks_declared": 21,
+            "frames_declared": 129,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 105,
+            "offset": 2576,
+            "tracks_declared": 21,
+            "frames_declared": 89,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 111,
+            "offset": 2640,
+            "tracks_declared": 26,
+            "frames_declared": 471,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 112,
+            "offset": 2704,
+            "tracks_declared": 27,
+            "frames_declared": 359,
+            "loop_frame_declared": 150
+          },
+          {
+            "slot": 113,
+            "offset": 2768,
+            "tracks_declared": 26,
+            "frames_declared": 591,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 121,
+            "offset": 2832,
+            "tracks_declared": 21,
+            "frames_declared": 203,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 122,
+            "offset": 2896,
+            "tracks_declared": 21,
+            "frames_declared": 275,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 123,
+            "offset": 2960,
+            "tracks_declared": 21,
+            "frames_declared": 315,
+            "loop_frame_declared": 88
+          },
+          {
+            "slot": 124,
+            "offset": 3024,
+            "tracks_declared": 21,
+            "frames_declared": 377,
+            "loop_frame_declared": 214
+          },
+          {
+            "slot": 125,
+            "offset": 3088,
+            "tracks_declared": 21,
+            "frames_declared": 81,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 131,
+            "offset": 3152,
+            "tracks_declared": 22,
+            "frames_declared": 53,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 132,
+            "offset": 3216,
+            "tracks_declared": 22,
+            "frames_declared": 183,
+            "loop_frame_declared": 6
+          },
+          {
+            "slot": 133,
+            "offset": 3280,
+            "tracks_declared": 22,
+            "frames_declared": 83,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 141,
+            "offset": 3344,
+            "tracks_declared": 22,
+            "frames_declared": 81,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 142,
+            "offset": 3408,
+            "tracks_declared": 22,
+            "frames_declared": 161,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 143,
+            "offset": 3472,
+            "tracks_declared": 22,
+            "frames_declared": 83,
+            "loop_frame_declared": 0
+          }
+        ],
+        "table_and_block_headers_in_bounds": true,
+        "fps": null,
+        "track_codecs_and_skeleton_binding_validated": false
+      }
+    },
+    {
+      "archive": "arc/village/common.arc",
+      "archive_sha256": "8694d2381e6c2e4b892831ca36c744d0ba6da9d5b2ce18e6376263659d9910c1",
+      "index": 85,
+      "internal_path": "npc\\mot\\par_0",
+      "bytes": 99304,
+      "sha256": "35fb4bd3efaba3fc321821c92258aebfc90bd93bb29385008f97631c839faf08",
+      "local_filename": "common_entry_0085.lmt",
+      "probe": {
+        "format": "LMT",
+        "version": 67,
+        "pointer_layout_tested": "32-bit little-endian",
+        "slots_declared": 73,
+        "nonempty_slots": 35,
+        "unique_block_offsets": 35,
+        "clips": [
+          {
+            "slot": 1,
+            "offset": 304,
+            "tracks_declared": 17,
+            "frames_declared": 123,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 2,
+            "offset": 368,
+            "tracks_declared": 16,
+            "frames_declared": 97,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 3,
+            "offset": 432,
+            "tracks_declared": 17,
+            "frames_declared": 161,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 4,
+            "offset": 496,
+            "tracks_declared": 17,
+            "frames_declared": 117,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 5,
+            "offset": 560,
+            "tracks_declared": 16,
+            "frames_declared": 387,
+            "loop_frame_declared": 24
+          },
+          {
+            "slot": 6,
+            "offset": 624,
+            "tracks_declared": 16,
+            "frames_declared": 91,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 7,
+            "offset": 688,
+            "tracks_declared": 17,
+            "frames_declared": 411,
+            "loop_frame_declared": 58
+          },
+          {
+            "slot": 8,
+            "offset": 752,
+            "tracks_declared": 17,
+            "frames_declared": 171,
+            "loop_frame_declared": 50
+          },
+          {
+            "slot": 9,
+            "offset": 816,
+            "tracks_declared": 17,
+            "frames_declared": 229,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 11,
+            "offset": 880,
+            "tracks_declared": 17,
+            "frames_declared": 123,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 12,
+            "offset": 944,
+            "tracks_declared": 17,
+            "frames_declared": 229,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 13,
+            "offset": 1008,
+            "tracks_declared": 16,
+            "frames_declared": 333,
+            "loop_frame_declared": 128
+          },
+          {
+            "slot": 21,
+            "offset": 1072,
+            "tracks_declared": 17,
+            "frames_declared": 123,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 22,
+            "offset": 1136,
+            "tracks_declared": 17,
+            "frames_declared": 229,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 23,
+            "offset": 1200,
+            "tracks_declared": 16,
+            "frames_declared": 91,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 24,
+            "offset": 1264,
+            "tracks_declared": 16,
+            "frames_declared": 387,
+            "loop_frame_declared": 24
+          },
+          {
+            "slot": 31,
+            "offset": 1328,
+            "tracks_declared": 21,
+            "frames_declared": 201,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 32,
+            "offset": 1392,
+            "tracks_declared": 21,
+            "frames_declared": 71,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 33,
+            "offset": 1456,
+            "tracks_declared": 21,
+            "frames_declared": 287,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 34,
+            "offset": 1520,
+            "tracks_declared": 21,
+            "frames_declared": 57,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 35,
+            "offset": 1584,
+            "tracks_declared": 21,
+            "frames_declared": 405,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 41,
+            "offset": 1648,
+            "tracks_declared": 21,
+            "frames_declared": 201,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 42,
+            "offset": 1712,
+            "tracks_declared": 21,
+            "frames_declared": 71,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 43,
+            "offset": 1776,
+            "tracks_declared": 21,
+            "frames_declared": 287,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 44,
+            "offset": 1840,
+            "tracks_declared": 21,
+            "frames_declared": 57,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 45,
+            "offset": 1904,
+            "tracks_declared": 21,
+            "frames_declared": 405,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 51,
+            "offset": 1968,
+            "tracks_declared": 21,
+            "frames_declared": 201,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 52,
+            "offset": 2032,
+            "tracks_declared": 21,
+            "frames_declared": 71,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 53,
+            "offset": 2096,
+            "tracks_declared": 21,
+            "frames_declared": 287,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 54,
+            "offset": 2160,
+            "tracks_declared": 21,
+            "frames_declared": 57,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 55,
+            "offset": 2224,
+            "tracks_declared": 21,
+            "frames_declared": 405,
+            "loop_frame_declared": -1
+          },
+          {
+            "slot": 61,
+            "offset": 2288,
+            "tracks_declared": 16,
+            "frames_declared": 245,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 62,
+            "offset": 2352,
+            "tracks_declared": 16,
+            "frames_declared": 387,
+            "loop_frame_declared": 24
+          },
+          {
+            "slot": 71,
+            "offset": 2416,
+            "tracks_declared": 16,
+            "frames_declared": 75,
+            "loop_frame_declared": 0
+          },
+          {
+            "slot": 72,
+            "offset": 2480,
+            "tracks_declared": 16,
+            "frames_declared": 387,
+            "loop_frame_declared": 24
+          }
+        ],
+        "table_and_block_headers_in_bounds": true,
+        "fps": null,
+        "track_codecs_and_skeleton_binding_validated": false
+      }
+    },
+    {
+      "archive": "arc/village/common.arc",
+      "archive_sha256": "8694d2381e6c2e4b892831ca36c744d0ba6da9d5b2ce18e6376263659d9910c1",
+      "index": 86,
+      "internal_path": "npc\\mot\\lpet_p_s",
+      "bytes": 2516,
+      "sha256": "ad1a8ae24be18ab64c4a857f0fbeec64c00b04c98a505f26ff230f2904f758ee",
+      "local_filename": "common_entry_0086.lmt",
+      "probe": {
+        "format": "LMT",
+        "version": 67,
+        "pointer_layout_tested": "32-bit little-endian",
+        "slots_declared": 2,
+        "nonempty_slots": 1,
+        "unique_block_offsets": 1,
+        "clips": [
+          {
+            "slot": 1,
+            "offset": 16,
+            "tracks_declared": 21,
+            "frames_declared": 113,
+            "loop_frame_declared": 0
+          }
+        ],
+        "table_and_block_headers_in_bounds": true,
+        "fps": null,
+        "track_codecs_and_skeleton_binding_validated": false
+      }
+    },
+    {
+      "archive": "arc/village/common.arc",
+      "archive_sha256": "8694d2381e6c2e4b892831ca36c744d0ba6da9d5b2ce18e6376263659d9910c1",
+      "index": 87,
+      "internal_path": "npc\\mot\\lpet_y_s",
+      "bytes": 2124,
+      "sha256": "2ef3c57d4075c57ff71805d3aa8cd6631f9e0c0dd54008b17e73596e9f5e1aae",
+      "local_filename": "common_entry_0087.lmt",
+      "probe": {
+        "format": "LMT",
+        "version": 67,
+        "pointer_layout_tested": "32-bit little-endian",
+        "slots_declared": 2,
+        "nonempty_slots": 1,
+        "unique_block_offsets": 1,
+        "clips": [
+          {
+            "slot": 1,
+            "offset": 16,
+            "tracks_declared": 21,
+            "frames_declared": 111,
+            "loop_frame_declared": 0
+          }
+        ],
+        "table_and_block_headers_in_bounds": true,
+        "fps": null,
+        "track_codecs_and_skeleton_binding_validated": false
+      }
+    }
+  ]
+}

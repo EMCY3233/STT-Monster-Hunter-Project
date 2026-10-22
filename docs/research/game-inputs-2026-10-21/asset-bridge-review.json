@@ -1,0 +1,66 @@
+{
+  "scope": "Numerical original-project sample assessment only. No importer, resampled asset, GUI/Vita test, telemetry or commercial compatibility claim.",
+  "model_sha256": "4fd4e514ac1f1df9e7370a2a9078300349752e75e9f547a46dd4752d6538882d",
+  "sample_sha256": "6065aec43ff7ba2072b08a07ff9ea6479cd19a07803ad29ee3533ae4fd7a4800",
+  "format": "STT Asset",
+  "version": 1,
+  "bones": 4,
+  "vertices": 48,
+  "triangles": 72,
+  "clips": [
+    {
+      "name": "Idle",
+      "seconds": 2,
+      "duration_times_60": 120,
+      "sampled_poses": 120,
+      "key_times_on_60hz_grid": true,
+      "loop_pose_equals_start": true
+    },
+    {
+      "name": "Practice swing",
+      "seconds": 1.2,
+      "duration_times_60": 72,
+      "sampled_poses": 72,
+      "key_times_on_60hz_grid": true,
+      "loop_pose_equals_start": true
+    }
+  ],
+  "sampled_poses_total": 192,
+  "sampled_world_vertex_bounds_mm": {
+    "min": [
+      -323.8614102866928,
+      -147.3744993940964,
+      -180
+    ],
+    "max": [
+      2100.5560599034748,
+      3232.1855489103164,
+      180
+    ]
+  },
+  "bounds_are_continuous_extrema": false,
+  "all_sample_key_times_on_60hz_grid": true,
+  "coordinate_basis_conversion_applied": false,
+  "proposed_unit_rounding": "half away from zero; proposal only, not a target-engine contract",
+  "unit_anchor_checks_passed": 5,
+  "illustrative_packed_payload_bytes": {
+    "bone_parent_i16_offset_3i32": 56,
+    "vertex_position_3i32_bone_u16": 672,
+    "triangle_3u16": 432,
+    "key_tick_u32_z_angle_i32": 56
+  },
+  "packed_layout_status": "Illustrative packing only. Excludes headers, names, runtime/alignment, render buffers and other memory. Not implemented or approved.",
+  "asset_to_vita_importer_implemented": false,
+  "fetched_sources": [
+    {
+      "path": "asset-lab/stt_asset_lab/model.py",
+      "branch": "prototype/asset-lab-20261021",
+      "git_blob_sha": "1b5257ab6129f8d0cfbf50474b37aac55bc90098"
+    },
+    {
+      "path": "asset-lab/samples/practice-dummy.stt.json",
+      "branch": "prototype/asset-lab-20261021",
+      "git_blob_sha": "58a95cec5db370400465568cda677853b91cd729"
+    }
+  ]
+}

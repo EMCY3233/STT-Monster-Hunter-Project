@@ -1,0 +1,117 @@
+{
+  "generated_utc": "2026-10-21T07:24:13.167590+00:00",
+  "input_label": "Juegos/MHF-Vita/PCSG00350",
+  "scope": "local files at enumeration time only; no decryption or recursive container decoding",
+  "files_enumerated": 8261,
+  "bytes_read_files": 5211575243,
+  "status": {
+    "read_ok": 8252,
+    "excluded_license": 9
+  },
+  "signatures": {
+    "unclassified": 8196,
+    "excluded_or_failed": 9,
+    "SFO": 2,
+    "HTML_candidate": 2,
+    "PNG": 2,
+    "JKR_candidate": 44,
+    "ECD_candidate": 5,
+    "SCE_wrapper": 1
+  },
+  "extensions": {
+    ".html": 3,
+    ".jpg": 2,
+    ".txb": 263,
+    ".bin": 2035,
+    ".pac": 1634,
+    ".abn": 125,
+    ".mot": 105,
+    ".gab": 320,
+    ".aan": 2,
+    ".png": 50,
+    ".mus": 766,
+    ".snd": 1,
+    ".vsnd": 2643,
+    ".vsnp": 288,
+    ".lst": 2,
+    ".suprx": 8,
+    ".db": 4,
+    "": 4,
+    ".xml": 2,
+    ".sfo": 2,
+    ".trp": 2
+  },
+  "added_during_scan": [],
+  "removed_during_scan": [],
+  "switch_excluded": true,
+  "transfer_completed": true,
+  "planned_selected_files": 8261,
+  "planned_selected_bytes": 5212490427,
+  "bank_catalog_files": 9888,
+  "independent_local_full_hash_matches": 8252,
+  "reconciliation_errors": [],
+  "census_package_metadata_excluded": [
+    "app/PCSG00350/sce_sys/package/body.bin",
+    "app/PCSG00350/sce_sys/package/head.bin",
+    "app/PCSG00350/sce_sys/package/stat.bin",
+    "app/PCSG00350/sce_sys/package/tail.bin",
+    "app/PCSG00350/sce_sys/package/temp.bin",
+    "patch/PCSG00350/sce_sys/package/body.bin",
+    "patch/PCSG00350/sce_sys/package/head.bin",
+    "patch/PCSG00350/sce_sys/package/stat.bin",
+    "patch/PCSG00350/sce_sys/package/tail.bin"
+  ],
+  "root_file_counts": {
+    "app": 4492,
+    "patch": 3666,
+    "rePatch": 103
+  },
+  "sfo": [
+    {
+      "path": "app/PCSG00350/sce_sys/param.sfo",
+      "sha256": "51b9f8ed1682a6868db4cc503dadfb2c49c80cbf8b1e220fa172dcafdb2b764b",
+      "metadata": {
+        "APP_VER": "01.00",
+        "CATEGORY": "gd",
+        "CONTENT_ID": "JP0102-PCSG00350_00-MHFGHDDCONTENTID",
+        "TITLE": "モンスターハンター フロンティアＧ",
+        "TITLE_ID": "PCSG00350",
+        "VERSION": "01.00"
+      }
+    },
+    {
+      "path": "patch/PCSG00350/sce_sys/param.sfo",
+      "sha256": "5c69bf7e75af0e3a72c5e93947ab255dec261f1759fd4ddcd114c4999543b98f",
+      "metadata": {
+        "APP_VER": "01.99",
+        "CATEGORY": "gp",
+        "CONTENT_ID": "JP0102-PCSG00350_00-MHFGHDDCONTENTID",
+        "TITLE": "モンスターハンター フロンティアＺ",
+        "TITLE_ID": "PCSG00350",
+        "VERSION": "01.00"
+      }
+    }
+  ],
+  "sqlite_integrity_check": "ok",
+  "bank_artifacts": [
+    {
+      "name": "catalog.sqlite",
+      "sha256": "1ad910c69269f951f41d9ff086d66521eda6bc2d96227042f82234e64a095ce1",
+      "matches_registration": true
+    },
+    {
+      "name": "catalog-files.jsonl",
+      "sha256": "ea01c3b2db8f69851aaaf8cbe270141df60bf60a688b188216268743b52ec2f0",
+      "matches_registration": true
+    },
+    {
+      "name": "catalog-entries.jsonl",
+      "sha256": "f927b43dede5d9eaa5be6aa4e742214850ea5096a4d99a4e39735013131fd488",
+      "matches_registration": true
+    }
+  ],
+  "excludes_remote_license": true,
+  "complete_bootable_decrypted_game_verified": false,
+  "inspection_tool_sha256": "d18e3fca5741b700faf58faabd21fcb36dde99c0c08c882d47467ffd014eee6e",
+  "full_local_inventory_sha256": "f9064d4b92397d495bc1af5810f34c2e5d5bf60c143a9aa97a4da5f56bbe2c15"
+}

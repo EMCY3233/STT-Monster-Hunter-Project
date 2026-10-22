@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-21T04:59:48.487047+00:00",
+  "input_root_label": "Juegos",
+  "method": "read-only streaming SHA-256 and bounded structural probes; no extraction/decryption",
+  "records": [
+    {
+      "path": "MH3U/EUR - Monster Hunter 3 Ultimate(00040000000b1d00).cia",
+      "filename": "EUR - Monster Hunter 3 Ultimate(00040000000b1d00).cia",
+      "version_from_filename_only": null,
+      "version_verified": null,
+      "access": "full_read_ok",
+      "bytes": 1871489344,
+      "sha256": "aa108914574a1a28b87e13964322441e2b619814a6d97401affce9f68ddcfd4f",
+      "size_mtime_stable_during_read": true,
+      "probe": {
+        "format": "CIA_structural_header",
+        "header_version": 0,
+        "sections_within_file": true,
+        "content_bytes_declared": 1871474688,
+        "tmd_bytes": 2916,
+        "cryptographic_validation": "not_performed",
+        "title_id_tmd": "00040000000B1D00",
+        "title_version_raw": 0,
+        "title_version_components": [
+          0,
+          0,
+          0
+        ],
+        "content_count_tmd": 2,
+        "contents_metadata": [
+          {
+            "id": "00000000",
+            "index": 0,
+            "type_flags": 1,
+            "encrypted_flag": true,
+            "declared_bytes": 1867444224
+          },
+          {
+            "id": "00000001",
+            "index": 1,
+            "type_flags": 1,
+            "encrypted_flag": true,
+            "declared_bytes": 4030464
+          }
+        ],
+        "first_content_has_plain_ncch_marker": false
+      },
+      "version_metadata_observed": {
+        "tmd_raw": 0,
+        "components": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "path": "MH4U/EUR - Monster Hunter 4 Ultimate (0004000000126100).7z.001",
+      "filename": "EUR - Monster Hunter 4 Ultimate (0004000000126100).7z.001",
+      "version_from_filename_only": null,
+      "version_verified": null,
+      "access": "full_read_ok",
+      "bytes": 1610612736,
+      "sha256": "e87b28badf258a739e3d4ece1db265c69dc329e3a31ba9a02c7181afaa5a3e2f",
+      "size_mtime_stable_during_read": true,
+      "probe": {
+        "format": "7z_split_header",
+        "parts": [
+          "EUR - Monster Hunter 4 Ultimate (0004000000126100).7z.001",
+          "EUR - Monster Hunter 4 Ultimate (0004000000126100).7z.002"
+        ],
+        "parts_contiguous_from_one": true,
+        "aggregate_bytes": 2734920480,
+        "start_header_crc_ok": true,
+        "next_header_within_parts": true,
+        "payload_test": "not_performed",
+        "next_header_crc_ok": true
+      },
+      "version_metadata_observed": null
+    },
+    {
+      "path": "MH4U/EUR - Monster Hunter 4 Ultimate (0004000000126100).7z.002",
+      "filename": "EUR - Monster Hunter 4 Ultimate (0004000000126100).7z.002",
+      "version_from_filename_only": null,
+      "version_verified": null,
+      "access": "full_read_ok",
+      "bytes": 1124307744,
+      "sha256": "88571b2ad5e4ab0845bbe008ef0360263fc94d3d35ecc6e9edbd0f854c1408c3",
+      "size_mtime_stable_during_read": true,
+      "probe": {
+        "format": "split_continuation_by_filename",
+        "independent_archive": false
+      },
+      "version_metadata_observed": null
+    },
+    {
+      "path": "MHFU/Monster Hunter Freedom Unite.iso",
+      "filename": "Monster Hunter Freedom Unite.iso",
+      "version_from_filename_only": null,
+      "version_verified": null,
+      "access": "full_read_ok",
+      "bytes": 886702080,
+      "sha256": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+      "size_mtime_stable_during_read": true,
+      "probe": {
+        "format": "ISO9660_primary_volume",
+        "file_count": 13,
+        "suffix_counts": {
+          ".bin": 6,
+          ".png": 3,
+          ".pmf": 1,
+          ".sfo": 2,
+          ".at3": 1
+        },
+        "sfo_metadata": {
+          "CATEGORY": "UG",
+          "DISC_ID": "ULES01213",
+          "DISC_VERSION": "1.01",
+          "PSP_SYSTEM_VER": "5.03",
+          "TITLE": "MONSTER HUNTER FREEDOM UNITE™"
+        },
+        "executable": {
+          "path": "PSP_GAME/SYSDIR/EBOOT.BIN",
+          "bytes": 1910384,
+          "container": "PSP_wrapped"
+        },
+        "largest_files": [
+          {
+            "path": "PSP_GAME/USRDIR/DATA.BIN",
+            "bytes": 772732928
+          },
+          {
+            "path": "PSP_GAME/SYSDIR/UPDATE/DATA.BIN",
+            "bytes": 21602544
+          },
+          {
+            "path": "PSP_GAME/SYSDIR/UPDATE/EBOOT.BIN",
+            "bytes": 5476608
+          },
+          {
+            "path": "PSP_GAME/SYSDIR/EBOOT.BIN",
+            "bytes": 1910384
+          },
+          {
+            "path": "PSP_GAME/SYSDIR/BOOT.BIN",
+            "bytes": 1910044
+          },
+          {
+            "path": "PSP_GAME/ICON1.PMF",
+            "bytes": 266240
+          },
+          {
+            "path": "PSP_GAME/PIC1.PNG",
+            "bytes": 254636
+          },
+          {
+            "path": "PSP_GAME/SND0.AT3",
+            "bytes": 240964
+          },
+          {
+            "path": "PSP_GAME/PIC0.PNG",
+            "bytes": 59230
+          },
+          {
+            "path": "PSP_GAME/ICON0.PNG",
+            "bytes": 27108
+          },
+          {
+            "path": "PSP_GAME/SYSDIR/UPDATE/PARAM.SFO",
+            "bytes": 2080
+          },
+          {
+            "path": "PSP_GAME/PARAM.SFO",
+            "bytes": 472
+          }
+        ]
+      },
+      "version_metadata_observed": "1.01"
+    },
+    {
+      "path": "MHGU/MHXX_MHGU_English_Patch_v2.cia",
+      "filename": "MHXX_MHGU_English_Patch_v2.cia",
+      "version_from_filename_only": "v2",
+      "version_verified": null,
+      "access": "full_read_ok",
+      "bytes": 36897728,
+      "sha256": "8438c0c026203c20b9dd81fc3b6ec9c31c94abc80e5bb7f6618cd58f804ac4ac",
+      "size_mtime_stable_during_read": true,
+      "probe": {
+        "format": "CIA_structural_header",
+        "header_version": 0,
+        "sections_within_file": true,
+        "content_bytes_declared": 36868096,
+        "tmd_bytes": 2868,
+        "cryptographic_validation": "not_performed",
+        "title_id_tmd": "0004000E00197100",
+        "title_version_raw": 4224,
+        "title_version_components": [
+          4,
+          8,
+          0
+        ],
+        "content_count_tmd": 1,
+        "contents_metadata": [
+          {
+            "id": "00000000",
+            "index": 0,
+            "type_flags": 0,
+            "encrypted_flag": false,
+            "declared_bytes": 36868096
+          }
+        ],
+        "first_content_has_plain_ncch_marker": true
+      },
+      "version_metadata_observed": {
+        "tmd_raw": 4224,
+        "components": [
+          4,
+          8,
+          0
+        ]
+      }
+    },
+    {
+      "path": "MHGU/Monster Hunter XX  JPN (0004000000197100).7z.001",
+      "filename": "Monster Hunter XX  JPN (0004000000197100).7z.001",
+      "version_from_filename_only": null,
+      "version_verified": null,
+      "access": "full_read_ok",
+      "bytes": 1610612736,
+      "sha256": "b4133f4707a0ace9cf1932dd4f623ad654366f794eeff623d4b2454d9329c8c9",
+      "size_mtime_stable_during_read": true,
+      "probe": {
+        "format": "7z_split_header",
+        "parts": [
+          "Monster Hunter XX  JPN (0004000000197100).7z.001",
+          "Monster Hunter XX  JPN (0004000000197100).7z.002"
+        ],
+        "parts_contiguous_from_one": true,
+        "aggregate_bytes": 2331029628,
+        "start_header_crc_ok": true,
+        "next_header_within_parts": true,
+        "payload_test": "not_performed",
+        "next_header_crc_ok": true
+      },
+      "version_metadata_observed": null
+    },
+    {
+      "path": "MHGU/Monster Hunter XX  JPN (0004000000197100).7z.002",
+      "filename": "Monster Hunter XX  JPN (0004000000197100).7z.002",
+      "version_from_filename_only": null,
+      "version_verified": null,
+      "access": "full_read_ok",
+      "bytes": 720416892,
+      "sha256": "d4bad63aef5133e0504f48e84775b924ed7af2249ca5acee687be28421772a57",
+      "size_mtime_stable_during_read": true,
+      "probe": {
+        "format": "split_continuation_by_filename",
+        "independent_archive": false
+      },
+      "version_metadata_observed": null
+    }
+  ]
+}
