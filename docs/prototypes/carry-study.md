@@ -1,0 +1,11 @@
+# STT 0.13 — envainado y desenvainado
+
+Prototipo independiente STTP00001. Se conserva movimiento con palanca izquierda, cámara con derecha y objetivo del Combat Lab. Cruz desde envainado inicia extracción; otra pulsación, una vez terminada, ataca. Cuadrado alterna envainado/desenvainado en reposo; Triángulo reinicia y Start sale. No se aceptan golpes ni movimiento durante las transiciones. La cámara sigue disponible. Suspensión descarta pulsaciones pendientes.
+
+La espada CC0 existente pasa entre un anclaje diagonal en espalda y el montaje de mano. Se añade una vaina geométrica propia, independiente del arma. Las transiciones duran 24/30 ticks a 60 Hz, con transferencia a los 12/15: valores provisionales de STT, no tiempos medidos de Monster Hunter. El cambio de anclaje es discreto; falta una animación de extracción que lo conecte sin salto. El cuerpo es todavía el muñeco planar propio y no resuelve agarre de dos manos, pies ni animación fiel. No presentar esta versión como recreación terminada.
+
+Esta rama no incluye archivos comerciales, conversiones de Frontier ni muestras locales de análisis. La investigación de hoja/vaina orienta la separación conceptual; los IDs de materiales de Frontier no se aplican a la espada CC0. Mantener los estilos Earth/Heaven/Storm/Extreme separados hasta validar sus movimientos.
+
+Pruebas: máquina de estados, ausencia de impactos al extraer/envainar, bloqueo de traslación y giro, transferencia de anclaje, entrada repetida durante transición, golpe único y pureza del render. Se generan cuatro capturas PC para revisar las fases. Las pruebas existentes de cámara, controles, render y combate siguen siendo necesarias. Compilación/inspección de VPK no equivalen a prueba física; rendimiento y control real en Vita 1000 pendientes.
+
+Telemetría: STT3 conserva su contrato y el estado de combate; aún no distingue los estados de equipamiento. Para la futura extensión acordar `equipment.mode`, `phase_tick`, `socket` (`back`/`hand`), `motion_provenance=reference_authored`, `style=stt_experimental` y un evento de transferencia. No etiquetar como Frontier verificado. HUD muestra el estado de equipamiento local; Aquatic Lab deberá definir su propia locomoción y sus transiciones antes de reutilizarlo.

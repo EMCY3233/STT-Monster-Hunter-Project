@@ -21,10 +21,10 @@ static int power_callback(int id,int count,int flags,void *user){
 }
 int main(void){
  SceUID memory[2]={-1,-1},callback=-1;uint32_t *buffers[2]={NULL,NULL};float *depth=NULL;
- int result=0,registered=0,shown=0,front=0,need_release=0;unsigned previous=0,pending_attack=0,frame_us=0,dropped=0,update_us=0;
+ int result=0,registered=0,shown=0,front=0,need_release=0;unsigned previous=0,pending_attack=0,pending_toggle=0,frame_us=0,dropped=0,update_us=0;
  uint64_t previous_time=0,accumulator=0,seq=0,next_sample=0,start=sceKernelGetProcessTimeWide();
  char session[65];snprintf(session,sizeof session,"vita-play-%" PRIx64,start);
- SttCombat combat;stt_combat_init(&combat);SttCamera camera={.45f,.40f};SttPlayMailbox mailbox={0};
+ SttCombat combat;stt_combat_init(&combat);SttEquipment equipment;stt_equipment_init(&equipment);SttCamera camera={.45f,.40f};SttPlayMailbox mailbox={0};
  stt_asset_file(&original_asset,"app0:/assets/hunter-body.pose.json");
  stt_weapon_file(&equipped_sword,"app0:/assets/quaternius-sword.pose.json");
  /* Two CDRAM buffers, each 512*272*4 rounded to 256 KiB. Original asset packaged in app0. */
@@ -44,21 +44,25 @@ int main(void){
   SceCtrlData controls;memset(&controls,0,sizeof controls);
   result=sceCtrlPeekBufferPositive(0,&controls,1);if(result<0)break;
   if(result==0){sceKernelDelayThreadCB(1000);continue;}
-  uint64_t elapsed=frame_start>=previous_time?frame_start-previous_time:100001;previous_time=frame_start;
-  if(resync_requested||elapsed>100000){resync_requested=0;accumulator=0;elapsed=0;previous=controls.buttons;pending_attack=0;need_release=1;dropped++;}
+  controls.buttons=stt_game_buttons(controls.buttons);
+  int clock_reset=frame_start<previous_time;
+  uint64_t elapsed=clock_reset?0:frame_start-previous_time;previous_time=frame_start;
+  if(resync_requested||clock_reset){resync_requested=0;accumulator=0;elapsed=0;previous=controls.buttons;pending_attack=0;pending_toggle=0;need_release=1;dropped++;}
+  if(elapsed>100000)dropped++; /* Slow rendering is not a power/resume event. */
   unsigned pressed=controls.buttons&~previous;previous=controls.buttons;
   if(pressed&SCE_CTRL_START){result=0;break;}
   if(need_release&&controls.buttons==0&&stt_axis(controls.lx)==0&&stt_axis(controls.ly)==0&&stt_axis(controls.rx)==0&&stt_axis(controls.ry)==0)need_release=0;
-  if(pressed&SCE_CTRL_TRIANGLE){stt_combat_init(&combat);camera=(SttCamera){.45f,.40f};accumulator=0;pending_attack=0;
+  if(pressed&SCE_CTRL_TRIANGLE){need_release=0;pressed&=~(SCE_CTRL_CROSS|SCE_CTRL_SQUARE);stt_combat_init(&combat);stt_equipment_init(&equipment);pending_toggle=0;camera=(SttCamera){.45f,.40f};accumulator=0;pending_attack=0;
    start=frame_start;seq=0;next_sample=0;memset(&mailbox,0,sizeof mailbox);snprintf(session,sizeof session,"vita-play-%" PRIx64,start);}
   if(!need_release&&(pressed&SCE_CTRL_CROSS))pending_attack=1;
+  if(!need_release&&(pressed&SCE_CTRL_SQUARE))pending_toggle=1;
   unsigned ticks=stt_frame_ticks(elapsed,&accumulator);uint64_t update_start=sceKernelGetProcessTimeWide();
   for(unsigned i=0;i<ticks;i++){
    if(need_release)break;
    stt_camera_step(&camera,controls.rx,controls.ry);
    SttMove move=stt_camera_move(camera,controls.lx,controls.ly,combat.hunter.yaw_turn);
    SttCombatInput input={move.x_mm,move.z_mm,move.yaw_turn,pending_attack!=0};
-   stt_combat_step(&combat,input);pending_attack=0;
+   stt_equipment_step(&equipment,&combat,input,pending_toggle!=0);pending_attack=0;pending_toggle=0;
    /* A latest-only snapshot at 10 Hz and immediately on impact. No network operations. */
    if(combat.impact_count||combat.tick>=next_sample){
     SttPlaySample sample;stt_vita_snapshot(&sample,&combat,camera,session,seq++,(frame_start-start)/1000,frame_us,update_us,dropped);
@@ -67,7 +71,7 @@ int main(void){
    }
   }
   update_us=(unsigned)(sceKernelGetProcessTimeWide()-update_start);
-  stt_render_equipped(buffers[front],depth,&combat,camera,frame_us,dropped,need_release,&original_asset,&equipped_sword);
+  stt_render_equipment(buffers[front],depth,&combat,camera,frame_us,dropped,need_release,&original_asset,&equipped_sword,&equipment);
   SceDisplayFrameBuf fb={sizeof fb,buffers[front],STT_PITCH,SCE_DISPLAY_PIXELFORMAT_A8B8G8R8,STT_WIDTH,STT_HEIGHT};
   result=sceDisplaySetFrameBuf(&fb,SCE_DISPLAY_SETBUF_NEXTFRAME);if(result<0)break;shown=1;
   result=sceDisplayWaitVblankStartCB();if(result<0)break;front^=1;

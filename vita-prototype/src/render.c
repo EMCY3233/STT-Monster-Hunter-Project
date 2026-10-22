@@ -1,3 +1,4 @@
+#include "equipment.h"
 #include "render.h"
 #include <math.h>
 #include <stdio.h>
@@ -51,7 +52,7 @@ static int sword_triangle(void *context,const float p[3][3]){
  uint32_t color=*(const uint32_t*)context;
  tri((V){p[0][0],p[0][1],p[0][2]},(V){p[1][0],p[1][1],p[1][2]},(V){p[2][0],p[2][1],p[2][2]},color);return 1;
 }
-void stt_render_equipped(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused,SttAsset *asset,SttWeapon *weapon){
+static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused,SttAsset *asset,SttWeapon *weapon,const SttEquipment *equipment){
  fb=pixels;zb=depth;memset(zb,0,sizeof(float)*STT_WIDTH*STT_HEIGHT);
  for(int y=0;y<STT_HEIGHT;y++)for(int x=0;x<STT_WIDTH;x++)fb[y*STT_PITCH+x]=RGB(18+y/12,27+y/10,47+y/8);
  float hx=c->hunter.x_mm*.001f,hz=c->hunter.z_mm*.001f,sy=sinf(cam.yaw),cy=cosf(cam.yaw),sp=sinf(cam.pitch),cp=cosf(cam.pitch);
@@ -69,17 +70,26 @@ void stt_render_equipped(uint32_t *pixels,float *depth,const SttCombat*c,SttCame
  }
  float blade_yaw=yaw+(c->hunter.state==STT_ACTIVE?.5f:0);float reach=c->hunter.state==STT_ACTIVE?1.0f:.65f;
  uint32_t blade_color=c->hunter.state==STT_ACTIVE?RGB(255,234,125):RGB(172,205,220);
- int equipped=weapon&&posed&&asset->pose.bones==4&&asset->pose.parents[2]==1&&asset->pose.parents[3]==2&&stt_weapon_emit(weapon,&asset->scratch,c->hunter.x_mm,c->hunter.z_mm,c->hunter.yaw_turn,sword_triangle,&blade_color);
- if(!equipped)box(hx+sinf(blade_yaw)*reach+cosf(yaw)*.4f,.85f,hz+cosf(blade_yaw)*reach-sinf(yaw)*.4f,.10f,.10f,1.6f,blade_yaw,blade_color);
+ SttPoseFrame carry={0};
+ carry.joints[2][0]=750;carry.joints[2][1]=2100;carry.joints[2][2]=-280;
+ carry.joints[3][0]=300;carry.joints[3][1]=1500;carry.joints[3][2]=-280;
+ int in_hand=!equipment||stt_equipment_in_hand(equipment);
+ const SttPoseFrame *socket=in_hand?(asset?&asset->scratch:&carry):&carry;
+ uint32_t sheath_color=RGB(100,65,42);
+ if(equipment)stt_weapon_emit(NULL,&carry,c->hunter.x_mm,c->hunter.z_mm,c->hunter.yaw_turn,sword_triangle,&sheath_color);
+ int equipped=weapon&&posed&&asset->pose.bones==4&&asset->pose.parents[2]==1&&asset->pose.parents[3]==2&&stt_weapon_emit(weapon,socket,c->hunter.x_mm,c->hunter.z_mm,c->hunter.yaw_turn,sword_triangle,&blade_color);
+ if(!equipped&&equipment&&!in_hand)stt_weapon_emit(NULL,&carry,c->hunter.x_mm,c->hunter.z_mm,c->hunter.yaw_turn,sword_triangle,&blade_color);
+ else if(!equipped)box(hx+sinf(blade_yaw)*reach+cosf(yaw)*.4f,.85f,hz+cosf(blade_yaw)*reach-sinf(yaw)*.4f,.10f,.10f,1.6f,blade_yaw,blade_color);
  float tx=c->target.x_mm*.001f,tz=c->target.z_mm*.001f;
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-12 SWORD EQUIPPED",RGB(119,223,235));
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-14 INPUT FIX",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
- rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE  RIGHT CAMERA  CROSS ATTACK  START EXIT",RGB(238,239,223));
- snprintf(line,sizeof line,"TRIANGLE RESET  FRAME US %u  DROPPED %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
- if(paused){rect(85,115,310,34,RGB(9,17,27));text(102,128,"RESUMED - RELEASE STICKS AND BUTTONS",RGB(255,234,125));}
+ rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE RIGHT CAMERA CROSS DRAW-ATTACK START EXIT",RGB(238,239,223));
+ snprintf(line,sizeof line,"SQUARE SHEATHE  TRI RESET  US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
+ if(paused){rect(65,110,350,46,RGB(9,17,27));text(78,120,"RELEASE STICKS AND GAME BUTTONS",RGB(255,234,125));text(78,137,"OR PRESS TRIANGLE TO RESET",RGB(255,234,125));}
  if(asset)text(8,36,asset->status==STT_ASSET_READY?"ASSET READY":asset->status==STT_ASSET_MISSING?"ASSET MISSING - SIMPLE HUNTER":"ASSET INVALID - SIMPLE HUNTER",RGB(255,234,125));
+ if(equipment){static const char *modes[]={"SHEATHED","DRAWING","DRAWN","SHEATHING"};text(330,36,modes[(unsigned)equipment->mode<=STT_SHEATHING?equipment->mode:0],RGB(255,234,125));}
  if(weapon)text(8,45,weapon->status==STT_ASSET_READY&&equipped?"SWORD READY":"SWORD FALLBACK",RGB(255,234,125));
 }
 void stt_render_with_asset(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused,SttAsset *asset){
@@ -95,3 +105,6 @@ void stt_render_error(uint32_t *pixels,int error){
  char code[64];snprintf(code,sizeof code,"CODE %08X",(unsigned)error);text(24,90,code,RGB(255,240,230));
  text(24,110,"RECORD CODE - NO SAVE DATA WAS WRITTEN",RGB(210,210,220));
 }
+
+void stt_render_equipped(uint32_t *p,float *d,const SttCombat *c,SttCamera cam,unsigned us,unsigned drop,int paused,SttAsset *a,SttWeapon *w){render_core(p,d,c,cam,us,drop,paused,a,w,NULL);}
+void stt_render_equipment(uint32_t *p,float *d,const SttCombat *c,SttCamera cam,unsigned us,unsigned drop,int paused,SttAsset *a,SttWeapon *w,const SttEquipment *e){render_core(p,d,c,cam,us,drop,paused,a,w,e);}

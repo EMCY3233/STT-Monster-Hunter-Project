@@ -15,7 +15,7 @@ target_link_libraries(stt_vita_prototype m SceCtrl_stub SceDisplay_stub ScePower
 vita_create_self(stt_vita_prototype.self stt_vita_prototype)
 # Separate identity: NEVER replace STTM00001 (STT Vita Monitor).
 vita_create_vpk(stt_vita_prototype.vpk STTP00001 stt_vita_prototype.self
-  VERSION 00.12 NAME "STT Vita Prototype"
+  VERSION 00.14 NAME "STT Vita Prototype"
   FILE assets/hunter-body.pose.json assets/hunter-body.pose.json
   FILE assets/quaternius-sword.pose.json assets/quaternius-sword.pose.json
   FILE assets/QUATERNIUS-NOTICE.txt assets/QUATERNIUS-NOTICE.txt)
