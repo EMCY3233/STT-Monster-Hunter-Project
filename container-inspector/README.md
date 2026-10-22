@@ -61,3 +61,37 @@ https://3dbrew.org/wiki/NCSD
 https://docs.mikage.app/NCCH/
 Se usa la descripción de campos y flags, sin copiar implementaciones ni ejemplos
 comerciales. Las referencias no constituyen validación de una muestra MH4U.
+
+## Verificación y listado (ampliación)
+
+    stt-inspect imagen.cci --verify --list-romfs
+
+--verify compara SHA-256 de logo, exheader, superblock ExeFS y superblock
+RomFS con la cabecera NCCH. Regiones ausentes se indican como absent.
+Si la cabecera declara cifrado, solo se verifica el logo en claro; las regiones
+de contenido se marcan skipped_encrypted. Una discrepancia devuelve 1.
+No comprueba los hashes de archivos ExeFS ni toda la jerarquía IVFC.
+
+--list-romfs interpreta IVFC versión 0x10000 y el nivel 3 en claro. Muestra rutas,
+tamaños y offsets absolutos sin leer/exportar el contenido de los archivos.
+Rechaza tablas fuera de límites, registros truncados, enlaces a mitad de registro,
+ciclos, padres incorrectos, nombres duplicados, nodos no alcanzables y datos fuera
+del nivel 3. Los buckets hash de nombres se delimitan pero no se validan.
+Nombres UTF-16 se representan mediante caracteres ASCII y escapes de unidades
+Unicode; no se normalizan. No son rutas para extracción.
+
+Presupuestos: 64 MiB de metadatos, 100.000 entradas por tabla, profundidad 128,
+nombre 1024 bytes, ruta 8192 caracteres, informe de archivos 32 MiB por RomFS,
+bloques IVFC entre 512 bytes y 1 MiB. Se rechazan perfiles fuera del alcance.
+El árbol completo IVFC, las firmas y la autenticidad siguen sin verificarse.
+
+Fuentes adicionales de campos/layout:
+https://docs.mikage.app/RomFS/
+https://pyctr.readthedocs.io/en/stable/_modules/pyctr/type/romfs.html
+La segunda se consultó como referencia independiente para la ubicación física
+del nivel 3; no se copió su implementación.
+
+La compilación local de esta ampliación pasó /W4 /WX, pero Windows Control de
+aplicaciones bloqueó la ejecución del nuevo binario (WinError 4551). Las pruebas
+C++ de la ampliación se ejecutan separadamente en CI con muestras sintéticas.
+Ninguna ROM ni listado privado se publica en el repositorio.
