@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Contrastevisualacotado yderivadosdeanálisis
+
+-PR7:864lecturassinerror,dinero/saludcontrastadosenaldea,resistenciahipotética.
+-UnaOBJ16vértices/6triángulosy2PNGlocales;catálogo19modelosprueba/92cabecerasTEX,sinrig/materialescompletosniadaptaciónautorizada.
+
 ## 22-10-2026 — Referenciasexternas delimitadas
 
 -PR7:fuentescoincidentes noindependientes,v1.0/v1.1separadas;valorcandidato1500sinpantallaverificada,punterosnulosnoseguidos.
