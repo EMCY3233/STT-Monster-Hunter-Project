@@ -1,4 +1,4 @@
-"""Bounded normal-arrow input for one explicitly selected foreground Citra window.
+"""Bounded arrow or mapped game-button input for one foreground Citra window.
 
 No downloads, remapping, hooks, drivers, focus changes, or background input.
 Windows SendInput/KEYBDINPUT reference:
@@ -15,12 +15,47 @@ from datetime import datetime, timezone
 
 ARROWS = {"left": (0x25, 0x4B), "up": (0x26, 0x48),
           "right": (0x27, 0x4D), "down": (0x28, 0x50)}
+KEYS = {**ARROWS, "interact": (0x41, 0x1E), "cancel": (0x53, 0x1F), "menu": (0x4D, 0x32), "dash": (0x57, 0x11)}
+MAX_SECONDS = 30
+
+
+def validate_keys(keys):
+    keys = tuple(keys)
+    if not keys or len(keys) > 4 or len(set(keys)) != len(keys) or any(k not in KEYS for k in keys):
+        raise ValueError('choose 1..4 distinct supported controls')
+    if any(a in keys and b in keys for a,b in [('left','right'),('up','down')]):
+        raise ValueError('opposite directions cannot be held together')
+    return keys
+
+
+def hold_keys(send, foreground_ok, sleep, clock, seconds, keys):
+    """Release every attempted key even if another release or press fails."""
+    keys = validate_keys(keys)
+    attempted = []
+    def group(up):
+        if not up:
+            for key in keys:
+                if not foreground_ok():raise RuntimeError('foreground changed; hold aborted')
+                attempted.append(key)
+                send(key, False)
+        else:
+            errors = []
+            for key in reversed(attempted):
+                try:send(key, True)
+                except BaseException as exc:errors.append(exc)
+            if errors:raise RuntimeError('one or more key releases failed') from errors[0]
+    return hold(group, foreground_ok, sleep, clock, seconds)
+
+
+def event_flags(key, up):
+    if key not in KEYS:raise ValueError('unsupported game control')
+    return 0x8 | (1 if key in ARROWS else 0) | (2 if up else 0)
 
 
 def hold(send, foreground_ok, sleep, clock, seconds):
     """Always attempt key-up, including focus loss and partial input failure."""
-    if not 0.1 <= seconds <= 3:
-        raise ValueError("duration must be 0.1..3 seconds")
+    if not 0.1 <= seconds <= MAX_SECONDS:
+        raise ValueError("duration must be 0.1..30 seconds")
     if not foreground_ok():
         raise RuntimeError("target is not foreground")
     start = clock()
@@ -39,19 +74,21 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--window", type=int, required=True)
     p.add_argument("--exe", type=Path, required=True)
-    p.add_argument("--key", choices=ARROWS, default="right")
+    p.add_argument("--key", choices=KEYS, action="append", help="repeat for simultaneous controls; default: right")
     p.add_argument("--seconds", type=float, default=2)
     p.add_argument("--receipt", type=Path, required=True)
     p.add_argument("--execute", action="store_true", help="default validates only")
     a = p.parse_args()
-    if os.name != "nt" or not 0.1 <= a.seconds <= 3:
-        p.error("requires Windows and duration 0.1..3")
+    if os.name != "nt" or not 0.1 <= a.seconds <= MAX_SECONDS:
+        p.error("requires Windows and duration 0.1..30")
+    try: selected = validate_keys(a.key or ['right'])
+    except ValueError as exc:p.error(str(exc))
     if a.exe.name.lower() != "citra-qt.exe":
         p.error("only citra-qt.exe is supported")
     # Reserve an exclusive receipt before any input, so evidence cannot overwrite.
     with a.receipt.open("x", encoding="utf-8") as out:
         result = {"utc": datetime.now(timezone.utc).isoformat(),
-                  "key": a.key, "requested_seconds": a.seconds,
+                  "keys": selected, "requested_seconds": a.seconds,
                   "executed": False, "movement_verified": False, "events": []}
         try:
             u = c.WinDLL("user32", use_last_error=True)
@@ -89,7 +126,7 @@ def main():
             if not foreground_ok():
                 raise RuntimeError("Citra must already be foreground")
             # Avoid overlapping physical or synthetic held keys/modifiers.
-            if any(u.GetAsyncKeyState(vk) & 0x8000 for vk in [0x10, 0x11, 0x12, 0x5B, 0x5C, *range(0x25, 0x29)]):
+            if any(u.GetAsyncKeyState(vk) & 0x8000 for vk in [0x10, 0x11, 0x12, 0x5B, 0x5C, *(k[0] for k in KEYS.values())]):
                 raise RuntimeError("release arrows and modifiers before test")
             class KEYBDINPUT(c.Structure):
                 _fields_ = [("wVk", w.WORD), ("wScan", w.WORD), ("dwFlags", w.DWORD), ("time", w.DWORD), ("dwExtraInfo", c.c_size_t)]
@@ -104,16 +141,16 @@ def main():
             assert c.sizeof(INPUT) == (40 if c.sizeof(c.c_void_p) == 8 else 28)
             u.SendInput.argtypes = [w.UINT, c.POINTER(INPUT), c.c_int]
             u.SendInput.restype = w.UINT
-            def send(up):
-                event = INPUT(type=1, payload=PAYLOAD(ki=KEYBDINPUT(0, ARROWS[a.key][1], 0x9 | (2 if up else 0), 0, 0)))
+            def send(key, up):
+                event = INPUT(type=1, payload=PAYLOAD(ki=KEYBDINPUT(0, KEYS[key][1], event_flags(key, up), 0, 0)))
                 accepted = u.SendInput(1, c.byref(event), c.sizeof(INPUT))
-                result["events"].append({"event": "up" if up else "down", "monotonic": time.monotonic(), "accepted": accepted})
+                result["events"].append({"key": key, "event": "up" if up else "down", "monotonic": time.monotonic(), "accepted": accepted})
                 if accepted != 1:
                     raise RuntimeError("SendInput did not accept the keyboard event")
             result["validated"] = True
             if a.execute:
                 result["executed"] = True
-                result["elapsed_seconds"] = hold(send, foreground_ok, time.sleep, time.monotonic, a.seconds)
+                result["elapsed_seconds"] = hold_keys(send, foreground_ok, time.sleep, time.monotonic, a.seconds, selected)
             result["status"] = "completed" if a.execute else "validated_only"
         except BaseException as exc:
             result["status"] = "failed"

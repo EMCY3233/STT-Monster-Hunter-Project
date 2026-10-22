@@ -1,0 +1,1003 @@
+{
+  "schema": 1,
+  "input_receipts": [
+    {
+      "receipt": "citra-facilities-20261022-001.json",
+      "sha256": "a8d684e90ffe706f7805171ef9fd74f5805e5b3c5ab1158fc7f21e0dff5e35bc",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-002.json",
+      "sha256": "0a7010e6a48a2c5c09c45572c6b683dd12053c5b6c5a5f66a144d67bff4ecfe8",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-003.json",
+      "sha256": "a0b36c8f8c2d875c9a632f511b4235704154c66ff4a840327b30c3f2922e6d8b",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-004.json",
+      "sha256": "ebda5fb7eb1fade38a285a644845939b6748847e59dde538efb0fc932f0e1008",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-005.json",
+      "sha256": "056771cd1a872ff136f18b4da8d5746b78dd5f44cd8629ac0c427b851c777cf8",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-006.json",
+      "sha256": "071cafac7c9bd3069aa883e6dbab11bbcbac6889b5fe547182fbf2a26000be4f",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-007.json",
+      "sha256": "a51d8f5b792d23df1211c11cdddcd8bb11461d75313daf9be36502531e981895",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-008.json",
+      "sha256": "ee522410eaec2df2f69457da17f96bb78fe301c257c150322fe90f963d876321",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-009.json",
+      "sha256": "6f68c8a425f2ef056043429acbb30c64b29db1fe561efee3d0c05808ac8a1216",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-010.json",
+      "sha256": "c9bf2724ce164f41cc4467f09c9124f72ad77ce3ca061b1bbd9f66cff69c83c5",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "cancel"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-011.json",
+      "sha256": "d93d5ca4d7d528147b65b4581c6fae5be758415a4a022a2db49d59fc33faaaa8",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "cancel"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-012.json",
+      "sha256": "8da4aa971c2195c66e18f588e69c8dfd4670ab40d4e9a893711799ab28ab8849",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "right",
+        "down"
+      ],
+      "event_count": 4,
+      "accepted_event_count": 4,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-013.json",
+      "sha256": "37a4a57dddade294015bff7ea74af8528eaf0bd55cb18d5a2fa88c5cdbac3e1e",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "right"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-014.json",
+      "sha256": "8494a628020009a9effb2edff69ec3a3aaf3aa5bca4b79650140dc675bf3ae6f",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "up",
+        "dash"
+      ],
+      "event_count": 4,
+      "accepted_event_count": 4,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-015.json",
+      "sha256": "dd7b49e5673359049df15b8cfb44db97bf6a2095ea099c5f59828395c60e79eb",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-016.json",
+      "sha256": "20f65193c7c92c6df705636633e1fc7abe80bcb32babdcd56f123745fffa47ef",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "down"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-017.json",
+      "sha256": "68ce5351c4f303fd18e5bf1d809aae093445af8c258e1dee53bf270afc223232",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-018.json",
+      "sha256": "0ec6833ef60f31bde3fa1b9871280498f8b9ffe5789ca0f6729a149531f4d606",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "right"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-019.json",
+      "sha256": "96ff2972e357827f8073e1e888efbc03be43ddb38ba5fd325f6ff17c93d52790",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-020.json",
+      "sha256": "fc4edccabb0518ee3366c709d96fa8b555872f989f6f458e2bdaf3eb7a41716a",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-021.json",
+      "sha256": "1827b6e5934b7e342e7a6ecb78dba02626020911a1b4434c8c304dcdfabec865",
+      "status": "failed",
+      "executed": false,
+      "keys": [
+        "cancel"
+      ],
+      "event_count": 0,
+      "accepted_event_count": 0,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-022.json",
+      "sha256": "f4241daaa0c87d43994e66b44ba496455826053e81686af5446e321d8758b3a1",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "cancel"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-023.json",
+      "sha256": "037b69296cbcae048b53bf1e7a5eb05abea5d212a36672e6f2d9f80e9be10c08",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "cancel"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-024.json",
+      "sha256": "687ddb2e68ee6e297589b22bb4bf9ebd97f195c3f0322c51854e6ec53db6d91a",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "right",
+        "up"
+      ],
+      "event_count": 4,
+      "accepted_event_count": 4,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-025.json",
+      "sha256": "8af2cba3ccc2e7ac8219687a559ffa314fd3d52edbd3531e8c030ebfe8d9ff20",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "up"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-026.json",
+      "sha256": "587248fb042ed550a3f5f50c858caaf7010df956942dd28bc8136014fdb6572a",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "up"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-027.json",
+      "sha256": "8641c81b34ccc4f4e5aa757b1ddbe9b6e63c4bc043937c298e0a6dfca94b5939",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "right"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-028.json",
+      "sha256": "a063b6eb5c0af712ea66c6364ee69182df9ce8e7e1e3a636e980afe1c01080e2",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "right"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-029.json",
+      "sha256": "841eedb3524446ef51c41a86619b6b5e9ffafd4d3b127c9d197fb9d827723279",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "down"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-030.json",
+      "sha256": "7a0895737108f5d42cb9cb13a2937a2ba8230b2ea401d9007b1b021beeea9952",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "down"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-031.json",
+      "sha256": "2b6982feeae343cdd9aba4e5d1593564ad7637771ac893d94f41b6c463f36330",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "right"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-032.json",
+      "sha256": "e67e33c2a207da82fac13df1b5865ba6498e2a8c584ff65eacd57fcca2e70ab9",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "down"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-033.json",
+      "sha256": "7f265c7a97576f451bf7f8c6f799e110d15c46baa4729d788a35abd38ef82115",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "down",
+        "right",
+        "dash"
+      ],
+      "event_count": 6,
+      "accepted_event_count": 6,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-034.json",
+      "sha256": "294f5ba3949051f96637345fa1467a0a9729651b6a345894af23c0570cd12a5f",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "down",
+        "right"
+      ],
+      "event_count": 4,
+      "accepted_event_count": 4,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-035.json",
+      "sha256": "83d6ddaedb82765ec6dbfee24ac1368bfdfb75358b9e28b9c99b069a26c904f7",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "down"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-036.json",
+      "sha256": "94e51a179f1e2ba9de9cd35c7a4e2d355f8462bdef54af444749a5e3167f4918",
+      "status": "failed",
+      "executed": false,
+      "keys": [
+        "down",
+        "right"
+      ],
+      "event_count": 0,
+      "accepted_event_count": 0,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-037.json",
+      "sha256": "77695d2c4bc88e22b8fdaeb9dc9637cc8076df3eb031c5915893bcb6429a4efb",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "down",
+        "right"
+      ],
+      "event_count": 4,
+      "accepted_event_count": 4,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-038.json",
+      "sha256": "f9e9fd6fe7602d687f3f82ebab3099dbd104d186f0ff51586fa3eee4d218f569",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "down"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-039.json",
+      "sha256": "ecdf676f639cbef7a13a2ac1da0ba86073ffd1a0fcf999b34b45b7fd9aa2afe9",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "right"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-040.json",
+      "sha256": "0c1a2c60629516b20c8138e196e12596549e246192662c76386cbf1aa462155d",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-041.json",
+      "sha256": "7f0727e29fc796d37029f986ebf195fd3246d6b5c65cb360652ca99ba425cc9e",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "right"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-042.json",
+      "sha256": "fc80bce1843f514d9de2239db07c783ba998ebf0be6fe47667164a245dcb7d24",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "up"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-043.json",
+      "sha256": "76ea2415d8f8b1495cd6403fe70f76baf813ec2caf074080f7991acd96003939",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-044.json",
+      "sha256": "3c9957e90183e8b5c7bbddc974a4fb7027f34d547b92588f283a6776b303a2a7",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-045.json",
+      "sha256": "9cba66fa958eb6ebe8499b635ffd30082d97c0e522a5722758da2b9562042acf",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-046.json",
+      "sha256": "870f7bd4ea4481d8a7670a0f2626a08517a59f2960829baa0e6b2abc12ea6c43",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-047.json",
+      "sha256": "108873bf33c28de9844341f542deed75d2b446a307ba002d190367c59d47c017",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-048.json",
+      "sha256": "6f5850083a9378663f4ce68519572b89aadf7b9a9cf5d6cfbb56133f128749d5",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-049.json",
+      "sha256": "c2d7124bc6ea91319072af97d36d55a5eec74ad7dfde4c06168a5ff2c025f1b9",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-050.json",
+      "sha256": "7bc22e308824babdd0ff56606e04373b20fd2e92a53c9de37662a9ad4f5bc1c6",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-051.json",
+      "sha256": "78e229e01131351f63cc0a773138cc65ce9af395ed53244c4526b741ec5d2c4d",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-052.json",
+      "sha256": "85cb5b6575c8a4e04199e02635866e95f54086e2fa386d5333247845d551a00e",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-053.json",
+      "sha256": "716dd1342e58792e32e48cc8262a1085b174506d5913e7ce55b6139a81bd47e6",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-054.json",
+      "sha256": "05093f023ab0bc65259c408fc587e578a0c630701ae6bfa90bc1e6c6ba3d6f4c",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "cancel"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-055.json",
+      "sha256": "a6c74c50062f618b99e2115eb44980b9bdfc65577311e523cd4c929e4fbcc6a5",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "cancel"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-056.json",
+      "sha256": "3e678fea413f95302f2a88ea25fb9176e461fbf1d10b66889748ac023c99e5d8",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "left",
+        "down"
+      ],
+      "event_count": 4,
+      "accepted_event_count": 4,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-057.json",
+      "sha256": "cc38869eb60cdd7cc81a19674bccefc9740d2a209b4bb53f080f083147a9b5d6",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "down"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    },
+    {
+      "receipt": "citra-facilities-20261022-058.json",
+      "sha256": "6a70c756e72d3c30df3fbf434baa6aabea38c9a42ec53b733c81270408ba9e44",
+      "status": "completed",
+      "executed": true,
+      "keys": [
+        "interact"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 2,
+      "all_accepted_downs_released": true,
+      "issues": [],
+      "game_effect_verified": false
+    }
+  ],
+  "captures": [
+    {
+      "capture": "village-item-pouch-006",
+      "receipt_sha256": "a2e132d5d4f90bf7a010af18aa2c714e45edb4dd8fb374e3602ffff84cd9e50b",
+      "data_reads": 22,
+      "bytes": 244,
+      "control_before": true,
+      "control_after": true,
+      "candidate_u16_views": {
+        "1.0:inventory:0": [
+          0,
+          0
+        ],
+        "1.0:box:0": [
+          8,
+          10,
+          31,
+          5
+        ],
+        "1.0:inventory:1": [
+          0,
+          0
+        ],
+        "1.0:box:1": [
+          8,
+          10,
+          31,
+          5
+        ]
+      }
+    },
+    {
+      "capture": "village-market-catalog-009",
+      "receipt_sha256": "57fb2b383ea098ee4791006af30826e3d2ef24a526edafa42c78536439831422",
+      "data_reads": 22,
+      "bytes": 244,
+      "control_before": true,
+      "control_after": true,
+      "candidate_u16_views": {
+        "1.0:inventory:0": [
+          0,
+          0
+        ],
+        "1.0:box:0": [
+          8,
+          10,
+          31,
+          5
+        ],
+        "1.0:inventory:1": [
+          0,
+          0
+        ],
+        "1.0:box:1": [
+          8,
+          10,
+          31,
+          5
+        ]
+      }
+    },
+    {
+      "capture": "village-voucher-after-010",
+      "receipt_sha256": "29b469ae5af8c0d8c74ff101c8eeae6d95e2c6a0d5f94ebbe7e348ca065feb2d",
+      "data_reads": 22,
+      "bytes": 244,
+      "control_before": true,
+      "control_after": true,
+      "candidate_u16_views": {
+        "1.0:inventory:0": [
+          842,
+          1
+        ],
+        "1.0:box:0": [
+          8,
+          10,
+          31,
+          5
+        ],
+        "1.0:inventory:1": [
+          842,
+          1
+        ],
+        "1.0:box:1": [
+          8,
+          10,
+          31,
+          5
+        ]
+      }
+    },
+    {
+      "capture": "village-voucher-visible-011",
+      "receipt_sha256": "592c1b326771a8a97defba29fb58611eb31501c2b66f2f02b7e14dd39845dc7e",
+      "data_reads": 22,
+      "bytes": 244,
+      "control_before": true,
+      "control_after": true,
+      "candidate_u16_views": {
+        "1.0:inventory:0": [
+          842,
+          1
+        ],
+        "1.0:box:0": [
+          8,
+          10,
+          31,
+          5
+        ],
+        "1.0:inventory:1": [
+          842,
+          1
+        ],
+        "1.0:box:1": [
+          8,
+          10,
+          31,
+          5
+        ]
+      }
+    },
+    {
+      "capture": "facility-box-potion-012",
+      "receipt_sha256": "2d15f4fa348912baff928f8cf2c26950300419dbb186e480490a9f59c7431476",
+      "data_reads": 22,
+      "bytes": 244,
+      "control_before": true,
+      "control_after": true,
+      "candidate_u16_views": {
+        "1.0:inventory:0": [
+          842,
+          1
+        ],
+        "1.0:box:0": [
+          8,
+          10,
+          31,
+          5
+        ],
+        "1.0:inventory:1": [
+          842,
+          1
+        ],
+        "1.0:box:1": [
+          8,
+          10,
+          31,
+          5
+        ]
+      }
+    }
+  ],
+  "visual_observations_are_manual": true,
+  "memory_writes": false,
+  "commercial_bytes_published": false,
+  "facilities": [
+    {
+      "name": "Gathering Hall",
+      "entry_verified": true,
+      "return_verified": true
+    },
+    {
+      "name": "Your House",
+      "entry_verified": true,
+      "return_verified": true
+    }
+  ],
+  "linked_resource_pr": {
+    "number": 27,
+    "head": "9c196193c182c469b3beaf79b51328c57f1b3c22",
+    "mrl_files": 83,
+    "records": 168,
+    "descriptors": 1344,
+    "unique_material_links": 166,
+    "tests_reported": 12,
+    "independently_retested_here": false
+  }
+}

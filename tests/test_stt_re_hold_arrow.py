@@ -43,7 +43,7 @@ class HoldTests(unittest.TestCase):
         self.assertEqual(events, [])
 
     def test_duration_limit(self):
-        for value in (0, 3.1, float("nan")):
+        for value in (0, 30.1, float("nan")):
             with self.assertRaises(ValueError):
                 m.hold(None, None, None, None, value)
 
