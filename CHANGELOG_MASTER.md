@@ -1,3 +1,9 @@
+## 00.23 — Original follow camera, PC/native build only (2026-10-22)
+
+- Shared follower uses XYZ anchors and frame-time smoothing, preserves existing yaw/pitch controls and renderer handedness.
+- L recenter, explicit reset/resume, validated optional sphere sweep, synthetic wall/ceiling tests and framing flags.
+- World/SBC sweep remains unconnected; original synthetic C trace for PC review. No transfer or hardware claim. Depends on PR33 and inherited PR21.
+
 ## 00.22 — GPU texture trial (2026-10-22)
 
 - Separate bounded texture stream and small local terrain/hunter trial with original UVs.
