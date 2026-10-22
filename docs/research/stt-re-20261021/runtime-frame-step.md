@@ -1,5 +1,7 @@
 # Contadores contrastados con avance individual — 22-10-2026
 
+> Seguimiento: [accesos estáticos candidatos y contraste de código](runtime-static-accesses.md).
+
 ## Resultado comprobado
 
 En la escena local de MH4U en Val Habar, los campos u32 little endian `0x0110D004` y `0x0110D008` aumentaron **exactamente una unidad por cada una de tres solicitudes individuales de Avanzar Fotograma de Citra**. Permanecieron estables durante veinte lecturas posteriores a cada solicitud. Esto refuerza y concreta la interpretación anterior de contador periódico: **contadores que siguen el avance de fotogramas del emulador en el ensayo realizado**.
