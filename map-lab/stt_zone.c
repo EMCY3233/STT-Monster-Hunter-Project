@@ -73,6 +73,7 @@ void stt_zone_position(float out[3]){memcpy(out,position,sizeof position);}
 float stt_zone_yaw(void){return yaw;}
 float stt_zone_slope(void){return acosf(fmaxf(-1,fminf(1,normal_y)))*57.2957795f;}
 unsigned stt_zone_contact(void){return contact;}
+unsigned stt_zone_phase(void){return phase;}
 unsigned stt_zone_emit(int hunter,SttZoneTriangle callback,void *context){
  if(!active||!callback)return 0;
  unsigned emitted=0,n=hunter?hf:mf;const uint16_t *indices=hunter?hunter_faces:map_faces;float sy=sinf(yaw),cy=cosf(yaw);

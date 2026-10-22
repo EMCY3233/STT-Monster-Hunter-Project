@@ -1,3 +1,9 @@
+## 00.22 — GPU texture trial (2026-10-22)
+
+- Separate bounded texture stream and small local terrain/hunter trial with original UVs.
+- GXM projection, depth and texture sampling using precompiled libvita2d shaders; point/linear comparison and 30/45 caps.
+- Private scene excluded from public package; automated loader/projection/package checks. Hardware appearance/FPS pending.
+
 # 00.21 — Carga de zona local y cazador convertido
 
 Lector STTZONE1 con límites y validación estricta; controlador propio de apoyo, pendiente, escalón, borde y barridos aproximados de pared. Renderer de geometría estática y cazador de poses locales, con recorte cercano y descarte espacial. Los datos comerciales permanecen fuera del paquete y de GitHub. Suite con recursos sintéticos y revisor Windows para streams locales. Las mediciones identifican la build 00.21. IK, texturas completas y mallas shell/cámara se revisan en PC; la primera versión nativa mantiene esas limitaciones explícitas.
