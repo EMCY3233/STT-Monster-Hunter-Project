@@ -14,4 +14,7 @@ void stt_render_error(uint32_t *pixels,int error);
 void stt_render_with_asset(uint32_t *pixels,float *depth,const SttCombat *combat,SttCamera camera,unsigned frame_us,unsigned dropped,int paused,SttAsset *asset);
 void stt_render_equipped(uint32_t *pixels,float *depth,const SttCombat *combat,SttCamera camera,unsigned frame_us,unsigned dropped,int paused,SttAsset *body,SttWeapon *weapon);
 void stt_render_equipment(uint32_t *pixels,float *depth,const SttCombat *combat,SttCamera camera,unsigned frame_us,unsigned dropped,int paused,SttAsset *body,SttWeapon *weapon,const SttEquipment *equipment);
+void stt_render_set_ground(unsigned mode);
+unsigned stt_render_get_ground(void);
+void stt_render_monitor_status(int active,unsigned sent,int result);
 #endif

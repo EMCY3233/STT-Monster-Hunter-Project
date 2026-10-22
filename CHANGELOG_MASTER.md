@@ -1,3 +1,10 @@
+## 2026-10-22 — Prototipo 0.15: agente y rendimiento
+
+- Usuario confirma controles y combate de0.14; observación física comunicada:10–12FPS, sin captura sincronizada aún.
+- Productor STT/4 en el prototipo, receptor/análisis PC, captura limitada y contadores no disponibles explícitos.
+- Suelo por filas con comparación G0/G1; dibujo en RAM cacheada y copia a CDRAM. Mejora física pendiente.
+- Contratos y pruebas ampliados; docs/prototypes/performance-lab.md.
+
 ## 2026-10-22 — Prototipo 0.14: bloqueo de reanudación
 
 - Usuario confirma mensaje de reanudación persistente en Vita 0.13. Causa concreta pendiente de nueva prueba física.

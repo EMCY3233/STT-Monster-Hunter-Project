@@ -28,6 +28,31 @@ static void tri(V a,V b,V c,uint32_t color){
      if(inv>zb[at]){zb[at]=inv;fb[y*STT_PITCH+x]=color;}}
  }
 }
+static unsigned ground_mode=1;
+static int monitor_active,monitor_result;static unsigned monitor_sent;
+void stt_render_set_ground(unsigned mode){ground_mode=mode?1u:0u;}
+unsigned stt_render_get_ground(void){return ground_mode;}
+void stt_render_monitor_status(int active,unsigned sent,int result){monitor_active=active;monitor_sent=sent;monitor_result=result;}
+/* Plane y=0: right.y=0 makes inverse depth constant along each screen row.
+   Same finite tiled area and depth convention as the triangle reference. */
+static void ground_scanline(int center_x,int center_z){
+ for(int y=0;y<STT_HEIGHT;y++){
+  float screen_y=(142.0f-(y+.5f))/250.0f;
+  float dy=forward.y+screen_y*up.y;
+  if(dy>=-.000001f)continue;
+  float z=-eye.y/dy;if(z<.15f)continue;
+  float inv=1.0f/z;
+  float wx0=eye.x+z*(forward.x+screen_y*up.x);
+  float wz0=eye.z+z*(forward.z+screen_y*up.z);
+  for(int x=0;x<STT_WIDTH;x++){
+   float screen_x=((x+.5f)-240.0f)/250.0f;
+   float wx=wx0+z*screen_x*right.x,wz=wz0+z*screen_x*right.z;
+   int gx=(int)floorf(wx*.5f),gz=(int)floorf(wz*.5f);
+   if(gx<center_x-8||gx>=center_x+8||gz<center_z-8||gz>=center_z+8)continue;
+   zb[y*STT_WIDTH+x]=inv;fb[y*STT_PITCH+x]=(gx+gz)&1?RGB(49,67,69):RGB(57,77,78);
+  }
+ }
+}
 static void box(float x,float y,float z,float sx,float sy,float sz,float yaw,uint32_t color){
  V p[8];float s=sinf(yaw),c=cosf(yaw);
  for(int i=0;i<8;i++){float dx=(i&1?1:-1)*sx/2,dz=(i&4?1:-1)*sz/2;
@@ -58,7 +83,8 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  float hx=c->hunter.x_mm*.001f,hz=c->hunter.z_mm*.001f,sy=sinf(cam.yaw),cy=cosf(cam.yaw),sp=sinf(cam.pitch),cp=cosf(cam.pitch);
  eye=(V){hx-sy*6*cp,1.1f+sp*6,hz-cy*6*cp};right=(V){cy,0,-sy};forward=(V){sy*cp,-sp,cy*cp};up=(V){sy*sp,cp,cy*sp};
  int center_x=(int)floorf(hx/2),center_z=(int)floorf(hz/2);
- for(int z=center_z-8;z<center_z+8;z++)for(int x=center_x-8;x<center_x+8;x++){
+ if(ground_mode)ground_scanline(center_x,center_z);
+ else for(int z=center_z-8;z<center_z+8;z++)for(int x=center_x-8;x<center_x+8;x++){
   uint32_t col=(x+z)&1?RGB(49,67,69):RGB(57,77,78);V a={x*2,0,z*2},b={x*2+2,0,z*2},d={x*2,0,z*2+2},e={x*2+2,0,z*2+2};tri(a,b,e,col);tri(a,e,d,col);
  }
  float yaw=c->hunter.yaw_turn*(6.28318530718f/65536);
@@ -83,13 +109,14 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  float tx=c->target.x_mm*.001f,tz=c->target.z_mm*.001f;
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-14 INPUT FIX",RGB(119,223,235));
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-15 PERF LAB",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
  rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE RIGHT CAMERA CROSS DRAW-ATTACK START EXIT",RGB(238,239,223));
- snprintf(line,sizeof line,"SQUARE SHEATHE  TRI RESET  US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
+ snprintf(line,sizeof line,"L GROUND  SELECT MONITOR  US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
  if(paused){rect(65,110,350,46,RGB(9,17,27));text(78,120,"RELEASE STICKS AND GAME BUTTONS",RGB(255,234,125));text(78,137,"OR PRESS TRIANGLE TO RESET",RGB(255,234,125));}
  if(asset)text(8,36,asset->status==STT_ASSET_READY?"ASSET READY":asset->status==STT_ASSET_MISSING?"ASSET MISSING - SIMPLE HUNTER":"ASSET INVALID - SIMPLE HUNTER",RGB(255,234,125));
  if(equipment){static const char *modes[]={"SHEATHED","DRAWING","DRAWN","SHEATHING"};text(330,36,modes[(unsigned)equipment->mode<=STT_SHEATHING?equipment->mode:0],RGB(255,234,125));}
+ snprintf(line,sizeof line,"FPS %u G%u NET %s %u R%d",frame_us?1000000u/frame_us:0,ground_mode,monitor_active?"ON":"OFF",monitor_sent,monitor_result);text(125,45,line,RGB(153,185,191));
  if(weapon)text(8,45,weapon->status==STT_ASSET_READY&&equipped?"SWORD READY":"SWORD FALLBACK",RGB(255,234,125));
 }
 void stt_render_with_asset(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused,SttAsset *asset){
