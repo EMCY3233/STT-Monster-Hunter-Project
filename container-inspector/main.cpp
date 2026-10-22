@@ -83,7 +83,79 @@ void disjoint(const std::vector<Range>& ranges) {
     for(size_t i=0;i<ranges.size();++i) for(size_t j=0;j<i;++j)
         require(ranges[i].offset>=ranges[j].offset+ranges[j].size || ranges[j].offset>=ranges[i].offset+ranges[i].size,"overlapping regions");
 }
-struct Options { bool verify=false, list=false; };
+U aligned(U n,U unit) {
+    require(n<=std::numeric_limits<U>::max()-(unit-1),"alignment overflow");
+    return ((n+unit-1)/unit)*unit;
+}
+U checked_add(U a,U b) {
+    require(a<=std::numeric_limits<U>::max()-b,"offset overflow");
+    return a+b;
+}
+void verify_ivfc(Reader& r,U base,U size,std::ostream& out) {
+    require(size>=96,"short IVFC"); Header h{}; r.read(base,h.data(),96);
+    require(std::equal(h.begin(),h.begin()+4,"IVFC") && le(h,4)==0x10000,"unsupported IVFC integrity profile");
+    std::array<U,3> logical{},length{},block{},physical{};
+    for(size_t i=0;i<3;++i) {
+        size_t p=12+24*i;
+        logical[i]=le(h,p,8); length[i]=le(h,p+8,8); U exponent=le(h,p+16);
+        require(exponent>=9 && exponent<=20,"unsupported IVFC block size");
+        block[i]=U(1)<<exponent;
+        require(length[i]>0,"empty IVFC level");
+    }
+    U master=le(h,8); require(master>0 && master%32==0,"invalid IVFC master hash size");
+    range(96,master,size);
+    require(logical[0]==0 && logical[1]==aligned(length[0],block[0])
+        && logical[2]==checked_add(logical[1],aligned(length[1],block[1])),"unsupported IVFC logical layout");
+    physical[2]=aligned(96+master,block[2]);
+    range(physical[2],aligned(length[2],block[2]),size);
+    physical[0]=checked_add(physical[2],aligned(length[2],block[2]));
+    range(physical[0],aligned(length[0],block[0]),size);
+    physical[1]=checked_add(physical[0],aligned(length[0],block[0]));
+    range(physical[1],aligned(length[1],block[1]),size);
+    U budget=0;
+    for(size_t i=0;i<3;++i) {
+        U count=aligned(length[i],block[i])/block[i];
+        U parentOffset=i==0?96:physical[i-1];
+        U parentLength=i==0?master:length[i-1];
+        require(count<=parentLength/32,"IVFC parent hash table too short");
+        require(count<=8000000-budget,"IVFC block budget exceeded"); budget+=count;
+        for(U j=0;j<count;++j) {
+            std::array<unsigned char,32> expected{};
+            r.read(base+parentOffset+j*32,expected.data(),expected.size());
+            auto actual=r.digest(base+physical[i]+j*block[i],block[i]);
+            if(actual!=hex(expected.data(),expected.size()))
+                throw std::runtime_error("IVFC level "+std::to_string(i+1)+" block "+std::to_string(j)+" SHA256 mismatch");
+        }
+        out<<"ivfc_level="<<i+1<<" hash=verified blocks="<<count<<" block_bytes="<<block[i]<<"\n";
+    }
+    out<<"ivfc_tree=verified levels=3 blocks="<<budget<<" signatures=not_verified\n";
+}
+void verify_exefs(Reader& r,U base,U size,std::ostream& out) {
+    require(size>=512,"short ExeFS"); auto h=r.header(base);
+    std::vector<Range> files; std::set<std::string> names; U count=0;
+    for(size_t i=0;i<10;++i) {
+        size_t p=i*16;
+        bool unused=std::all_of(h.begin()+p,h.begin()+p+16,[](unsigned char c){return c==0;});
+        if(unused) continue;
+        size_t n=0; while(n<8 && h[p+n]) ++n;
+        require(n>0,"empty ExeFS filename");
+        for(size_t j=0;j<n;++j) require(h[p+j]>=33 && h[p+j]<127 && h[p+j]!=34
+            && h[p+j]!=47 && h[p+j]!=92,"unsupported ExeFS filename");
+        for(size_t j=n;j<8;++j) require(h[p+j]==0,"invalid ExeFS filename padding");
+        std::string name(reinterpret_cast<const char*>(h.data()+p),n);
+        require(names.insert(name).second,"duplicate ExeFS filename");
+        U offset=le(h,p+8),length=le(h,p+12); range(offset,length,size-512);
+        if(length) files.push_back({512+offset,length});
+        auto actual=r.digest(base+512+offset,length);
+        if(actual!=hex(h.data()+0x1e0-i*32,32))
+            throw std::runtime_error("ExeFS "+name+" SHA256 mismatch");
+        out<<"exefs_file name="<<name<<" size="<<length<<" hash=verified\n"; ++count;
+    }
+    disjoint(files);
+    out<<"exefs_files=verified count="<<count<<"\n";
+}
+
+struct Options { bool verify=false, list=false, integrity=false; };
 U rawle(const std::vector<unsigned char>& b,U p,size_t n=4) {
     range(p,n,b.size()); U v=0;
     for(size_t i=0;i<n;++i) v|=U(b[static_cast<size_t>(p)+i])<<(8*i);
@@ -102,7 +174,7 @@ std::string name16(const std::vector<unsigned char>& b,U p,U n) {
     }
     require(s!="." && s!="..","invalid RomFS dot component"); return s;
 }
-void romfs(Reader& r,U base,U size,std::ostream& out) {
+void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false) {
     require(size>=0x60,"short IVFC"); Header iv{}; r.read(base,iv.data(),0x60);
     require(std::equal(iv.begin(),iv.begin()+4,"IVFC") && le(iv,4)==0x10000,"unsupported IVFC");
     U exponent=le(iv,0x4c); require(exponent>=9 && exponent<=20,"unsupported IVFC block size");
@@ -175,7 +247,7 @@ void romfs(Reader& r,U base,U size,std::ostream& out) {
     }
     require(seenDirs.size()==dn.size() && seenFiles.size()==fn.size(),"unreachable RomFS metadata");
     out<<"romfs_summary directories="<<dn.size()<<" files="<<fn.size()<<" file_bytes="<<total
-       <<" ivfc_tree=not_verified hash_buckets=not_verified\n";
+       <<" ivfc_tree="<<(treeVerified?"verified":"not_verified")<<" hash_buckets=not_verified\n";
 }
 void verify_region(Reader& r,U offset,U length,const Header& h,size_t stored,const char* label,std::ostream& out,bool present=false) {
     if(!length) {
@@ -227,19 +299,27 @@ void ncch(Reader& r,U base,U available,std::ostream& out,const Options& options)
             verify_region(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b8),exp),h,0x1e0,"romfs_superblock",out,le(h,0x1b4)!=0);
         }
     }
+    if(options.integrity) {
+        if(encrypted) out<<"file_integrity=skipped_encrypted\n";
+        else {
+            if(le(h,0x1a4)) verify_exefs(r,base+scale(le(h,0x1a0),exp),scale(le(h,0x1a4),exp),out);
+            if(le(h,0x1b4)) verify_ivfc(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b4),exp),out);
+        }
+    }
     if(options.list && le(h,0x1b4)) {
         if(encrypted) out<<"romfs_listing=skipped_encrypted\n";
-        else romfs(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b4),exp),out);
+        else romfs(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b4),exp),out,options.integrity);
     }
 
 }
 int main(int argc,char** argv) {
     Options options;
-    if(argc<2) { std::cerr<<"usage: stt-inspect input [--verify] [--list-romfs]\n"; return 2; }
+    if(argc<2) { std::cerr<<"usage: stt-inspect input [--verify] [--list-romfs] [--verify-integrity]\n"; return 2; }
     for(int i=2;i<argc;++i) {
         std::string arg=argv[i];
         if(arg=="--verify") options.verify=true;
         else if(arg=="--list-romfs") options.list=true;
+        else if(arg=="--verify-integrity") { options.integrity=true; options.verify=true; }
         else { std::cerr<<"unknown option\n"; return 2; }
     }
     try {

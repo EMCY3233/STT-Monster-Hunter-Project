@@ -121,3 +121,31 @@ lector. Su proveedor Ghidra experimental en Windows admite PE y raw NMOS 6502,
 no establece soporte directo de imágenes NCSD/NCCH ni ARM11/3DS. No se ha
 instalado ni registrado REA desde esta revisión.
 Referencia: https://github.com/morluto/rea/blob/main/docs/windows-ghidra-p0.md
+
+## Integridad de archivos (23-10-2026)
+
+    stt-inspect imagen.cci --verify-integrity --list-romfs
+
+--verify-integrity incluye --verify y añade los hashes individuales de los
+archivos ExeFS y los tres niveles del árbol IVFC de RomFS en claro. Lee contenidos
+para calcular hashes, pero no los extrae ni escribe. Verifica también los bytes
+de padding de cada bloque físico contra el hash almacenado.
+
+El perfil IVFC admitido usa versión 0x10000, bloques de 512 bytes a 1 MiB,
+niveles lógicos secuenciales y orden físico de RomFS 3DS: cabecera/master, datos
+de nivel 3, nivel 1 y nivel 2. Comprueba sumas, alineaciones, rangos y capacidad
+de tablas padre antes de leer. Límite total: 8.000.000 bloques por RomFS.
+No admite perfiles Switch/save ni intenta interpretarlos como RomFS 3DS.
+
+ExeFS admite diez registros, offsets relativos al final de la cabecera de
+512 bytes y hashes en orden inverso. Rechaza nombres duplicados, padding de
+nombre inválido, rangos fuera del contenedor y archivos solapados.
+
+Suite ampliada a 36 pruebas: árbol completo y multibloque, cola parcial,
+padding corrupto, alteraciones en cada nivel, layout y exponentes inválidos,
+archivos ExeFS corruptos, hashes intercambiados y límites/solapamientos.
+
+Este modo no verifica firmas RSA, autenticidad ni buckets hash de nombres
+RomFS. Un árbol coherente es una comprobación de integridad interna, no una
+certificación de procedencia.
+Fuentes y búsqueda en plataformas: RESEARCH.md.

@@ -88,6 +88,43 @@ def tree_image(names=(), filename="a"):
     b[0x1e0:0x200]=hashlib.sha256(b[512:1024]).digest()
     return b
 
+
+def integrity_image(lvsize=512):
+    src=tree_image()
+    block=512
+    ceil=lambda n:(n+block-1)//block*block
+    body=bytes(src[1024:])+bytes(max(0,ceil(lvsize)-512))
+    body=body[:ceil(lvsize)]
+    h2=b"".join(hashlib.sha256(body[i:i+block]).digest() for i in range(0,len(body),block))
+    l2=h2+bytes(ceil(len(h2))-len(h2))
+    h1=b"".join(hashlib.sha256(l2[i:i+block]).digest() for i in range(0,len(l2),block))
+    l1=h1+bytes(ceil(len(h1))-len(h1))
+    master=b"".join(hashlib.sha256(l1[i:i+block]).digest() for i in range(0,len(l1),block))
+    b=bytearray(1024+len(body)+len(l1)+len(l2))
+    b[:512]=src[:512]
+    put(b,0x104,len(b)//512); put(b,0x1b4,(len(b)-512)//512)
+    b[512:516]=b"IVFC"; put(b,516,0x10000); put(b,520,len(master))
+    for i,(logical,n) in enumerate([(0,len(h1)),(len(l1),len(h2)),(len(l1)+len(l2),lvsize)]):
+        struct.pack_into("<QQII",b,512+12+24*i,logical,n,9,0)
+    b[608:608+len(master)]=master
+    b[1024:1024+len(body)]=body
+    at=1024+len(body)
+    b[at:at+len(l1)]=l1
+    b[at+len(l1):]=l2
+    b[0x1e0:0x200]=hashlib.sha256(b[512:1024]).digest()
+    return b
+def exefs_image():
+    b=bytearray(2048)
+    b[256:260]=b"NCCH"; put(b,0x104,4); b[0x18f]=4
+    put(b,0x1a0,1); put(b,0x1a4,3); put(b,0x1a8,1)
+    for i,(name,offset,data) in enumerate([(b".code",0,b"abc"),(b"icon",512,b"xyz")]):
+        b[512+16*i:512+16*i+len(name)]=name
+        put(b,512+16*i+8,offset); put(b,512+16*i+12,len(data))
+        b[1024+offset:1024+offset+len(data)]=data
+        b[512+0x1e0-i*32:512+0x200-i*32]=hashlib.sha256(data).digest()
+    b[0x1c0:0x1e0]=hashlib.sha256(b[512:1024]).digest()
+    return b
+
 class Inspector(unittest.TestCase):
     def run_image(self, b, valid=True, options=()):
         with tempfile.TemporaryDirectory() as d:
@@ -237,6 +274,46 @@ class Inspector(unittest.TestCase):
         b=deep_image()
         put(b,1024+16,64*1024*1024+4)
         self.run_image(b,False,("--list-romfs",))
+
+
+    def test_ivfc_integrity(self):
+        for size in [115,512,777,16385]:
+            out=self.run_image(integrity_image(size),options=("--verify-integrity","--list-romfs"))
+            self.assertIn("ivfc_tree=verified levels=3",out)
+    def test_ivfc_corrupted_levels(self):
+        for p in [1024+112,1536,2048]:
+            b=integrity_image()
+            b[p]^=1
+            self.run_image(b,False,("--verify-integrity",))
+    def test_ivfc_corrupted_padding(self):
+        b=integrity_image(115); b[1024+115]=1
+        self.run_image(b,False,("--verify-integrity",))
+    def test_ivfc_bad_layout(self):
+        for p,v in [(512+8,0),(512+0x1c,63),(512+0x34,0),(512+0xc,1),
+                    (512+0x24,1),(512+0x2c,0),(512+0x3c,1)]:
+            b=integrity_image(); put(b,p,v)
+            b[0x1e0:0x200]=hashlib.sha256(b[512:1024]).digest()
+            self.run_image(b,False,("--verify-integrity",))
+    def test_exefs_files(self):
+        out=self.run_image(exefs_image(),options=("--verify-integrity",))
+        self.assertIn("exefs_files=verified count=2",out)
+    def test_exefs_corruption(self):
+        for p in [1024,1536]:
+            b=exefs_image(); b[p]^=1
+            self.run_image(b,False,("--verify-integrity",))
+    def test_exefs_hash_order(self):
+        b=exefs_image()
+        b[512+0x1c0:512+0x1e0],b[512+0x1e0:512+0x200]=b[512+0x1e0:512+0x200],b[512+0x1c0:512+0x1e0]
+        b[0x1c0:0x1e0]=hashlib.sha256(b[512:1024]).digest()
+        self.run_image(b,False,("--verify-integrity",))
+    def test_exefs_invalid_entries(self):
+        for p,v in [(512+8,0xffffffff),(512+12,0xffffffff),(512+16+8,0)]:
+            b=exefs_image(); put(b,p,v)
+            b[0x1c0:0x1e0]=hashlib.sha256(b[512:1024]).digest()
+            self.run_image(b,False,("--verify-integrity",))
+    def test_integrity_encrypted_skip(self):
+        b=integrity_image(); b[0x18f]=0
+        self.assertIn("file_integrity=skipped_encrypted",self.run_image(b,options=("--verify-integrity",)))
 
     def test_usage(self):
         self.assertEqual(subprocess.run([EXE],capture_output=True).returncode,2)
