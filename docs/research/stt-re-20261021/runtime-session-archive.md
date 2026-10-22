@@ -1,5 +1,7 @@
 # Archivo de sesiones, lecturas prioritarias y exportación verificada — 22-10-2026
 
+> Referencia posterior: [pistas EUR de GitHub/Scribd y contraste local](mh4u-cheat-references.md).
+
 ## Qué se construyó
 
 `citra_session_archive.py` captura BSS verificada, guarda bloques de 32 bytes por SHA-256, conserva un índice de dirección/tiempo/pasada y permite analizar o exportar cada pasada tras comprobar integridad. Las lecturas repetidas de igual contenido comparten objeto; el índice conserva cada observación y ubicación. No se modificó el banco de recursos previo.
