@@ -10,6 +10,7 @@ from pathlib import Path
 import re
 import struct
 import zlib
+from parse_mrl32 import parse as parse_mrl
 
 LIMIT = 32 * 1024 * 1024
 
@@ -79,6 +80,7 @@ def run(root):
         e = dict(e)
         d = payloads[e['index']]
         e['texture_references'] = mrl_evidence(d, textures)
+        e['structure'] = parse_mrl(d)
         # Raw aligned words, not an assumed MRL material-table layout.
         e['aligned_words'] = {struct.unpack_from('<I', d, at)[0]: at
                               for at in range(28, len(d)-3, 4)}
@@ -95,12 +97,15 @@ def run(root):
                 mat['mrl_hash_occurrences'] = [dict(index=m['index'], offset=m['aligned_words'][h],
                     same_archive_path=m['path']==e['path'], texture_references=m['texture_references'])
                     for m in materials if h in m['aligned_words']]
+                mat['mrl_material_records'] = [dict(mrl_index=m['index'], record=record)
+                    for m in materials if m['path']==e['path']
+                    for record in m['structure']['materials'] if record['name_hash']==mat['complement_crc32']]
         except (ValueError, UnicodeDecodeError) as exc:
             row['unsupported'] = str(exc)
         models.append(row)
     return dict(schema=1, source_manifest_sha256=digest((root/'manifest.json').read_bytes()),
                 source_arc_sha256=manifest['source_sha256'], models=models,
-                mrls=[{k:v for k,v in m.items() if k in ('index','path','sha256','texture_references')} for m in materials],
+                mrls=[{k:v for k,v in m.items() if k in ('index','path','sha256','texture_references','structure')} for m in materials],
                 method='MOD230 128-byte names; complement CRC32 aligned-word occurrence; exact MRL strings to ARC TEX names',
                 limits=['CRC word occurrence is evidence, not a parsed MRL material record',
                         'texture slot, shader, UV transform, blend and runtime appearance unverified'])

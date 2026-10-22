@@ -1,5 +1,24 @@
 # MHXX 3DS: evidencia de enlaces MOD–MRL–TEX
 
+## Actualización: lector estructural MRL32
+
+El analizador ahora lee tablas de recursos (76 bytes), registros de material (60 bytes) y descriptores (12 bytes). Comprueba límites, contadores, bloques fuera de tablas y ausencia de solapamiento entre bloques. El hash se busca en el campo del registro, además de conservar la evidencia anterior de palabras alineadas. No se ejecutó el juego ni se modificaron recursos.
+
+Lotes comprobados contra los manifiestos privados:
+
+| Archivo | MRL | Registros MRL | Descriptores | Nombres MOD con un único registro coincidente en MRL de la misma ruta |
+| --- | ---: | ---: | ---: | ---: |
+| common.arc | 51 | 100 | 800 | 99 de 99 |
+| quest.arc | 32 | 68 | 544 | 67 de 67 |
+
+Los descriptores de nibble bajo 3 contienen valores compatibles con índices de recursos desde 1, con 0 nulo: 840 casos dentro del rango en estos lotes. Se exportan como **candidatos**, no como slots con semántica confirmada. Hay recursos de tipo cero sin ruta, que no deben convertirse en texturas.
+
+En el modelo pequeño, parámetro hash `cd06f1aa`, descriptor offset 344, valor 1, apunta según esta hipótesis al recurso 1 con la ruta TEX esperada. Los otros candidatos no nulos (2 y 3) son recursos sin ruta, de tipo cero. Esto reduce la ambigüedad a nivel de material; no prueba que ese parámetro sea color difuso ni su interpretación por el shader.
+
+Se pasaron **12 pruebas** en total. Los seis nuevos casos cubren registro/referencia desde 1, nulo, índice fuera de rango, exceso de descriptores, bloque dentro de tabla y truncamiento. Catálogos ampliados privados: `common-structured.json` y `quest-structured.json`. Para reproducir, cambiar el nombre del destino del comando anterior y ejecutar pruebas con `-p 'test_*.py'`.
+
+Referencia primaria adicional: [wiki de mhff, formato rMaterial MH4U](https://raw.githubusercontent.com/wiki/svanheulen/mhff/MH4U-rMaterial-Format.md), consultada el 22 de octubre de 2026. Su esquema incompleto orientó la lectura de tablas; los strides y los campos de hash/descriptores se comprobaron en MHXX local. La equivalencia entre ambos juegos no se presupone. Esta actualización sustituye el bloqueo anterior sobre lectura estructural; siguen pendientes los nombres semánticos de parámetros, slots, transformaciones UV y validación visual en juego.
+
 22 de octubre de 2026. Trabajo independiente de la sesión de Citra/MH4U.
 
 Se creó un analizador de metadatos de solo lectura. Verifica SHA-256 y tamaño de cada MOD/MRL/TEX utilizado contra el manifiesto de extracción antes de analizarlo. No ejecuta contenido del juego ni usa las rutas internas como destinos. Los recursos y el catálogo detallado permanecen locales.
