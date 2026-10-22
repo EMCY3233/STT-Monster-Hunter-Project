@@ -251,3 +251,9 @@ Eigent auditoríadocumentalpública permaneceesperando aprobación search_action
 Copiaaislada dePR3 actualizada conmainf199bd07b4e05ee4f7e56ed616840518374f3300;solo conflictosREADME/changelog,ambashistoriasconservadas yreferenciasvigentes corregidas. Código stt_monitor/vita-agent/workflows idénticoamain. No fusión dePR3 enmain.
 
 Validaciónlocaldelárbolpreparado:71/71pruebasPC correctas,CLI10muestras ysmoke_limits correctos(cuotaUTF8/LF,CRLFprevio,intactos,rechazoanexadoincompleto,informeparcial). Tráficoexclusivobuclelocal,sinVita/FTP. CIremota deesta preparaciónpendientedecomprobar.
+
+## 22-10-2026 — CI PR3 confirmada y contadores por fotograma
+
+CI delcommitexacto966fb5ffef7f11020ab7ea07fb76ec260834744c confirmada:Monitor tests39697855865 yVita agent build39697856255 completed/success. Recibolocalanalysis-local/logs/pr3-ci-966fb5f.json. No atribuir estas ejecuciones a commits documentalesposteriores ni a hardware.
+
+PropietarioPR7 comunica runtime-frame-step:100lecturascorrectas/0errores,en3avancesindividuales defotograma amboscontadores+1yestablesentreavances.4pruebasnuevasdelaherramienta correctas. Esaceptaciónacotadaderelaciónconavanceemulado,noposición/animación ni instruccionesescritorasidentificadas. Citraretornadoaejecuciónnormalporpropietario;central nointervinoemulador. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/research/stt-engineering-resources-20261021/docs/research/stt-re-20261021/runtime-frame-step.md). SinVita/FTP/banco alteradosdesdeestefrente.

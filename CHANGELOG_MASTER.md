@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — CI yrelacióncontadores/fotograma
+
+-CI966fb5f PC/Vita confirmadacorrecta;no hardware.
+-PR7 comunica100lecturassinerror y3pasosdefotograma +1enamboscontadores. No posición/animación/escritoresidentificados;4pruebasdelpropietario.
+
 ## 22-10-2026 — Preparación PR3 tras integración del monitor
 
 - Rama de inventario actualizada sobre mainf199bd0 en copia propia; conflictos deREADME/changelog resueltos conservando evidencias deambosfrentes ydescripciones vigentes. Sin fusión dePR3 enmain.
