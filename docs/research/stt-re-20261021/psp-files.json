@@ -1,0 +1,93 @@
+[
+  {
+    "path": "UMD_DATA.BIN",
+    "bytes": 48,
+    "offset": 55296,
+    "sha256": "1cd978bf43fcc97a795f6aa99bed39a82f33ec0925bb94f53f61b2430e3a4eb7",
+    "excluded_from_asset_study": false
+  },
+  {
+    "path": "PSP_GAME/ICON0.PNG",
+    "bytes": 27108,
+    "offset": 111443968,
+    "sha256": "c246a02509fe9c4aa5a135bf60c2e9550a1fc919971a25b65140328658062214",
+    "excluded_from_asset_study": false
+  },
+  {
+    "path": "PSP_GAME/ICON1.PMF",
+    "bytes": 266240,
+    "offset": 111476736,
+    "sha256": "5d91ce2d77dd8668d7c7d3d64edb128083e77674827b74d4dc0443ec62d39761",
+    "excluded_from_asset_study": false
+  },
+  {
+    "path": "PSP_GAME/PARAM.SFO",
+    "bytes": 472,
+    "offset": 111083520,
+    "sha256": "9c257d7c460b7a97d0eb84b7e690f45716cb6c1985a52e202aab9d6ab631ed11",
+    "excluded_from_asset_study": false
+  },
+  {
+    "path": "PSP_GAME/PIC0.PNG",
+    "bytes": 59230,
+    "offset": 111116288,
+    "sha256": "6e2a1b39f533f6231e069b8efafc5ffe358a6cd1d5504b287d1062407efba95c",
+    "excluded_from_asset_study": false
+  },
+  {
+    "path": "PSP_GAME/PIC1.PNG",
+    "bytes": 254636,
+    "offset": 111181824,
+    "sha256": "55fb3bffaa39c19cbfb8b706bd4528f85f5a6ddc67f9a5c5ac897af798129d18",
+    "excluded_from_asset_study": false
+  },
+  {
+    "path": "PSP_GAME/SND0.AT3",
+    "bytes": 240964,
+    "offset": 111771648,
+    "sha256": "1eb7a3bff5c3a6a2ec93ed0c4ac87f90c90964478aea33a00363c51d63667abe",
+    "excluded_from_asset_study": false
+  },
+  {
+    "path": "PSP_GAME/USRDIR/DATA.BIN",
+    "bytes": 772732928,
+    "offset": 113967104,
+    "sha256": "4c65ae5c58f5b983321131391db0dce1d72ccd53b4cd28520429121333a82dec",
+    "excluded_from_asset_study": false
+  },
+  {
+    "path": "PSP_GAME/SYSDIR/BOOT.BIN",
+    "bytes": 1910044,
+    "offset": 112033792,
+    "sha256": "74a0b779ea98f16dc8a9498487a8df6a712891e83a07ef4d533a948df1f4f4df",
+    "excluded_from_asset_study": false
+  },
+  {
+    "path": "PSP_GAME/SYSDIR/EBOOT.BIN",
+    "bytes": 1910384,
+    "offset": 65536,
+    "sha256": "cc5a1251d1446be6c4cb807810c47c106fc1c915c8769863d4e568cfe4190040",
+    "excluded_from_asset_study": false
+  },
+  {
+    "path": "PSP_GAME/SYSDIR/UPDATE/DATA.BIN",
+    "bytes": 21602544,
+    "offset": 10420224,
+    "sha256": "fce1d97a80acc5d97aeea14cec2bf955c89a26bc4090b45a904ae9122cd59e79",
+    "excluded_from_asset_study": true
+  },
+  {
+    "path": "PSP_GAME/SYSDIR/UPDATE/EBOOT.BIN",
+    "bytes": 5476608,
+    "offset": 2031616,
+    "sha256": "b1724708876c47c0cfd562bf51cbfd4336fe9584ff77eaf418ca8a0b4d4d4f2e",
+    "excluded_from_asset_study": true
+  },
+  {
+    "path": "PSP_GAME/SYSDIR/UPDATE/PARAM.SFO",
+    "bytes": 2080,
+    "offset": 1998848,
+    "sha256": "79d5b1a7da4eff4da7ba36f1293fd8c633723c6e59ca630dc7250440b1cc7d96",
+    "excluded_from_asset_study": true
+  }
+]

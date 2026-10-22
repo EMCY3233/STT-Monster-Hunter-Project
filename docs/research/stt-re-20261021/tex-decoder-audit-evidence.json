@@ -1,0 +1,60 @@
+{
+  "scope": "one synthetic contrast plus one existing local TEX; alpha-loss audit only",
+  "upstream": {
+    "url": "https://github.com/svanheulen/mhff/blob/6ef14c8ffa341ccbe44e0e6a93eb4bfe541265cf/n3ds/io_import_scene_mod.py",
+    "commit": "6ef14c8ffa341ccbe44e0e6a93eb4bfe541265cf",
+    "git_blob": "0da950c275caf78bfcfa310f6a45c488e890d94b",
+    "verified_content_sha256": "af2d5c18d226d02644695b339e7fd8edae9041518284d7e91c0814d8c809eb68",
+    "saved_file_sha256": "2d2311c776d5260a9da19f925098c8b38276ca40f8ee374da82b384add9acd36",
+    "saved_final_extra_newline": 1,
+    "license": "GPL-3.0-or-later",
+    "executed_symbols": [
+      "modifier_tables",
+      "decode_etc1"
+    ],
+    "full_module_imported": false
+  },
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "byteorder": "little",
+    "array_I_bytes": 4,
+    "mock_image": {
+      "width": 8,
+      "height": 8,
+      "depth": 32,
+      "update_pack": "no external effects"
+    }
+  },
+  "synthetic": {
+    "blocks": 4,
+    "only_difference": "eight alpha bytes per block: zero vs FF",
+    "rgba_equal": true,
+    "all_output_alpha_255": true,
+    "output_sha256_zero": "ca60aebe5aac8a1345863ba9915c7da833bcdc32e37125c73dba508cdad7ae4b",
+    "output_sha256_ff": "ca60aebe5aac8a1345863ba9915c7da833bcdc32e37125c73dba508cdad7ae4b"
+  },
+  "local": {
+    "bytes": 84,
+    "source_sha256_before": "0e5ae51392aa2a13b0800e41f2969b15a2b1b609ca9e0e1181bc3a07af110f52",
+    "source_sha256_after": "0e5ae51392aa2a13b0800e41f2969b15a2b1b609ca9e0e1181bc3a07af110f52",
+    "source_unchanged": true,
+    "payload_offset": 20,
+    "payload_bytes": 64,
+    "block_count": 4,
+    "raw_alpha_nibble_count": 64,
+    "raw_alpha_distinct_count": 2,
+    "raw_alpha_varies": true,
+    "output_bytes": 256,
+    "output_sha256": "80b3f0167f546fa97f5546cd3c00e9f61f002224993b5efaf6b269bffc56741e",
+    "output_all_alpha_255": true
+  },
+  "limits": [
+    "RGB correctness not validated",
+    "No independent decoder comparison",
+    "No tile orientation or complete ETC1A4 correctness asserted",
+    "No pixels, RGB values or commercial strings in metadata",
+    "No image exported or displayed"
+  ],
+  "private_receipt_sha256": "c70e7b42b615eacff5c713c4e79fd5bb1866f9b17b2317dce8f0b50fee1cc9be",
+  "wrapper_sha256": "13455d3d9ca439a37f04c11924e52de1b7a0c21781aff9e105e2160030841221"
+}

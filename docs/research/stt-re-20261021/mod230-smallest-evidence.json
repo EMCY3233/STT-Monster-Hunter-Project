@@ -1,0 +1,158 @@
+{
+  "source-receipt.json": {
+    "selection": "minimum bytes, tie SHA256, among prior verified MOD230 manifest",
+    "resource": {
+      "container": "MHXX-patch/arc/village/common.arc",
+      "index": 377,
+      "internal_path": "effect\\base\\cm080_000",
+      "bytes": 990,
+      "sha256": "ec1b20b25f022db69ba759bb525e0e9a88d05c2ccaf727812d900a61efc280b0",
+      "kind": "MOD_candidate",
+      "header_probe": {
+        "format": "MOD",
+        "version": 230,
+        "bone_count_declared": 0,
+        "mesh_count_declared": 1,
+        "material_count_declared": 1,
+        "vertex_count_declared": 16,
+        "index_count_declared": 30,
+        "edge_count_declared": 6,
+        "geometry_and_skeleton_validated": false
+      }
+    },
+    "bank_object_path": "objects/ec/ec1b20b25f022db69ba759bb525e0e9a88d05c2ccaf727812d900a61efc280b0",
+    "bank_object_sha256": "ec1b20b25f022db69ba759bb525e0e9a88d05c2ccaf727812d900a61efc280b0",
+    "source_copy_sha256": "ec1b20b25f022db69ba759bb525e0e9a88d05c2ccaf727812d900a61efc280b0"
+  },
+  "arc-correspondence.json": {
+    "container": "MHXX-patch/arc/village/common.arc",
+    "container_sha256": "8694d2381e6c2e4b892831ca36c744d0ba6da9d5b2ce18e6376263659d9910c1",
+    "entry": {
+      "index": 377,
+      "path": "effect\\base\\cm080_000",
+      "type_id": "58A15856",
+      "compressed_bytes": 274,
+      "declared_bytes": 990,
+      "flags": 5,
+      "offset": 2196177
+    },
+    "decoded_bytes": 990,
+    "decoded_sha256": "ec1b20b25f022db69ba759bb525e0e9a88d05c2ccaf727812d900a61efc280b0",
+    "matches_bank_and_private_copy": true,
+    "zlib_length_termination_trailing_checks": true,
+    "scope": "one payload re-decoded only; no other ARC entries extracted"
+  },
+  "structure-final.json": {
+    "version": 230,
+    "declared": {
+      "bones": 0,
+      "meshes": 1,
+      "materials": 1,
+      "vertices": 16,
+      "indices": 30,
+      "edges": 6,
+      "groups": 1,
+      "skins": 0,
+      "textures": 0
+    },
+    "tables": {
+      "header": {
+        "offset": 0,
+        "bytes": 64,
+        "in_bounds": true
+      },
+      "groups": {
+        "offset": 128,
+        "bytes": 32,
+        "in_bounds": true
+      },
+      "materials": {
+        "offset": 160,
+        "bytes": 128,
+        "in_bounds": true
+      },
+      "meshes": {
+        "offset": 288,
+        "bytes": 48,
+        "in_bounds": true
+      },
+      "vertex_buffer": {
+        "offset": 484,
+        "bytes": 448,
+        "in_bounds": true
+      },
+      "global_index_buffer_declared": {
+        "offset": 932,
+        "bytes": 60,
+        "in_bounds": false
+      }
+    },
+    "structural_table_ranges_nonoverlapping": true,
+    "available_index_u16_from_pointer": 29,
+    "global_index_shortfall_bytes": 2,
+    "meshes": [
+      {
+        "mesh": 0,
+        "table_offset": 288,
+        "vertices": 16,
+        "indices": 28,
+        "stride": 28,
+        "vertex_format": "0x59DC400B",
+        "primitive_code": 4,
+        "weight_count_field": 0,
+        "material_index": 0,
+        "group_index": 0,
+        "vertex_span": {
+          "offset": 484,
+          "bytes": 448,
+          "in_buffer": true
+        },
+        "index_span": {
+          "offset": 932,
+          "bytes": 56,
+          "in_file": true
+        },
+        "declared_min_vertex": 0,
+        "declared_max_vertex": 0,
+        "skin_bone_begin": 1,
+        "envelopes": 0,
+        "material_index_in_range": true,
+        "group_index_in_range": true,
+        "attributes": {
+          "layout": "f32x3 position @0, snorm8x4 normal @12, f32x2 UV @16, snorm8x4 tangent @24",
+          "stride_matches_layout": true,
+          "finite_position_records": 16,
+          "finite_uv_records": 16,
+          "bone_index_attribute": false,
+          "bone_weight_attribute": false,
+          "coordinate_system_verified": false
+        },
+        "index_values": {
+          "restarts": 0,
+          "minimum": 0,
+          "maximum": 15,
+          "all_after_vertex_start_in_range": true,
+          "matches_declared_mesh_minmax": false
+        },
+        "strip_triplets": {
+          "total": 26,
+          "distinct_index_triplets": 6,
+          "duplicate_index_triplets": 20,
+          "geometric_area_and_winding_verified": false
+        }
+      }
+    ],
+    "geometry_validated": false,
+    "skeleton_validated": false,
+    "unparsed_regions_remain": true,
+    "source_sha256": "ec1b20b25f022db69ba759bb525e0e9a88d05c2ccaf727812d900a61efc280b0",
+    "source_bytes": 990,
+    "source_unchanged": true
+  },
+  "evidence_hashes": {
+    "source-receipt.json": "992b34a4407eed15a193283c1df9705bf0b83579173175e9ecafbdbd50e036a9",
+    "arc-correspondence.json": "983879c9ee3f74ef0dc08acd5c29a88e4a11a6337ca9eff85f8551954ba99b9f",
+    "structure-final.json": "e535aa9ece2c0e1d0d8674b5a81b04ed776a07726ec24bcb523b2942287a1ab6"
+  },
+  "new_synthetic_tests_passed": 8
+}

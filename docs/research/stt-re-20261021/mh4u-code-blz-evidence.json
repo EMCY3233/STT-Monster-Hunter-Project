@@ -1,0 +1,136 @@
+{
+  "compressed_range": {
+    "index": 0,
+    "name": ".code",
+    "relative_data_offset": 0,
+    "file_offset": 28160,
+    "bytes": 9091360,
+    "sha256": "655e5b4f896d16ab1a745c3f516ef13c6cf482f3aa676b5c9927f3fa8ee57d83",
+    "hash_verified": true
+  },
+  "compressed_sha256_before": "655e5b4f896d16ab1a745c3f516ef13c6cf482f3aa676b5c9927f3fa8ee57d83",
+  "compressed_sha256_after": "655e5b4f896d16ab1a745c3f516ef13c6cf482f3aa676b5c9927f3fa8ee57d83",
+  "compressed_range_unchanged": true,
+  "decompression": {
+    "top": 9,
+    "bottom": 9091284,
+    "additional_bytes": 7169760,
+    "output_bytes": 16261120,
+    "prefix_bytes": 76,
+    "compressed_stream_bytes": 9091275,
+    "input_stream_consumed": true,
+    "output_complete": true,
+    "prefix_unchanged": true,
+    "literals": 3883803,
+    "backreferences": 2222116,
+    "backreference_bytes": 12377241,
+    "control_bytes": 763240,
+    "output_sha256": "63940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc"
+  },
+  "output_bytes": 16261120,
+  "output_sha256": "63940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc",
+  "read_ranges": [
+    {
+      "label": "NCSD header",
+      "offset": 0,
+      "bytes": 512,
+      "sha256": "0f63874b1167ed6236be819792f0a9960a91db4cbccf35b868c2350a1e0f2596"
+    },
+    {
+      "label": "NCCH header",
+      "offset": 16384,
+      "bytes": 512,
+      "sha256": "2d9fcc7968a47b01bcdaddafd0e625da746eb2e5251f63aacb70bcd56a8aba22"
+    },
+    {
+      "label": "ExHeader hashed region",
+      "offset": 16896,
+      "bytes": 1024,
+      "sha256": "0fc242e3ab0c8cfc2de2a0f1205438afa466ed336ebb464e038148818dfdef09"
+    },
+    {
+      "label": "ExeFS table",
+      "offset": 27648,
+      "bytes": 512,
+      "sha256": "2cd39b00fa40aa68f29dbc9d8bb9828618700b8a0bc6c416debbc3d7e233fe0e"
+    },
+    {
+      "label": ".code before",
+      "offset": 28160,
+      "bytes": 9091360,
+      "sha256": "655e5b4f896d16ab1a745c3f516ef13c6cf482f3aa676b5c9927f3fa8ee57d83"
+    },
+    {
+      "label": ".code after",
+      "offset": 28160,
+      "bytes": 9091360,
+      "sha256": "655e5b4f896d16ab1a745c3f516ef13c6cf482f3aa676b5c9927f3fa8ee57d83"
+    }
+  ],
+  "read_bytes": 18185280,
+  "whole_image_hash_repeated": false,
+  "whole_image_unchanged_reverified": false,
+  "original_sha256_from_prior_receipt": "3832beef353d134bcba6ef83dc987e7ae228c43dc32a6ba52519f5f103f52581",
+  "header_ranges_match_prior_receipt": true,
+  "exact_output_budget": 16261120,
+  "independently_expected_decompressed_hash": false,
+  "code_executed": false,
+  "instruction_state_verified": false,
+  "game_functions_identified": false,
+  "romfs_parsed_or_extracted": false,
+  "prior_receipt_sha256": "6b7b06ac0ecd1692d591a28917201bcd284dbc45a324886cf5f71b5226386c6d",
+  "original_stat_unchanged": true,
+  "segments": [
+    {
+      "name": "text",
+      "address": 1048576,
+      "pages": 3309,
+      "code_bytes": 13549804,
+      "mapped_bytes": 13553664,
+      "file_offset": 0,
+      "padding_bytes": 3860,
+      "file_backed_range_verified": true,
+      "file_end": 13553664
+    },
+    {
+      "name": "ro",
+      "address": 14602240,
+      "pages": 211,
+      "code_bytes": 863584,
+      "mapped_bytes": 864256,
+      "file_offset": 13553664,
+      "padding_bytes": 672,
+      "file_backed_range_verified": true,
+      "file_end": 14417920
+    },
+    {
+      "name": "data",
+      "address": 15466496,
+      "pages": 450,
+      "code_bytes": 1842044,
+      "mapped_bytes": 1843200,
+      "file_offset": 14417920,
+      "padding_bytes": 1156,
+      "file_backed_range_verified": true,
+      "file_end": 16261120
+    }
+  ],
+  "bss_bytes": 636332,
+  "bss_page_bytes": 638976,
+  "bss_in_output": false,
+  "stack_bytes": 262144,
+  "private_receipt_sha256": "b885e1e2a0c52f400938bd73796714e66d27d9ee6f0e6f357152d8b8e7250fd0",
+  "written_output_hash_verified": true,
+  "new_synthetic_tests": 7,
+  "new_synthetic_tests_exit": 0,
+  "previous_full_suite_tests": 124,
+  "previous_full_suite_repeated": false,
+  "reference_commit": "219d743a1e698101fe1ab8bef43e6563126c3c27",
+  "reference_cpp_blob": "666d6037f1667ceea641cc46c7ee94cac5bee56c",
+  "baseline_public_commit": "1bdf73ecd6f3535b2d83c105b1847f3f9806ccca",
+  "tool_sha256": "4ca153b9a039d0afeb125a5c72cbd08deb2ba916022d9ee9341019481de5977f",
+  "shared_decoder_sha256": "8dbf4838179693fb00b2f8da70c07c2ccbc677f835782366eb0251072d696338",
+  "tests_sha256": "745a0307eb9315aa53d0c6d1cda412e562d3cc926594651af25bde4a728a5e03",
+  "new_emulator_runs": 0,
+  "bank_modified": false
+}

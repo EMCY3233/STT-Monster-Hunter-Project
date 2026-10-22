@@ -1,0 +1,35 @@
+{
+  "local_receipts": [
+    {
+      "path": "analysis-local/lmt-vector-decoding-20261021/common_entry_0084.vectors.json",
+      "bytes": 455712,
+      "sha256": "faadd97f96c5d3f38db8edbeb37dc76ecc885b0e0ac84bdf792eee09c36417a7"
+    },
+    {
+      "path": "analysis-local/lmt-vector-decoding-20261021/common_entry_0085.vectors.json",
+      "bytes": 277344,
+      "sha256": "b9568c7c9115b9354a1a13758bd5f8511020436aa4c7dc77cb9f63bc887f0345"
+    },
+    {
+      "path": "analysis-local/lmt-vector-decoding-20261021/common_entry_0086.vectors.json",
+      "bytes": 6355,
+      "sha256": "11bbcf5fef368b7ac3300a015b3879bcd04794d94e1653017e105a67d5f2e908"
+    },
+    {
+      "path": "analysis-local/lmt-vector-decoding-20261021/common_entry_0087.vectors.json",
+      "bytes": 5772,
+      "sha256": "fb06703b12e99c4a98c3f384c4ea43956bf61b510d90d34023da711ffb8db052"
+    },
+    {
+      "path": "analysis-local/lmt-vector-decoding-20261021/summary.json",
+      "bytes": 2414,
+      "sha256": "34a20ee3da3bd0595065150b805ab4b6377be3a1412ac0797e58214da4dfe382"
+    }
+  ],
+  "checks": {
+    "vector_tracks": 90,
+    "nonincreasing_steps": 0,
+    "last_key_outside_declared_clip": 0
+  },
+  "publication": "Only summaries and receipts; vector values remain local"
+}

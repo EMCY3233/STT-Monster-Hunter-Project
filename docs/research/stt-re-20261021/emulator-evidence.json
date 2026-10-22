@@ -1,0 +1,195 @@
+{
+  "ppsspp": {
+    "version": "1.20.4",
+    "url": "https://www.ppsspp.org/files/1_20_4/ppsspp_win.zip",
+    "zip_sha256": "a60f04ebdb0b5f1655422bd7f88349a46999b17ad5115d6ddb290c3934bd5163",
+    "authenticode": "Windows reports signature verified"
+  },
+  "boot_probe": {
+    "generated_utc": "2026-10-21T06:54:32.658038+00:00",
+    "emulator_sha256": "27d3edbb06dc623dab60877d3e3a975aef4034c7d4fac464e92fd4998864d2ec",
+    "iso_sha256_before": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+    "iso_sha256_after": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+    "source_unchanged": true,
+    "seconds": 21.218999999997322,
+    "exit_code": 1,
+    "stop_reason": "bounded_probe_terminated",
+    "log_exists": true,
+    "logs": [
+      {
+        "name": "ppsspp.log",
+        "bytes": 8575268,
+        "sha256": "79a21291a537a17bf56e66c0e16a5f6eb2c4fa8a3f6aca56fd6dd4f50f6972de"
+      },
+      {
+        "name": "stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "scope": "Bounded hidden portable process; game progress must be established from logs, not elapsed runtime.",
+    "headless": false,
+    "visual_validation": false
+  },
+  "decryption_probe": {
+    "generated_utc": "2026-10-21T06:56:57.032521+00:00",
+    "emulator_sha256": "27d3edbb06dc623dab60877d3e3a975aef4034c7d4fac464e92fd4998864d2ec",
+    "iso_sha256_before": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+    "iso_sha256_after": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+    "source_unchanged": true,
+    "seconds": 6.235000000000582,
+    "exit_code": 1,
+    "stop_reason": "bounded_probe_terminated",
+    "log_exists": true,
+    "logs": [
+      {
+        "name": "ppsspp.log",
+        "bytes": 2200208,
+        "sha256": "8b5b5c8fc8eb244a8779d1c8b1e714932c3320552b69203336870df5f2104a03"
+      },
+      {
+        "name": "probe.ini",
+        "bytes": 47,
+        "sha256": "031fca705b8e3b0d8719cb53dfb23353059722877478bfa40786d49307f760b9"
+      },
+      {
+        "name": "stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "scope": "Bounded hidden portable process; game progress must be established from logs, not elapsed runtime.",
+    "headless": false,
+    "visual_validation": false,
+    "dump_eboot_requested": true,
+    "dumps": [
+      {
+        "path": "memstick/PSP/SYSTEM/DUMP/ULES01213_EBOOT.BIN",
+        "bytes": 1910384,
+        "sha256": "64937c521286fc8423076e644089881c5fe051bed2565e5061dda8aec0b45e10"
+      }
+    ]
+  },
+  "comparison": {
+    "sha256": "64937c521286fc8423076e644089881c5fe051bed2565e5061dda8aec0b45e10",
+    "bytes": 1910384,
+    "elf_type": 2,
+    "machine": 8,
+    "entry": 143681844,
+    "entry_in_file_backed_executable_load": true,
+    "entry_file_offsets": [
+      1068776
+    ],
+    "program_types": {
+      "1": 1,
+      "0": 299
+    },
+    "load_segments": [
+      {
+        "vaddr": 142622720,
+        "offset": 9652,
+        "filesz": 1866384,
+        "memsz": 22418560,
+        "flags": 7,
+        "alignment": 16
+      }
+    ],
+    "section_count": 620,
+    "section_types": {
+      "0": 1,
+      "3": 1,
+      "1": 313,
+      "9": 304,
+      "8": 1
+    },
+    "symbol_types": {},
+    "semantic_function_validation": false,
+    "dump_relative_path": "analysis-local/emulators/ppsspp-1.20.4/memstick/PSP/SYSTEM/DUMP/ULES01213_EBOOT.BIN",
+    "boot_bytes": 1910044,
+    "boot_sha256": "74a0b779ea98f16dc8a9498487a8df6a712891e83a07ef4d533a948df1f4f4df",
+    "dump_prefix_equals_boot": true,
+    "trailing_bytes": 340,
+    "trailing_all_zero": false
+  },
+  "frontier_summary": {
+    "generated_utc": "2026-10-21T06:55:21.755662+00:00",
+    "input_label": "Juegos/MHF-Vita/PCSG00350",
+    "scope": "local files at enumeration time only; no decryption or recursive container decoding",
+    "files_enumerated": 4673,
+    "bytes_read_files": 2504734845,
+    "status": {
+      "read_ok": 4663,
+      "excluded_license": 9,
+      "excluded_in_progress": 1
+    },
+    "signatures": {
+      "unclassified": 4661,
+      "excluded_or_failed": 10,
+      "SFO": 2
+    },
+    "extensions": {
+      ".html": 1,
+      ".jpg": 1,
+      ".txb": 202,
+      ".bin": 747,
+      ".pac": 978,
+      ".abn": 42,
+      ".mot": 53,
+      ".gab": 320,
+      ".aan": 2,
+      ".png": 49,
+      ".mus": 553,
+      ".snd": 1,
+      ".vsnd": 1576,
+      ".vsnp": 126,
+      ".lst": 1,
+      ".suprx": 8,
+      ".db": 2,
+      "": 4,
+      ".xml": 2,
+      ".sfo": 2,
+      ".trp": 2,
+      ".partial": 1
+    },
+    "complete_game_dump_verified": false,
+    "switch_excluded": true
+  },
+  "frontier_sfo": [
+    {
+      "path": "app/PCSG00350/sce_sys/param.sfo",
+      "sha256": "51b9f8ed1682a6868db4cc503dadfb2c49c80cbf8b1e220fa172dcafdb2b764b",
+      "metadata": {
+        "APP_VER": "01.00",
+        "CATEGORY": "gd",
+        "CONTENT_ID": "JP0102-PCSG00350_00-MHFGHDDCONTENTID",
+        "TITLE": "モンスターハンター フロンティアＧ",
+        "TITLE_ID": "PCSG00350",
+        "VERSION": "01.00"
+      }
+    },
+    {
+      "path": "patch/PCSG00350/sce_sys/param.sfo",
+      "sha256": "5c69bf7e75af0e3a72c5e93947ab255dec261f1759fd4ddcd114c4999543b98f",
+      "metadata": {
+        "APP_VER": "01.99",
+        "CATEGORY": "gp",
+        "CONTENT_ID": "JP0102-PCSG00350_00-MHFGHDDCONTENTID",
+        "TITLE": "モンスターハンター フロンティアＺ",
+        "TITLE_ID": "PCSG00350",
+        "VERSION": "01.00"
+      }
+    }
+  ],
+  "frontier_local_inventory_sha256": "52619b1a103c3accc96e8440cdf7c08751765178b547c11c0cdefa797fe71772",
+  "test_count": 40
+}

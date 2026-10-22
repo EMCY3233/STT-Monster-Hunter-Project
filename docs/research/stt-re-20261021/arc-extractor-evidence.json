@@ -1,0 +1,90 @@
+{
+  "archives": [
+    {
+      "status": "verified",
+      "source_name": "title.arc",
+      "source_sha256": "6c73a0cfb275ed54b0909d4aac8989b887af3db10b69b4a3dfe342ac4753446e",
+      "entry_count": 121,
+      "extracted_bytes": 9323521,
+      "manifest_sha256": "eb06231aca2e277a9dd42d1332bef5946ae422c5b3d769bc0e2d2b3f3e1d23a5",
+      "exports_verified": true,
+      "fresh_source_decode_verified": true,
+      "signature_counts": {
+        "GMD_candidate": 11,
+        "TEX_candidate": 22,
+        "unclassified": 88
+      },
+      "semantic_conversion": false,
+      "label": "title",
+      "baseline_payload_hash_matches": 121
+    },
+    {
+      "status": "verified",
+      "source_name": "quest.arc",
+      "source_sha256": "63714c4c4ddd7eba78560d9a998dadf8319d788963e79928844e88f0814054be",
+      "entry_count": 373,
+      "extracted_bytes": 3879361,
+      "manifest_sha256": "074706b5c66275a3714af8c5c7009f9039e2526d529f3bf88d0c3238813346cc",
+      "exports_verified": true,
+      "fresh_source_decode_verified": true,
+      "signature_counts": {
+        "GMD_candidate": 6,
+        "MOD_candidate": 32,
+        "MRL_candidate": 32,
+        "TEX_candidate": 60,
+        "unclassified": 243
+      },
+      "semantic_conversion": false,
+      "label": "quest",
+      "baseline_payload_hash_matches": 373
+    },
+    {
+      "status": "verified",
+      "source_name": "common.arc",
+      "source_sha256": "8694d2381e6c2e4b892831ca36c744d0ba6da9d5b2ce18e6376263659d9910c1",
+      "entry_count": 843,
+      "extracted_bytes": 9641271,
+      "manifest_sha256": "5d716197ff97c8ca64a30bccda919a5d6547abaa705562381c8aecc1d5acabbf",
+      "exports_verified": true,
+      "fresh_source_decode_verified": true,
+      "signature_counts": {
+        "GMD_candidate": 42,
+        "LMT_candidate": 4,
+        "MOD_candidate": 51,
+        "MRL_candidate": 51,
+        "TEX_candidate": 118,
+        "unclassified": 577
+      },
+      "semantic_conversion": false,
+      "label": "common",
+      "baseline_payload_hash_matches": 6
+    },
+    {
+      "status": "verified",
+      "source_name": "hunter_note.arc",
+      "source_sha256": "6fd092b03d0d7889ba52c22f9196063150a85d95bffbbc49f33308a111aba804",
+      "entry_count": 4,
+      "extracted_bytes": 249620,
+      "manifest_sha256": "28be2f01194959d97dc2abd77de26ece74b3e155990428272b06d53f4124c66e",
+      "exports_verified": true,
+      "fresh_source_decode_verified": true,
+      "signature_counts": {
+        "GMD_candidate": 4
+      },
+      "semantic_conversion": false,
+      "label": "hunter_note",
+      "baseline_payload_hash_matches": 0
+    }
+  ],
+  "tests_passed": 10,
+  "commercial_outputs_private": true,
+  "bank_modified": false,
+  "acceptance_receipt_sha256": "0dc4a916ad6f3d2076ac2b68c1e32d4cdd9050796cc0e5058d688f6e0e0613d9",
+  "total_entries": 1341,
+  "total_extracted_bytes": 23093773,
+  "source_scope": "four plain ARC LE v17 archives from locally accessible MHXX 3DS patch RomFS; not Switch/GU",
+  "output_root_local": "analysis-local/arc-extractor-acceptance-20261022",
+  "commercial_bytes_published": false,
+  "supported_extractor_complete_for_tested_scope": true,
+  "universal_extractor": false
+}

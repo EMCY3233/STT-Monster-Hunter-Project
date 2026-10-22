@@ -1,0 +1,385 @@
+{
+  "access_date": "2026-10-21",
+  "sources": [
+    {
+      "id": "EMU-001",
+      "url": "https://github.com/azahar-emu/azahar/releases/tag/2126.2",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-002",
+      "url": "https://github.com/azahar-emu/azahar/commit/219d743a1e698101fe1ab8bef43e6563126c3c27",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-003",
+      "url": "https://github.com/azahar-emu/azahar/releases/expanded_assets/2126.2",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-004",
+      "url": "https://github.com/azahar-emu/azahar/releases/download/2126.2/",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-005",
+      "url": "https://github.com/azahar-emu/azahar/blob/2126.2/README.md",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-006",
+      "url": "https://azahar-emu.org/pages/faq/",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-007",
+      "url": "https://github.com/azahar-emu/azahar/blob/2126.2/src/core/core.cpp",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-008",
+      "url": "https://github.com/azahar-emu/azahar/blob/2126.2/src/audio_core/lle/lle.cpp",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-009",
+      "url": "https://github.com/azahar-emu/azahar/blob/2126.2/license.txt",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-010",
+      "url": "https://github.com/azahar-emu/azahar/blob/2126.2/src/common/file_util.cpp",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-011",
+      "url": "https://github.com/azahar-emu/azahar/blob/2126.2/src/common/common_paths.h",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-012",
+      "url": "https://github.com/azahar-emu/azahar/blob/2126.2/src/common/logging/backend.cpp",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-013",
+      "url": "https://github.com/azahar-emu/azahar/blob/2126.2/src/core/loader/loader.cpp",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-014",
+      "url": "https://github.com/azahar-emu/azahar/blob/2126.2/src/core/file_sys/ncch_container.cpp",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-015",
+      "url": "https://github.com/azahar-emu/azahar/blob/2126.2/src/core/hle/service/am/am.cpp",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-016",
+      "url": "https://github.com/azahar-emu/compatibility-list/blob/master/compatibility_list.json",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-017",
+      "url": "https://github.com/azahar-emu/compatibility-list",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-018",
+      "url": "https://github.com/azahar-emu/compatibility-list/blob/master/CONTRIBUTING.md",
+      "component": "Azahar",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-019",
+      "url": "https://report.ppsspp.org/game/ULES01213_1.01",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-020",
+      "url": "https://report.ppsspp.org/logs/game/ULES01213_1.01",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-021",
+      "url": "https://github.com/hrydgard/ppsspp/blob/v1.20.4/Core/MIPS/MIPS.cpp",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-022",
+      "url": "https://www.ppsspp.org/docs/reference/command-line/",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-023",
+      "url": "https://www.ppsspp.org/docs/development/",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-024",
+      "url": "https://forums.ppsspp.org/showthread.php?pid=84679&tid=11947",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-025",
+      "url": "https://www.ppsspp.org/docs/settings/graphics/",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-026",
+      "url": "https://www.ppsspp.org/docs/getting-started/introduction/",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-027",
+      "url": "https://dev.ppsspp.org/docs/getting-started/system-requirements/",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-028",
+      "url": "https://github.com/hrydgard/ppsspp/blob/v1.20.4/Core/Loaders.cpp",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-029",
+      "url": "https://github.com/hrydgard/ppsspp/blob/v1.20.4/Windows/main.cpp",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-030",
+      "url": "https://dev.ppsspp.org/docs/faq/",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-031",
+      "url": "https://github.com/hrydgard/ppsspp/blob/v1.20.4/Core/Debugger/Breakpoints.h",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-032",
+      "url": "https://www.ppsspp.org/files/1_20_4/ppsspp_win.zip",
+      "component": "PPSSPP",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-033",
+      "url": "https://api.github.com/repos/Vita3K/Vita3K/releases/tags/continuous",
+      "component": "Vita3K",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-034",
+      "url": "https://github.com/Vita3K/Vita3K/releases/download/continuous/windows-latest.zip",
+      "component": "Vita3K",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-035",
+      "url": "https://github.com/Vita3K/Vita3K/blob/ed0b71271fa9632c2d81532ef87da0cddf2bc970/README.md",
+      "component": "Vita3K",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": true,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-036",
+      "url": "https://github.com/Vita3K/Vita3K/blob/ed0b71271fa9632c2d81532ef87da0cddf2bc970/",
+      "component": "Vita3K",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": true,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-037",
+      "url": "https://vita3k.org/quickstart.html",
+      "component": "Vita3K",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-038",
+      "url": "https://github.com/Vita3K/compatibility/issues/2449",
+      "component": "Vita3K",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-039",
+      "url": "https://github.com/Vita3K/compatibility/issues/2449#issuecomment-4351432909",
+      "component": "Vita3K",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-040",
+      "url": "https://github.com/Vita3K/compatibility/issues/2449#issuecomment-6296770619",
+      "component": "Vita3K",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    },
+    {
+      "id": "EMU-041",
+      "url": "https://github.com/Vita3K/Vita3K/issues/2509",
+      "component": "Vita3K",
+      "access_date": "2026-10-21",
+      "source_class": "project primary source or project-hosted user report",
+      "immutable_commit_url": false,
+      "verification": "documentary, not a local binary or gameplay test"
+    }
+  ],
+  "pins": {
+    "PPSSPP": "fa50bb1976065c4f8b1b47af227d367fe9771555",
+    "Azahar": "219d743a1e698101fe1ab8bef43e6563126c3c27",
+    "Vita3K": "ed0b71271fa9632c2d81532ef87da0cddf2bc970"
+  },
+  "private_note_hashes": {
+    "3ds-notes.md": "139f45dbb430261b1294ad1b453d25188d07cc5550e6ea923fee696e8a77e33c",
+    "psp-notes.md": "2e6137d5b32dfed19425c4b4ec17a594595934607f863c34295be291e9dfba8c",
+    "vita-notes.md": "e18d1391cf395563311c151df24f7715f9354d9d65dce8d193deddff32535ed8"
+  },
+  "caveat": "Project-hosted user reports do not certify local files/hardware. Tags/docs and continuous download URLs can change; use the pinned commit and published asset digest. Some trailing directory URLs are resolution bases explicitly noted in the report."
+}

@@ -1,0 +1,33 @@
+{
+  "source_path": "rePatch/PCSG00350/dat/load/uc/uc00_001_03.bin",
+  "source_bytes": 238,
+  "source_sha256": "4fcc62ad49f42b315d69013b2d312845b2d301dc97d47526047497f37125d385",
+  "source_unchanged": true,
+  "output_sha256": "592fe0ca19e741430f4fa669eea3df71e83935dec2812bf51524ad279074691c",
+  "seconds": 0.0,
+  "classification": {
+    "signature": "unclassified",
+    "semantics_verified": false
+  },
+  "version": 264,
+  "codec": 3,
+  "data_offset": 16,
+  "declared_output_bytes": 349,
+  "actual_output_bytes": 349,
+  "consumed_payload_bytes": 222,
+  "trailing_payload_bytes": 0,
+  "unused_control_bits": 5,
+  "termination": "declared output size reached; no end marker asserted",
+  "operations": {
+    "literal": 107,
+    "short": 26,
+    "long_b": 1,
+    "long_a": 2,
+    "raw_block": 1,
+    "medium": 6
+  },
+  "receipt_sha256": "e1a1984e360cfb2a2a39041657f393cd2590b111f4042483e17b599cf75c0553",
+  "synthetic_tests_passed": 65,
+  "decoder_source_blob": "469390222071858749a42556b12809820123718f",
+  "output_budget_bytes": 67108864
+}

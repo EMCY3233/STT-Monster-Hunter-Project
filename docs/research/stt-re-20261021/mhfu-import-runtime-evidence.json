@@ -1,0 +1,71 @@
+{
+  "emulator_version": "1.20.4",
+  "emulator_sha256": "27d3edbb06dc623dab60877d3e3a975aef4034c7d4fac464e92fd4998864d2ec",
+  "static_receipt_sha256": "9b370c8b054d81f8cc278f0c84bb135851e30da6267c354b51e762231ff63f3a",
+  "new_emulator_runs": 0,
+  "new_dumps": 0,
+  "existing_runs_reused": 2,
+  "runs": [
+    {
+      "label": "ppsspp-probe-20261021",
+      "receipt_sha256": "a4c2763a0258353908a811e156a5c7928e1792045315ccbc9d9668332e95c3eb",
+      "log_sha256": "79a21291a537a17bf56e66c0e16a5f6eb2c4fa8a3f6aca56fd6dd4f50f6972de",
+      "log_bytes": 8575268,
+      "announcements": [
+        {
+          "line_number": 903,
+          "section": ".lib.stub",
+          "vaddr": 143714004,
+          "bytes": 680
+        },
+        {
+          "line_number": 910,
+          "section": ".rodata.sceNid",
+          "vaddr": 143715448,
+          "bytes": 3200
+        }
+      ],
+      "both_section_announcements_match": true,
+      "historical_iso_sha256_before": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+      "historical_iso_sha256_after": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+      "historical_source_unchanged": true,
+      "historical_stop_reason": "bounded_probe_terminated"
+    },
+    {
+      "label": "ppsspp-decrypt-20261021",
+      "receipt_sha256": "faaadb5896d2aefe9acf56b9e3ac4093178f6dbab3d191db33c6824bf59f698d",
+      "log_sha256": "8b5b5c8fc8eb244a8779d1c8b1e714932c3320552b69203336870df5f2104a03",
+      "log_bytes": 2200208,
+      "announcements": [
+        {
+          "line_number": 912,
+          "section": ".lib.stub",
+          "vaddr": 143714004,
+          "bytes": 680
+        },
+        {
+          "line_number": 919,
+          "section": ".rodata.sceNid",
+          "vaddr": 143715448,
+          "bytes": 3200
+        }
+      ],
+      "both_section_announcements_match": true,
+      "historical_iso_sha256_before": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+      "historical_iso_sha256_after": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+      "historical_source_unchanged": true,
+      "historical_stop_reason": "bounded_probe_terminated"
+    }
+  ],
+  "runtime_section_announcement_corroborated": true,
+  "runtime_pointer_dereference_confirmed": false,
+  "function_identity_verified": false,
+  "function_invocation_verified": false,
+  "visual_validation": false,
+  "fps": null,
+  "acceptance": "section address/size corroboration only; concrete pointer dereference remains unproved",
+  "receipt_sha256": "0fb169e7c6fe3c3f33edf38c894517332c28b287de8de836fdb11347f1808744",
+  "new_synthetic_tests_passed": 4,
+  "loader_tag": "v1.20.4",
+  "loader_blob": "e4fd7e2bf898068de37b8a4386388a0fff7e81af"
+}

@@ -1,0 +1,12 @@
+{
+  "task": "STT-RE-20261021",
+  "github_main_at_branch_creation": "0067706f7baf01465f335b5509a1ce62c6b2d02f",
+  "github_pr3_head": "51b8904c84de6bdf241f731bd15a6f8ea56528b6",
+  "dti_dictionary": {
+    "url": "https://github.com/Paxlord/pax_arc_explorer/blob/main/data/dti_ext.json",
+    "git_blob_sha": "e76f41b5d5920cdac543c1e96ac883f68fe6fd17"
+  },
+  "audit_utc": "2026-10-21T06:06:19.793294+00:00",
+  "timezone": "Europe/Madrid",
+  "public_contents": "Reports, metadata and independently authored local project tooling only; no game payloads or keys."
+}

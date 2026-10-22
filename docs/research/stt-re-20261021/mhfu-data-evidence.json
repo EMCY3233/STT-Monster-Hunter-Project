@@ -1,0 +1,17 @@
+{
+  "data_source_sha256": "4c65ae5c58f5b983321131391db0dce1d72ccd53b4cd28520429121333a82dec",
+  "data_bytes": 772732928,
+  "upstream_sha256": "39204fcaae7283b0ba5b8584eb467442452140d6be98dc2c1c23d267a0cf3586",
+  "toc_bytes": 34816,
+  "file_count": 6657,
+  "toc_roundtrip": true,
+  "scope": "All allocated entries processed; roundtrip verified; payload semantics and unpadded lengths not validated",
+  "processed_entries": 6657,
+  "processed_allocated_bytes": 772698112,
+  "unique_payload_hashes": 6558,
+  "all_roundtrips": true,
+  "report_sha256": "0656125073d2cf9043c366d062c00b9e232eda8cfbb02d3e3334504899c79e58",
+  "report_bytes": 2344531,
+  "payload_semantics_verified": false,
+  "unpadded_lengths_verified": false
+}

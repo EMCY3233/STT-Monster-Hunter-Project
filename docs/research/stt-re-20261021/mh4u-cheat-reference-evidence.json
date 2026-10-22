@@ -1,0 +1,286 @@
+{
+  "github_source": {
+    "url": "https://github.com/JourneyOver/CTRPF-AR-CHEAT-CODES/blob/4feb065cf4e6f7c84af99098458b56e5ae0bb4e4/Cheats/Monster%20Hunter%204%20Ultimate%20(EUR)/0004000000126100.txt",
+    "file_last_commit": "4feb065cf4e6f7c84af99098458b56e5ae0bb4e4",
+    "file_last_commit_date": "2018-03-20T14:18:20Z",
+    "local_saved_text_sha256": "27d59cee842c02c9b7c58995335b0d1437bbb9f8a388e2776e1f8023d80d8fee"
+  },
+  "scribd": {
+    "url": "https://www.scribd.com/document/849758648/Monster-Hunter-4-Ultimate-EUR",
+    "access": "public HTML view",
+    "downloaded": false,
+    "comparison": "reviewed blocks match GitHub, including conflicting v1.1 root; independence not established"
+  },
+  "interpreter_reference": {
+    "url": "https://github.com/azahar-emu/azahar/blob/0ff3440232d6bc9226e37c41c05c5aead03f37fd/src/core/cheats/gateway_cheat.cpp",
+    "local_saved_text_sha256": "11d71142ff01c4d92b5389e242c9e0cf9a473b64f2adfffdb86f06f5777c028b"
+  },
+  "derived_read_plan": {
+    "versions": [
+      {
+        "version": "1.0",
+        "direct": {
+          "Max Money": 137793120,
+          "Max Caravan": 137852620
+        },
+        "player_root": 136083232,
+        "lower_exclusive": 142606336,
+        "upper_exclusive": 147849216,
+        "inventory_candidate": 137845056,
+        "box_quantity_candidate": 137793420,
+        "health_offsets": [
+          4484,
+          4488,
+          4500
+        ],
+        "stamina_offsets": [
+          4492,
+          4496
+        ]
+      },
+      {
+        "version": "1.1",
+        "direct": {
+          "Max Money": 137795712,
+          "Max Caravan": 137855212
+        },
+        "player_root": 136085824,
+        "lower_exclusive": 142606336,
+        "upper_exclusive": 147849216,
+        "inventory_candidate": 137847648,
+        "box_quantity_candidate": 137796012,
+        "health_offsets": [
+          4484,
+          4488,
+          4500
+        ],
+        "stamina_offsets": [
+          4492,
+          4496
+        ]
+      }
+    ],
+    "alternate_v11_roots": [
+      136086592
+    ],
+    "source_sections": 22,
+    "cheats_executed": false
+  },
+  "probe_receipt": {
+    "plan": {
+      "versions": [
+        {
+          "version": "1.0",
+          "direct": {
+            "Max Money": 137793120,
+            "Max Caravan": 137852620
+          },
+          "player_root": 136083232,
+          "lower_exclusive": 142606336,
+          "upper_exclusive": 147849216,
+          "inventory_candidate": 137845056,
+          "box_quantity_candidate": 137793420,
+          "health_offsets": [
+            4484,
+            4488,
+            4500
+          ],
+          "stamina_offsets": [
+            4492,
+            4496
+          ]
+        },
+        {
+          "version": "1.1",
+          "direct": {
+            "Max Money": 137795712,
+            "Max Caravan": 137855212
+          },
+          "player_root": 136085824,
+          "lower_exclusive": 142606336,
+          "upper_exclusive": 147849216,
+          "inventory_candidate": 137847648,
+          "box_quantity_candidate": 137796012,
+          "health_offsets": [
+            4484,
+            4488,
+            4500
+          ],
+          "stamina_offsets": [
+            4492,
+            4496
+          ]
+        }
+      ],
+      "alternate_v11_roots": [
+        136086592
+      ],
+      "source_sections": 22,
+      "cheats_executed": false
+    },
+    "source_sha256": "27d59cee842c02c9b7c58995335b0d1437bbb9f8a388e2776e1f8023d80d8fee",
+    "image_sha256": "63940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc",
+    "reads": 20,
+    "bytes": 208,
+    "samples_sha256": "778cd5950ce2c6a133e5a2956f36052bbfd429e86a12998d04380ae579d3158e",
+    "reads_sha256": "f30f032174a341b807ed9309341558892b19b8ec98e18d8a78522a57df0901d1",
+    "results": [
+      {
+        "version": "1.0",
+        "root_stable": true,
+        "root_within_source_guard": false,
+        "player_identity_verified": false
+      },
+      {
+        "version": "1.1",
+        "root_stable": true,
+        "root_within_source_guard": false,
+        "player_identity_verified": false
+      }
+    ],
+    "control_before_matches": true,
+    "control_after_matches": true,
+    "cheats_executed": false,
+    "memory_writes": false,
+    "heap_allocation_ownership_verified": false,
+    "semantic_identity_verified": false
+  },
+  "observations": [
+    {
+      "label": "1.0:root:0",
+      "address": 136083232,
+      "size": 4,
+      "all_zero": true,
+      "root_is_null": true
+    },
+    {
+      "label": "1.0:Max Money:0",
+      "address": 137793120,
+      "size": 4,
+      "all_zero": false,
+      "u32_candidate_value": 1500
+    },
+    {
+      "label": "1.0:Max Caravan:0",
+      "address": 137852620,
+      "size": 4,
+      "all_zero": true
+    },
+    {
+      "label": "1.0:inventory:0",
+      "address": 137845056,
+      "size": 32,
+      "all_zero": true
+    },
+    {
+      "label": "1.0:box:0",
+      "address": 137793418,
+      "size": 8,
+      "all_zero": false
+    },
+    {
+      "label": "1.1:root:0",
+      "address": 136085824,
+      "size": 4,
+      "all_zero": true,
+      "root_is_null": true
+    },
+    {
+      "label": "1.1:Max Money:0",
+      "address": 137795712,
+      "size": 4,
+      "all_zero": true,
+      "u32_candidate_value": 0
+    },
+    {
+      "label": "1.1:Max Caravan:0",
+      "address": 137855212,
+      "size": 4,
+      "all_zero": true
+    },
+    {
+      "label": "1.1:inventory:0",
+      "address": 137847648,
+      "size": 32,
+      "all_zero": true
+    },
+    {
+      "label": "1.1:box:0",
+      "address": 137796010,
+      "size": 8,
+      "all_zero": true
+    },
+    {
+      "label": "1.0:root:1",
+      "address": 136083232,
+      "size": 4,
+      "all_zero": true,
+      "root_is_null": true
+    },
+    {
+      "label": "1.0:Max Money:1",
+      "address": 137793120,
+      "size": 4,
+      "all_zero": false,
+      "u32_candidate_value": 1500
+    },
+    {
+      "label": "1.0:Max Caravan:1",
+      "address": 137852620,
+      "size": 4,
+      "all_zero": true
+    },
+    {
+      "label": "1.0:inventory:1",
+      "address": 137845056,
+      "size": 32,
+      "all_zero": true
+    },
+    {
+      "label": "1.0:box:1",
+      "address": 137793418,
+      "size": 8,
+      "all_zero": false
+    },
+    {
+      "label": "1.1:root:1",
+      "address": 136085824,
+      "size": 4,
+      "all_zero": true,
+      "root_is_null": true
+    },
+    {
+      "label": "1.1:Max Money:1",
+      "address": 137795712,
+      "size": 4,
+      "all_zero": true,
+      "u32_candidate_value": 0
+    },
+    {
+      "label": "1.1:Max Caravan:1",
+      "address": 137855212,
+      "size": 4,
+      "all_zero": true
+    },
+    {
+      "label": "1.1:inventory:1",
+      "address": 137847648,
+      "size": 32,
+      "all_zero": true
+    },
+    {
+      "label": "1.1:box:1",
+      "address": 137796010,
+      "size": 8,
+      "all_zero": true
+    }
+  ],
+  "probe_receipt_sha256": "0176d677ada0a2657e1f4ab9d72a7c4763110a5df3e07b12f5edc8a20825e339",
+  "tests_passed": 6,
+  "cheat_activation": false,
+  "memory_writes": false,
+  "player_pointer_followed": false,
+  "game_version_verified": false,
+  "money_ui_verified": false,
+  "ui_observation": "Citra state capture was occluded by the user browser; no game UI action taken to confirm money"
+}

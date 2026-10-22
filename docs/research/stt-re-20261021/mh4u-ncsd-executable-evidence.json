@@ -1,0 +1,170 @@
+{
+  "partition_index": 0,
+  "partition_offset": 16384,
+  "partition_bytes": 2727489536,
+  "ncch_declared_bytes": 2727489536,
+  "program_id": "0004000000126100",
+  "no_crypto": true,
+  "executable_content_flag": true,
+  "exheader_hash_verified": true,
+  "exheader_sha256": "0fc242e3ab0c8cfc2de2a0f1205438afa466ed336ebb464e038148818dfdef09",
+  "segments": [
+    {
+      "name": "text",
+      "address": 1048576,
+      "pages": 3309,
+      "code_bytes": 13549804,
+      "mapped_bytes": 13553664,
+      "file_offset": 0,
+      "padding_bytes": 3860
+    },
+    {
+      "name": "ro",
+      "address": 14602240,
+      "pages": 211,
+      "code_bytes": 863584,
+      "mapped_bytes": 864256,
+      "file_offset": 13553664,
+      "padding_bytes": 672
+    },
+    {
+      "name": "data",
+      "address": 15466496,
+      "pages": 450,
+      "code_bytes": 1842044,
+      "mapped_bytes": 1843200,
+      "file_offset": 14417920,
+      "padding_bytes": 1156
+    }
+  ],
+  "declared_code_pages_bytes": 16261120,
+  "stack_bytes": 262144,
+  "bss_bytes": 636332,
+  "compression_flag_byte": 1,
+  "code_compressed": true,
+  "blz_footer": {
+    "top": 9,
+    "bottom": 9091284,
+    "additional_bytes": 7169760,
+    "output_bytes": 16261120,
+    "prefix_bytes": 76,
+    "compressed_stream_bytes": 9091275
+  },
+  "exefs_offset_in_partition": 11264,
+  "exefs_bytes": 9355264,
+  "exefs_table_hash_verified": true,
+  "exefs_entries": [
+    {
+      "index": 0,
+      "name": ".code",
+      "relative_data_offset": 0,
+      "file_offset": 28160,
+      "bytes": 9091360,
+      "sha256": "655e5b4f896d16ab1a745c3f516ef13c6cf482f3aa676b5c9927f3fa8ee57d83",
+      "hash_verified": true
+    },
+    {
+      "index": 1,
+      "name": "banner",
+      "relative_data_offset": 9091584,
+      "file_offset": 9119744,
+      "bytes": 248744,
+      "sha256": "047d6d78587066d7cadcf9802329cce90cd1647204a55d71ce24559509a14634",
+      "hash_verified": true
+    },
+    {
+      "index": 2,
+      "name": "icon",
+      "relative_data_offset": 9340416,
+      "file_offset": 9368576,
+      "bytes": 14016,
+      "sha256": "5f0e0c0ec9eb85273cc392c5b67e4b487825a44e72c56c08771cd9857f4ab225",
+      "hash_verified": true
+    }
+  ],
+  "arm11_caps": {
+    "core_version": 2,
+    "n3ds_cpu_flags_raw": 3,
+    "enable_l2_cache_requested": true,
+    "enable_804mhz_requested": true,
+    "n3ds_mode_raw": 1,
+    "system_mode_raw": 3,
+    "ideal_processor_raw": 0,
+    "affinity_mask_raw": 1,
+    "actual_clock_verified": false,
+    "arm_thumb_instruction_state_verified": false
+  },
+  "read_ranges": [
+    {
+      "label": "NCSD header",
+      "offset": 0,
+      "bytes": 512,
+      "sha256": "0f63874b1167ed6236be819792f0a9960a91db4cbccf35b868c2350a1e0f2596"
+    },
+    {
+      "label": "NCCH header",
+      "offset": 16384,
+      "bytes": 512,
+      "sha256": "2d9fcc7968a47b01bcdaddafd0e625da746eb2e5251f63aacb70bcd56a8aba22"
+    },
+    {
+      "label": "ExHeader hashed region",
+      "offset": 16896,
+      "bytes": 1024,
+      "sha256": "0fc242e3ab0c8cfc2de2a0f1205438afa466ed336ebb464e038148818dfdef09"
+    },
+    {
+      "label": "ExeFS table",
+      "offset": 27648,
+      "bytes": 512,
+      "sha256": "2cd39b00fa40aa68f29dbc9d8bb9828618700b8a0bc6c416debbc3d7e233fe0e"
+    },
+    {
+      "label": "ExeFS entry 0",
+      "offset": 28160,
+      "bytes": 9091360,
+      "sha256": "655e5b4f896d16ab1a745c3f516ef13c6cf482f3aa676b5c9927f3fa8ee57d83"
+    },
+    {
+      "label": "ExeFS entry 1",
+      "offset": 9119744,
+      "bytes": 248744,
+      "sha256": "047d6d78587066d7cadcf9802329cce90cd1647204a55d71ce24559509a14634"
+    },
+    {
+      "label": "ExeFS entry 2",
+      "offset": 9368576,
+      "bytes": 14016,
+      "sha256": "5f0e0c0ec9eb85273cc392c5b67e4b487825a44e72c56c08771cd9857f4ab225"
+    }
+  ],
+  "structural_read_bytes": 9356680,
+  "read_budget_bytes": 67108864,
+  "reused_validators": [
+    "inspect_ncch_code.blz_footer",
+    "map_ncch_entry_reference.map_reference"
+  ],
+  "declared_layout_only": true,
+  "code_decompressed": false,
+  "binary_output_written": false,
+  "game_functions_identified": false,
+  "original_bytes": 4294967296,
+  "original_sha256_before": "3832beef353d134bcba6ef83dc987e7ae228c43dc32a6ba52519f5f103f52581",
+  "original_sha256_after": "3832beef353d134bcba6ef83dc987e7ae228c43dc32a6ba52519f5f103f52581",
+  "original_unchanged": true,
+  "full_file_hash_passes": 2,
+  "romfs_parsed_or_extracted": false,
+  "receipt_field_correction": "Original romfs_read=false described only the structured probe; full-file hash passes read all bytes. Original receipt retained unchanged.",
+  "private_receipt_sha256": "6b7b06ac0ecd1692d591a28917201bcd284dbc45a324886cf5f71b5226386c6d",
+  "new_synthetic_tests": 7,
+  "new_synthetic_tests_exit": 0,
+  "previous_full_suite_tests": 124,
+  "previous_full_suite_repeated": false,
+  "reference_commit": "219d743a1e698101fe1ab8bef43e6563126c3c27",
+  "reference_header_blob": "1559ee5dcf83aee8b197fb7510b433871c0e6b55",
+  "reference_cpp_blob": "666d6037f1667ceea641cc46c7ee94cac5bee56c",
+  "tool_sha256": "e488dca8134428a7e65cc2250a9be4c347c46b33efcad5a18457681a307fc65e",
+  "tests_sha256": "db9dee85d37ce67e8d2fa17216d0691f3625b86e2c5151fc54633d11a4bc2198",
+  "new_emulator_runs": 0,
+  "bank_modified": false
+}

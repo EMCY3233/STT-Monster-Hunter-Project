@@ -1,0 +1,164 @@
+{
+  "date": "2026-10-22",
+  "selection": {
+    "selection": "minimum bytes then SHA256 among previously catalogued MOD230 with bones>0 and existing object; duplicate occurrence tie container/index",
+    "manifest_sha256": "0b98e274b925a2db76e6148e7652e9e4dafd82a86fb050a10c11dfe7227e09da",
+    "catalogued_mod230_count": 83,
+    "eligible_count": 3,
+    "existing_eligible_count": 3,
+    "selected": {
+      "container": "MHXX-patch/arc/village/common.arc",
+      "index": 466,
+      "internal_path": "effect\\base\\cm400_000",
+      "bytes": 26402,
+      "sha256": "6d98d22019ceafc1c44801ed45692610ed5c0b2db461dc1fb813526c7af374be",
+      "kind": "MOD_candidate",
+      "header_probe": {
+        "format": "MOD",
+        "version": 230,
+        "bone_count_declared": 3,
+        "mesh_count_declared": 3,
+        "material_count_declared": 1,
+        "vertex_count_declared": 793,
+        "index_count_declared": 1496,
+        "edge_count_declared": 820,
+        "geometry_and_skeleton_validated": false
+      }
+    },
+    "object_relative_path": "analysis-local\\resource-bank\\objects\\6d\\6d98d22019ceafc1c44801ed45692610ed5c0b2db461dc1fb813526c7af374be",
+    "new_extraction": false,
+    "new_binary_copy": false,
+    "bank_modified": false
+  },
+  "result": {
+    "version": 230,
+    "bone_count": 3,
+    "bone_record_stride": 24,
+    "matrix_stride": 64,
+    "header_counts": {
+      "meshes": 3,
+      "materials": 1,
+      "groups": 2,
+      "skins": 1
+    },
+    "ranges": [
+      {
+        "label": "extended header",
+        "offset": 0,
+        "bytes": 64,
+        "sha256": "5965cf0b7e04ca95b430eee1e00f3b2b6b71f8697168f2b0180ea76d8a774c26"
+      },
+      {
+        "label": "bones",
+        "offset": 128,
+        "bytes": 72,
+        "sha256": "c3b8b534eec5573ad6390243437b7c63321c73e273c52e073a09b29ea0c0a3f0"
+      },
+      {
+        "label": "ref_poses",
+        "offset": 200,
+        "bytes": 192,
+        "sha256": "2d875e7c9fba39652f67c4df7e42c6c17fb74b1a6d46e3c2ad6a2bb3bc57f531"
+      },
+      {
+        "label": "transforms",
+        "offset": 392,
+        "bytes": 192,
+        "sha256": "11c9a62de2ba661c561897fe24b0f2e45317e32c6e32758b30c472a5e4409873"
+      },
+      {
+        "label": "remaps",
+        "offset": 584,
+        "bytes": 256,
+        "sha256": "e7906d33f4377441ceb8c4448193e75a8f8029d000833958f48f855a6eebab46"
+      },
+      {
+        "label": "skin_remaps",
+        "offset": 840,
+        "bytes": 28,
+        "sha256": "dc0cf603b63266d90702fa877236643787458755c4f20d93cc5ae34d74cb5e1b"
+      }
+    ],
+    "skeleton_table_bytes": 740,
+    "parsed_read_bytes": 804,
+    "skeleton_end": 868,
+    "next_declared_region": 868,
+    "tables_in_file_nonoverlapping": true,
+    "hierarchy": {
+      "parent_reference_domain": "bone record slots, as used by primary converter",
+      "parent_indices_in_range": true,
+      "root_count": 2,
+      "root_slots": [
+        0,
+        1
+      ],
+      "nonroot_edges": 1,
+      "acyclic": true,
+      "max_depth": 1
+    },
+    "bone_records_all_finite": true,
+    "index_field_unique_count": 2,
+    "index_field_duplicate_records": 1,
+    "index_equals_slot": false,
+    "index_field_used_for_parent_resolution": false,
+    "matrices": {
+      "ref_poses": {
+        "count": 3,
+        "float_count": 48,
+        "all_finite": true
+      },
+      "transforms": {
+        "count": 3,
+        "float_count": 48,
+        "all_finite": true
+      }
+    },
+    "skin_remap_counts": [
+      2
+    ],
+    "skin_remap_indices_interpreted": false,
+    "remaps_semantics_verified": false,
+    "matrices_exported": false,
+    "coordinate_system_verified": false,
+    "matrix_inverses_verified": false,
+    "functional_rig_verified": false,
+    "skinning_performed": false,
+    "lmt_association": false,
+    "geometry_parsed_or_validated": false,
+    "source_bytes": 26402,
+    "source_sha256_before": "6d98d22019ceafc1c44801ed45692610ed5c0b2db461dc1fb813526c7af374be",
+    "source_sha256_after": "6d98d22019ceafc1c44801ed45692610ed5c0b2db461dc1fb813526c7af374be",
+    "source_unchanged": true,
+    "full_file_hash_passes": 2
+  },
+  "private_receipt_sha256": "cd8570ac1238c3448c47ccda309fde8650ebb765b5b91a2b1bf25ad4c3b4ff11",
+  "private_selection_sha256": "696a36209ac7a8f89a66d424ffc59a8fb361203596bcb6eeaa8da2adedf8d117",
+  "tool_sha256": "5f6760180b50b339b4de685fbd9464b28212752999c0e08d2acf1f1455746980",
+  "tests_sha256": "05d3e172a89a6486f73ac5ecea262c69a8486147d76c18096c99471a6e0aea16",
+  "new_synthetic_tests": 10,
+  "new_synthetic_tests_exit": 0,
+  "full_suite_repeated": false,
+  "revillib_commit": "e17f9718ea571f040a7e1f331c28a4d45a6066b5",
+  "revillib_blobs": {
+    "header.hpp": "1c4b820fad1afbb58498eea989faf96d8ae91c15",
+    "bones.hpp": "742e88d2f7eaaa31a9ccdcf3581d86d948ca8fb3",
+    "traits.hpp": "61f901ad82bd674592682aaed26ab2d4e59eeb3d",
+    "common.hpp": "94b23b325ceaa6ea52f8be7d9bb79a06a4330848",
+    "serialize.cpp": "b599dc118442471c6e2cc00c161dadd0e61cb432",
+    "mod_to_gltf.cpp": "028e077b99021c53e6f40e5484083c04a93dd914"
+  },
+  "spike_submodule_commit": "e83f3855e0a96b29eee3dcec98f428c1787ffad4",
+  "spike_blobs": {
+    "vectors_fwd.hpp": "7c09ca0df9c1bfc8f76dc9f32a7b908c06a50af0",
+    "vectors.hpp": "0ba400c5df939e933141992e072a2bdf78b14544",
+    "vectors_simd.hpp": "7a0585cb17ac7c8a831584c81c729bfb0f3182fa",
+    "matrix44.hpp": "c371667c8ac07a3d1137fcedeb381175b9da6d18",
+    "binreader_ref.hpp": "f3bfb100c1be8b5377fdd025dd4d9ea3439331bf"
+  },
+  "prior_mod990_discrepancy_resolved": false,
+  "blz_independence_reopened": false,
+  "lmt_independence_reopened": false,
+  "new_geometry_or_animation_outputs": 0,
+  "new_binary_copy": false,
+  "bank_modified": false
+}

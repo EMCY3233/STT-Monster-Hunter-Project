@@ -1,0 +1,221 @@
+{
+  "recording": {
+    "condition": "assistant-issued-action",
+    "address": 17879040,
+    "attempts": 299,
+    "successes": 299,
+    "errors": 0,
+    "elapsed_seconds": 30.00064199999906,
+    "stop_reason": "complete",
+    "control_before_matches": true,
+    "control_after_matches": true,
+    "extracted_bytes": 9568,
+    "stats": {
+      "samples": 299,
+      "changed_byte_indices": [
+        0,
+        4,
+        5,
+        8,
+        9,
+        24,
+        25
+      ],
+      "u32_le": [
+        {
+          "byte_offset": 0,
+          "distinct_bit_patterns": 2,
+          "changed_pairs": 14,
+          "comparable_pairs": 298,
+          "modular_delta_counts": [
+            {
+              "delta": 0,
+              "count": 284
+            },
+            {
+              "delta": 1,
+              "count": 7
+            },
+            {
+              "delta": 4294967295,
+              "count": 7
+            }
+          ],
+          "interpretation": "aligned unsigned little-endian bit view; actual type unknown"
+        },
+        {
+          "byte_offset": 4,
+          "distinct_bit_patterns": 299,
+          "changed_pairs": 298,
+          "comparable_pairs": 298,
+          "modular_delta_counts": [
+            {
+              "delta": 5,
+              "count": 7
+            },
+            {
+              "delta": 6,
+              "count": 284
+            },
+            {
+              "delta": 7,
+              "count": 7
+            }
+          ],
+          "interpretation": "aligned unsigned little-endian bit view; actual type unknown"
+        },
+        {
+          "byte_offset": 8,
+          "distinct_bit_patterns": 299,
+          "changed_pairs": 298,
+          "comparable_pairs": 298,
+          "modular_delta_counts": [
+            {
+              "delta": 5,
+              "count": 7
+            },
+            {
+              "delta": 6,
+              "count": 284
+            },
+            {
+              "delta": 7,
+              "count": 7
+            }
+          ],
+          "interpretation": "aligned unsigned little-endian bit view; actual type unknown"
+        },
+        {
+          "byte_offset": 12,
+          "distinct_bit_patterns": 1,
+          "changed_pairs": 0,
+          "comparable_pairs": 298,
+          "modular_delta_counts": [
+            {
+              "delta": 0,
+              "count": 298
+            }
+          ],
+          "interpretation": "aligned unsigned little-endian bit view; actual type unknown"
+        },
+        {
+          "byte_offset": 16,
+          "distinct_bit_patterns": 1,
+          "changed_pairs": 0,
+          "comparable_pairs": 298,
+          "modular_delta_counts": [
+            {
+              "delta": 0,
+              "count": 298
+            }
+          ],
+          "interpretation": "aligned unsigned little-endian bit view; actual type unknown"
+        },
+        {
+          "byte_offset": 20,
+          "distinct_bit_patterns": 1,
+          "changed_pairs": 0,
+          "comparable_pairs": 298,
+          "modular_delta_counts": [
+            {
+              "delta": 0,
+              "count": 298
+            }
+          ],
+          "interpretation": "aligned unsigned little-endian bit view; actual type unknown"
+        },
+        {
+          "byte_offset": 24,
+          "distinct_bit_patterns": 6,
+          "changed_pairs": 27,
+          "comparable_pairs": 298,
+          "modular_delta_counts": [
+            {
+              "delta": 0,
+              "count": 271
+            },
+            {
+              "delta": 144,
+              "count": 1
+            },
+            {
+              "delta": 1280,
+              "count": 1
+            },
+            {
+              "delta": 18560,
+              "count": 11
+            },
+            {
+              "delta": 4294948736,
+              "count": 12
+            },
+            {
+              "delta": 4294967200,
+              "count": 1
+            },
+            {
+              "delta": 4294967248,
+              "count": 1
+            }
+          ],
+          "interpretation": "aligned unsigned little-endian bit view; actual type unknown"
+        },
+        {
+          "byte_offset": 28,
+          "distinct_bit_patterns": 1,
+          "changed_pairs": 0,
+          "comparable_pairs": 298,
+          "modular_delta_counts": [
+            {
+              "delta": 0,
+              "count": 298
+            }
+          ],
+          "interpretation": "aligned unsigned little-endian bit view; actual type unknown"
+        }
+      ]
+    },
+    "samples_sha256": "7e9212fca2073c1008dbe3f3526b28e4085a7c2950aa4b7409f11487d4fe76bc",
+    "reads_sha256": "5fbdeafdb250b5ac56042de6fa700d341d4adf7d897f798c1f8e6b54a411068b",
+    "protocol_sha256": "95de6a9cad288652e879da4c4810654cbeeea7408f7b1fa8d97f2ed474adf5ab",
+    "semantic_identity_verified": false,
+    "action_effect_verified": false,
+    "memory_writes": false
+  },
+  "recording_receipt_sha256": "fc97e7ff0a0b9ba11dfb72ca729a64d3931d71e4fd26e3bc7d5b65521d24841f",
+  "input": {
+    "utc": "2026-10-22T01:00:24.416727+00:00",
+    "key": "right",
+    "requested_seconds": 2.0,
+    "executed": true,
+    "movement_verified": false,
+    "events": [
+      {
+        "event": "down",
+        "monotonic": 148634.453,
+        "accepted": 1
+      },
+      {
+        "event": "up",
+        "monotonic": 148636.453,
+        "accepted": 1
+      }
+    ],
+    "target_pid": 477664,
+    "validated": true,
+    "elapsed_seconds": 2.0,
+    "status": "completed"
+  },
+  "input_receipt_sha256": "c59fb14cf5b8c9db6369bdd365f8b28ad27a4aeb86a62697f3d1f0dce1dfc724",
+  "input_start_relative_seconds": 12.139989852905273,
+  "input_entirely_within_capture": true,
+  "visual_observation": {
+    "movement_verified": true,
+    "method": "assistant inspected native screenshots before and after; scenery and hunter location changed",
+    "frame_exact": false
+  },
+  "semantic_identity_verified": false,
+  "raw_bytes_private": true,
+  "tests_passed": 5
+}

@@ -1,0 +1,62 @@
+{
+  "source-receipt.json": {
+    "sha256": "0e5ae51392aa2a13b0800e41f2969b15a2b1b609ca9e0e1181bc3a07af110f52",
+    "bytes": 84,
+    "object_path": "objects/0e/0e5ae51392aa2a13b0800e41f2969b15a2b1b609ca9e0e1181bc3a07af110f52",
+    "file_id": 1238,
+    "entry_index": 631,
+    "internal_path": "effect\\base\\cm200_106_BM_NOMIP",
+    "type_id": "241F5DEB",
+    "container": "MHXX-patch/arc/village/common.arc",
+    "selection": "minimum bytes, tie SHA256 among catalogued MHXX-patch TEX signatures; duplicate occurrence tie container/index",
+    "source_copy_sha256": "0e5ae51392aa2a13b0800e41f2969b15a2b1b609ca9e0e1181bc3a07af110f52"
+  },
+  "structure.json": {
+    "signature": "TEX",
+    "version": 166,
+    "version_hex": "0x0A6",
+    "width": 8,
+    "height": 8,
+    "images_declared": 1,
+    "mips_declared": 1,
+    "color_format": 12,
+    "color_format_name": "ETC1A4",
+    "swizzle_field": 0,
+    "size_shift_field": 0,
+    "high_flag_nibble": 2,
+    "high_flag_semantics_verified": false,
+    "unknown_u16": 1,
+    "header_bytes": 16,
+    "mip_table_bytes": 4,
+    "mip_offset_relative_to_data_base": 0,
+    "data_base_offset": 20,
+    "compressed_range": {
+      "offset": 20,
+      "bytes": 64,
+      "end": 84,
+      "in_file": true
+    },
+    "block_formula": {
+      "width": 4,
+      "height": 4,
+      "bytes_per_block": 16,
+      "blocks": 4
+    },
+    "trailing_bytes": 0,
+    "exact_header_table_payload_fit": true,
+    "pixel_decoding_performed": false,
+    "swizzle_visual_validation": false,
+    "functional_texture_validation": false,
+    "source_bytes": 84,
+    "source_sha256": "0e5ae51392aa2a13b0800e41f2969b15a2b1b609ca9e0e1181bc3a07af110f52",
+    "source_unchanged": true
+  },
+  "evidence_hashes": {
+    "source-receipt.json": "2d51452b151ca4c517af85c2d4830e8947ed500cd7ac84feccd8f26415326966",
+    "structure.json": "783ec07e30cbe7a90b7f56b322f8cf756e6dc24d4818eeb55a5dd726ee7f0286"
+  },
+  "new_synthetic_tests_passed": 7,
+  "kuriimu2_commit": "6babcdc3562975f445f258f0b7f1d9bd8e5e2a83",
+  "kuriimu2_loader_blob": "05f1906e88c22b28bb8aa7cf5db2bdaeb61005f7",
+  "kuriimu2_support_blob": "348b885b6996a56d7a792facf506d491648945be"
+}

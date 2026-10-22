@@ -1,0 +1,80 @@
+{
+  "protocol": {
+    "action": "one keyboard a press, mapped to emulated A; acknowledge Formatting complete",
+    "samples_per_phase": 3,
+    "interval_seconds": 0.3,
+    "ranges": [
+      {
+        "label": "code_control",
+        "address": 1048576,
+        "size": 4,
+        "file_offset": 0
+      },
+      {
+        "label": "data_candidate",
+        "address": 15466496,
+        "size": 32,
+        "file_offset": 14417920
+      }
+    ],
+    "selection": "first 32 bytes of ExHeader-derived file-backed data; no known semantic meaning",
+    "static_receipt_sha256": "b885e1e2a0c52f400938bd73796714e66d27d9ee6f0e6f357152d8b8e7250fd0",
+    "criterion": "report all byte-index differences; no tuning, scanning, or attribution of causation",
+    "no_memory_writes": true
+  },
+  "comparison": {
+    "protocol_sha256": "96055d2efcecb3cb92200722b9c8d266c67b84d0d34b0f9fa8ab5632416ef0b1",
+    "ranges": [
+      {
+        "label": "code_control",
+        "address": 1048576,
+        "bytes": 4,
+        "before_stable": true,
+        "after_stable": true,
+        "changed_indices_between_last_before_first_after": [],
+        "all_before_match_static": true,
+        "all_after_match_static": true
+      },
+      {
+        "label": "data_candidate",
+        "address": 15466496,
+        "bytes": 32,
+        "before_stable": true,
+        "after_stable": true,
+        "changed_indices_between_last_before_first_after": [],
+        "all_before_match_static": true,
+        "all_after_match_static": true
+      }
+    ],
+    "action_marker": {
+      "action": "one keyboard a press mapped to emulated A",
+      "input_started_utc": "2026-10-21T23:14:18.905Z",
+      "input_returned_utc": "2026-10-21T23:14:19.327Z",
+      "observation_returned_utc": "2026-10-21T23:14:19.855Z"
+    },
+    "semantic_identity_known": false,
+    "exact_emulated_frame_alignment": false,
+    "causation_established": false
+  },
+  "valid_reads": 12,
+  "total_sample_bytes": 216,
+  "game_input_acceptance_verified": false,
+  "visual_state_before": "Formatting complete.",
+  "visual_state_after": "Formatting complete.",
+  "no_further_inputs_attempted": true,
+  "ongoing_observer": false,
+  "emulator_left_open": true,
+  "receipt_hashes": {
+    "protocol.json": "96055d2efcecb3cb92200722b9c8d266c67b84d0d34b0f9fa8ab5632416ef0b1",
+    "action.json": "fe862bd8e9e3bf2929b6459949ad8c229f5adfc00439e0c9944fc229374eeb57",
+    "before/receipt.json": "d09148b53779f2a006aedb5ba7ec1a4a747f1bdeb1255a4046e01fee049bb69d",
+    "after/receipt.json": "58c26f4b42e7bec32a2be22086bf978779b909a14a1a17c14083179026ea27f7",
+    "comparison.json": "24316028a662e1bc07f355d55ab1e255184cbf2dc19dec9f66d19a8b5566c82b"
+  },
+  "limits": [
+    "not frame synchronized",
+    "no continuous sampling across action",
+    "no semantic data identity",
+    "no causal transition established"
+  ]
+}

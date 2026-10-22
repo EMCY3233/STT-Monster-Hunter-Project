@@ -1,0 +1,107 @@
+{
+  "receipts": {
+    "model": {
+      "meshes": [
+        {
+          "mesh": 0,
+          "vertices": 16,
+          "triangles": 6,
+          "zero_area_removed": 0,
+          "bbox_min": [
+            -1.5,
+            0.0,
+            -1.5
+          ],
+          "bbox_max": [
+            1.5,
+            4.0,
+            1.5
+          ]
+        }
+      ],
+      "global_index_shortfall_bytes": 2,
+      "index_policy": "mesh-declared spans only; no invented bytes; native winding of standard strip",
+      "coordinate_system_verified": false,
+      "materials_converted": false,
+      "skeleton_converted": false,
+      "source_sha256": "ec1b20b25f022db69ba759bb525e0e9a88d05c2ccaf727812d900a61efc280b0",
+      "obj_sha256": "cea6ad02e9375ea2810131b8be3905208439b5d04f2d3a4882d7a297ebac6ce9",
+      "source_unchanged": true
+    },
+    "texture": {
+      "source_sha256": "0e5ae51392aa2a13b0800e41f2969b15a2b1b609ca9e0e1181bc3a07af110f52",
+      "png_sha256": "f47452e471bc512ef6f18ba7b1a87e683d6649f535835a6bc1754b2721a5c465",
+      "rgba_sha256": "51494e61dd2cb544c8caf6ebb3feda1a3ac81d120c1c33b378502dcb04de25f5",
+      "width": 8,
+      "height": 8,
+      "alpha_distinct_values": 2,
+      "backend_version": "1.0.6",
+      "native_row_order": true,
+      "in_game_orientation_verified": false,
+      "material_association_verified": false,
+      "source_unchanged": true
+    },
+    "texture-same-prefix": {
+      "source_sha256": "2e2eecdf38c999a0e0c2af658aa69ca29490dd8f3bab4cae963f721909e64fbb",
+      "png_sha256": "1e62ec5b106dab85d2dce19f55261a84c778ae53aafe343a3f6bd9cb2b7e1cd4",
+      "rgba_sha256": "5f4ecdb7b71c3e403983fe405cddcdc2f2576b655fdb3e80d94a6f7c32e58bc2",
+      "width": 16,
+      "height": 16,
+      "alpha_distinct_values": 1,
+      "backend_version": "1.0.6",
+      "native_row_order": true,
+      "in_game_orientation_verified": false,
+      "material_association_verified": false,
+      "source_unchanged": true
+    }
+  },
+  "validation": {
+    "textures": [
+      {
+        "label": "texture",
+        "width": 8,
+        "height": 8,
+        "png_roundtrip_exact": true,
+        "rgb_matches_pinned_mhff_after_row_convention": true,
+        "alpha_distinct": 2
+      },
+      {
+        "label": "texture-same-prefix",
+        "width": 16,
+        "height": 16,
+        "png_roundtrip_exact": true,
+        "rgb_matches_pinned_mhff_after_row_convention": true,
+        "alpha_distinct": 1
+      }
+    ],
+    "model": {
+      "vertices": 16,
+      "triangles": 6,
+      "obj_indices_valid": true,
+      "oriented_faces_match_pinned_mhff": true,
+      "extra_tail_does_not_change_nondegenerate_faces": true,
+      "global_index_shortfall_unresolved": true
+    },
+    "tests_passed": 8,
+    "in_game_visual_match_verified": false,
+    "material_pairing_verified": false,
+    "animations_converted": false
+  },
+  "validation_sha256": "8a80442d20bbd170fb017acfd5366d19074bd4b43baa0ef73741ceb8197b9c7d",
+  "dependency": {
+    "version": "1.0.6",
+    "sha256": "1bad8209d9dfbfc7daf13ea2e545236ea2bbc1e423b2992b6e7563909975a47b",
+    "url": "https://files.pythonhosted.org/packages/ac/f8/cbbefcb1b3435aea8ef1b3d65622c933f79ea7c70af4d4571f667277cc86/texture2ddecoder-1.0.6-cp311-abi3-win_amd64.whl",
+    "pypi_verified": true
+  },
+  "local_outputs": [
+    "model/model.obj",
+    "model/geometry-preview.png",
+    "texture/texture.png",
+    "texture-same-prefix/texture.png"
+  ],
+  "commercial_outputs_published": false,
+  "material_pairing_verified": false,
+  "animation_conversion": false,
+  "source_scope": "existing verified MHXX 3DS ARC payloads; static unskinned MOD230 and single-mip TEX A6 only"
+}

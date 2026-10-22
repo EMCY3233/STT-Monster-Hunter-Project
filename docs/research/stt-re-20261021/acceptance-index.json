@@ -1,0 +1,1157 @@
+{
+  "schema_version": 1,
+  "consolidated_date": "2026-10-22",
+  "timezone": "Europe/Madrid",
+  "source_snapshot_commit": "e8a0c7bcb65ca0ef474285087d4f15c2a7d50c88",
+  "scope": "documentary consolidation only, no new experiments or inventory",
+  "status_definition": {
+    "verificado": "only the narrow stated scope, not full fidelity or functionality",
+    "negativo": "a measured hypothesis or tool property did not satisfy its stated criterion",
+    "bloqueado": "the specific acceptance lacks a required input/reference/semantic condition"
+  },
+  "evidence_hash_scope": "Existing JSON artifacts in source snapshot; historical MD reports may receive editorial notes without changing original experiment data",
+  "git_commits": [
+    {
+      "sha": "d1765f984deaa5dd830e335b44c0fcac045dcd4c",
+      "date_utc": "2026-10-21T06:15:46Z",
+      "message": "Document STT reverse engineering audit, format evidence and reproducible experiments"
+    },
+    {
+      "sha": "e4b40c4c224315d99a3af84c44d5638bdab2f7b2",
+      "date_utc": "2026-10-21T06:39:33Z",
+      "message": "Inspect partial local Frontier inputs and validate PSP ELF sections; exclude Switch"
+    },
+    {
+      "sha": "3bdce7d6d1cfcda0314fd372a0f1ce8ea7a85441",
+      "date_utc": "2026-10-21T06:48:04Z",
+      "message": "Decode limited MHXX LMT vector keys locally with bounded readers and synthetic tests"
+    },
+    {
+      "sha": "097f64f31b4133f6f721cdd25d69efc51700f867",
+      "date_utc": "2026-10-21T07:17:13Z",
+      "message": "Verify Citra and PPSSPP trials and all 6657 MHFU DATA entries"
+    },
+    {
+      "sha": "ee9bcd4f848428a2382490692fce7db46c1c8092",
+      "date_utc": "2026-10-21T07:28:51Z",
+      "message": "Verify complete Frontier candidate headers against closed local census"
+    },
+    {
+      "sha": "bf1f41c38856dd9dab83fc748831b39e13e0feba",
+      "date_utc": "2026-10-21T07:51:40Z",
+      "message": "Decode smallest Frontier JKR sample with bounded attributed LZ reader"
+    },
+    {
+      "sha": "d9b940dc5a701d9367b30a5ffa8dcaba9015a3ec",
+      "date_utc": "2026-10-21T09:07:48Z",
+      "message": "Compare Frontier sample boundaries with public text layout hypotheses"
+    },
+    {
+      "sha": "90dc6d1081a6abeec1ccd89f6ade40e9a0c2b0bc",
+      "date_utc": "2026-10-21T09:20:02Z",
+      "message": "Compare one deterministically selected Frontier JKR under 4 KiB"
+    },
+    {
+      "sha": "10f3f1076e076eadc8ed6112610a8354a4137d8d",
+      "date_utc": "2026-10-21T09:36:34Z",
+      "message": "Validate one minimal MOD230 mesh span and record unresolved global index bounds"
+    },
+    {
+      "sha": "4d0e9a9a800c945f735af896d41e94696953a9af",
+      "date_utc": "2026-10-21T09:49:53Z",
+      "message": "Delimit MOD230 index count conventions using pinned primary MH4U reader"
+    },
+    {
+      "sha": "c52979925181539b70ff5335bec30f06d1e35c7b",
+      "date_utc": "2026-10-21T19:53:28Z",
+      "message": "Map one static PSP import-table reference against pinned PSPSDK layout"
+    },
+    {
+      "sha": "19d6e9d1bc8c987de7262764f992578a31c30804",
+      "date_utc": "2026-10-21T20:37:18Z",
+      "message": "Document one LMT67 track reference review and unresolved independence gate"
+    },
+    {
+      "sha": "3f95616430bb156008fe6ef7c2b9e0fec93daa41",
+      "date_utc": "2026-10-21T20:49:05Z",
+      "message": "Validate one minimal 3DS TEX header and compressed data range without pixels"
+    },
+    {
+      "sha": "c4215e801bc14d5158321860a3afddeda790d561",
+      "date_utc": "2026-10-21T20:52:37Z",
+      "message": "Corroborate static PSP section addresses with existing PPSSPP logs without new execution"
+    },
+    {
+      "sha": "f2417f43282a65de8c3ff97808d6702e5f3b31f0",
+      "date_utc": "2026-10-21T20:58:48Z",
+      "message": "Record complete local PC regression matrix: 106 tests and 21 tool interfaces"
+    },
+    {
+      "sha": "964770ad40a6c7dfc7df6bc4294858521ae7ff55",
+      "date_utc": "2026-10-21T21:13:23Z",
+      "message": "Document emulator compatibility and test new legible MH4U NCSD in Citra"
+    },
+    {
+      "sha": "3e9bbdb032cf448194b09c07499fb5ee4ecde264",
+      "date_utc": "2026-10-21T21:19:46Z",
+      "message": "Validate and decompress one MHXX update BLZ code set with segment bounds"
+    },
+    {
+      "sha": "d419d6b41e7c21ee9cb11025df50fb120f0a75f2",
+      "date_utc": "2026-10-21T21:23:44Z",
+      "message": "Map one MHXX update startup reference using pinned loader and thread context"
+    },
+    {
+      "sha": "1bdf73ecd6f3535b2d83c105b1847f3f9806ccca",
+      "date_utc": "2026-10-21T21:51:29Z",
+      "message": "Probe one MH4U base NCSD executable partition without decompression"
+    },
+    {
+      "sha": "93455dcab83d823d1b4218b039aa29e951e5e7a1",
+      "date_utc": "2026-10-21T21:56:01Z",
+      "message": "Decode one pinned MH4U code range with exact BLZ budget and segment backing"
+    },
+    {
+      "sha": "a914801aa3865a516aba848a214d055243ca6284",
+      "date_utc": "2026-10-21T22:03:53Z",
+      "message": "Document BLZ reference lineage review without claiming independent validation"
+    },
+    {
+      "sha": "16111d8ee806d46b835b72b6a7541bc6d7366d3f",
+      "date_utc": "2026-10-21T22:15:40Z",
+      "message": "Validate one catalogued MOD230 bone hierarchy and finite matrix tables"
+    },
+    {
+      "sha": "e8a0c7bcb65ca0ef474285087d4f15c2a7d50c88",
+      "date_utc": "2026-10-21T22:26:48Z",
+      "message": "Record failed source-derived hierarchy matrix coherence property without bind-pose claims"
+    }
+  ],
+  "acceptances": [
+    {
+      "id": "A01",
+      "commit": "d1765f984deaa5dd830e335b44c0fcac045dcd4c",
+      "commit_date_utc": "2026-10-21T06:15:46Z",
+      "title": "Auditoría inicial de archivos y banco",
+      "status": "verificado",
+      "verification_level": "lectura-hash",
+      "report": "README.md",
+      "input_ids": [
+        "AUDIT"
+      ],
+      "result": "Snapshot de 10.641 archivos y originales/catálogo cotejados; no censo actual.",
+      "reopen_criterion": "Reabrir solo con un conjunto de entradas cambiado y alcance de auditoría nuevo.",
+      "evidence": [
+        {
+          "path": "audit-summary.json",
+          "sha256": "b7a828daf3f97ddff010fe84c07ea4c04471922c8b5e043f889b53c8f259f44b",
+          "hash_role": "evidence document identity in source snapshot"
+        },
+        {
+          "path": "local-evidence-receipt.json",
+          "sha256": "218503b92323f69c415ed0bd209adb20a96d68e12278252deae94ef6223e3595",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A02",
+      "commit": "d1765f984deaa5dd830e335b44c0fcac045dcd4c",
+      "commit_date_utc": "2026-10-21T06:15:46Z",
+      "title": "Ejecutables legibles iniciales",
+      "status": "verificado",
+      "verification_level": "estructura",
+      "report": "README.md",
+      "input_ids": [
+        "BOOT",
+        "MHXX_NCCH",
+        "MHXX_CODE_COMP"
+      ],
+      "result": "ELF/ExeFS y hashes iniciales; descompresión y secciones eran pasos posteriores.",
+      "reopen_criterion": "Solo ampliar una propiedad no cubierta; no repetir cabeceras equivalentes.",
+      "evidence": [
+        {
+          "path": "plain-executables.json",
+          "sha256": "f00b97c68c22aba4db77b83461adb33b2c5c8ff98e1f415dee210cd2ab6fbb3a",
+          "hash_role": "evidence document identity in source snapshot"
+        },
+        {
+          "path": "psp-files.json",
+          "sha256": "b0ad05632223b50cafb32d53b0206253dd217433153dd2ab8ff212a2a4572f2f",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A03",
+      "commit": "e4b40c4c224315d99a3af84c44d5638bdab2f7b2",
+      "commit_date_utc": "2026-10-21T06:39:33Z",
+      "title": "Secciones ELF PSP",
+      "status": "verificado",
+      "verification_level": "estructura",
+      "report": "continuation.md",
+      "input_ids": [
+        "BOOT"
+      ],
+      "result": "620 secciones declaradas verificadas en alcance estático; no funciones.",
+      "reopen_criterion": "Referencia nueva con VA/offset y límites, no recuento repetido.",
+      "evidence": [
+        {
+          "path": "continuation-summary.json",
+          "sha256": "7ac9bf60880a4404d756bc1ca79152db0e96665fe3281ffbe0d2611da4f9c91f",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A04",
+      "commit": "e4b40c4c224315d99a3af84c44d5638bdab2f7b2",
+      "commit_date_utc": "2026-10-21T06:39:33Z",
+      "title": "Frontier parcial, snapshot histórico",
+      "status": "verificado",
+      "verification_level": "snapshot-histórico",
+      "report": "continuation.md",
+      "input_ids": [
+        "FRONTIER_PARTIAL"
+      ],
+      "result": "Lecturas parciales de 1.027/1.653 archivos; no representaban copia completa.",
+      "reopen_criterion": "No reabrir como estado actual: sustituido por A09; conservar errores/recibos.",
+      "evidence": [
+        {
+          "path": "continuation-summary.json",
+          "sha256": "7ac9bf60880a4404d756bc1ca79152db0e96665fe3281ffbe0d2611da4f9c91f",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A05",
+      "commit": "3bdce7d6d1cfcda0314fd372a0f1ce8ea7a85441",
+      "commit_date_utc": "2026-10-21T06:48:04Z",
+      "title": "Vectores LMT67 limitados",
+      "status": "verificado",
+      "verification_level": "decodificación-invariantes",
+      "report": "lmt-vectors.md",
+      "input_ids": [
+        "LMT_SET"
+      ],
+      "result": "90 pistas/1.772 claves vectoriales; sin rotaciones, FPS o vínculo rig.",
+      "reopen_criterion": "Referencia compatible e independiente para la misma pista antes de fidelidad.",
+      "evidence": [
+        {
+          "path": "lmt-vectors-summary.json",
+          "sha256": "79d68c2d23c304e7e41c6407a7ce8ccdfb64db0dc43c267e85c330b7e9384fb4",
+          "hash_role": "evidence document identity in source snapshot"
+        },
+        {
+          "path": "lmt-vectors-receipt.json",
+          "sha256": "668aee52ec2efba37157d0453b4900f5edbd5ec615fdcd99c90796d83585f1f9",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A06",
+      "commit": "097f64f31b4133f6f721cdd25d69efc51700f867",
+      "commit_date_utc": "2026-10-21T07:17:13Z",
+      "title": "PPSSPP y EBOOT MHFU",
+      "status": "verificado",
+      "verification_level": "ejecución-limitada",
+      "report": "emulators.md",
+      "input_ids": [
+        "ISO",
+        "EBOOT"
+      ],
+      "result": "Arranques acotados y dump cuyo prefijo coincide con BOOT; no visual/FPS.",
+      "reopen_criterion": "Solo observación nueva con instrumentación útil; no dumps repetidos.",
+      "evidence": [
+        {
+          "path": "emulator-evidence.json",
+          "sha256": "8d3142bbffeed99454398afb163485957b73be25f85c35f67a0c5451f26be1a4",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A07",
+      "commit": "097f64f31b4133f6f721cdd25d69efc51700f867",
+      "commit_date_utc": "2026-10-21T07:17:13Z",
+      "title": "Instalación CIA con Citra",
+      "status": "bloqueado",
+      "verification_level": "ejecución-limitada",
+      "report": "citra.md",
+      "input_ids": [
+        "CIA_SET",
+        "MHXX_NCCH"
+      ],
+      "result": "CIA base cifradas; update instalado en ruta corta, pero ejecución aislada falló.",
+      "reopen_criterion": "Cambio causal en entrada compatible; la NCSD MH4U es distinta y no resuelve CIA.",
+      "evidence": [
+        {
+          "path": "citra-evidence.json",
+          "sha256": "842e4b41be0df44a054d624bab31b5d164ccd23216e7a04760d248a6ec1085ce",
+          "hash_role": "evidence document identity in source snapshot"
+        },
+        {
+          "path": "citra-current-inputs-evidence.json",
+          "sha256": "5208b18ca15a15821163ae51a0a0e7056c76aa20dff28832f27c4390ac5cab3b",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A08",
+      "commit": "097f64f31b4133f6f721cdd25d69efc51700f867",
+      "commit_date_utc": "2026-10-21T07:17:13Z",
+      "title": "MHFU DATA.BIN completo",
+      "status": "verificado",
+      "verification_level": "decodificación-invariantes",
+      "report": "mhfu-data.md",
+      "input_ids": [
+        "DATA"
+      ],
+      "result": "6.657 entradas asignadas procesadas y round-trip; longitudes sin padding/semántica no probadas.",
+      "reopen_criterion": "Gramática interior de una entrada con criterio nuevo, no otra extracción masiva.",
+      "evidence": [
+        {
+          "path": "mhfu-data-evidence.json",
+          "sha256": "58bc2ff988733d53142e96e4b043f762468e528ecb0e7d370fbadf48d1fe7751",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A09",
+      "commit": "ee9bcd4f848428a2382490692fce7db46c1c8092",
+      "commit_date_utc": "2026-10-21T07:28:51Z",
+      "title": "Frontier completo y 50 candidatos",
+      "status": "verificado",
+      "verification_level": "lectura-hash-estructura",
+      "report": "frontier-complete-headers.md",
+      "input_ids": [
+        "FRONTIER_CANDIDATES"
+      ],
+      "result": "Censo completo comunicado por otro frente; aquí 44 JKR/5 ECD/1 SCE cotejados.",
+      "reopen_criterion": "Una propiedad semántica acotada; no repetir censo ni afirmar jugabilidad/ZZ.",
+      "evidence": [
+        {
+          "path": "frontier-candidate-evidence.json",
+          "sha256": "ac22aee51d69ea43da481a5147eff841e1980ffcfdee3e30c8ef9113bd9f1733",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A10",
+      "commit": "bf1f41c38856dd9dab83fc748831b39e13e0feba",
+      "commit_date_utc": "2026-10-21T07:51:40Z",
+      "title": "Primera muestra JKR/LZ",
+      "status": "verificado",
+      "verification_level": "decodificación-invariantes",
+      "report": "frontier-jkr-sample.md",
+      "input_ids": [
+        "JKRA",
+        "JKRA_OUT"
+      ],
+      "result": "238→349 bytes, flujo completo; formato interior desconocido.",
+      "reopen_criterion": "Nueva gramática primaria aplicable a esa salida; no abrir otras42 por analogía.",
+      "evidence": [
+        {
+          "path": "frontier-jkr-evidence.json",
+          "sha256": "68a67409e2ef267337299c44d17b1c7bb94ee5da9f8345dca337300cfe12df6e",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A11",
+      "commit": "d9b940dc5a701d9367b30a5ffa8dcaba9015a3ec",
+      "commit_date_utc": "2026-10-21T09:07:48Z",
+      "title": "Bordes/gramáticas del JKR A",
+      "status": "bloqueado",
+      "verification_level": "documental-estructural",
+      "report": "frontier-jkr-layout.md",
+      "input_ids": [
+        "JKRA_OUT"
+      ],
+      "result": "Anclas y patrón parcial observados; estructuras candidatas no validan gramática.",
+      "reopen_criterion": "Evidencia primaria que explique offsets/longitudes sin texto comercial publicado.",
+      "evidence": [
+        {
+          "path": "frontier-jkr-layout-evidence.json",
+          "sha256": "b997d32c77e524a5cf26705a8bd08f2a100463cb3bef83c383e4cb9d528f004a",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A12",
+      "commit": "90dc6d1081a6abeec1ccd89f6ade40e9a0c2b0bc",
+      "commit_date_utc": "2026-10-21T09:20:02Z",
+      "title": "JKR B y comparación del patrón",
+      "status": "verificado",
+      "verification_level": "decodificación-invariantes",
+      "report": "frontier-jkr-pair.md",
+      "input_ids": [
+        "JKRA_OUT",
+        "JKRB",
+        "JKRB_OUT"
+      ],
+      "result": "1.058→1.884 bytes; patrón de A no se generaliza a B, sin gramática interior.",
+      "reopen_criterion": "Hipótesis de formato nueva y presupuesto explícito sobre estas mismas muestras.",
+      "evidence": [
+        {
+          "path": "frontier-jkr-pair-evidence.json",
+          "sha256": "a7ee30f21f423d31259e61343ff3e1a410b6d13f4f9eb240e5916668a1b0c316",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A13",
+      "commit": "10f3f1076e076eadc8ed6112610a8354a4137d8d",
+      "commit_date_utc": "2026-10-21T09:36:34Z",
+      "title": "MOD990: malla parcial",
+      "status": "verificado",
+      "verification_level": "estructura-limitada",
+      "report": "mod230-smallest.md",
+      "input_ids": [
+        "MOD990"
+      ],
+      "result": "Spans de una malla/atributos finitos e índices locales; geometría completa no.",
+      "reopen_criterion": "Explicar discrepancia global en esta muestra antes de ampliación geométrica.",
+      "evidence": [
+        {
+          "path": "mod230-smallest-evidence.json",
+          "sha256": "1039fcfd4d7c20a62b8f3ce89d34b1fb73bec43e1a95252ef6a654dd35ec8d20",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A14",
+      "commit": "4d0e9a9a800c945f735af896d41e94696953a9af",
+      "commit_date_utc": "2026-10-21T09:49:53Z",
+      "title": "MOD990: convenciones de índices",
+      "status": "bloqueado",
+      "verification_level": "documental",
+      "report": "mod230-index-conventions.md",
+      "input_ids": [
+        "MOD990"
+      ],
+      "result": "29 u16 caben con convención MH4U; contador global 30 y min/max pendientes.",
+      "reopen_criterion": "Referencia específica MOD230/MHXX que resuelva el contador sin rellenar bytes.",
+      "evidence": [
+        {
+          "path": "mod230-index-conventions-evidence.json",
+          "sha256": "1a668ec532bb0900e0eebd1ec19f80cc0d0daa883b2dadc73da3cb2d1f0c99fd",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A15",
+      "commit": "c52979925181539b70ff5335bec30f06d1e35c7b",
+      "commit_date_utc": "2026-10-21T19:53:28Z",
+      "title": "Una referencia de imports PSP",
+      "status": "verificado",
+      "verification_level": "estructura",
+      "report": "mhfu-import-reference.md",
+      "input_ids": [
+        "EBOOT",
+        "BOOT"
+      ],
+      "result": "Puntero NID mapeado por sección y PT_LOAD; no funciones/invocación.",
+      "reopen_criterion": "Observación instrumental que cubra la lectura relevante, no etiquetas por nombres.",
+      "evidence": [
+        {
+          "path": "mhfu-import-reference-evidence.json",
+          "sha256": "502cfe12701183857a7c0c0f5e6fa0f9450befdf6653c0a2a6e66d10475fafa4",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A16",
+      "commit": "19d6e9d1bc8c987de7262764f992578a31c30804",
+      "commit_date_utc": "2026-10-21T20:37:18Z",
+      "title": "Independencia/compatibilidad LMT",
+      "status": "bloqueado",
+      "verification_level": "documental",
+      "report": "lmt-one-track-review.md",
+      "input_ids": [
+        "LMT_TRACK"
+      ],
+      "result": "Fórmulas documentales compatibles; independencia y contenedor no acreditados.",
+      "reopen_criterion": "Nueva evidencia primaria independiente compatible con LMT67 LE32; no repetir búsqueda igual.",
+      "evidence": [
+        {
+          "path": "lmt-one-track-review-evidence.json",
+          "sha256": "369304f7596f241f720c31290f0521b862da3b2ec1b4e5e5bc0caf863070c083",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A17",
+      "commit": "3f95616430bb156008fe6ef7c2b9e0fec93daa41",
+      "commit_date_utc": "2026-10-21T20:49:05Z",
+      "title": "Una cabecera TEX3DS",
+      "status": "verificado",
+      "verification_level": "estructura",
+      "report": "tex-smallest.md",
+      "input_ids": [
+        "TEX84"
+      ],
+      "result": "A6/8×8/ETC1A4, tabla y 64 bytes de bloques encajan; sin fidelidad visual.",
+      "reopen_criterion": "Decoder alfa correcto e independiente con controles antes de otra carga.",
+      "evidence": [
+        {
+          "path": "tex-smallest-evidence.json",
+          "sha256": "baba18aa1756755855943a169f04b55f7c74de3fb20c5bb8eb87d54cf7544df6",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A18",
+      "commit": "c4215e801bc14d5158321860a3afddeda790d561",
+      "commit_date_utc": "2026-10-21T20:52:37Z",
+      "title": "Logs previos PPSSPP vs mapa",
+      "status": "verificado",
+      "verification_level": "corroboración-limitada",
+      "report": "mhfu-import-runtime-review.md",
+      "input_ids": [
+        "PSP_LOGS",
+        "EBOOT"
+      ],
+      "result": "Dos logs anuncian secciones coincidentes; no prueba desreferencia o llamada.",
+      "reopen_criterion": "Instrumentación armada antes del acceso y cobertura HLE demostrada.",
+      "evidence": [
+        {
+          "path": "mhfu-import-runtime-evidence.json",
+          "sha256": "cc648c30070e1de60ed19688b575480894f9d10f79444506e26760b140953003",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A19",
+      "commit": "f2417f43282a65de8c3ff97808d6702e5f3b31f0",
+      "commit_date_utc": "2026-10-21T20:58:48Z",
+      "title": "Regresión PC106/21CLI",
+      "status": "verificado",
+      "verification_level": "software-tests",
+      "report": "pc-regression-matrix.md",
+      "input_ids": [
+        "PC_SNAPSHOT"
+      ],
+      "result": "Snapshot106 tests,21 sintaxis/21 ayudas; no nueva evidencia comercial o hardware.",
+      "reopen_criterion": "Solo repetir checks cuando cambios o fallos lo justifiquen; no sumar campañas.",
+      "evidence": [
+        {
+          "path": "pc-regression-evidence.json",
+          "sha256": "649ee5fc1fdcbd0efafc0816b303bfeb7c97d10b6e6aff54c5cec1031ebdfb02",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A20",
+      "commit": "964770ad40a6c7dfc7df6bc4294858521ae7ff55",
+      "commit_date_utc": "2026-10-21T21:13:23Z",
+      "title": "Comparativa emuladores",
+      "status": "verificado",
+      "verification_level": "documental",
+      "report": "emulator-comparison.md",
+      "input_ids": [
+        "EMULATOR_SOURCES"
+      ],
+      "result": "Fuentes/versiones fijadas; no instalación Azahar/Vita3K ni compatibilidad local prometida.",
+      "reopen_criterion": "Cambio de versión/entrada o ensayo con aceptación nueva; no reabrir cifrado inalterado.",
+      "evidence": [
+        {
+          "path": "emulator-sources.json",
+          "sha256": "0cbfb286d8229b96a250a83601b1d83bb3416e7a9d5cf981f4876194f05027d2",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A21",
+      "commit": "964770ad40a6c7dfc7df6bc4294858521ae7ff55",
+      "commit_date_utc": "2026-10-21T21:13:23Z",
+      "title": "Base MH4U NCSD en Citra",
+      "status": "verificado",
+      "verification_level": "ejecución-limitada",
+      "report": "citra-current-inputs.md",
+      "input_ids": [
+        "MH4U_NCSD"
+      ],
+      "result": "Una ejecución15s con loader/DSP y hash intacto; sin pantalla/FPS/jugabilidad.",
+      "reopen_criterion": "Control visual fiable u otra observación distinta; no mismos logs de arranque.",
+      "evidence": [
+        {
+          "path": "citra-current-inputs-evidence.json",
+          "sha256": "5208b18ca15a15821163ae51a0a0e7056c76aa20dff28832f27c4390ac5cab3b",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A22",
+      "commit": "964770ad40a6c7dfc7df6bc4294858521ae7ff55",
+      "commit_date_utc": "2026-10-21T21:13:23Z",
+      "title": "Alfa descartado por lector TEX",
+      "status": "negativo",
+      "verification_level": "experimento-negativo",
+      "report": "tex-decoder-audit.md",
+      "input_ids": [
+        "TEX84"
+      ],
+      "result": "Controles alfa0/FF y muestra local confirman pérdida de alfa en mhff.",
+      "reopen_criterion": "Decoder que aplique alfa con controles independientes; no asumir RGB/orientación.",
+      "evidence": [
+        {
+          "path": "tex-decoder-audit-evidence.json",
+          "sha256": "d3b4c600d17197c805d668412f19e4090d1c239bb524062b78d89fa140549111",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A23",
+      "commit": "3e9bbdb032cf448194b09c07499fb5ee4ecde264",
+      "commit_date_utc": "2026-10-21T21:19:46Z",
+      "title": "BLZ del update MHXX",
+      "status": "verificado",
+      "verification_level": "decodificación-invariantes",
+      "report": "mhxx-code-blz.md",
+      "input_ids": [
+        "MHXX_NCCH",
+        "MHXX_CODE_COMP",
+        "MHXX_CODE_OUT"
+      ],
+      "result": "13.045.760 bytes, flujo/prefijo 84 y páginas coherentes; update no base.",
+      "reopen_criterion": "Referencia independiente compatible o propiedad estática distinta; no otro BLZ propio.",
+      "evidence": [
+        {
+          "path": "mhxx-code-blz-evidence.json",
+          "sha256": "4429f9b1c39b15fa3b1f6f0d710c377e80e1808aa74125862a23fc61e9354112",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A24",
+      "commit": "d419d6b41e7c21ee9cb11025df50fb120f0a75f2",
+      "commit_date_utc": "2026-10-21T21:23:44Z",
+      "title": "Entrada derivada del loader MHXX",
+      "status": "verificado",
+      "verification_level": "documental-mapeo",
+      "report": "mhxx-entry-reference.md",
+      "input_ids": [
+        "MHXX_CODE_OUT"
+      ],
+      "result": "VA 0x00100000→offset 0/text r-x y A32 esperado según loader; no ejecución.",
+      "reopen_criterion": "Evidencia de ruta/estado observados si fuese viable; no función atribuida a opcode.",
+      "evidence": [
+        {
+          "path": "mhxx-entry-reference-evidence.json",
+          "sha256": "99545d15a1ef2e0c2458895335b622f8d5fbd6fb8e20205d96147973938553ed",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A25",
+      "commit": "1bdf73ecd6f3535b2d83c105b1847f3f9806ccca",
+      "commit_date_utc": "2026-10-21T21:51:29Z",
+      "title": "Partición0/ExeFS base MH4U",
+      "status": "verificado",
+      "verification_level": "estructura",
+      "report": "mh4u-ncsd-executable.md",
+      "input_ids": [
+        "MH4U_NCSD",
+        "MH4U_CODE_COMP"
+      ],
+      "result": "Cabeceras/tres hashes íntegros, CPU como solicitudes, pie BLZ coherente.",
+      "reopen_criterion": "La fase solo-declaración fue ampliada por A26; no repetir cabeceras.",
+      "evidence": [
+        {
+          "path": "mh4u-ncsd-executable-evidence.json",
+          "sha256": "70a63aa1874e68cfb12b213b3e9055dc99c8fbb731c341a695fd2fca482a3c9d",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A26",
+      "commit": "93455dcab83d823d1b4218b039aa29e951e5e7a1",
+      "commit_date_utc": "2026-10-21T21:56:01Z",
+      "title": "BLZ de la base MH4U",
+      "status": "verificado",
+      "verification_level": "decodificación-invariantes",
+      "report": "mh4u-code-blz.md",
+      "input_ids": [
+        "MH4U_CODE_COMP",
+        "MH4U_CODE_OUT"
+      ],
+      "result": "16.261.120 bytes, flujo/prefijo 76 y backing; rehash por rango, no imagen completa.",
+      "reopen_criterion": "Contraste independiente acreditado, manteniendo whole_image_unchanged_reverified=false.",
+      "evidence": [
+        {
+          "path": "mh4u-code-blz-evidence.json",
+          "sha256": "92ea748dfc119c07b002a13d523a076f448e4f8f55b793de67782816730848e4",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A27",
+      "commit": "a914801aa3865a516aba848a214d055243ca6284",
+      "commit_date_utc": "2026-10-21T22:03:53Z",
+      "title": "Independencia BLZ",
+      "status": "bloqueado",
+      "verification_level": "documental",
+      "report": "mh4u-blz-independent-review.md",
+      "input_ids": [
+        "MH4U_CODE_COMP",
+        "MH4U_CODE_OUT"
+      ],
+      "result": "CTRTool/CUE/3dstool revisados; segunda comparación no realizada, igualdades=null.",
+      "reopen_criterion": "Linaje independiente compatible acreditado antes de otro decoder; no búsqueda repetida.",
+      "evidence": [
+        {
+          "path": "mh4u-blz-independent-review-evidence.json",
+          "sha256": "a739776e22cc6c9c0a49a74e29d2f47b696638a126ac322a841065b6ae79d909",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A28",
+      "commit": "16111d8ee806d46b835b72b6a7541bc6d7366d3f",
+      "commit_date_utc": "2026-10-21T22:15:40Z",
+      "title": "Una jerarquía MOD230",
+      "status": "verificado",
+      "verification_level": "estructura",
+      "report": "mod230-skeleton.md",
+      "input_ids": [
+        "MOD3"
+      ],
+      "result": "3 huesos/2 raíces/0ciclos,6 matrices finitas y tablas encajan; no rig funcional.",
+      "reopen_criterion": "Nueva semántica específica de matrices; A29 no confirma el modelo probado.",
+      "evidence": [
+        {
+          "path": "mod230-skeleton-evidence.json",
+          "sha256": "f3fb6e593243a922ec2473f85c7591ce2410e88a61c2a800f06ea5ebf8e9eba9",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    },
+    {
+      "id": "A29",
+      "commit": "e8a0c7bcb65ca0ef474285087d4f15c2a7d50c88",
+      "commit_date_utc": "2026-10-21T22:26:48Z",
+      "title": "Relación jerarquía↔matrices",
+      "status": "negativo",
+      "verification_level": "experimento-negativo",
+      "report": "mod230-matrix-property.md",
+      "input_ids": [
+        "MOD3"
+      ],
+      "result": "Modelo global×inversa al 1e-4:0/3 pares, residuo143,626968; fuente intacta.",
+      "reopen_criterion": "Fuente específica de espacios/convención para esta variante; no ajustar tolerancia/órdenes.",
+      "evidence": [
+        {
+          "path": "mod230-matrix-property-evidence.json",
+          "sha256": "85e9ade1b7a173f2b8cb5f4c590cbd68f853adf30610438500b173329cf62111",
+          "hash_role": "evidence document identity in source snapshot"
+        }
+      ]
+    }
+  ],
+  "inputs": {
+    "AUDIT": {
+      "label": "Recibo de auditoría inicial",
+      "kind": "evidence document, not a game-set aggregate hash",
+      "sha256": "218503b92323f69c415ed0bd209adb20a96d68e12278252deae94ef6223e3595",
+      "bytes": 1128,
+      "reference": "local-evidence-receipt.json"
+    },
+    "FRONTIER_PARTIAL": {
+      "label": "Recibos de cortes parciales Frontier/ELF",
+      "kind": "evidence document, not a game-set aggregate hash",
+      "sha256": "7ac9bf60880a4404d756bc1ca79152db0e96665fe3281ffbe0d2611da4f9c91f",
+      "bytes": 3523,
+      "reference": "continuation-summary.json"
+    },
+    "FRONTIER_CANDIDATES": {
+      "label": "Manifiesto externo de50candidatos Frontier",
+      "kind": "candidate catalogue document",
+      "sha256": "b990d19577b07448a03d8d261e5014aca712aec2d06740adcaf782f0be2f50be",
+      "bytes": null,
+      "reference": "frontier-complete-headers.md"
+    },
+    "BOOT": {
+      "label": "Prefijo canónico BOOT.BIN PSP",
+      "kind": "game file or derived range",
+      "sha256": "74a0b779ea98f16dc8a9498487a8df6a712891e83a07ef4d533a948df1f4f4df",
+      "bytes": 1910044
+    },
+    "EBOOT": {
+      "label": "Dump EBOOT PSP, con cola excluida del mapa",
+      "kind": "game file or derived range",
+      "sha256": "64937c521286fc8423076e644089881c5fe051bed2565e5061dda8aec0b45e10",
+      "bytes": 1910384
+    },
+    "ISO": {
+      "label": "ISO MHFU ULES01213/1.01",
+      "kind": "game file or derived range",
+      "sha256": "5ebab623367e78c68033bb4b40e454b84ea974c4aa5e9819641232181d3f8139",
+      "bytes": null
+    },
+    "DATA": {
+      "label": "Rango DATA.BIN MHFU",
+      "kind": "game file or derived range",
+      "sha256": "4c65ae5c58f5b983321131391db0dce1d72ccd53b4cd28520429121333a82dec",
+      "bytes": 772732928
+    },
+    "LMT_SET": {
+      "label": "Cuatro fuentes LMT67",
+      "kind": "set with constituent hashes, no aggregate invented",
+      "sha256": null,
+      "bytes": null,
+      "members": [
+        {
+          "label": "common_entry_0084.lmt",
+          "sha256": "a4cf8054ebecebfa53f82bae923353b0e1221f2fc46242ee507e1bfe7df39fa9",
+          "bytes": 247504
+        },
+        {
+          "label": "common_entry_0085.lmt",
+          "sha256": "35fb4bd3efaba3fc321821c92258aebfc90bd93bb29385008f97631c839faf08",
+          "bytes": 99304
+        },
+        {
+          "label": "common_entry_0086.lmt",
+          "sha256": "ad1a8ae24be18ab64c4a857f0fbeec64c00b04c98a505f26ff230f2904f758ee",
+          "bytes": 2516
+        },
+        {
+          "label": "common_entry_0087.lmt",
+          "sha256": "2ef3c57d4075c57ff71805d3aa8cd6631f9e0c0dd54008b17e73596e9f5e1aae",
+          "bytes": 2124
+        }
+      ]
+    },
+    "LMT_TRACK": {
+      "label": "Fuente de pista LMT seleccionada, slot8/track2",
+      "kind": "parent LMT file; 8-byte track is a range within it",
+      "sha256": "35fb4bd3efaba3fc321821c92258aebfc90bd93bb29385008f97631c839faf08",
+      "bytes": null
+    },
+    "JKRA": {
+      "label": "rePatch/PCSG00350/dat/load/uc/uc00_001_03.bin",
+      "kind": "game file or derived range",
+      "sha256": "4fcc62ad49f42b315d69013b2d312845b2d301dc97d47526047497f37125d385",
+      "bytes": 238
+    },
+    "JKRA_OUT": {
+      "label": "Salida privada JKRA",
+      "kind": "game file or derived range",
+      "sha256": "592fe0ca19e741430f4fa669eea3df71e83935dec2812bf51524ad279074691c",
+      "bytes": 349
+    },
+    "JKRB": {
+      "label": "rePatch/PCSG00350/dat/load/uc/uc00_000_01.bin",
+      "kind": "game file or derived range",
+      "sha256": "29d9e008ccd705a82185c3574f7e58327d6a77f4ccedb9ad89d5599c62fb2463",
+      "bytes": 1058
+    },
+    "JKRB_OUT": {
+      "label": "Salida privada JKRB",
+      "kind": "game file or derived range",
+      "sha256": "fa22ddcc947003496640007bd8f9cd5153e25b61a33b98e430bb1b4eb88352c8",
+      "bytes": 1884
+    },
+    "MOD990": {
+      "label": "MOD230 anterior sin huesos",
+      "kind": "game file or derived range",
+      "sha256": "ec1b20b25f022db69ba759bb525e0e9a88d05c2ccaf727812d900a61efc280b0",
+      "bytes": 990
+    },
+    "TEX84": {
+      "label": "TEX A6/ETC1A4 mínima",
+      "kind": "game file or derived range",
+      "sha256": "0e5ae51392aa2a13b0800e41f2969b15a2b1b609ca9e0e1181bc3a07af110f52",
+      "bytes": 84
+    },
+    "PSP_LOGS": {
+      "label": "Dos registros PPSSPP ya existentes",
+      "kind": "set with constituent hashes",
+      "sha256": null,
+      "bytes": null,
+      "members": [
+        {
+          "label": "ppsspp-probe-20261021",
+          "sha256": "79a21291a537a17bf56e66c0e16a5f6eb2c4fa8a3f6aca56fd6dd4f50f6972de"
+        },
+        {
+          "label": "ppsspp-decrypt-20261021",
+          "sha256": "8b5b5c8fc8eb244a8779d1c8b1e714932c3320552b69203336870df5f2104a03"
+        }
+      ]
+    },
+    "PC_SNAPSHOT": {
+      "label": "Código sometido a la campaña106tests",
+      "kind": "Git commit, not SHA256",
+      "sha256": null,
+      "bytes": null,
+      "git_commit": "c4215e801bc14d5158321860a3afddeda790d561"
+    },
+    "EMULATOR_SOURCES": {
+      "label": "Catálogo de fuentes de emuladores",
+      "kind": "evidence document, not a game-set aggregate hash",
+      "sha256": "0cbfb286d8229b96a250a83601b1d83bb3416e7a9d5cf981f4876194f05027d2",
+      "bytes": 15897,
+      "reference": "emulator-sources.json"
+    },
+    "CIA_SET": {
+      "label": "Cinco CIA físicas, cuatro hashes del recibo existente",
+      "kind": "set with constituent hashes, not a new inventory",
+      "sha256": null,
+      "bytes": null,
+      "members": [
+        {
+          "label": "Juegos\\MH3U\\EUR - Monster Hunter 3 Ultimate(00040000000b1d00).cia",
+          "sha256": "aa108914574a1a28b87e13964322441e2b619814a6d97401affce9f68ddcfd4f",
+          "bytes": 1871489344
+        },
+        {
+          "label": "Juegos\\MHGU\\MHXX_MHGU_English_Patch_v2.cia",
+          "sha256": "8438c0c026203c20b9dd81fc3b6ec9c31c94abc80e5bb7f6618cd58f804ac4ac",
+          "bytes": 36897728
+        },
+        {
+          "label": "analysis-local\\containers\\MHXX\\Monster Hunter XX  JPN (0004000000197100).cia",
+          "sha256": "195570856aa2cd623001d00aaa7c7e20d1e563fe8782979e054570ac83982245",
+          "bytes": 2330896704
+        },
+        {
+          "label": "analysis-local\\containers\\MH4U\\EUR - Monster Hunter 4 Ultimate (0004000000126100).cia",
+          "sha256": "3b11095265bd96436306cbde7aa6256e7550164e83914d3ec9f8a139902e8069",
+          "bytes": 2734762304
+        }
+      ]
+    },
+    "MHXX_NCCH": {
+      "label": "NCCH plaintext del update MHXX",
+      "kind": "game file or derived range",
+      "sha256": "1ed304a0d11d01ed66cdfeebefb140a072b1b20728f8c611c13ebab75a8be473",
+      "bytes": 36868096
+    },
+    "MHXX_CODE_COMP": {
+      "label": ".code MHXX comprimido",
+      "kind": "game file or derived range",
+      "sha256": "251399daef52a2a23bf77375a94ac4e6746bacb9b6d67e1b0654c82f57964f93",
+      "bytes": 7419468
+    },
+    "MHXX_CODE_OUT": {
+      "label": ".code MHXX descomprimido privado",
+      "kind": "game file or derived range",
+      "sha256": "6f66928e0deecdcd20c3b0e67c614e6313dfe92c8dc0b9ba2d7a906d1efe4fe8",
+      "bytes": 13045760
+    },
+    "MH4U_NCSD": {
+      "label": "Base MH4U EUR NCSD/4GiB",
+      "kind": "game file or derived range",
+      "sha256": "3832beef353d134bcba6ef83dc987e7ae228c43dc32a6ba52519f5f103f52581",
+      "bytes": 4294967296,
+      "verification_scope": "whole-image SHA from prior receipt; BLZ stage reverified only headers/.code range"
+    },
+    "MH4U_CODE_COMP": {
+      "label": ".code MH4U comprimido",
+      "kind": "game file or derived range",
+      "sha256": "655e5b4f896d16ab1a745c3f516ef13c6cf482f3aa676b5c9927f3fa8ee57d83",
+      "bytes": 9091360
+    },
+    "MH4U_CODE_OUT": {
+      "label": ".code MH4U descomprimido privado",
+      "kind": "game file or derived range",
+      "sha256": "63940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc",
+      "bytes": 16261120
+    },
+    "MOD3": {
+      "label": "MOD230 de3huesos",
+      "kind": "game file or derived range",
+      "sha256": "6d98d22019ceafc1c44801ed45692610ed5c0b2db461dc1fb813526c7af374be",
+      "bytes": 26402
+    }
+  },
+  "historical_supersessions": [
+    {
+      "id": "H01",
+      "historical": "Frontier ausente o copia parcial/incompleta",
+      "replacement": "Copia local completa comunicada:8261 archivos; este frente verificó50 candidatos, no todos los 8261 de nuevo.",
+      "old_acceptances": [
+        "A04"
+      ],
+      "current_acceptances": [
+        "A09"
+      ],
+      "limits": "ZZ, ejecutable funcional, capas y online siguen sin validar."
+    },
+    {
+      "id": "H02",
+      "historical": "Ninguna base 3DS legible",
+      "replacement": "Existe MH4U EUR .3ds NCSD legible, distinta de CIA; loader/DSP y análisis estático acreditados.",
+      "old_acceptances": [
+        "A07"
+      ],
+      "current_acceptances": [
+        "A21",
+        "A25",
+        "A26"
+      ],
+      "limits": "Las CIA MH3U/MH4U/MHXX siguen cifradas; no equivale a jugabilidad."
+    },
+    {
+      "id": "H03",
+      "historical": ".code MHXX no descomprimido",
+      "replacement": "Una descompresión del update13.045.760 bytes en A23.",
+      "old_acceptances": [
+        "A02"
+      ],
+      "current_acceptances": [
+        "A23",
+        "A24"
+      ],
+      "limits": "Update no base; semántica e independencia pendientes."
+    },
+    {
+      "id": "H04",
+      "historical": "MH4U: solo tamaño BLZ declarado",
+      "replacement": "Una descompresión real16.261.120 bytes, consumo/prefijo/backing en A26.",
+      "old_acceptances": [
+        "A25"
+      ],
+      "current_acceptances": [
+        "A26"
+      ],
+      "limits": "No hash independiente; imagen entera no reverificada después."
+    },
+    {
+      "id": "H05",
+      "historical": "Solo cabeceras MOD, sin jerarquía",
+      "replacement": "Una muestra de 3 huesos acredita estructura; modelo numérico de matrices posterior falló0/3.",
+      "old_acceptances": [
+        "A13"
+      ],
+      "current_acceptances": [
+        "A28",
+        "A29"
+      ],
+      "limits": "No rig funcional; MOD990 y sus índices siguen abiertos, no sustituidos."
+    },
+    {
+      "id": "H06",
+      "historical": "TEX: no ensayo de píxeles/alfa",
+      "replacement": "Auditoría posterior de una carga y controles sintéticos demostró descarte de alfa por mhff.",
+      "old_acceptances": [
+        "A17"
+      ],
+      "current_acceptances": [
+        "A22"
+      ],
+      "limits": "No decoder ETC1A4 completo, RGB/orientación o aspecto en juego aceptados."
+    },
+    {
+      "id": "H07",
+      "historical": "BOOT visible; EBOOT sin descifrado probado",
+      "replacement": "Dump PPSSPP local con prefijo idéntico a BOOT y cola340 bytes sin interpretar.",
+      "old_acceptances": [
+        "A02",
+        "A03"
+      ],
+      "current_acceptances": [
+        "A06",
+        "A15"
+      ],
+      "limits": "No identifica funciones ni ejecución del import."
+    },
+    {
+      "id": "H08",
+      "historical": "Cifras globales de archivos/tests como estado actual",
+      "replacement": "Cada cifra pertenece a un recorrido/campaña fechado; no censo ni suite nuevos en esta consolidación.",
+      "old_acceptances": [
+        "A01",
+        "A19"
+      ],
+      "current_acceptances": [],
+      "limits": "No sumar campañas como nueva suite; no proyectar7 originales sobre entradas añadidas."
+    },
+    {
+      "id": "H09",
+      "historical": "Frontier soloG sin patchZ acreditado",
+      "replacement": "SFO baseG1.00 y patchZ01.99 observados en etapa posterior; copia local cerrada.",
+      "old_acceptances": [
+        "A04"
+      ],
+      "current_acceptances": [
+        "A06",
+        "A09"
+      ],
+      "limits": "ZZ sigue sin confirmarse; nombre de carpeta o emulador no lo acredita."
+    },
+    {
+      "id": "H10",
+      "historical": "Investigación inicial también incluía Switch/GU",
+      "replacement": "Usuario excluyó GU/Switch; referencias antiguas quedan como antecedentes.",
+      "old_acceptances": [
+        "A01"
+      ],
+      "current_acceptances": [
+        "A03",
+        "A20"
+      ],
+      "limits": "Sin nuevas pruebas ni compatibilidad Switch declarada."
+    }
+  ],
+  "totals": {
+    "acceptances": 29,
+    "source_commits": 23,
+    "by_status": {
+      "verificado": 22,
+      "negativo": 2,
+      "bloqueado": 5
+    }
+  },
+  "consolidation_activity": {
+    "new_experiments": 0,
+    "new_game_reads": 0,
+    "new_census": 0,
+    "new_installs_or_binary_downloads": 0,
+    "new_synthetic_tests": 0,
+    "new_chat_messages": 0
+  },
+  "current_limits": [
+    "No functional rig/bindpose for selected MOD230; matrix property A29 negative",
+    "MOD990 global indices/minmax unresolved",
+    "BLZ/LMT independent-reference gates remain closed until new evidence",
+    "MH3U/MH4U/MHXX CIA encryption unchanged; MH4U NCSD is distinct",
+    "No game functions, IA, hitboxes, scenario collision, complete UI/audio/VFX/quest schemas or hardware fidelity validated"
+  ],
+  "no_new_aggregate_suite_claim": true,
+  "tool_surface_update": {
+    "date": "2026-10-22",
+    "evidence": "native-visual-surface-evidence.json",
+    "report": "native-visual-surface.md",
+    "source_index_commit": "e2671fb4026c3ebc5b30dc91e2afdc0def106485",
+    "affects_acceptance": "A21",
+    "native_alternative_available": true,
+    "citra_capture_tested": false,
+    "new_game_acceptance": false
+  }
+}

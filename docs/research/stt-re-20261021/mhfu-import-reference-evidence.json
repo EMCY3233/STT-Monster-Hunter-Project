@@ -1,0 +1,47 @@
+{
+  "elf_type": 2,
+  "machine": 8,
+  "source_section": {
+    "index": 11,
+    "name": ".lib.stub",
+    "address": 143714004,
+    "offset": 1100936,
+    "bytes": 680
+  },
+  "first_record": {
+    "length_words": 5,
+    "bytes": 20,
+    "functions": 3,
+    "variables": 0
+  },
+  "reference": {
+    "field_relative_offset": 12,
+    "field_vaddr": 143714016,
+    "field_file_offset": 1100948,
+    "target_vaddr": 143715448,
+    "target_file_offset": 1102380,
+    "target_section_index": 18,
+    "target_section_name": ".rodata.sceNid",
+    "target_relative_offset": 0,
+    "referenced_nid_array_bytes": 12
+  },
+  "mapping_agrees_between_section_and_pt_load": true,
+  "target_in_file_backed_range": true,
+  "selected_program_header_index": 0,
+  "selected_section_headers_checked": 2,
+  "prior_complete_section_check_repeated": false,
+  "confidence": "high structural confidence for this single import-table pointer; no function identity or runtime resolution asserted",
+  "semantics_verified": false,
+  "artifact_sha256": "64937c521286fc8423076e644089881c5fe051bed2565e5061dda8aec0b45e10",
+  "artifact_bytes": 1910384,
+  "canonical_prefix_sha256": "74a0b779ea98f16dc8a9498487a8df6a712891e83a07ef4d533a948df1f4f4df",
+  "canonical_prefix_bytes": 1910044,
+  "excluded_uninterpreted_tail_bytes": 340,
+  "baseline_receipt_sha256": "4165630eeddb0a4df895f4e62ec03e2c9d21f379207077031b9b5e94fa36415c",
+  "source_unchanged": true,
+  "receipt_sha256": "9b370c8b054d81f8cc278f0c84bb135851e30da6267c354b51e762231ff63f3a",
+  "new_synthetic_tests_passed": 5,
+  "pspsdk_commit": "6ef2b21dc440ef8d4125f000301faaa2a470975e",
+  "pspsdk_structure_blob": "cd17040b7300de4bb97a2004b13e96f17fcda74f",
+  "pspsdk_macro_blob": "ca04503afb6f72a37dfa270cc2d60d3cebfc125b"
+}

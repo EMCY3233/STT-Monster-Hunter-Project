@@ -1,0 +1,34 @@
+# MH4U BLZ: contraste independiente no acreditado
+
+Consulta2026-10-21; cierre2026-10-22, Europe/Madrid. Revisión de linaje, licencia y aplicabilidad **antes de ejecutar otra implementación**. Resultado: bloqueo documental cerrado para esta aceptación, sin segundo resultado numérico. La [descompresión anterior](mh4u-code-blz.md) conserva sus invariantes; no adquiere validación independiente por esta búsqueda.
+
+## Qué se intentaba contrastar
+
+Una única salida de la base MH4U:16.261.120bytes, SHA256 `63940d7ef1fecc119f9fb820f5f6a2cf2f2a5549e4a70f00319fbd6c9c1ad8dc`, acreditada en commit **93455dcab83d823d1b4218b039aa29e951e5e7a1**. Entrada comprimida:9.091.360bytes, SHA256 `655e5b4f896d16ab1a745c3f516ef13c6cf482f3aa676b5c9927f3fa8ee57d83`. Estos son datos de recibos anteriores, no hashes nuevos de un segundo decoder.
+
+El conjunto privado contiene code.bin **descomprimido**, receipt y acceptance; no se preparó una copia autónoma comprimida para esta investigación. No se usa el code.bin descomprimido como si fuera entrada BLZ. No se relee la imagen original, copia el rango, repite BLZ propia ni instala un compilador para una comparación aún sin independencia acreditada. `whole_image_unchanged_reverified=false` continúa vigente.
+
+## Fuentes primarias fijadas y decisiones
+
+| Candidato | Procedencia/licencia revisadas | Aplicabilidad y decisión |
+|---|---|---|
+| Azahar2126.2 | [ncch_container.cpp](https://github.com/azahar-emu/azahar/blob/219d743a1e698101fe1ab8bef43e6563126c3c27/src/core/file_sys/ncch_container.cpp), commit219d743a1e698101fe1ab8bef43e6563126c3c27, blob666d6037f1667ceea641cc46c7ee94cac5bee56c; GPLv2-o-posterior | Referencia del decoder ya adaptado. Ejecutar otra traducción o fork de esta función no sería independencia. No se ejecuta de nuevo. |
+| CTRTool1.3.0 | [lzss.c](https://github.com/3DSGuy/Project_CTR/blob/e8f5f529c54ff9b22a2491a480ffa69206bf7b19/ctrtool/src/lzss.c), commit e8f5f529c54ff9b22a2491a480ffa69206bf7b19, blob69868c3eb96229730bf35a9a11fe54048c30f979. Ese .c/.h no contiene una declaración de licencia; las licencias de dependencias no se atribuyen a este archivo automáticamente | Misma estructura de footer, índices inversos, copia inicial, bucle de control, referencias y comprobaciones que la línea Citra/Azahar. No aporta independencia suficientemente acreditada. Binario local ya disponible, SHA25679021f283b2199950eb22cf3c459806b9c8aaaf68f65c80100107d3454a1c224, **no ejecutado** en esta aceptación. |
+| CUE BLZ / distribución PeterLemon | [blz.c](https://github.com/PeterLemon/Nintendo_DS_Compressors/blob/067259ab76bc7f3b1dc4dcc94a6681a24366a0ed/blz.c), commit067259ab76bc7f3b1dc4dcc94a6681a24366a0ed, blobde99266c476a7c46c48a3956336c95890e0722ea. CopyrightCUE2011; GPLv3-o-posterior, licencia incluida en ese proyecto | Estrategia distinta: invierte flujo, decodifica hacia delante e invierte salida. Candidato plausible, no simple traducción identificada de nuestra función. Pero la distribución e historia revisadas no acreditan suficientemente ausencia de dependencia con el linaje contrastado. No se descarga/ejecuta su .exe ni se porta el algoritmo para fabricar una coincidencia. |
+| 3dstool | [backwardlz77.cpp](https://github.com/dnasdw/3dstool/blob/3771ae967d64092370b646db86aa626401c279e8/src/backwardlz77.cpp), commit3771ae967d64092370b646db86aa626401c279e8, blobd7fae77a900780ff17d9c3a3e9b9e452069580cd. [LICENSE](https://github.com/dnasdw/3dstool/blob/3771ae967d64092370b646db86aa626401c279e8/LICENSE), MIT/DaowenSun2014–2020 | Formato y fórmulas compatibles documentalmente, con recorrido inverso por punteros y validaciones propias. MIT y diferente autor no demuestran independencia histórica. Sin relación de origen suficiente acreditada: no aceptado ni ejecutado como contraste independiente. |
+
+La similitud de operaciones exigidas por el formato **no prueba por sí sola copia o dependencia**. Las decisiones anteriores significan que los candidatos no satisfacen el grado de independencia requerido en esta revisión; no constituyen una atribución histórica o jurídica no documentada.
+
+## Linaje comprobado y lo que falta
+
+CTRTool tiene un hito primario [87681b8bc5b6f57c4ac7368f494f310b84bfe4aa](https://github.com/3DSGuy/Project_CTR/commit/87681b8bc5b6f57c4ac7368f494f310b84bfe4aa),2014-04-14: «Added neimod's ctrtool». Su lzss.c inicial tiene blob93bc7696410a29d1f581a5a2c2bf6744cb58fb9f. Citra ya incluía el decoder en [3577dd027ddbaa2517eacad700ed0768a1f4b518](https://github.com/azahar-emu/azahar/blob/3577dd027ddbaa2517eacad700ed0768a1f4b518/src/core/loader/ncch.cpp),2014-06-17, blob a01411e11dc16e2fc72f78d309e5bfb71c6528ae. La fuente inicial revisada no declara una atribución directa de esa rutina a CTRTool: **no se afirma que ese enlace histórico esté probado solo por similitud**.
+
+La [historia CUE](https://github.com/PeterLemon/Nintendo_DS_Compressors/blob/067259ab76bc7f3b1dc4dcc94a6681a24366a0ed/history.txt) declara versión1.0 de2011-11-11 y versión1.5 en2024. La historia Git de su archivo incluye [9fca43a5fca7f08f243818816ea0f14978bc7679](https://github.com/PeterLemon/Nintendo_DS_Compressors/commit/9fca43a5fca7f08f243818816ea0f14978bc7679),2020-05-01, «Original version1.4 files by CUE», y cambios2024 para salida separada. Son evidencias de autoría/distribución declarada; no bastan por sí solas para establecer la relación de desarrollo con neimod/Citra. Los ports Java/Go que declaran CUE no se contarían además como implementaciones independientes entre sí.
+
+Aplicabilidad CUE **documental**: nuestra longitud9.091.360 cabe en BLZ_MAXIM0x01400000; salida16.261.120 cabe en RAW_MAXIM0x00FFFFFF; top9 cabe en el intervalo8–11 del decoder; incremento y prefijo se interpretan con el mismo layout. No se ha probado su tratamiento real de esta carga, consumo exacto, errores o resultado. Un estado«Done» o tamaño aparente tampoco sustituiría esos controles.
+
+## Resultado y cierre
+
+No se ejecuta ninguna segunda implementación. `independent_reference_established=false`; tamaños/hashes/consumo comparados quedan **null**, no«coinciden» ni«difieren». Cero instalaciones, nuevos binarios, descompresiones, lecturas de imagen y pruebas sintéticas: esta fase es documental y los lectores anteriores no cambian. Se conservan fuentes/licencias revisadas de herramientas en el conjunto privado; no se publican sus ejecutables ni recursos comerciales.
+
+[Recibo de revisión](mh4u-blz-independent-review-evidence.json) fija candidatos, blobs, fuentes y ausencia de comparación. Las invariantes anteriores siguen siendo aceptación de nuestro lector; el contraste independiente sigue bloqueado. Condición para reabrir: evidencia primaria suficiente de origen independiente y compatibilidad, seguida de un ensayo sobre **la misma entrada comprimida** en copia privada, con salida separada y comparación de tamaño/hash/consumo. No se deriva semántica, funciones, IA o hitboxes de esta revisión.

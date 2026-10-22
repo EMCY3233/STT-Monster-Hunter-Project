@@ -1,0 +1,105 @@
+[
+  {
+    "name": "common_entry_0084.lmt",
+    "sha256": "a4cf8054ebecebfa53f82bae923353b0e1221f2fc46242ee507e1bfe7df39fa9",
+    "bytes": 247504,
+    "tracks": 970,
+    "status": {
+      "reference_vector_read": 46,
+      "codec_not_decoded": 875,
+      "vector_keys_decoded": 49
+    },
+    "codecs": {
+      "1": 46,
+      "6": 321,
+      "5": 43,
+      "7": 310,
+      "12": 85,
+      "11": 107,
+      "4": 6,
+      "2": 52
+    },
+    "vector_keys": 1138,
+    "dynamic_vector_tracks": 49,
+    "skeleton_binding": false,
+    "quaternion_decoding": false,
+    "fps": null,
+    "gameplay_events": false
+  },
+  {
+    "name": "common_entry_0085.lmt",
+    "sha256": "35fb4bd3efaba3fc321821c92258aebfc90bd93bb29385008f97631c839faf08",
+    "bytes": 99304,
+    "tracks": 645,
+    "status": {
+      "codec_not_decoded": 571,
+      "reference_vector_read": 35,
+      "vector_keys_decoded": 39
+    },
+    "codecs": {
+      "2": 17,
+      "1": 35,
+      "11": 90,
+      "5": 38,
+      "6": 231,
+      "12": 63,
+      "7": 170,
+      "4": 1
+    },
+    "vector_keys": 625,
+    "dynamic_vector_tracks": 38,
+    "skeleton_binding": false,
+    "quaternion_decoding": false,
+    "fps": null,
+    "gameplay_events": false
+  },
+  {
+    "name": "common_entry_0086.lmt",
+    "sha256": "ad1a8ae24be18ab64c4a857f0fbeec64c00b04c98a505f26ff230f2904f758ee",
+    "bytes": 2516,
+    "tracks": 21,
+    "status": {
+      "reference_vector_read": 3,
+      "codec_not_decoded": 17,
+      "vector_keys_decoded": 1
+    },
+    "codecs": {
+      "1": 3,
+      "11": 5,
+      "5": 1,
+      "6": 1,
+      "7": 10,
+      "2": 1
+    },
+    "vector_keys": 6,
+    "dynamic_vector_tracks": 1,
+    "skeleton_binding": false,
+    "quaternion_decoding": false,
+    "fps": null,
+    "gameplay_events": false
+  },
+  {
+    "name": "common_entry_0087.lmt",
+    "sha256": "2ef3c57d4075c57ff71805d3aa8cd6631f9e0c0dd54008b17e73596e9f5e1aae",
+    "bytes": 2124,
+    "tracks": 21,
+    "status": {
+      "reference_vector_read": 3,
+      "codec_not_decoded": 17,
+      "vector_keys_decoded": 1
+    },
+    "codecs": {
+      "1": 3,
+      "6": 6,
+      "5": 1,
+      "7": 7,
+      "11": 4
+    },
+    "vector_keys": 3,
+    "dynamic_vector_tracks": 1,
+    "skeleton_binding": false,
+    "quaternion_decoding": false,
+    "fps": null,
+    "gameplay_events": false
+  }
+]

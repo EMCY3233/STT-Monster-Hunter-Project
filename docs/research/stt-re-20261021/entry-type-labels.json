@@ -1,0 +1,932 @@
+[
+  {
+    "type_id": "5B3C302D",
+    "dictionary_label": "rem",
+    "entries": 5119
+  },
+  {
+    "type_id": "2553701D",
+    "dictionary_label": "setemmain",
+    "entries": 3258
+  },
+  {
+    "type_id": "242BB29A",
+    "dictionary_label": "gmd",
+    "entries": 2637
+  },
+  {
+    "type_id": "1BBFD18E",
+    "dictionary_label": "questdata",
+    "entries": 2520
+  },
+  {
+    "type_id": "32CA92F8",
+    "dictionary_label": "esl",
+    "entries": 2298
+  },
+  {
+    "type_id": "54539AEE",
+    "dictionary_label": "supplylist",
+    "entries": 1218
+  },
+  {
+    "type_id": "26BEC21C",
+    "dictionary_label": "questplus",
+    "entries": 1218
+  },
+  {
+    "type_id": "00E0BB1C",
+    "dictionary_label": "questlink",
+    "entries": 1218
+  },
+  {
+    "type_id": "33A84E14",
+    "dictionary_label": "hagi",
+    "entries": 650
+  },
+  {
+    "type_id": "79C47B59",
+    "dictionary_label": "soundsourceadpcm.madp",
+    "entries": 531
+  },
+  {
+    "type_id": "241F5DEB",
+    "dictionary_label": "tex",
+    "entries": 220
+  },
+  {
+    "type_id": "22948394",
+    "dictionary_label": "gui",
+    "entries": 143
+  },
+  {
+    "type_id": "58A15856",
+    "dictionary_label": "mod",
+    "entries": 83
+  },
+  {
+    "type_id": "2749C8A8",
+    "dictionary_label": "mrl",
+    "entries": 83
+  },
+  {
+    "type_id": "4E397417",
+    "dictionary_label": "ean",
+    "entries": 70
+  },
+  {
+    "type_id": "1A273E8B",
+    "dictionary_label": "npcsubdata",
+    "entries": 58
+  },
+  {
+    "type_id": "6D5AE854",
+    "dictionary_label": "efl",
+    "entries": 51
+  },
+  {
+    "type_id": "458DE878",
+    "dictionary_label": "spactdata",
+    "entries": 26
+  },
+  {
+    "type_id": "15D782FB",
+    "dictionary_label": "sbkr",
+    "entries": 16
+  },
+  {
+    "type_id": "540D49C1",
+    "dictionary_label": "playerweaponlist",
+    "entries": 15
+  },
+  {
+    "type_id": "1BCC4966",
+    "dictionary_label": "srqr",
+    "entries": 15
+  },
+  {
+    "type_id": "64844D84",
+    "dictionary_label": "monnyanreward",
+    "entries": 11
+  },
+  {
+    "type_id": "6D5AAA39",
+    "dictionary_label": "npcbasedata",
+    "entries": 8
+  },
+  {
+    "type_id": "5F6A387F",
+    "dictionary_label": "commonscript",
+    "entries": 8
+  },
+  {
+    "type_id": "000692F5",
+    "dictionary_label": "amuletskilldata",
+    "entries": 8
+  },
+  {
+    "type_id": "2BCFB893",
+    "dictionary_label": "otinilot",
+    "entries": 6
+  },
+  {
+    "type_id": "6FCC7AD4",
+    "dictionary_label": "pec",
+    "entries": 5
+  },
+  {
+    "type_id": "167DBBFF",
+    "dictionary_label": "stqr",
+    "entries": 5
+  },
+  {
+    "type_id": "0AB54515",
+    "dictionary_label": "bui",
+    "entries": 5
+  },
+  {
+    "type_id": "76820D81",
+    "dictionary_label": "lmt",
+    "entries": 4
+  },
+  {
+    "type_id": "5A525C16",
+    "dictionary_label": "pel",
+    "entries": 4
+  },
+  {
+    "type_id": "496F8F22",
+    "dictionary_label": "fup",
+    "entries": 4
+  },
+  {
+    "type_id": "21F33E01",
+    "dictionary_label": "amuletslotdata",
+    "entries": 4
+  },
+  {
+    "type_id": "10EBE843",
+    "dictionary_label": "festasoundsequence.mss",
+    "entries": 4
+  },
+  {
+    "type_id": "69B525DF",
+    "dictionary_label": "otpointtable",
+    "entries": 3
+  },
+  {
+    "type_id": "61CF79AF",
+    "dictionary_label": "questgroup",
+    "entries": 3
+  },
+  {
+    "type_id": "55FCA0F5",
+    "dictionary_label": "tradelimiteditemlist",
+    "entries": 3
+  },
+  {
+    "type_id": "4541367C",
+    "dictionary_label": "festapeltiedse.xfs",
+    "entries": 3
+  },
+  {
+    "type_id": "19F2AB31",
+    "dictionary_label": "tradepointitemlist",
+    "entries": 3
+  },
+  {
+    "type_id": "7F416CE5",
+    "dictionary_label": "monnyancirclepattern",
+    "entries": 2
+  },
+  {
+    "type_id": "73850D05",
+    "dictionary_label": "arcs",
+    "entries": 2
+  },
+  {
+    "type_id": "70709F3F",
+    "dictionary_label": "cointradelist",
+    "entries": 2
+  },
+  {
+    "type_id": "619D23DF",
+    "dictionary_label": "shoplist",
+    "entries": 2
+  },
+  {
+    "type_id": "5B0DD78A",
+    "dictionary_label": "ottrainparam",
+    "entries": 2
+  },
+  {
+    "type_id": "58BC1C29",
+    "dictionary_label": "guestquestdata",
+    "entries": 2
+  },
+  {
+    "type_id": "4A91DDB9",
+    "dictionary_label": "monnyanlotenemy",
+    "entries": 2
+  },
+  {
+    "type_id": "3F13DE3C",
+    "dictionary_label": "researchreinforce",
+    "entries": 2
+  },
+  {
+    "type_id": "2D462600",
+    "dictionary_label": "gfd",
+    "entries": 2
+  },
+  {
+    "type_id": "254309C9",
+    "dictionary_label": "psl",
+    "entries": 2
+  },
+  {
+    "type_id": "0ECD7DF4",
+    "dictionary_label": "scsr",
+    "entries": 2
+  },
+  {
+    "type_id": "7F2E2EE0",
+    "dictionary_label": "aat",
+    "entries": 1
+  },
+  {
+    "type_id": "7D025838",
+    "dictionary_label": "monnyanlotadvent",
+    "entries": 1
+  },
+  {
+    "type_id": "7C4883A8",
+    "dictionary_label": "itemdata",
+    "entries": 1
+  },
+  {
+    "type_id": "7C163FF5",
+    "dictionary_label": "weapon12msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "7B572569",
+    "dictionary_label": "otlotownskill",
+    "entries": 1
+  },
+  {
+    "type_id": "7B54B600",
+    "dictionary_label": "activitydata",
+    "entries": 1
+  },
+  {
+    "type_id": "7AAD377E",
+    "dictionary_label": "weapon08msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "7A41A133",
+    "dictionary_label": "weapon08basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "7A395CB7",
+    "dictionary_label": "otsupportactionbase",
+    "entries": 1
+  },
+  {
+    "type_id": "79FF11C9",
+    "dictionary_label": "otlotownsupport",
+    "entries": 1
+  },
+  {
+    "type_id": "7896B60A",
+    "dictionary_label": "armorseriesdata",
+    "entries": 1
+  },
+  {
+    "type_id": "78143FEE",
+    "dictionary_label": "weapon03basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "77D70343",
+    "dictionary_label": "guesteffectiveattr",
+    "entries": 1
+  },
+  {
+    "type_id": "76A1D9A2",
+    "dictionary_label": "insectparam",
+    "entries": 1
+  },
+  {
+    "type_id": "751AFF22",
+    "dictionary_label": "tameshotdata",
+    "entries": 1
+  },
+  {
+    "type_id": "73B73919",
+    "dictionary_label": "weapon14basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "737234F5",
+    "dictionary_label": "armorcolordata",
+    "entries": 1
+  },
+  {
+    "type_id": "72993816",
+    "dictionary_label": "weapon11msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "710688E2",
+    "dictionary_label": "squatshotdata",
+    "entries": 1
+  },
+  {
+    "type_id": "7039F76F",
+    "dictionary_label": "otquestexpvalue",
+    "entries": 1
+  },
+  {
+    "type_id": "6F6F2BAD",
+    "dictionary_label": "weapon02basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "6F56B442",
+    "dictionary_label": "otparamlot",
+    "entries": 1
+  },
+  {
+    "type_id": "6F27254C",
+    "dictionary_label": "weapon06msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "6EC8125C",
+    "dictionary_label": "rapidshotdata",
+    "entries": 1
+  },
+  {
+    "type_id": "6E972F76",
+    "dictionary_label": "kireajidata",
+    "entries": 1
+  },
+  {
+    "type_id": "6E765E35",
+    "dictionary_label": "insectessenceskill",
+    "entries": 1
+  },
+  {
+    "type_id": "6D964D19",
+    "dictionary_label": "kitchenlistskillalcohol",
+    "entries": 1
+  },
+  {
+    "type_id": "6D81CFDD",
+    "dictionary_label": "otarmordata",
+    "entries": 1
+  },
+  {
+    "type_id": "6D3AB570",
+    "dictionary_label": "weapon09basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "6D31C3FA",
+    "dictionary_label": "weapon11leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "6B6D2BB6",
+    "dictionary_label": "weapon02msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "69C413C7",
+    "dictionary_label": "weapon13leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "699AC631",
+    "dictionary_label": "npcbasedata_mdl",
+    "entries": 1
+  },
+  {
+    "type_id": "681FA774",
+    "dictionary_label": "otweapondata",
+    "entries": 1
+  },
+  {
+    "type_id": "66D7CD8A",
+    "dictionary_label": "monnyanadventitem",
+    "entries": 1
+  },
+  {
+    "type_id": "65E22C55",
+    "dictionary_label": "weapon01msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "63F62424",
+    "dictionary_label": "itempretypedata",
+    "entries": 1
+  },
+  {
+    "type_id": "630ED7BB",
+    "dictionary_label": "nan",
+    "entries": 1
+  },
+  {
+    "type_id": "626BC4D6",
+    "dictionary_label": "monnyanrewardsecret",
+    "entries": 1
+  },
+  {
+    "type_id": "62220853",
+    "dictionary_label": "villagefirstpos",
+    "entries": 1
+  },
+  {
+    "type_id": "61C203A4",
+    "dictionary_label": "fuemusicscdata",
+    "entries": 1
+  },
+  {
+    "type_id": "5EA6AA68",
+    "dictionary_label": "otquestexpbias",
+    "entries": 1
+  },
+  {
+    "type_id": "5E5B44C8",
+    "dictionary_label": "shoplistsale",
+    "entries": 1
+  },
+  {
+    "type_id": "5D163510",
+    "dictionary_label": "equipshoplistw10",
+    "entries": 1
+  },
+  {
+    "type_id": "5D0455EB",
+    "dictionary_label": "equipshoplistw03",
+    "entries": 1
+  },
+  {
+    "type_id": "5CA6DB93",
+    "dictionary_label": "equipshoplista00",
+    "entries": 1
+  },
+  {
+    "type_id": "5B8E6BF3",
+    "dictionary_label": "itempredata",
+    "entries": 1
+  },
+  {
+    "type_id": "5ADC692C",
+    "dictionary_label": "emsizecalctblelement",
+    "entries": 1
+  },
+  {
+    "type_id": "5A7BF109",
+    "dictionary_label": "equipshoplistw14",
+    "entries": 1
+  },
+  {
+    "type_id": "5A6991F2",
+    "dictionary_label": "equipshoplistw07",
+    "entries": 1
+  },
+  {
+    "type_id": "583F70B0",
+    "dictionary_label": "rdb",
+    "entries": 1
+  },
+  {
+    "type_id": "56E21768",
+    "dictionary_label": "weapon01basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "542767EC",
+    "dictionary_label": "n10smh3gmovie5mydtie",
+    "entries": 1
+  },
+  {
+    "type_id": "50AA37F0",
+    "dictionary_label": "weapon08leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "4E630743",
+    "dictionary_label": "weapon06leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "4D70000C",
+    "dictionary_label": "kitchenlistsuccesstable3",
+    "entries": 1
+  },
+  {
+    "type_id": "4C3942E3",
+    "dictionary_label": "skilltypedata",
+    "entries": 1
+  },
+  {
+    "type_id": "4B51E836",
+    "dictionary_label": "otlevel",
+    "entries": 1
+  },
+  {
+    "type_id": "4AD68C63",
+    "dictionary_label": "equipshoplistw08",
+    "entries": 1
+  },
+  {
+    "type_id": "4A96D77E",
+    "dictionary_label": "weapon04leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "48B16938",
+    "dictionary_label": "insectlevel",
+    "entries": 1
+  },
+  {
+    "type_id": "4788A739",
+    "dictionary_label": "weapon02leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "441F64AA",
+    "dictionary_label": "equipshoplistw13",
+    "entries": 1
+  },
+  {
+    "type_id": "440D0451",
+    "dictionary_label": "equipshoplistw00",
+    "entries": 1
+  },
+  {
+    "type_id": "437D7704",
+    "dictionary_label": "weapon00leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "4360C048",
+    "dictionary_label": "equipshoplistw04",
+    "entries": 1
+  },
+  {
+    "type_id": "43062A33",
+    "dictionary_label": "npcbasedata_id",
+    "entries": 1
+  },
+  {
+    "type_id": "4199032B",
+    "dictionary_label": "weapon00basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "3FA5AD6A",
+    "dictionary_label": "itemcategorytypedata",
+    "entries": 1
+  },
+  {
+    "type_id": "3F685CCE",
+    "dictionary_label": "weapon09leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "3E333888",
+    "dictionary_label": "weapon10msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "3E2A4D8E",
+    "dictionary_label": "amuletdata",
+    "entries": 1
+  },
+  {
+    "type_id": "3E0E02FC",
+    "dictionary_label": "fishdata",
+    "entries": 1
+  },
+  {
+    "type_id": "3DD1BCF5",
+    "dictionary_label": "equipshoplistw09",
+    "entries": 1
+  },
+  {
+    "type_id": "3C51E03C",
+    "dictionary_label": "armorresistdata",
+    "entries": 1
+  },
+  {
+    "type_id": "3A793672",
+    "dictionary_label": "weapon14msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "3A77309A",
+    "dictionary_label": "kitchenlistsuccesstable2",
+    "entries": 1
+  },
+  {
+    "type_id": "39C8DC68",
+    "dictionary_label": "skilldata",
+    "entries": 1
+  },
+  {
+    "type_id": "39207C56",
+    "dictionary_label": "weapon11basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "38534E81",
+    "dictionary_label": "insectattr",
+    "entries": 1
+  },
+  {
+    "type_id": "36C909FD",
+    "dictionary_label": "monnyanrewardenemy",
+    "entries": 1
+  },
+  {
+    "type_id": "360737E0",
+    "dictionary_label": "weapon09msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "3464995E",
+    "dictionary_label": "otodokesetlist",
+    "entries": 1
+  },
+  {
+    "type_id": "3318543C",
+    "dictionary_label": "equipshoplistw12",
+    "entries": 1
+  },
+  {
+    "type_id": "330A34C7",
+    "dictionary_label": "equipshoplistw01",
+    "entries": 1
+  },
+  {
+    "type_id": "32837AA1",
+    "dictionary_label": "weapon06basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "327E327E",
+    "dictionary_label": "armorbuilddata",
+    "entries": 1
+  },
+  {
+    "type_id": "30BC3F6B",
+    "dictionary_label": "weapon13msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "2E5B6815",
+    "dictionary_label": "weapon10basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "2D6EA164",
+    "dictionary_label": "equipshoplistw06",
+    "entries": 1
+  },
+  {
+    "type_id": "2D022231",
+    "dictionary_label": "weapon04msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "2CBF1C3A",
+    "dictionary_label": "weapon01leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "2A68813F",
+    "dictionary_label": "monnyanlotcommon",
+    "entries": 1
+  },
+  {
+    "type_id": "2A110586",
+    "dictionary_label": "equipshoplistw11",
+    "entries": 1
+  },
+  {
+    "type_id": "2A03657D",
+    "dictionary_label": "equipshoplistw02",
+    "entries": 1
+  },
+  {
+    "type_id": "29751294",
+    "dictionary_label": "tradeitemlist",
+    "entries": 1
+  },
+  {
+    "type_id": "294A5E8D",
+    "dictionary_label": "hunterartsdata",
+    "entries": 1
+  },
+  {
+    "type_id": "29482CCB",
+    "dictionary_label": "weapon00msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "284ACC07",
+    "dictionary_label": "weapon03leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "27C72B28",
+    "dictionary_label": "weapon03msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "2754877D",
+    "dictionary_label": "tradelotlist",
+    "entries": 1
+  },
+  {
+    "type_id": "25F86EE2",
+    "dictionary_label": "weapon07basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "25334DDE",
+    "dictionary_label": "tradedeliverylist",
+    "entries": 1
+  },
+  {
+    "type_id": "252BD342",
+    "dictionary_label": "equipbasecolordata",
+    "entries": 1
+  },
+  {
+    "type_id": "24F0A487",
+    "dictionary_label": "kitchenlistskillset",
+    "entries": 1
+  },
+  {
+    "type_id": "24080FFF",
+    "dictionary_label": "freehuntdata",
+    "entries": 1
+  },
+  {
+    "type_id": "238D25D2",
+    "dictionary_label": "weapon07msgdata",
+    "entries": 1
+  },
+  {
+    "type_id": "237E6120",
+    "dictionary_label": "kitchenlistsuccesstable1",
+    "entries": 1
+  },
+  {
+    "type_id": "233A9F13",
+    "dictionary_label": "kitchenlistgrillitem",
+    "entries": 1
+  },
+  {
+    "type_id": "21A16C7D",
+    "dictionary_label": "weapon07leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "1EE1ED64",
+    "dictionary_label": "areacommonlink.xfs",
+    "entries": 1
+  },
+  {
+    "type_id": "1C755227",
+    "dictionary_label": "weapon04basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "19C994C4",
+    "dictionary_label": "monnyanexp",
+    "entries": 1
+  },
+  {
+    "type_id": "1800EB37",
+    "dictionary_label": "emsizeyuretbl.xfs",
+    "entries": 1
+  },
+  {
+    "type_id": "17D654D0",
+    "dictionary_label": "weapon13basedata",
+    "entries": 1
+  },
+  {
+    "type_id": "164F60FF",
+    "dictionary_label": "npclocatedata",
+    "entries": 1
+  },
+  {
+    "type_id": "160329F8",
+    "dictionary_label": "guestremdata",
+    "entries": 1
+  },
+  {
+    "type_id": "156A8085",
+    "dictionary_label": "fuemusicinfdata",
+    "entries": 1
+  },
+  {
+    "type_id": "141C243A",
+    "dictionary_label": "insectabirity",
+    "entries": 1
+  },
+  {
+    "type_id": "11DE9EF6",
+    "dictionary_label": "insectdata",
+    "entries": 1
+  },
+  {
+    "type_id": "117D7CD0",
+    "dictionary_label": "monnyancommonmaterial",
+    "entries": 1
+  },
+  {
+    "type_id": "0F86C052",
+    "dictionary_label": "otskill",
+    "entries": 1
+  },
+  {
+    "type_id": "0C7468EA",
+    "dictionary_label": "kitchenlistmenu",
+    "entries": 1
+  },
+  {
+    "type_id": "0C6C4DBF",
+    "dictionary_label": "kitchenlistskillrandom",
+    "entries": 1
+  },
+  {
+    "type_id": "0B1808BE",
+    "dictionary_label": "weapon14leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "0A7DB17E",
+    "dictionary_label": "decodata",
+    "entries": 1
+  },
+  {
+    "type_id": "07F768AF",
+    "dictionary_label": "gii",
+    "entries": 1
+  },
+  {
+    "type_id": "06C7327B",
+    "dictionary_label": "fuemusicdata",
+    "entries": 1
+  },
+  {
+    "type_id": "060678F9",
+    "dictionary_label": "weapon12leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "041925D7",
+    "dictionary_label": "monnyanvillagepoint",
+    "entries": 1
+  },
+  {
+    "type_id": "0315E81F",
+    "dictionary_label": "sdsr",
+    "entries": 1
+  },
+  {
+    "type_id": "02F3A8C4",
+    "dictionary_label": "weapon10leveldata",
+    "entries": 1
+  },
+  {
+    "type_id": "02929600",
+    "dictionary_label": "questdaily",
+    "entries": 1
+  },
+  {
+    "type_id": "01A1196B",
+    "dictionary_label": "dlcotomoinfo",
+    "entries": 1
+  },
+  {
+    "type_id": "017CA1B2",
+    "dictionary_label": "armorsedata",
+    "entries": 1
+  },
+  {
+    "type_id": "00AD4093",
+    "dictionary_label": "weapon12basedata",
+    "entries": 1
+  }
+]
