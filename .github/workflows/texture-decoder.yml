@@ -19,5 +19,7 @@ jobs:
         with:
           python-version: '3.x'
       - run: cmake -S texture-decoder -B build -DCMAKE_BUILD_TYPE=${{ matrix.build }}
+      - if: runner.os == 'Linux' && matrix.build == 'Debug'
+        run: cmake -S texture-decoder -B build -DSTT_TEX_SANITIZERS=ON
       - run: cmake --build build --config ${{ matrix.build }}
       - run: ctest --test-dir build -C ${{ matrix.build }} --output-on-failure

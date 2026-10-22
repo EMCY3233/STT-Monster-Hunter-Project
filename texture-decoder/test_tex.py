@@ -1,5 +1,6 @@
 import hashlib
 import pathlib
+import random
 import struct
 import subprocess
 import sys
@@ -32,6 +33,60 @@ def fixture(kind=3, width=32, height=16, levels=2):
                     payload.extend((a, b, g, r) if kind == 3 else (b, g, r))
     header = struct.pack('<4I', 0x584554, 0x200000a5,
                          levels | width << 6 | height << 19, 0x10001 | kind << 8)
+    return header + struct.pack('<' + 'I' * levels, *offsets) + payload, expected
+
+
+def etc_fixture(alpha=True, levels=3):
+    """Encode chosen base colors/selectors; expected pixels use those choices,
+    not bit extraction from the resulting stream. No external decoder needed.
+    """
+    magnitudes = ((2, 8), (5, 17), (9, 29), (13, 42),
+                  (18, 60), (24, 80), (33, 106), (47, 183))
+    payload, offsets, expected = bytearray(), [], []
+    serial = 0
+    for level in range(levels):
+        offsets.append(len(payload))
+        width = 32 >> level
+        rgba = bytearray(width * width * 4)
+        for ty in range(0, width, 8):
+            for tx in range(0, width, 8):
+                for block in range(4):
+                    flip = (serial // 8) % 2
+                    differential = (serial // 16) % 2
+                    tables = (serial % 8, 7 - serial % 8)
+                    info = tables[0] << 5 | tables[1] << 2 | differential << 1 | flip
+                    if differential:
+                        delta = serial % 8 - 4
+                        first = (4, 16, 28)
+                        second = tuple(v + delta for v in first)
+                        colors = [tuple(v * 8 + v // 4 for v in color)
+                                  for color in (first, second)]
+                        fields = [(v << 3) | (delta & 7) for v in first]
+                    else:
+                        colors = [(0, 136, 255), (255, 119, 0)]
+                        fields = [0x0f, 0x87, 0xf0]
+                    info |= fields[0] << 24 | fields[1] << 16 | fields[2] << 8
+                    selectors = a4 = 0
+                    for x in range(4):
+                        for y in range(4):
+                            n = x * 4 + y
+                            choice = (x + y + serial) % 4
+                            selectors |= (choice & 1) << n | (choice >> 1) << (16 + n)
+                            nibble = (n + serial) % 16
+                            a4 |= nibble << (4 * n)
+                            half = y // 2 if flip else x // 2
+                            modifier = magnitudes[tables[half]][choice & 1]
+                            modifier *= -1 if choice >= 2 else 1
+                            rgb = [max(0, min(255, v + modifier)) for v in colors[half]]
+                            dst = ((ty + block // 2 * 4 + y) * width + tx + block % 2 * 4 + x) * 4
+                            rgba[dst:dst + 4] = bytes(rgb + [nibble * 17 if alpha else 255])
+                    if alpha:
+                        payload.extend(struct.pack('<Q', a4))
+                    payload.extend(struct.pack('<II', selectors, info))
+                    serial += 1
+        expected.append(bytes(rgba))
+    header = struct.pack('<4I', 0x584554, 0x200000a5,
+                         levels | 32 << 6 | 32 << 19, 0x10001 | (12 if alpha else 11) << 8)
     return header + struct.pack('<' + 'I' * levels, *offsets) + payload, expected
 
 
@@ -68,7 +123,7 @@ class Tests(unittest.TestCase):
         data, _ = fixture()
         for index, value in ((0, 0), (4, 0x200000a6), (4, 0x600000a5),
                              (4, 0x210000a5), (8, 0), (12, 0x10302),
-                             (12, 0x10c01), (12, 0x20001), (16, 1), (20, 0)):
+                             (12, 0x10601), (12, 0x20001), (16, 1), (20, 0)):
             with self.subTest(index=index, value=value):
                 bad = bytearray(data)
                 struct.pack_into('<I', bad, index, value)
@@ -103,6 +158,62 @@ class Tests(unittest.TestCase):
             run = subprocess.run([EXE, str(source), '--out', str(out)], capture_output=True)
             self.assertNotEqual(run.returncode, 0)
             self.assertEqual(marker.read_bytes(), b'keep')
+
+    def test_etc_modes_tables_tiles_mips_and_alpha(self):
+        for alpha in (False, True):
+            data, expected = etc_fixture(alpha)
+            for mip, pixels in enumerate(expected):
+                with self.subTest(alpha=alpha, mip=mip):
+                    self.assertEqual(self.run_case(data, ['--mip', str(mip)]), pixels)
+
+    def test_etc_known_zero_block_and_alpha_extremes(self):
+        for kind, block, pixel in ((11, bytes(8), bytes((2, 2, 2, 255))),
+                                   (12, bytes(16), bytes((2, 2, 2, 0))),
+                                   (12, b'\xff' * 8 + bytes(8), bytes((2, 2, 2, 255)))):
+            header = struct.pack('<5I', 0x584554, 0x200000a5,
+                                 1 | 8 << 6 | 8 << 19, 0x10001 | kind << 8, 0)
+            self.assertEqual(self.run_case(header + block * 4), pixel * 64)
+
+    def test_etc_invalid_differential_colors(self):
+        header = struct.pack('<5I', 0x584554, 0x200000a5,
+                             1 | 8 << 6 | 8 << 19, 0x10b01, 0)
+        for channel in range(3):
+            for field in (0x07, 0xfb):  # base 0 delta -1 / base 31 delta +3
+                info = 2 | field << (24 - channel * 8)
+                self.run_case(header + struct.pack('<II', 0, info) * 4, good=False)
+
+    def test_etc_bad_offsets_truncation_and_trailing(self):
+        data, _ = etc_fixture()
+        for cut in (1, 8, 16, 64):
+            self.run_case(data[:-cut], good=False)
+        self.run_case(data + b'\0', good=False)
+        bad = bytearray(data)
+        struct.pack_into('<I', bad, 20, 1)
+        self.run_case(bad, good=False)
+
+    def test_etc_reference_random_vectors(self):
+        # Golden RGBA hashes independently obtained with texture2ddecoder 1.0.6
+        # for RGB, plus byte/nibble alpha expansion. No backend needed in CI.
+        rng = random.Random(0xA5)
+        hashes = ('110d6f3ad9bc09df0030f63d27ff5903ccaad46c9d6d868b2d03f332b7e6fc37',
+                  'bbbb33ec64ff46ddf244fc2a1da3c4a1cc395070051f70bc1a2df7c5b4ca4836')
+        for alpha, wanted in zip((False, True), hashes):
+            data = bytearray(struct.pack('<5I', 0x584554, 0x200000a5,
+                             1 | 128 << 6 | 128 << 19, 0x10001 | (12 if alpha else 11) << 8, 0))
+            for _ in range(1024):
+                info = rng.getrandbits(8)
+                for shift in (24, 16, 8):
+                    if info & 2:
+                        first = rng.randrange(32)
+                        delta = rng.choice([v for v in range(-4, 4) if 0 <= first + v <= 31])
+                        field = first * 8 + (delta & 7)
+                    else:
+                        field = rng.randrange(256)
+                    info |= field << shift
+                if alpha:
+                    data.extend(rng.getrandbits(64).to_bytes(8, 'little'))
+                data.extend(struct.pack('<II', rng.getrandbits(32), info))
+            self.assertEqual(hashlib.sha256(self.run_case(data)).hexdigest(), wanted)
 
 
 if __name__ == '__main__':

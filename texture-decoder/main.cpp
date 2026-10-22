@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <cstdint>
 #include <filesystem>
 #include <fstream>
@@ -27,6 +28,60 @@ static uint64_t number(const std::string& text) {
     return value;
 }
 struct Image { uint32_t width, height; Bytes rgba; };
+static uint64_t little64(const Bytes& b, size_t p) {
+    return uint64_t(word(b, p)) | (uint64_t(word(b, p + 4)) << 32);
+}
+// ETC1 bit fields follow the Khronos OES_compressed_ETC1_RGB8_texture spec.
+// 3DS stores each 64-bit color word little-endian, preceded by A4 when present.
+static void decode_etc(const Bytes& b, size_t start, bool alpha, Image& image) {
+    constexpr int magnitude[8][2] = {
+        {2, 8}, {5, 17}, {9, 29}, {13, 42},
+        {18, 60}, {24, 80}, {33, 106}, {47, 183}};
+    const size_t stride = alpha ? 16 : 8;
+    size_t cursor = start;
+    for (uint32_t ty = 0; ty < image.height; ty += 8) {
+        for (uint32_t tx = 0; tx < image.width; tx += 8) {
+            for (unsigned block = 0; block < 4; ++block, cursor += stride) {
+                const uint64_t a4 = alpha ? little64(b, cursor) : UINT64_MAX;
+                const uint64_t color = little64(b, cursor + (alpha ? 8 : 0));
+                const uint32_t info = static_cast<uint32_t>(color >> 32);
+                const uint32_t indices = static_cast<uint32_t>(color);
+                const bool differential = (info & 2) != 0;
+                std::array<std::array<int, 3>, 2> base{};
+                for (unsigned c = 0; c < 3; ++c) {
+                    const unsigned shift = 24 - c * 8;
+                    const unsigned field = (info >> shift) & 255;
+                    if (differential) {
+                        const int first = static_cast<int>(field >> 3);
+                        const int delta = int(field & 7) - ((field & 4) ? 8 : 0);
+                        const int second = first + delta;
+                        require(second >= 0 && second <= 31, "invalid ETC1 differential color");
+                        base[0][c] = first * 8 + first / 4;
+                        base[1][c] = second * 8 + second / 4;
+                    } else {
+                        base[0][c] = int(field >> 4) * 17;
+                        base[1][c] = int(field & 15) * 17;
+                    }
+                }
+                for (unsigned y = 0; y < 4; ++y) {
+                    for (unsigned x = 0; x < 4; ++x) {
+                        const unsigned n = x * 4 + y;
+                        const unsigned half = (info & 1) ? y / 2 : x / 2;
+                        const unsigned table = (info >> (half ? 2 : 5)) & 7;
+                        const int sign = ((indices >> (16 + n)) & 1) ? -1 : 1;
+                        const int modifier = sign * magnitude[table][(indices >> n) & 1];
+                        const size_t dst = (size_t(ty + (block / 2) * 4 + y) * image.width +
+                                            tx + (block % 2) * 4 + x) * 4;
+                        for (unsigned c = 0; c < 3; ++c)
+                            image.rgba[dst + c] = static_cast<uint8_t>(
+                                std::clamp(base[half][c] + modifier, 0, 255));
+                        image.rgba[dst + 3] = static_cast<uint8_t>(((a4 >> (4 * n)) & 15) * 17);
+                    }
+                }
+            }
+        }
+    }
+}
 static Image decode(const Bytes& b, uint64_t mip) {
     require(word(b, 0) == 0x00584554, "not TEX");
     const auto flags = word(b, 4), dimensions = word(b, 8), format = word(b, 12);
@@ -36,7 +91,9 @@ static Image decode(const Bytes& b, uint64_t mip) {
     require((format & 255) == 1, "only one texture supported");
     require((format >> 16) == 1, "unsupported texture layout flags");
     const uint32_t type = (format >> 8) & 255;
-    require(type == 3 || type == 17, "only ABGR8888 and BGR888 supported");
+    require(type == 3 || type == 17 || type == 11 || type == 12,
+            "only ABGR8888, BGR888, ETC1 and ETC1A4 supported");
+    const bool compressed = type == 11 || type == 12;
     const uint32_t width = (dimensions >> 6) & 8191, height = dimensions >> 19;
     const uint32_t levels = dimensions & 63;
     require(width >= 8 && height >= 8 && width <= 4096 && height <= 4096 &&
@@ -54,11 +111,16 @@ static Image decode(const Bytes& b, uint64_t mip) {
         require(word(b, 16 + size_t(i) * 4) == expected,
                 "mip offsets must be contiguous, relative to pixel data, and start at zero");
         if (i == mip) { selected = expected; sw = w; sh = h; }
-        expected += size_t(w) * h * channels;
+        expected += compressed ? size_t(w) * h / 16 * (type == 12 ? 16 : 8)
+                               : size_t(w) * h * channels;
         w /= 2; h /= 2;
     }
     require(expected == b.size() - base, "payload length does not match all mip levels");
     Image image{sw, sh, Bytes(size_t(sw) * sh * 4)};
+    if (compressed) {
+        decode_etc(b, base + selected, type == 12, image);
+        return image;
+    }
     for (uint32_t y = 0; y < sh; ++y) {
         for (uint32_t x = 0; x < sw; ++x) {
             size_t morton = 0;
