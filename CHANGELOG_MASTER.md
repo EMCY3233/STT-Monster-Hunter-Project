@@ -1,3 +1,9 @@
+# 00.19 — Prueba 30/45 FPS
+
+Objetivo 45 por defecto; Círculo alterna 30/45. Plazos absolutos con fracción de microsegundo, sincronización de pantalla conservada y simulación a 60 Hz. No cambia frecuencias. STT/6 identifica cada ensayo mediante sesión `vita-0019-f45-…` o `vita-0019-f30-…`, reinicia la ventana al cambiar objetivo y conserva el límite de envío de tres minutos.
+
+Pruebas portables cubren cadencia con vblank de 60 Hz, sobrecarga, cambio de objetivo, reanudación/reloj y desbordamiento. 45 es un objetivo experimental; pendiente de medición física. En una pantalla de 60 Hz los intervalos de presentación no serán uniformes a 45 FPS.
+
 ## 2026-10-22 — Prototipo 0.18: cámara hacia arriba
 
 - Mirada por encima del horizonte con palanca derecha y altura mínima respecto al suelo.

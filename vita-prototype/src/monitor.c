@@ -39,15 +39,20 @@ void stt_monitor_toggle(SttPrototypeMonitor *m,uint64_t now){
  memcpy(m->address,&address,sizeof address);
  snprintf(m->session,sizeof m->session,"vita-perf-%"PRIx64,now);
  m->started=m->window_start=now;m->next=now+1000000;m->seq=0;m->sent=m->errors=m->frames=0;
- m->update_sum=m->render_sum=m->present_sum=m->telemetry_sum=0;m->last_ground=m->last_raster=2;memset(m->stage_sum,0,sizeof m->stage_sum);m->active=1;return;
+ m->update_sum=m->render_sum=m->present_sum=m->telemetry_sum=0;m->last_ground=m->last_raster=2;m->last_target=0;memset(m->stage_sum,0,sizeof m->stage_sum);m->active=1;return;
 fail:
  stt_monitor_close(m);
 }
 void stt_monitor_frame(SttPrototypeMonitor *m,const char *session,uint64_t now,uint64_t tick,
- unsigned equipment,unsigned ground_mode,unsigned raster_mode,const SttRenderProfile *profile,unsigned update_us,unsigned render_us,unsigned present_us,unsigned telemetry_us){
+ unsigned equipment,unsigned ground_mode,unsigned raster_mode,unsigned target_fps,const SttRenderProfile *profile,unsigned update_us,unsigned render_us,unsigned present_us,unsigned telemetry_us){
  (void)session;
  if(!m->active)return;
  if(now<m->started||now-m->started>=180000000ULL){stt_monitor_close(m);return;}
+ if(m->last_target!=target_fps){
+  m->last_target=target_fps;snprintf(m->session,sizeof m->session,"vita-0019-f%u-%"PRIx64,target_fps,now);
+  /* New session per target: retain safety timeout and cumulative send counters. */
+  m->seq=0;m->last_ground=3;
+ }
  if(m->last_ground!=ground_mode||m->last_raster!=raster_mode){m->last_ground=ground_mode;m->last_raster=raster_mode;memset(m->stage_sum,0,sizeof m->stage_sum);m->window_start=now;m->next=now+1000000;m->frames=0;m->update_sum=m->render_sum=m->present_sum=m->telemetry_sum=0;return;}
  unsigned stage[6]={profile->clear_us,profile->ground_us,profile->body_us,profile->weapon_us,profile->target_us,profile->hud_us};
  for(unsigned i=0;i<6;i++)m->stage_sum[i]+=stage[i];

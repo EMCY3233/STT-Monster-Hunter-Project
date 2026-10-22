@@ -30,7 +30,8 @@ static void tri_reference(V a,V b,V c,uint32_t color){
 }
 /* Integer subpixel coverage (1/16 pixel), canonical winding, incremental depth.
    Reference rasterizer stays selectable. Edges can differ by <=1 pixel. */
-static unsigned raster_mode=1;
+static unsigned raster_mode=1,target_fps=45;
+void stt_render_set_target(unsigned fps){target_fps=fps==30?30:45;}
 static SttRenderClock profile_clock;static SttRenderProfile profile;
 void stt_render_set_clock(SttRenderClock clock){profile_clock=clock;}
 const SttRenderProfile *stt_render_profile(void){return &profile;}
@@ -219,14 +220,14 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
  profile.target_us=(unsigned)(mark()-phase);phase=mark();
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-18 CAMERA UP",RGB(119,223,235));
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-19 FPS TRIAL",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
  rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE RIGHT CAMERA CROSS DRAW-ATTACK START EXIT",RGB(238,239,223));
  snprintf(line,sizeof line,"L GROUND R RASTER SELECT NET US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
  if(paused){rect(65,110,350,46,RGB(9,17,27));text(78,120,"RELEASE STICKS AND GAME BUTTONS",RGB(255,234,125));text(78,137,"OR PRESS TRIANGLE TO RESET",RGB(255,234,125));}
  if(asset)text(8,36,asset->status==STT_ASSET_READY?"ASSET READY":asset->status==STT_ASSET_MISSING?"ASSET MISSING - SIMPLE HUNTER":"ASSET INVALID - SIMPLE HUNTER",RGB(255,234,125));
  if(equipment){static const char *modes[]={"SHEATHED","DRAWING","DRAWN","SHEATHING"};text(330,36,modes[(unsigned)equipment->mode<=STT_SHEATHING?equipment->mode:0],RGB(255,234,125));}
- snprintf(line,sizeof line,"FPS %u G%u T%u NET %s %u",frame_us?1000000u/frame_us:0,ground_mode,raster_mode,monitor_active?"ON":"OFF",monitor_sent);text(125,45,line,RGB(153,185,191));
+ snprintf(line,sizeof line,"FPS %u CAP%u G%u T%u NET %s %u",frame_us?1000000u/frame_us:0,target_fps,ground_mode,raster_mode,monitor_active?"ON":"OFF",monitor_sent);text(125,45,line,RGB(153,185,191));
  if(weapon)text(8,45,weapon->status==STT_ASSET_READY&&equipped?"SWORD READY":"SWORD FALLBACK",RGB(255,234,125));
  profile.hud_us=(unsigned)(mark()-phase);
 }

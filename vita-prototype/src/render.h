@@ -11,6 +11,7 @@
 #define STT_PITCH 512
 typedef uint64_t (*SttRenderClock)(void);
 typedef struct {unsigned clear_us,ground_us,body_us,weapon_us,target_us,hud_us;} SttRenderProfile;
+void stt_render_set_target(unsigned fps);
 void stt_render_set_clock(SttRenderClock clock);
 const SttRenderProfile *stt_render_profile(void);
 void stt_render_set_raster(unsigned mode);
