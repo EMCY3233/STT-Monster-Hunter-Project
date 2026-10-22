@@ -263,3 +263,7 @@ PropietarioPR7 comunica runtime-frame-step:100lecturascorrectas/0errores,en3avan
 Cierre delpropietarioPR7:2.400lecturascorrectas/0errores,barridos8KiB conventanasprioritarias,archivo deduplicado con tiempos/direcciones/hashes;9exportacioneslocales verificadas y9pruebasdelaherramienta aprobadas. Permite reconstruir/compararmemoria muestreada,no identifica recursosoriginales. Capturas/datoscomerciales privados,fuera delbancoexistente yGit. Citra seguíaabierto yteclasliberadassegúncierre;centralnointervino.
 
 Aceptaciónestática previa:24candidatosdelecturadedoscamposvecinos,71palabrasinstrucciones/literales coincidenconmemoria segúnpropietario;6pruebasdelanalizadorcorrectas. No ejecución decandidatos ni escritordeloscontadores confirmado. No tratar coincidenciabytescomosemántica. Investigaciónactual contrasta referenciasexternasporversión,sin activartrucos/escriturasdememoria. No nuevastareasduplicadas.
+
+## 22-10-2026 — Pistas externas de memoria, sin semántica confirmada
+
+PropietarioPR7 cerró contraste dedosfuentesexternas:bloquesvisiblescoinciden,noconstituyen validaciónindependiente. Separó referenciasv1.0/v1.1 ydetectódiscrepanciadedirecciónv1.1. Lecturacandidatadedinero1500repetidadosveces,sincontrastepantalla:noetiquetacampo confirmada. Punterosjugadornulos,seguro noseguidos. Noactivótrucosniescribiómemoria. No asumir revisiónexactadeljuegopor coincidenciavalor. Mantenerfuentesexternascomopistas,nocontratosimplementados. Sin nuevasórdenesdecapturadesdecentral ni cambiosbanco/Vita.

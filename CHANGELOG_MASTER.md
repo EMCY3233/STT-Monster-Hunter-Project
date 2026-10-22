@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Referenciasexternas delimitadas
+
+-PR7:fuentescoincidentes noindependientes,v1.0/v1.1separadas;valorcandidato1500sinpantallaverificada,punterosnulosnoseguidos.
+-Sin trucos/escriturasdememoria ni semánticaconfirmada.
+
 ## 22-10-2026 — Capturas reconstruibles
 
 -PR7comunica2.400lecturassinerror,9exportacionesverificadas/9pruebas;memoria muestreada,norecursosoriginalesidentificados.
