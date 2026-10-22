@@ -66,9 +66,9 @@ static void tri_incremental(V a,V b,V c,uint32_t color){
  }
 }
 static void tri(V a,V b,V c,uint32_t color){if(raster_mode)tri_incremental(a,b,c,color);else tri_reference(a,b,c,color);}
-static unsigned ground_mode=1;
+static unsigned ground_mode=2;
 static int monitor_active,monitor_result;static unsigned monitor_sent;
-void stt_render_set_ground(unsigned mode){ground_mode=mode?1u:0u;}
+void stt_render_set_ground(unsigned mode){ground_mode=mode<=2?mode:2u;}
 unsigned stt_render_get_ground(void){return ground_mode;}
 void stt_render_monitor_status(int active,unsigned sent,int result){monitor_active=active;monitor_sent=sent;monitor_result=result;}
 /* Plane y=0: right.y=0 makes inverse depth constant along each screen row.
@@ -88,6 +88,68 @@ static void ground_scanline(int center_x,int center_z){
    int gx=(int)floorf(wx*.5f),gz=(int)floorf(wz*.5f);
    if(gx<center_x-8||gx>=center_x+8||gz<center_z-8||gz>=center_z+8)continue;
    zb[y*STT_WIDTH+x]=inv;fb[y*STT_PITCH+x]=(gx+gz)&1?RGB(49,67,69):RGB(57,77,78);
+  }
+ }
+}
+/* Exact reference coordinate evaluation, called per cell boundary, not per pixel. */
+static int ground_cell(float base,float distance,float axis,int x){
+ float screen_x=((x+.5f)-240.0f)/250.0f;
+ return (int)floorf((base+distance*screen_x*axis)*.5f);
+}
+/* First pixel reaching a monotonic cell threshold. End is exclusive. */
+static int ground_lower(float base,float distance,float axis,int threshold,int increasing){
+ int lo=0,hi=STT_WIDTH;
+ while(lo<hi){int mid=lo+(hi-lo)/2,cell=ground_cell(base,distance,axis,mid);
+  if(increasing?cell>=threshold:cell<=threshold)hi=mid;else lo=mid+1;
+ }
+ return lo;
+}
+static int ground_interval(float base,float distance,float axis,int center,int *start,int *end){
+ if(axis==0){int cell=ground_cell(base,distance,axis,0);return cell>=center-8&&cell<center+8;}
+ int a=ground_lower(base,distance,axis,axis>0?center-8:center+7,axis>0);
+ int b=ground_lower(base,distance,axis,axis>0?center+8:center-9,axis>0);
+ if(a>*start)*start=a;
+ if(b<*end)*end=b;
+ return *start<*end;
+}
+static int ground_next(float base,float distance,float axis,int cell,int start,int end){
+ if(axis==0)return end;
+ float denom=distance*axis;if(denom==0)return end;
+ float boundary=(axis>0?cell+1:cell)*2.0f;
+ float crossing=(boundary-base)/denom*250.0f+239.5f;
+ int guess;
+ if(!isfinite(crossing)||crossing>=end)guess=end;
+ else if(crossing<=start)guess=start+1;
+ else guess=axis>0?(int)ceilf(crossing):(int)floorf(crossing)+1;
+ if(guess<=start)guess=start+1;
+ if(guess>end)guess=end;
+ /* Float boundary rounding is resolved against the unchanged coordinate formula. */
+ if(ground_cell(base,distance,axis,guess-1)==cell&&
+    (guess==end||ground_cell(base,distance,axis,guess)!=cell))return guess;
+ int lo=start+1,hi=end;
+ while(lo<hi){int mid=lo+(hi-lo)/2;
+  if(ground_cell(base,distance,axis,mid)==cell)lo=mid+1;else hi=mid;
+ }
+ return lo;
+}
+static void ground_spans(int center_x,int center_z){
+ for(int y=0;y<STT_HEIGHT;y++){
+  float screen_y=(142.0f-(y+.5f))/250.0f;
+  float dy=forward.y+screen_y*up.y;if(dy>=-.000001f)continue;
+  float distance=-eye.y/dy;if(distance<.15f)continue;
+  float inv=1.0f/distance;
+  float wx0=eye.x+distance*(forward.x+screen_y*up.x),wz0=eye.z+distance*(forward.z+screen_y*up.z);
+  int start=0,end=STT_WIDTH;
+  if(!ground_interval(wx0,distance,right.x,center_x,&start,&end)||
+     !ground_interval(wz0,distance,right.z,center_z,&start,&end))continue;
+  while(start<end){
+   int gx=ground_cell(wx0,distance,right.x,start),gz=ground_cell(wz0,distance,right.z,start);
+   int last=ground_next(wx0,distance,right.x,gx,start,end);
+   int nz=ground_next(wz0,distance,right.z,gz,start,end);if(nz<last)last=nz;
+   uint32_t color=(gx+gz)&1?RGB(49,67,69):RGB(57,77,78);
+   uint32_t *pixels=fb+y*STT_PITCH;float *depth=zb+y*STT_WIDTH;
+   for(int x=start;x<last;x++){depth[x]=inv;pixels[x]=color;}
+   start=last;
   }
  }
 }
@@ -123,7 +185,8 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  eye=(V){hx-sy*6*cp,1.1f+sp*6,hz-cy*6*cp};right=(V){cy,0,-sy};forward=(V){sy*cp,-sp,cy*cp};up=(V){sy*sp,cp,cy*sp};
  int center_x=(int)floorf(hx/2),center_z=(int)floorf(hz/2);
  profile.clear_us=(unsigned)(mark()-phase);phase=mark();
- if(ground_mode)ground_scanline(center_x,center_z);
+ if(ground_mode==2)ground_spans(center_x,center_z);
+ else if(ground_mode==1)ground_scanline(center_x,center_z);
  else for(int z=center_z-8;z<center_z+8;z++)for(int x=center_x-8;x<center_x+8;x++){
   uint32_t col=(x+z)&1?RGB(49,67,69):RGB(57,77,78);V a={x*2,0,z*2},b={x*2+2,0,z*2},d={x*2,0,z*2+2},e={x*2+2,0,z*2+2};tri(a,b,e,col);tri(a,e,d,col);
  }
@@ -153,7 +216,7 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
  profile.target_us=(unsigned)(mark()-phase);phase=mark();
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-16 RASTER LAB",RGB(119,223,235));
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-17 GROUND LAB",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
  rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE RIGHT CAMERA CROSS DRAW-ATTACK START EXIT",RGB(238,239,223));
  snprintf(line,sizeof line,"L GROUND R RASTER SELECT NET US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));

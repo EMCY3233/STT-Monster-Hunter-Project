@@ -42,6 +42,13 @@ class PerfTests(unittest.TestCase):
         self.assertEqual(result['groups'][0]['render_stages_us']['weapon_us'],3000)
         del p['perf']['body_us']
         with self.assertRaises(ValueError):encode(p)
+    def test_v6_ground_spans_and_old_range(self):
+        p=sample();p['version']=6
+        p['perf'].update(ground_mode=2,raster_mode=1,clear_us=1,ground_us=2,body_us=3,weapon_us=4,target_us=5,hud_us=6)
+        self.assertEqual(decode(encode(p)),p)
+        self.assertEqual(analyze([{'packet':p}])['groups'][0]['ground_mode'],2)
+        p['version']=5
+        with self.assertRaises(ValueError):encode(p)
     def test_receiver_accepts_performance(self):
         from stt_monitor.receiver import receive
         class Socket:
