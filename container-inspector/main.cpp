@@ -155,13 +155,13 @@ void verify_exefs(Reader& r,U base,U size,std::ostream& out) {
     out<<"exefs_files=verified count="<<count<<"\n";
 }
 
-struct Options { bool verify=false, list=false, integrity=false; };
+struct Options { bool verify=false, list=false, integrity=false, index=false; };
 U rawle(const std::vector<unsigned char>& b,U p,size_t n=4) {
     range(p,n,b.size()); U v=0;
     for(size_t i=0;i<n;++i) v|=U(b[static_cast<size_t>(p)+i])<<(8*i);
     return v;
 }
-struct Node { U parent,next,child,file,offset,size; std::string name; };
+struct Node { U parent,next,child,file,offset,size,hashNext; std::uint32_t pathHash; std::string name; };
 std::string name16(const std::vector<unsigned char>& b,U p,U n) {
     require(n%2==0 && n<=1024,"invalid RomFS name length"); range(p,n,b.size());
     std::string s;
@@ -174,7 +174,33 @@ std::string name16(const std::vector<unsigned char>& b,U p,U n) {
     }
     require(s!="." && s!="..","invalid RomFS dot component"); return s;
 }
-void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false) {
+
+void verify_buckets(Reader& r,U base,U offset,U size,const std::map<U,Node>& nodes,
+                    const char* label,std::ostream& out) {
+    require(size%4==0 && size<=4*1024*1024,"RomFS hash bucket budget exceeded");
+    U count=size/4;
+    require(count>0 || nodes.empty(),"missing RomFS hash table");
+    std::vector<unsigned char> heads(static_cast<size_t>(size));
+    if(size) r.read(base+offset,heads.data(),heads.size());
+    std::set<U> seen; U used=0,maxChain=0;
+    for(U i=0;i<count;++i) {
+        U current=rawle(heads,i*4),chain=0;
+        if(current!=0xffffffff) ++used;
+        while(current!=0xffffffff) {
+            require(nodes.count(current)>0,"RomFS bucket link is not a record boundary");
+            require(seen.insert(current).second,"RomFS cyclic/shared bucket link");
+            const auto& node=nodes.at(current);
+            require(node.pathHash%count==i,"RomFS name in wrong hash bucket");
+            current=node.hashNext; ++chain;
+        }
+        maxChain=std::max(maxChain,chain);
+    }
+    require(seen.size()==nodes.size(),"RomFS records missing from hash buckets");
+    out<<"romfs_index type="<<label<<" hash_buckets=verified buckets="<<count
+       <<" used="<<used<<" entries="<<seen.size()<<" max_chain="<<maxChain<<"\n";
+}
+
+void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false,bool printFiles=true,bool verifyIndex=false) {
     require(size>=0x60,"short IVFC"); Header iv{}; r.read(base,iv.data(),0x60);
     require(std::equal(iv.begin(),iv.begin()+4,"IVFC") && le(iv,4)==0x10000,"unsupported IVFC");
     U exponent=le(iv,0x4c); require(exponent>=9 && exponent<=20,"unsupported IVFC block size");
@@ -202,6 +228,12 @@ void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false) {
             range(p+fixed,n,b.size()); require(n%2==0,"odd UTF16 name size");
             Node node{}; node.parent=rawle(b,p); node.next=rawle(b,p+4);
             node.name=name16(b,p+fixed,n);
+            node.hashNext=rawle(b,p+(isdir?16:24));
+            node.pathHash=static_cast<std::uint32_t>(node.parent)^123456789u;
+            for(U j=0;j<n;j+=2) {
+                node.pathHash=(node.pathHash>>5)|(node.pathHash<<27);
+                node.pathHash^=static_cast<std::uint32_t>(rawle(b,p+fixed+j,2));
+            }
             if(isdir) { node.child=rawle(b,p+8); node.file=rawle(b,p+12); }
             else { node.offset=rawle(b,p+8,8); node.size=rawle(b,p+16,8); range(node.offset,node.size,length-data); }
             nodes.emplace(p,node); require(nodes.size()<=100000,"RomFS entry budget exceeded");
@@ -209,6 +241,10 @@ void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false) {
         }
     };
     parse(dirs,true,dn); parse(files,false,fn);
+    if(verifyIndex) {
+        verify_buckets(r,base+start,le(h,4),le(h,8),dn,"directories",out);
+        verify_buckets(r,base+start,le(h,20),le(h,24),fn,"files",out);
+    }
     require(dn.count(0) && dn.at(0).parent==0 && dn.at(0).name.empty() && dn.at(0).next==0xffffffff,"invalid RomFS root");
     struct Work { U id,parent,depth; std::string path; };
     std::vector<Work> pending{{0,0,0,""}};
@@ -229,7 +265,7 @@ void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false) {
             require(total<=std::numeric_limits<U>::max()-file.size,"RomFS total overflow"); total+=file.size;
             reportBytes+=w.path.size()+file.name.size()+128;
             require(reportBytes<=32*1024*1024,"RomFS report budget exceeded");
-            out<<"romfs_file path=\""<<w.path<<"/"<<file.name<<"\" size="<<file.size
+            if(printFiles) out<<"romfs_file path=\""<<w.path<<"/"<<file.name<<"\" size="<<file.size
                <<" absolute_offset="<<base+start+data+file.offset<<"\n";
             f=file.next;
         }
@@ -247,7 +283,7 @@ void romfs(Reader& r,U base,U size,std::ostream& out,bool treeVerified=false) {
     }
     require(seenDirs.size()==dn.size() && seenFiles.size()==fn.size(),"unreachable RomFS metadata");
     out<<"romfs_summary directories="<<dn.size()<<" files="<<fn.size()<<" file_bytes="<<total
-       <<" ivfc_tree="<<(treeVerified?"verified":"not_verified")<<" hash_buckets=not_verified\n";
+       <<" ivfc_tree="<<(treeVerified?"verified":"not_verified")<<" hash_buckets="<<(verifyIndex?"verified":"not_verified")<<"\n";
 }
 void verify_region(Reader& r,U offset,U length,const Header& h,size_t stored,const char* label,std::ostream& out,bool present=false) {
     if(!length) {
@@ -315,20 +351,21 @@ void ncch(Reader& r,U base,U available,std::ostream& out,const Options& options)
             }
         }
     }
-    if(options.list && le(h,0x1b4)) {
-        if(encrypted) out<<"romfs_listing=skipped_encrypted\n";
-        else romfs(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b4),exp),out,options.integrity);
+    if((options.list || options.index) && le(h,0x1b4)) {
+        if(encrypted) out<<(options.index?"romfs_index":"romfs_listing")<<"=skipped_encrypted\n";
+        else romfs(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b4),exp),out,options.integrity,options.list,options.index);
     }
 
 }
 int main(int argc,char** argv) {
     Options options;
-    if(argc<2) { std::cerr<<"usage: stt-inspect input [--verify] [--list-romfs] [--verify-integrity]\n"; return 2; }
+    if(argc<2) { std::cerr<<"usage: stt-inspect input [--verify] [--list-romfs] [--verify-integrity] [--verify-romfs-index]\n"; return 2; }
     for(int i=2;i<argc;++i) {
         std::string arg=argv[i];
         if(arg=="--verify") options.verify=true;
         else if(arg=="--list-romfs") options.list=true;
         else if(arg=="--verify-integrity") { options.integrity=true; options.verify=true; }
+        else if(arg=="--verify-romfs-index") { options.index=true; options.integrity=true; options.verify=true; }
         else { std::cerr<<"unknown option\n"; return 2; }
     }
     try {

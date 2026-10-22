@@ -89,12 +89,12 @@ def tree_image(names=(), filename="a"):
     return b
 
 
-def integrity_image(lvsize=512):
+def integrity_image(lvsize=512, level3=None):
     src=tree_image()
     block=512
     ceil=lambda n:(n+block-1)//block*block
-    body=bytes(src[1024:])+bytes(max(0,ceil(lvsize)-512))
-    body=body[:ceil(lvsize)]
+    body=bytes(src[1024:] if level3 is None else level3)
+    body=(body+bytes(max(0,ceil(lvsize)-len(body))))[:ceil(lvsize)]
     h2=b"".join(hashlib.sha256(body[i:i+block]).digest() for i in range(0,len(body),block))
     l2=h2+bytes(ceil(len(h2))-len(h2))
     h1=b"".join(hashlib.sha256(l2[i:i+block]).digest() for i in range(0,len(l2),block))
@@ -124,6 +124,39 @@ def exefs_image():
         b[512+0x1e0-i*32:512+0x200-i*32]=hashlib.sha256(data).digest()
     b[0x1c0:0x1e0]=hashlib.sha256(b[512:1024]).digest()
     return b
+
+
+def indexed_image(names=(), filename="a", buckets=3):
+    src=tree_image(names,filename)
+    hdr=struct.unpack_from("<10I",src,1024)
+    dirs=bytearray(src[1024+hdr[3]:1024+hdr[3]+hdr[4]])
+    files=bytearray(src[1024+hdr[7]:1024+hdr[7]+hdr[8]])
+    def make_table(raw,fixed):
+        heads=[0xffffffff]*buckets
+        at=0
+        while at<len(raw):
+            parent=struct.unpack_from("<I",raw,at)[0]
+            n=struct.unpack_from("<I",raw,at+fixed-4)[0]
+            value=parent^123456789
+            for unit in struct.unpack_from("<"+"H"*(n//2),raw,at+fixed):
+                value=(((value>>5)|(value<<27))^unit)&0xffffffff
+            i=value%buckets
+            put(raw,at+(16 if fixed==24 else 24),heads[i])
+            heads[i]=at
+            at+=fixed+(n+3)//4*4
+        return struct.pack("<"+"I"*buckets,*heads)
+    dh=make_table(dirs,24); fh=make_table(files,32)
+    dm=40+len(dh); fhoff=dm+len(dirs); fm=fhoff+len(fh)
+    data=(fm+len(files)+15)//16*16
+    lv=bytearray((data+3+511)//512*512)
+    struct.pack_into("<10I",lv,0,40,40,len(dh),dm,len(dirs),fhoff,len(fh),fm,len(files),data)
+    lv[40:dm]=dh; lv[dm:fhoff]=dirs
+    lv[fhoff:fm]=fh; lv[fm:fm+len(files)]=files
+    lv[data:data+3]=b"abc"
+    return integrity_image(len(lv),lv)
+def rehash_index_image(b):
+    n=struct.unpack_from("<Q",b,512+0x44)[0]
+    return integrity_image(n,b[1024:1024+n])
 
 class Inspector(unittest.TestCase):
     def run_image(self, b, valid=True, options=()):
@@ -321,6 +354,55 @@ class Inspector(unittest.TestCase):
     def test_integrity_requires_exefs_header_coverage(self):
         b=exefs_image(); put(b,0x1a8,0)
         self.run_image(b,False,("--verify-integrity",))
+
+
+    def test_romfs_index_valid(self):
+        out=self.run_image(indexed_image(["sub","ñ","𐐀"]),options=("--verify-romfs-index",))
+        self.assertIn("type=directories hash_buckets=verified",out)
+        self.assertIn("entries=4",out)
+        self.assertIn("hash_buckets=verified",out)
+        self.assertNotIn("romfs_file path=",out)
+    def test_romfs_index_and_listing(self):
+        out=self.run_image(indexed_image(["sub"]),options=("--verify-romfs-index","--list-romfs"))
+        self.assertIn('path="/sub/a"',out)
+    def test_romfs_index_empty_files(self):
+        out=self.run_image(indexed_image(filename=None),options=("--verify-romfs-index",))
+        self.assertIn("type=files hash_buckets=verified buckets=3 used=0 entries=0",out)
+    def test_romfs_index_collisions(self):
+        out=self.run_image(indexed_image(["x","y","z"],buckets=1),options=("--verify-romfs-index",))
+        self.assertIn("entries=4 max_chain=4",out)
+    def test_romfs_index_missing_record(self):
+        b=indexed_image()
+        dh=struct.unpack_from("<I",b,1028)[0]
+        for i in range(3): put(b,1024+dh+4*i,0xffffffff)
+        self.run_image(rehash_index_image(b),False,("--verify-romfs-index",))
+    def test_romfs_index_wrong_bucket(self):
+        b=indexed_image()
+        dh=struct.unpack_from("<I",b,1028)[0]
+        heads=list(struct.unpack_from("<3I",b,1024+dh))
+        heads=heads[1:]+heads[:1]
+        struct.pack_into("<3I",b,1024+dh,*heads)
+        self.run_image(rehash_index_image(b),False,("--verify-romfs-index",))
+    def test_romfs_index_invalid_bucket_link(self):
+        for value in [1,0xfffffffe]:
+            b=indexed_image()
+            dh=struct.unpack_from("<I",b,1028)[0]
+            put(b,1024+dh,value)
+            self.run_image(rehash_index_image(b),False,("--verify-romfs-index",))
+    def test_romfs_index_cycles(self):
+        for table,field in [(3,16),(7,24)]:
+            b=indexed_image()
+            off=struct.unpack_from("<I",b,1024+4*table)[0]
+            put(b,1024+off+field,0)
+            self.run_image(rehash_index_image(b),False,("--verify-romfs-index",))
+    def test_romfs_index_shared_record(self):
+        b=indexed_image()
+        dh=struct.unpack_from("<I",b,1028)[0]
+        for i in range(3):put(b,1024+dh+4*i,0)
+        self.run_image(rehash_index_image(b),False,("--verify-romfs-index",))
+    def test_romfs_index_encrypted_skip(self):
+        b=indexed_image(); b[0x18f]=0
+        self.assertIn("romfs_index=skipped_encrypted",self.run_image(b,options=("--verify-romfs-index",)))
 
     def test_usage(self):
         self.assertEqual(subprocess.run([EXE],capture_output=True).returncode,2)

@@ -1,7 +1,7 @@
-# Inspector C++17 NCSD/NCCH de solo lectura
+# Lector C++17 NCSD/NCCH de solo lectura
 
-Inspección estructural de imágenes .3DS/.CCI NCSD con hasta ocho particiones
-NCCH, y NCCH independientes. La extensión no determina el formato.
+Inspecciona .3DS/.CCI NCSD con hasta ocho particiones NCCH y NCCH independientes.
+La extensión no determina el formato. No ejecuta MH4U.
 
 ## Compilar y probar
 
@@ -9,157 +9,108 @@ NCCH, y NCCH independientes. La extensión no determina el formato.
     cmake --build build/inspector --config Release
     ctest --test-dir build/inspector -C Release --output-on-failure
 
-Windows usa SHA-256 de BCrypt (SDK Windows); Linux requiere OpenSSL de desarrollo.
+Windows usa BCrypt del SDK Windows; Linux requiere OpenSSL de desarrollo.
+Linux puede activar ASan/UBSan con -DSTT_SANITIZERS=ON.
+
+## Uso y modos
 
     stt-inspect imagen.cci
-    stt-inspect imagen.cci --verify --list-romfs
+    stt-inspect imagen.cci --verify
+    stt-inspect imagen.cci --verify-integrity --list-romfs
+    stt-inspect imagen.cci --verify-romfs-index
 
-Informe a stdout; errores a stderr. Retornos: 0 inspección aceptada,
+- Básico: cabeceras, particiones, regiones, flags de cifrado, hashes almacenados
+  y SHA-256 completo por bloques de 64 KiB.
+- --verify: compara hashes NCCH de logo, exheader y superblocks en claro.
+  Regiones ausentes se indican absent; una región presente con rango hash vacío
+  se marca not_verified_empty_hash_range.
+- --verify-integrity: incluye --verify, hashes individuales de archivos ExeFS
+  y todos los bloques/padding de los tres niveles IVFC de RomFS en claro.
+- --verify-romfs-index: incluye --verify-integrity y comprueba los dos índices
+  hash de nombres RomFS, incluidos raíz, todos los directorios y archivos.
+  No muestra nombres de archivo salvo si se añade --list-romfs.
+- --list-romfs: muestra rutas, tamaños y offsets de archivos del nivel 3 IVFC.
+  Se puede combinar con los modos de verificación.
+
+Informe a stdout, errores a stderr. Retornos: 0 inspección aceptada,
 1 inválido/no soportado/error de lectura/hash discordante, 2 argumentos incorrectos.
-Un fallo descarta el informe parcial. El programa solo abre un ifstream binario y
-no crea archivos. Nunca redirigir stdout a la entrada.
+Un fallo descarta el informe parcial. Retorno 0 no significa que se hayan
+verificado firmas o regiones cifradas: consultar los estados de cada región.
+El programa solo abre un ifstream binario y no crea archivos.
+Nunca redirigir stdout a la entrada.
 
-## Inspección estructural
+## Validaciones
 
-Cabeceras de 512 bytes, campos little endian y tamaños/offsets uint64_t.
-Valida límites contra archivo, tamaño NCSD y tamaño NCCH, pares offset/tamaño,
-regiones y particiones solapadas, tamaños de regiones hash. Permite cola NCSD
-recortada si todas las particiones declaradas siguen presentes.
+Campos little endian, offsets y tamaños uint64_t, límites contra archivo y
+contenedores, pares offset/tamaño, regiones y particiones sin solapamientos.
+Se admite cola NCSD recortada si todas sus particiones siguen presentes.
 
-Perfil conservador: exheader ausente o 0x400 bytes más descriptor de acceso de
-0x400; exponentes de unidad hasta 22 (impide overflow de campos uint32_t);
-solo particiones NCCH. No acepta NAND NCSD ni particiones parcialmente ausentes.
-Muestra flags crudos, crypto method, NoCrypto, FixedCryptoKey y seed.
-Son declaraciones de cabecera, no prueba independiente del cifrado de los bytes.
-SHA-256 del archivo completo calculado por bloques de 64 KiB.
+ExeFS: diez registros, offsets relativos al final de su cabecera de 512 bytes,
+hashes en orden inverso. Rechaza nombres duplicados, padding de nombre inválido,
+rangos fuera del contenedor y archivos solapados.
 
-## Verificación de hashes
+IVFC: versión 0x10000, niveles lógicos secuenciales, orden físico 3DS
+cabecera/master, nivel 3, nivel 1 y nivel 2. Comprueba sumas, alineaciones, rangos
+y capacidad de tablas padre. Verifica bloques completos con padding físico.
+Exige que el hash NCCH cubra cabecera ExeFS y cabecera/master hashes IVFC.
 
---verify compara SHA-256 de logo, exheader y superblocks ExeFS/RomFS con NCCH.
-Regiones ausentes se indican absent. Si la cabecera declara cifrado, solo se
-verifica el logo en claro; el contenido se marca skipped_encrypted.
-El modo básico informa hashes almacenados sin compararlos. Los resultados
-de comparación se muestran individualmente como hash=verified.
+RomFS: tablas y registros completos, enlaces a límites de registro, ausencia de
+ciclos o referencias compartidas indebidas, padres correctos, nombres únicos,
+nodos alcanzables y datos dentro del nivel 3. Nombres UTF-16 representados por
+ASCII y escapes de unidades Unicode; no se normalizan ni usan para escribir.
 
-No comprueba hashes de archivos ExeFS, toda la jerarquía IVFC ni firmas RSA.
-La coincidencia de estos hashes no certifica autenticidad ni integridad completa.
+Índices RomFS: calcula el hash de formato sobre padre y unidades UTF-16
+originales. Recorre buckets y cadenas, comprueba que cada registro esté en el
+bucket correcto y aparezca exactamente una vez, detecta ciclos, enlaces
+compartidos, registros ausentes y offsets que no sean inicio de registro.
+No impone un número primo de buckets ni un orden particular de colisiones.
 
-## Listado RomFS
+## Perfil y presupuestos
 
---list-romfs interpreta IVFC versión 0x10000 y su nivel 3 en claro. Muestra
-rutas, tamaños y offsets absolutos sin leer/exportar el contenido de archivos.
-Rechaza tablas fuera de límites, registros truncados, enlaces a mitad de registro,
-ciclos, padres incorrectos, nombres duplicados, nodos no alcanzables y datos fuera
-del nivel 3. Delimita los buckets hash de nombres, pero no los valida.
-Representa nombres UTF-16 mediante ASCII y escapes de unidades Unicode;
-no los normaliza ni los usa para escribir rutas.
+- Exheader ausente o 0x400 bytes más descriptor de acceso de 0x400.
+- Exponentes de unidad hasta 22, para evitar overflow de campos uint32_t.
+- Solo particiones NCCH; no admite NAND NCSD, Switch/save ni particiones truncadas.
+- Bloques IVFC entre 512 bytes y 1 MiB; hasta 8.000.000 bloques por RomFS.
+- Hasta 64 MiB de metadatos, 100.000 registros por tabla, profundidad 128,
+  nombres de 1024 bytes y rutas completas de 8192 caracteres.
+- Hasta 32 MiB de rutas pendientes y 32 MiB de informe de archivos por RomFS.
+- Hasta 4 MiB por tabla de buckets (1.048.576 buckets).
 
-Presupuestos: 64 MiB de metadatos, 100.000 entradas por tabla, profundidad 128,
-nombre 1024 bytes, ruta 8192 caracteres, informe de archivos 32 MiB por RomFS,
-bloques IVFC entre 512 bytes y 1 MiB. Perfiles mayores se rechazan.
+Flags NoCrypto/FixedCryptoKey/seed son declaraciones, no prueba independiente de
+cifrado. Contenido declarado cifrado se omite explícitamente, sin descifrar.
+La entrada debe permanecer estable; no se ofrece instantánea atómica frente
+a escrituras de otros procesos.
 
 ## Evidencia y coordinación
 
-Base: main f199bd07b4e05ee4f7e56ed616840518374f3300. AGENTS.md leído.
-PR abiertas revisadas: #7 investigación/ARC, #27 materiales, #36 núcleo PC,
-#39 inspector. Carpeta y workflow independientes; sin modificar sus ramas,
-monitor, banco privado ni Vita. No depende de fusionar otras PR.
+AGENTS.md leído. Base main f199bd07b4e05ee4f7e56ed616840518374f3300.
+Trabajos #7 (investigación/ARC), #27 (materiales), #36 (núcleo PC) y #39
+(lector) revisados. Cambios aislados en esta carpeta y su workflow.
+Sin modificar sus ramas, monitor, banco privado ni PS Vita.
 
-Código 1003ba2:
-* MSVC x64 C++17 /W4 /WX y CMake Release locales: compilación correcta.
-* Ejecución local confirmada el 23-10-2026 tras resolver el usuario el bloqueo
-  anterior de Windows Control de aplicaciones (WinError 4551). Las 21 pruebas
-  sintéticas locales pasan y el C++ ejecuta --verify --list-romfs sobre la
-  imagen privada: seis hashes presentes coinciden, y sus 11.512 entradas
-  coinciden con la referencia Python en partición, ruta, tamaño y offset.
-  SHA-256 completo de la imagen nuevamente contrastado e idéntico.
-* CI Windows/Linux x Debug/Release: cuatro trabajos correctos, con 21 pruebas
-  sintéticas por trabajo, incluidas 512 truncaciones de cabecera, corrupción de
-  hashes, ciclos, padres, enlaces, tablas, tamaños y nombres inseguros.
-  https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39860980537
-* La fuente queda intacta antes/después y SHA-256 se contrasta con hashlib.
-* Comprobación privada de la imagen indicada por el usuario mediante referencia
-  Python independiente: seis hashes NCCH presentes coinciden; listados RomFS
-  de las tres particiones y SHA-256 completo antes/después idéntico. Esto valida
-  la referencia sobre esa imagen; el contraste C++ posterior se registra arriba.
-  Los informes, rutas comerciales y bytes permanecen fuera de Git.
+Bloqueo previo de Windows Control de aplicaciones resuelto por el usuario.
+Compilación MSVC x64 C++17 /W4 /WX y suite local de 48 pruebas correctas.
+Incluye 512 truncaciones, corrupción por nivel IVFC, padding, hashes ExeFS
+invertidos, cobertura NCCH, ciclos, padres, Unicode, colisiones válidas,
+bucket incorrecto, enlaces compartidos y entradas ausentes.
 
-Sin claves, descifrado, extracción, reparación, recursos comerciales ni acceso a
-PS Vita. No ejecuta MH4U ni interpreta sus formatos de modelos/animación.
-Pendiente: verificar todo el árbol IVFC, hashes por archivo ExeFS y buckets RomFS.
-La entrada debe permanecer estable: no se ofrece instantánea atómica frente a
-cambios de otros procesos.
+Sobre la imagen privada del usuario: seis hashes NCCH, tres archivos ExeFS,
+673.229 bloques IVFC y los dos índices de cada una de las tres particiones
+correctos. Directorios/archivos: [153,11445], [1,1], [1,66].
+Referencia Python independiente reproduce hashes, recuentos y estadísticas
+de buckets. El SHA-256 completo sigue idéntico. Listados privados fuera de Git.
 
-## Referencias de formato
+CI ba8677f (38 pruebas, antes de los índices): cuatro trabajos correctos,
+Windows/Linux x Debug/Release, Linux Debug con ASan/UBSan:
+https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39864443114
+La CI de los índices debe identificarse separadamente por su commit.
 
-Consulta 22-10-2026:
-* https://3dbrew.org/wiki/NCSD
-* https://docs.mikage.app/NCCH/
-* https://docs.mikage.app/RomFS/
-* https://pyctr.readthedocs.io/en/stable/_modules/pyctr/type/romfs.html
+## Límites y fuentes
 
-La última se consultó para contrastar la ubicación física del nivel 3; no se
-copió su implementación. No se incorporaron ejemplos comerciales.
+Sin claves, descifrado, extracción, reparación ni recursos comerciales en Git.
+No se verifican firmas RSA, autenticidad o procedencia; la consistencia interna
+no las certifica. No interpreta modelos, texturas, animaciones o lógica MH4U.
 
-## Revisión del 23-10-2026
-
-Tres regresiones reproducidas y corregidas:
-* El límite de ruta incluye ahora el nombre del archivo; también se limita a
-  32 MiB la suma de rutas pendientes del recorrido.
-* Un superblock presente cuya longitud de hash sea cero aparece como
-  not_verified_empty_hash_range, no como absent. El retorno 0 significa
-  inspección aceptada; consultar todos los estados por región.
-* --verify ya no imprime reported_only junto a comparaciones realizadas.
-
-Se añaden pruebas de rutas completas, árboles anidados con Unicode, RomFS vacío,
-presupuesto de metadatos y estados del informe. Suite ampliada a 27 pruebas.
-Linux Debug habilita ASan/UBSan; las otras tres combinaciones conservan sus
-compilaciones normales. Las pruebas de regresión fallaron antes de los cambios.
-
-REA se revisó como herramienta de análisis posterior, no como dependencia del
-lector. Su proveedor Ghidra experimental en Windows admite PE y raw NMOS 6502,
-no establece soporte directo de imágenes NCSD/NCCH ni ARM11/3DS. No se ha
-instalado ni registrado REA desde esta revisión.
-Referencia: https://github.com/morluto/rea/blob/main/docs/windows-ghidra-p0.md
-
-## Integridad de archivos (23-10-2026)
-
-    stt-inspect imagen.cci --verify-integrity --list-romfs
-
---verify-integrity incluye --verify y añade los hashes individuales de los
-archivos ExeFS y los tres niveles del árbol IVFC de RomFS en claro. Lee contenidos
-para calcular hashes, pero no los extrae ni escribe. Verifica también los bytes
-de padding de cada bloque físico contra el hash almacenado.
-
-El perfil IVFC admitido usa versión 0x10000, bloques de 512 bytes a 1 MiB,
-niveles lógicos secuenciales y orden físico de RomFS 3DS: cabecera/master, datos
-de nivel 3, nivel 1 y nivel 2. Comprueba sumas, alineaciones, rangos y capacidad
-de tablas padre antes de leer. Límite total: 8.000.000 bloques por RomFS.
-No admite perfiles Switch/save ni intenta interpretarlos como RomFS 3DS.
-
-ExeFS admite diez registros, offsets relativos al final de la cabecera de
-512 bytes y hashes en orden inverso. Rechaza nombres duplicados, padding de
-nombre inválido, rangos fuera del contenedor y archivos solapados.
-
-Suite ampliada a 38 pruebas: árbol completo y multibloque, cola parcial,
-padding corrupto, alteraciones en cada nivel, layout y exponentes inválidos,
-archivos ExeFS corruptos, hashes intercambiados y límites/solapamientos.
-
-Este modo no verifica firmas RSA, autenticidad ni buckets hash de nombres
-RomFS. Un árbol coherente es una comprobación de integridad interna, no una
-certificación de procedencia.
-Fuentes y búsqueda en plataformas: RESEARCH.md.
-
-El modo --verify-integrity exige que el hash NCCH cubra la cabecera ExeFS
-completa y la cabecera/master hashes IVFC; rechaza una cobertura declarada
-insuficiente. --verify conserva su informe explícito de rangos vacíos.
-
-Resultado local sobre la imagen privada indicada por el usuario: coinciden los
-tres archivos ExeFS y los 673.229 bloques IVFC de las tres particiones. Referencia
-Python independiente reproduce los tres hashes ExeFS y los recuentos IVFC
-[41,5144,658418], [1,14,1755], [1,61,7794]. SHA-256 completo idéntico al anterior.
-No se publican nombres RomFS, contenidos ni hash privado de la imagen.
-
-Los pendientes históricos de hashes por archivo ExeFS/IVFC descritos arriba
-quedan cubiertos por --verify-integrity en este perfil. Siguen pendientes los
-buckets de nombres, firmas/autenticidad y formatos internos de recursos MH4U.
+Fuentes y búsqueda en plataformas: RESEARCH.md. Implementación propia basada
+en el formato; no se copiaron implementaciones ni se añadieron dependencias de
+CTRTool, GodMode9, libctru o REA.

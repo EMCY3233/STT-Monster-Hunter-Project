@@ -51,3 +51,26 @@ Estas páginas no acreditan compatibilidad MH4U ni integridad de la imagen local
 Las afirmaciones funcionales del lector deben apoyarse en pruebas sintéticas,
 ejecución local y CI identificadas por commit; los bytes comerciales quedan
 fuera del repositorio.
+
+## Ampliación: índices de nombres RomFS
+
+La repetición del ciclo se centra en el siguiente pendiente, los buckets de
+directorios y archivos. Se contrastó la especificación 3dbrew con libctru y
+GodMode9 para el hash padre/UTF-16, módulo del número de buckets y cadena
+nextHash. Se valida la tabla completa, no solo una búsqueda concreta.
+
+Fuente primaria adicional:
+https://github.com/devkitPro/libctru/blob/master/libctru/source/romfs_dev.c
+Blob consultado: ea5c4da46270311b9b3b1fe3d2907d9f3912e032.
+Formato de estructuras:
+https://github.com/devkitPro/libctru/blob/master/libctru/include/3ds/romfs.h
+
+La búsqueda específica en GBAtemp, Reddit y Stack Overflow se repitió. Las
+conclusiones de implementación se apoyan en especificación y fuentes primarias,
+sin atribuir validación de la imagen privada a publicaciones de comunidad.
+
+Pruebas nuevas reconstruyen los hashes IVFC tras alterar el índice, de modo que
+el rechazo comprueba la semántica de buckets y no solo la integridad de bytes.
+También se prueba una cadena válida con colisiones, raíz, árbol anidado, tabla
+de archivos vacía, nombres con unidades UTF-16 fuera de ASCII y no mostrar
+nombres de archivos cuando solo se verifica el índice.
