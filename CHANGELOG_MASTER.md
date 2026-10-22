@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Capturas reconstruibles
+
+-PR7comunica2.400lecturassinerror,9exportacionesverificadas/9pruebas;memoria muestreada,norecursosoriginalesidentificados.
+-24candidatosestáticos de lectura sin ejecución/escritoresconfirmados;nocausalidadinferida.
+
 ## 22-10-2026 — CI yrelacióncontadores/fotograma
 
 -CI966fb5f PC/Vita confirmadacorrecta;no hardware.

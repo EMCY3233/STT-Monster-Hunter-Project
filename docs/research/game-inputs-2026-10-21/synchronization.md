@@ -257,3 +257,9 @@ Validaciónlocaldelárbolpreparado:71/71pruebasPC correctas,CLI10muestras ysmoke
 CI delcommitexacto966fb5ffef7f11020ab7ea07fb76ec260834744c confirmada:Monitor tests39697855865 yVita agent build39697856255 completed/success. Recibolocalanalysis-local/logs/pr3-ci-966fb5f.json. No atribuir estas ejecuciones a commits documentalesposteriores ni a hardware.
 
 PropietarioPR7 comunica runtime-frame-step:100lecturascorrectas/0errores,en3avancesindividuales defotograma amboscontadores+1yestablesentreavances.4pruebasnuevasdelaherramienta correctas. Esaceptaciónacotadaderelaciónconavanceemulado,noposición/animación ni instruccionesescritorasidentificadas. Citraretornadoaejecuciónnormalporpropietario;central nointervinoemulador. [Informe](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/research/stt-engineering-resources-20261021/docs/research/stt-re-20261021/runtime-frame-step.md). SinVita/FTP/banco alteradosdesdeestefrente.
+
+## 22-10-2026 — Lector de capturas ampliado
+
+Cierre delpropietarioPR7:2.400lecturascorrectas/0errores,barridos8KiB conventanasprioritarias,archivo deduplicado con tiempos/direcciones/hashes;9exportacioneslocales verificadas y9pruebasdelaherramienta aprobadas. Permite reconstruir/compararmemoria muestreada,no identifica recursosoriginales. Capturas/datoscomerciales privados,fuera delbancoexistente yGit. Citra seguíaabierto yteclasliberadassegúncierre;centralnointervino.
+
+Aceptaciónestática previa:24candidatosdelecturadedoscamposvecinos,71palabrasinstrucciones/literales coincidenconmemoria segúnpropietario;6pruebasdelanalizadorcorrectas. No ejecución decandidatos ni escritordeloscontadores confirmado. No tratar coincidenciabytescomosemántica. Investigaciónactual contrasta referenciasexternasporversión,sin activartrucos/escriturasdememoria. No nuevastareasduplicadas.
