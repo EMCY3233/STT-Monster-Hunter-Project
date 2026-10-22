@@ -1,5 +1,7 @@
 # Primera interpretación de campos en ejecución — 22-10-2026
 
+> Prueba posterior: [tres avances individuales con delta +1](runtime-frame-step.md).
+
 ## Resultado
 
 Los campos de 32 bits little endian en `0x0110D004` y `0x0110D008` avanzan a unas 60 unidades por segundo de tiempo del host mientras la emulación funciona, permanecen fijos en pausa y vuelven a avanzar al continuar. Traducción provisional: **dos candidatos a contador periódico ligados al avance de la emulación**. La hipótesis de contador de frames es compatible, pero no se ha probado equivalencia de un incremento con un frame ni se conoce la función de cada campo. Son iguales en las 160 muestras con emulación funcionando; durante las 80 muestras pausadas, el campo +8 permanece una unidad por debajo del campo +4. No se llaman copias idénticas ni se atribuye ese desfase a una instrucción concreta.
