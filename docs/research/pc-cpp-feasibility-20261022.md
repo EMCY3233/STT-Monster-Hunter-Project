@@ -77,8 +77,12 @@ Se comprueba una reproducción de 100.000 pasos y el final exacto del guion de
 600 pasos: tick=600, x_mm=500, z_mm=0, hp=0, hits=4.
 El núcleo se compila con /W4 /WX /permissive-. Los tests usan fallos explícitos
 también en Release. No hay medida de rendimiento ni validación gráfica.
-Se añade workflow para Windows/Linux y Debug/Release; resultados remotos
-pendientes en esta revisión documental. Linux no se ha ejecutado localmente.
+La [CI C++ 39849823392](https://github.com/EMCY3233/STT-Monster-Hunter-Project/actions/runs/39849823392)
+terminó con success: cuatro jobs Windows/Linux x Debug/Release, sobre código
+`84f4b6d9b899181432189b10e148fe7fb159ef1f`. Las revisiones posteriores solo
+cambian documentación o finales de línea del changelog. Linux se validó en CI,
+no en este equipo. [PR #36](https://github.com/EMCY3233/STT-Monster-Hunter-Project/pull/36)
+abierta en borrador; ninguna fusión realizada.
 
 ## Siguiente hito y preguntas de alcance
 

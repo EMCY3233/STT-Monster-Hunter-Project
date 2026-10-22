@@ -9,8 +9,9 @@
   MIT, terceros con términos propios); registrados como referencias, sin instalar,
   copiar ni enlazar. Licencia global STT todavía pendiente de definición.
 - MSVC 19.51 Release local: CTest 2/2 correcto, incluida reproducción de 100.000
-  pasos y demo de 600 pasos. CI Windows/Linux Debug/Release añadida; su ejecución
-  remota queda pendiente al preparar el cambio. No acredita ejecución de MH4U.
+  pasos y demo de 600 pasos. CI 39849823392 Windows/Linux Debug/Release:
+  cuatro jobs correctos sobre código 84f4b6d. PR #36 en borrador.
+  No acredita ejecución de MH4U.
 - Rama propia desde main f199bd0, sin alterar PR paralelas ni recursos comerciales.
   Informe: docs/research/pc-cpp-feasibility-20261022.md.
 
