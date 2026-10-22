@@ -67,8 +67,12 @@ monitor, banco privado ni Vita. No depende de fusionar otras PR.
 
 Código 1003ba2:
 * MSVC x64 C++17 /W4 /WX y CMake Release locales: compilación correcta.
-* Windows Control de aplicaciones bloqueó la ejecución local del nuevo binario
-  (WinError 4551). No se presenta esta compilación como prueba funcional.
+* Ejecución local confirmada el 23-10-2026 tras resolver el usuario el bloqueo
+  anterior de Windows Control de aplicaciones (WinError 4551). Las 21 pruebas
+  sintéticas locales pasan y el C++ ejecuta --verify --list-romfs sobre la
+  imagen privada: seis hashes presentes coinciden, y sus 11.512 entradas
+  coinciden con la referencia Python en partición, ruta, tamaño y offset.
+  SHA-256 completo de la imagen nuevamente contrastado e idéntico.
 * CI Windows/Linux x Debug/Release: cuatro trabajos correctos, con 21 pruebas
   sintéticas por trabajo, incluidas 512 truncaciones de cabecera, corrupción de
   hashes, ciclos, padres, enlaces, tablas, tamaños y nombres inseguros.
@@ -77,13 +81,12 @@ Código 1003ba2:
 * Comprobación privada de la imagen indicada por el usuario mediante referencia
   Python independiente: seis hashes NCCH presentes coinciden; listados RomFS
   de las tres particiones y SHA-256 completo antes/después idéntico. Esto valida
-  la referencia sobre esa imagen, no la ejecución C++ local de esta ampliación.
+  la referencia sobre esa imagen; el contraste C++ posterior se registra arriba.
   Los informes, rutas comerciales y bytes permanecen fuera de Git.
 
 Sin claves, descifrado, extracción, reparación, recursos comerciales ni acceso a
 PS Vita. No ejecuta MH4U ni interpreta sus formatos de modelos/animación.
-Pendiente: ejecutar esta ampliación C++ sobre la imagen privada cuando el entorno
-lo permita, verificar todo el árbol IVFC, hashes por archivo ExeFS y buckets RomFS.
+Pendiente: verificar todo el árbol IVFC, hashes por archivo ExeFS y buckets RomFS.
 La entrada debe permanecer estable: no se ofrece instantánea atómica frente a
 cambios de otros procesos.
 
