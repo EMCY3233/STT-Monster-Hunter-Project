@@ -273,6 +273,40 @@ class Tests(unittest.TestCase):
             self.run_case(data[:cut], good=False)
         self.run_case(data + b'X', good=False)
 
+    def test_verify_all_rejects_bad_unselected_face_and_mip(self):
+        for kind in (11, 12):
+            data, expected = cube_fixture(kind)
+            for face, mip in ((0, 2), (5, 0), (5, 2)):
+                bad = bytearray(data)
+                start = 196 + struct.unpack_from('<I', data, 124 + (face * 3 + mip) * 4)[0]
+                struct.pack_into('<I', bad, start + (8 if kind == 12 else 0) + 4, 0x07000002)
+                self.assertEqual(self.run_case(bad), expected[0][0])
+                self.run_case(bad, ['--verify-all'], good=False)
+
+    def test_verify_all_without_output(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            source = root / 'input.tex'
+            for kind in (3, 17, 11, 12):
+                source.write_bytes(cube_fixture(kind)[0])
+                before = hashlib.sha256(source.read_bytes()).digest()
+                run = subprocess.run([EXE, str(source), '--verify-all'], capture_output=True)
+                self.assertEqual(run.returncode, 0, run.stderr)
+                self.assertIn(b'all_supported_color_blocks_valid=true', run.stdout)
+                self.assertEqual(list(root.iterdir()), [source])
+                self.assertEqual(hashlib.sha256(source.read_bytes()).digest(), before)
+            run = subprocess.run([EXE, str(source), '--verify-all', '--verify-all'], capture_output=True)
+            self.assertNotEqual(run.returncode, 0)
+            for args in (['--out', '--verify-all'], ['--verify-all', '--out'], []):
+                run = subprocess.run([EXE, str(source), *args], cwd=root, capture_output=True)
+                self.assertNotEqual(run.returncode, 0)
+                self.assertEqual(list(root.iterdir()), [source])
+
+    def test_verify_all_and_output_together(self):
+        data, expected = cube_fixture(12)
+        self.assertEqual(self.run_case(data, ['--verify-all', '--face', '5', '--mip', '2']),
+                         expected[5][2])
+
 
 if __name__ == '__main__':
     unittest.main()

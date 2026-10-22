@@ -31,6 +31,24 @@ struct Image { uint32_t width, height; Bytes rgba; };
 static uint64_t little64(const Bytes& b, size_t p) {
     return uint64_t(word(b, p)) | (uint64_t(word(b, p + 4)) << 32);
 }
+static std::array<std::array<int, 3>, 2> etc_bases(uint32_t info) {
+    std::array<std::array<int, 3>, 2> base{};
+    for (unsigned c = 0; c < 3; ++c) {
+        const unsigned field = (info >> (24 - c * 8)) & 255;
+        if (info & 2) {
+            const int first = static_cast<int>(field >> 3);
+            const int delta = int(field & 7) - ((field & 4) ? 8 : 0);
+            const int second = first + delta;
+            require(second >= 0 && second <= 31, "invalid ETC1 differential color");
+            base[0][c] = first * 8 + first / 4;
+            base[1][c] = second * 8 + second / 4;
+        } else {
+            base[0][c] = int(field >> 4) * 17;
+            base[1][c] = int(field & 15) * 17;
+        }
+    }
+    return base;
+}
 // ETC1 bit fields follow the Khronos OES_compressed_ETC1_RGB8_texture spec.
 // 3DS stores each 64-bit color word little-endian, preceded by A4 when present.
 static void decode_etc(const Bytes& b, size_t start, bool alpha, Image& image) {
@@ -46,23 +64,7 @@ static void decode_etc(const Bytes& b, size_t start, bool alpha, Image& image) {
                 const uint64_t color = little64(b, cursor + (alpha ? 8 : 0));
                 const uint32_t info = static_cast<uint32_t>(color >> 32);
                 const uint32_t indices = static_cast<uint32_t>(color);
-                const bool differential = (info & 2) != 0;
-                std::array<std::array<int, 3>, 2> base{};
-                for (unsigned c = 0; c < 3; ++c) {
-                    const unsigned shift = 24 - c * 8;
-                    const unsigned field = (info >> shift) & 255;
-                    if (differential) {
-                        const int first = static_cast<int>(field >> 3);
-                        const int delta = int(field & 7) - ((field & 4) ? 8 : 0);
-                        const int second = first + delta;
-                        require(second >= 0 && second <= 31, "invalid ETC1 differential color");
-                        base[0][c] = first * 8 + first / 4;
-                        base[1][c] = second * 8 + second / 4;
-                    } else {
-                        base[0][c] = int(field >> 4) * 17;
-                        base[1][c] = int(field & 15) * 17;
-                    }
-                }
+                const auto base = etc_bases(info);
                 for (unsigned y = 0; y < 4; ++y) {
                     for (unsigned x = 0; x < 4; ++x) {
                         const unsigned n = x * 4 + y;
@@ -82,7 +84,7 @@ static void decode_etc(const Bytes& b, size_t start, bool alpha, Image& image) {
         }
     }
 }
-static Image decode(const Bytes& b, uint64_t mip, uint64_t face) {
+static Image decode(const Bytes& b, uint64_t mip, uint64_t face, bool verify_all, bool pixels) {
     require(word(b, 0) == 0x00584554, "not TEX");
     const auto flags = word(b, 4), dimensions = word(b, 8), format = word(b, 12);
     require((flags & 0xfff) == 0xa5, "only TEX A5 supported");
@@ -125,6 +127,14 @@ static Image decode(const Bytes& b, uint64_t mip, uint64_t face) {
         }
     }
     require(expected == b.size() - base, "payload length does not match all mip levels");
+    if (compressed && verify_all) {
+        const size_t stride = type == 12 ? 16 : 8;
+        // Face/mip ranges form one checked, contiguous sequence of complete blocks.
+        // All selectors and A4 values are defined; differential base overflow is not.
+        for (size_t position = base; position < b.size(); position += stride)
+            (void)etc_bases(word(b, position + (type == 12 ? 8 : 0) + 4));
+    }
+    if (!pixels) return Image{sw, sh, {}};
     Image image{sw, sh, Bytes(size_t(sw) * sh * 4)};
     if (compressed) {
         decode_etc(b, base + selected, type == 12, image);
@@ -151,24 +161,28 @@ static Image decode(const Bytes& b, uint64_t mip, uint64_t face) {
 }
 int main(int argc, char** argv) {
     try {
-        require(argc >= 2, "usage: stt-tex INPUT --out NEW_DIRECTORY [--offset N --size N --mip N --face N]");
+        require(argc >= 2, "usage: stt-tex INPUT [--out NEW_DIRECTORY] [--verify-all] [--offset N --size N --mip N --face N]");
         fs::path input = argv[1], output;
         uint64_t offset = 0, length = 0, mip = 0, face = 0;
         bool has_size = false;
+        bool verify_all = false;
         std::vector<std::string> seen;
-        for (int i = 2; i < argc; i += 2) {
-            require(i + 1 < argc, "missing option value");
+        for (int i = 2; i < argc; ++i) {
             const std::string option = argv[i];
             require(std::find(seen.begin(), seen.end(), option) == seen.end(), "duplicate option");
             seen.push_back(option);
-            if (option == "--out") output = argv[i + 1];
-            else if (option == "--offset") offset = number(argv[i + 1]);
-            else if (option == "--size") { length = number(argv[i + 1]); has_size = true; }
-            else if (option == "--mip") mip = number(argv[i + 1]);
-            else if (option == "--face") face = number(argv[i + 1]);
+            if (option == "--verify-all") { verify_all = true; continue; }
+            require(i + 1 < argc, "missing option value");
+            const std::string value = argv[++i];
+            require(value.rfind("--", 0) != 0, "missing option value before next option");
+            if (option == "--out") output = value;
+            else if (option == "--offset") offset = number(value);
+            else if (option == "--size") { length = number(value); has_size = true; }
+            else if (option == "--mip") mip = number(value);
+            else if (option == "--face") face = number(value);
             else throw std::runtime_error("unknown option");
         }
-        require(!output.empty(), "--out required");
+        require(!output.empty() || verify_all, "--out or --verify-all required");
         const auto total = fs::file_size(input);
         require(offset <= total, "input offset outside file");
         if (!has_size) length = total - offset;
@@ -180,7 +194,9 @@ int main(int argc, char** argv) {
         Bytes bytes(static_cast<size_t>(length));
         source.read(reinterpret_cast<char*>(bytes.data()), static_cast<std::streamsize>(length));
         require(bool(source), "input read failed");
-        const auto image = decode(bytes, mip, face);
+        const auto image = decode(bytes, mip, face, verify_all, !output.empty());
+        if (verify_all) std::cout << "all_supported_color_blocks_valid=true\n";
+        if (output.empty()) return 0;
         require(fs::create_directory(output), "output directory must be new");
         std::ofstream target(output / "image.pam", std::ios::binary);
         target << "P7\nWIDTH " << image.width << "\nHEIGHT " << image.height
