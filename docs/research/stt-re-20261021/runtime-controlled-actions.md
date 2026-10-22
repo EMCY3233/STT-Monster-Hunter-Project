@@ -2,6 +2,8 @@
 
 ## Resultado actual
 
+> Actualización posterior: [flechas sostenidas verificadas](runtime-held-key.md), herramienta SendInput y 299 lecturas con movimiento visible. Los intentos anteriores se conservan como historial.
+
 Se confirmó control táctil de la partida local de MH4U en Val Habar: abrir Menu, seleccionar Combine, cerrar Menu y ejecutar el gesto **Wave**. Wave se resaltó y el personaje cambió de pose. El ensayo ampliado de 60 segundos obtuvo **598 lecturas correctas** del rango de 32 bytes `0x0110D000`; la pulsación Wave y la observación visual posterior ocurrieron dentro de esa captura. Los intentos con Right, Left y M no produjeron movimiento o apertura de menú confirmados; no se contabilizan como desplazamientos realizados.
 
 Los datos **no identifican un campo de movimiento o animación**. En particular, el campo a +24 bytes (`0x0110D018`, leído como patrón u32 little endian) varió también antes de entradas del asistente. La coincidencia inicial con caminar no basta para usarlo como detector de movimiento. No se interpretaron instrucciones ni se desreferenciaron supuestos punteros.
