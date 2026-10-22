@@ -53,6 +53,41 @@ def deep_image():
     b[0x1e0:0x200] = hashlib.sha256(b[iv:iv+512]).digest()
     return b
 
+
+def tree_image(names=(), filename="a"):
+    offsets=[0]
+    d=bytearray(24)
+    for name in names:
+        offsets.append(len(d))
+        raw=name.encode("utf-16le")
+        d+=bytearray(24+(len(raw)+3)//4*4)
+    for i,pos in enumerate(offsets):
+        raw=(names[i-1] if i else "").encode("utf-16le")
+        child=offsets[i+1] if i+1<len(offsets) else 0xffffffff
+        struct.pack_into("<6I",d,pos,offsets[i-1] if i else 0,
+                         0xffffffff,child,0 if i==len(offsets)-1 and filename is not None else 0xffffffff,
+                         0xffffffff,len(raw))
+        d[pos+24:pos+24+len(raw)]=raw
+    file=bytearray()
+    if filename is not None:
+        raw=filename.encode("utf-16le")
+        file=bytearray(32+(len(raw)+3)//4*4)
+        struct.pack_into("<IIQQII",file,0,offsets[-1],0xffffffff,0,3,0xffffffff,len(raw))
+        file[32:32+len(raw)]=raw
+    dm=44; fh=dm+len(d); fm=fh+4; data=(fm+len(file)+15)//16*16
+    lvsize=(data+3+511)//512*512
+    b=bytearray(1024+lvsize)
+    b[256:260]=b"NCCH"; put(b,0x104,len(b)//512); b[0x18f]=4
+    put(b,0x1b0,1); put(b,0x1b4,(len(b)-512)//512); put(b,0x1b8,1)
+    b[512:516]=b"IVFC"; put(b,516,0x10000); put(b,520,32); put(b,512+0x4c,9)
+    struct.pack_into("<Q",b,512+0x44,lvsize)
+    struct.pack_into("<10I",b,1024,40,40,4,dm,len(d),fh,4,fm,len(file),data)
+    b[1024+dm:1024+dm+len(d)]=d
+    b[1024+fm:1024+fm+len(file)]=file
+    b[1024+data:1024+data+3]=b"abc"
+    b[0x1e0:0x200]=hashlib.sha256(b[512:1024]).digest()
+    return b
+
 class Inspector(unittest.TestCase):
     def run_image(self, b, valid=True, options=()):
         with tempfile.TemporaryDirectory() as d:
@@ -180,6 +215,28 @@ class Inspector(unittest.TestCase):
             self.run_image(broken,False,("--verify",))
     def test_unknown_option(self):
         self.assertEqual(subprocess.run([EXE,"unused","--bad"],capture_output=True).returncode,2)
+
+
+    def test_nested_unicode_tree(self):
+        out=self.run_image(tree_image(["sub","deep"],"ñ"),options=("--verify","--list-romfs"))
+        self.assertIn('path="/sub/deep/\\u00f1" size=3',out)
+        self.assertIn("directories=3 files=1",out)
+    def test_empty_tree(self):
+        self.assertIn("files=0",self.run_image(tree_image(filename=None),options=("--list-romfs",)))
+    def test_complete_path_budget(self):
+        self.run_image(tree_image(["a"*500]*16,"b"*500),False,("--list-romfs",))
+    def test_missing_hash_range_not_absent(self):
+        b=deep_image()
+        put(b,0x1b8,0)
+        self.assertIn("romfs_superblock_hash=not_verified_empty_hash_range",
+                      self.run_image(b,options=("--verify",)))
+    def test_report_comparison_state(self):
+        out=self.run_image(deep_image(),options=("--verify",))
+        self.assertNotIn("stored_hashes=reported_only",out)
+    def test_metadata_budget(self):
+        b=deep_image()
+        put(b,1024+16,64*1024*1024+4)
+        self.run_image(b,False,("--list-romfs",))
 
     def test_usage(self):
         self.assertEqual(subprocess.run([EXE],capture_output=True).returncode,2)

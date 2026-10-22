@@ -100,3 +100,24 @@ Consulta 22-10-2026:
 
 La última se consultó para contrastar la ubicación física del nivel 3; no se
 copió su implementación. No se incorporaron ejemplos comerciales.
+
+## Revisión del 23-10-2026
+
+Tres regresiones reproducidas y corregidas:
+* El límite de ruta incluye ahora el nombre del archivo; también se limita a
+  32 MiB la suma de rutas pendientes del recorrido.
+* Un superblock presente cuya longitud de hash sea cero aparece como
+  not_verified_empty_hash_range, no como absent. El retorno 0 significa
+  inspección aceptada; consultar todos los estados por región.
+* --verify ya no imprime reported_only junto a comparaciones realizadas.
+
+Se añaden pruebas de rutas completas, árboles anidados con Unicode, RomFS vacío,
+presupuesto de metadatos y estados del informe. Suite ampliada a 27 pruebas.
+Linux Debug habilita ASan/UBSan; las otras tres combinaciones conservan sus
+compilaciones normales. Las pruebas de regresión fallaron antes de los cambios.
+
+REA se revisó como herramienta de análisis posterior, no como dependencia del
+lector. Su proveedor Ghidra experimental en Windows admite PE y raw NMOS 6502,
+no establece soporte directo de imágenes NCSD/NCCH ni ARM11/3DS. No se ha
+instalado ni registrado REA desde esta revisión.
+Referencia: https://github.com/morluto/rea/blob/main/docs/windows-ghidra-p0.md

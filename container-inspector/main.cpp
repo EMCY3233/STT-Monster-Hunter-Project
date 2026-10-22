@@ -5,6 +5,8 @@
 #include <iomanip>
 #include <iostream>
 #include <limits>
+#include <map>
+#include <set>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -81,8 +83,6 @@ void disjoint(const std::vector<Range>& ranges) {
     for(size_t i=0;i<ranges.size();++i) for(size_t j=0;j<i;++j)
         require(ranges[i].offset>=ranges[j].offset+ranges[j].size || ranges[j].offset>=ranges[i].offset+ranges[i].size,"overlapping regions");
 }
-#include <map>
-#include <set>
 struct Options { bool verify=false, list=false; };
 U rawle(const std::vector<unsigned char>& b,U p,size_t n=4) {
     range(p,n,b.size()); U v=0;
@@ -110,12 +110,11 @@ void romfs(Reader& r,U base,U size,std::ostream& out) {
     U start=((0x60+master+block-1)/block)*block;
     U length=le(iv,0x44,8); range(start,length,size); require(length>=40,"short RomFS level3");
     Header h{}; r.read(base+start,h.data(),40); require(le(h,0)==40,"invalid RomFS level3 header");
-    std::vector<Range> tables{{0,40}};
     U end=40;
     for(size_t p=4;p<=28;p+=8) {
         U off=le(h,p),n=le(h,p+4); range(off,n,length);
         require(off>=end && off%4==0 && n%4==0,"invalid RomFS tables");
-        tables.push_back({off,n}); end=off+n;
+        end=off+n;
     }
     U data=le(h,36); require(data>=end && data<=length && data%16==0,"invalid RomFS data offset");
     U dm=le(h,16),fm=le(h,32);
@@ -142,9 +141,9 @@ void romfs(Reader& r,U base,U size,std::ostream& out) {
     struct Work { U id,parent,depth; std::string path; };
     std::vector<Work> pending{{0,0,0,""}};
     std::set<U> seenDirs,seenFiles;
-    U total=0,reportBytes=0;
+    U total=0,reportBytes=0,pendingBytes=0;
     while(!pending.empty()) {
-        auto w=pending.back(); pending.pop_back();
+        auto w=pending.back(); pending.pop_back(); pendingBytes-=w.path.size();
         require(w.depth<=128 && w.path.size()<=8192,"RomFS path budget exceeded");
         require(dn.count(w.id) && seenDirs.insert(w.id).second,"invalid/cyclic RomFS directory link");
         const auto& d=dn.at(w.id); require(d.parent==w.parent,"RomFS directory parent mismatch");
@@ -154,6 +153,7 @@ void romfs(Reader& r,U base,U size,std::ostream& out) {
             require(fn.count(f) && seenFiles.insert(f).second,"invalid/cyclic RomFS file link");
             const auto& file=fn.at(f); require(file.parent==w.id && !file.name.empty(),"RomFS file parent/name mismatch");
             require(names.insert(file.name).second,"duplicate RomFS name");
+            require(w.path.size()+1+file.name.size()<=8192,"RomFS complete path budget exceeded");
             require(total<=std::numeric_limits<U>::max()-file.size,"RomFS total overflow"); total+=file.size;
             reportBytes+=w.path.size()+file.name.size()+128;
             require(reportBytes<=32*1024*1024,"RomFS report budget exceeded");
@@ -166,6 +166,9 @@ void romfs(Reader& r,U base,U size,std::ostream& out) {
         while(child!=0xffffffff) {
             require(dn.count(child) && siblings.insert(child).second,"invalid/cyclic RomFS sibling link");
             const auto& c=dn.at(child); require(!c.name.empty() && names.insert(c.name).second,"duplicate/empty RomFS directory name");
+            require(w.path.size()+1+c.name.size()<=8192,"RomFS complete path budget exceeded");
+            pendingBytes+=w.path.size()+1+c.name.size();
+            require(pendingBytes<=32*1024*1024,"RomFS pending paths budget exceeded");
             pending.push_back({child,w.id,w.depth+1,w.path+"/"+c.name});
             require(pending.size()<=100000,"RomFS work budget exceeded"); child=c.next;
         }
@@ -174,8 +177,11 @@ void romfs(Reader& r,U base,U size,std::ostream& out) {
     out<<"romfs_summary directories="<<dn.size()<<" files="<<fn.size()<<" file_bytes="<<total
        <<" ivfc_tree=not_verified hash_buckets=not_verified\n";
 }
-void verify_region(Reader& r,U offset,U length,const Header& h,size_t stored,const char* label,std::ostream& out) {
-    if(!length) { out<<label<<"_hash=absent\n"; return; }
+void verify_region(Reader& r,U offset,U length,const Header& h,size_t stored,const char* label,std::ostream& out,bool present=false) {
+    if(!length) {
+        out<<label<<"_hash="<<(present?"not_verified_empty_hash_range":"absent")<<"\n";
+        return;
+    }
     auto actual=r.digest(offset,length); auto expected=hex(h.data()+stored,32);
     if(actual!=expected) throw std::runtime_error(std::string(label)+" SHA256 mismatch");
     out<<label<<"_hash=verified bytes="<<length<<"\n";
@@ -209,15 +215,16 @@ void ncch(Reader& r,U base,U available,std::ostream& out,const Options& options)
        <<"exheader_sha256_stored="<<hex(h.data()+0x160,32)<<"\n"
        <<"exefs_sha256_stored="<<hex(h.data()+0x1c0,32)<<"\n"
        <<"romfs_sha256_stored="<<hex(h.data()+0x1e0,32)<<"\n"
-       <<"stored_hashes=reported_only signatures=not_verified\n";
+       <<"stored_hashes="<<(options.verify?"reported comparisons=per_region":"reported_only")
+       <<" signatures=not_verified\n";
     if(options.verify) {
         U logo=scale(le(h,0x19c),exp);
         verify_region(r,base+scale(le(h,0x198),exp),logo,h,0x130,"logo",out);
         if(encrypted) out<<"content_hashes=skipped_encrypted\n";
         else {
             verify_region(r,base+512,ex,h,0x160,"exheader",out);
-            verify_region(r,base+scale(le(h,0x1a0),exp),scale(le(h,0x1a8),exp),h,0x1c0,"exefs",out);
-            verify_region(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b8),exp),h,0x1e0,"romfs_superblock",out);
+            verify_region(r,base+scale(le(h,0x1a0),exp),scale(le(h,0x1a8),exp),h,0x1c0,"exefs",out,le(h,0x1a4)!=0);
+            verify_region(r,base+scale(le(h,0x1b0),exp),scale(le(h,0x1b8),exp),h,0x1e0,"romfs_superblock",out,le(h,0x1b4)!=0);
         }
     }
     if(options.list && le(h,0x1b4)) {
