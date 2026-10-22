@@ -14,7 +14,7 @@ jobs:
         run: |
           cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Icontracts contracts/stt_perf.c contracts/tests/test_perf.c -o /tmp/stt-perf
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-perf > /tmp/stt-perf.json
-          python -c "from pathlib import Path; from stt_monitor.protocol import decode; p=decode(Path('/tmp/stt-perf.json').read_bytes().strip()); assert p['perf']['frames']==12; assert p['perf']['cpu_load_pct'] is None"
+          python -c "from pathlib import Path; from stt_monitor.protocol import decode; p=decode(Path('/tmp/stt-perf.json').read_bytes().strip()); assert p['version']==7; assert p['perf']['target_fps']==45; assert p['perf']['ceiling_us']==2300; assert p['perf']['frames']==12; assert p['perf']['cpu_load_pct'] is None"
           python -m unittest discover -s tests -p 'test_perf_protocol.py'
       - name: Portable controls, camera, core adapter and renderer
         run: |
@@ -49,6 +49,18 @@ jobs:
           cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c vita-prototype/src/render.c combat-lab/src/stt_combat.c vita-prototype/tests/test_camera.c -lm -o /tmp/stt-camera
           ASAN_OPTIONS=detect_leaks=0 /tmp/stt-camera vita-prototype/assets/hunter-body.pose.json vita-prototype/assets/quaternius-sword.pose.json stt-camera-up.ppm stt-camera-level.ppm stt-camera-down.ppm > stt-camera-evidence.json
           cat stt-camera-evidence.json
+      - name: Ceiling reference, spans and occlusion
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ipose-runtime -Ivita-prototype/src -Icombat-lab/include pose-runtime/stt_pose.c vita-prototype/src/asset.c vita-prototype/src/weapon.c vita-prototype/src/control.c combat-lab/src/stt_combat.c vita-prototype/tests/test_ceiling.c -lm -o /tmp/stt-ceiling
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-ceiling vita-prototype/assets/hunter-body.pose.json vita-prototype/assets/quaternius-sword.pose.json stt-ceiling > stt-ceiling-evidence.json
+          cat stt-ceiling-evidence.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-ceiling-pc
+          path: |
+            stt-ceiling-*.ppm
+            stt-ceiling-evidence.json
+          retention-days: 14
       - uses: actions/upload-artifact@v4
         with:
           name: stt-camera-pc

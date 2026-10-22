@@ -1,3 +1,9 @@
+# 00.20 — Techo de comparación
+
+Techo cuadriculado de prueba a 8 m, del mismo tamaño finito que el suelo (32 × 32 m, centrado en el cazador). Arriba en la cruceta alterna C0 apagado, C1 por píxel y C2 por franjas. Se comparte la optimización del plano horizontal con el suelo y se mide `ceiling_us` por separado. No cambia temporización ni frecuencias. Cámara acotada por debajo del techo; no representa colisiones generales del mundo.
+
+STT/7 añade `ceiling_mode`, `ceiling_us` y `target_fps`; lector compatible con STT/4–6. Ventanas separadas al cambiar techo/objetivo/suelo/raster, con sesiones `vita-0020-f45-c2-…`. El analizador agrupa por techo y objetivo. Pruebas de color/profundidad contra referencia, reconstrucción independiente, oclusión y capturas PC. Rendimiento físico del techo pendiente de captura en consola.
+
 # 00.19 — Prueba 30/45 FPS
 
 Objetivo 45 por defecto; Círculo alterna 30/45. Plazos absolutos con fracción de microsegundo, sincronización de pantalla conservada y simulación a 60 Hz. No cambia frecuencias. STT/6 identifica cada ensayo mediante sesión `vita-0019-f45-…` o `vita-0019-f30-…`, reinicia la ventana al cambiar objetivo y conserva el límite de envío de tres minutos.

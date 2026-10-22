@@ -56,6 +56,24 @@ class PerfTests(unittest.TestCase):
         self.assertEqual(analyze([{'packet':p}])['groups'][0]['ground_mode'],2)
         p['version']=5
         with self.assertRaises(ValueError):encode(p)
+    def test_v7_ceiling_contract_and_grouping(self):
+        p=sample();p["version"]=7;p["session"]="vita-0020-f45-c2-abc"
+        p["perf"].update(ground_mode=2,raster_mode=1,clear_us=1,ground_us=2,body_us=3,weapon_us=4,target_us=5,hud_us=6,ceiling_mode=2,ceiling_us=2300,target_fps=45)
+        self.assertEqual(decode(encode(p)),p)
+        q=copy.deepcopy(p);q["seq"]=1;q["perf"]["ceiling_mode"]=1
+        groups=analyze({"packet":x} for x in (p,q))["groups"]
+        self.assertEqual(len(groups),2)
+        self.assertEqual(groups[0]["ceiling_mode"],2)
+        self.assertEqual(groups[0]["render_stages_us"]["ceiling_us"],2300)
+        self.assertEqual(groups[0]["target_fps"],45)
+        self.assertEqual(groups[0]["build"],"00.20")
+        q["seq"]=2;q["perf"]["ceiling_mode"]=2;q["perf"]["target_fps"]=30
+        self.assertEqual(len(analyze({"packet":x} for x in (p,q))["groups"]),2)
+        for key,value in (("ceiling_mode",3),("ceiling_us",-1),("target_fps",44),("target_fps",True)):
+            bad=copy.deepcopy(p);bad["perf"][key]=value
+            with self.assertRaises(ValueError):encode(bad)
+        del p["perf"]["ceiling_us"]
+        with self.assertRaises(ValueError):encode(p)
     def test_receiver_accepts_performance(self):
         from stt_monitor.receiver import receive
         class Socket:

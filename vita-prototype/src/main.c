@@ -60,6 +60,7 @@ int main(void){
   if(pressed&SCE_CTRL_CIRCLE){target_fps=target_fps==45?30:45;stt_pacer_reset(&pacer,frame_start,target_fps);}
   stt_render_set_target(target_fps);
   if(pressed&SCE_CTRL_SELECT)stt_monitor_toggle(&monitor,frame_start);
+  if(pressed&SCE_CTRL_UP)stt_render_set_ceiling((stt_render_get_ceiling()+1)%3);
   if(pressed&SCE_CTRL_RTRIGGER)stt_render_set_raster(!stt_render_get_raster());
   if(pressed&SCE_CTRL_LTRIGGER)stt_render_set_ground((stt_render_get_ground()+1)%3);
   if(pressed&SCE_CTRL_START){result=0;break;}
@@ -94,7 +95,7 @@ int main(void){
   result=sceDisplayWaitVblankStartCB();if(result<0)break;front^=1;
   present_us=(unsigned)(sceKernelGetProcessTimeWide()-present_start);
   uint64_t telemetry_start=sceKernelGetProcessTimeWide();
-  stt_monitor_frame(&monitor,session,telemetry_start,combat.tick,(unsigned)equipment.mode,stt_render_get_ground(),stt_render_get_raster(),target_fps,stt_render_profile(),update_us,render_us,present_us,telemetry_us);
+  stt_monitor_frame(&monitor,session,telemetry_start,combat.tick,(unsigned)equipment.mode,stt_render_get_ground(),stt_render_get_raster(),stt_render_get_ceiling(),target_fps,stt_render_profile(),update_us,render_us,present_us,telemetry_us);
   telemetry_us=(unsigned)(sceKernelGetProcessTimeWide()-telemetry_start);
   unsigned work_us=(unsigned)(sceKernelGetProcessTimeWide()-frame_start);
   if(work_us>1000000/target_fps)dropped++;
