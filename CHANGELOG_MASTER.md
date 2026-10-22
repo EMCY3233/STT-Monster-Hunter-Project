@@ -1,5 +1,10 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 22-10-2026 — Cámara00.23integradaenPR35
+
+-PruebasPC/compilacióninspecciónVita correctas segúnPR35;colisiónmaparealno conectada,no físicade00.23.
+-Diseñooriginal/sincomerciales,PRabierta ysininstalación.
+
 ## 22-10-2026 — ReferenciasMH4Uauditadas
 
 -PR7/98f98f9:64.420referencias,0huérfanas/duplicadas,3.670ambiguas,sinsemánticaconfirmada;5testsdelpropietario. Banco intacto.
