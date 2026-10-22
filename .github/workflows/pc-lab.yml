@@ -1,0 +1,20 @@
+name: Original C++ PC lab
+on:
+  push:
+    paths: ['pc-lab/**', '.github/workflows/pc-lab.yml']
+  pull_request:
+    paths: ['pc-lab/**', '.github/workflows/pc-lab.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        config: [Debug, Release]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -S pc-lab -B build/pc-lab -DCMAKE_BUILD_TYPE=${{ matrix.config }}
+      - run: cmake --build build/pc-lab --config ${{ matrix.config }}
+      - run: ctest --test-dir build/pc-lab -C ${{ matrix.config }} --output-on-failure

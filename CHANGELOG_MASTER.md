@@ -1,5 +1,20 @@
 # Changelog maestro — Start The Travesy, Monster Hunter
 
+## 2026-10-22 — estudio C++ original para PC
+
+- Destino actualizado por el usuario a Windows y Linux; siguiente hito propuesto:
+  escena 3D original. Añadido núcleo C++17 aislado en pc-lab, con simulación
+  determinista a 60 pasos/s, movimiento acotado y objetivo sintético con ataques.
+- Evaluados assembly-language (índice, sin licencia colectiva) y REA (código
+  MIT, terceros con términos propios); registrados como referencias, sin instalar,
+  copiar ni enlazar. Licencia global STT todavía pendiente de definición.
+- MSVC 19.51 Release local: CTest 2/2 correcto, incluida reproducción de 100.000
+  pasos y demo de 600 pasos. CI 39849823392 Windows/Linux Debug/Release:
+  cuatro jobs correctos sobre código 84f4b6d. PR #36 en borrador.
+  No acredita ejecución de MH4U.
+- Rama propia desde main f199bd0, sin alterar PR paralelas ni recursos comerciales.
+  Informe: docs/research/pc-cpp-feasibility-20261022.md.
+
 ## 2026-10-21 — STT-MON-013 / frontera de anexado
 
 - Fallo reproducido con datos sintéticos en memoria: anexar tras una línea sin LF devolvía una muestra aceptada, pero el JSONL combinado era inválido y no recuperable por el analizador como muestra.
