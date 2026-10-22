@@ -100,8 +100,10 @@ una firma pública embebida y datos sintéticos generados durante las pruebas.
 
 La revisión de PR #7 encontró un extractor ya existente para ARC17/MHXX.
 La imagen actual declara ARC19/MH4U: no se modifica aquella rama ni se generalizan
-sus resultados. El lector nuevo solo comprueba metadatos/rangos ARC19 y cabeceras
-TEX A5; conversión, zlib, MOD/MRL/LMT y fidelidad gráfica siguen fuera de alcance.
+sus resultados. El primer alcance solo comprobaba metadatos/rangos ARC19 y cabeceras TEX A5.
+El alcance actual también valida zlib con --validate-arc-zlib, descrito abajo;
+no convierte recursos ni interpreta semántica MOD/MRL/LMT. PR #40 contiene un
+decodificador TEX A5 separado y no convierte este lector en un emulador.
 
 Con un módulo público aportado por la misma imagen se puede comprobar coherencia
 de firma, pero no establecer la confianza del emisor. La ausencia de una raíz
@@ -121,8 +123,8 @@ https://github.com/madler/zlib/blob/v1.3.2/LICENSE
 El uso de inflate de zlib valida formato y Adler-32. El wrapper propio exige
 fin de flujo, tamaños exactos, todos los bytes consumidos y presupuestos, sin
 guardar las salidas. Las pruebas Python comprimen muestras sintéticas, alteran
-checksum/longitudes/colas/diccionarios y comprueban rechazo. La comprobación
-privada independiente usa decompressobj con máximo de salida y exige eof,
+checksum/longitudes/colas/diccionarios y comprueban rechazo. El control privado separado, usando la misma familia zlib y sin constituir
+un segundo algoritmo DEFLATE, usa decompressobj con máximo de salida y exige eof,
 unused_data y unconsumed_tail coherentes.
 
 Los magics y campos de versión de las cargas no equivalen a conversión completa
