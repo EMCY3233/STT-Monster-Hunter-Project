@@ -21,7 +21,7 @@ Prueba:30squieto,30smovimiento/cámara y30sataques en G1. Pulsar L cambia a G0 y
 | RAM | ram_free, bytes | Memoria USER_RW disponible según API; no memoria usada del juego ni RAM física total. |
 | CDRAM | cdram_free, bytes | Disponible según API; no utilización de GPU. |
 | PHY | phy_free, bytes | Memoria físicamente contigua disponible según API. |
-| CDLG | cdlg_free, bytes | Subpresupuesto de diálogos libre si la consulta funciona. |
+| CDLG | cdlg_free, bytes | No disponible: el SDK fijado de esta compilación carece de la API de subpresupuesto. |
 | FG APP | null | No se dispone de contador validado equivalente al del overlay. |
 | VNZ | null | No hay acceso validado al contador de Venezia desde este productor. |
 | BAT | battery_pct, % | Lectura de batería; null si falla. |

@@ -59,8 +59,7 @@ void stt_monitor_frame(SttPrototypeMonitor *m,const char *session,uint64_t now,u
  s.battery_pct=scePowerGetBatteryLifePercent();s.ram_free=s.cdram_free=s.phy_free=s.cdlg_free=-1;
  SceKernelFreeMemorySizeInfo free_mem;memset(&free_mem,0,sizeof free_mem);free_mem.size=sizeof free_mem;
  if(sceKernelGetFreeMemorySize(&free_mem)>=0){s.ram_free=free_mem.size_user;s.cdram_free=free_mem.size_cdram;s.phy_free=free_mem.size_phycont;}
- SceKernelSubbudgetInfo sub;memset(&sub,0,sizeof sub);sub.size=sizeof sub;
- if(sceKernelGetSubbudgetInfo(SCE_KERNEL_SUBBUDGET_ID_CDLG,&sub)>=0)s.cdlg_free=(int)sub.free_size;
+ /* Pinned SDK lacks the CDLG subbudget API; keep explicit unavailable. */
  s.send_ok=m->sent;s.send_errors=m->errors;
  char payload[1025];int bytes=stt_perf_encode(payload,sizeof payload,&s);
  SceNetSockaddrIn destination;memcpy(&destination,m->address,sizeof destination);
