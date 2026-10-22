@@ -44,7 +44,7 @@ def inspect(folder):
         if not archive.read('eboot.bin').startswith(b'SCE\0'):
             raise ValueError('Invalid SELF header')
         sfo = sfo_strings(archive.read('sce_sys/param.sfo'))
-        if sfo.get('TITLE_ID') != 'STTP00001' or sfo.get('TITLE') != 'STT Vita Prototype' or sfo.get('APP_VER') != '00.20':
+        if sfo.get('TITLE_ID') != 'STTP00001' or sfo.get('TITLE') != 'STT Vita Prototype' or sfo.get('APP_VER') != '00.21':
             raise ValueError('Application identity mismatch; do not install')
         for path, digest in {
             'assets/hunter-body.pose.json': '9881699bf7f3de544038755f9b8251877593ecde60c4927d00406f9be170c861',

@@ -1,4 +1,5 @@
 #include "equipment.h"
+#include "../../map-lab/stt_zone.h"
 #include "render.h"
 #include <math.h>
 #include <stdio.h>
@@ -182,6 +183,18 @@ static int sword_triangle(void *context,const float p[3][3]){
  uint32_t color=*(const uint32_t*)context;
  tri((V){p[0][0],p[0][1],p[0][2]},(V){p[1][0],p[1][1],p[1][2]},(V){p[2][0],p[2][1],p[2][2]},color);return 1;
 }
+static int zone_triangle(void *context,const float p[3][3],uint32_t color){
+ (void)context;V input[4],output[4];unsigned count=0;
+ for(unsigned i=0;i<3;i++)input[i]=(V){p[i][0],p[i][1],p[i][2]};
+ for(unsigned i=0;i<3;i++){
+  V a=input[i],b=input[(i+1)%3];float za=dot(sub(a,eye),forward),zb_=dot(sub(b,eye),forward);int ia=za>=.151f,ib=zb_>=.151f;
+  if(ia)output[count++]=a;
+  if(ia!=ib){float t=(.151f-za)/(zb_-za);output[count++]=(V){a.x+t*(b.x-a.x),a.y+t*(b.y-a.y),a.z+t*(b.z-a.z)};}
+ }
+ if(count<3)return 0;
+ for(unsigned i=1;i+1<count;i++)tri(output[0],output[i],output[i+1],color);
+ return 1;
+}
 static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamera cam,unsigned frame_us,unsigned dropped,int paused,SttAsset *asset,SttWeapon *weapon,const SttEquipment *equipment){
  uint64_t phase=mark();memset(&profile,0,sizeof profile);
  fb=pixels;zb=depth;memset(zb,0,sizeof(float)*STT_WIDTH*STT_HEIGHT);
@@ -193,6 +206,15 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  forward=(V){view.forward[0],view.forward[1],view.forward[2]};up=(V){view.up[0],view.up[1],view.up[2]};
  int center_x=(int)floorf(hx/2),center_z=(int)floorf(hz/2);
  profile.clear_us=(unsigned)(mark()-phase);phase=mark();
+ if(stt_zone_active()){
+  float location[3];stt_zone_position(location);eye.y+=location[1];
+  unsigned map_count=stt_zone_emit(0,zone_triangle,NULL);profile.ground_us=(unsigned)(mark()-phase);phase=mark();
+  unsigned hunter_count=stt_zone_emit(1,zone_triangle,NULL);profile.body_us=(unsigned)(mark()-phase);phase=mark();
+  rect(0,0,480,34,RGB(9,17,27));text(8,5,"STT 0-21 LOCAL MAP ZONE",RGB(119,223,235));
+  char line[100];snprintf(line,sizeof line,"FPS %u CAP%u MAP %u HUNTER %u",frame_us?1000000u/frame_us:0,target_fps,map_count,hunter_count);text(8,19,line,RGB(238,239,223));
+  rect(0,237,480,35,RGB(9,17,27));snprintf(line,sizeof line,"GROUND %u SLOPE %u NET %s %u",stt_zone_contact(),(unsigned)stt_zone_slope(),monitor_active?"ON":"OFF",monitor_sent);text(8,242,line,RGB(153,185,191));
+  text(8,256,"LEFT MOVE RIGHT CAMERA CIRCLE CAP TRI RESET SELECT NET",RGB(238,239,223));profile.hud_us=(unsigned)(mark()-phase);return;
+ }
  if(ground_mode==2)ground_spans(center_x,center_z);
  else if(ground_mode==1)ground_scanline(center_x,center_z);
  else for(int z=center_z-8;z<center_z+8;z++)for(int x=center_x-8;x<center_x+8;x++){
@@ -229,7 +251,7 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
  profile.target_us=(unsigned)(mark()-phase);phase=mark();
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-20 CEILING LAB",RGB(119,223,235));
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-21 CEILING LAB",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
  rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE RIGHT CAMERA CROSS DRAW-ATTACK START EXIT",RGB(238,239,223));
  text(8,257,"L GROUND R RASTER UP ROOF CIRCLE CAP SELECT NET",RGB(153,185,191));

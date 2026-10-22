@@ -1,3 +1,7 @@
+# 00.21 — Carga de zona local y cazador convertido
+
+Lector STTZONE1 con límites y validación estricta; controlador propio de apoyo, pendiente, escalón, borde y barridos aproximados de pared. Renderer de geometría estática y cazador de poses locales, con recorte cercano y descarte espacial. Los datos comerciales permanecen fuera del paquete y de GitHub. Suite con recursos sintéticos y revisor Windows para streams locales. Las mediciones identifican la build 00.21. IK, texturas completas y mallas shell/cámara se revisan en PC; la primera versión nativa mantiene esas limitaciones explícitas.
+
 # 00.20 — Techo de comparación
 
 Techo cuadriculado de prueba a 8 m, del mismo tamaño finito que el suelo (32 × 32 m, centrado en el cazador). Arriba en la cruceta alterna C0 apagado, C1 por píxel y C2 por franjas. Se comparte la optimización del plano horizontal con el suelo y se mide `ceiling_us` por separado. No cambia temporización ni frecuencias. Cámara acotada por debajo del techo; no representa colisiones generales del mundo.

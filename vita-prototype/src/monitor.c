@@ -49,7 +49,7 @@ void stt_monitor_frame(SttPrototypeMonitor *m,const char *session,uint64_t now,u
  if(!m->active)return;
  if(now<m->started||now-m->started>=180000000ULL){stt_monitor_close(m);return;}
  if(m->last_target!=target_fps||m->last_ceiling!=ceiling_mode){
-  m->last_target=target_fps;m->last_ceiling=ceiling_mode;snprintf(m->session,sizeof m->session,"vita-0020-f%u-c%u-%"PRIx64,target_fps,ceiling_mode,now);
+  m->last_target=target_fps;m->last_ceiling=ceiling_mode;snprintf(m->session,sizeof m->session,"vita-0021-f%u-c%u-%"PRIx64,target_fps,ceiling_mode,now);
   /* New session per target: retain safety timeout and cumulative send counters. */
   m->seq=0;m->last_ground=3;
  }
