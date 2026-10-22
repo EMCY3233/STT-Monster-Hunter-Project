@@ -39,28 +39,28 @@ void stt_monitor_toggle(SttPrototypeMonitor *m,uint64_t now){
  memcpy(m->address,&address,sizeof address);
  snprintf(m->session,sizeof m->session,"vita-perf-%"PRIx64,now);
  m->started=m->window_start=now;m->next=now+1000000;m->seq=0;m->sent=m->errors=m->frames=0;
- m->update_sum=m->render_sum=m->present_sum=m->telemetry_sum=0;m->last_ground=m->last_raster=2;m->last_target=0;memset(m->stage_sum,0,sizeof m->stage_sum);m->active=1;return;
+ m->update_sum=m->render_sum=m->present_sum=m->telemetry_sum=0;m->last_ground=m->last_raster=2;m->last_target=0;m->last_ceiling=3;memset(m->stage_sum,0,sizeof m->stage_sum);m->active=1;return;
 fail:
  stt_monitor_close(m);
 }
 void stt_monitor_frame(SttPrototypeMonitor *m,const char *session,uint64_t now,uint64_t tick,
- unsigned equipment,unsigned ground_mode,unsigned raster_mode,unsigned target_fps,const SttRenderProfile *profile,unsigned update_us,unsigned render_us,unsigned present_us,unsigned telemetry_us){
+ unsigned equipment,unsigned ground_mode,unsigned raster_mode,unsigned ceiling_mode,unsigned target_fps,const SttRenderProfile *profile,unsigned update_us,unsigned render_us,unsigned present_us,unsigned telemetry_us){
  (void)session;
  if(!m->active)return;
  if(now<m->started||now-m->started>=180000000ULL){stt_monitor_close(m);return;}
- if(m->last_target!=target_fps){
-  m->last_target=target_fps;snprintf(m->session,sizeof m->session,"vita-0019-f%u-%"PRIx64,target_fps,now);
+ if(m->last_target!=target_fps||m->last_ceiling!=ceiling_mode){
+  m->last_target=target_fps;m->last_ceiling=ceiling_mode;snprintf(m->session,sizeof m->session,"vita-0020-f%u-c%u-%"PRIx64,target_fps,ceiling_mode,now);
   /* New session per target: retain safety timeout and cumulative send counters. */
   m->seq=0;m->last_ground=3;
  }
  if(m->last_ground!=ground_mode||m->last_raster!=raster_mode){m->last_ground=ground_mode;m->last_raster=raster_mode;memset(m->stage_sum,0,sizeof m->stage_sum);m->window_start=now;m->next=now+1000000;m->frames=0;m->update_sum=m->render_sum=m->present_sum=m->telemetry_sum=0;return;}
- unsigned stage[6]={profile->clear_us,profile->ground_us,profile->body_us,profile->weapon_us,profile->target_us,profile->hud_us};
- for(unsigned i=0;i<6;i++)m->stage_sum[i]+=stage[i];
+ unsigned stage[7]={profile->clear_us,profile->ground_us,profile->ceiling_us,profile->body_us,profile->weapon_us,profile->target_us,profile->hud_us};
+ for(unsigned i=0;i<7;i++)m->stage_sum[i]+=stage[i];
  m->frames++;m->update_sum+=update_us;m->render_sum+=render_us;m->present_sum+=present_us;m->telemetry_sum+=telemetry_us;
  if(now<m->next)return;
  SttPerfSample s;memset(&s,0,sizeof s);s.session=m->session;s.seq=m->seq++;s.uptime_ms=(now-m->started)/1000;s.tick=tick;
- s.frames=m->frames;s.window_us=(unsigned)(now-m->window_start);s.equipment=equipment;s.ground_mode=ground_mode;s.raster_mode=raster_mode;
- s.clear_us=(unsigned)(m->stage_sum[0]/m->frames);s.ground_us=(unsigned)(m->stage_sum[1]/m->frames);s.body_us=(unsigned)(m->stage_sum[2]/m->frames);s.weapon_us=(unsigned)(m->stage_sum[3]/m->frames);s.target_us=(unsigned)(m->stage_sum[4]/m->frames);s.hud_us=(unsigned)(m->stage_sum[5]/m->frames);
+ s.frames=m->frames;s.window_us=(unsigned)(now-m->window_start);s.equipment=equipment;s.ground_mode=ground_mode;s.raster_mode=raster_mode;s.ceiling_mode=ceiling_mode;s.target_fps=target_fps;
+ s.clear_us=(unsigned)(m->stage_sum[0]/m->frames);s.ground_us=(unsigned)(m->stage_sum[1]/m->frames);s.ceiling_us=(unsigned)(m->stage_sum[2]/m->frames);s.body_us=(unsigned)(m->stage_sum[3]/m->frames);s.weapon_us=(unsigned)(m->stage_sum[4]/m->frames);s.target_us=(unsigned)(m->stage_sum[5]/m->frames);s.hud_us=(unsigned)(m->stage_sum[6]/m->frames);
  s.update_us=(unsigned)(m->update_sum/m->frames);s.render_us=(unsigned)(m->render_sum/m->frames);
  s.present_us=(unsigned)(m->present_sum/m->frames);s.telemetry_us=(unsigned)(m->telemetry_sum/m->frames);
  s.cpu_mhz=scePowerGetArmClockFrequency();s.gpu_mhz=scePowerGetGpuClockFrequency();s.xbar_mhz=scePowerGetGpuXbarClockFrequency();

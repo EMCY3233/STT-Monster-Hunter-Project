@@ -81,7 +81,7 @@ int main(void){
  stt_render_set_clock(fake_clock);SttCombat combat;stt_combat_init(&combat);
  stt_render(image_a,test_depth,&combat,(SttCamera){.45f,.4f},33333,0,0);
  const SttRenderProfile *profile=stt_render_profile();
- assert(profile->clear_us==10&&profile->ground_us==10&&profile->body_us==10&&profile->weapon_us==10&&profile->target_us==10&&profile->hud_us==10);
+ assert(profile->clear_us==10&&profile->ground_us==10&&profile->ceiling_us==10&&profile->body_us==10&&profile->weapon_us==10&&profile->target_us==10&&profile->hud_us==10);
  stt_render_set_clock(NULL);
  puts("PASS CPU projection anchors, double-sided winding, bounded near-plane rejection and degenerate triangle");
  return 0;

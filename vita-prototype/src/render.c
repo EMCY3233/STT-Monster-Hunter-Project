@@ -67,19 +67,21 @@ static void tri_incremental(V a,V b,V c,uint32_t color){
  }
 }
 static void tri(V a,V b,V c,uint32_t color){if(raster_mode)tri_incremental(a,b,c,color);else tri_reference(a,b,c,color);}
-static unsigned ground_mode=2;
+static unsigned ground_mode=2,ceiling_mode=0;
+void stt_render_set_ceiling(unsigned mode){ceiling_mode=mode<=2?mode:0;}
+unsigned stt_render_get_ceiling(void){return ceiling_mode;}
 static int monitor_active,monitor_result;static unsigned monitor_sent;
 void stt_render_set_ground(unsigned mode){ground_mode=mode<=2?mode:2u;}
 unsigned stt_render_get_ground(void){return ground_mode;}
 void stt_render_monitor_status(int active,unsigned sent,int result){monitor_active=active;monitor_sent=sent;monitor_result=result;}
-/* Plane y=0: right.y=0 makes inverse depth constant along each screen row.
+/* Horizontal plane: right.y=0 makes inverse depth constant along each screen row.
    Same finite tiled area and depth convention as the triangle reference. */
-static void ground_scanline(int center_x,int center_z){
+static void plane_scanline(int center_x,int center_z,float height,uint32_t odd,uint32_t even){
  for(int y=0;y<STT_HEIGHT;y++){
   float screen_y=(142.0f-(y+.5f))/250.0f;
   float dy=forward.y+screen_y*up.y;
-  if(dy>=-.000001f)continue;
-  float z=-eye.y/dy;if(z<.15f)continue;
+  if(fabsf(dy)<.000001f)continue;
+  float z=(height-eye.y)/dy;if(z<.15f)continue;
   float inv=1.0f/z;
   float wx0=eye.x+z*(forward.x+screen_y*up.x);
   float wz0=eye.z+z*(forward.z+screen_y*up.z);
@@ -88,7 +90,7 @@ static void ground_scanline(int center_x,int center_z){
    float wx=wx0+z*screen_x*right.x,wz=wz0+z*screen_x*right.z;
    int gx=(int)floorf(wx*.5f),gz=(int)floorf(wz*.5f);
    if(gx<center_x-8||gx>=center_x+8||gz<center_z-8||gz>=center_z+8)continue;
-   zb[y*STT_WIDTH+x]=inv;fb[y*STT_PITCH+x]=(gx+gz)&1?RGB(49,67,69):RGB(57,77,78);
+   zb[y*STT_WIDTH+x]=inv;fb[y*STT_PITCH+x]=(gx+gz)&1?odd:even;
   }
  }
 }
@@ -133,11 +135,11 @@ static int ground_next(float base,float distance,float axis,int cell,int start,i
  }
  return lo;
 }
-static void ground_spans(int center_x,int center_z){
+static void plane_spans(int center_x,int center_z,float height,uint32_t odd,uint32_t even){
  for(int y=0;y<STT_HEIGHT;y++){
   float screen_y=(142.0f-(y+.5f))/250.0f;
-  float dy=forward.y+screen_y*up.y;if(dy>=-.000001f)continue;
-  float distance=-eye.y/dy;if(distance<.15f)continue;
+  float dy=forward.y+screen_y*up.y;if(fabsf(dy)<.000001f)continue;
+  float distance=(height-eye.y)/dy;if(distance<.15f)continue;
   float inv=1.0f/distance;
   float wx0=eye.x+distance*(forward.x+screen_y*up.x),wz0=eye.z+distance*(forward.z+screen_y*up.z);
   int start=0,end=STT_WIDTH;
@@ -147,13 +149,15 @@ static void ground_spans(int center_x,int center_z){
    int gx=ground_cell(wx0,distance,right.x,start),gz=ground_cell(wz0,distance,right.z,start);
    int last=ground_next(wx0,distance,right.x,gx,start,end);
    int nz=ground_next(wz0,distance,right.z,gz,start,end);if(nz<last)last=nz;
-   uint32_t color=(gx+gz)&1?RGB(49,67,69):RGB(57,77,78);
+   uint32_t color=(gx+gz)&1?odd:even;
    uint32_t *pixels=fb+y*STT_PITCH;float *depth=zb+y*STT_WIDTH;
    for(int x=start;x<last;x++){depth[x]=inv;pixels[x]=color;}
    start=last;
   }
  }
 }
+static void ground_scanline(int x,int z){plane_scanline(x,z,0,RGB(49,67,69),RGB(57,77,78));}
+static void ground_spans(int x,int z){plane_spans(x,z,0,RGB(49,67,69),RGB(57,77,78));}
 static void box(float x,float y,float z,float sx,float sy,float sz,float yaw,uint32_t color){
  V p[8];float s=sinf(yaw),c=cosf(yaw);
  for(int i=0;i<8;i++){float dx=(i&1?1:-1)*sx/2,dz=(i&4?1:-1)*sz/2;
@@ -195,6 +199,11 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
   uint32_t col=(x+z)&1?RGB(49,67,69):RGB(57,77,78);V a={x*2,0,z*2},b={x*2+2,0,z*2},d={x*2,0,z*2+2},e={x*2+2,0,z*2+2};tri(a,b,e,col);tri(a,e,d,col);
  }
  profile.ground_us=(unsigned)(mark()-phase);phase=mark();
+ /* Camera always lies between y=0 and y=8, so plane rows are disjoint.
+    Both planes precede actors and populate the same inverse-depth buffer. */
+ if(ceiling_mode==1)plane_scanline(center_x,center_z,STT_CEILING_HEIGHT,RGB(78,76,108),RGB(94,91,129));
+ else if(ceiling_mode==2)plane_spans(center_x,center_z,STT_CEILING_HEIGHT,RGB(78,76,108),RGB(94,91,129));
+ profile.ceiling_us=(unsigned)(mark()-phase);phase=mark();
  float yaw=c->hunter.yaw_turn*(6.28318530718f/65536);
  int posed=asset&&asset->status==STT_ASSET_READY&&stt_pose_emit(&asset->pose,stt_asset_clip(asset,c->hunter.state!=STT_IDLE),c->tick,c->hunter.x_mm,c->hunter.z_mm,c->hunter.yaw_turn,&asset->scratch,pose_triangle,NULL);
  if(!posed){
@@ -220,14 +229,15 @@ static void render_core(uint32_t *pixels,float *depth,const SttCombat*c,SttCamer
  if(c->target.hp>0)box(tx,.7f,tz,.65f,1.4f,.65f,0,c->target.reaction_ticks?RGB(255,231,108):RGB(230,94,76));
  else box(tx,.12f,tz,.85f,.24f,.85f,0,RGB(88,70,70));
  profile.target_us=(unsigned)(mark()-phase);phase=mark();
- rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-19 FPS TRIAL",RGB(119,223,235));
+ rect(0,0,480,32,RGB(9,17,27));text(8,5,"STT VITA PROTOTYPE 0-20 CEILING LAB",RGB(119,223,235));
  char line[100];snprintf(line,sizeof line,"TARGET HP %d   COMBO %u   TICK %u",c->target.hp,(unsigned)c->hunter.combo,(unsigned)c->tick);text(8,18,line,RGB(238,239,223));
  rect(0,239,480,33,RGB(9,17,27));text(8,244,"LEFT MOVE RIGHT CAMERA CROSS DRAW-ATTACK START EXIT",RGB(238,239,223));
- snprintf(line,sizeof line,"L GROUND R RASTER SELECT NET US %u DROP %u",frame_us,dropped);text(8,257,line,RGB(153,185,191));
+ text(8,257,"L GROUND R RASTER UP ROOF CIRCLE CAP SELECT NET",RGB(153,185,191));
+ (void)dropped;
  if(paused){rect(65,110,350,46,RGB(9,17,27));text(78,120,"RELEASE STICKS AND GAME BUTTONS",RGB(255,234,125));text(78,137,"OR PRESS TRIANGLE TO RESET",RGB(255,234,125));}
  if(asset)text(8,36,asset->status==STT_ASSET_READY?"ASSET READY":asset->status==STT_ASSET_MISSING?"ASSET MISSING - SIMPLE HUNTER":"ASSET INVALID - SIMPLE HUNTER",RGB(255,234,125));
  if(equipment){static const char *modes[]={"SHEATHED","DRAWING","DRAWN","SHEATHING"};text(330,36,modes[(unsigned)equipment->mode<=STT_SHEATHING?equipment->mode:0],RGB(255,234,125));}
- snprintf(line,sizeof line,"FPS %u CAP%u G%u T%u NET %s %u",frame_us?1000000u/frame_us:0,target_fps,ground_mode,raster_mode,monitor_active?"ON":"OFF",monitor_sent);text(125,45,line,RGB(153,185,191));
+ snprintf(line,sizeof line,"FPS %u CAP%u G%u T%u C%u NET %s %u",frame_us?1000000u/frame_us:0,target_fps,ground_mode,raster_mode,ceiling_mode,monitor_active?"ON":"OFF",monitor_sent);text(125,45,line,RGB(153,185,191));
  if(weapon)text(8,45,weapon->status==STT_ASSET_READY&&equipped?"SWORD READY":"SWORD FALLBACK",RGB(255,234,125));
  profile.hud_us=(unsigned)(mark()-phase);
 }
