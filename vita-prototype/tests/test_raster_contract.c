@@ -25,6 +25,22 @@ int main(void){
  for(unsigned i=0;i<STT_PITCH*STT_HEIGHT;i++)assert(image_b[i]==0);
  clear(image_b);tri((V){0,0,2},(V){0,0,2},(V){0,0,2},0xffffffffu);
  for(unsigned i=0;i<STT_PITCH*STT_HEIGHT;i++)assert(image_b[i]==0);
+ /* Compare the specialized plane to independent projected world samples. */
+ for(unsigned a=0;a<4;a++)for(unsigned b=0;b<3;b++){
+  float yaw=a*1.5707963268f,pitch=.12f+b*.4f,sy=sinf(yaw),cy=cosf(yaw),sp=sinf(pitch),cp=cosf(pitch);
+  eye=(V){-sy*6*cp,1.1f+sp*6,-cy*6*cp};right=(V){cy,0,-sy};forward=(V){sy*cp,-sp,cy*cp};up=(V){sy*sp,cp,cy*sp};
+  clear(image_a);ground_scanline(0,0);unsigned checked=0;
+  for(int y=60;y<239;y+=13)for(int x=3;x<STT_WIDTH;x+=31){
+   float inv=test_depth[y*STT_WIDTH+x];if(inv==0)continue;
+   float z=1/inv,sx=((x+.5f)-240)/250,uy=(142-(y+.5f))/250;
+   V world={eye.x+z*(forward.x+sx*right.x+uy*up.x),eye.y+z*(forward.y+sx*right.y+uy*up.y),eye.z+z*(forward.z+sx*right.z+uy*up.z)};
+   assert(fabsf(world.y)<.00001f);V pixel=project(world);
+   assert(fabsf(pixel.x-(x+.5f))<.0003f&&fabsf(pixel.y-(y+.5f))<.0003f);
+   int gx=(int)floorf(world.x*.5f),gz=(int)floorf(world.z*.5f);
+   assert(gx>=-8&&gx<8&&gz>=-8&&gz<8);checked++;
+  }
+  assert(checked>25);
+ }
  puts("PASS CPU projection anchors, double-sided winding, bounded near-plane rejection and degenerate triangle");
  return 0;
 }

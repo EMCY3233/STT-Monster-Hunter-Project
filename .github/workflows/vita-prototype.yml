@@ -10,6 +10,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Performance wire contract and PC monitor integration
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Icontracts contracts/stt_perf.c contracts/tests/test_perf.c -o /tmp/stt-perf
+          ASAN_OPTIONS=detect_leaks=0 /tmp/stt-perf > /tmp/stt-perf.json
+          python -c "from pathlib import Path; from stt_monitor.protocol import decode; p=decode(Path('/tmp/stt-perf.json').read_bytes().strip()); assert p['perf']['frames']==12; assert p['perf']['cpu_load_pct'] is None"
+          python -m unittest discover -s tests -p 'test_perf_protocol.py'
       - name: Portable controls, camera, core adapter and renderer
         run: |
           cc -std=c99 -Wall -Wextra -Werror -Ivita-prototype/src vita-prototype/src/control.c vita-prototype/tests/test_control.c -lm -o /tmp/stt-controls
