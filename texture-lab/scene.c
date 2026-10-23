@@ -23,7 +23,7 @@ int stt_tex_load(SttTexScene *s,const char *path){
   t->rgba=malloc(bytes);if(!t->rgba||!block(f,t->rgba,bytes))goto done;
  }
  for(unsigned i=0;i<tmp.nm;i++){
-  uint32_t a[5];if(!block(f,a,20)||a[0]>1||!a[1]||a[1]>8192||!a[2]||a[2]>49152||a[2]%3||a[3]>=tmp.nt||a[4]!=(a[0]?16u:1u))goto done;
+  uint32_t a[5];if(!block(f,a,20)||a[0]>1||!a[1]||a[1]>8192||!a[2]||a[2]>49152||a[2]%3||a[3]>=tmp.nt||(a[0]?(a[4]!=16u&&a[4]!=33u):a[4]!=1u))goto done;
   SttTexMesh *m=tmp.meshes+i;m->hunter=a[0];m->nv=a[1];m->ni=a[2];m->texture=a[3];m->frames=a[4];
   size_t nv=(size_t)m->nv*m->frames,bytes=nv*sizeof *m->vertices;budget+=bytes+m->ni*2;if(budget>32*1024*1024)goto done;
   m->vertices=malloc(bytes);m->indices=malloc(m->ni*2);if(!m->vertices||!m->indices||!block(f,m->vertices,bytes)||!block(f,m->indices,m->ni*2))goto done;

@@ -3,6 +3,8 @@
 #include <vita2d.h>
 #include <stdlib.h>
 #include <string.h>
+#include "visibility.h"
+static float bounds[128][6];
 extern const SceGxmProgram texture_v_gxp_start,texture_f_gxp_start;
 static SceGxmShaderPatcherId vertex_id,fragment_id;
 static SceGxmVertexProgram *vp;
@@ -20,6 +22,8 @@ void stt_gpu_close(void){
  fp=NULL;vp=NULL;registered_f=registered_v=0;
 }
 int stt_gpu_init(const SttTexScene *s){
+ for(unsigned i=0;i<s->nm;i++){const SttTexMesh *m=s->meshes+i;for(unsigned k=0;k<3;k++){bounds[i][k]=5001;bounds[i][k+3]=-5001;}for(unsigned j=0;j<m->nv;j++){const float v[3]={m->vertices[j].x,m->vertices[j].y,m->vertices[j].z};for(unsigned k=0;k<3;k++){if(v[k]<bounds[i][k])bounds[i][k]=v[k];if(v[k]>bounds[i][k+3])bounds[i][k+3]=v[k];}}}
+
  SceGxmShaderPatcher *p=vita2d_get_shader_patcher();
  if(sceGxmShaderPatcherRegisterProgram(p,&texture_v_gxp_start,&vertex_id)<0)return 0;
  registered_v=1;
@@ -53,6 +57,7 @@ unsigned stt_gpu_draw(const SttTexScene *s,int hunter,const float matrix[16],uns
  sceGxmSetUniformDataF(uniforms,wvp,0,16,matrix);
  for(unsigned i=0;i<s->nm;i++){
   const SttTexMesh *m=s->meshes+i;if(m->hunter!=(unsigned)hunter)continue;
+  if(!hunter&&!stt_bounds_visible(matrix,bounds[i]))continue;
   SttTexVertex *vertices=vita2d_pool_memalign(m->nv*sizeof *vertices,16);uint16_t *indices=vita2d_pool_memalign(m->ni*2,16);if(!vertices||!indices)break;
   memcpy(indices,m->indices,m->ni*2);
   const SttTexVertex *a=m->vertices+((phase/2)%m->frames)*m->nv,*b=m->vertices+(((phase/2)+1)%m->frames)*m->nv;
