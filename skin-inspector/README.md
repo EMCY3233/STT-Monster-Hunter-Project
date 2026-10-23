@@ -121,7 +121,7 @@ This diagnostic does not validate dynamic deformation or an LMT association.
 
 ## Evidence and rectifications
 
-Twenty-four synthetic test methods cover all five profiles, grouped latter influence
+Twenty-six synthetic test methods cover all five profiles, grouped latter influence
 offsets, unknown-format reporting, invalid active references/weight sums/palettes,
 parent cycles/ranges, nonfinite values, overlaps, index windows and shortfall,
 source/output preservation, Git destinations and CLI errors, a cycle with a
@@ -137,6 +137,34 @@ An additional case rejects diagnostic evaluation of a singular common transform
 without changing the underlying structural inspection.
 Sparse and duplicate bone IDs are tested separately from parent/palette record
 slots; reporting the raw IDs does not enable LMT association or playback.
+Two seeded campaigns exercise 64 valid profile variants and 64 deliberately
+malformed inputs (seeds 23067 and 670230). Every case checks source preservation;
+failure must return the expected rejection code 1 and create no output. A crash
+is not an acceptable rejection. All subprocess checks have a 30-second timeout.
+These structured campaigns are not exhaustive fuzzing or a security guarantee.
+
+## Original synthetic motion simulation
+
+`python simulate_motion.py` runs a deterministic numerical experiment; CTest
+registers it separately as `motion_simulation`. `--out NEW_PRIVATE_DIRECTORY`
+also builds a self-contained interactive `index.html` and summary `results.json`.
+Existing/Git-contained output paths reject; only original synthetic geometry and
+motion are used. No MH4U models, LMT decoding or game execution is involved.
+
+Three joints deform an original 82-record strip across 241 samples of a four
+second synthetic motion (60 samples/second plus endpoint). Matrix linear blend
+skinning is compared with a separately expressed nested 2D rotation oracle.
+Controlled variants swap a palette, reverse hierarchy composition, or show
+invalid weights **unchecked for illustration**. The actual inspector rejects
+invalid referenced sums; the unchecked case is not a supported execution mode.
+
+Checks require agreement with the analytic oracle below 1e-12 synthetic units,
+zero palette-swap error at rest, and clear dynamic error for the wrong palette
+and hierarchy. This demonstrates why a rest-pose match cannot prove a motion
+binding. Some moving instants can also coincide; the full sampled trajectory is
+compared, not a single favorable screenshot. Samples do not prove continuous-time
+accuracy or independence of all arithmetic assumptions. This exercises a Python
+synthetic motion implementation, not dynamic C++ or original-game playback.
 
 Initial two-profile local private check: 20 distinct MH4U MOD hashes, representing 18 skeleton-table
 signatures, selected nonrandomly from the first 20 `/data/emNNN.arc` files.

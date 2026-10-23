@@ -1,6 +1,7 @@
 import hashlib
 import json
 import pathlib
+import random
 import struct
 import subprocess
 import sys
@@ -47,6 +48,19 @@ def fixture(two=False, unknown=False):
     return data
 
 
+def profile_fixture(fmt):
+    two = fmt in (0xd6784014, 0x43fb3015, 0x7ba7401b)
+    data = fixture(two=two)
+    if fmt in (0x43fb3015, 0x7ba7401b):
+        vb, ib = struct.unpack_from('<2I', data, 56)
+        data[vb:ib] = b''.join(data[vb+i*28:vb+(i+1)*28]+bytes(4) for i in range(4))
+        struct.pack_into('<I', data, 24, 128)
+        struct.pack_into('<I', data, 60, ib+16)
+        struct.pack_into('<I', data, 884, 32 << 16 | 4 << 24 | 2 << 3)
+    struct.pack_into('<I', data, 896, fmt)
+    return data
+
+
 class Skin(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -61,8 +75,8 @@ class Skin(unittest.TestCase):
         args = [EXE, str(self.source), '--out', str(self.destination)]
         if rest:
             args.append('--check-rest-pose')
-        result = subprocess.run(args, capture_output=True)
-        self.assertEqual(result.returncode == 0, ok, result.stderr.decode())
+        result = subprocess.run(args, capture_output=True, timeout=30)
+        self.assertEqual(result.returncode, 0 if ok else 1, result.stderr.decode(errors='replace'))
         self.assertEqual(hashlib.sha256(self.source.read_bytes()).hexdigest(), before)
         if ok:
             value = json.loads((self.destination/'report.json').read_text())
@@ -126,8 +140,8 @@ class Skin(unittest.TestCase):
     def test_oversized_source_rejected_without_output(self):
         with self.source.open('wb') as source:
             source.truncate((32 << 20)+1)
-        result = subprocess.run([EXE, str(self.source), '--out', str(self.destination)], capture_output=True)
-        self.assertNotEqual(result.returncode, 0)
+        result = subprocess.run([EXE, str(self.source), '--out', str(self.destination)], capture_output=True, timeout=30)
+        self.assertEqual(result.returncode, 1)
         self.assertIn(b'input budget', result.stderr)
         self.assertFalse(self.destination.exists())
 
@@ -215,6 +229,54 @@ class Skin(unittest.TestCase):
         self.assertEqual(report['bone_index_ids_raw'], [0, 0])
         self.assertEqual(report['referenced_vertex_records'], 3)
 
+    def test_seeded_valid_profile_campaign(self):
+        rng = random.Random(23067)
+        formats = (0x01b36016, 0xf606f017, 0xd6784014, 0x43fb3015, 0x7ba7401b)
+        for case in range(64):
+            fmt = formats[case % len(formats)]
+            data = profile_fixture(fmt)
+            data[128], data[152] = rng.randrange(256), rng.randrange(256)
+            vb = struct.unpack_from('<I', data, 56)[0]
+            stride = data[886]
+            offsets_i = (24, 25, 32, 33) if stride == 36 else (24, 25)
+            offsets_w = (26, 27, 34, 35) if stride == 36 else (26, 27)
+            for vertex in range(3):
+                p = vb+vertex*stride
+                struct.pack_into('<3f', data, p, *(rng.uniform(-1000, 1000) for _ in range(3)))
+                cuts = sorted([0, 255] + [rng.randrange(256) for _ in range(len(offsets_w)-1)])
+                weights = [b-a for a, b in zip(cuts, cuts[1:])]
+                for index, weight, oi, ow in zip((rng.randrange(2) for _ in weights), weights, offsets_i, offsets_w):
+                    data[p+oi], data[p+ow] = index, weight
+            with self.subTest(case=case, format=hex(fmt)):
+                report = self.run_case(data, rest=True)
+                self.assertEqual(report['referenced_vertex_records'], 3)
+                self.assertFalse(report['functional_skinning_verified'])
+
+    def test_seeded_malformed_profile_campaign(self):
+        rng = random.Random(670230)
+        for case in range(64):
+            data = fixture()
+            vb = struct.unpack_from('<I', data, 56)[0]
+            mode = case % 8
+            if mode == 0:
+                del data[rng.randrange(len(data)):]
+            elif mode == 1:
+                struct.pack_into('<H', data, 6, 256)
+            elif mode == 2:
+                data[153] = 1
+            elif mode == 3:
+                data[vb+26] -= rng.randrange(1, 128)
+            elif mode == 4:
+                data[913] = rng.randrange(1, 256)
+            elif mode == 5:
+                struct.pack_into('<I', data, vb, 0x7fc00000 | rng.randrange(0x10000))
+            elif mode == 6:
+                struct.pack_into('<I', data, 888, 0xffffffff)
+            else:
+                struct.pack_into('<H', data, len(data)-2, rng.randrange(4, 65535))
+            with self.subTest(case=case, defect=mode):
+                self.run_case(data, False, rest=True)
+
     def test_nonzero_start_adjustment_and_stream(self):
         data = fixture()
         vb, ib = struct.unpack_from('<2I', data, 56)
@@ -296,17 +358,17 @@ class Skin(unittest.TestCase):
         self.destination.mkdir()
         sentinel = self.destination/'keep'
         sentinel.write_text('unchanged')
-        result = subprocess.run([EXE, str(self.source), '--out', str(self.destination)], capture_output=True)
-        self.assertNotEqual(result.returncode, 0)
+        result = subprocess.run([EXE, str(self.source), '--out', str(self.destination)], capture_output=True, timeout=30)
+        self.assertEqual(result.returncode, 1)
         self.assertEqual(sentinel.read_text(), 'unchanged')
         (self.root/'.git').mkdir()
-        result = subprocess.run([EXE, str(self.source), '--out', str(self.root/'other')], capture_output=True)
-        self.assertNotEqual(result.returncode, 0)
+        result = subprocess.run([EXE, str(self.source), '--out', str(self.root/'other')], capture_output=True, timeout=30)
+        self.assertEqual(result.returncode, 1)
         self.assertFalse((self.root/'other').exists())
 
     def test_cli(self):
         for args in ([], ['a'], ['a', '--out'], ['a', '--unknown', 'b']):
-            self.assertNotEqual(subprocess.run([EXE, *args], capture_output=True).returncode, 0)
+            self.assertEqual(subprocess.run([EXE, *args], capture_output=True, timeout=30).returncode, 1)
 
 
 if __name__ == '__main__':
