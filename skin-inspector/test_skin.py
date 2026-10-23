@@ -1,0 +1,153 @@
+import hashlib
+import json
+import pathlib
+import struct
+import subprocess
+import sys
+import tempfile
+import unittest
+
+EXE = str(pathlib.Path(sys.argv.pop(1)).resolve())
+
+
+def fixture(two=False, unknown=False):
+    stride = 28 if two else 36
+    meshes = 2 if unknown else 1
+    bone, group, material, mesh = 128, 716, 748, 876
+    vb = mesh+meshes*48
+    ib = vb+4*stride
+    data = bytearray(ib+6)
+    data[:4] = b'MOD\0'
+    struct.pack_into('<4H', data, 4, 230, 2, meshes, 1)
+    for at, value in ((12, 4), (16, 3), (24, 4*stride), (32, 1), (36, 1),
+                      (40, bone), (44, group), (48, material), (52, mesh), (56, vb), (60, ib)):
+        struct.pack_into('<I', data, at, value)
+    data[bone+1] = 255
+    data[bone+24] = 1
+    for table in (bone+48, bone+176):
+        for i in range(2):
+            struct.pack_into('<16f', data, table+i*64, *[float(r == c) for r in range(4) for c in range(4)])
+    struct.pack_into('<I', data, 688, 2)
+    data[692:694] = bytes((0, 1))
+    for i in range(meshes):
+        at = mesh+i*48
+        struct.pack_into('<H', data, at+2, 4)
+        struct.pack_into('<I', data, at+8, stride << 16 | 4 << 24 | (2 if two else 4) << 3)
+        struct.pack_into('<I', data, at+20, 0xdeadbeef if i else (0xd6784014 if two else 0x01b36016))
+        struct.pack_into('<I', data, at+28, 3)
+    for i, position in enumerate(((0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 0))):
+        at = vb+i*stride
+        struct.pack_into('<3f', data, at, *position)
+        if i < 3:
+            data[at+24:at+28] = bytes((0, 1, 128, 127))
+        # Unused zero-weight slots can contain arbitrary bytes.
+        if not two:
+            data[at+32:at+34] = b'\xff\xff'
+    struct.pack_into('<3H', data, ib, 0, 1, 2)
+    return data
+
+
+class Skin(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = pathlib.Path(self.temp.name)
+        self.source = self.root/'source.mod'
+        self.destination = self.root/'out'
+
+    def run_case(self, data, ok=True):
+        self.source.write_bytes(data)
+        before = hashlib.sha256(data).hexdigest()
+        result = subprocess.run([EXE, str(self.source), '--out', str(self.destination)], capture_output=True)
+        self.assertEqual(result.returncode == 0, ok, result.stderr.decode())
+        self.assertEqual(hashlib.sha256(self.source.read_bytes()).hexdigest(), before)
+        if ok:
+            value = json.loads((self.destination/'report.json').read_text())
+            (self.destination/'report.json').unlink()
+            self.destination.rmdir()
+            return value
+        self.assertFalse(self.destination.exists())
+
+    def test_valid_profiles(self):
+        for two in (False, True):
+            with self.subTest(two=two):
+                report = self.run_case(fixture(two))
+                self.assertEqual(report['referenced_vertex_records'], 3)
+                self.assertEqual(report['unused_zero_weight_records'], 1)
+                self.assertFalse(report['functional_skinning_verified'])
+                self.assertFalse(report['palette_semantics_verified'])
+
+    def test_four_influence_grouped_offsets(self):
+        data = fixture()
+        vb = struct.unpack_from('<I', data, 56)[0]
+        data[vb+26:vb+28] = bytes((64, 64))
+        data[vb+32:vb+36] = bytes((0, 1, 64, 63))
+        report = self.run_case(data)
+        self.assertEqual(report['active_influences'], 8)
+
+    def test_unknown_mesh_explicit(self):
+        report = self.run_case(fixture(unknown=True))
+        self.assertEqual(report['unsupported_meshes'], 1)
+        data = fixture()
+        struct.pack_into('<I', data, 896, 0xdeadbeef)
+        self.run_case(data, False)
+
+    def test_weight_and_palette_errors(self):
+        base = fixture()
+        vb = struct.unpack_from('<I', base, 56)[0]
+        for at, value in ((vb+26, 0), (vb+24, 2), (vb+34, 1), (913, 1), (692, 2)):
+            with self.subTest(at=at):
+                data = base[:]
+                data[at] = value
+                self.run_case(data, False)
+        data = base[:]
+        data[vb+26:vb+28] = b'\0\0'
+        self.run_case(data, False)
+
+    def test_hierarchy(self):
+        for at, value in ((129, 2), (129, 0), (129, 1)):
+            data = fixture()
+            data[at] = value
+            self.run_case(data, False)
+
+    def test_ranges_and_nonfinite(self):
+        for at, value in ((40, 0), (52, 128), (24, 0xffffffff), (16, 0), (688, 25), (176, 0x7fc00000)):
+            data = fixture()
+            struct.pack_into('<I', data, at, value)
+            self.run_case(data, False)
+        self.run_case(fixture()[:100], False)
+        data = fixture()
+        vb = struct.unpack_from('<I', data, 56)[0]
+        struct.pack_into('<I', data, vb+16, 0x7f800000)
+        self.run_case(data, False)
+
+    def test_indices_and_shortfall(self):
+        data = fixture()
+        struct.pack_into('<H', data, len(data)-2, 4)
+        self.run_case(data, False)
+        data = fixture()
+        struct.pack_into('<I', data, 16, 4)
+        self.assertEqual(self.run_case(data)['global_index_shortfall_bytes'], 2)
+        struct.pack_into('<I', data, 16, 5)
+        self.run_case(data, False)
+
+    def test_existing_and_git_destinations(self):
+        self.source.write_bytes(fixture())
+        self.destination.mkdir()
+        sentinel = self.destination/'keep'
+        sentinel.write_text('unchanged')
+        result = subprocess.run([EXE, str(self.source), '--out', str(self.destination)], capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(sentinel.read_text(), 'unchanged')
+        (self.root/'.git').mkdir()
+        result = subprocess.run([EXE, str(self.source), '--out', str(self.root/'other')], capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse((self.root/'other').exists())
+
+    def test_cli(self):
+        for args in ([], ['a'], ['a', '--out'], ['a', '--unknown', 'b']):
+            self.assertNotEqual(subprocess.run([EXE, *args], capture_output=True).returncode, 0)
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,0 +1,116 @@
+# MOD230 weighted-mesh inspection (C++17)
+
+Read-only structural inspection, without geometry, skeleton or animation export.
+Standalone, no dependency on the reader/texture/static-converter PRs and no
+external libraries. Never commit private inputs or their generated reports.
+
+```text
+cmake -S skin-inspector -B build
+cmake --build build --config Release
+ctest --test-dir build -C Release --output-on-failure
+stt-skin INPUT.mod --out NEW_PRIVATE_DIRECTORY
+```
+
+## Profile and validation
+
+Little-endian MOD230, 1..255 bones. Bone records are 24 bytes, followed by two
+tables of 64-byte matrices per bone, 256 opaque global-remap bytes and 28-byte
+skin-palette records (u32 count <=24, followed by byte bone-slot candidates).
+Checks finite bone scalars/matrices, parent slots, roots and cycles. It does not
+interpret the global remap or assert that the matrices are inverses. Bone index
+and mirror fields remain uninterpreted; parents use record slots, not index IDs.
+
+Validates nonoverlapping header/skeleton/group/material/mesh/vertex/index ranges,
+sparse group IDs and material references. Header profile starts at 128 bytes;
+other unknown metadata is not interpreted. The global index declaration may
+overstate available bytes by exactly one u16: shortfall 0 or 2 is reported,
+never repaired; every mesh window must remain within actual and declared bounds.
+
+Weighted formats inspected:
+
+| Format | Stride | Indices (byte offsets) | Weight bytes |
+| --- | --- | --- | --- |
+| `0x01B36016` | 36 | 24, 25, **32, 33** | 26, 27, **34, 35** |
+| `0xD6784014` | 28 | 24, 25 | 26, 27 |
+
+Positions f32x3 at +0, UV f32x2 at +16 must be finite. Supported meshes require
+triangle-strip primitive 4. Vertex start is buffer + (start + adjustment)*stride
++ stream; u16 mesh indices use `index-start`, excluding restart 65535. A record
+is referenced if any index addresses it, including degenerate strip indices.
+
+**Candidate interpretation:** mesh byte +37 selects a skin palette; each
+nonzero-weight byte index addresses a palette slot, which addresses a bone-record
+slot. With no skin palettes, indices address bone slots directly. Checks every
+declared palette slot, all active references (including unused vertex records),
+and active influence count against the mesh field. Referenced vertices must
+sum to exactly 255 in raw weight bytes; no normalization or inferred weights.
+Zero-weight influence indices are ignored. Unreferenced zero-weight records
+are counted; other unreferenced sums are not required to equal 255.
+
+Unknown formats are listed with `supported:false`; their declared buffer ranges,
+group/material references and index windows are checked, but their attributes
+and individual index values are **not** validated. They are excluded from
+supported vertex/reference/influence totals. A file with no supported mesh fails.
+Success means the described partial profile passed, not that every mesh or the
+whole MOD is understood. JSON explicitly keeps palette semantics, functional
+skinning and matrix inverse verification false.
+
+Budgets: 32 MiB input, 4096 meshes/materials/groups, 256 palettes, declared 1m
+vertices/4m indices, aggregate 250k supported vertex records/1m processed indices.
+Parse completes before creating a new output directory. Existing and Git-contained
+destinations are rejected. Inputs must remain stable during the read; source is
+opened read-only, but the CLI does not compute before/after hashes. Output I/O
+failure can leave a partial newly created directory. No runtime/console access.
+
+## Evidence and rectifications
+
+Nine synthetic test methods cover both profiles, grouped latter influence
+offsets, unknown-format reporting, invalid active references/weight sums/palettes,
+parent cycles/ranges, nonfinite values, overlaps, index windows and shortfall,
+source/output preservation, Git destinations and CLI errors. CI targets
+Windows/Linux Debug/Release with ASan/UBSan on Linux Debug.
+
+Local private check: 20 distinct MH4U MOD hashes, representing 18 skeleton-table
+signatures, selected nonrandomly from the first 20 `/data/emNNN.arc` files.
+The two profiles occur in 15 files (120 meshes); 331 meshes have other formats.
+Five files are correctly rejected as unsupported-only. For the two profiles,
+25,432 vertex records include 17,296 referenced records, all with raw weight sum
+255 and active indices within the candidate palettes. The remaining 8,136 zero
+weight records are unreferenced. C++ counters match the separate project Python
+probe; shared format assumptions mean this is not independent game validation.
+Original image SHA256 was checked before/after the Python audit and stayed equal.
+
+The initial local four-influence probe incorrectly interleaved its last two
+index/weight pairs. Those results are superseded. The grouped offsets above
+match the primary format declaration and eliminate the observed anomalous sums
+and active out-of-range references. No malformed samples were silently normalized.
+
+Separately, 40 matrix-product hypotheses were tested locally. None gives identity
+for all bones; four give a common root product, with maximum normalized residual
+5.850722e-8 over 736 bone-record occurrences. Requiring identity alone cannot
+discard an otherwise coherent structural reading. A common product still does
+not establish its meaning, coordinate convention or a usable rig. Parent-first
+and child-first alternatives remain indistinguishable in this sample. These
+matrix hypothesis tests are research evidence, not implemented in this CLI.
+
+Remaining: independently validate palette semantics, unknown formats, coordinate
+and model-space transforms, actual deformation, LMT associations and animation.
+This tool does not modify the static converter or claim a converted monster.
+
+## Primary format references
+
+Independently written inspection code; no external library code copied or run.
+
+- [RevilLib common.cpp](https://github.com/PredatorCZ/RevilLib/blob/master/src/mtf_mod/common.cpp),
+  blob `5435277ef757c0f6c7bdeae7efd0837fe44df8f1`: attribute layouts, XE5 mesh
+  palette selector and distinction between Transforms/InverseBinds.
+- [bones.hpp](https://github.com/PredatorCZ/RevilLib/blob/master/src/mtf_mod/bones.hpp),
+  blob `742e88d2f7eaaa31a9ccdcf3581d86d948ca8fb3`;
+  [traits.hpp](https://github.com/PredatorCZ/RevilLib/blob/master/src/mtf_mod/traits.hpp),
+  blob `61f901ad82bd674592682aaed26ab2d4e59eeb3d`;
+  [serialize.cpp](https://github.com/PredatorCZ/RevilLib/blob/master/src/mtf_mod/serialize.cpp),
+  blob `b599dc118442471c6e2cc00c161dadd0e61cb432`: tables and XE6 using XE5 reader.
+- [Historical MH4U Blender importer](https://github.com/svanheulen/mhff/blob/master/n3ds/io_import_scene_mod.py),
+  blob `0da950c275caf78bfcfa310f6a45c488e890d94b`: its latter influence pairs
+  are interleaved differently; it does not construct the skeleton. That code
+  is therefore not an oracle for these offsets or proof of functional skinning.
