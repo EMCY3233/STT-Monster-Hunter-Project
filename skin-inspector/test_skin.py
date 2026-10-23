@@ -197,6 +197,24 @@ class Skin(unittest.TestCase):
         self.assertIsNone(report['max_absolute_xyz_error'])
         self.assertEqual(self.run_case(fixture(), rest=True)['rest_pose_diagnostic']['common_linear_determinant'], 1)
 
+    def test_bone_ids_are_not_parent_or_palette_slots(self):
+        data = fixture()
+        data[128], data[152] = 5, 200
+        report = self.run_case(data)
+        self.assertEqual(report['bone_index_ids_raw'], [5, 200])
+        self.assertTrue(report['bone_index_ids_unique'])
+        self.assertFalse(report['bone_index_ids_equal_slots'])
+        self.assertTrue(report['parent_references_use_record_slots'])
+        self.assertFalse(report['motion_association_verified'])
+
+    def test_duplicate_bone_ids_reported_without_invented_mapping(self):
+        data = fixture()
+        data[152] = 0
+        report = self.run_case(data)
+        self.assertFalse(report['bone_index_ids_unique'])
+        self.assertEqual(report['bone_index_ids_raw'], [0, 0])
+        self.assertEqual(report['referenced_vertex_records'], 3)
+
     def test_nonzero_start_adjustment_and_stream(self):
         data = fixture()
         vb, ib = struct.unpack_from('<2I', data, 56)

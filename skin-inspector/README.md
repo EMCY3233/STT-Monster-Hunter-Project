@@ -18,8 +18,11 @@ Little-endian MOD230, 1..255 bones. Bone records are 24 bytes, followed by two
 tables of 64-byte matrices per bone, 256 opaque global-remap bytes and 28-byte
 skin-palette records (u32 count <=24, followed by byte bone-slot candidates).
 Checks finite bone scalars/matrices, parent slots, roots and cycles. It does not
-interpret the global remap or assert that the matrices are inverses. Bone index
-and mirror fields remain uninterpreted; parents use record slots, not index IDs.
+interpret the global remap or assert that the matrices are inverses. Exposes
+`bone_index_ids_raw`, uniqueness and equality-to-slot flags as raw evidence;
+does not invent a motion binding, even when IDs are unique. Duplicate IDs are
+reported, not used for an ambiguous mapping. Mirror fields remain uninterpreted;
+parents and candidate palette targets use record slots, not these index IDs.
 
 Validates nonoverlapping header/skeleton/group/material/mesh/vertex/index ranges,
 sparse group IDs and material references. Header profile starts at 128 bytes;
@@ -118,7 +121,7 @@ This diagnostic does not validate dynamic deformation or an LMT association.
 
 ## Evidence and rectifications
 
-Twenty-two synthetic test methods cover all five profiles, grouped latter influence
+Twenty-four synthetic test methods cover all five profiles, grouped latter influence
 offsets, unknown-format reporting, invalid active references/weight sums/palettes,
 parent cycles/ranges, nonfinite values, overlaps, index windows and shortfall,
 source/output preservation, Git destinations and CLI errors, a cycle with a
@@ -132,6 +135,8 @@ hierarchy with noncommuting transforms, broken bind residual, palette/weight
 ambiguity, multiple roots/nonaffine unavailability and invalid referenced weights.
 An additional case rejects diagnostic evaluation of a singular common transform
 without changing the underlying structural inspection.
+Sparse and duplicate bone IDs are tested separately from parent/palette record
+slots; reporting the raw IDs does not enable LMT association or playback.
 
 Initial two-profile local private check: 20 distinct MH4U MOD hashes, representing 18 skeleton-table
 signatures, selected nonrandomly from the first 20 `/data/emNNN.arc` files.

@@ -129,9 +129,13 @@ std::string inspect(const Bytes& b,bool restEnabled) {
     const U available=std::min(declaredI*2,U(b.size())-ibAt),shortfall=declaredI*2-available;
     check(shortfall==0||shortfall==2,"unsupported global index shortfall");
     regions.push_back({ibAt,available}); disjoint(regions);
-    std::vector<U> parents;
+    std::vector<U> parents,indexIds;
+    std::set<U> distinctIndexIds;
+    bool indexIdsEqualSlots=true;
     U roots=0,maxDepth=0;
     for(U i=0;i<bones;++i) {
+        const U indexId=number(b,boneAt+i*24,1);
+        indexIds.push_back(indexId); distinctIndexIds.insert(indexId); indexIdsEqualSlots=indexIdsEqualSlots&&indexId==i;
         const U parent=number(b,boneAt+i*24+1,1);
         check(parent==255||parent<bones,"parent outside bone slots"); parents.push_back(parent); roots+=parent==255;
         for(U j=0;j<5;++j) scalar(b,boneAt+i*24+4+j*4);
@@ -216,11 +220,17 @@ std::string inspect(const Bytes& b,bool restEnabled) {
     check(supported>0,"no supported weighted mesh");
     check(referenced>0,"no referenced vertex in supported meshes"); details << ']';
     std::ostringstream out;
+    std::ostringstream ids; ids << '[';
+    for(size_t i=0;i<indexIds.size();++i) { if(i) ids << ','; ids << indexIds[i]; }
+    ids << ']';
     out << "{\"schema\":1,\"inspection_only\":true,\"functional_skinning_verified\":false,\"matrix_inverses_verified\":false,"
         "\"palette_semantics_verified\":false,\"global_remap_interpreted\":false,\"geometry_exported\":false,"
         "\"vertex_counts_are_window_occurrences\":true,\"has_unsupported_meshes\":" << (unsupported?"true":"false")
         << ",\"declared_vertices_raw\":" << declaredV << ",\"declared_indices_raw\":" << declaredI
         << ",\"bone_count\":" << bones << ",\"roots\":" << roots << ",\"max_depth\":" << maxDepth
+        << ",\"bone_index_ids_raw\":" << ids.str() << ",\"bone_index_ids_unique\":" << (distinctIndexIds.size()==indexIds.size()?"true":"false")
+        << ",\"bone_index_ids_equal_slots\":" << (indexIdsEqualSlots?"true":"false")
+        << ",\"parent_references_use_record_slots\":true,\"motion_association_verified\":false"
         << ",\"skin_palettes\":" << skins << ",\"supported_meshes\":" << supported << ",\"unsupported_meshes\":" << unsupported
         << ",\"supported_vertex_records\":" << vertices << ",\"referenced_vertex_records\":" << referenced
         << ",\"unused_zero_weight_records\":" << zeroUnused << ",\"active_influences\":" << active
