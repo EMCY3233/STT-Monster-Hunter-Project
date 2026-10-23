@@ -18,6 +18,8 @@ El receptor añade líneas a `telemetry.jsonl` sin truncar el archivo. Si un arc
 python -m unittest discover -s tests -v
 ```
 
+Si hay un compilador de C (`cc`, `gcc` o `clang`), los tests también compilan y ejecutan en el PC la lógica portable del agente Vita (recuperación de red, reloj de límite y codificación); sin compilador esos tests se omiten. Son resultados automatizados de lógica, no validación física en la consola.
+
 El monitor PC no tiene dependencias de terceros. Si Windows abre Microsoft Store al invocar `python`, instalar/configurar Python o usar su ruta completa.
 
 ## Ver diagnósticos en directo
@@ -29,6 +31,12 @@ python -m stt_monitor.receiver --live --max-packets 10 --idle-timeout 30
 ```
 
 El archivo JSONL conserva el mismo formato y sigue añadiendo registros. Los contadores describen intentos anteriores al mensaje actual; «último error conservado» puede pertenecer a una sesión previa. Una recepción no confirma el resultado del envío actual. STT/1 no aporta diagnóstico. La falta de mensajes no demuestra desconexión ni parada: STT/2 no transmite el estado de parada ni el presupuesto RTC. Esta vista no necesita actualizar el VPK.
+
+Para probar esta vista sin la Vita, el simulador puede emitir STT/2 con diagnósticos simulados. Con `--fail-every 3`, uno de cada tres intentos se marca como fallo simulado y no se envía; el siguiente paquete lo refleja en sus contadores. Son datos marcados `source=simulator`, no observaciones de la consola:
+
+```powershell
+python -m stt_monitor.simulator --version 2 --fail-every 3 --count 10
+```
 
 Para acotar también un flujo continuo, añadir `--duration 180`: el plazo total usa el reloj monotónico del PC y no se reinicia con cada muestra. Se aplica el primer límite alcanzado entre duración, inactividad y máximo de muestras. No cambia el plazo de la Vita. La cuota independiente `--max-bytes` limita el tamaño total del archivo, incluido su contenido previo. [Compatibilidad, límites y ensayo conjunto](docs/monitor-pc-compatibility.md).
 
