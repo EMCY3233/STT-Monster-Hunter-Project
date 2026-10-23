@@ -121,7 +121,7 @@ This diagnostic does not validate dynamic deformation or an LMT association.
 
 ## Evidence and rectifications
 
-Twenty-six synthetic test methods cover all five profiles, grouped latter influence
+Twenty-seven synthetic test methods cover all five profiles, grouped latter influence
 offsets, unknown-format reporting, invalid active references/weight sums/palettes,
 parent cycles/ranges, nonfinite values, overlaps, index windows and shortfall,
 source/output preservation, Git destinations and CLI errors, a cycle with a
@@ -142,6 +142,9 @@ malformed inputs (seeds 23067 and 670230). Every case checks source preservation
 failure must return the expected rejection code 1 and create no output. A crash
 is not an acceptable rejection. All subprocess checks have a 30-second timeout.
 These structured campaigns are not exhaustive fuzzing or a security guarantee.
+A 17-angle synthetic pose-perturbation sweep also exercises the actual C++
+diagnostic against direct scalar rotation formulas, accounting for stored-float
+input rounding. It checks numerical residuals, not original animation playback.
 
 ## Original synthetic motion simulation
 

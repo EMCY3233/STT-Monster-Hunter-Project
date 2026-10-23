@@ -1,5 +1,6 @@
 import hashlib
 import json
+import math
 import pathlib
 import random
 import struct
@@ -276,6 +277,25 @@ class Skin(unittest.TestCase):
                 struct.pack_into('<H', data, len(data)-2, rng.randrange(4, 65535))
             with self.subTest(case=case, defect=mode):
                 self.run_case(data, False, rest=True)
+
+    def test_cpp_pose_perturbation_sweep_against_scalar_oracle(self):
+        # This evaluates the C++ diagnostic on synthetic perturbed matrices;
+        # it does not turn the diagnostic into an animation player.
+        points = ((0., 0.), (1., 0.), (0., 1.))
+        for step in range(17):
+            angle = -math.pi+step*math.pi/8
+            c, s = (struct.unpack('<f', struct.pack('<f', value))[0]
+                    for value in (math.cos(angle), math.sin(angle)))
+            data = fixture()
+            child = (c, s, 0., 0., -s, c, 0., 0., 0., 0., 1., 0., 1., 0., 0., 1.)
+            struct.pack_into('<16f', data, 240, *child)
+            struct.pack_into('<f', data, 368+48, -1.)
+            expected = max(abs(127/255*value) for x, y in points
+                           for value in (((x-1)*c-y*s+1)-x, ((x-1)*s+y*c)-y))
+            with self.subTest(angle_sample=step):
+                report = self.run_case(data, rest=True)['rest_pose_diagnostic']
+                self.assertEqual(report['compared_records'], 3)
+                self.assertAlmostEqual(report['max_absolute_xyz_error'], expected, delta=1e-12)
 
     def test_nonzero_start_adjustment_and_stream(self):
         data = fixture()
