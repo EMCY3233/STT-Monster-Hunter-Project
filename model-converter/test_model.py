@@ -197,6 +197,32 @@ class Tests(unittest.TestCase):
             self.assertNotEqual(run.returncode, 0)
             self.assertFalse(out.exists())
 
+    def test_sparse_group_id_is_resolved_by_value(self):
+        data = model()
+        struct.pack_into('<I', data, 128, 88)
+        struct.pack_into('<I', data, 292, 88)
+        _, report = self.run_case(data)
+        self.assertEqual(report['meshes'][0]['group_id'], 88)
+        struct.pack_into('<I', data, 292, 0)
+        self.run_case(data, good=False)
+
+    def test_lod_visibility_bits_are_reported_without_filtering(self):
+        data = model()
+        struct.pack_into('<I', data, 292, 0xa5 << 24)
+        struct.pack_into('<I', data, 296, 28 << 16 | 4 << 24 | 1)
+        _, report = self.run_case(data)
+        self.assertEqual(report['meshes'][0]['lod_mask_raw'], 0xa5)
+        self.assertEqual(report['meshes'][0]['visible_bit_raw'], 1)
+        self.assertEqual(report['triangles'], 2)
+
+    def test_duplicate_group_id_rejected(self):
+        original = model()
+        data = bytearray(original[:160] + bytes(32) + original[160:])
+        struct.pack_into('<I', data, 32, 2)
+        for offset in (48, 52, 56, 60):
+            struct.pack_into('<I', data, offset, struct.unpack_from('<I', original, offset)[0] + 32)
+        self.run_case(data, good=False)
+
 
 if __name__ == '__main__':
     unittest.main()

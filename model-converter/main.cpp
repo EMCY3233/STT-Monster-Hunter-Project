@@ -106,6 +106,9 @@ Result convert(const Bytes& b, const Mrl* mrl) {
     std::vector<Region> regions{{0, 128}, {gp, groups * 32}, {mp, materials * 128},
         {meshp, meshes * 48}, {vb, vbsize}};
     for (const auto& r : regions) span(r.at, r.size, b.size());
+    std::set<U> group_ids;
+    for (U i = 0; i < groups; ++i)
+        require(group_ids.insert(value(b, gp + i * 32)).second, "duplicate group ID unsupported");
     require(ib <= b.size(), "index buffer outside input");
     const U index_available = b.size() - ib;
     // Some observed MOD230 files overdeclare the global count by one u16.
@@ -149,7 +152,8 @@ Result convert(const Bytes& b, const Mrl* mrl) {
         const U material = (d0 >> 12) & 4095, group = d0 & 4095;
         require(count > 0 && format == 0x59dc400b && ((d1 >> 16) & 255) == 28 &&
                 ((d1 >> 24) & 63) == 4 && ((d1 >> 3) & 31) == 0, "unsupported vertex layout/skinning/primitive");
-        require(material < materials && group < groups, "mesh material/group index out of range");
+        require(material < materials, "mesh material index out of range");
+        require(group_ids.count(group) != 0, "mesh references missing group ID");
         span(start, count, nv); span(first_index, index_count, ni);
         const U relative = (start + adjustment) * 28 + stream;
         span(relative, count * 28, vbsize); span(ib + first_index * 2, index_count * 2, b.size());
@@ -194,7 +198,9 @@ Result convert(const Bytes& b, const Mrl* mrl) {
         triangle_total += faces;
         require(obj.tellp() <= 128 * 1024 * 1024, "OBJ report budget exceeded");
         if (mesh) report << ',';
-        report << "{\"mesh\":" << mesh << ",\"material_index\":" << material << ",\"vertices\":" << count
+        report << "{\"mesh\":" << mesh << ",\"group_id\":" << group
+               << ",\"lod_mask_raw\":" << (d0 >> 24) << ",\"visible_bit_raw\":" << (d1 & 1)
+               << ",\"material_index\":" << material << ",\"vertices\":" << count
                << ",\"triangles\":" << faces << ",\"repeated_index_triangles_removed\":" << repeated
                << ",\"zero_area_triangles_removed\":" << zero << '}'; base += count;
     }

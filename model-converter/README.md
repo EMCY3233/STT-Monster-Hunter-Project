@@ -23,11 +23,16 @@ Positions: f32x3 at +0; normals: snorm8x3 at +12 (clamp -128 to -1);
 UV: f32x2 at +16. Tangents and other attributes are not exported. Coordinates,
 UV values and strip winding stay native; no axis, scale or UV flip is invented.
 
-Checks header/table/buffer ranges and structural overlaps, material/group IDs,
+Checks header/table/buffer ranges and structural overlaps, material indices/group IDs,
 mesh vertex/index windows, finite positions/UV, restart 0xFFFF and index bounds.
 Strip parity advances across degenerates and resets on restart. Repeated-index
 triangles and exact zero-area triangles are omitted and counted. OBJ indices
 remain valid across multiple exported meshes; normals are not re-normalized.
+Group references are IDs matched to the first u32 in each 32-byte group record,
+not ordinal indices bounded by group count. Sparse IDs are accepted; missing
+and duplicate IDs fail. Each mesh report preserves its `group_id`, `lod_mask_raw`
+and `visible_bit_raw`. All meshes are exported; no runtime LOD/visibility/culling
+policy is inferred or applied.
 
 Global index count caveat: observed MH4U sample declares one u16 more than the
 file provides globally. Only shortfall 0 or exactly 2 bytes is accepted; every
@@ -62,11 +67,13 @@ All MTL slots are deliberately neutral; no texture is assigned automatically.
 
 ## Tests and local evidence
 
-13 synthetic test methods cover positions/UV/normals, strip winding, restart and
+16 synthetic test methods cover positions/UV/normals, strip winding, restart and
 parity after degenerates, zero area, nonzero vertex start, multiple meshes,
 material hash matching/ambiguity, unresolved references, malformed ranges/strings,
 nonfinite attributes, index count caveat, preservation of sources/outputs and
-Git destination rejection. CI: Windows/Linux Debug/Release; Linux Debug ASan/UBSan.
+Git destination rejection, sparse/missing/duplicate group IDs and preservation
+of raw LOD/visibility fields without filtering. CI: Windows/Linux Debug/Release;
+Linux Debug ASan/UBSan.
 
 Private MH4U sample (23 October 2026): one mesh, 16 vertices, 6 triangles,
 20 repeated-index triplets removed, one material hash matching one MRL record.
@@ -84,6 +91,33 @@ visually inspected: simple pyramidal geometry, not a converted monster.
 The global index shortfall is 2 bytes. Source image SHA256 remains unchanged.
 Commercial inputs/outputs and detailed catalogs remain outside Git.
 
+### Larger static stage and group-ID correction
+
+A bounded survey read 10,472 local MOD230 entries: 1,991 with zero joints and
+8,481 with joints. These are archive occurrences, not deduplicated assets or
+models all proven convertible. It also found additional unsupported vertex
+layouts. The larger checked zero-joint model uses the already supported layout.
+
+It exposed a real rejection bug: eight group records have IDs including 62/88;
+the old `group < group_count` test rejected valid references. Source evidence
+and actual group records support ID lookup. The regression now accepts ID 88
+in a one-record synthetic group table and rejects a missing or duplicate ID.
+
+Private MH4U static stage: 35,272 vertices, 28,112 nondegenerate triangles across
+189 meshes and 57 material names. All 57 have one hash-matching MRL record;
+49 unique typed candidate paths each match one TEX A5 entry in the same ARC
+(full bounded zlib streams checked). Texture roles remain unverified.
+Raw LOD masks are all 255 and visible bits all 1 in this sample; this does not
+establish the game's complete visibility/culling behavior.
+
+Every exported position, UV, normal and oriented face matched a separate Python
+source-data traversal exactly. Removed: 30,905 repeated-index triplets and two
+exact zero-area triangles; global index shortfall remains 2 bytes. MOD SHA256:
+`24e202b846de1ba76425360156483a0248ee53da51334a47c4006d641eea5ec5`.
+A local wireframe plot was visually inspected. Its percentiles 2..98 frame the
+detail; the full OBJ retains all vertices/meshes. No scene fidelity or shader
+appearance is claimed. No commercial stage data or preview is committed.
+
 ## Coordination and sources
 
 Starts from main `f199bd07b4e05ee4f7e56ed616840518374f3300` in a separate branch.
@@ -95,6 +129,13 @@ Field references:
 [MH4U MRL](https://github.com/svanheulen/mhff/wiki/MH4U-rMaterial-Format),
 and the project's prior documented vertex-layout/index evidence. No third-party
 parser source is copied or linked. No console access, keys or decryption.
+
+Group-ID evidence additionally checked against RevilLib's
+[mesh field definitions](https://github.com/PredatorCZ/RevilLib/blob/master/src/mtf_mod/mesh.hpp),
+[reflection into groupId](https://github.com/PredatorCZ/RevilLib/blob/master/src/mtf_mod/common.cpp)
+and [MODGroup definition](https://github.com/PredatorCZ/RevilLib/blob/master/include/revil/mod.hpp),
+the latter blob `7673422cdf37412eeedd96283f2b3f10b64bf28e`.
+Only the layout/identifier relation was inspected; no library code was copied.
 
 Pending: additional vertex formats, skeleton/weights, animation, verified shader
 bindings and textured rendering. Authenticity remains outside this conversion;
