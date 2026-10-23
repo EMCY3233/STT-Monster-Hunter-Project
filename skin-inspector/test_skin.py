@@ -94,6 +94,40 @@ class Skin(unittest.TestCase):
         self.assertEqual(report['meshes'][0]['stride'], 36)
         self.assertTrue(self.run_case(fixture(unknown=True))['has_unsupported_meshes'])
 
+    def test_two_influence_32_byte_profiles(self):
+        for fmt in (0x43fb3015, 0x7ba7401b):
+            data = fixture(two=True)
+            vb, ib = struct.unpack_from('<2I', data, 56)
+            vertices = [data[vb+i*28:vb+(i+1)*28] + bytes((1, 2, 3, 4)) for i in range(4)]
+            data[vb:ib] = b''.join(vertices)
+            struct.pack_into('<I', data, 24, 128)
+            struct.pack_into('<I', data, 60, ib+16)
+            struct.pack_into('<I', data, 884, 32 << 16 | 4 << 24 | 2 << 3)
+            struct.pack_into('<I', data, 896, fmt)
+            report = self.run_case(data)
+            self.assertEqual(report['referenced_active_influences'], 6)
+            self.assertEqual(report['meshes'][0]['stride'], 32)
+            # The profile identifier does not authorize a mismatched stride.
+            struct.pack_into('<I', data, 884, 28 << 16 | 4 << 24 | 2 << 3)
+            self.run_case(data, False)
+
+    def test_referenced_influence_counter(self):
+        data = fixture()
+        vb = struct.unpack_from('<I', data, 56)[0]
+        data[vb+3*36+24:vb+3*36+28] = bytes((0, 255, 1, 0))
+        report = self.run_case(data)
+        self.assertEqual(report['active_influences'], 7)
+        self.assertEqual(report['referenced_active_influences'], 6)
+        self.assertEqual(report['unused_zero_weight_records'], 0)
+
+    def test_oversized_source_rejected_without_output(self):
+        with self.source.open('wb') as source:
+            source.truncate((32 << 20)+1)
+        result = subprocess.run([EXE, str(self.source), '--out', str(self.destination)], capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn(b'input budget', result.stderr)
+        self.assertFalse(self.destination.exists())
+
     def test_nonzero_start_adjustment_and_stream(self):
         data = fixture()
         vb, ib = struct.unpack_from('<2I', data, 56)

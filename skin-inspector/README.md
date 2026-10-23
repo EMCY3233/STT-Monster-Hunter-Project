@@ -33,6 +33,14 @@ Weighted formats inspected:
 | `0x01B36016` | 36 | 24, 25, **32, 33** | 26, 27, **34, 35** |
 | `0xF606F017` | 36 | 24, 25, **32, 33** | 26, 27, **34, 35** |
 | `0xD6784014` | 28 | 24, 25 | 26, 27 |
+| `0x43FB3015` | 32 | 24, 25 | 26, 27 |
+| `0x7BA7401B` | 32 | 24, 25 | 26, 27 |
+
+For the 32-byte profiles, +28..31 are respectively tangent/color storage in
+the primary declaration. This weight inspector leaves those attributes opaque;
+it does not export, render or validate their appearance. Format `0x866B6018`
+remains unsupported: a prefix that resembles another format is insufficient to
+declare its complete layout known.
 
 Positions f32x3 at +0, UV f32x2 at +16 must be finite. Supported meshes require
 triangle-strip primitive 4. Vertex start is buffer + (start + adjustment)*stride
@@ -59,6 +67,10 @@ counts, weight-count field and palette selector. Header vertex/index counts are
 reported as raw declarations; no equality with summed mesh windows is inferred.
 Vertex counters are **window occurrences**, not unique physical vertices: shared
 windows and meshes can count the same bytes more than once.
+`active_influences` counts nonzero weight slots in all supported vertex-window
+records, including unreferenced records. `referenced_active_influences` counts
+only those in records addressed by mesh indices. Neither count represents unique
+bones or distinct physical influences across shared windows.
 Success means the described partial profile passed, not that every mesh or the
 whole MOD is understood. JSON explicitly keeps palette semantics, functional
 skinning and matrix inverse verification false.
@@ -72,12 +84,14 @@ failure can leave a partial newly created directory. No runtime/console access.
 
 ## Evidence and rectifications
 
-Thirteen synthetic test methods cover all three profiles, grouped latter influence
+Sixteen synthetic test methods cover all five profiles, grouped latter influence
 offsets, unknown-format reporting, invalid active references/weight sums/palettes,
 parent cycles/ranges, nonfinite values, overlaps, index windows and shortfall,
 source/output preservation, Git destinations and CLI errors, a cycle with a
 separate valid root, no-palette candidate bone domain, restart-only rejection,
-and simultaneous nonzero vertex start/adjustment/stream offsets. CI targets
+and simultaneous nonzero vertex start/adjustment/stream offsets. They also check
+both 32-byte profiles/mismatched strides, separation of influence counters and
+early rejection of an oversized sparse source before any output. CI targets
 Windows/Linux Debug/Release with ASan/UBSan on Linux Debug.
 
 Initial two-profile local private check: 20 distinct MH4U MOD hashes, representing 18 skeleton-table

@@ -73,7 +73,7 @@ std::string inspect(const Bytes& b) {
     }
     std::set<U> groupIds;
     for(U i=0;i<groups;++i) check(groupIds.insert(number(b,groupAt+i*32)).second,"duplicate group id");
-    U supported=0,unsupported=0,processed=0,vertices=0,referenced=0,zeroUnused=0,active=0;
+    U supported=0,unsupported=0,processed=0,vertices=0,referenced=0,zeroUnused=0,active=0,referencedActive=0;
     std::ostringstream details; details << '[';
     for(U mesh=0;mesh<meshes;++mesh) {
         const U at=meshAt+mesh*48,nv=number(b,at+2,2),d0=number(b,at+4),d1=number(b,at+8);
@@ -85,13 +85,14 @@ std::string inspect(const Bytes& b) {
         span(indexStart,ni,declaredI); span(ibAt+indexStart*2,ni*2,b.size());
         processed+=ni; check(processed<=1000000,"aggregate index budget");
         const bool four=fmt==0x01b36016||fmt==0xf606f017;
-        const bool known=four||fmt==0xd6784014;
+        const bool two32=fmt==0x43fb3015||fmt==0x7ba7401b;
+        const bool known=four||two32||fmt==0xd6784014;
         if(mesh) details << ',';
         details << "{\"mesh\":" << mesh << ",\"format\":" << fmt << ",\"supported\":" << (known?"true":"false")
             << ",\"stride\":" << stride << ",\"vertex_records\":" << nv << ",\"index_count\":" << ni
             << ",\"weight_count_raw\":" << weightCount << ",\"palette_index_raw\":" << paletteIndex << '}';
         if(!known) { ++unsupported; continue; }
-        check(stride==(four?36:28),"format stride");
+        check(stride==(four?36:(two32?32:28)),"format stride");
         check(((d1>>24)&63)==4,"requires triangle strip primitive 4");
         check(weightCount>0&&weightCount<=(four?4:2),"weight count field");
         check(!skins||paletteIndex<skins,"mesh palette index");
@@ -115,7 +116,9 @@ std::string inspect(const Bytes& b) {
                 }
             }
             check(nactive<=weightCount,"active weights exceed field");
-            if(used[size_t(vertex)]) { check(sum==255,"referenced vertex weight sum is not 255"); ++referenced; }
+            if(used[size_t(vertex)]) {
+                check(sum==255,"referenced vertex weight sum is not 255"); ++referenced; referencedActive+=nactive;
+            }
             else if(!sum) ++zeroUnused;
             active+=nactive;
         }
@@ -131,6 +134,7 @@ std::string inspect(const Bytes& b) {
         << ",\"skin_palettes\":" << skins << ",\"supported_meshes\":" << supported << ",\"unsupported_meshes\":" << unsupported
         << ",\"supported_vertex_records\":" << vertices << ",\"referenced_vertex_records\":" << referenced
         << ",\"unused_zero_weight_records\":" << zeroUnused << ",\"active_influences\":" << active
+        << ",\"referenced_active_influences\":" << referencedActive
         << ",\"global_index_shortfall_bytes\":" << shortfall << ",\"meshes\":" << details.str() << "}\n";
     return out.str();
 }
