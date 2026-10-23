@@ -60,7 +60,8 @@ unsigned stt_gpu_draw(const SttTexScene *s,int hunter,const float matrix[16],uns
   if(!hunter&&!stt_bounds_visible(matrix,bounds[i]))continue;
   SttTexVertex *vertices=vita2d_pool_memalign(m->nv*sizeof *vertices,16);uint16_t *indices=vita2d_pool_memalign(m->ni*2,16);if(!vertices||!indices)break;
   memcpy(indices,m->indices,m->ni*2);
-  const SttTexVertex *a=m->vertices+((phase/2)%m->frames)*m->nv,*b=m->vertices+(((phase/2)+1)%m->frames)*m->nv;
+  unsigned frame=(phase/2)%m->frames,next=(frame+1)%m->frames;if(m->frames==33){if(phase<2)next=0;else if(phase<34)next=1+(frame%16);else next=17+((frame-16)%16);}
+  const SttTexVertex *a=m->vertices+frame*m->nv,*b=m->vertices+next*m->nv;
   memcpy(vertices,a,m->nv*sizeof *vertices);
   if(hunter&&(phase&1))for(unsigned j=0;j<m->nv;j++){vertices[j].x=(a[j].x+b[j].x)*.5f;vertices[j].y=(a[j].y+b[j].y)*.5f;vertices[j].z=(a[j].z+b[j].z)*.5f;}
   vita2d_texture *tex=images[m->texture];vita2d_texture_set_filters(tex,linear?SCE_GXM_TEXTURE_FILTER_LINEAR:SCE_GXM_TEXTURE_FILTER_POINT,linear?SCE_GXM_TEXTURE_FILTER_LINEAR:SCE_GXM_TEXTURE_FILTER_POINT);
