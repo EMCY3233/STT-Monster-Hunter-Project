@@ -84,13 +84,16 @@ std::string inspect(const Bytes& b) {
         check(vstart>=vbAt,"vertex start"); span(vstart-vbAt,nv*stride,vbSize);
         span(indexStart,ni,declaredI); span(ibAt+indexStart*2,ni*2,b.size());
         processed+=ni; check(processed<=1000000,"aggregate index budget");
-        const bool known=fmt==0x01b36016||fmt==0xd6784014;
+        const bool four=fmt==0x01b36016||fmt==0xf606f017;
+        const bool known=four||fmt==0xd6784014;
         if(mesh) details << ',';
-        details << "{\"mesh\":" << mesh << ",\"format\":" << fmt << ",\"supported\":" << (known?"true":"false") << '}';
+        details << "{\"mesh\":" << mesh << ",\"format\":" << fmt << ",\"supported\":" << (known?"true":"false")
+            << ",\"stride\":" << stride << ",\"vertex_records\":" << nv << ",\"index_count\":" << ni
+            << ",\"weight_count_raw\":" << weightCount << ",\"palette_index_raw\":" << paletteIndex << '}';
         if(!known) { ++unsupported; continue; }
-        check(stride==(fmt==0x01b36016?36:28),"format stride");
+        check(stride==(four?36:28),"format stride");
         check(((d1>>24)&63)==4,"requires triangle strip primitive 4");
-        check(weightCount>0&&weightCount<=(fmt==0x01b36016?4:2),"weight count field");
+        check(weightCount>0&&weightCount<=(four?4:2),"weight count field");
         check(!skins||paletteIndex<skins,"mesh palette index");
         std::vector<bool> used(size_t(nv),false);
         for(U i=0;i<ni;++i) {
@@ -104,7 +107,7 @@ std::string inspect(const Bytes& b) {
             for(U off:{U(0),U(4),U(8),U(16),U(20)}) scalar(b,p+off);
             const std::array<U,4> offsetsI={24,25,32,33},offsetsW={26,27,34,35};
             U sum=0,nactive=0;
-            for(size_t i=0;i<(fmt==0x01b36016?4u:2u);++i) {
+            for(size_t i=0;i<(four?4u:2u);++i) {
                 const U index=number(b,p+offsetsI[i],1),weight=number(b,p+offsetsW[i],1); sum+=weight;
                 if(weight) {
                     ++nactive;
@@ -117,11 +120,14 @@ std::string inspect(const Bytes& b) {
             active+=nactive;
         }
     }
-    check(supported>0,"no supported weighted mesh"); details << ']';
+    check(supported>0,"no supported weighted mesh");
+    check(referenced>0,"no referenced vertex in supported meshes"); details << ']';
     std::ostringstream out;
     out << "{\"schema\":1,\"inspection_only\":true,\"functional_skinning_verified\":false,\"matrix_inverses_verified\":false,"
         "\"palette_semantics_verified\":false,\"global_remap_interpreted\":false,\"geometry_exported\":false,"
-        "\"bone_count\":" << bones << ",\"roots\":" << roots << ",\"max_depth\":" << maxDepth
+        "\"vertex_counts_are_window_occurrences\":true,\"has_unsupported_meshes\":" << (unsupported?"true":"false")
+        << ",\"declared_vertices_raw\":" << declaredV << ",\"declared_indices_raw\":" << declaredI
+        << ",\"bone_count\":" << bones << ",\"roots\":" << roots << ",\"max_depth\":" << maxDepth
         << ",\"skin_palettes\":" << skins << ",\"supported_meshes\":" << supported << ",\"unsupported_meshes\":" << unsupported
         << ",\"supported_vertex_records\":" << vertices << ",\"referenced_vertex_records\":" << referenced
         << ",\"unused_zero_weight_records\":" << zeroUnused << ",\"active_influences\":" << active

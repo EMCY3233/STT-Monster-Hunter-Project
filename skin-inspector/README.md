@@ -31,6 +31,7 @@ Weighted formats inspected:
 | Format | Stride | Indices (byte offsets) | Weight bytes |
 | --- | --- | --- | --- |
 | `0x01B36016` | 36 | 24, 25, **32, 33** | 26, 27, **34, 35** |
+| `0xF606F017` | 36 | 24, 25, **32, 33** | 26, 27, **34, 35** |
 | `0xD6784014` | 28 | 24, 25 | 26, 27 |
 
 Positions f32x3 at +0, UV f32x2 at +16 must be finite. Supported meshes require
@@ -51,6 +52,13 @@ Unknown formats are listed with `supported:false`; their declared buffer ranges,
 group/material references and index windows are checked, but their attributes
 and individual index values are **not** validated. They are excluded from
 supported vertex/reference/influence totals. A file with no supported mesh fails.
+At least one supported vertex must be referenced; empty/restart-only coverage
+fails rather than reporting successful weight inspection with no used records.
+JSON includes `has_unsupported_meshes` and per-mesh raw stride, vertex/index
+counts, weight-count field and palette selector. Header vertex/index counts are
+reported as raw declarations; no equality with summed mesh windows is inferred.
+Vertex counters are **window occurrences**, not unique physical vertices: shared
+windows and meshes can count the same bytes more than once.
 Success means the described partial profile passed, not that every mesh or the
 whole MOD is understood. JSON explicitly keeps palette semantics, functional
 skinning and matrix inverse verification false.
@@ -64,13 +72,15 @@ failure can leave a partial newly created directory. No runtime/console access.
 
 ## Evidence and rectifications
 
-Nine synthetic test methods cover both profiles, grouped latter influence
+Thirteen synthetic test methods cover all three profiles, grouped latter influence
 offsets, unknown-format reporting, invalid active references/weight sums/palettes,
 parent cycles/ranges, nonfinite values, overlaps, index windows and shortfall,
-source/output preservation, Git destinations and CLI errors. CI targets
+source/output preservation, Git destinations and CLI errors, a cycle with a
+separate valid root, no-palette candidate bone domain, restart-only rejection,
+and simultaneous nonzero vertex start/adjustment/stream offsets. CI targets
 Windows/Linux Debug/Release with ASan/UBSan on Linux Debug.
 
-Local private check: 20 distinct MH4U MOD hashes, representing 18 skeleton-table
+Initial two-profile local private check: 20 distinct MH4U MOD hashes, representing 18 skeleton-table
 signatures, selected nonrandomly from the first 20 `/data/emNNN.arc` files.
 The two profiles occur in 15 files (120 meshes); 331 meshes have other formats.
 Five files are correctly rejected as unsupported-only. For the two profiles,
@@ -79,6 +89,15 @@ Five files are correctly rejected as unsupported-only. For the two profiles,
 weight records are unreferenced. C++ counters match the separate project Python
 probe; shared format assumptions mean this is not independent game validation.
 Original image SHA256 was checked before/after the Python audit and stayed equal.
+
+Expanded check with `0xF606F017`: the same 20 files now all contain supported
+meshes, 449 in total; two meshes remain unsupported (`0x866B6018`, stride 44).
+109,720 supported vertex-window occurrences include 96,472 referenced records,
+all with exact raw sum 255 and candidate active references in range. The 13,248
+zero-weight records are unreferenced. C++ counters match the expanded Python
+probe on all 20 files. This is the same selected corpus, not an independent
+holdout or proof of game behavior. The additional profile shares the primary
+declaration's layout; no offset inference was made from its format hash.
 
 The initial local four-influence probe incorrectly interleaved its last two
 index/weight pairs. Those results are superseded. The grouped offsets above

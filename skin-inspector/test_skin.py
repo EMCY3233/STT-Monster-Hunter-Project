@@ -85,6 +85,45 @@ class Skin(unittest.TestCase):
         report = self.run_case(data)
         self.assertEqual(report['active_influences'], 8)
 
+    def test_f606_profile_and_partial_flag(self):
+        data = fixture()
+        struct.pack_into('<I', data, 896, 0xf606f017)
+        report = self.run_case(data)
+        self.assertFalse(report['has_unsupported_meshes'])
+        self.assertTrue(report['vertex_counts_are_window_occurrences'])
+        self.assertEqual(report['meshes'][0]['stride'], 36)
+        self.assertTrue(self.run_case(fixture(unknown=True))['has_unsupported_meshes'])
+
+    def test_nonzero_start_adjustment_and_stream(self):
+        data = fixture()
+        vb, ib = struct.unpack_from('<2I', data, 56)
+        data[vb:vb] = bytes(108)
+        struct.pack_into('<I', data, 12, 7)
+        struct.pack_into('<I', data, 24, 252)
+        struct.pack_into('<I', data, 60, ib+108)
+        struct.pack_into('<I', data, 888, 1)  # vertexStart
+        struct.pack_into('<I', data, 892, 36)  # stream offset
+        struct.pack_into('<I', data, 908, 1)  # indexValueOffset
+        struct.pack_into('<3H', data, ib+108, 1, 2, 3)
+        self.assertEqual(self.run_case(data)['referenced_vertex_records'], 3)
+
+    def test_restart_and_empty_reference_rejection(self):
+        data = fixture()
+        struct.pack_into('<H', data, len(data)-2, 65535)
+        self.assertEqual(self.run_case(data)['referenced_vertex_records'], 2)
+        struct.pack_into('<3H', data, len(data)-6, 65535, 65535, 65535)
+        self.run_case(data, False)
+        struct.pack_into('<I', data, 904, 0)
+        self.run_case(data, False)
+
+    def test_cycle_with_root_and_direct_bone_domain(self):
+        data = fixture()
+        data[153] = 1  # self cycle on second bone while first remains a root
+        self.run_case(data, False)
+        data = fixture()
+        struct.pack_into('<I', data, 36, 0)  # opaque former palette bytes remain a gap
+        self.assertEqual(self.run_case(data)['skin_palettes'], 0)
+
     def test_unknown_mesh_explicit(self):
         report = self.run_case(fixture(unknown=True))
         self.assertEqual(report['unsupported_meshes'], 1)
