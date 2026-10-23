@@ -67,6 +67,46 @@ All MTL slots are deliberately neutral; no texture is assigned automatically.
 
 ## Tests and local evidence
 
+### Offline inspection tool
+
+`python build_inspector.py PRIVATE_MODEL_OUTPUT --textures PRIVATE_PNG_CATALOG --out NEW_PRIVATE_DIRECTORY`
+
+Builds one self-contained `index.html` using Python's standard library. Open it
+locally in a WebGL 2 browser; no server, CDN or network connection is needed.
+Filters meshes/materials, rotates and zooms geometry, shows raw mesh metadata,
+and offers wire edges and detail/full bounding-box framing. Detail framing uses
+coordinate percentiles 2–98; all exported triangles remain available. The camera
+is an orthographic inspection projection, not the game's camera. Very distant
+geometry can lie outside the inspection clipping volume at a given zoom.
+
+Optional texture catalog: `catalog.json` with `textures` entries containing
+`path` (MRL candidate identity), relative `png`, `width`, `height`, `png_sha256`.
+Only candidates named by the selected material appear. No texture is assigned
+automatically: each selection resets the explicit trial checkbox. A trial uses
+native UVs, linear sampling/repeat, no vertical flip, blending, original lighting
+or shader reconstruction. PNG alpha is retained but blending is disabled;
+transparency and appearance are therefore **not** reproduced. OBJ/MTL stay neutral.
+
+Builder accepts the converter's triangular, matching-index OBJ subset, validates
+finite attributes and index/count/material agreement with the report, and rejects
+existing outputs and Git destinations. Budgets: OBJ 128 MiB, report 16 MiB,
+250k vertices, 1m face indices, 4096 meshes; up to 256 PNGs, 4096 pixels per axis,
+16 MiB each/32 MiB aggregate, final HTML 64 MiB. PNG signature, IHDR dimensions
+and supplied SHA256 are checked; this is not a general-purpose PNG validator.
+Catalog paths cannot escape their directory. Embedded metadata escapes `<` and
+is displayed as text; a restrictive content policy blocks network access.
+Inputs must remain stable; output I/O failure can leave a partial new directory.
+
+Four additional synthetic tests exercise preservation, overwrite/Git rejection,
+nonfinite/index/report errors, PNG hash/dimension/path checks and script escaping.
+Private local Edge smoke test: 189 meshes/57 materials, neutral default, explicit
+texture trial on one selected mesh, no JS errors or external requests. This
+browser check is local evidence, not a CI browser test or proof of game fidelity.
+All 49 stage candidate textures were checked with full encoded verification;
+every decoded base-level pixel matched the separate RGB backend plus separate
+alpha-nibble traversal. The alpha check is not a second independent ETC1A4 codec.
+Neither the catalog nor private HTML/PNGs belongs in Git.
+
 16 synthetic test methods cover positions/UV/normals, strip winding, restart and
 parity after degenerates, zero area, nonzero vertex start, multiple meshes,
 material hash matching/ambiguity, unresolved references, malformed ranges/strings,

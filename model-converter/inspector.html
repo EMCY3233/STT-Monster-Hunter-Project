@@ -1,0 +1,44 @@
+<!doctype html><html lang="es"><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'">
+<title>STT · Inspector estático</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#111923;color:#e4eaf1;font:15px system-ui}header{padding:18px 24px;border-bottom:1px solid #344254}h1{font-size:22px;margin:0 0 6px}p{color:#b5c3d3;margin:7px 0}main{display:grid;grid-template-columns:310px 1fr;height:calc(100vh - 110px)}aside{padding:20px;overflow:auto}label{display:block;margin:14px 0 6px}select,button{width:100%;padding:9px;background:#233246;color:inherit;border:1px solid #536b85;border-radius:5px}button{margin-top:14px;cursor:pointer}canvas{width:100%;height:100%;display:block;touch-action:none;background:#101721}section{min-width:0;position:relative}#status{position:absolute;bottom:15px;left:18px;background:#111d;max-width:90%;padding:8px}#preview{max-width:100%;max-height:180px;image-rendering:pixelated;margin-top:15px;background:repeating-conic-gradient(#777 0 25%,#aaa 0 50%) 0/16px 16px}pre{white-space:pre-wrap;font-size:12px;color:#a9bed1}input{accent-color:#49d4c1}@media(max-width:700px){main{grid-template-columns:220px 1fr}}
+</style>
+<header><h1>STT · Inspector estático</h1><p>Inspección local de geometría y referencias candidatas. Apariencia, ejes, samplers y funciones de textura sin verificar.</p></header>
+<main><aside><label for="mesh">Malla</label><select id="mesh"></select><label for="material">Material (filtra mallas)</label><select id="material"></select>
+<label for="candidate">Textura candidata</label><select id="candidate"></select>
+<label><input id="trial" type="checkbox"> Prueba visual de textura · sin verificar</label>
+<label><input id="wire" type="checkbox"> Mostrar aristas</label>
+<label><input id="detail" type="checkbox" checked> Encuadre de detalle (percentiles 2–98)</label>
+<button id="reset">Reencuadrar selección</button><p>Arrastra para girar. Rueda para acercar.</p><img id="preview" alt="Vista de la textura candidata" hidden><pre id="metadata"></pre>
+</aside><section><canvas id="view"></canvas><div id="status">Iniciando…</div></section></main>
+<script>
+'use strict';
+const data=/*PAYLOAD*/null;
+const $=id=>document.getElementById(id),canvas=$('view'),gl=canvas.getContext('webgl2',{antialias:true,preserveDrawingBuffer:true});
+function option(select,value,label){const o=document.createElement('option');o.value=value;o.textContent=label;select.append(o)}
+option($('mesh'),-1,'Todas las mallas');data.meshes.forEach((m,i)=>option($('mesh'),i,'Malla '+i));
+option($('material'),-1,'Todos los materiales');data.report.materials.forEach((m,i)=>option($('material'),i,i+' · '+m.name));
+let selected=[],yaw=.55,pitch=.35,zoom=1,center=[0,0,0],radius=1,textureReady=false,texture=null,drawCount=0;
+function selectedMeshes(){return data.meshes.map((m,i)=>i).filter(i=>(+$('mesh').value<0||i===+$('mesh').value)&&(+$('material').value<0||data.meshes[i].material===+$('material').value))}
+function candidates(){const mat=+$('material').value,refs=new Set();if(mat>=0)for(const slot of data.report.materials[mat].candidate_resource_slots||[])if(slot.path)refs.add(slot.path);
+ $('candidate').replaceChildren();option($('candidate'),-1,'Sin textura');data.textures.forEach((t,i)=>{if(refs.has(t.path))option($('candidate'),i,t.path)});$('trial').checked=false;loadTexture()}
+function loadTexture(){textureReady=false;$('preview').hidden=true;const i=+$('candidate').value;if(i<0){draw();return}const img=$('preview');img.onload=()=>{if(!gl)return;gl.bindTexture(gl.TEXTURE_2D,texture);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);textureReady=true;draw()};img.src=data.textures[i].data;img.hidden=false;draw()}
+function frame(){const ids=new Set();selected.forEach(i=>data.meshes[i].indices.forEach(v=>ids.add(v)));const points=Array.from(ids,v=>data.positions[v]);if(!points.length)return;
+ const low=[],high=[];for(let axis=0;axis<3;axis++){const a=points.map(p=>p[axis]).sort((a,b)=>a-b),trim=$('detail').checked?.02:0;low.push(a[Math.floor((a.length-1)*trim)]);high.push(a[Math.ceil((a.length-1)*(1-trim))])}center=low.map((v,i)=>(v+high[i])/2);radius=Math.max(1e-6,...high.map((v,i)=>v-low[i]))*.65;zoom=1;draw()}
+function update(){selected=selectedMeshes();const m=+$('mesh').value;$('metadata').textContent=m>=0?JSON.stringify(data.report.meshes[m],null,2):selected.length+' mallas seleccionadas. Sin política de LOD/visibilidad aplicada.';frame()}
+if(!gl){$('status').textContent='WebGL 2 no disponible. Abre este archivo con un navegador compatible.'}else{
+ function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
+ const program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,`#version 300 es
+ in vec3 position;in vec2 uv;uniform vec3 center;uniform vec4 camera;uniform float aspect;out vec2 texcoord;void main(){vec3 p=(position-center)*camera.w;float cy=cos(camera.x),sy=sin(camera.x),cp=cos(camera.y),sp=sin(camera.y);p=vec3(cy*p.x+sy*p.z,p.y,-sy*p.x+cy*p.z);p=vec3(p.x,cp*p.y-sp*p.z,sp*p.y+cp*p.z);gl_Position=vec4(p.x/aspect,p.y,p.z/100.0,1.0);texcoord=uv;}`));
+ gl.attachShader(program,shader(gl.FRAGMENT_SHADER,`#version 300 es
+ precision highp float;in vec2 texcoord;uniform bool trial;uniform sampler2D image;out vec4 color;void main(){color=trial?texture(image,texcoord):vec4(.40,.71,.73,1.0);}`));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+ for(const [name,values,size] of [['position',data.positions,3],['uv',data.uv,2]]){const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(values.flat()),gl.STATIC_DRAW);const at=gl.getAttribLocation(program,name);gl.enableVertexAttribArray(at);gl.vertexAttribPointer(at,size,gl.FLOAT,false,0,0)}
+ data.meshes.forEach(m=>{m.buffer=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,m.buffer);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint32Array(m.indices),gl.STATIC_DRAW);const lines=[];for(let i=0;i<m.indices.length;i+=3){const [a,b,c]=m.indices.slice(i,i+3);lines.push(a,b,b,c,c,a)}m.lines=gl.createBuffer();m.lineCount=lines.length;gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,m.lines);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint32Array(lines),gl.STATIC_DRAW)});
+ texture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,texture);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.REPEAT);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.REPEAT);gl.enable(gl.DEPTH_TEST);
+ window.renderScene=()=>{canvas.width=canvas.clientWidth;canvas.height=canvas.clientHeight;gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(.055,.085,.12,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.uniform3fv(gl.getUniformLocation(program,'center'),center);gl.uniform4f(gl.getUniformLocation(program,'camera'),yaw,pitch,0,zoom/radius);gl.uniform1f(gl.getUniformLocation(program,'aspect'),canvas.width/canvas.height);gl.uniform1i(gl.getUniformLocation(program,'trial'),$('trial').checked&&textureReady?1:0);drawCount=0;for(const i of selected){const m=data.meshes[i],wire=$('wire').checked;gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,wire?m.lines:m.buffer);gl.drawElements(wire?gl.LINES:gl.TRIANGLES,wire?m.lineCount:m.indices.length,gl.UNSIGNED_INT,0);drawCount+=m.indices.length/3}$('status').textContent=selected.length+' mallas · '+drawCount.toLocaleString('es')+' triángulos · '+($('trial').checked&&textureReady?'PRUEBA: repetición UV, sin mezcla ni shader original':'Material neutro');canvas.dataset.ready='true'};
+}
+function draw(){if(gl&&window.renderScene)window.renderScene()}
+$('mesh').onchange=()=>{const i=+$('mesh').value;$('material').value=i>=0?data.meshes[i].material:-1;candidates();update()};$('material').onchange=()=>{$('mesh').value=-1;candidates();update()};$('candidate').onchange=()=>{$('trial').checked=false;loadTexture()};$('reset').onclick=frame;$('detail').onchange=frame;$('wire').onchange=draw;$('trial').onchange=draw;
+let last=null;canvas.onpointerdown=e=>{last=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId)};canvas.onpointerup=()=>last=null;canvas.onpointercancel=()=>last=null;canvas.onpointermove=e=>{if(last){yaw+=(e.clientX-last[0])*.008;pitch+=(e.clientY-last[1])*.008;last=[e.clientX,e.clientY];draw()}};canvas.onwheel=e=>{e.preventDefault();zoom=Math.max(.05,Math.min(100,zoom*Math.exp(-e.deltaY*.001)));draw()};window.onresize=draw;update();
+</script></html>
