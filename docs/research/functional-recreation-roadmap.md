@@ -43,9 +43,21 @@ ground/obstacle collision and one deterministic combat interaction. Verified
 private model/texture/animation integration follows behind complete bindings;
 an original synthetic placeholder keeps engine work independent of decoder gaps.
 
+## Platform target
+
+The user requires Windows 10 x64 as the minimum Windows version. Windows 11
+compatibility remains a target; Linux remains an additional platform. Actual
+Windows 10 runtime compatibility must be tested before it is claimed: a build
+on a newer Windows CI runner is not sufficient evidence.
+
+The provisional performance target is integrated graphics of the Intel UHD 620
+class, 8 GB RAM, OpenGL 3.3 and 1280 x 720 at 30 FPS, with simulation independent
+of rendering at 60 steps per second. This is a development budget pending
+measurement, not a demonstrated hardware minimum.
+
 ## Decisions still needed before release
 
-Minimum hardware/OS and input priorities need concrete targets before choosing
+Hardware measurements and input priorities are still needed when choosing
 and benchmarking the final rendering/input stack. Repository distribution
 license and third-party dependency terms must be chosen explicitly; do not infer
 a global license or permission to redistribute commercial resources. These do
