@@ -14,6 +14,19 @@ jobs:
           python texture-lab/fixtures.py /tmp/texture-fixture
           cc -std=c99 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -no-pie -Ivita-prototype/src texture-lab/scene.c texture-lab/test_scene.c -lm -o /tmp/texture-tests
           /tmp/texture-tests /tmp/texture-fixture/valid.bin /tmp/texture-fixture/truncated.bin /tmp/texture-fixture/trailing.bin /tmp/texture-fixture/count.bin /tmp/texture-fixture/index.bin /tmp/texture-fixture/nonfinite.bin /tmp/texture-fixture/uv.bin /tmp/texture-fixture/dimension.bin
+  expanded-scene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python texture-lab/fixtures.py /tmp/scene33
+          cc -std=c99 -O2 -Wall -Wextra -Werror -Ivita-prototype/src texture-lab/scene.c texture-lab/test_scene.c -lm -o /tmp/bank33
+          /tmp/bank33 /tmp/scene33/bank33.bin
+          cc -std=c99 -O2 -Wall -Wextra -Werror texture-lab/test_visibility.c -o /tmp/visibility
+          /tmp/visibility
   follow-camera:
     runs-on: ubuntu-latest
     steps:
@@ -63,8 +76,16 @@ jobs:
           if (-not $sttCompiler) { $sttCompiler = (Get-Command gcc.exe -ErrorAction Stop).Source }
           & $sttCompiler -std=c99 -O2 -Wall -Wextra -Werror -Ivita-prototype/src texture-lab/scene.c texture-lab/test_scene.c -static -lm -o stt-texture-review.exe
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - shell: pwsh
+        run: |
+          $sttCompiler = @('C:/mingw64/bin/gcc.exe','C:/msys64/mingw64/bin/gcc.exe') | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+          if (-not $sttCompiler) { $sttCompiler = (Get-Command gcc.exe -ErrorAction Stop).Source }
+          & $sttCompiler -std=c99 -O2 -Wall -Wextra -Werror -Ivita-prototype/src map-lab/stt_zone.c texture-lab/review_ground.c -static -lm -o stt-zone-review.exe
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - uses: actions/upload-artifact@v4
         with:
           name: stt-texture-review-windows
-          path: stt-texture-review.exe
+          path: |
+            stt-texture-review.exe
+            stt-zone-review.exe
           retention-days: 14

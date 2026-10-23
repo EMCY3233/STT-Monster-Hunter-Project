@@ -15,3 +15,7 @@ bad={'truncated':raw[:-1],'trailing':raw+b'x','count':raw[:8]+struct.pack('<I',9
      'uv':header+mesh+vertices[:12]+struct.pack('<f',float('inf'))+vertices[16:]+raw[-6:],
      'dimension':raw[:16]+struct.pack('<I',513)+raw[20:]}
 for name,data in bad.items():(p/(name+'.bin')).write_bytes(data)
+
+# Original synthetic 33-pose idle/walk/run bank; no external assets.
+bank=header+struct.pack('<5I',1,3,3,0,33)+vertices*33+struct.pack('<3H',0,1,2)
+(p/'bank33.bin').write_bytes(bank)
