@@ -15,6 +15,9 @@ endif()
 include(CTest)
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 if(BUILD_TESTING)
+  add_test(NAME synthetic_decoder_contract
+    COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/test_decoder.py" -v)
+  set_tests_properties(synthetic_decoder_contract PROPERTIES TIMEOUT 30)
   add_test(NAME synthetic_translation
     COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/test_translation.py"
       --cmake "${CMAKE_COMMAND}" --config "$<CONFIG>")
