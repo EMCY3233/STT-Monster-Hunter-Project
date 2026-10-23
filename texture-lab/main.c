@@ -22,8 +22,16 @@ int main(void){
  int gpu_ready=0,result=0,registered=0;SceUID callback=-1;vita2d_pgf *font=NULL;
  if(!vita2d_init_advanced(4*1024*1024)){sceKernelExitProcess(1);return 1;}
  vita2d_set_vblank_wait(1);vita2d_set_clear_color(RGBA8(105,132,135,255));font=vita2d_load_default_pgf();
- if(!stt_zone_load("ux0:/data/STTP00001/map-zone.bin")||!stt_tex_load(&scene,"ux0:/data/STTP00001/texture-zone.bin")||!stt_gpu_init(&scene)){
-  for(unsigned i=0;i<300;i++){vita2d_start_drawing();vita2d_clear_screen();if(font)vita2d_pgf_draw_text(font,30,100,0xffffffff,1,"STT 00.24: scene or GPU initialization failed");vita2d_end_drawing();vita2d_swap_buffers();vita2d_wait_rendering_done();}result=1;goto cleanup;
+ int map_ok=stt_zone_load("ux0:/data/STTP00001/map-zone.bin");
+ int texture_ok=map_ok?stt_tex_load(&scene,"ux0:/data/STTP00001/texture-zone.bin"):0;
+ int gpu_ok=texture_ok?stt_gpu_init(&scene):0;
+ FILE *startup=fopen("ux0:/data/STTP00001/startup-report.txt","w");
+ const char *stage=!map_ok?"MAP":!texture_ok?"TEXTURE":!gpu_ok?"GPU":"READY";
+ const char *detail=!map_ok?"map stream rejected":!texture_ok?stt_tex_error():stt_gpu_error();
+ if(startup){fprintf(startup,"STT00.25 stage=%s map=%d texture=%d gpu=%d nt=%u nm=%u\n%s\n",stage,map_ok,texture_ok,gpu_ok,scene.nt,scene.nm,detail);fclose(startup);}
+ if(!gpu_ok){
+  char error_line[256];snprintf(error_line,sizeof error_line,"STT00.25 %s FAILED: %s",stage,detail);
+  for(;;){SceCtrlData error_pad;memset(&error_pad,0,sizeof error_pad);sceCtrlPeekBufferPositive(0,&error_pad,1);if(error_pad.buttons&SCE_CTRL_START)break;vita2d_start_drawing();vita2d_clear_screen();if(font){vita2d_pgf_draw_text(font,20,100,0xffffffff,.7f,error_line);vita2d_pgf_draw_text(font,20,140,0xffffffff,.7f,"startup-report.txt saved | START exits");}vita2d_end_drawing();vita2d_swap_buffers();vita2d_wait_rendering_done();}result=1;goto cleanup;
  }
  gpu_ready=1;sceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG);
  callback=sceKernelCreateCallback("stt-texture-power",0,power_event,NULL);if(callback<0){result=1;goto cleanup;}
@@ -67,7 +75,7 @@ int main(void){
   }
   stt_tex_matrix(matrix,&view,position,stt_zone_yaw(),1);unsigned hunter=stt_gpu_draw(&scene,1,matrix,pose_phase,linear);profile.body_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);stamp=sceKernelGetProcessTimeWide();
   sceGxmSetFrontDepthFunc(ctx,SCE_GXM_DEPTH_FUNC_ALWAYS);sceGxmSetBackDepthFunc(ctx,SCE_GXM_DEPTH_FUNC_ALWAYS);sceGxmSetFrontDepthWriteEnable(ctx,SCE_GXM_DEPTH_WRITE_DISABLED);sceGxmSetBackDepthWriteEnable(ctx,SCE_GXM_DEPTH_WRITE_DISABLED);
-  char text[180];snprintf(text,sizeof text,"STT 00.24 GPU | %.1f FPS | CAP %u | %s | MAP %u HUNTER %u",frame_us?1000000.0f/frame_us:0,target,linear?"LINEAR":"POINT",terrain,hunter);
+  char text[180];snprintf(text,sizeof text,"STT 00.25 GPU | %.1f FPS | CAP %u | %s | MAP %u HUNTER %u",frame_us?1000000.0f/frame_us:0,target,linear?"LINEAR":"POINT",terrain,hunter);
   if(font){vita2d_pgf_draw_text(font,16,26,0xffffffff,.7f,text);vita2d_pgf_draw_text(font,16,530,0xffffffff,.65f,paused?"Release sticks/buttons | Triangle reset":"L recenter | R run | Square filter | Circle 30/45 | Select metrics | Triangle reset | Start exit");}
   profile.hud_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);vita2d_end_drawing();unsigned render_us=profile.clear_us+profile.ground_us+profile.body_us+profile.hud_us;
   stamp=sceKernelGetProcessTimeWide();vita2d_swap_buffers();vita2d_wait_rendering_done();unsigned present_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);
