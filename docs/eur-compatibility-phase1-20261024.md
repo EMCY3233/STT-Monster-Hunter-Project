@@ -21,6 +21,8 @@ Etiquetas: **E-doc** documento/metadato inspeccionado; **R** resultado reportado
 
 Los enlaces `main` pueden cambiar; los blobs identifican el texto efectivamente leído. La revisión auxiliar debe contrastar cada ruta regional en el commit baseline, no inferir ausencia global de EUR de una sola búsqueda.
 
+**S7, revisión auxiliar documental en el baseline `e06b0ca30b9b2d66ec7785f277ead4bb35374b28`:** [versions.json](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/config/versions.json) contiene una sola entrada USA v1.3.0, sin entrada EUR. [hooks](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/config/hooks.txt), [tunables](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/config/tunables.txt), [symbols](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/config/symbols.txt) y [extra_entries](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/config/extra_entries.txt) declaran USA v1.3.0. Esto acredita dependencia regional de esos archivos concretos; no ausencia global de trabajo EUR en todo el repositorio. No se reproducen sus direcciones ni valores. La revisión auxiliar es de un subagente Codex, no una respuesta atribuida a Claude/OpenCode.
+
 ## Matriz de compatibilidad
 
 | Componente | Evidencia USA/referencia | Estado para EUR | Validación / decisión |
