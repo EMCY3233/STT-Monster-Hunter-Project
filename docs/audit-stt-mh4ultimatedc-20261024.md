@@ -27,7 +27,7 @@ Un workflow correcto es evidencia de sus pasos y entorno, no de ejecución físi
 | [MH4UltimateDC main](https://github.com/CompaLarios18/MH4UltimateDC/tree/e06b0ca30b9b2d66ec7785f277ead4bb35374b28) | `e06b0ca30b9b2d66ec7785f277ead4bb35374b28` | Port que usa Azahar como plataforma |
 | [MH4UltimateDC native](https://github.com/CompaLarios18/MH4UltimateDC/tree/a6b71de1221e895312273d0378b7a2e8513955fa) | `a6b71de1221e895312273d0378b7a2e8513955fa` | Runtime propio en desarrollo; no equivale a main ni a paridad completa |
 
-E: se enumeraron 62 ramas STT y 12 MH4UltimateDC, y 48/34 PR respectivamente en las colecciones devueltas. La colección de PR STT incluye #37 cerrada sin fusión y muchas cadenas abiertas; el número máximo de PR no es un conteo de PR. Las listas completas se adjuntan como inventario en la entrega local.
+E: se enumeraron 62 ramas STT y 12 MH4UltimateDC, y 48/34 PR respectivamente en las colecciones devueltas. La colección de PR STT incluye #37 cerrada sin fusión y muchas cadenas abiertas; el número máximo de PR no es un conteo de PR. El inventario completo es un entregable local del autor; no está incluido en esta PR y no se considera evidencia reproducida por el revisor.
 
 E: [AGENTS.md STT](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blob/f199bd07b4e05ee4f7e56ed616840518374f3300/AGENTS.md) exige distinguir automatización, receptor PC y confirmación física. También limita limpieza y transferencias: esta tarea documental no justifica reinstalar ni acceder a Vita. Se comprobó el AGENTS de #45; no apareció otro AGENTS anidado en los árboles STT inspeccionados.
 
@@ -36,6 +36,8 @@ E: [README principal](https://github.com/EMCY3233/STT-Monster-Hunter-Project/blo
 E: #36 estudia núcleo PC; #39–43 son lectores/inspectores; #44 es arena original. #45 no se confunde con esas vías. #47 modifica simulador/tests del agente y #48 el decoder. La auditoría usa una rama documental nueva desde main y un archivo nuevo; no toca esas ramas ni sus archivos. No se accedió a sesiones privadas de Claude Code/OpenCode ni se enviaron mensajes a otros chats.
 
 ## CI comprobada en los commits
+
+E remota: consultas del autor al servicio GitHub el 24/10/2026 (Europe/Madrid). Claude no reprodujo las consultas de runs/jobs ni sus logs; su revisión no constituye una segunda comprobación de CI.
 
 | SHA / pista | Resultado remoto inspeccionado |
 |---|---|
@@ -62,7 +64,7 @@ Las referencias MH siguientes están fijadas a main salvo que se indique native.
 | [ARM_Recomp](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/port/src/arm_recomp.h), [CMake](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/port/CMakeLists.txt) (E) | No plataforma 3DS ejecutable demostrada | Arquitectura CPU/plataforma separada: útil; backend no es componente autónomo para Vita | Hereda ARM_Interface, usa tablas de páginas y SVC Azahar y enlaza citra_core/citra_common/network. Sustituir CPU no sustituye plataforma |
 | [Hooks](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/port/src/hooks.cpp) y RCodeInfo.set_hook (E) | Sin ABI de hooks equivalente en el laboratorio | Patrón envolver original/antes/después y validar cambios: útil | hooks.cpp incluye core/video_core/common; direcciones y comportamiento dependen de versión del juego. No portar hooks de FPS/HUD como parche universal |
 | [difftest.py](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/tools/difftest.py) (E) | #45 compara C++ nativo con Unicorn sobre sintéticos | Semillas, estados idénticos y comparación de efectos: alta utilidad metodológica | difftest compila candidato a ARMv6K y ejecuta original/candidato en Unicorn; no es lo mismo que probar C nativo en host. Usa LLVM y entradas privadas |
-| [Fuzz/gametest](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/docs/RECOMPILER.md) (E/R) | 21 fixtures/5376 estados documentados en #45; contrato adicional #48 | Registrar retorno, fallo, timeout e inconcluso separados; medir casos efectivos | Documento MH reporta muchos fallos coincidentes y presupuestos agotados. Fallar igual con punteros aleatorios no prueba gameplay ni cobertura semántica |
+| [Fuzz/gametest](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/docs/RECOMPILER.md) (E/R) | 21 fixtures/5376 estados documentados en #45; contrato adicional #48 | Registrar retorno, fallo, timeout e inconcluso separados; medir casos efectivos | La sección Verification, nivel 3 y Latest full run, de RECOMPILER.md reporta muchos fallos coincidentes y presupuestos agotados. Fallar igual con punteros aleatorios no prueba gameplay ni cobertura semántica |
 | [Fibers](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/port/src/fiber.h) (E) | Sin scheduler de juego demostrado | Suspensión cooperativa y contrato de yield merecen estudio | Stack por fiber por defecto 8 MiB; no multiplicarlo sin medir. Backend de contexto, memoria y API de Vita no comprobados |
 | [native](https://github.com/CompaLarios18/MH4UltimateDC/blob/a6b71de1221e895312273d0378b7a2e8513955fa/docs/native/README.md), [dependencias](https://github.com/CompaLarios18/MH4UltimateDC/blob/a6b71de1221e895312273d0378b7a2e8513955fa/tools/native/check_native_deps.py) (E) | Laboratorio PC independiente | Contratos de servicios y pruebas de conformidad son referencia; no integración ahora | Guard evita includes/enlaces Azahar, pero admite funciones individuales con procedencia. No significa ausencia total de código derivado de Azahar ni cambio de licencia |
 | [native CMake](https://github.com/CompaLarios18/MH4UltimateDC/blob/a6b71de1221e895312273d0378b7a2e8513955fa/native/CMakeLists.txt) y estado GPU/audio (E/R) | Laboratorio C++17; prototipos Vita separados | Separar runner headless, app, GPU y audio es útil | native usa C++20/C11 y app SDL3; main app SDL2. El renderer PICA200 no se reemplaza automáticamente por renderer STT ni por compatibilidad ARM |
@@ -88,6 +90,8 @@ R: main README anuncia aldea/misiones/cacerías, sonido y 60/120 FPS en Windows.
 
 E: [README MH](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/README.md) declara GPL-3.0-or-later para herramientas, port y documentación; [LICENSE](https://github.com/CompaLarios18/MH4UltimateDC/blob/e06b0ca30b9b2d66ec7785f277ead4bb35374b28/LICENSE) contiene GPLv3. La separación main/native no elimina esa licencia. Una eventual incorporación exige registrar procedencia, avisos/licencia, modificaciones, dependencias y obligaciones de entrega de fuente correspondiente según cómo se distribuya el conjunto. El análisis técnico no determina por sí solo compatibilidad jurídica con un STT todavía sin licencia declarada.
 
+La referencia de diseño no autoriza trasladar implementación, estructura expresiva o nombres específicos de hooks.cpp, difftest.py o recomp.h a STT. Una eventual implementación independiente necesita requisitos y fixtures originales y procedencia registrada; esta auditoría no certifica un proceso clean-room.
+
 No se copió implementación ni texto sustancial de MH al repositorio STT. Este informe es análisis original con enlaces. Las fuentes STT descargadas para repetir pruebas quedan en el área local de trabajo, fuera de los cambios propuestos. No se distribuye código recompilado del juego, binarios, ROMs, keys, dumps, assets, trazas privadas ni capturas comerciales.
 
 LEGAL prohíbe incluso pequeños extractos, mientras CONTRIBUTING admite algunas instrucciones breves en notas: hay una ambigüedad documental. Para esta tarea se aplica el límite más estricto solicitado por el usuario: ningún byte comercial. La GPL del tooling no concede derechos sobre el juego. No se abrieron issues ni se contactó con el proyecto externo.
@@ -97,7 +101,7 @@ LEGAL prohíbe incluso pequeños extractos, mientras CONTRIBUTING admite algunas
 | Puerta | Prueba sintética / criterio de aceptación | Evidencia que todavía no aporta |
 |---|---|---|
 | P0: procedencia y alcance | Fijar SHA/versión, licencia de cada dependencia y fixtures originales; ninguna entrada comercial en Git | No certifica titularidad de un dump |
-| P1: decoder #48 | Repetir cinco tests, incluyendo 4096 inmediatos rotados, condición/opcode, registros, shifts y límites; cero fallos | No ejecuta C++ ni certifica toda A32 |
+| P1: decoder #48 | Repetir cinco tests, incluyendo 4096 inmediatos rotados, condición/opcode, registros, rechazo de los 255 campos de shift no nulos y límites; cero fallos | No ejecuta C++ ni certifica toda A32 |
 | P2: semántica #45 | CMake/CTest Windows/Linux Debug/Release, Unicorn fijado, 21 fixtures/5376 estados por configuración; comparar registros/CPSR/PC; rechazos sin mutación | No demuestra identidad de función ni juego |
 | P3: memoria/ABI | Añadir casos originales con bordes de página, alineación, acceso inválido, endian, ABI/stack y wrap; fallo explícito y reproducible; sanitizadores del host | No habilitar automáticamente nuevas instrucciones |
 | P4: control/FP | Ramas, llamadas, retorno ARM↔Thumb, flags, exclusivas, TLS y VFP por familias; NaN/denormal/redondeo; discrepancias del oráculo documentadas | Una familia correcta no valida scheduler/servicios |
@@ -119,6 +123,14 @@ python -m unittest discover -s work/stt-source/arm-leaf-lab -p test_decoder.py -
 Resultado: cinco tests correctos, 0.013 s; salida de proceso 0. Se comprobó el contrato de decodificación, sin entradas comerciales.
 
 No se ejecutaron C++/Unicorn, suites completas MH, juego, benchmarks ni pruebas de hardware. CMake y compilador C++ no se encontraron en PATH. Las pruebas de ejecución nativa citadas son CI remota, no locales. No se agregan tests duplicados: #48 ya cubre el contrato sintético relevante. La propuesta cambia únicamente esta documentación.
+
+## Revisión independiente de Claude
+
+R: Claude comunicó por el buzón compartido (evento 7, tarea 2) una revisión de solo lectura del commit b3fdcb499e447faad332c67594d74ec776c4347d: aprobable como documentación, sin errores de fondo y con matices menores. Confirmó límites del decoder, composición #45/#48, cifras de fixtures, licencia declarada, separación main/native y algunos estados de STATUS. No comprobó AGENTS, N2b-09, N2b-12, N2-01 ni los runs/logs de CI; no se atribuye revisión total a su dictamen.
+
+R de ejecución independiente: el evento 8 complementa y sustituye la limitación inicial del evento 7 sobre tests. Claude informa que ejecutó test_decoder.py de #48 (0c65b13), extraído mediante git archive fuera de un checkout, con Python 3.13.17 en Linux: cinco tests OK en 0.030 s. Comando: `python3 -m unittest discover -s . -p test_decoder.py -v`. Coincide con la ejecución local Windows descrita arriba. Codex leyó el mensaje, pero no ejecutó ni observó el proceso Linux; es evidencia atribuida a Claude. No se ejecutaron C++, CMake ni Unicorn ni se modificó el repositorio durante su revisión.
+
+Los matices sobre inventario local, atribución de CI, rechazo de shifts y referencia a Verification se incorporan en esta revisión documental. Se mantienen las restricciones de licencia y ausencia de prueba de viabilidad Vita.
 
 ## Próximo paso recomendado
 
