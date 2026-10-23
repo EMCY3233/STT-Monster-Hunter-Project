@@ -1,0 +1,25 @@
+name: MOD230 skin inspector
+on:
+  push:
+    paths: ['skin-inspector/**', '.github/workflows/skin-inspector.yml']
+  pull_request:
+    paths: ['skin-inspector/**', '.github/workflows/skin-inspector.yml']
+permissions:
+  contents: read
+jobs:
+  synthetic:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        build: [Debug, Release]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: cmake -S skin-inspector -B build -DCMAKE_BUILD_TYPE=${{ matrix.build }}
+      - if: runner.os == 'Linux' && matrix.build == 'Debug'
+        run: cmake -S skin-inspector -B build -DSTT_SKIN_SANITIZERS=ON
+      - run: cmake --build build --config ${{ matrix.build }}
+      - run: ctest --test-dir build -C ${{ matrix.build }} --output-on-failure
