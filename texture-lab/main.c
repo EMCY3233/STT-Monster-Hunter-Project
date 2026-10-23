@@ -29,7 +29,7 @@ int main(void){
  callback=sceKernelCreateCallback("stt-texture-power",0,power_event,NULL);if(callback<0){result=1;goto cleanup;}
  if(scePowerRegisterCallback(callback)<0){result=1;goto cleanup;}registered=1;
  SttFollowCamera tracking={0};SttFollowConfig tracking_config=stt_follow_defaults();
- SttCamera camera={.45f,.4f};unsigned previous=0,target=30,linear=1,frame_us=0,telemetry_us=0,paused=0;uint64_t tick=0,acc=0,last=sceKernelGetProcessTimeWide();SttPacer pacer;stt_pacer_reset(&pacer,last,target);
+ SttCamera camera={.45f,.4f};unsigned gait_tick=0,gait_mode=0;unsigned previous=0,target=30,linear=1,frame_us=0,telemetry_us=0,paused=0;uint64_t tick=0,acc=0,last=sceKernelGetProcessTimeWide();SttPacer pacer;stt_pacer_reset(&pacer,last,target);
  for(;;){
   uint64_t start=sceKernelGetProcessTimeWide();sceKernelCheckCallback();SceCtrlData pad;memset(&pad,0,sizeof pad);int read=sceCtrlPeekBufferPositive(0,&pad,1);if(read<0){result=1;break;}if(!read){sceKernelDelayThreadCB(1000);continue;}
   pad.buttons=stt_game_buttons(pad.buttons);unsigned pressed=pad.buttons&~previous;previous=pad.buttons;
@@ -59,7 +59,13 @@ int main(void){
   if(stt_follow_step(&tracking,&tracking_config,camera,position,elapsed?elapsed*.000001f:1.0f/60,0,NULL,NULL,&followed))view=followed.view;
   else{stt_camera_view(camera,(int32_t)(position[0]*1000),(int32_t)(position[2]*1000),&view);view.eye[1]+=position[1];}
   stt_tex_matrix(matrix,&view,position,stt_zone_yaw(),0);unsigned terrain=stt_gpu_draw(&scene,0,matrix,0,linear);profile.ground_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);stamp=sceKernelGetProcessTimeWide();
-  stt_tex_matrix(matrix,&view,position,stt_zone_yaw(),1);unsigned hunter=stt_gpu_draw(&scene,1,matrix,(scene.meshes[scene.nm-1].frames==33?(stt_axis(pad.lx)||stt_axis(pad.ly)?((pad.buttons&SCE_CTRL_RTRIGGER)?34u:2u)+stt_zone_phase():0u):stt_zone_phase()),linear);profile.body_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);stamp=sceKernelGetProcessTimeWide();
+  unsigned pose_phase=stt_zone_phase();
+  if(scene.meshes[scene.nm-1].frames==33){
+   unsigned mode=(!paused&&!stt_zone_contact()&&(stt_axis(pad.lx)||stt_axis(pad.ly)))?((pad.buttons&SCE_CTRL_RTRIGGER)?2u:1u):0u;
+   unsigned period=mode==2?102u:274u;gait_tick=mode==gait_mode?(gait_tick+ticks)%period:0;gait_mode=mode;
+   pose_phase=mode?(mode==2?34u:2u)+(gait_tick*32u/period):0;
+  }
+  stt_tex_matrix(matrix,&view,position,stt_zone_yaw(),1);unsigned hunter=stt_gpu_draw(&scene,1,matrix,pose_phase,linear);profile.body_us=(unsigned)(sceKernelGetProcessTimeWide()-stamp);stamp=sceKernelGetProcessTimeWide();
   sceGxmSetFrontDepthFunc(ctx,SCE_GXM_DEPTH_FUNC_ALWAYS);sceGxmSetBackDepthFunc(ctx,SCE_GXM_DEPTH_FUNC_ALWAYS);sceGxmSetFrontDepthWriteEnable(ctx,SCE_GXM_DEPTH_WRITE_DISABLED);sceGxmSetBackDepthWriteEnable(ctx,SCE_GXM_DEPTH_WRITE_DISABLED);
   char text[180];snprintf(text,sizeof text,"STT 00.24 GPU | %.1f FPS | CAP %u | %s | MAP %u HUNTER %u",frame_us?1000000.0f/frame_us:0,target,linear?"LINEAR":"POINT",terrain,hunter);
   if(font){vita2d_pgf_draw_text(font,16,26,0xffffffff,.7f,text);vita2d_pgf_draw_text(font,16,530,0xffffffff,.65f,paused?"Release sticks/buttons | Triangle reset":"L recenter | R run | Square filter | Circle 30/45 | Select metrics | Triangle reset | Start exit");}
