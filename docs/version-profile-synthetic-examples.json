@@ -1,0 +1,131 @@
+{
+  "example_contract_version": 1,
+  "synthetic_only": true,
+  "note": "Original ASCII payloads; guest layouts invented independently of payloads. No game data or actual EUR profile. Normative acceptance cases are in the companion proposal, not an implemented selector.",
+  "payloads": {
+    "a": "STT original fixture A: documentation only.",
+    "b": "STT original fixture B: documentation only."
+  },
+  "profiles": [
+    {
+      "profile_id": "stt-toy-a",
+      "identity": {
+        "target": "stt-original-fixture",
+        "region": "SYNTH-A",
+        "revision": "toy-1",
+        "representation": "stt-ascii-fixture-v1",
+        "artifacts": [
+          {
+            "role": "fixture",
+            "size": 43,
+            "sha256": "636ec8548bcce0d0cb9101876f379ca5694259f1b1762a12a852c6b5e174a8d2"
+          }
+        ]
+      },
+      "runtime_contract": "stt-toy-state-v1",
+      "segments": [
+        {
+          "id": "toy-text",
+          "base": 4096,
+          "size": 64,
+          "permissions": "rx"
+        }
+      ],
+      "entrypoints": [
+        {
+          "id": "toy-entry",
+          "address": 4096,
+          "isa": "A32"
+        }
+      ],
+      "hooks": [],
+      "tunables": []
+    },
+    {
+      "profile_id": "stt-toy-b",
+      "identity": {
+        "target": "stt-original-fixture",
+        "region": "SYNTH-B",
+        "revision": "toy-2",
+        "representation": "stt-ascii-fixture-v1",
+        "artifacts": [
+          {
+            "role": "fixture",
+            "size": 43,
+            "sha256": "4fa32c89893929535331ca509706d5672d3ae6279291b9898f769c752974f59c"
+          }
+        ]
+      },
+      "runtime_contract": "stt-toy-state-v1",
+      "segments": [
+        {
+          "id": "toy-text",
+          "base": 8192,
+          "size": 96,
+          "permissions": "rx"
+        }
+      ],
+      "entrypoints": [
+        {
+          "id": "toy-entry",
+          "address": 8194,
+          "isa": "T32"
+        }
+      ],
+      "hooks": [],
+      "tunables": []
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "toy-observed-a",
+      "identity": {
+        "target": "stt-original-fixture",
+        "region": "SYNTH-A",
+        "revision": "toy-1",
+        "representation": "stt-ascii-fixture-v1",
+        "artifacts": [
+          {
+            "role": "fixture",
+            "size": 43,
+            "sha256": "636ec8548bcce0d0cb9101876f379ca5694259f1b1762a12a852c6b5e174a8d2"
+          }
+        ]
+      },
+      "segments": [
+        {
+          "id": "toy-text",
+          "base": 4096,
+          "size": 64,
+          "permissions": "rx"
+        }
+      ],
+      "expected_profile": "stt-toy-a"
+    },
+    {
+      "observation_id": "toy-observed-b",
+      "identity": {
+        "target": "stt-original-fixture",
+        "region": "SYNTH-B",
+        "revision": "toy-2",
+        "representation": "stt-ascii-fixture-v1",
+        "artifacts": [
+          {
+            "role": "fixture",
+            "size": 43,
+            "sha256": "4fa32c89893929535331ca509706d5672d3ae6279291b9898f769c752974f59c"
+          }
+        ]
+      },
+      "segments": [
+        {
+          "id": "toy-text",
+          "base": 8192,
+          "size": 96,
+          "permissions": "rx"
+        }
+      ],
+      "expected_profile": "stt-toy-b"
+    }
+  ]
+}
