@@ -186,6 +186,17 @@ class Skin(unittest.TestCase):
         data[vb+26] = 0
         self.run_case(data, False, rest=True)
 
+    def test_rest_singular_common_transform_is_not_evidence(self):
+        data = fixture()
+        for at in (304, 368):
+            struct.pack_into('<f', data, at, 0)
+        report = self.run_case(data, rest=True)['rest_pose_diagnostic']
+        self.assertEqual(report['status'], 'unavailable_singular_common_transform')
+        self.assertEqual(report['common_linear_determinant'], 0)
+        self.assertEqual(report['compared_records'], 0)
+        self.assertIsNone(report['max_absolute_xyz_error'])
+        self.assertEqual(self.run_case(fixture(), rest=True)['rest_pose_diagnostic']['common_linear_determinant'], 1)
+
     def test_nonzero_start_adjustment_and_stream(self):
         data = fixture()
         vb, ib = struct.unpack_from('<2I', data, 56)

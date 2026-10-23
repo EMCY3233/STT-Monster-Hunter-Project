@@ -97,6 +97,11 @@ Requires exactly one root and matrices with exact affine fourth column
 status, zero compared records and **null** error values, while the ordinary
 structural report remains available. Disabled by default. Nonfinite computed
 arithmetic rejects the diagnostic invocation before output creation.
+The root common transform's 3x3 linear determinant is reported when computed;
+an exactly zero computed determinant gives `unavailable_singular_common_transform`
+instead of allowing collapsed coordinates to suggest agreement. This is a
+double-precision exact-zero check, not a condition-number or near-singularity
+analysis. It does not establish reliable invertibility from a nonzero result.
 
 Reports maximum absolute xyz residual in raw transformed coordinate units and
 maximum per-record relative residual, divided by max(1,max(abs(expected xyz))).
@@ -113,7 +118,7 @@ This diagnostic does not validate dynamic deformation or an LMT association.
 
 ## Evidence and rectifications
 
-Twenty-one synthetic test methods cover all five profiles, grouped latter influence
+Twenty-two synthetic test methods cover all five profiles, grouped latter influence
 offsets, unknown-format reporting, invalid active references/weight sums/palettes,
 parent cycles/ranges, nonfinite values, overlaps, index windows and shortfall,
 source/output preservation, Git destinations and CLI errors, a cycle with a
@@ -125,6 +130,8 @@ Windows/Linux Debug/Release with ASan/UBSan on Linux Debug.
 Rest diagnostic cases cover a nonidentity common transform, correct row-vector
 hierarchy with noncommuting transforms, broken bind residual, palette/weight
 ambiguity, multiple roots/nonaffine unavailability and invalid referenced weights.
+An additional case rejects diagnostic evaluation of a singular common transform
+without changing the underlying structural inspection.
 
 Initial two-profile local private check: 20 distinct MH4U MOD hashes, representing 18 skeleton-table
 signatures, selected nonrandomly from the first 20 `/data/emNNN.arc` files.

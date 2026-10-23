@@ -56,6 +56,8 @@ struct RestDiagnostic {
     Mat common{};
     U compared=0;
     double maxAbsolute=0,maxRelative=0;
+    double commonDeterminant=0;
+    bool determinantAvailable=false;
     void initialize(const Bytes& b,U at,const std::vector<U>& parents,U roots) {
         if(roots!=1) { status="unavailable_multiple_roots"; return; }
         const size_t count=parents.size();
@@ -77,6 +79,12 @@ struct RestDiagnostic {
         };
         effective.resize(count);
         for(size_t i=0;i<count;++i) { visit(visit,i); effective[i]=product(bind[i],global[i]); if(parents[i]==255) common=effective[i]; }
+        commonDeterminant=common[0][0]*(common[1][1]*common[2][2]-common[1][2]*common[2][1])
+            -common[0][1]*(common[1][0]*common[2][2]-common[1][2]*common[2][0])
+            +common[0][2]*(common[1][0]*common[2][1]-common[1][1]*common[2][0]);
+        check(std::isfinite(commonDeterminant),"rest diagnostic determinant overflow");
+        determinantAvailable=true;
+        if(commonDeterminant==0) { effective.clear(); status="unavailable_singular_common_transform"; return; }
         status="computed_under_hypothesis";
     }
     void observe(const Vec& position,const std::array<U,4>& slots,const std::array<U,4>& weights,size_t count) {
@@ -98,6 +106,8 @@ struct RestDiagnostic {
     std::string json() const {
         std::ostringstream out; out << std::setprecision(17);
         out << "{\"status\":\"" << status << "\",\"compared_records\":" << compared;
+        out << ",\"common_linear_determinant\":";
+        if(determinantAvailable) out << commonDeterminant; else out << "null";
         if(compared) out << ",\"max_absolute_xyz_error\":" << maxAbsolute << ",\"max_relative_xyz_error\":" << maxRelative;
         else out << ",\"max_absolute_xyz_error\":null,\"max_relative_xyz_error\":null";
         out << ",\"palette_identity_verified\":false,\"weight_distribution_verified\":false,"
