@@ -55,10 +55,13 @@ class Skin(unittest.TestCase):
         self.source = self.root/'source.mod'
         self.destination = self.root/'out'
 
-    def run_case(self, data, ok=True):
+    def run_case(self, data, ok=True, rest=False):
         self.source.write_bytes(data)
         before = hashlib.sha256(data).hexdigest()
-        result = subprocess.run([EXE, str(self.source), '--out', str(self.destination)], capture_output=True)
+        args = [EXE, str(self.source), '--out', str(self.destination)]
+        if rest:
+            args.append('--check-rest-pose')
+        result = subprocess.run(args, capture_output=True)
         self.assertEqual(result.returncode == 0, ok, result.stderr.decode())
         self.assertEqual(hashlib.sha256(self.source.read_bytes()).hexdigest(), before)
         if ok:
@@ -127,6 +130,61 @@ class Skin(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn(b'input budget', result.stderr)
         self.assertFalse(self.destination.exists())
+
+    def test_rest_disabled_and_nonidentity_common_transform(self):
+        self.assertEqual(self.run_case(fixture())['rest_pose_diagnostic']['status'], 'disabled')
+        data = fixture()
+        for at in (304, 368):  # both B matrices share model-space offset
+            struct.pack_into('<f', data, at+48, 5)
+        report = self.run_case(data, rest=True)['rest_pose_diagnostic']
+        self.assertEqual(report['status'], 'computed_under_hypothesis')
+        self.assertEqual(report['compared_records'], 3)
+        self.assertLess(report['max_absolute_xyz_error'], 1e-12)
+
+    def test_rest_hierarchy_order_and_broken_bind(self):
+        data = fixture()
+        struct.pack_into('<f', data, 176, 2)  # root local x scale
+        struct.pack_into('<f', data, 240+48, 1)  # child local x translation
+        for at in (304, 368):
+            struct.pack_into('<f', data, at, .5)
+        struct.pack_into('<f', data, 368+48, -1)
+        self.assertLess(self.run_case(data, rest=True)['rest_pose_diagnostic']['max_absolute_xyz_error'], 1e-12)
+        struct.pack_into('<f', data, 368+48, 0)
+        report = self.run_case(data, rest=True)['rest_pose_diagnostic']
+        self.assertAlmostEqual(report['max_absolute_xyz_error'], 2*127/255)
+        self.assertFalse(report['palette_identity_verified'])
+
+    def test_rest_cannot_prove_palette_or_weight_identity(self):
+        data = fixture()
+        struct.pack_into('<f', data, 240+48, 1)
+        struct.pack_into('<f', data, 368+48, -1)
+        data[692:694] = bytes((1, 0))
+        vb = struct.unpack_from('<I', data, 56)[0]
+        for i in range(3):
+            data[vb+i*36+26:vb+i*36+28] = bytes((255, 0))
+        report = self.run_case(data, rest=True)['rest_pose_diagnostic']
+        self.assertLess(report['max_absolute_xyz_error'], 1e-12)
+        self.assertFalse(report['palette_identity_verified'])
+        self.assertFalse(report['weight_distribution_verified'])
+
+    def test_rest_multiple_roots_and_nonaffine_unavailable(self):
+        data = fixture()
+        data[153] = 255
+        report = self.run_case(data, rest=True)['rest_pose_diagnostic']
+        self.assertEqual(report['status'], 'unavailable_multiple_roots')
+        self.assertIsNone(report['max_absolute_xyz_error'])
+        self.assertEqual(report['compared_records'], 0)
+        data = fixture()
+        struct.pack_into('<f', data, 176+12, .25)
+        report = self.run_case(data, rest=True)['rest_pose_diagnostic']
+        self.assertEqual(report['status'], 'unavailable_non_affine')
+        self.assertIsNone(report['max_relative_xyz_error'])
+
+    def test_rest_still_requires_valid_weights(self):
+        data = fixture()
+        vb = struct.unpack_from('<I', data, 56)[0]
+        data[vb+26] = 0
+        self.run_case(data, False, rest=True)
 
     def test_nonzero_start_adjustment_and_stream(self):
         data = fixture()

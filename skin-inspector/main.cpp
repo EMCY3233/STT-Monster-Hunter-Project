@@ -5,6 +5,7 @@
 #include <cstring>
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <set>
 #include <sstream>
@@ -31,7 +32,80 @@ void disjoint(std::vector<Region> r) {
     std::sort(r.begin(),r.end(),[](Region a,Region b){return a.at<b.at;});
     for(size_t i=1;i<r.size();++i) check(r[i].at>=r[i-1].at+r[i-1].size,"overlapping tables");
 }
-std::string inspect(const Bytes& b) {
+using Mat = std::array<std::array<double,4>,4>;
+using Vec = std::array<double,4>;
+Mat product(const Mat& a,const Mat& b) {
+    Mat out{};
+    for(size_t i=0;i<4;++i) for(size_t j=0;j<4;++j) {
+        for(size_t k=0;k<4;++k) out[i][j]+=a[i][k]*b[k][j];
+        check(std::isfinite(out[i][j]),"rest diagnostic matrix overflow");
+    }
+    return out;
+}
+Vec transform(const Vec& v,const Mat& m) {
+    Vec out{};
+    for(size_t j=0;j<4;++j) {
+        for(size_t k=0;k<4;++k) out[j]+=v[k]*m[k][j];
+        check(std::isfinite(out[j]),"rest diagnostic position overflow");
+    }
+    return out;
+}
+struct RestDiagnostic {
+    const char* status="disabled";
+    std::vector<Mat> effective;
+    Mat common{};
+    U compared=0;
+    double maxAbsolute=0,maxRelative=0;
+    void initialize(const Bytes& b,U at,const std::vector<U>& parents,U roots) {
+        if(roots!=1) { status="unavailable_multiple_roots"; return; }
+        const size_t count=parents.size();
+        std::vector<Mat> local(count),bind(count),global(count);
+        for(size_t i=0;i<count;++i) for(size_t r=0;r<4;++r) for(size_t c=0;c<4;++c) {
+            local[i][r][c]=scalar(b,at+count*24+i*64+(r*4+c)*4);
+            bind[i][r][c]=scalar(b,at+count*88+i*64+(r*4+c)*4);
+        }
+        for(size_t i=0;i<count;++i) for(size_t r=0;r<4;++r)
+            if(local[i][r][3]!=(r==3?1.0:0.0)||bind[i][r][3]!=(r==3?1.0:0.0)) {
+                status="unavailable_non_affine"; return;
+            }
+        std::vector<bool> ready(count,false);
+        auto visit=[&](auto&& self,size_t i)->void {
+            if(ready[i]) return;
+            if(parents[i]==255) global[i]=local[i];
+            else { self(self,size_t(parents[i])); global[i]=product(local[i],global[size_t(parents[i])]); }
+            ready[i]=true;
+        };
+        effective.resize(count);
+        for(size_t i=0;i<count;++i) { visit(visit,i); effective[i]=product(bind[i],global[i]); if(parents[i]==255) common=effective[i]; }
+        status="computed_under_hypothesis";
+    }
+    void observe(const Vec& position,const std::array<U,4>& slots,const std::array<U,4>& weights,size_t count) {
+        if(effective.empty()) return;
+        Vec actual{};
+        for(size_t i=0;i<count;++i) if(weights[i]) {
+            const auto p=transform(position,effective[size_t(slots[i])]);
+            for(size_t j=0;j<4;++j) actual[j]+=double(weights[i])/255.0*p[j];
+        }
+        const auto expected=transform(position,common);
+        double error=0,scale=1;
+        for(size_t j=0;j<3;++j) {
+            check(std::isfinite(actual[j]),"rest diagnostic blend overflow");
+            error=std::max(error,std::abs(actual[j]-expected[j])); scale=std::max(scale,std::abs(expected[j]));
+        }
+        check(std::isfinite(error),"rest diagnostic residual overflow");
+        maxAbsolute=std::max(maxAbsolute,error); maxRelative=std::max(maxRelative,error/scale); ++compared;
+    }
+    std::string json() const {
+        std::ostringstream out; out << std::setprecision(17);
+        out << "{\"status\":\"" << status << "\",\"compared_records\":" << compared;
+        if(compared) out << ",\"max_absolute_xyz_error\":" << maxAbsolute << ",\"max_relative_xyz_error\":" << maxRelative;
+        else out << ",\"max_absolute_xyz_error\":null,\"max_relative_xyz_error\":null";
+        out << ",\"palette_identity_verified\":false,\"weight_distribution_verified\":false,"
+            "\"hypothesis\":\"row_vectors; global=local*parent_global; effective=B*global; compare blend to p*root_effective\"}";
+        return out.str();
+    }
+};
+std::string inspect(const Bytes& b,bool restEnabled) {
     span(0,128,b.size()); check(number(b,0)==0x00444f4d && number(b,4,2)==230,"requires little-endian MOD230");
     const U bones=number(b,6,2),meshes=number(b,8,2),materials=number(b,10,2);
     const U declaredV=number(b,12),declaredI=number(b,16),vbSize=number(b,24),groups=number(b,32),skins=number(b,36);
@@ -61,6 +135,8 @@ std::string inspect(const Bytes& b) {
         maxDepth=std::max(maxDepth,depth);
     }
     for(U i=0;i<bones*32;++i) scalar(b,boneAt+bones*24+i*4);
+    RestDiagnostic rest;
+    if(restEnabled) rest.initialize(b,boneAt,parents,roots);
     const U paletteAt=boneAt+bones*152+256;
     std::vector<std::vector<U>> palettes;
     for(U i=0;i<skins;++i) {
@@ -107,17 +183,21 @@ std::string inspect(const Bytes& b) {
             const U p=vstart+vertex*stride;
             for(U off:{U(0),U(4),U(8),U(16),U(20)}) scalar(b,p+off);
             const std::array<U,4> offsetsI={24,25,32,33},offsetsW={26,27,34,35};
+            std::array<U,4> boneSlots{},weightBytes{};
             U sum=0,nactive=0;
             for(size_t i=0;i<(four?4u:2u);++i) {
                 const U index=number(b,p+offsetsI[i],1),weight=number(b,p+offsetsW[i],1); sum+=weight;
+                weightBytes[i]=weight;
                 if(weight) {
                     ++nactive;
                     check(index<(skins?palettes[size_t(paletteIndex)].size():bones),"active influence palette reference");
+                    boneSlots[i]=skins?palettes[size_t(paletteIndex)][size_t(index)]:index;
                 }
             }
             check(nactive<=weightCount,"active weights exceed field");
             if(used[size_t(vertex)]) {
                 check(sum==255,"referenced vertex weight sum is not 255"); ++referenced; referencedActive+=nactive;
+                if(restEnabled) rest.observe({scalar(b,p),scalar(b,p+4),scalar(b,p+8),1.0},boneSlots,weightBytes,four?4u:2u);
             }
             else if(!sum) ++zeroUnused;
             active+=nactive;
@@ -135,12 +215,14 @@ std::string inspect(const Bytes& b) {
         << ",\"supported_vertex_records\":" << vertices << ",\"referenced_vertex_records\":" << referenced
         << ",\"unused_zero_weight_records\":" << zeroUnused << ",\"active_influences\":" << active
         << ",\"referenced_active_influences\":" << referencedActive
-        << ",\"global_index_shortfall_bytes\":" << shortfall << ",\"meshes\":" << details.str() << "}\n";
+        << ",\"global_index_shortfall_bytes\":" << shortfall << ",\"meshes\":" << details.str()
+        << ",\"rest_pose_diagnostic\":" << rest.json() << "}\n";
     return out.str();
 }
 int main(int argc,char** argv) {
     try {
-        check(argc==4&&std::string(argv[2])=="--out","usage: stt-skin INPUT.mod --out NEW_PRIVATE_DIRECTORY");
+        check((argc==4||argc==5)&&std::string(argv[2])=="--out"&&(argc==4||std::string(argv[4])=="--check-rest-pose"),
+            "usage: stt-skin INPUT.mod --out NEW_PRIVATE_DIRECTORY [--check-rest-pose]");
         const fs::path input=argv[1],dest=fs::absolute(argv[3]);
         check(!fs::exists(dest),"destination exists");
         auto parent=fs::weakly_canonical(dest);
@@ -151,7 +233,7 @@ int main(int argc,char** argv) {
         const auto size=fs::file_size(input); check(size<=32*1024*1024,"input budget");
         std::ifstream source(input,std::ios::binary); check(bool(source),"cannot open source read-only");
         Bytes bytes(static_cast<size_t>(size)); if(size) source.read(reinterpret_cast<char*>(bytes.data()),static_cast<std::streamsize>(size));
-        check(bool(source),"source read failed"); const auto result=inspect(bytes);
+        check(bool(source),"source read failed"); const auto result=inspect(bytes,argc==5);
         check(fs::create_directory(dest),"cannot create output directory");
         std::ofstream output(dest/"report.json",std::ios::binary); output << result; output.close(); check(bool(output),"output write failed");
         std::cout << "Inspection complete; no functional skinning claim.\n"; return 0;

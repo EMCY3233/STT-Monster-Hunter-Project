@@ -9,6 +9,7 @@ cmake -S skin-inspector -B build
 cmake --build build --config Release
 ctest --test-dir build -C Release --output-on-failure
 stt-skin INPUT.mod --out NEW_PRIVATE_DIRECTORY
+stt-skin INPUT.mod --out ANOTHER_NEW_PRIVATE_DIRECTORY --check-rest-pose
 ```
 
 ## Profile and validation
@@ -82,9 +83,37 @@ destinations are rejected. Inputs must remain stable during the read; source is
 opened read-only, but the CLI does not compute before/after hashes. Output I/O
 failure can leave a partial newly created directory. No runtime/console access.
 
+## Optional rest-pose diagnostic
+
+`--check-rest-pose` evaluates one explicit hypothesis, not a game-verified rig:
+row vectors, local matrices A from the first table, global G_i=A_i*G_parent,
+effective E_i=B_i*G_i from the second table B, and root common transform C=E_root.
+For each referenced supported vertex p, compares sum(w_i/255 * p*E_palette[i])
+with p*C. Weights and palette ranges must first pass the structural profile.
+No renormalization, inverse calculation, coordinate conversion or output mesh.
+
+Requires exactly one root and matrices with exact affine fourth column
+(0,0,0,1). Multiple roots/nonaffine tables produce explicit `unavailable_*`
+status, zero compared records and **null** error values, while the ordinary
+structural report remains available. Disabled by default. Nonfinite computed
+arithmetic rejects the diagnostic invocation before output creation.
+
+Reports maximum absolute xyz residual in raw transformed coordinate units and
+maximum per-record relative residual, divided by max(1,max(abs(expected xyz))).
+No pass/fail tolerance is imposed; `computed_under_hypothesis` means evaluated,
+not verified. Unknown meshes remain excluded. Arithmetic uses double precision
+on stored float inputs; these residuals do not measure original game accuracy.
+
+**Fundamental limit:** if all effective matrices are the same common transform,
+any normalized blend yields the same rest result. Permuted palettes or altered
+weight distributions can therefore produce zero residual. The report explicitly
+keeps palette identity and weight distribution unverified. Synthetic tests prove
+this blind spot as well as checking a broken bind and noncommuting hierarchy.
+This diagnostic does not validate dynamic deformation or an LMT association.
+
 ## Evidence and rectifications
 
-Sixteen synthetic test methods cover all five profiles, grouped latter influence
+Twenty-one synthetic test methods cover all five profiles, grouped latter influence
 offsets, unknown-format reporting, invalid active references/weight sums/palettes,
 parent cycles/ranges, nonfinite values, overlaps, index windows and shortfall,
 source/output preservation, Git destinations and CLI errors, a cycle with a
@@ -93,6 +122,9 @@ and simultaneous nonzero vertex start/adjustment/stream offsets. They also check
 both 32-byte profiles/mismatched strides, separation of influence counters and
 early rejection of an oversized sparse source before any output. CI targets
 Windows/Linux Debug/Release with ASan/UBSan on Linux Debug.
+Rest diagnostic cases cover a nonidentity common transform, correct row-vector
+hierarchy with noncommuting transforms, broken bind residual, palette/weight
+ambiguity, multiple roots/nonaffine unavailability and invalid referenced weights.
 
 Initial two-profile local private check: 20 distinct MH4U MOD hashes, representing 18 skeleton-table
 signatures, selected nonrandomly from the first 20 `/data/emNNN.arc` files.
@@ -124,7 +156,8 @@ for all bones; four give a common root product, with maximum normalized residual
 discard an otherwise coherent structural reading. A common product still does
 not establish its meaning, coordinate convention or a usable rig. Parent-first
 and child-first alternatives remain indistinguishable in this sample. These
-matrix hypothesis tests are research evidence, not implemented in this CLI.
+matrix-hypothesis sweep remains research evidence; the CLI optionally evaluates
+only the explicitly documented row-vector rest-pose hypothesis above.
 
 Remaining: independently validate palette semantics, unknown formats, coordinate
 and model-space transforms, actual deformation, LMT associations and animation.
