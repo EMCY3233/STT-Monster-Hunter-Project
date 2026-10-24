@@ -97,7 +97,7 @@ La primera columna indica el tipo de componente:
 1. **El perfil como dato y no como código.** Un directorio por versión, por ejemplo `config/profiles/<program_id>-v<title_version>/`, con su propio `versions`, `functions`, `hooks`, `symbols`, `mt_classes`, `extra_entries` y `tunables`. El perfil USA actual sería solo el primero.
    - Lo que se commitea son hashes y direcciones obtenidos por el usuario de su copia. Nunca bytes del juego.
    - Antes de añadir ficheros de perfil, hay que confirmar con la política de datos del proyecto (LEGAL y CONTRIBUTING) que esas tablas de direcciones son aceptables (V).
-2. **Selección por hash.** `build_game` y el backend eligen el perfil por el SHA-1 del `code.bin`. Si no hay perfil, se mantiene el respaldo actual (interpretar) y nunca se aplica una tabla de otra versión.
+2. **Selección por hash.** `build_game` y el backend eligen el perfil por identidad exacta del artefacto. MH usa hoy SHA-1 del `code.bin` (E); para STT se recomienda adoptar el contrato propuesto en PR #52 (`docs/version-profile-contract.md`): SHA-256, tamaño, rol y representación explícita de cada artefacto, coincidencia exacta y rechazo de ambigüedad. Si no hay perfil, nunca se aplica una tabla de otra versión. Si se permite o no el respaldo genérico (interpretar sin tablas regionales, como hace MH) es una decisión de D0 en PR #52 (H); en ningún caso cuenta como compatibilidad EUR.
 3. **Remapeo asistido, no automático.** Una herramienta local puede proponer correspondencias USA→EUR por firmas, por ejemplo con hashes de bloques normalizados sin direcciones, o por referencias cruzadas. Esa herramienta solo genera tablas en el equipo del usuario.
    - Cada correspondencia propuesta empieza en `todo` y solo pasa a `done` tras el difftest.
    - El código de la herramienta debe ser original, o reutilizado cumpliendo la GPL-3.0-or-later.
@@ -126,7 +126,7 @@ Todas las pruebas son locales, sobre la copia propia del usuario, y sus resultad
 
 | Puerta | Prueba | Criterio |
 |---|---|---|
-| R0 | Identificar la versión: `program_id`, `title_version`, SHA-1 del `code.bin` y el exheader, y segmentos | Los valores quedan registrados como E en la entrada de perfil |
+| R0 | Identificar la versión: `program_id`, `title_version`, huellas (SHA-256 según el contrato de PR #52; SHA-1 adicional si se compara con `versions.json` de MH) del `code.bin` y el exheader con su representación, y segmentos | Los valores quedan registrados como E en la entrada de perfil |
 | R1 | Comparar estructuras de USA y EUR: tamaños de segmento y presencia o ausencia de las 31 funciones hook por firma | Informe con el número de funciones mapeadas, no mapeadas y ambiguas |
 | R2 | Recompilar con el perfil EUR y ejecutar `gametest` con todas las funciones | Ningún «different state». Los inconclusos y los fallos coincidentes se cuentan por separado y no cuentan como pass |
 | R3 | Difftest 1000/1000 de cada función `replace` y `done` remapeada | Todas pasan. Las que fallan se quedan sin reescribir |
@@ -148,3 +148,7 @@ Todas las pruebas son locales, sobre la copia propia del usuario, y sus resultad
 1. Codex: añadir al laboratorio STT un caso sintético de selección de perfil por hash, que rechace un perfil desconocido sin aplicar tablas.
 2. OpenCode: revisar esta matriz y contrastar las etiquetas E con los SHA citados.
 3. Usuario: si quiere avanzar, ejecutar localmente la puerta R0 sobre su copia EUR y compartir solo los metadatos (identificadores, versión, hashes y tamaños de segmento).
+
+## 11. Coordinación con PR #52
+
+Revisión de Claude enviada por el buzón el 24/10/2026 sobre PR #52 @784b17e. Esta matriz adopta el esquema de identidad de su contrato v1 (§5.2 y R0). Los hallazgos sobre el contrato (oráculo `expected_profile` dentro de la observación, procedencia de `region`/`revision` observadas, caso 4158 que mezcla alineación y contención, `runtime_contract` fuera de la identidad en el JSON, comparación de segmentos observados y memoria sintética del tunable no definida) quedan para su autor; esta PR no edita la rama de Codex.
